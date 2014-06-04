@@ -16,7 +16,7 @@ __More information:__
 
 __Contact to organizers:__
 
-- Ola Sitarska and Ola Sendecka - [mailto:hello@djangogirls.org](hello@djangogirls.org)
+- Ola Sitarska and Ola Sendecka - [hello@djangogirls.org](mailto:hello@djangogirls.org)
 
 __Graphics:__
 
