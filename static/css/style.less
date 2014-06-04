@@ -237,46 +237,14 @@ button.button {
 		margin-top: 0px;
 	}
 	
-	// Collapsing menu sooner than usually:
-    .navbar-header {
-        float: none;
-    }
-    .navbar-toggle {
-        display: block;
-    }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-collapse.collapse {
-        display: none!important;
-    }
-    .navbar-nav {
-        float: none!important;
-        margin: 7.5px -15px;
-    }
-    .navbar-nav>li {
-        float: none;
-    }
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    .navbar-default {
+	.navbar-default {
 		.navbar-nav {
-			width: auto;
-			padding-left: 0px;
-			li {
-				height: auto;
-				padding-top: 10px;
-				a {
-					color: black;
-				}
-
+			.optional {
+				display: none;
 			}
 		}
 	}
+    
 }
 
 /* Smartphones (portrait) ----------- */
@@ -316,5 +284,9 @@ and (max-width : 480px) {
 
 			}
 		}
+	}
+	.navbar-default .navbar-collapse {
+		border: 0px !important;
+		margin-top: 20px;
 	}
 }
