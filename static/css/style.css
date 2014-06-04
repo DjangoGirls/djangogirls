@@ -91,21 +91,27 @@ a:hover {
 }
 #apply {
   background: url('../img/photos/photo5.jpg') 50% 0 no-repeat fixed;
-  height: 400px;
+  height: auto;
   margin: 0;
   color: white;
   background-size: cover;
+}
+#apply .overlay {
+  padding-bottom: 50px;
 }
 #apply p {
   line-height: 180%;
 }
 #coach {
   background: url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
-  height: 400px;
+  height: auto;
   margin: 0;
   color: white;
   background-size: cover;
   line-height: 180%;
+}
+#coach .overlay {
+  padding-bottom: 50px;
 }
 #coach h2 {
   margin-bottom: 25px;
@@ -124,12 +130,15 @@ a:hover {
 }
 footer {
   background: url('../img/photos/photo4.jpg') 50% 0 no-repeat fixed;
-  height: 300px;
+  height: auto;
   margin: 0;
   color: white;
   background-size: cover;
   line-height: 180%;
   background-position: 0 200px;
+}
+footer .overlay {
+  padding-bottom: 30px;
 }
 footer .social {
   height: 200px;
