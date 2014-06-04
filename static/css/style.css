@@ -29,12 +29,12 @@ h3 {
 }
 a,
 a:hover {
-  color: #1bbc9b;
+  color: #ff9400;
 }
 .navbar-default {
   background: white;
   border: 0px;
-  border-top: 3px solid #1bbc9b;
+  border-top: 3px solid #ff9400;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 .navbar-default .navbar-brand {
@@ -42,7 +42,7 @@ a:hover {
 }
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover {
-  background-color: #1bbc9b;
+  background-color: #ff9400;
   position: absolute;
   height: 70px;
   padding: 0;
@@ -67,7 +67,7 @@ a:hover {
 }
 .btn,
 .btn:hover {
-  background: #1bbc9b;
+  background: #ff9400;
   color: white;
   font-size: 18px;
   font-weight: 100;
@@ -117,7 +117,7 @@ a:hover {
   margin: 50px 0;
 }
 #sponsors .row {
-  padding: 30px;
+  padding: 0 0 30px 0;
 }
 #sponsors .row .col-md-4 {
   text-align: center;
@@ -138,6 +138,12 @@ footer .credits {
   font-size: 12px;
   text-align: center;
   opacity: 0.6;
+}
+footer .twitter {
+  margin-left: 220px;
+  float: left;
+  margin-top: -55px;
+  position: absolute;
 }
 .button {
   line-height: 48px;
@@ -184,4 +190,86 @@ button.button {
 }
 button.button:before {
   margin-left: -57px;
+}
+/* ---------------------
+
+ Responsive design fixes
+
+---------------------- */
+@media (max-width: 1024px) {
+  #value .col-md-6:last-child {
+    margin-top: 40px;
+  }
+  #sponsors img {
+    max-width: 300px;
+    margin-top: 30px;
+  }
+  footer .social .twitter {
+    margin-top: 0px;
+  }
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  .navbar-nav {
+    float: none!important;
+    margin: 7.5px -15px;
+  }
+  .navbar-nav > li {
+    float: none;
+  }
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .navbar-default .navbar-nav {
+    width: auto;
+    padding-left: 0px;
+  }
+  .navbar-default .navbar-nav li {
+    height: auto;
+    padding-top: 10px;
+  }
+  .navbar-default .navbar-nav li a {
+    color: black;
+  }
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 480px) {
+  #about .overlay {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  #about {
+    height: auto;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  footer .social .twitter {
+    margin: 50px 0 0 12px;
+  }
+  .navbar-default .navbar-nav {
+    width: auto;
+    padding-left: 0px;
+  }
+  .navbar-default .navbar-nav li {
+    height: auto;
+    padding-top: 10px;
+  }
+  .navbar-default .navbar-nav li a {
+    color: black;
+  }
 }
