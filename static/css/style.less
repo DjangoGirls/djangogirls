@@ -77,7 +77,7 @@ a, a:hover {
 }
 
 #about {
-	background:url('../img/photos/photo1.jpg') 50% 0 no-repeat fixed;
+	background: url('../img/photos/photo1.jpg') 50% 0 no-repeat fixed;
 	height: 500px;
 	margin: 0;
 	background-size: cover;
@@ -216,8 +216,32 @@ button.button {
 ---------------------- */
 @media (max-width: 1024px) {
 
+	h1 {
+		font-size: 36px;
+	}
+	h2 {
+		font-size: 26px;
+	}
+
 	#about {
-		background-attachement: scroll;
+		background-attachment: scroll;
+		height: auto;
+		.overlay {
+			padding: 80px 0;
+		}
+	}
+
+	#apply {
+		background-attachment: scroll;
+	}
+
+	#coach {
+		background-attachment: scroll;
+	}
+
+	footer {
+		background-attachment: scroll;
+		background-position: 0;
 	}
 
 	#value {
@@ -258,15 +282,18 @@ and (max-width : 480px) {
 		padding-top: 50px;
 		padding-bottom: 50px;
 	}
+
 	#about {
-		height: auto;
+		background-position: 0;
 	}
+
 	h1 {
 		font-size: 30px;
 	}
 	h2 {
 		font-size: 24px;
 	}
+
 	footer .social .twitter {
 		margin: 50px 0 0 12px;
 	}
