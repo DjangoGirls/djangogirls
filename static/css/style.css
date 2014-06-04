@@ -117,7 +117,7 @@ a:hover {
   margin: 50px 0;
 }
 #sponsors .row {
-  padding: 0 0 30px 0;
+  padding: 30px 0px;
 }
 #sponsors .row .col-md-4 {
   text-align: center;
@@ -204,6 +204,9 @@ button.button:before {
     max-width: 300px;
     margin-top: 30px;
   }
+  #sponsors .row {
+    padding: 0 0 30px 0;
+  }
   footer .social .twitter {
     margin-top: 0px;
   }
@@ -260,6 +263,9 @@ button.button:before {
   }
   footer .social .twitter {
     margin: 50px 0 0 12px;
+  }
+  #sponsors .row {
+    padding: 0 0 30px 0;
   }
   .navbar-default .navbar-nav {
     width: auto;
