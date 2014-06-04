@@ -1,4 +1,4 @@
-# Django Girls: Free Django workshop for women at EuroPython!
+# Free Django workshop for women at EuroPython!
 
 __Django Girls is an initiative that is aiming to introduce 19 women who never code before to the world of technology and increase the diversity of European Python community. During [EuroPython 2014 in Berlin](http://europython.eu/), we're going to organize one-day workshops and invite girls from all over Europe to join us and learn how to build the internet using HTML, CSS, Python and Django.__
 
@@ -20,4 +20,4 @@ __Contact to organizers:__
 
 __Graphics:__
 
-![](../graphics/logo-transparent-negative.png]
+![](../graphics/logo-transparent-negative.png)
