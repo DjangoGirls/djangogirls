@@ -8,7 +8,7 @@ Workshops are free of charge and each participant will receive free tickets to t
 
 __Application process starts now and ends on 30th June 2014. Applicants will reveice confirmation letters until 4th of July 2014.__
 
-Django Girls organizers are looking for coaches and sponsors who can contribute to the event. People and organizations who are interested are very welcome! 
+Django Girls organizers are looking for coaches and sponsors who can contribute to the event. People and organizations who are interested are very welcome! Every individual who want to financially support Django Girls can buy a special support ticket for EuroPython donating 10, 20, 50 or 100€ for the cause. Sales of these tickets starts 5th June 2014 at 6pm UTC+2.
 
 __More information:__
 
