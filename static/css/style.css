@@ -131,7 +131,8 @@ a:hover {
 #sponsors .row {
   padding: 30px 0px;
 }
-#sponsors .row .col-md-4 {
+#sponsors .row .col-md-4,
+#sponsors .row .col-md-3 {
   text-align: center;
 }
 #codeofconduct {
