@@ -171,7 +171,8 @@ a:hover {
   line-height: 180%;
 }
 #coach,
-#yourcity {
+#yourcity,
+#schedule {
   background: url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
   height: auto;
   margin: 0;
@@ -180,11 +181,13 @@ a:hover {
   line-height: 180%;
 }
 #coach .overlay,
-#yourcity .overlay {
+#yourcity .overlay,
+#schedule .overlay {
   padding-bottom: 50px;
 }
 #coach h2,
-#yourcity h2 {
+#yourcity h2,
+#schedule h2 {
   margin-bottom: 25px;
 }
 .cls {
@@ -194,11 +197,30 @@ a:hover {
   margin: 50px 0;
 }
 #sponsors .row {
-  padding: 30px 0px;
+  padding: 20px 0px;
 }
 #sponsors .row .col-md-4,
 #sponsors .row .col-md-3 {
   text-align: center;
+}
+#coaches {
+  margin-top: 50px;
+}
+#coaches .row {
+  padding: 30px 0px;
+}
+#coaches .row .col-md-2 {
+  text-align: center;
+}
+#coaches .row .col-md-2 .coach {
+  max-width: 160px;
+  border-radius: 100%;
+  margin-bottom: 15px;
+}
+#coaches .row .col-md-2 a {
+  color: black;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 18px;
 }
 #codeofconduct {
   margin: 50px 0;

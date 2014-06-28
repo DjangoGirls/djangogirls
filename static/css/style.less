@@ -180,7 +180,7 @@ a, a:hover {
 	}
 }
 
-#coach, #yourcity {
+#coach, #yourcity, #schedule {
 	background:url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
 	height: auto;
 	margin: 0;
@@ -200,11 +200,30 @@ a, a:hover {
 #sponsors {
 	margin: 50px 0;
 	.row {
-		padding: 30px 0px;
+		padding: 20px 0px;
 		.col-md-4, .col-md-3 {
 			text-align: center;
 		}
 	}
+}
+#coaches {
+    margin-top: 50px;
+    .row {
+        padding: 30px 0px;
+        .col-md-2 {
+            text-align: center;
+            .coach {
+                max-width: 160px;
+                border-radius: 100%;
+                margin-bottom: 15px;
+            }
+            a {
+                color: black;
+                font-family: @font;
+                font-size: 18px;
+            }
+        }
+    }
 }
 
 #codeofconduct {
