@@ -26,6 +26,7 @@ h2 {
 h3 {
   font-size: 28px;
   margin-top: 0;
+  margin-bottom: 20px;
 }
 a,
 a:hover {
@@ -59,6 +60,7 @@ a:hover {
 .navbar-default .navbar-nav {
   width: auto;
   padding-left: 200px;
+  float: right;
 }
 .navbar-default .navbar-nav li {
   height: 50px;
@@ -66,6 +68,40 @@ a:hover {
 }
 .navbar-default .navbar-nav li a {
   color: black;
+}
+.navbar-wrapper {
+  height: 70px;
+}
+.negative {
+  clear: both;
+  overflow: hidden;
+  position: fixed;
+  height: 70px;
+  z-index: 9999;
+  width: 100%;
+  background: none;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #ffffff), color-stop(60%, rgba(255, 255, 255, 0.8)), color-stop(0, rgba(255, 255, 255, 0)));
+}
+.negative .navbar-brand,
+.negative .navbar-brand:hover {
+  background: transparent;
+  padding-top: 10px;
+}
+.negative .navbar-brand img,
+.negative .navbar-brand:hover img {
+  width: 180px;
+}
+.negative .navbar-collapse {
+  padding: 0;
+}
+.negative .navbar-collapse a:last-child {
+  padding-right: 0;
+}
+.australia .navbar-brand {
+  padding-right: 19px;
+}
+.australia .navbar-nav {
+  padding-left: 219px;
 }
 .overlay {
   padding: 50px 0 260px 0;
@@ -224,6 +260,13 @@ button.button {
 }
 button.button:before {
   margin-left: -57px;
+}
+#map {
+  width: 100%;
+  max-width: 100%;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 /* ---------------------
 

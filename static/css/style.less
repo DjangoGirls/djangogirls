@@ -25,6 +25,7 @@ h2 {
 h3 {
 	font-size: 28px;
 	margin-top: 0;
+    margin-bottom: 20px;
 }
 a, a:hover {
 	color: @mint;
@@ -59,6 +60,7 @@ a, a:hover {
 	.navbar-nav {
 		width: auto;
 		padding-left: 200px;
+        float: right;
 		li {
 			height: 50px;
 			padding-top: 10px;
@@ -68,6 +70,41 @@ a, a:hover {
 
 		}
 	}
+}
+.navbar-wrapper {
+    height: 70px;
+}
+.negative {
+    clear: both;
+    overflow: hidden;
+    position: fixed;
+    height: 70px;
+    z-index: 9999;
+    width: 100%;
+    background: none;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, white), color-stop(60%, rgba(255, 255, 255, 0.8)), color-stop(0, rgba(255, 255, 255, 0)));
+
+    .navbar-brand, .navbar-brand:hover {
+        background: transparent;
+        padding-top: 10px;
+        img {
+            width: 180px;
+        }
+    }
+    .navbar-collapse {
+        padding: 0;
+        a:last-child {
+            padding-right: 0;
+        }
+    }
+}
+.australia {
+    .navbar-brand {
+        padding-right: 19px;
+    }
+    .navbar-nav {
+        padding-left: 219px;
+    }
 }
 
 .overlay {
@@ -235,7 +272,13 @@ button.button {
         margin-left: -57px;
     }
 }
-
+#map {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 
 /* ---------------------
 
