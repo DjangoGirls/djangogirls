@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.039882,
+          38.898321
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "name": "Django Girls @ EuroPython 2014",
+        "address": "Berlin, Germany"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.4679,
+          153.0278
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "name": "Django Girls @ PyCon Australia",
+        "address": "Brisbane, Australia"
+      }
+    }
+  ]
+}
