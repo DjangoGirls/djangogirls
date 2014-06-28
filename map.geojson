@@ -5,13 +5,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -77.039882,
-          38.898321
-        ]
+        "coordinates": [13.3833, 52.5167]
       },
       "properties": {
         "marker-symbol": "heart",
+        "marker-color": "#F7931D",
         "name": "Django Girls @ EuroPython 2014",
         "address": "Berlin, Germany"
       }
@@ -20,13 +18,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          27.4679,
-          153.0278
-        ]
+        "coordinates": [153.01, -27.28]
       },
       "properties": {
         "marker-symbol": "heart",
+        "marker-color": "#F7931D",
         "name": "Django Girls @ PyCon Australia",
         "address": "Brisbane, Australia"
       }
