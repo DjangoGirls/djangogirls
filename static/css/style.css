@@ -28,6 +28,10 @@ h3 {
   margin-top: 0;
   margin-bottom: 20px;
 }
+h5 a {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
 a,
 a:hover {
   color: #ff9400;
@@ -130,7 +134,9 @@ a:hover {
   padding: 130px 0 0 0;
 }
 #value,
-#faq {
+#faq,
+#events,
+#newsletter {
   padding: 60px 0;
 }
 #faq {
@@ -138,6 +144,18 @@ a:hover {
 }
 #faq .row {
   padding-bottom: 30px;
+}
+#newsletter .facebook {
+  float: left;
+  width: 50%;
+}
+#newsletter .twitter {
+  margin-top: 25px;
+}
+#newsletter button {
+  margin: 0;
+  padding: 10px 15px;
+  border: 0px;
 }
 #apply {
   background: url('../img/photos/photo5.jpg') 50% 0 no-repeat fixed;
@@ -152,7 +170,8 @@ a:hover {
 #apply p {
   line-height: 180%;
 }
-#coach {
+#coach,
+#yourcity {
   background: url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
   height: auto;
   margin: 0;
@@ -160,10 +179,12 @@ a:hover {
   background-size: cover;
   line-height: 180%;
 }
-#coach .overlay {
+#coach .overlay,
+#yourcity .overlay {
   padding-bottom: 50px;
 }
-#coach h2 {
+#coach h2,
+#yourcity h2 {
   margin-bottom: 25px;
 }
 .cls {

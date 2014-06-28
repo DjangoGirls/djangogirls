@@ -27,6 +27,10 @@ h3 {
 	margin-top: 0;
     margin-bottom: 20px;
 }
+h5 a {
+    font-family: @font;
+    font-size: 18px;
+}
 a, a:hover {
 	color: @mint;
 }
@@ -136,7 +140,7 @@ a, a:hover {
 
 }
 
-#value, #faq {
+#value, #faq, #events, #newsletter {
 	padding: 60px 0;
 }
 
@@ -145,6 +149,21 @@ a, a:hover {
 	.row {
 		padding-bottom: 30px;
 	}
+}
+
+#newsletter {
+    .facebook {
+        float: left;
+        width: 50%;
+    }
+    .twitter {
+        margin-top: 25px;
+    }
+    button {
+        margin: 0;
+        padding: 10px 15px;
+        border: 0px;
+    }
 }
 
 #apply {
@@ -161,7 +180,7 @@ a, a:hover {
 	}
 }
 
-#coach {
+#coach, #yourcity {
 	background:url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
 	height: auto;
 	margin: 0;
