@@ -76,6 +76,13 @@ a:hover {
 .navbar-wrapper {
   height: 70px;
 }
+.australia .navbar-brand:hover {
+    padding-right: 19px;
+}
+.australia .navbar-nav:hover {
+    padding-left: 219px;
+}
+
 .negative {
   clear: both;
   overflow: hidden;
@@ -106,12 +113,6 @@ a:hover {
 }
 .australia .navbar-nav {
   padding-left: 219px;
-}
-.australia .navbar-brand:hover {
-    padding-right: 19px;
-}
-.australia .navbar-nav:hover {
-    padding-left: 219px;
 }
 .overlay {
   padding: 50px 0 260px 0;
