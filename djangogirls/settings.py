@@ -97,3 +97,5 @@ MEDIA_URL = '/static/media/'
 # Templates
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+AUTH_USER_MODEL = 'core.User'
