@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-    <!-- Value proposition -->
     <div class="container">
           <div id="value" class="row">
               <div class="col-md-6">
@@ -27,23 +26,40 @@
         <script src="https://embed.github.com/view/geojson/DjangoGirls/djangogirls/gh-pages/new-map.geojson?width=1500&height=300"></script>
     </div>
 
-    <!-- FAQ -->
+    {% if upcoming_events %}
     <div class="container">
         <div id="events">
             <h3>Upcoming events</h3>
             <div class="row">
-                <div class="col-md-3">
-                    <h5><a href="/europe.html">Django Girls @ EuroPython</a><h5>
-                    <p>21st July 2014</p>
-                    <p>Berlin, Germany</p>
-                </div>
-                <div class="col-md-3">
-                    <h5><a href="/australia.html">Django Girls @ PyCon AU</a><h5>
-                    <p>4th August 2014</p>
-                    <p>Brisbane, Australia</p>
-                </div>
-            </div>
+                {% for event in upcoming_events %}
+                    <div class="col-md-3">
+                        <h5><a href="/{{ event.event.url }}/">{{ event.event.name }}</a><h5>
+                        <p>{{ event.event.date|date:"d M y" }}</p>
+                        <p>{{ event.event.city }}, {{ event.event.country }}</p>
+                    </div>
 
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div id="events">
+            <h3>Past events</h3>
+            <div class="row">
+                {% for event in past_events %}
+                    <div class="col-md-3">
+                        <h5><a href="/{{ event.event.url }}/">{{ event.event.name }}</a><h5>
+                        <p>{{ event.event.date }}</p>
+                        <p>{{ event.event.city }}, {{ event.event.country }}</p>
+                    </div>
+
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<div class="navbar navbar-default australia" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand" href="/">
+          <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Django Girls" /></a>
+          <a href="/{{ page.url }}" class="chapter">{{ AUSTRALIA }}</a>
+      </div>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#value">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#coach">Become a coach</a></li>
+        <li><a href="http://blog.djangogirls.org/">Blog</a></li>
+        <li class="optional"><a href="#sponsors">Partners</a></li>
+        <li class="optional"><a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
