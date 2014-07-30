@@ -1,0 +1,18 @@
+
+{% if item.background %}
+
+    <div id="{{ item.name }}" class="with-background" style="background-image: url({{ item.background.url }})">
+        <div class="overlay">
+              <div class="container">
+                  {{ item.content|safe }}
+              </div>
+          </div>
+    </div>
+
+{% else %}
+
+    <div class="container without-background" id="{{ item.name }}">
+        {{ item.content|safe }}
+    </div>
+
+{% endif %}

@@ -33,7 +33,7 @@
             <div class="row">
                 {% for event in upcoming_events %}
                     <div class="col-md-3">
-                        <h5><a href="/{{ event.event.url }}/">{{ event.event.name }}</a><h5>
+                        <h5><a href="/{{ event.url }}/">{{ event.event.name }}</a><h5>
                         <p>{{ event.event.date|date:"d M y" }}</p>
                         <p>{{ event.event.city }}, {{ event.event.country }}</p>
                     </div>
@@ -52,7 +52,7 @@
             <div class="row">
                 {% for event in past_events %}
                     <div class="col-md-3">
-                        <h5><a href="/{{ event.event.url }}/">{{ event.event.name }}</a><h5>
+                        <h5><a href="/{{ event.url }}/">{{ event.event.name }}</a><h5>
                         <p>{{ event.event.date }}</p>
                         <p>{{ event.event.city }}, {{ event.event.country }}</p>
                     </div>

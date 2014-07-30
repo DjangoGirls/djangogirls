@@ -14,11 +14,16 @@ def index(request):
     })
 
 def event(request, city):
-	try:
-		page = EventPage.objects.get(url=city, is_live=True)
-	except EventPage.DoesNotExist:
-		return redirect('index')
+    try:
+        page = EventPage.objects.get(url=city, is_live=True)
+    except EventPage.DoesNotExist:
+        return redirect('index')
 
-	return render(request, "event.html", {
-		'page': page
-	})
+    menu = EventPageMenu.objects.filter(page=page)
+    content = EventPageContent.objects.filter(page=page)
+
+    return render(request, "event.html", {
+        'page': page,
+        'menu': menu,
+        'content': content,
+    })

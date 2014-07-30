@@ -91,6 +91,8 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStora
 STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_URL = '/static/media/'
 
 # Templates
 

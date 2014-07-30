@@ -38,3 +38,18 @@ class EventPageContent(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('position', )
+
+class EventPageMenu(models.Model):
+    page = models.ForeignKey(EventPage, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False)
+    url = models.CharField(max_length=255, null=False, blank=False)
+    position = models.IntegerField(null=False, blank=False, help_text="Order of menu")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('position', )
