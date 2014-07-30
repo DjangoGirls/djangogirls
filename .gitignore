@@ -2,3 +2,5 @@
 *.sqlite3
 *.pyc
 static/media
+staticfiles
+local_settings.py

@@ -20,11 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '_fa9i@a58^(ycedbaidm5o&3z*8_d21=%y4bl3ohq_aof6ksj%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
 
@@ -62,12 +63,9 @@ WSGI_APPLICATION = 'djangogirls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {}
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -88,7 +86,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'public')
+STATIC_ROOT = 'staticfiles'
 UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
 
@@ -100,3 +98,8 @@ MEDIA_URL = '/static/media/'
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 AUTH_USER_MODEL = 'core.User'
+
+try:
+    from .local_settings import *
+except:
+    pass
