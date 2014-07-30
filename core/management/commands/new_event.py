@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 import random, string, click
 from django.core.management.base import BaseCommand, CommandError
+from django.core.files import File
+from django.conf import settings
 
 from core.models import *
 
@@ -69,6 +71,61 @@ class Command(BaseCommand):
 
         return members
 
+    def add_default_content(self, page):
+        EventPageContent.objects.create(
+            page = page,
+            name = 'about',
+            position = 1,
+            is_public = True,
+            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo1.jpg')),
+            content = '<div style="text-align: center;"><h1>Free programming workshop for women</h1><h2>Build your first website at EuroPython 2014 in Berlin!</h2><a class="btn" href="#value">Learn more »</a></div>')
+
+        EventPageContent.objects.create(
+            page = page,
+            name = 'values',
+            position = 10,
+            is_public = True,
+            content = '<div class="row">      <div class="col-md-6">          <h3>Django Girls</h3>          <p>If you are a female and you want to learn how to make websites,          we have good news for you! We are holding a one-day workshop for beginners!</p>        <p>It will take place on <strong>21st of July</strong> in <strong>Berlin</strong>,        on the first day of a big IT conference:        <a href="http://europython.eu/">EuroPython</a>, which gathers a lot of talented programmers from all over the world.</p>        <p>We believe that IT industry will greatly benefit from bringing more women        into technology. We want to give you an opportunity to learn how to program        and become one of us - female programmers!</p>        <p>Workshops are free of charge and if you can’t afford coming to Berlin,        but you are very motivated to learn and then share your knowledge with others,        we have some funds to help you out        with your travel costs and accommodation. Don’t wait too long -        you can apply for a pass only until <strong>30th of June</strong>!</p>      </div>      <div class="col-md-6">          <h3>Apply for a pass!</h3>          <p>If you are a woman, you know English and have a laptop - you can apply          for a pass! You don’t need to know any technical stuff - workshops          are for people who are new to programming.</p>        <p>As a workshop attendee you will:        <ul>            <li>attend one-day Django workshops during which you will            create your first website</li>            <li>get a free EuroPython ticket (which normally costs 400 €!),            where you can meet people from the industry and learn more about programming</li>            <li>be fed by us - during workshops and EuroPython food is provided</li>        </ul>        </p>        <p>We have space only for 40 people, so make sure to fill the form very carefully!</p>      </div>  </div>')
+
+        EventPageContent.objects.create(
+            page = page,
+            name = 'apply',
+            position = 20,
+            is_public = True,
+            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo5.jpg')),
+            content = '<div class="row"><div class="col-md-7"><h2>Application are now open!</h2><p>Application process closes on July 23rd and you\'ll be informedabout acceptance or rejection by July 28th (or sooner)!.</p><a class="btn" href="http://t.co/YvvAFiUvKN">Register</a><p></p></div></div>')
+
+        EventPageContent.objects.create(
+            page = page,
+            name = 'faq',
+            position = 30,
+            is_public = True,
+            content = '<div class="row"><div class="col-md-4"><p><b>Do I need to know anything about websites or programming?</b></p><p>No! Workshops are for beginners. You don’t need to know anything about it.However, if you have a little bit of technical knowledge(i.e. you know what HTML or CSS are) you still can apply!</p></div><div class="col-md-4"><p><b>I am not living in Germany, can I attend?</b></p><p>Of course! Workshops will be in English, so if you have notroubles with speaking and understanding English - you should apply.If you need financial aid to get toBerlin or you need assistance with booking flights or hotel in Berlin -let us know. We are willing to help you!</p></div><div class="col-md-4"><p><b>Should I bring my own laptop?</b></p><p>Yes. We have no hardware, so we expect you to bring your computer with you.It is also important for us that you will take home everything you’llwrite and create during workshops. </p></div></div><div class="row" style="margin-top: 30px"><div class="col-md-4"><p><b>Do I need to have something installed on my laptop? </b></p><p>It would be helpful to have Django installed before workshops, but wouldn\'t expect you to install anything on your own.We will make sure that one of our coaches will helpyou out with this task. </p></div><div class="col-md-4"><p><b>Is EuroPython conference good for a total beginner?</b></p><p>As a workshop attendee you will get a free ticket to EuroPython -conference for Python programmers. Even though you are new to programming,conference is a good place to meet many interestingpeople in the industry and find inspiration.</p></div><div class="col-md-4"><p><b>Is food provided? </b></p><p>Yes. Thanks to EuroPython, snacks and lunch will be served during workshops. </p></div></div>')
+
+        EventPageContent.objects.create(
+            page = page,
+            name = 'coach',
+            position = 40,
+            is_public = True,
+            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo0.jpg')),
+            content = '<div class="row"><div class="col-md-6"><h2>Be a Mentor!</h2><p>We would be delighted if you would like to join us as a mentor! Fill in the form  <a href="http://t.co/YvvAFiUvKN">here</a>, but select the option to be a mentor.</p><p>We will contact you :)</p></div><div class="col-md-6"><h2>Django Girls</h2><p>Django Girls Australia is a part of bigger initiative: <a href="http://djangogirls.org/">Django Girls</a>.  It is a non-profit organization and events are organized by volunteersin different places of the world.  </p><p>To see the source for the program find us on gihub: <a href="https://github.com/DjangoGirls/">github.com/DjangoGirls</a>.</p><p>If you want to bring Django Girls to your city, drop us a line: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.</p></div></div>')
+
+        EventPageContent.objects.create(
+            page = page,
+            name = 'partners',
+            position = 50,
+            is_public = True,
+            content = '<h3>Sponsors</h3><p>We couldn\'t be here without the support from amazing people and organizations who donated money, knowledge and time to help us make this a reality.</p><div class="row" style="margin-top: 30px;"><div class="col-md-4"><a href="http://europython.eu/"><img src="/static/img/partners/ep.png" /></a></div><div class="col-md-4"><a href="https://www.djangoproject.com/"><img src="/static/img/partners/django.png" width="50%" /></a></div><div class="col-md-4"><a href="http://www.django-de.org/"><img src="/static/img/partners/djangode.png" /></a></div></div><div class="row" style="margin-top: 30px;"><div class="col-md-4"><a href="http://www.python.org/"><img src="/static/img/partners/python.png" /></a></div><div class="col-md-4"><a href="http://github.com/"><img src="/static/img/partners/github.png" width="50%" /></a></div><div class="col-md-4"><a href="https://p.ota.to/"><img src="/static/img/partners/potato.png" /></a></div></div><div class="row" style="padding: 30px 0 30px 0;"><div class="col-md-4"><a href="http://stxnext.com/#/en"><img src="/static/img/partners/stxnext.png" /></a></div></div><p>If you want to contribute and support our goal, please get in touch: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></p>')
+
+    def add_default_menu(self, page):
+        
+        EventPageMenu.objects.create(page = page, title = 'About', position = 1, url = '#values')
+        EventPageMenu.objects.create(page = page, title = 'Apply for a pass!', position = 10, url = '#apply')
+        EventPageMenu.objects.create(page = page, title = 'FAQ', position = 20, url = '#faq')
+        EventPageMenu.objects.create(page = page, title = 'Become a coach', position = 30, url = '#coach')
+        EventPageMenu.objects.create(page = page, title = 'Partners', position = 40, url = '#partners')
+
+
 
     def handle(self, *args, **options):
 
@@ -96,7 +153,8 @@ class Command(BaseCommand):
         page = EventPage.objects.create(event=event, url=url, title=name)
 
         #Default content
-
+        self.add_default_content(page)
+        self.add_default_menu(page)
 
         click.echo(u"Website is ready here: http://djangogirls.org/{0}".format(url))
         click.echo("Congrats on yet another event!")
