@@ -1,54 +1,7 @@
-<!DOCTYPE HTML>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-  <title>Django Girls - start your journey with programming</title>
-  <meta name="description" content="Django Girls is a one-day workshop about programming in Python and Django tailored for women.">
-  <meta name="keywords" content="programming, python, django, workshop, women, females">
-  <link href="static/img/favicon.ico" rel="shortcut icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Django Girls is a one-day workshop about programming in Python and Django tailored for women" />
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="Join us and become female developer! Build your first website in Python and Django in a friendly, safe enviroment." />
-  <meta property="og:url" content="http://djangogirls.org/" />
-  <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
+{% extends 'global/base.html' %}
+{% load staticfiles %}
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen">
-  <script type="text/javascript" src="static/js/jquery.min.js"></script>
-  <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="static/js/djangogirls.js"></script>
-</head>
-<body>
-<div class="navbar-wrapper">
-      <!-- Fixed navbar -->
-    <div class="navbar navbar-default negative" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="navbar-brand" href="/">
-              <a href="/"><img src="static/img/logo-negative.png" width="200" alt="Django Girls" /></a>
-          </div>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#value">About</a></li>
-            <li><a href="#events">Our events</a></li>
-            <li><a href="#yourcity"><b>Django Girls in your city!</b></a></li>
-            <li><a href="http://blog.djangogirls.org/">Blog</a></li>
-            <li class="optional"><a href="#sponsors">Partners</a></li>
-
-            <li class="optional"><a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-</div>
+{% block content %}
     <!-- Value proposition -->
     <div class="container">
           <div id="value" class="row">
@@ -147,57 +100,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-    <footer>
-        <div class="overlay">
-            <div class="container">
-                <div class="row social">
-                    <div class="col-md-7"></div>
-                    <div class="col-md-5">
-                        Get in touch: <br /> <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a><br /><br />
-
-
-                    </div>
-                </div>
-                <div class="row credits">
-                    <div class="col-md-12">
-                        ♥ Django is a <a href="https://www.djangoproject.com/trademarks/">registered trademark</a> of the Django Software Foundation.
-                        Python is a <a href="https://www.python.org/psf/trademarks/">registered trademark</a> of Project Software Foundation. This website
-                        is not associated with DSF or PSF.<br />
-                        ♥ Django Girls is inspired by wonderful <a href="http://railsgirls.com/">Rails Girls</a>.<br >
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-    <!-- fb -->
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=345022845576638";
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-    <!-- twitter -->
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <!-- analytics -->
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-51680040-1', 'djangogirls.org');
-          ga('send', 'pageview');
-
-        </script>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+          <div id="value" class="row">
+              <div class="col-md-12">
+                  <h3>{{ flatpage.title }}</h3>
+                  {{ flatpage.content }}
+              </div>
+          </div>
+    </div>
+{% endblock %}
