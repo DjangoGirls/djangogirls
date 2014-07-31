@@ -77,7 +77,7 @@ class Command(BaseCommand):
             name = 'about',
             position = 1,
             is_public = True,
-            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo1.jpg')),
+            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo1.jpg')),
             content = '<div style="text-align: center;"><h1>Free programming workshop for women</h1><h2>Build your first website at EuroPython 2014 in Berlin!</h2><a class="btn" href="#value">Learn more »</a></div>')
 
         EventPageContent.objects.create(
@@ -92,7 +92,7 @@ class Command(BaseCommand):
             name = 'apply',
             position = 20,
             is_public = True,
-            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo5.jpg')),
+            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo5.jpg')),
             content = '<div class="row"><div class="col-md-7"><h2>Application are now open!</h2><p>Application process closes on July 23rd and you\'ll be informedabout acceptance or rejection by July 28th (or sooner)!.</p><a class="btn" href="http://t.co/YvvAFiUvKN">Register</a><p></p></div></div>')
 
         EventPageContent.objects.create(
@@ -107,7 +107,7 @@ class Command(BaseCommand):
             name = 'coach',
             position = 40,
             is_public = True,
-            background = File(open(settings.UPLOAD_ROOT+'img/photos/photo0.jpg')),
+            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo0.jpg')),
             content = '<div class="row"><div class="col-md-6"><h2>Be a Mentor!</h2><p>We would be delighted if you would like to join us as a mentor! Fill in the form  <a href="http://t.co/YvvAFiUvKN">here</a>, but select the option to be a mentor.</p><p>We will contact you :)</p></div><div class="col-md-6"><h2>Django Girls</h2><p>Django Girls Australia is a part of bigger initiative: <a href="http://djangogirls.org/">Django Girls</a>.  It is a non-profit organization and events are organized by volunteersin different places of the world.  </p><p>To see the source for the program find us on gihub: <a href="https://github.com/DjangoGirls/">github.com/DjangoGirls</a>.</p><p>If you want to bring Django Girls to your city, drop us a line: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.</p></div></div>')
 
         EventPageContent.objects.create(
