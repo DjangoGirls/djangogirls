@@ -32,6 +32,8 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
+    'suit_redactor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -97,7 +99,18 @@ MEDIA_URL = '/static/media/'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
+#Custom
+
 AUTH_USER_MODEL = 'core.User'
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Django Girls'
+}
 
 try:
     from .local_settings import *
