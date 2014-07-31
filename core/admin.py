@@ -3,11 +3,13 @@ from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
 from forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 from suit_redactor.widgets import RedactorWidget
+from suit.admin import SortableModelAdmin
 
 from .models import *
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country')
+    search_fields = ('city', 'country')
 
     def queryset(self, request):
         qs = super(EventAdmin, self).queryset(request)
@@ -30,9 +32,11 @@ class EventPageContentForm(ModelForm):
             'content': RedactorWidget(editor_options={'lang': 'en'})
         }
 
-class EventPageContentAdmin(admin.ModelAdmin):
+class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
+    list_filter = ('page','is_public')
     form = EventPageContentForm
+    sortable = 'position'
 
     def queryset(self, request):
 		qs = super(EventPageContentAdmin, self).queryset(request)
@@ -46,8 +50,10 @@ class EventPageContentAdmin(admin.ModelAdmin):
 			form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
 		return form
 
-class EventPageMenuAdmin(admin.ModelAdmin):
+class EventPageMenuAdmin(SortableModelAdmin):
     list_display = ('title', 'page', 'url', 'position')
+    list_filter = ('page',)
+    sortable = 'position'
 
     def queryset(self, request):
         qs = super(EventPageMenuAdmin, self).queryset(request)

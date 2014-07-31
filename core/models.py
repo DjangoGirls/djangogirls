@@ -82,7 +82,7 @@ class EventPageContent(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     content = models.TextField(null=False, blank=False, help_text="HTLM allowed")
     background = models.ImageField(upload_to="event/backgrounds/", null=True, blank=True, help_text="Optional background photo")
-    position = models.IntegerField(null=False, blank=False, help_text="Position of the block on the website")
+    position = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the block on the website")
 
     is_public = models.BooleanField(null=False, blank=False, default=False)
 
@@ -98,7 +98,7 @@ class EventPageMenu(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
     url = models.CharField(max_length=255, null=False, blank=False)
-    position = models.IntegerField(null=False, blank=False, help_text="Order of menu")
+    position = models.PositiveIntegerField(null=False, blank=False, help_text="Order of menu")
 
     def __str__(self):
         return self.title
