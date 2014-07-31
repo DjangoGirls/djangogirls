@@ -108,10 +108,11 @@ a:hover {
   padding-left: 219px;
 }
 .overlay {
-  padding: 50px 0 260px 0;
+  padding: 100px 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  color: white;
 }
 .btn,
 .btn:hover {
@@ -122,28 +123,14 @@ a:hover {
   margin: 20px 0 0 0;
   padding: 15px 30px;
 }
-#about {
+.with-background {
   background: url('../img/photos/photo1.jpg') 50% 0 no-repeat fixed;
-  height: 500px;
-  margin: 0;
   background-size: cover;
-  text-align: center;
-  background-position: 0 -100px;
+  height: auto;
+  color: white;
 }
-#about .overlay {
-  padding: 130px 0 0 0;
-}
-#value,
-#faq,
-#events,
-#newsletter {
-  padding: 60px 0;
-}
-#faq {
-  padding: 60px 0 30px 0;
-}
-#faq .row {
-  padding-bottom: 30px;
+.without-background {
+  padding: 60px 0px;
 }
 #newsletter .facebook {
   float: left;
@@ -157,80 +144,24 @@ a:hover {
   padding: 10px 15px;
   border: 0px;
 }
-#apply {
-  background: url('../img/photos/photo5.jpg') 50% 0 no-repeat fixed;
-  height: auto;
-  margin: 0;
-  color: white;
-  background-size: cover;
-}
-#apply .overlay {
-  padding-bottom: 50px;
-}
-#apply p {
-  line-height: 180%;
-}
-#coach,
-#yourcity,
-#schedule {
-  background: url('../img/photos/photo0.jpg') 50% 0 no-repeat fixed;
-  height: auto;
-  margin: 0;
-  color: white;
-  background-size: cover;
-  line-height: 180%;
-}
-#coach .overlay,
-#yourcity .overlay,
-#schedule .overlay {
-  padding-bottom: 50px;
-}
-#coach h2,
-#yourcity h2,
-#schedule h2 {
-  margin-bottom: 25px;
-}
 .cls {
   clear: both;
 }
-#sponsors {
-  margin: 50px 0;
-}
-#sponsors .row {
-  padding: 20px 0px;
-}
-#sponsors .row .col-md-4,
-#sponsors .row .col-md-3 {
-  text-align: center;
-}
-#coaches {
-  margin-top: 50px;
-}
-#coaches .row {
+.coaches {
   padding: 30px 0px;
 }
-#coaches .row .col-md-2 {
+.coaches .col-md-2 {
   text-align: center;
 }
-#coaches .row .col-md-2 .coach {
+.coaches .col-md-2 .coach {
   max-width: 160px;
   border-radius: 100%;
   margin-bottom: 15px;
 }
-#coaches .row .col-md-2 a {
+.coaches .col-md-2 a {
   color: black;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 18px;
-}
-#codeofconduct {
-  margin: 50px 0;
-}
-#codeofconduct h2 {
-  color: black;
-  margin-bottom: 30px;
-}
-#codeofconduct h3 {
-  margin: 30px 0 15px 0;
 }
 footer {
   background: url('../img/photos/photo4.jpg') 50% 0 no-repeat fixed;
@@ -257,52 +188,6 @@ footer .twitter {
   float: left;
   margin-top: -55px;
   position: absolute;
-}
-.button {
-  line-height: 48px;
-  padding: 13px 52px 10px 52px;
-  height: 62px;
-  position: relative;
-  margin-left: 17px;
-  cursor: pointer;
-  border: 0;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  font-size: 36px;
-  text-transform: uppercase;
-  background: url(../img/button_bigred_content.png) repeat-x;
-  color: white;
-  display: inline;
-}
-.button:hover {
-  text-decoration: none;
-  color: white;
-}
-.button:before {
-  width: 16px;
-  height: 62px;
-  content: " ";
-  background: url(../img/button_bigred_before.png);
-  display: block;
-  float: left;
-  position: absolute;
-  margin-left: -16px;
-  top: 0px;
-}
-.button:after {
-  width: 15px;
-  height: 62px;
-  content: " ";
-  background: url(../img/button_bigred_after.png);
-  display: block;
-  position: absolute;
-  top: 0;
-  right: -15px;
-}
-button.button {
-  margin-left: 4px;
-}
-button.button:before {
-  margin-left: -57px;
 }
 #map {
   width: 100%;
