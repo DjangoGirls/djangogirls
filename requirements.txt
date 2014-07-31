@@ -3,6 +3,7 @@ Pillow==2.5.1
 South==1.0
 click==2.5
 dj-database-url==0.3.0
+django-storages==1.1.8
 django-suit==0.2.9
 django-suit-redactor==0.0.2
 gunicorn==19.1.0
