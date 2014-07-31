@@ -118,7 +118,7 @@ class Command(BaseCommand):
             content = '<h3>Sponsors</h3><p>We couldn\'t be here without the support from amazing people and organizations who donated money, knowledge and time to help us make this a reality.</p><div class="row" style="margin-top: 30px;"><div class="col-md-4"><a href="http://europython.eu/"><img src="/static/img/partners/ep.png" /></a></div><div class="col-md-4"><a href="https://www.djangoproject.com/"><img src="/static/img/partners/django.png" width="50%" /></a></div><div class="col-md-4"><a href="http://www.django-de.org/"><img src="/static/img/partners/djangode.png" /></a></div></div><div class="row" style="margin-top: 30px;"><div class="col-md-4"><a href="http://www.python.org/"><img src="/static/img/partners/python.png" /></a></div><div class="col-md-4"><a href="http://github.com/"><img src="/static/img/partners/github.png" width="50%" /></a></div><div class="col-md-4"><a href="https://p.ota.to/"><img src="/static/img/partners/potato.png" /></a></div></div><div class="row" style="padding: 30px 0 30px 0;"><div class="col-md-4"><a href="http://stxnext.com/#/en"><img src="/static/img/partners/stxnext.png" /></a></div></div><p>If you want to contribute and support our goal, please get in touch: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></p>')
 
     def add_default_menu(self, page):
-        
+
         EventPageMenu.objects.create(page = page, title = 'About', position = 1, url = '#values')
         EventPageMenu.objects.create(page = page, title = 'Apply for a pass!', position = 10, url = '#apply')
         EventPageMenu.objects.create(page = page, title = 'FAQ', position = 20, url = '#faq')
@@ -146,7 +146,7 @@ class Command(BaseCommand):
 
         #Event and EventPage objects
         name = u'Django Girls '+city
-        event = Event.objects.create(name=name, country=country, main_organizer=members[0], date=date)
+        event = Event.objects.create(name=name, city=city, country=country, main_organizer=members[0], date=date)
         for member in members:
             event.team.add(member)
 
