@@ -33,7 +33,7 @@ SITE_ID = 1
 
 INSTALLED_APPS = (
     'suit',
-    'suit_redactor',
+    #'suit_redactor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
