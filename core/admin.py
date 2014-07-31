@@ -1,20 +1,65 @@
 from django.contrib import admin
+from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
 from forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
+from suit_redactor.widgets import RedactorWidget
 
 from .models import *
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country')
 
+    def queryset(self, request):
+        qs = super(EventAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(team__in=[request.user,])
+
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
 
+    def queryset(self, request):
+        qs = super(EventPageAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(event__team__in=[request.user,])
+
+class EventPageContentForm(ModelForm):
+    class Meta:
+        widgets = {
+            'content': RedactorWidget(editor_options={'lang': 'en'})
+        }
+
 class EventPageContentAdmin(admin.ModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
+    form = EventPageContentForm
+
+    def queryset(self, request):
+		qs = super(EventPageContentAdmin, self).queryset(request)
+		if request.user.is_superuser:
+			return qs
+		return qs.filter(page__event__team__in=[request.user,])
+
+    def get_form(self, request, obj=None, **kwargs):
+		form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
+		if not request.user.is_superuser:
+			form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+		return form
 
 class EventPageMenuAdmin(admin.ModelAdmin):
     list_display = ('title', 'page', 'url', 'position')
+
+    def queryset(self, request):
+        qs = super(EventPageMenuAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(page__event__team__in=[request.user,])
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
+        if not request.user.is_superuser:
+            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+        return form
 
 
 class UserAdmin(auth_admin.UserAdmin):

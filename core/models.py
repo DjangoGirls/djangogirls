@@ -58,6 +58,9 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "List of events"
+
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -70,6 +73,9 @@ class EventPage(models.Model):
 
     def __unicode__(self):
         return 'Website for {0}'.format(self.event)
+
+    class Meta:
+        verbose_name = "Website"
 
 class EventPageContent(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
@@ -85,6 +91,8 @@ class EventPageContent(models.Model):
 
     class Meta:
         ordering = ('position', )
+        verbose_name = "Website Content"
+
 
 class EventPageMenu(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
@@ -97,3 +105,4 @@ class EventPageMenu(models.Model):
 
     class Meta:
         ordering = ('position', )
+        verbose_name = "Website Menu"
