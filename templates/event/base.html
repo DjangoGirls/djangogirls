@@ -21,6 +21,23 @@
   <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/djangogirls.js' %}"></script>
 
+  {% if page.main_color %}
+  <style type="text/css">
+    .navbar-default {
+        border-color: #{{ page.main_color }};
+    }
+    .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+        background-color: #{{ page.main_color }};
+    }
+    a, a:hover {
+        color: #{{ page.main_color }};
+    }
+    .btn, .btn:hover {
+        background-color: #{{ page.main_color }};
+    }
+  </style>
+  {% endif %}
+
   {% block custom_css %}{% endblock %}
 
 </head>
