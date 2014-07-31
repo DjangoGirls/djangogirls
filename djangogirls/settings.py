@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     'south',
+    'storages',
 
     'core'
 )
@@ -83,18 +84,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
-STATIC_ROOT = 'staticfiles'
-UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/')
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-MEDIA_URL = '/static/media/'
-
 # Templates
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
@@ -111,6 +100,28 @@ AUTH_USER_MODEL = 'core.User'
 SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls'
 }
+
+MEDIA_ROOT = 'staticfiles/media'
+MEDIA_URL = '/static/media/'
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = 'djangogirls'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 try:
     from .local_settings import *
