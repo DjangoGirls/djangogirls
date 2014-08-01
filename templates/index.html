@@ -34,7 +34,7 @@
                 {% for event in upcoming_events %}
                     <div class="col-md-3">
                         <h5><a href="/{{ event.url }}/">{{ event.event.name }}</a><h5>
-                        <p>{{ event.event.date|date:"d M y" }}</p>
+                        <p>{{ event.event.date }}</p>
                         <p>{{ event.event.city }}, {{ event.event.country }}</p>
                     </div>
 
@@ -46,7 +46,7 @@
     </div>
     {% endif %}
 
-    <div class="container without-background">
+    <div class="container without-background" style="padding-top: 0px;">
         <div id="events">
             <h3>Past events</h3>
             <div class="row">
