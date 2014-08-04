@@ -15,7 +15,11 @@ def index(request):
 
 def event(request, city):
     try:
-        page = EventPage.objects.get(url=city, is_live=True)
+        if request.user.is_authenticated():
+            page = EventPage.objects.get(url=city)
+        else:
+            page = EventPage.objects.get(url=city, is_live=True)
+            
     except EventPage.DoesNotExist:
         return redirect('index')
 
