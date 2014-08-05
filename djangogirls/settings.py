@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'django_date_extensions',
+
     'south',
     'storages',
 

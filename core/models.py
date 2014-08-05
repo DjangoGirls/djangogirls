@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
-
 from django.contrib.auth.models import User
+
+from django_date_extensions.fields import ApproximateDateField
 
 class UserManager(auth_models.BaseUserManager):
     def create_user(self, email, password=None):
@@ -48,12 +49,14 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    date = models.DateField(null=True, blank=True)
+    date = ApproximateDateField(null=True, blank=True)
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
 
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, null=True, blank=True)
+
+    is_on_homepage = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

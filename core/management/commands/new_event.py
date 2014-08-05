@@ -14,7 +14,7 @@ class Command(BaseCommand):
         click.echo("Let's start with some basics.")
         city = click.prompt("What is the name of the city?")
         country = click.prompt("What is the name of the country?")
-        date = click.prompt("What is the date of the event? (Format: YYYY-MM-DD)")
+        date = click.prompt("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)")
         url = click.prompt("What should be the URL of website? djangogirls.org/xxxx")
         click.echo(u"Ok, got that! Your new event will happen in {0}, {1} on {2}".format(city, country, date))
 
