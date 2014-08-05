@@ -5,12 +5,10 @@ from .models import *
 
 def index(request):
 
-    upcoming_events = EventPage.objects.filter(is_live=True, event__date__gt=timezone.now()).order_by('-event__date')
-    past_events = EventPage.objects.filter(is_live=True, event__date__lt=timezone.now()).order_by('-event__date')
+    events = EventPage.objects.filter(event__is_on_homepage=True).order_by('-event__date')
 
     return render(request, 'index.html', {
-        'upcoming_events': upcoming_events,
-        'past_events': past_events,
+        'events': events,
     })
 
 def event(request, city):
@@ -19,7 +17,7 @@ def event(request, city):
             page = EventPage.objects.get(url=city)
         else:
             page = EventPage.objects.get(url=city, is_live=True)
-            
+
     except EventPage.DoesNotExist:
         return redirect('index')
 

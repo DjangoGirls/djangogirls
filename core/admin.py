@@ -8,7 +8,7 @@ from suit.admin import SortableModelAdmin
 from .models import *
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'city', 'country')
+    list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
     search_fields = ('city', 'country')
 
     def queryset(self, request):

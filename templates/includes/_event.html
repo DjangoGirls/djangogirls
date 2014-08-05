@@ -1,0 +1,11 @@
+<div class="col-md-3">
+    <h5>
+        {% if event.is_live %}
+            <a href="/{{ event.url }}/">{{ event.event.name }}</a>
+        {% else %}
+            {{ event.event.name }}
+        {% endif %}
+    <h5>
+    <p>{{ event.event.date }}</p>
+    <p>{{ event.event.city }}, {{ event.event.country }}</p>
+</div>
