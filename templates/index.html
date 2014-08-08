@@ -26,12 +26,12 @@
         <script src="https://embed.github.com/view/geojson/DjangoGirls/djangogirls/gh-pages/new-map.geojson?width=1500&height=300"></script>
     </div>
 
-    {% if events %}
+    {% if future_events %}
     <div class="container without-background">
         <div id="events">
-            <h3>Our events</h3>
+            <h3>Upcoming events</h3>
             <div class="row">
-                {% for event in events %}
+                {% for event in future_events %}
                     {% include 'includes/_event.html' with event=event %}
                     {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
                 {% endfor %}
@@ -40,6 +40,19 @@
         </div>
     </div>
     {% endif %}
+
+    <div class="container without-background" style="padding-top: 0">
+        <div id="events">
+            <h3>Past events</h3>
+            <div class="row">
+                {% for event in past_events %}
+                    {% include 'includes/_event.html' with event=event %}
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 
 
     <div id="yourcity">

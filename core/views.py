@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -5,10 +6,12 @@ from .models import *
 
 def index(request):
 
-    events = EventPage.objects.filter(event__is_on_homepage=True).order_by('-event__date')
+    future_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('event__date')
+    past_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-event__date')
 
     return render(request, 'index.html', {
-        'events': events,
+        'future_events': future_events,
+        'past_events': past_events,
     })
 
 def event(request, city):
