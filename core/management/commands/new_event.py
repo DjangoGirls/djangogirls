@@ -7,6 +7,7 @@ from django.conf import settings
 from django_date_extensions.fields import ApproximateDate
 
 from core.models import *
+from core.utils import get_coordinates_for_city
 
 class Command(BaseCommand):
     help = 'Creates new Django Girls event'
@@ -174,7 +175,8 @@ class Command(BaseCommand):
 
         #Event and EventPage objects
         name = u'Django Girls '+city
-        event = Event.objects.create(name=name, city=city, country=country, main_organizer=members[0], date=date)
+        latlng = get_coordinates_for_city(city, country)
+        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date)
         for member in members:
             event.team.add(member)
 

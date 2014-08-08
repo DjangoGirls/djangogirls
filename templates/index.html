@@ -1,5 +1,24 @@
 {% extends 'global/base.html' %}
-{% load staticfiles %}
+{% load staticfiles leaflet_tags %}
+
+{% block extra_js %}
+    {% leaflet_js %}{% leaflet_css %}
+    <link rel="stylesheet" href="{% static 'css/leaflet.awesome-markers.css' %}">
+    <script src="{% static 'js/leaflet.awesome-markers.js' %}"></script>
+
+    <script type="text/javascript">
+        function map_init_basic (map, options) {
+            {% for event in future_events %}
+                {% include 'includes/_map_event.html' with event=event %}
+            {% endfor %}
+            {% for event in past_events %}
+                {% include 'includes/_map_event.html' with event=event %}
+            {% endfor %}
+            map.scrollWheelZoom.disable();
+        }
+    </script>
+
+{% endblock %}
 
 {% block content %}
     <div class="container without-background">
@@ -22,8 +41,8 @@
           </div>
     </div>
 
-    <div id="map">
-        <script src="https://embed.github.com/view/geojson/DjangoGirls/djangogirls/gh-pages/new-map.geojson?width=1500&height=300"></script>
+    <div class="container map">
+        {% leaflet_map "map" callback="window.map_init_basic" %}
     </div>
 
     {% if future_events %}

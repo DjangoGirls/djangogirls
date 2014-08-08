@@ -52,6 +52,7 @@ class Event(models.Model):
     date = ApproximateDateField(null=True, blank=True)
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
+    latlng = models.CharField(max_length=30, null=True, blank=True)
 
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, null=True, blank=True)

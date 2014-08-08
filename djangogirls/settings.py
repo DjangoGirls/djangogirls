@@ -44,9 +44,9 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     'django_date_extensions',
-
     'south',
     'storages',
+    'leaflet',
 
     'core'
 )
@@ -125,6 +125,17 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (20, 20),
+    'DEFAULT_ZOOM': 2,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 5,
+    'ATTRIBUTION_PREFIX':'',
+    'SCALE': None,
+    'MINIMAP': False,
+    'RESET_VIEW': False
+}
 
 try:
     from .local_settings import *
