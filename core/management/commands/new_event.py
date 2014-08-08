@@ -1,20 +1,39 @@
 # -*- encoding: utf-8 -*-
 import random, string, click
+from datetime import datetime
 from django.core.management.base import BaseCommand, CommandError
 from django.core.files import File
 from django.conf import settings
+from django_date_extensions.fields import ApproximateDate
 
 from core.models import *
 
 class Command(BaseCommand):
     help = 'Creates new Django Girls event'
 
+    def prepare_date(self, date_str):
+        try:
+            date_obj = datetime.strptime(date_str, '%d/%m/%Y')
+            return ApproximateDate(year=date_obj.year, month=date_obj.month, day=date_obj.day)
+        except ValueError:
+            try:
+                date_obj = datetime.strptime(date_str, '%m/%Y')
+                return ApproximateDate(year=date_obj.year, month=date_obj.month)
+            except ValueError:
+                return False
+
+        return False
+
+
     def get_basic_info(self):
         click.echo("Hello there! Let's create new Django Girls event! So exciting!")
         click.echo("Let's start with some basics.")
         city = click.prompt("What is the name of the city?")
         country = click.prompt("What is the name of the country?")
-        date = click.prompt("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)")
+        date = self.prepare_date(click.prompt("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)"))
+        while not date:
+            date = self.prepare_date(click.prompt("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)"))
+
         url = click.prompt("What should be the URL of website? djangogirls.org/xxxx")
         click.echo(u"Ok, got that! Your new event will happen in {0}, {1} on {2}".format(city, country, date))
 
