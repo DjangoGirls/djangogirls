@@ -163,13 +163,16 @@ a:hover {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 18px;
 }
-.facebook {
+.social {
+  margin-top: 30px;
+}
+.social .facebook {
   margin: -10px 0 10px 0;
   float: left;
   width: 250px;
   height: 70px;
 }
-.twitter {
+.social .twitter {
   margin-top: 10px;
 }
 .credits {
@@ -177,6 +180,10 @@ a:hover {
   text-align: center;
   opacity: 0.6;
   padding-top: 30px;
+}
+#yourcity {
+  background: url('../img/photos/photo2.jpg') 50% 0 no-repeat fixed;
+  background-size: cover;
 }
 footer {
   background: url('../img/photos/photo4.jpg') 50% 0 no-repeat fixed;
@@ -188,10 +195,7 @@ footer {
   background-position: 0 200px;
 }
 footer .overlay {
-  padding-bottom: 30px;
-}
-footer .social {
-  height: 200px;
+  padding: 30px 0;
 }
 footer .credits {
   font-size: 12px;
