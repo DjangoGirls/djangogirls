@@ -91,7 +91,7 @@ class EventPageContent(models.Model):
     is_public = models.BooleanField(null=False, blank=False, default=False)
 
     def __unicode__(self):
-        return self.name
+        return "{0} at {1}".format(self.name, self.page.event)
 
     class Meta:
         ordering = ('position', )
@@ -110,3 +110,18 @@ class EventPageMenu(models.Model):
     class Meta:
         ordering = ('position', )
         verbose_name = "Website Menu"
+
+class Sponsor(models.Model):
+    event_page_content = models.ForeignKey(EventPageContent, null=False, blank=False)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    logo = models.ImageField(upload_to="event/sponsors/", null=True, blank=True, help_text="Make sure logo is not bigger than 200 pixels wide")
+    url = models.URLField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    position = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the sponsor")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('position', )

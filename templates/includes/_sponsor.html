@@ -1,0 +1,11 @@
+<div class="col-md-3">
+    <a href="{{ sponsor.url }}" target="_blank">
+        {% if sponsor.logo %}
+            <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}" />
+        {% else %}
+            <b>{{ sponsor.name }}</b>
+        {% endif %}
+    </a>
+    {% if sponsor.description %}<p>{{ sponsor.description }}</p>{% endif %}
+</div>
+{% if forloop.counter|divisibleby:3 %}</div><div class="row sponsor-logos">{% endif %}

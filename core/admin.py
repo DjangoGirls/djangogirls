@@ -67,6 +67,21 @@ class EventPageMenuAdmin(SortableModelAdmin):
             form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
         return form
 
+class SponsorAdmin(SortableModelAdmin):
+    list_display = ('name', 'event_page_content', 'url', 'position')
+    sortable = 'position'
+
+    def queryset(self, request):
+        qs = super(SponsorAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(page__event__team__in=[request.user,])
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
+        if not request.user.is_superuser:
+            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+        return form
 
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
@@ -123,3 +138,4 @@ admin.site.register(EventPage, EventPageAdmin)
 admin.site.register(EventPageContent, EventPageContentAdmin)
 admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Sponsor, SponsorAdmin)

@@ -13,6 +13,15 @@
 
     <div class="container without-background" id="{{ item.name }}">
         {{ item.content|safe }}
+
+        {% if item.sponsor_set.count > 0 %}
+            <div class="row sponsor-logos">
+                {% for sponsor in item.sponsor_set.all %}
+                    {% include 'includes/_sponsor.html' with sponsor=sponsor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
     </div>
 
 {% endif %}
