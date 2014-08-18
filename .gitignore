@@ -4,3 +4,4 @@
 static/media
 staticfiles
 local_settings.py
+.anvil/*
