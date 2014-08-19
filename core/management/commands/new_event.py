@@ -74,20 +74,26 @@ class Command(BaseCommand):
         main_organizer = None
         members = []
         for member in team:
-            member['password'] = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
-            user = User.objects.create(email=member['email'],
-                                        first_name=member['first_name'],
-                                        last_name=member['last_name'],
-                                        is_active=True,
-                                        is_staff=True)
-            user.set_password(member['password'])
-            user.save()
-            user.groups.add(1)
+
+            if not User.objects.filter(email=member['email']).exists():
+                member['password'] = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
+                user = User.objects.create(email=member['email'],
+                                            first_name=member['first_name'],
+                                            last_name=member['last_name'],
+                                            is_active=True,
+                                            is_staff=True)
+                user.set_password(member['password'])
+                user.save()
+                user.groups.add(1)
+
+                click.echo(u"{0} - email: {1} password: {2}".format(member['first_name'], member['email'], member['password']))
+            else:
+                user = User.objects.get(email=member['email'])
+                click.echo(u"{0} - email: {1} already has account in Django Girls".format(member['first_name'], member['email']))
 
             if not main_organizer:
                 main_organizer = user
             members.append(user)
-            click.echo(u"{0} - email: {1} password: {2}".format(member['first_name'], member['email'], member['password']))
 
         return members
 
@@ -176,7 +182,7 @@ class Command(BaseCommand):
         #Event and EventPage objects
         name = u'Django Girls '+city
         latlng = get_coordinates_for_city(city, country)
-        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date)
+        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date, is_on_homepage=True)
         for member in members:
             event.team.add(member)
 
