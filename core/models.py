@@ -104,7 +104,7 @@ class EventPageMenu(models.Model):
     url = models.CharField(max_length=255, null=False, blank=False)
     position = models.PositiveIntegerField(null=False, blank=False, help_text="Order of menu")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     class Meta:
@@ -120,7 +120,7 @@ class Sponsor(models.Model):
 
     position = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the sponsor")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     class Meta:
