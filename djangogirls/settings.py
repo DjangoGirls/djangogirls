@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'raven.contrib.django.raven_compat',
     'django_date_extensions',
     'south',
     'storages',
@@ -135,6 +136,10 @@ LEAFLET_CONFIG = {
     'SCALE': None,
     'MINIMAP': False,
     'RESET_VIEW': False
+}
+
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('SENTRY_DSN')
 }
 
 try:

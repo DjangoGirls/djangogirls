@@ -11,6 +11,7 @@ django-suit==0.2.9
 django-suit-redactor==0.0.2
 gunicorn==19.1.0
 psycopg2==2.5.3
+raven==5.0.0
 requests==2.3.0
 six==1.7.3
 whitenoise==1.0.3
