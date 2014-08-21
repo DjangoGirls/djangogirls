@@ -75,7 +75,7 @@ class SponsorAdmin(SortableModelAdmin):
         qs = super(SponsorAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(event_page_content__page__event__team__in=[request.user,])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
