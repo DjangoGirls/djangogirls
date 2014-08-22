@@ -84,7 +84,7 @@ class EventPage(models.Model):
 class EventPageContent(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
     name = models.CharField(null=False, blank=False, max_length=100)
-    content = models.TextField(null=False, blank=False, help_text="HTLM allowed")
+    content = models.TextField(null=False, blank=False, help_text="HTML allowed")
     background = models.ImageField(upload_to="event/backgrounds/", null=True, blank=True, help_text="Optional background photo")
     position = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the block on the website")
 
