@@ -25,7 +25,7 @@ def event(request, city):
         return redirect('index')
 
     menu = EventPageMenu.objects.filter(page=page)
-    content = EventPageContent.objects.filter(page=page)
+    content = EventPageContent.objects.filter(page=page, is_public=True)
 
     return render(request, "event.html", {
         'page': page,
