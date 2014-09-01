@@ -76,7 +76,7 @@ class EventPage(models.Model):
     is_live = models.BooleanField(null=False, blank=False, default=False)
 
     def __unicode__(self):
-        return 'Website for {0}'.format(self.event)
+        return 'Website for %s' % self.event.name
 
     class Meta:
         verbose_name = "Website"
@@ -91,7 +91,7 @@ class EventPageContent(models.Model):
     is_public = models.BooleanField(null=False, blank=False, default=False)
 
     def __unicode__(self):
-        return "{0} at {1}".format(self.name, self.page.event)
+        return "%s at %s" % (self.name, self.page.event)
 
     class Meta:
         ordering = ('position', )
