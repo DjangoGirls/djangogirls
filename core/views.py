@@ -22,7 +22,7 @@ def event(request, city):
             page = EventPage.objects.get(url=city, is_live=True)
 
     except EventPage.DoesNotExist:
-        return redirect('index')
+        return redirect('core:index')
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)

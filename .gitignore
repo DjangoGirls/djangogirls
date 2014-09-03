@@ -5,3 +5,4 @@ static/media
 staticfiles
 local_settings.py
 .anvil/*
+__pycache__
