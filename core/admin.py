@@ -1,17 +1,17 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
-from forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin
 
 from .models import *
+from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
     search_fields = ('city', 'country')
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         qs = super(EventAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
@@ -20,7 +20,7 @@ class EventAdmin(admin.ModelAdmin):
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         qs = super(EventPageAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
@@ -38,24 +38,24 @@ class EventPageContentAdmin(SortableModelAdmin):
     form = EventPageContentForm
     sortable = 'position'
 
-    def queryset(self, request):
-		qs = super(EventPageContentAdmin, self).queryset(request)
-		if request.user.is_superuser:
-			return qs
-		return qs.filter(page__event__team__in=[request.user,])
+    def get_queryset(self, request):
+        qs = super(EventPageContentAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(page__event__team__in=[request.user,])
 
     def get_form(self, request, obj=None, **kwargs):
-		form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
-		if not request.user.is_superuser:
-			form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
-		return form
+        form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
+        if not request.user.is_superuser:
+            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+        return form
 
 class EventPageMenuAdmin(SortableModelAdmin):
     list_display = ('title', 'page', 'url', 'position')
     list_filter = ('page',)
     sortable = 'position'
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         qs = super(EventPageMenuAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
@@ -71,7 +71,7 @@ class SponsorAdmin(SortableModelAdmin):
     list_display = ('name', 'event_page_content', 'url', 'position')
     sortable = 'position'
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         qs = super(SponsorAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs

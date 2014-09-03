@@ -1,201 +1,131 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import django.utils.timezone
+import django_date_extensions.fields
+from django.conf import settings
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'User'
-        db.create_table(u'core_user', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('is_superuser', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=75)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
-            ('is_staff', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('date_joined', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'core', ['User'])
+    dependencies = [
+        ('auth', '0001_initial'),
+    ]
 
-        # Adding M2M table for field groups on 'User'
-        m2m_table_name = db.shorten_name(u'core_user_groups')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('user', models.ForeignKey(orm[u'core.user'], null=False)),
-            ('group', models.ForeignKey(orm[u'auth.group'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['user_id', 'group_id'])
-
-        # Adding M2M table for field user_permissions on 'User'
-        m2m_table_name = db.shorten_name(u'core_user_user_permissions')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('user', models.ForeignKey(orm[u'core.user'], null=False)),
-            ('permission', models.ForeignKey(orm[u'auth.permission'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
-
-        # Adding model 'Event'
-        db.create_table(u'core_event', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('country', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('main_organizer', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='main_organizer', null=True, to=orm['core.User'])),
-        ))
-        db.send_create_signal(u'core', ['Event'])
-
-        # Adding M2M table for field team on 'Event'
-        m2m_table_name = db.shorten_name(u'core_event_team')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('event', models.ForeignKey(orm[u'core.event'], null=False)),
-            ('user', models.ForeignKey(orm[u'core.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['event_id', 'user_id'])
-
-        # Adding model 'EventPage'
-        db.create_table(u'core_eventpage', (
-            ('event', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['core.Event'], unique=True, primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(default='Django Girls is a one-day workshop about programming in Python and Django tailored for women.', null=True, blank=True)),
-            ('main_color', self.gf('django.db.models.fields.CharField')(default='FF9400', max_length=6, null=True, blank=True)),
-            ('custom_css', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('is_live', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'core', ['EventPage'])
-
-        # Adding model 'EventPageContent'
-        db.create_table(u'core_eventpagecontent', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('page', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.EventPage'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('background', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
-            ('position', self.gf('django.db.models.fields.IntegerField')()),
-            ('is_public', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'core', ['EventPageContent'])
-
-        # Adding model 'EventPageMenu'
-        db.create_table(u'core_eventpagemenu', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('page', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.EventPage'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('position', self.gf('django.db.models.fields.IntegerField')()),
-        ))
-        db.send_create_signal(u'core', ['EventPageMenu'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'User'
-        db.delete_table(u'core_user')
-
-        # Removing M2M table for field groups on 'User'
-        db.delete_table(db.shorten_name(u'core_user_groups'))
-
-        # Removing M2M table for field user_permissions on 'User'
-        db.delete_table(db.shorten_name(u'core_user_user_permissions'))
-
-        # Deleting model 'Event'
-        db.delete_table(u'core_event')
-
-        # Removing M2M table for field team on 'Event'
-        db.delete_table(db.shorten_name(u'core_event_team'))
-
-        # Deleting model 'EventPage'
-        db.delete_table(u'core_eventpage')
-
-        # Deleting model 'EventPageContent'
-        db.delete_table(u'core_eventpagecontent')
-
-        # Deleting model 'EventPageMenu'
-        db.delete_table(u'core_eventpagemenu')
-
-
-    models = {
-        u'auth.group': {
-            'Meta': {'object_name': 'Group'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
-        },
-        u'auth.permission': {
-            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        u'core.event': {
-            'Meta': {'object_name': 'Event'},
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'country': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'main_organizer': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'main_organizer'", 'null': 'True', 'to': u"orm['core.User']"}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'team': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['core.User']", 'null': 'True', 'blank': 'True'})
-        },
-        u'core.eventpage': {
-            'Meta': {'object_name': 'EventPage'},
-            'custom_css': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'default': "'Django Girls is a one-day workshop about programming in Python and Django tailored for women.'", 'null': 'True', 'blank': 'True'}),
-            'event': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['core.Event']", 'unique': 'True', 'primary_key': 'True'}),
-            'is_live': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'main_color': ('django.db.models.fields.CharField', [], {'default': "'FF9400'", 'max_length': '6', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
-        },
-        u'core.eventpagecontent': {
-            'Meta': {'ordering': "('position',)", 'object_name': 'EventPageContent'},
-            'background': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_public': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'page': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.EventPage']"}),
-            'position': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'core.eventpagemenu': {
-            'Meta': {'ordering': "('position',)", 'object_name': 'EventPageMenu'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'page': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.EventPage']"}),
-            'position': ('django.db.models.fields.IntegerField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        u'core.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"})
-        }
-    }
-
-    complete_apps = ['core']
+    operations = [
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(verbose_name='last login', default=django.utils.timezone.now)),
+                ('is_superuser', models.BooleanField(verbose_name='superuser status', default=False, help_text='Designates that this user has all permissions without explicitly assigning them.')),
+                ('email', models.EmailField(unique=True, max_length=75)),
+                ('first_name', models.CharField(max_length=30, blank=True)),
+                ('last_name', models.CharField(max_length=30, blank=True)),
+                ('is_staff', models.BooleanField(default=False)),
+                ('is_active', models.BooleanField(default=True)),
+                ('date_joined', models.DateTimeField(auto_now_add=True)),
+                ('groups', models.ManyToManyField(verbose_name='groups', to='auth.Group', blank=True, related_name='user_set', related_query_name='user', help_text='The groups this user belongs to. A user will get all permissions granted to each of his/her group.')),
+                ('user_permissions', models.ManyToManyField(verbose_name='user permissions', to='auth.Permission', blank=True, related_name='user_set', related_query_name='user', help_text='Specific permissions for this user.')),
+            ],
+            options={
+                'verbose_name': 'Organizer',
+                'verbose_name_plural': 'Organizers',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Event',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('name', models.CharField(max_length=200)),
+                ('date', django_date_extensions.fields.ApproximateDateField(max_length=10, blank=True, null=True)),
+                ('city', models.CharField(max_length=200)),
+                ('country', models.CharField(max_length=200)),
+                ('latlng', models.CharField(max_length=30, blank=True, null=True)),
+                ('is_on_homepage', models.BooleanField(default=False)),
+            ],
+            options={
+                'verbose_name_plural': 'List of events',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='EventPage',
+            fields=[
+                ('event', models.OneToOneField(to='core.Event', serialize=False, primary_key=True)),
+                ('title', models.CharField(max_length=200, blank=True, null=True)),
+                ('description', models.TextField(blank=True, null=True, default='Django Girls is a one-day workshop about programming in Python and Django tailored for women.')),
+                ('main_color', models.CharField(max_length=6, default='FF9400', blank=True, null=True, help_text='Main color of the chapter in HEX')),
+                ('custom_css', models.TextField(blank=True, null=True)),
+                ('url', models.CharField(max_length=200, blank=True, null=True)),
+                ('is_live', models.BooleanField(default=False)),
+            ],
+            options={
+                'verbose_name': 'Website',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='EventPageContent',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('content', models.TextField(help_text='HTML allowed')),
+                ('background', models.ImageField(upload_to='event/backgrounds/', blank=True, null=True, help_text='Optional background photo')),
+                ('position', models.PositiveIntegerField(help_text='Position of the block on the website')),
+                ('is_public', models.BooleanField(default=False)),
+                ('page', models.ForeignKey(to='core.EventPage')),
+            ],
+            options={
+                'ordering': ('position',),
+                'verbose_name': 'Website Content',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='EventPageMenu',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('title', models.CharField(max_length=255)),
+                ('url', models.CharField(max_length=255)),
+                ('position', models.PositiveIntegerField(help_text='Order of menu')),
+                ('page', models.ForeignKey(to='core.EventPage')),
+            ],
+            options={
+                'ordering': ('position',),
+                'verbose_name': 'Website Menu',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Sponsor',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('name', models.CharField(max_length=200, blank=True, null=True)),
+                ('logo', models.ImageField(upload_to='event/sponsors/', blank=True, null=True, help_text='Make sure logo is not bigger than 200 pixels wide')),
+                ('url', models.URLField(blank=True, null=True)),
+                ('description', models.TextField(blank=True, null=True)),
+                ('position', models.PositiveIntegerField(help_text='Position of the sponsor')),
+                ('event_page_content', models.ForeignKey(to='core.EventPageContent')),
+            ],
+            options={
+                'ordering': ('position',),
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='event',
+            name='main_organizer',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True, related_name='main_organizer', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='event',
+            name='team',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True, null=True),
+            preserve_default=True,
+        ),
+    ]

@@ -45,7 +45,6 @@ INSTALLED_APPS = (
 
     'raven.contrib.django.raven_compat',
     'django_date_extensions',
-    'south',
     'storages',
     'leaflet',
 
