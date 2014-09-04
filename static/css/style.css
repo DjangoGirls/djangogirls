@@ -276,6 +276,23 @@ footer .twitter {
 .sponsor-logos .col-md-3 p {
   margin-top: 15px;
 }
+#resources .row {
+  margin-bottom: 50px;
+}
+#resources .cover {
+  float: left;
+  margin: 0 30px 0 0;
+}
+#resources .cover img {
+  border-radius: 3px;
+}
+#resources .info p {
+  margin-bottom: 0;
+}
+#resources .info .btn {
+  margin-bottom: 10px;
+  padding: 10px 30px;
+}
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) {
   #about .overlay {
