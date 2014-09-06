@@ -18,8 +18,9 @@
         </div>
     </section>
 
-    <section id="about">
-        <div class="container">
+    <div class="container">
+
+        <section id="about">
 
             <div class="row">
                 <div class="col-md-6">
@@ -55,38 +56,13 @@
                 </div>
 
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="events">
-        <div class="container">
-            <h2>Upcoming events</h2>
-
+        <section id="events">
             <div class="row">
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
+                <div class="col-md-12">
+                    <h2>Upcoming events</h2>
+                </div>
             </div>
 
             <div class="row">
@@ -142,8 +118,167 @@
                     </div>
                 </a>
             </div>
-        </div>
-    </section>
 
+            <div class="row">
+                <a href="">
+                    <div class="col-md-4 event">
+                        <div class="overlay">
+                            <p class="city">Kraków</p>
+                            <span class="date">11th November 2014</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col-md-4 event">
+                        <div class="overlay">
+                            <p class="city">Kraków</p>
+                            <span class="date">11th November 2014</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col-md-4 event">
+                        <div class="overlay">
+                            <p class="city">Kraków</p>
+                            <span class="date">11th November 2014</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row past-events">
+                <div class="col-md-12">
+                    <h2>Past events</h2>
+                    <a href="">Berlin, 21st July 2014</a>
+                    <a href="">Australia, 2nd August 2014</a>
+                    <a href="">Berlin, 21st July 2014</a>
+                    <a href="">Australia, 2nd August 2014</a>
+                    <a href="">Berlin, 21st July 2014</a>
+                    <a href="">Australia, 2nd August 2014</a>
+                    <a href="">Berlin, 21st July 2014</a>
+                    <a href="">Australia, 2nd August 2014</a>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="organize">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Don’t see event in your city?</h2>
+                </div>
+            </div>
+
+            <div class="row centered">
+                <div class="col-md-12">
+                    <h4>Sign up for newsletter</h4>
+                    <p>
+                        We will let you know when the event in your city will be launched:
+                    </p>
+                    <form>
+                        <input type="email" name="email" placeholder="Your e-mail" />
+                        <input type="text" name="city" placeholder="Your city" />
+                        <input type="submit" value="Sign up" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="row centered">
+                <div class="col-md-12">
+                    <h4>Bring Django Girls to your city!</h4>
+                    <p>
+                        Everyone can organize their own Django Girls event and share it with their community.
+                    </p>
+                    <a href="" class="btn">Find out more</a>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="story">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Django Girls Story</h2>
+                    <p>Each week we try to introduce two badass ladies who use Python or Django to highlight their work:</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <a href="">
+                    <div class="col-md-3 girl">
+                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
+                        <div class="overlay">Ola Sitarska</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col-md-3 girl">
+                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
+                        <div class="overlay">Ola Sitarska</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col-md-3 girl">
+                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
+                        <div class="overlay">Ola Sitarska</div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="col-md-3 girl">
+                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
+                        <div class="overlay">Ola Sitarska</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p><a href="">See more on our blog »</a></p>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="supporters">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Supporters</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="http://djangoproject.com/">
+                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://djangoproject.com/">
+                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://djangoproject.com/">
+                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://djangoproject.com/">
+                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Wanna join us on the mission? Drop us a line: <a href="">hello@djangogirls.org</a>.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
 
 {% endblock %}

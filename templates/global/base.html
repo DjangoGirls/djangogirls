@@ -24,26 +24,23 @@
 </head>
 <body>
 
-{% block menu %}
+    <div class="page-wrap">
+        {% block menu %}
 
-    {% include 'global/menu.html' %}
+            {% include 'global/menu.html' %}
 
-{% endblock %}
+        {% endblock %}
 
-{% block content %}
+        {% block content %}
 
-{% endblock %}
-
-<footer>
-    <div class="overlay">
-        <div class="container">
-            {% block footer %}
-                {% include 'global/footer.html' %}
-            {% endblock %}
-        </div>
+        {% endblock %}
     </div>
-</footer>
 
-{% include 'includes/js.html' %}
+    {% block footer %}
+        {% include 'global/footer.html' %}
+    {% endblock %}
+        
+
+    {% include 'includes/js.html' %}
 </body>
 </html>

@@ -3,6 +3,10 @@
     Common styles
 ---------------------
 */
+html,
+body {
+  height: 100%;
+}
 body {
   font: 20px 'Linux Libertine';
   color: #4a4a4a;
@@ -35,6 +39,36 @@ a {
 a:hover {
   color: #4a4a4a;
   text-decoration: none;
+}
+form input[type="email"],
+form input[type="text"] {
+  padding: 5px 10px;
+  width: 260px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin-right: 15px;
+}
+.btn,
+input[type="submit"] {
+  background: #f7921d;
+  border: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 18px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: 300;
+  text-decoration: none;
+}
+.btn {
+  padding: 8px 20px;
+}
+.btn:hover {
+  color: #fff;
 }
 /*
 ------------------
@@ -130,11 +164,11 @@ nav ul li a:hover {
   margin-bottom: 15px;
 }
 #events .event {
-  margin: 15px 0 0 15px;
+  margin: 15px 15px 15px 15px;
   padding: 0;
   background: url("../img/global/krakow.png") no-repeat;
   background-size: cover;
-  width: calc(33% - 15px);
+  width: calc(33% - 30px);
   height: 210px;
   text-align: center;
   color: #fff;
@@ -157,4 +191,121 @@ nav ul li a:hover {
 #events .event span {
   font-size: 23px;
   line-height: 27px;
+}
+#events .past-events {
+  margin-top: 40px;
+}
+#events .past-events a {
+  margin-right: 60px;
+  margin-bottom: 15px;
+  float: left;
+}
+/*
+-----------------------------
+    Organize & Newsletter
+-----------------------------
+*/
+#organize {
+  margin-top: 30px;
+}
+#organize .row {
+  margin-top: 10px;
+}
+#organize .row:nth-child(2) {
+  margin-bottom: 30px;
+}
+#organize .centered {
+  text-align: center;
+}
+/*
+-------------
+    Story
+-------------
+*/
+#story {
+  margin-top: 60px;
+}
+#story .row {
+  margin: 15px 0;
+}
+#story .row .girl img {
+  width: 100%;
+  height: 100%;
+}
+#story .row .girl .overlay {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  width: calc(100% - 30px);
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  padding-top: 45%;
+  text-align: center;
+  color: #fff;
+  font-style: italic;
+  font-size: 30px;
+  opacity: 0;
+}
+#story .row .girl .overlay:hover {
+  opacity: 1;
+}
+/*
+------------------
+    Supporters
+------------------
+*/
+#supporters {
+  margin-bottom: 80px;
+}
+#supporters .row {
+  margin: 30px 0;
+}
+#supporters .row .col-md-3 {
+  text-align: center;
+}
+#supporters .row .col-md-3 img {
+  max-width: 80%;
+}
+/*
+--------------
+    Footer
+--------------
+*/
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -300px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+footer,
+.page-wrap:after {
+  height: 300px;
+}
+footer {
+  background: #f9f7f7;
+  padding: 65px 0 0 0;
+}
+footer .row {
+  margin: 0;
+}
+footer .row .col-md-3 p {
+  text-transform: uppercase;
+  font-family: Roboto;
+  color: #f7921d;
+  font-size: 18px;
+  line-height: 21px;
+}
+footer .row .col-md-3 ul {
+  list-style-type: none;
+  padding: 0;
+}
+footer .row .col-md-3 ul li {
+  margin-left: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+footer .row .col-md-3 ul li a {
+  text-decoration: none;
 }
