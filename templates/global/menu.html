@@ -1,18 +1,22 @@
 {% load staticfiles %}
 
 <div class="container">
-    <nav role="navigation" class="clearfix">
-        <div class="logo">
-            <a href="/">
-                <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
-            </a>
-        </div>
+    <div class="row">
+        <div class="col-md-11">
+            <nav role="navigation" class="clearfix">
+                <div class="logo">
+                    <a href="/">
+                        <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
+                    </a>
+                </div>
 
-        <ul>
-            <li><a href="">Events</a></li>
-            <li><a href="">Resources</a></li>
-            <li><a href="">Organize</a></li>
-            <li><a href="">Blog</a></li>
-        </ul>
-    </nav>
+                <ul>
+                    <li><a href="">Events</a></li>
+                    <li><a href="">Resources</a></li>
+                    <li><a href="">Organize</a></li>
+                    <li><a href="">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>

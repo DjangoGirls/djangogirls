@@ -9,7 +9,6 @@ body {
   line-height: 29px;
   font-weight: 300;
 }
-h1,
 h2,
 h3,
 h4,
@@ -20,17 +19,14 @@ h5 {
   font-size: 36px;
   line-height: 120%;
 }
-h2 {
+h3 {
   font-size: 30px;
 }
-h3 {
+h4 {
   font-size: 24px;
 }
-h4 {
-  font-size: 18px;
-}
 h5 {
-  font-size: 14px;
+  font-size: 18px;
 }
 a {
   color: #4a4a4a;
@@ -54,6 +50,7 @@ nav .logo {
 nav ul {
   float: right;
   list-style-type: none;
+  margin-bottom: 0;
 }
 nav ul li {
   float: left;
@@ -69,4 +66,95 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: #f7921d;
+}
+/*
+------------------------
+    Box with picture
+------------------------
+*/
+#box-with-picture {
+  background: url("../img/global/woman.jpg") 50% 0 no-repeat fixed;
+  background-position: center -100px;
+  background-size: cover;
+}
+#box-with-picture .container {
+  padding: 120px 0;
+  text-align: center;
+}
+#box-with-picture h1 {
+  font-family: 'Linux Libertine';
+  font-size: 48px;
+  color: #fff;
+  line-height: 55px;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+#box-with-picture p {
+  font-family: 'Linux Libertine';
+  font-size: 24px;
+  color: #e7e7e7;
+  line-height: 30px;
+  font-style: italic;
+}
+/*
+------------------------
+    About
+------------------------
+*/
+#about {
+  padding: 30px 0 0 0;
+}
+#about h2 {
+  margin-top: 40px;
+}
+#about h2:first-child {
+  margin-top: 20px;
+}
+#about .row {
+  margin-bottom: 20px;
+}
+#about .gallery {
+  margin-top: 20px;
+  text-align: center;
+}
+#about .gallery img {
+  max-width: 100%;
+  max-height: 400px;
+}
+/*
+------------------------
+    Events
+------------------------
+*/
+#events h2 {
+  margin-bottom: 15px;
+}
+#events .event {
+  margin: 15px 0 0 15px;
+  padding: 0;
+  background: url("../img/global/krakow.png") no-repeat;
+  background-size: cover;
+  width: calc(33% - 15px);
+  height: 210px;
+  text-align: center;
+  color: #fff;
+  font-style: italic;
+}
+#events .event .overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  padding: 70px 0 0 0;
+}
+#events .event .overlay:hover {
+  background: rgba(0,0,0,0.3);
+}
+#events .event p.city {
+  font-size: 36px;
+  line-height: 41px;
+  margin-bottom: 0;
+}
+#events .event span {
+  font-size: 23px;
+  line-height: 27px;
 }
