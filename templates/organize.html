@@ -1,0 +1,58 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+
+        <section id="organize-full">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Organize Django Girls</h2>
+                    <p>
+                        Django Girls events are organized by a group of volunteers in different cities. Events are always non-profit, free for participants. We do not pay coaches, speakers or organizers. Attendees don't need any previous knowledge about programming and there are no age-limitations. All the attendees need is a laptop and some curiosity.
+                    </p>
+                    <p>
+                        Read our <a href="http://organize.djangogirls.org/">Organizer's Manual</a> to learn what it takes to organize workshop in your city.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        If you want to organize Django Girls workshop in your city, please fill out the form below and we will get back to you soon!
+                    </p>
+                    <div id="wufoo-m17wnuq61ml2nlx" style="margin-top: 40px; margin-left: -10px">
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script type="text/javascript">
+        var m17wnuq61ml2nlx;(function(d, t) {
+            var s = d.createElement(t), options = {
+                'userName':'djangogirls',
+                'formHash':'m17wnuq61ml2nlx',
+                'autoResize':true,
+                'height':'1102',
+                'async':true,
+                'host':'wufoo.com',
+                'header':'show',
+                'ssl':true
+            };
+            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+            s.onload = s.onreadystatechange = function() {
+                var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+            try { m17wnuq61ml2nlx = new WufooForm();m17wnuq61ml2nlx.initialize(options);m17wnuq61ml2nlx.display();
+
+            } catch (e) {}};
+            var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+        })(document, 'script');
+    </script>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <nav role="navigation" class="clearfix">
                 <div class="logo">
                     <a href="/">
@@ -11,10 +11,10 @@
                 </div>
 
                 <ul>
-                    <li><a href="">Events</a></li>
-                    <li><a href="">Resources</a></li>
-                    <li><a href="">Organize</a></li>
-                    <li><a href="">Blog</a></li>
+                    <li><a href="{% url 'core:events' %}">Events</a></li>
+                    <li><a href="{% url 'core:resources' %}">Resources</a></li>
+                    <li><a href="{% url 'core:organize' %}">Organize</a></li>
+                    <li><a href="http://blog.djangogirls.org/">Blog</a></li>
                 </ul>
             </nav>
         </div>

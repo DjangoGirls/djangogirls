@@ -32,3 +32,21 @@ def event(request, city):
         'menu': menu,
         'content': content,
     })
+
+def events(request):
+
+    future_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('event__date')
+    past_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-event__date')
+
+    return render(request, 'events.html', {
+        'future_events': future_events,
+        'past_events': past_events,
+    })
+
+def resources(request):
+
+    return render(request, 'resources.html', {})
+
+def organize(request):
+
+    return render(request, 'organize.html', {})

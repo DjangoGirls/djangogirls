@@ -26,12 +26,12 @@
                 <div class="col-md-6">
                     <h2>About</h2>
                     <p>
-                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in Berlin and started by two Polish girls: Ola Sitarska and Ola Sendecka.
+                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in Berlin and started by two Polish girls: <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asendecka">Ola Sendecka</a>.
                     </p>
 
                     <h2>Mission</h2>
                     <p>
-                        Our goal is to bring more amazing women into the world of technology and increase the diveristy in Django community. We believe that technology is for people and everyone should be able to build it. We are making technology more approchable by creating simple tools and resources designed with empathy.
+                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and everyone should be able to build it. We are making technology more approchable by creating simple tools and resources designed with empathy.
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -51,7 +51,7 @@
                 <div class="col-md-6">
                     <h2>Tutorial</h2>
                     <p>
-                        During the workshop attendees are following a tutorial written especially for this purpose. Tutorial is also open sourced and available for free. It covers creating your blog application from scratch until deployment to Heroku.
+                        During the workshop attendees are following a tutorial written especially for this purpose. Tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch until deployment to Heroku.
                     </p>
                 </div>
 
@@ -164,38 +164,11 @@
 
         <section id="organize">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Don’t see event in your city?</h2>
-                </div>
-            </div>
-
-            <div class="row centered">
-                <div class="col-md-12">
-                    <h4>Sign up for newsletter</h4>
-                    <p>
-                        We will let you know when the event in your city will be launched:
-                    </p>
-                    <form>
-                        <input type="email" name="email" placeholder="Your e-mail" />
-                        <input type="text" name="city" placeholder="Your city" />
-                        <input type="submit" value="Sign up" />
-                    </form>
-                </div>
-            </div>
-
-            <div class="row centered">
-                <div class="col-md-12">
-                    <h4>Bring Django Girls to your city!</h4>
-                    <p>
-                        Everyone can organize their own Django Girls event and share it with their community.
-                    </p>
-                    <a href="" class="btn">Find out more</a>
-                </div>
-            </div>
+            {% include 'includes/_no_event.html' %}
 
         </section>
 
+        {% comment %}
         <section id="story">
 
             <div class="row">
@@ -239,6 +212,7 @@
             </div>
 
         </section>
+        {% endcomment %}
 
         <section id="supporters">
 
@@ -251,22 +225,12 @@
             <div class="row">
                 <div class="col-md-3">
                     <a href="http://djangoproject.com/">
-                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                        <img src="{% static 'img/global/supporters/django.png' %}" alt="Django Software Foundation" />
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="http://djangoproject.com/">
-                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="http://djangoproject.com/">
-                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="http://djangoproject.com/">
-                        <img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" />
+                    <a href="http://megiteam.pl/">
+                        <img src="{% static 'img/global/supporters/megiteam.png' %}" alt="MegiTeam" />
                     </a>
                 </div>
             </div>
