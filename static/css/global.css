@@ -1,0 +1,72 @@
+/*
+---------------------
+    Common styles
+---------------------
+*/
+body {
+  font: 20px 'Linux Libertine';
+  color: #4a4a4a;
+  line-height: 29px;
+  font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Roboto;
+  color: #000;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 120%;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 14px;
+}
+a {
+  color: #4a4a4a;
+  text-decoration: underline;
+}
+a:hover {
+  color: #4a4a4a;
+  text-decoration: none;
+}
+/*
+------------------
+    Navigation
+------------------
+*/
+nav {
+  margin: 30px 0 30px 0;
+}
+nav .logo {
+  float: left;
+}
+nav ul {
+  float: right;
+  list-style-type: none;
+}
+nav ul li {
+  float: left;
+  margin-left: 60px;
+  line-height: 68px;
+}
+nav ul li a {
+  color: #f7921d;
+  font-family: Roboto;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+nav ul li a:hover {
+  color: #f7921d;
+}

@@ -1,30 +1,18 @@
 {% load staticfiles %}
 
-<div class="navbar-wrapper">
-      <!-- Fixed navbar -->
-    <div class="navbar navbar-default negative" role="navigation">
-      <div class="container" style="padding: 0">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="navbar-brand" href="/">
-              <a href="/"><img src="{% static 'img/logo-negative.png' %}" width="200" alt="Django Girls" /></a>
-          </div>
+<div class="container">
+    <nav role="navigation" class="clearfix">
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
+            </a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/#value">About</a></li>
-            <li><a href="/#events">Our events</a></li>
-            <li><a href="/pages/in-your-city/"><b>Django Girls in your city!</b></a></li>
-            <li><a href="http://blog.djangogirls.org/">Blog</a></li>
 
-            <li class="optional"><a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+        <ul>
+            <li><a href="">Events</a></li>
+            <li><a href="">Resources</a></li>
+            <li><a href="">Organize</a></li>
+            <li><a href="">Blog</a></li>
+        </ul>
+    </nav>
 </div>
