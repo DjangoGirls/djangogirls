@@ -15,12 +15,15 @@ def index(request):
     })
 
 def event(request, city):
+
+    if city == 'admin':
+        return redirect('/admin/')
+
     try:
         if request.user.is_authenticated():
             page = EventPage.objects.get(url=city)
         else:
             page = EventPage.objects.get(url=city, is_live=True)
-
     except EventPage.DoesNotExist:
         return redirect('core:index')
 
