@@ -194,9 +194,22 @@ nav ul li:first-child {
   line-height: 41px;
   margin-bottom: 0;
 }
-#events .event span {
+#events .event span.date {
   font-size: 23px;
   line-height: 27px;
+}
+#events .event p.credit {
+  font-size: 12px;
+  text-align: left;
+  font-family: Roboto;
+  font-style: normal;
+  bottom: -5px;
+  left: 10px;
+  position: absolute;
+  opacity: 0;
+}
+#events .event:hover p.credit {
+  opacity: 1;
 }
 #events .past-events {
   margin-top: 40px;
