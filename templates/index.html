@@ -1,6 +1,10 @@
 {% extends 'global/base.html' %}
 {% load staticfiles %}
 
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
     <section id="box-with-picture">
