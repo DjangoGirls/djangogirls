@@ -49,3 +49,10 @@ http://djangogirls.org/admin/core/eventpagemenu/add/
 To manage menu available on the website, you can add objects to EventPageMenu. Available options:
 - Title
 - URL
+
+
+# Contribute to website
+
+## CSS
+
+We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
