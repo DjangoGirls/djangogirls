@@ -148,8 +148,10 @@ nav ul li a:hover {
   margin-bottom: 20px;
 }
 #about .gallery {
-  margin-top: 20px;
   text-align: center;
+  width: 400px;
+  height: 400px;
+  margin: 20px auto 0;
 }
 #about .gallery img {
   max-width: 100%;

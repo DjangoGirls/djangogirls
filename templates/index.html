@@ -37,6 +37,19 @@
                 <div class="col-md-6">
                     <div class="gallery">
                         <img src="{% static 'img/global/about/1.png' %}" />
+                        <img src="{% static 'img/global/about/2.png' %}" />
+                        <img src="{% static 'img/global/about/3.png' %}" />
+                        <img src="{% static 'img/global/about/4.png' %}" />
+                        <img src="{% static 'img/global/about/5.png' %}" />
+                        <img src="{% static 'img/global/about/6.png' %}" />
+                        <img src="{% static 'img/global/about/7.png' %}" />
+                        <img src="{% static 'img/global/about/8.png' %}" />
+                        <img src="{% static 'img/global/about/9.png' %}" />
+                        <img src="{% static 'img/global/about/10.png' %}" />
+                        <img src="{% static 'img/global/about/11.png' %}" />
+                        <img src="{% static 'img/global/about/12.png' %}" />
+                        <img src="{% static 'img/global/about/13.png' %}" />
+                        <img src="{% static 'img/global/about/14.png' %}" />
                     </div>
                 </div>
             </div>
@@ -149,14 +162,9 @@
             <div class="row past-events">
                 <div class="col-md-12">
                     <h2>Past events</h2>
-                    <a href="">Berlin, 21st July 2014</a>
-                    <a href="">Australia, 2nd August 2014</a>
-                    <a href="">Berlin, 21st July 2014</a>
-                    <a href="">Australia, 2nd August 2014</a>
-                    <a href="">Berlin, 21st July 2014</a>
-                    <a href="">Australia, 2nd August 2014</a>
-                    <a href="">Berlin, 21st July 2014</a>
-                    <a href="">Australia, 2nd August 2014</a>
+                    {% for event in past_events %}
+                        <a href="/{{ event.url }}">{{ event.event.city }}, {{ event.event.date }}</a>
+                    {% endfor %}
                 </div>
             </div>
 

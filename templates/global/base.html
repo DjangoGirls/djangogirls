@@ -16,16 +16,18 @@
 
   <link href="//brick.a.ssl.fastly.net/Linux+Libertine:300i400i/Roboto:300i400i" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" media="screen">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sss.css' %}" media="screen">
   <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}" media="screen">
   <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/sss.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/djangogirls.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </head>
 <body>
 
     <div class="page-wrap">
-        
+
         {% block menu %}
 
             {% include 'global/menu.html' %}
