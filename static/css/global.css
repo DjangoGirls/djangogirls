@@ -85,6 +85,7 @@ nav ul {
   float: right;
   list-style-type: none;
   margin-bottom: 0;
+  padding-left: 0;
 }
 nav ul li {
   float: left;
@@ -100,6 +101,9 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: #f7921d;
+}
+nav ul li:first-child {
+  margin-left: 0;
 }
 /*
 ------------------------
@@ -348,4 +352,84 @@ footer .row .col-md-3 ul li {
 }
 footer .row .col-md-3 ul li a {
   text-decoration: none;
+}
+/*
+---------------------
+    Responsiveness
+---------------------
+*/
+@media (max-width: 1024px) {
+  nav ul li {
+    margin-left: 30px;
+  }
+  #events .row .event {
+    width: calc(50% - 30px);
+    float: left;
+  }
+  #supporters .row .col-md-3 {
+    width: calc(50% - 30px);
+    float: left;
+  }
+  footer {
+    padding-top: 50px;
+  }
+  footer .row .col-md-3 {
+    float: left;
+    width: calc(50% - 30px);
+    margin-bottom: 30px;
+  }
+  footer,
+  .page-wrap:after {
+    height: 480px;
+  }
+  .page-wrap {
+    margin-bottom: -480px;
+  }
+}
+@media (max-width: 725px) {
+  nav ul {
+    display: none;
+  }
+  #box-with-picture {
+    height: auto;
+    background-position: center center;
+  }
+  #box-with-picture .container {
+    padding: 20px;
+  }
+  #box-with-picture .container h1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  #box-with-picture .container p {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  #about .gallery {
+    display: none;
+  }
+  #events .row .event {
+    width: 90%;
+  }
+  #organize form input[type="text"],
+  #organize form input[type="email"] {
+    margin-bottom: 15px;
+  }
+  #supporters .row .col-md-3 {
+    width: 90%;
+  }
+  footer {
+    padding-top: 50px;
+  }
+  footer .row .col-md-3 {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+  footer,
+  .page-wrap:after {
+    height: 900px;
+  }
+  .page-wrap {
+    margin-bottom: -900px;
+  }
 }
