@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_fa9i@a58^(ycedbaidm5o&3z*8_d21=%y4bl3ohq_aof6ksj%'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -46,7 +46,6 @@ INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django_date_extensions',
     'storages',
-    'leaflet',
 
     'core'
 )
@@ -131,17 +130,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (20, 20),
-    'DEFAULT_ZOOM': 2,
-    'MIN_ZOOM': 1,
-    'MAX_ZOOM': 5,
-    'ATTRIBUTION_PREFIX':'',
-    'SCALE': None,
-    'MINIMAP': False,
-    'RESET_VIEW': False
-}
 
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN')
