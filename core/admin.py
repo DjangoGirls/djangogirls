@@ -83,6 +83,9 @@ class SponsorAdmin(SortableModelAdmin):
             form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
         return form
 
+class PostmortemAdmin(admin.ModelAdmin):
+    list_display = ('event', 'attendees_count', 'applicants_count')
+
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -139,3 +142,4 @@ admin.site.register(EventPageContent, EventPageContentAdmin)
 admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
+admin.site.register(Postmortem, PostmortemAdmin)

@@ -126,3 +126,16 @@ class Sponsor(models.Model):
 
     class Meta:
         ordering = ('position', )
+
+class Postmortem(models.Model):
+    event = models.ForeignKey(Event, null=False, blank=False)
+    attendees_count = models.IntegerField(null=False, blank=False, verbose_name="Number of attendees")
+    applicants_count = models.IntegerField(null=False, blank=False, verbose_name="Number of applicants")
+
+    discovery = models.TextField(null=True, blank=True, verbose_name="What was the most important thing you discovered during the workshop?")
+    feedback = models.TextField(null=True, blank=True, verbose_name="How we can make DjangoGirls better?")
+    costs = models.TextField(null=True, blank=True, verbose_name="What are the total costs of the event?", help_text="We only collect this information for statistics and advice for future organizers.")
+    comments = models.TextField(null=True, blank=True, verbose_name="Anything else you want to share with us?")
+
+    def __unicode__(self):
+        return self.event.city
