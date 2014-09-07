@@ -1,9 +1,10 @@
 body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  color: black;
-  font-size: 15px;
+  font-family: 'Linux Libertine';
+  color: #4a4a4a;
+  font-size: 19px;
   line-height: 150%;
   height: 100%;
+  font-weight: 300;
 }
 h1,
 h2,
@@ -11,25 +12,25 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: Roboto;
+  font-weight: 300;
+  color: #000;
 }
 h1 {
-  color: white;
-  font-weight: 600;
+  color: #fff;
   font-size: 46px;
 }
 h2 {
-  color: white;
-  font-size: 32px;
-  font-weight: 400;
+  color: #fff;
+  font-size: 36px;
 }
 h3 {
-  font-size: 28px;
+  font-size: 36px;
   margin-top: 0;
   margin-bottom: 20px;
 }
 h5 a {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: Roboto;
   font-size: 18px;
 }
 a,
@@ -37,18 +38,18 @@ a:hover {
   color: #ff9400;
 }
 .navbar-default {
-  background: white;
+  background: #fff;
   border: 0px;
   border-top: 3px solid #ff9400;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: 'Linux Libertine';
 }
 .navbar-default .navbar-brand {
-  color: black;
+  color: #000;
 }
 .navbar-default .navbar-brand a.chapter {
   position: absolute;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   font-size: 12px;
   right: 10px;
   bottom: 4px;
@@ -71,7 +72,14 @@ a:hover {
   padding-top: 10px;
 }
 .navbar-default .navbar-nav li a {
-  color: black;
+  color: #ff9400;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.navbar-default .navbar-nav li a:hover {
+  color: #ff9400;
 }
 .navbar-wrapper {
   height: 70px;
@@ -84,7 +92,7 @@ a:hover {
   z-index: 9999;
   width: 100%;
   background: none;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #ffffff), color-stop(60%, rgba(255, 255, 255, 0.8)), color-stop(0, rgba(255, 255, 255, 0)));
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fff), color-stop(60%, rgba(255,255,255,0.8)), color-stop(0, rgba(255,255,255,0)));
 }
 .negative .navbar-brand,
 .negative .navbar-brand:hover {
@@ -111,23 +119,24 @@ a:hover {
   padding: 100px 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
 }
 .btn,
 .btn:hover {
   background: #ff9400;
-  color: white;
+  color: #fff;
+  font-family: Roboto;
   font-size: 18px;
   font-weight: 100;
   margin: 20px 0 0 0;
   padding: 15px 30px;
 }
 .with-background {
-  background: url('../img/photos/photo1.jpg') 50% 0 no-repeat fixed;
+  background: url("../img/photos/photo1.jpg") 50% 0 no-repeat fixed;
   background-size: cover;
   height: auto;
-  color: white;
+  color: #fff;
 }
 .without-background {
   padding: 60px 0px;
@@ -159,8 +168,8 @@ a:hover {
   margin-bottom: 15px;
 }
 .coaches .col-md-2 a {
-  color: black;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #000;
+  font-family: 'Linux Libertine';
   font-size: 18px;
 }
 .social {
@@ -176,37 +185,14 @@ a:hover {
   margin-top: 10px;
 }
 .credits {
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
   opacity: 0.6;
   padding-top: 30px;
 }
 #yourcity {
-  background: url('../img/photos/photo2.jpg') 50% 0 no-repeat fixed;
+  background: url("../img/photos/photo2.jpg") 50% 0 no-repeat fixed;
   background-size: cover;
-}
-footer {
-  background: url('../img/photos/photo4.jpg') 50% 0 no-repeat fixed;
-  height: auto;
-  margin: 0;
-  color: white;
-  background-size: cover;
-  line-height: 180%;
-  background-position: 0 200px;
-}
-footer .overlay {
-  padding: 30px 0;
-}
-footer .credits {
-  font-size: 12px;
-  text-align: center;
-  opacity: 0.6;
-}
-footer .twitter {
-  margin-left: 220px;
-  float: left;
-  margin-top: -55px;
-  position: absolute;
 }
 .map {
   overflow-x: hidden;
@@ -218,9 +204,7 @@ footer .twitter {
   height: 400px;
 }
 /* ---------------------
-
  Responsive design fixes
-
 ---------------------- */
 @media (max-width: 1024px) {
   h1 {
@@ -262,36 +246,36 @@ footer .twitter {
   .navbar-default .navbar-nav .optional {
     display: none;
   }
-}
-.sponsor-logos {
-  margin: 30px 0 0 0;
-}
-.sponsor-logos .col-md-3 {
-  text-align: center;
-}
-.sponsor-logos .col-md-3 img {
-  max-width: 80%;
-  height: auto;
-}
-.sponsor-logos .col-md-3 p {
-  margin-top: 15px;
-}
-#resources .row {
-  margin-bottom: 50px;
-}
-#resources .cover {
-  float: left;
-  margin: 0 30px 0 0;
-}
-#resources .cover img {
-  border-radius: 3px;
-}
-#resources .info p {
-  margin-bottom: 0;
-}
-#resources .info .btn {
-  margin-bottom: 10px;
-  padding: 10px 30px;
+  .sponsor-logos {
+    margin: 30px 0 0 0;
+  }
+  .sponsor-logos .col-md-3 {
+    text-align: center;
+  }
+  .sponsor-logos .col-md-3 img {
+    max-width: 80%;
+    height: auto;
+  }
+  .sponsor-logos .col-md-3 p {
+    margin-top: 15px;
+  }
+  #resources .row {
+    margin-bottom: 50px;
+  }
+  #resources .cover {
+    float: left;
+    margin: 0 30px 0 0;
+  }
+  #resources .cover img {
+    border-radius: 3px;
+  }
+  #resources .info p {
+    margin-bottom: 0;
+  }
+  #resources .info .btn {
+    margin-bottom: 10px;
+    padding: 10px 30px;
+  }
 }
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) {
@@ -323,7 +307,7 @@ footer .twitter {
     padding-top: 10px;
   }
   .navbar-default .navbar-nav li a {
-    color: black;
+    color: #000;
   }
   .navbar-default .navbar-collapse {
     border: 0px !important;

@@ -148,6 +148,7 @@ class Command(BaseCommand):
             name = 'footer',
             position = 60,
             is_public = True,
+            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo4.jpg')),
             content = '<div class="row social"><div class="col-md-7"><div class="facebook"><div class="fb-like-box" data-href="https://www.facebook.com/djangogirls" data-colorscheme="dark" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div></div><div class="twitter"> <a href="https://twitter.com/djangogirls" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @djangogirls</a></div> </div><div class="col-md-5">Get in touch: <br> <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a><br><br></div></div><div class="row credits"><div class="col-md-12">♥ Django Girls Europe is organized by <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asednecka">Ola Sendecka</a> with the support from <a href="http://europython.eu/">EuroPython 2014</a>.<br>Django Girls Europe is a part of <a href="/">Django Girls</a>.<br>Every participant needs to follow the <a href="/pages/coc/">Code of Conduct</a>.</div></div>')
 
 

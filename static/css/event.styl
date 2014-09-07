@@ -1,0 +1,310 @@
+sans_font = Roboto
+serif_font = 'Linux Libertine'
+mint = #FF9400
+gray = #4A4A4A
+
+body
+    font-family: serif_font
+    color: gray
+    font-size: 19px
+    line-height: 150%
+    height: 100%
+    font-weight: 300
+
+h1, h2, h3, h4, h5, h6
+    font-family: sans_font
+    font-weight: 300
+    color: black
+
+h1
+    color: white
+    font-size: 46px
+
+h2
+    color: white
+    font-size: 36px
+
+h3
+    font-size: 36px
+    margin-top: 0
+    margin-bottom: 20px
+
+h5 a
+    font-family: sans_font
+    font-size: 18px
+
+a, a:hover
+    color: mint
+
+
+.navbar-default
+    background: white
+    border: 0px
+    border-top: 3px solid mint
+    font-family: serif_font
+
+    .navbar-brand
+        color: black
+        a.chapter
+            position: absolute
+            text-transform: uppercase
+            color: white
+            font-size: 12px
+            right: 10px
+            bottom: 4px
+
+    .navbar-brand, .navbar-brand:hover
+        background-color: mint
+        position: absolute
+        height: 70px
+        padding: 0
+        margin-left: 0 !important
+
+    .navbar-nav
+        width: auto
+        padding-left: 200px
+        float: right
+        li
+            height: 50px
+            padding-top: 10px
+            a
+                color: mint
+                font-size: 16px
+                font-family: sans_font
+                font-weight: 300
+                text-transform: uppercase
+            a:hover
+                color: mint
+
+.navbar-wrapper
+    height: 70px
+
+.negative
+    clear: both
+    overflow: hidden
+    position: fixed
+    height: 70px
+    z-index: 9999
+    width: 100%
+    background: none
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, white), color-stop(60%, rgba(255, 255, 255, 0.8)), color-stop(0, rgba(255, 255, 255, 0)))
+
+    .navbar-brand, .navbar-brand:hover
+        background: transparent
+        padding-top: 10px
+        img
+            width: 180px
+
+    .navbar-collapse
+        padding: 0
+        a:last-child
+            padding-right: 0
+
+.australia
+    .navbar-brand
+        padding-right: 19px
+
+    .navbar-nav
+        padding-left: 219px
+
+.overlay
+    padding: 100px 0
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.6)
+    color: white
+
+.btn, .btn:hover
+    background: mint
+    color: white
+    font-family: sans_font
+    font-size: 18px
+    font-weight: 100
+    margin: 20px 0 0 0
+    padding: 15px 30px
+
+
+.with-background
+    background: url('../img/photos/photo1.jpg') 50% 0 no-repeat fixed
+    background-size: cover
+    height: auto
+    color: white
+
+
+.without-background
+    padding: 60px 0px
+
+
+#newsletter
+    .facebook
+        float: left
+        width: 50%
+
+    .twitter
+        margin-top: 25px
+
+    button
+        margin: 0
+        padding: 10px 15px
+        border: 0px
+
+.cls
+    clear: both
+
+.coaches
+    padding: 30px 0px
+    .col-md-2
+        text-align: center
+        .coach
+            max-width: 160px
+            border-radius: 100%
+            margin-bottom: 15px
+
+        a
+            color: black
+            font-family: serif_font
+            font-size: 18px
+
+.social
+    margin-top: 30px
+    .facebook
+        margin: -10px 0 10px 0
+        float: left
+        width: 250px
+        height: 70px
+
+    .twitter
+        margin-top: 10px
+
+.credits
+    font-size: 15px
+    text-align: center
+    opacity: 0.6
+    padding-top: 30px
+
+#yourcity
+    background: url('../img/photos/photo2.jpg') 50% 0 no-repeat fixed
+    background-size: cover
+
+
+.map
+    overflow-x: hidden
+    overflow-y: hidden
+    padding: 0
+    height: 400px
+
+.leaflet-container
+    height: 400px
+
+
+/* ---------------------
+ Responsive design fixes
+---------------------- */
+
+@media (max-width: 1024px)
+
+    h1
+        font-size: 36px
+
+    h2
+        font-size: 26px
+
+    #about
+        background-attachment: scroll
+        height: auto
+        .overlay
+            padding: 80px 0
+
+    #apply
+        background-attachment: scroll
+
+    #coach
+        background-attachment: scroll
+
+    footer
+        background-attachment: scroll
+        background-position: 0
+
+    #value
+        .col-md-6:last-child
+            margin-top: 40px
+
+    #sponsors
+        img
+            max-width: 300px
+            margin-top: 30px
+        .row
+            padding: 0 0 30px 0
+
+    footer .social .twitter
+        margin-top: 0px
+
+    .navbar-default
+        .navbar-nav
+            .optional
+                display: none
+
+    .sponsor-logos
+        margin: 30px 0 0 0
+        .col-md-3
+            text-align: center
+
+            img
+                max-width: 80%
+                height: auto
+
+            p
+                margin-top: 15px
+
+    #resources
+        .row
+            margin-bottom: 50px
+
+        .cover
+            float: left
+            margin: 0 30px 0 0
+            img
+                border-radius: 3px
+
+        .info
+            p
+                margin-bottom: 0
+            .btn
+                margin-bottom: 10px
+                padding: 10px 30px
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 480px)
+    #about .overlay
+        padding-top: 50px
+        padding-bottom: 50px
+
+    #about
+        background-position: 0
+
+    h1
+        font-size: 30px
+
+    h2
+        font-size: 24px
+
+    footer .social .twitter
+        margin: 50px 0 0 12px
+
+    #sponsors
+        .row
+            padding: 0 0 30px 0
+
+    .navbar-default
+        .navbar-nav
+            width: auto
+            padding-left: 0px
+            li
+                height: auto
+                padding-top: 10px
+                a
+                    color: black
+
+    .navbar-default .navbar-collapse
+        border: 0px !important
+        margin-top: 20px
