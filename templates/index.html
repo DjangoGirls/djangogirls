@@ -79,84 +79,10 @@
             </div>
 
             <div class="row">
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="row">
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="row">
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-4 event">
-                        <div class="overlay">
-                            <p class="city">Kraków</p>
-                            <span class="date">11th November 2014</span>
-                        </div>
-                    </div>
-                </a>
+                {% for event in future_events %}
+                    {% include 'includes/_event.html' with event=event %}
+                    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                {% endfor %}
             </div>
 
             <div class="row past-events">

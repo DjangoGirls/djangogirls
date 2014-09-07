@@ -182,7 +182,7 @@ class Command(BaseCommand):
         #Event and EventPage objects
         name = u'Django Girls '+city
         latlng = get_coordinates_for_city(city, country)
-        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date, is_on_homepage=True)
+        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date, is_on_homepage=False)
         for member in members:
             event.team.add(member)
 
@@ -194,3 +194,5 @@ class Command(BaseCommand):
 
         click.echo(u"Website is ready here: http://djangogirls.org/{0}".format(url))
         click.echo("Congrats on yet another event!")
+        click.echo("------------")
+        click.echo("Important! Go here: http://djangogirls.org/admin/core/event/{0}/ Upload a photo of city and tick is on homepage checkbox!".format(event.id))
