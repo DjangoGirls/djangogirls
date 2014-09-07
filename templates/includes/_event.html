@@ -1,8 +1,8 @@
-<a href="/{{ event.url }}">
-    <div class="col-md-4 event"{% if event.event.photo %} style="background-image: url({{ event.event.photo.url }})"{% endif %}>
+<a href="/{{ event.eventpage.url }}">
+    <div class="col-md-4 event"{% if event.photo %} style="background-image: url({{ event.photo.url }})"{% endif %}>
         <div class="overlay">
-            <p class="city">{{ event.event.city }}</p>
-            <span class="date">{{ event.event.date }}</span>
+            <p class="city">{{ event.city }}</p>
+            <span class="date">{{ event.date }}</span>
         </div>
     </div>
 </a>

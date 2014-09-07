@@ -6,13 +6,24 @@ from .models import *
 
 def index(request):
 
-    future_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('event__date')
-    past_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-event__date')
-
     return render(request, 'index.html', {
-        'future_events': future_events,
-        'past_events': past_events,
+        'future_events': Event.objects.future(),
+        'past_events': Event.objects.past(),
     })
+
+def events(request):
+
+    return render(request, 'events.html', {
+        'future_events': Event.objects.future(),
+        'past_events': Event.objects.past(),
+    })
+
+def resources(request):
+    return render(request, 'resources.html', {})
+
+def organize(request):
+    return render(request, 'organize.html', {})
+
 
 def event(request, city):
     try:
@@ -21,7 +32,7 @@ def event(request, city):
         else:
             page = EventPage.objects.get(url=city, is_live=True)
     except EventPage.DoesNotExist:
-        return redirect('core:index')
+        return redirect('core:events')
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)
@@ -31,21 +42,3 @@ def event(request, city):
         'menu': menu,
         'content': content,
     })
-
-def events(request):
-
-    future_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('event__date')
-    past_events = EventPage.objects.filter(event__is_on_homepage=True, event__date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-event__date')
-
-    return render(request, 'events.html', {
-        'future_events': future_events,
-        'past_events': past_events,
-    })
-
-def resources(request):
-
-    return render(request, 'resources.html', {})
-
-def organize(request):
-
-    return render(request, 'organize.html', {})

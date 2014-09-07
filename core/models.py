@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import User
@@ -46,6 +48,14 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def get_full_name(self):
         return u'{0} {1}'.format(self.first_name, self.last_name)
 
+class EventManager(models.Manager):
+
+    def future(self):
+        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
+
+    def past(self):
+        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
+
 
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
@@ -54,11 +64,11 @@ class Event(models.Model):
     country = models.CharField(max_length=200, null=False, blank=False)
     latlng = models.CharField(max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True, help_text="The best would be 356 x 210px")
-
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, null=True, blank=True)
-
     is_on_homepage = models.BooleanField(default=False)
+
+    objects = EventManager()
 
     def __unicode__(self):
         return self.name
