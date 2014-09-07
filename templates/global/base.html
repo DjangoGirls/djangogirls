@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE HTML>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
@@ -19,30 +18,22 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/sss.css' %}" media="screen">
   <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}" media="screen">
   <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/sss.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/djangogirls.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </head>
 <body>
-
     <div class="page-wrap">
-
         {% block menu %}
-
             {% include 'global/menu.html' %}
-
         {% endblock %}
 
-        {% block content %}
-
-        {% endblock %}
+        {% block content %}{% endblock %}
     </div>
 
     {% block footer %}
         {% include 'global/footer.html' %}
     {% endblock %}
-
 
     {% include 'includes/js.html' %}
 </body>
