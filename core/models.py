@@ -150,3 +150,12 @@ class Postmortem(models.Model):
 
     def __unicode__(self):
         return self.event.city
+
+class Story(models.Model):
+    name = models.CharField(max_length=100, null=False, blank=False)
+    post_url = models.URLField(null=False, blank=False)
+    image = models.ImageField(upload_to="stories/", null=False, blank=False)
+    created = models.DateField(auto_now_add=True, null=False, blank=False)
+
+    def __unicode__(self):
+        return self.name

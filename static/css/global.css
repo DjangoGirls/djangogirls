@@ -247,15 +247,21 @@ nav ul li:first-child {
 #story .row {
   margin: 15px 0;
 }
-#story .row .girl img {
-  width: 100%;
-  height: 100%;
+#story .row .girl {
+  height: 255px;
+  width: 255px;
+  padding: 0;
+  margin: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0 15px;
 }
 #story .row .girl .overlay {
   position: absolute;
   top: 0;
-  left: 15px;
-  width: calc(100% - 30px);
+  left: 0;
+  width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
   padding-top: 45%;

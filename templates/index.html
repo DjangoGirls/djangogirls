@@ -106,7 +106,6 @@
 
         </section>
 
-        {% comment %}
         <section id="story">
 
             <div class="row">
@@ -117,40 +116,22 @@
             </div>
 
             <div class="row">
-                <a href="">
-                    <div class="col-md-3 girl">
-                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
-                        <div class="overlay">Ola Sitarska</div>
+                {% for story in stories %}
+                <a href="{{ story.post_url }}" target="_blank">
+                    <div class="col-md-3 girl" style="background-image: url({% if story.image %}{{ story.image.url }}{% endif %});">
+                        <div class="overlay">{{ story.name }}</div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="col-md-3 girl">
-                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
-                        <div class="overlay">Ola Sitarska</div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-3 girl">
-                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
-                        <div class="overlay">Ola Sitarska</div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="col-md-3 girl">
-                        <img src="{% static 'img/global/ola.png' %}" alt="Ola Sitarska" />
-                        <div class="overlay">Ola Sitarska</div>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <p><a href="">See more on our blog »</a></p>
+                    <p><a href="http://blog.djangogirls.org/">See more on our blog »</a></p>
                 </div>
             </div>
 
         </section>
-        {% endcomment %}
 
         <section id="supporters">
 

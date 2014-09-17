@@ -6,9 +6,12 @@ from .models import *
 
 def index(request):
 
+    stories = Story.objects.all().order_by('-created')[:4]
+
     return render(request, 'index.html', {
         'future_events': Event.objects.future(),
         'past_events': Event.objects.past(),
+        'stories': stories,
     })
 
 def events(request):
