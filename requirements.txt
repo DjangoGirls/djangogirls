@@ -2,6 +2,7 @@ Django==1.7
 Pillow==2.5.1
 boto==2.32.0
 click==2.5
+cssselect==0.9.1
 dj-database-url==0.3.0
 django-date-extensions==1.0.0
 django-leaflet==0.14.1
@@ -9,8 +10,11 @@ django-storages==1.1.8
 django-suit==0.2.9
 django-suit-redactor==0.0.2
 gunicorn==19.1.0
+lxml==3.4.0
 psycopg2==2.5.3
+pyquery==1.2.9
 raven==5.0.0
 requests==2.3.0
 six==1.7.3
 whitenoise==1.0.3
+wsgiref==0.1.2
