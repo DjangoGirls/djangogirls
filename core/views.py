@@ -27,6 +27,12 @@ def resources(request):
 def organize(request):
     return render(request, 'organize.html', {})
 
+def stories(request):
+
+    return render(request, 'stories.html', {
+        'stories': Story.objects.all().order_by('-created'),
+    })
+
 
 def event(request, city):
     try:

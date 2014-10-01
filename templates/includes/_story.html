@@ -1,0 +1,5 @@
+<a href="{{ story.post_url }}" target="_blank">
+    <div class="col-md-3 girl" style="background-image: url({% if story.image %}{{ story.image.url }}{% endif %});">
+        <div class="overlay">{{ story.name }}</div>
+    </div>
+</a>

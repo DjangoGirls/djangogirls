@@ -1,0 +1,27 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+
+        <section id="stories">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Django Girls Story</h2>
+                    <p>Each week on our blog we try to introduce two badass ladies who use Python or Django to highlight their work:</p>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for story in stories %}
+                    {% include 'includes/_story.html' with story=story %}
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+            </div>
+
+        </section>
+
+    </div>
+
+{% endblock %}

@@ -241,13 +241,16 @@ nav ul li:first-child {
     Story
 -------------
 */
-#story {
+#story,
+#stories {
   margin-top: 60px;
 }
-#story .row {
+#story .row,
+#stories .row {
   margin: 15px 0;
 }
-#story .row .girl {
+#story .row .girl,
+#stories .row .girl {
   height: 255px;
   width: 255px;
   padding: 0;
@@ -257,7 +260,8 @@ nav ul li:first-child {
   background-repeat: no-repeat;
   margin: 0 15px;
 }
-#story .row .girl .overlay {
+#story .row .girl .overlay,
+#stories .row .girl .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -271,8 +275,12 @@ nav ul li:first-child {
   font-size: 30px;
   opacity: 0;
 }
-#story .row .girl .overlay:hover {
+#story .row .girl .overlay:hover,
+#stories .row .girl .overlay:hover {
   opacity: 1;
+}
+#stories {
+  margin-top: 0;
 }
 /*
 ------------------

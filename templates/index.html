@@ -15,7 +15,7 @@
                         We want to inspire women to fall in love with programming.
                     </h1>
                     <p>
-                        So we organize free Python and Django workshops, create open sourced online resources and care about amazing first experiences.
+                        So we organize free Python and Django workshops, create open sourced online tutorials and care about amazing first experiences.
                     </p>
                 </div>
             </div>
@@ -117,11 +117,7 @@
 
             <div class="row">
                 {% for story in stories %}
-                <a href="{{ story.post_url }}" target="_blank">
-                    <div class="col-md-3 girl" style="background-image: url({% if story.image %}{{ story.image.url }}{% endif %});">
-                        <div class="overlay">{{ story.name }}</div>
-                    </div>
-                </a>
+                    {% include 'includes/_story.html' with story=story %}
                 {% endfor %}
             </div>
 
