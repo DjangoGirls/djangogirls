@@ -282,6 +282,9 @@ nav ul li:first-child {
 #stories {
   margin-top: 0;
 }
+#stories .row {
+  margin: 30px 0;
+}
 /*
 ------------------
     Supporters
