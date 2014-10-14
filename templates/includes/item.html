@@ -24,9 +24,15 @@
 
         {% if item.coach_set.count > 0 %}
             <div class="row coaches">
+
                 {% for coach in item.coach_set.all %}
-                    {% include 'includes/_coach.html' with coach=coach counter=forloop.counter %}
+                    <div class="col-md-2{% cycle ' col-md-offset-1' '' '' '' '' %}">
+                        {% include 'includes/_coach.html' with coach=coach %}
+                    </div>
+
+                    {% if forloop.counter|divisibleby:5 %}</div><div class="row coaches">{% endif %}
                 {% endfor %}
+
             </div>
         {% endif %}
 
