@@ -83,6 +83,21 @@ class SponsorAdmin(SortableModelAdmin):
             form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
         return form
 
+class CoachAdmin(admin.ModelAdmin):
+    list_display = ('name', 'event_page_content', 'twitter_handle', 'url')
+
+    def get_queryset(self, request):
+        qs = super(CoachAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(event_page_content__page__event__team__in=[request.user,])
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
+        if not request.user.is_superuser:
+            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+        return form
+
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
 
@@ -143,3 +158,4 @@ admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Postmortem, PostmortemAdmin)
+admin.site.register(Coach, CoachAdmin)

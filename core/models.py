@@ -138,6 +138,21 @@ class Sponsor(models.Model):
     class Meta:
         ordering = ('position', )
 
+class Coach(models.Model):
+    event_page_content = models.ForeignKey(EventPageContent, null=False, blank=False)
+    name = models.CharField(max_length=200, null=False, blank=False)
+    twitter_handle = models.CharField(max_length=200, null=True, blank=True, help_text="No @, No http://, just username")
+    photo = models.ImageField(upload_to="event/coaches/", null=True, blank=True, help_text="For best display keep it square")
+    url = models.URLField(null=True, blank=True)
+
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('?',)
+        verbose_name_plural = "Coaches"
+
 class Postmortem(models.Model):
     event = models.ForeignKey(Event, null=False, blank=False)
     attendees_count = models.IntegerField(null=False, blank=False, verbose_name="Number of attendees")

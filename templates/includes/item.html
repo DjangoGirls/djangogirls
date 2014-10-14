@@ -22,6 +22,14 @@
             </div>
         {% endif %}
 
+        {% if item.coach_set.count > 0 %}
+            <div class="row coaches">
+                {% for coach in item.coach_set.all %}
+                    {% include 'includes/_coach.html' with coach=coach counter=forloop.counter %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
     </div>
 
 {% endif %}
