@@ -7,6 +7,6 @@ urlpatterns = patterns('',
     url(r'^organize/$', views.organize, name='organize'),
     url(r'^story/$', views.stories, name='stories'),
 
-    url(r'^(?P<city>[\w\d]+)', 'core.views.event', name='event'),
+    url(r'^(?P<city>[\w\d]+)$', 'core.views.event', name='event'),
     url(r'^$', views.index, name='index'),
 )
