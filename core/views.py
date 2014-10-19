@@ -35,6 +35,9 @@ def stories(request):
 
 
 def event(request, city):
+    if city[-1:] == "/":
+        city = city[:-1]
+        
     try:
         if request.user.is_authenticated():
             page = EventPage.objects.get(url=city)
