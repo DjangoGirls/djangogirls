@@ -1,14 +1,14 @@
 {% extends 'global/base.html' %}
-{% load staticfiles %}
+{% load staticfiles markdown_deux_tags %}
 
 {% block title %}{{ flatpage.title }}{% endblock %}
 
 {% block content %}
-    <div class="container without-background">
+    <div class="container without-background" id="flatpage">
           <div id="value" class="row">
               <div class="col-md-12">
-                  <h3>{{ flatpage.title }}</h3>
-                  {{ flatpage.content }}
+                  <h1>{{ flatpage.title }}</h1>
+                  {{ flatpage.content|markdown }}
               </div>
           </div>
     </div>

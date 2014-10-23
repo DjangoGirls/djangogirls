@@ -6,11 +6,13 @@ cssselect==0.9.1
 dj-database-url==0.3.0
 django-date-extensions==1.0.0
 django-leaflet==0.14.1
+django-markdown-deux==1.0.5
 django-storages==1.1.8
 django-suit==0.2.9
 django-suit-redactor==0.0.2
 gunicorn==19.1.0
 lxml==3.4.0
+markdown2==2.3.0
 psycopg2==2.5.3
 pyquery==1.2.9
 raven==5.0.0

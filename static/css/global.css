@@ -13,6 +13,7 @@ body {
   line-height: 29px;
   font-weight: 300;
 }
+h1,
 h2,
 h3,
 h4,
@@ -20,8 +21,11 @@ h5 {
   font-family: Roboto;
   color: #000;
   font-weight: 300;
-  font-size: 36px;
+  font-size: 40px;
   line-height: 120%;
+}
+h2 {
+  font-size: 36px;
 }
 h3 {
   font-size: 30px;
@@ -383,6 +387,11 @@ footer .row .col-md-3 ul li {
 footer .row .col-md-3 ul li a {
   text-decoration: none;
 }
+/*
+---------------------
+    Flatpages
+---------------------
+*/
 /*
 ---------------------
     Responsiveness
