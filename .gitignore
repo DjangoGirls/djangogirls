@@ -6,3 +6,8 @@ staticfiles
 local_settings.py
 .anvil/*
 __pycache__
+.Python
+bin
+lib
+src
+include

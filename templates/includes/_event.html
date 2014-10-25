@@ -3,7 +3,7 @@
         <div class="overlay">
             <p class="city">{{ event.city }}</p>
             <span class="date">{{ event.date }}</span>
-            {% if event.photo_credit %}<p class="credit">Photo credit: {{ event.photo_credit }}</p>{% endif %}
+            {% if event.photo_credit %}<p class="credit">Photo credit: {% if event.photo_link %}<a href="{{ event.photo_link }}">{% endif %}{{ event.photo_credit }}</a>{% else %}{{ event.photo_credit }}{% endif %}(<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC</a>)</p>
         </div>
     </div>
 {% if event.eventpage.is_live %}</a>{% endif %}
