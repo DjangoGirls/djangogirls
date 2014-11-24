@@ -74,6 +74,13 @@ input[type="submit"] {
 .btn:hover {
   color: #fff;
 }
+.ical.btn {
+  font-size: 12px;
+  padding: 1px 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
 /*
 ------------------
     Navigation
@@ -222,17 +229,6 @@ nav ul li:first-child {
   margin-right: 60px;
   margin-bottom: 15px;
   float: left;
-}
-#events .ical {
-  font-size: 12px;
-  padding: 1px 5px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  display: none;
-}
-#events h2:hover .ical {
-  display: inline;
 }
 /*
 -----------------------------
