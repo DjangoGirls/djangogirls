@@ -70,4 +70,4 @@ def events_ical(request):
             continue  # Skip events with an approximate date
         calendar.add_component(ical_event)
 
-    return HttpResponse(calendar.to_ical(), content_type='text/calendar')
+    return HttpResponse(calendar.to_ical(), content_type='text/calendar; charset=UTF-8')
