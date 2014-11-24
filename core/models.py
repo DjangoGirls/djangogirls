@@ -48,13 +48,19 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def get_full_name(self):
         return u'{0} {1}'.format(self.first_name, self.last_name)
 
-class EventManager(models.Manager):
+
+class EventQuerySet(models.QuerySet):
+    def public(self):
+        """
+        Only include events that are on the homepage.
+        """
+        return self.filter(is_on_homepage=True)
 
     def future(self):
-        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
+        return self.public().filter(date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
 
     def past(self):
-        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
+        return self.public().filter(date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
 
 
 class Event(models.Model):
@@ -70,7 +76,7 @@ class Event(models.Model):
     team = models.ManyToManyField(User, null=True, blank=True)
     is_on_homepage = models.BooleanField(default=False)
 
-    objects = EventManager()
+    objects = EventQuerySet.as_manager()
 
     def __unicode__(self):
         return self.name
