@@ -223,6 +223,17 @@ nav ul li:first-child {
   margin-bottom: 15px;
   float: left;
 }
+#events .ical {
+  font-size: 12px;
+  padding: 1px 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: none;
+}
+#events h2:hover .ical {
+  display: inline;
+}
 /*
 -----------------------------
     Organize & Newsletter
