@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
+
+import icalendar
 
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -48,13 +50,19 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def get_full_name(self):
         return u'{0} {1}'.format(self.first_name, self.last_name)
 
-class EventManager(models.Manager):
+
+class EventQuerySet(models.QuerySet):
+    def public(self):
+        """
+        Only include events that are on the homepage.
+        """
+        return self.filter(is_on_homepage=True)
 
     def future(self):
-        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
+        return self.public().filter(date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
 
     def past(self):
-        return super(EventManager, self).get_queryset().filter(is_on_homepage=True, date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
+        return self.public().filter(date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
 
 
 class Event(models.Model):
@@ -70,13 +78,33 @@ class Event(models.Model):
     team = models.ManyToManyField(User, null=True, blank=True)
     is_on_homepage = models.BooleanField(default=False)
 
-    objects = EventManager()
+    objects = EventQuerySet.as_manager()
 
     def __unicode__(self):
         return self.name
 
     class Meta:
         verbose_name_plural = "List of events"
+
+    @property
+    def ical_uid(self):
+        return 'event%d@djangogirls.org' % self.pk
+
+    def as_ical(self):
+        """
+        Return a representation of the current event as an icalendar.Event.
+        """
+        ymd = (self.date.year, self.date.month, self.date.day)
+        if not all(ymd):
+            return None
+        event_date = date(*ymd)
+        event = icalendar.Event()
+        event.add('dtstart', event_date)
+        event.add('dtend', event_date + timedelta(days=1))
+        event.add('uid', self.ical_uid)
+        event.add('summary', u'Django Girls %s' % self.city)
+        event.add('location', u'%s, %s' % (self.country, self.city))
+        return event
 
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)

@@ -1,4 +1,8 @@
 from datetime import datetime
+
+import icalendar
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -54,3 +58,16 @@ def event(request, city):
         'menu': menu,
         'content': content,
     })
+
+
+def events_ical(request):
+    events = Event.objects.public().order_by('-date')
+    calendar = icalendar.Calendar()
+    calendar['summary'] = "List of Django Girls events around the world"
+    for event in events:
+        ical_event = event.as_ical()
+        if ical_event is None:
+            continue  # Skip events with an approximate date
+        calendar.add_component(ical_event)
+
+    return HttpResponse(calendar.to_ical(), content_type='text/calendar')
