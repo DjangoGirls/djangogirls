@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
+
+import icalendar
 
 from django.db import models
 from django.contrib.auth import models as auth_models
@@ -83,6 +85,26 @@ class Event(models.Model):
 
     class Meta:
         verbose_name_plural = "List of events"
+
+    @property
+    def ical_uid(self):
+        return 'event%d@djangogirls.org' % self.pk
+
+    def as_ical(self):
+        """
+        Return a representation of the current event as an icalendar.Event.
+        """
+        ymd = (self.date.year, self.date.month, self.date.day)
+        if not all(ymd):
+            return None
+        event_date = date(*ymd)
+        event = icalendar.Event()
+        event.add('dtstart', event_date)
+        event.add('dtend', event_date + timedelta(days=1))
+        event.add('uid', self.ical_uid)
+        event.add('summary', u'Django Girls %s' % self.city)
+        event.add('location', u'%s, %s' % (self.country, self.city))
+        return event
 
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)
