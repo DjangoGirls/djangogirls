@@ -141,6 +141,24 @@ a:hover {
 .without-background {
   padding: 60px 0px;
 }
+#about .overlay {
+  padding: 150px 0;
+}
+#about .overlay h1 {
+  font-family: 'Linux Libertine';
+  font-size: 60px;
+  color: #fff;
+  line-height: 60px;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+#about .overlay h2 {
+  font-family: 'Linux Libertine';
+  font-size: 40px;
+  color: #e7e7e7;
+  line-height: 40px;
+  font-style: italic;
+}
 #newsletter .facebook {
   float: left;
   width: 50%;

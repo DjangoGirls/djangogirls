@@ -98,12 +98,28 @@ class Command(BaseCommand):
         return members
 
     def add_default_content(self, page):
+        about_photos = [
+            settings.STATICFILES_DIRS[0]+'/img/photos/about1.jpg',
+            settings.STATICFILES_DIRS[0]+'/img/photos/about2.jpg'
+        ]
+        apply_photos = [
+            settings.STATICFILES_DIRS[0]+'/img/photos/apply.jpg'
+        ]
+        coach_photos = [
+            settings.STATICFILES_DIRS[0]+'/img/photos/coach1.jpg',
+            settings.STATICFILES_DIRS[0]+'/img/photos/coach2.jpg'
+        ]
+        footer_photos = [
+            settings.STATICFILES_DIRS[0]+'/img/photos/footer1.jpg',
+            settings.STATICFILES_DIRS[0]+'/img/photos/footer2.jpg'
+        ]
+
         EventPageContent.objects.create(
             page = page,
             name = 'about',
             position = 1,
             is_public = True,
-            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo1.jpg')),
+            background = File(open(about_photos[random.randint(0, len(about_photos)-1)])),
             content = '<div style="text-align: center;"><h1>Free programming workshop for women</h1><h2>Build your first website at EuroPython 2014 in Berlin!</h2><a class="btn" href="#value">Learn more »</a></div>')
 
         EventPageContent.objects.create(
@@ -118,8 +134,8 @@ class Command(BaseCommand):
             name = 'apply',
             position = 20,
             is_public = True,
-            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo5.jpg')),
-            content = '<div class="row"><div class="col-md-7"><h2>Application are now open!</h2><p>Application process closes on July 23rd and you\'ll be informedabout acceptance or rejection by July 28th (or sooner)!.</p><a class="btn" href="http://t.co/YvvAFiUvKN">Register</a><p></p></div></div>')
+            background = File(open(apply_photos[random.randint(0, len(apply_photos)-1)])),
+            content = '<div class="row"><div class="col-md-7 col-md-offset-5"><h2>Applications are now open!</h2><p>Application process closes on July 23rd and you\'ll be informedabout acceptance or rejection by July 28th (or sooner)!.</p><a class="btn" href="http://t.co/YvvAFiUvKN">Register</a><p></p></div></div>')
 
         EventPageContent.objects.create(
             page = page,
@@ -133,7 +149,7 @@ class Command(BaseCommand):
             name = 'coach',
             position = 40,
             is_public = True,
-            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo0.jpg')),
+            background = File(open(coach_photos[random.randint(0, len(coach_photos)-1)])),
             content = '<div class="row"><div class="col-md-6"><h2>Be a Mentor!</h2><p>We would be delighted if you would like to join us as a mentor! Fill in the form  <a href="http://t.co/YvvAFiUvKN">here</a>, but select the option to be a mentor.</p><p>We will contact you :)</p></div><div class="col-md-6"><h2>Django Girls</h2><p>Django Girls Australia is a part of bigger initiative: <a href="http://djangogirls.org/">Django Girls</a>.  It is a non-profit organization and events are organized by volunteersin different places of the world.  </p><p>To see the source for the program find us on gihub: <a href="https://github.com/DjangoGirls/">github.com/DjangoGirls</a>.</p><p>If you want to bring Django Girls to your city, drop us a line: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.</p></div></div>')
 
         EventPageContent.objects.create(
@@ -148,7 +164,7 @@ class Command(BaseCommand):
             name = 'footer',
             position = 60,
             is_public = True,
-            background = File(open(settings.STATICFILES_DIRS[0]+'/img/photos/photo4.jpg')),
+            background = File(open(footer_photos[random.randint(0, len(footer_photos)-1)])),
             content = '<div class="row social"><div class="col-md-7"><div class="facebook"><div class="fb-like-box" data-href="https://www.facebook.com/djangogirls" data-colorscheme="dark" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div></div><div class="twitter"> <a href="https://twitter.com/djangogirls" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @djangogirls</a></div> </div><div class="col-md-5">Get in touch: <br> <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a><br><br></div></div><div class="row credits"><div class="col-md-12">♥ Django Girls Europe is organized by <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asednecka">Ola Sendecka</a> with the support from <a href="http://europython.eu/">EuroPython 2014</a>.<br>Django Girls Europe is a part of <a href="/">Django Girls</a>.<br>Every participant needs to follow the <a href="/pages/coc/">Code of Conduct</a>.</div></div>')
 
 
