@@ -173,3 +173,5 @@ SSLIFY_DISABLE = DEBUG
 
 # Mapbox maps to use on the Events map
 MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
+
+APPEND_SLASH = True
