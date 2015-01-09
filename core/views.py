@@ -41,9 +41,9 @@ def stories(request):
 def event(request, city):
     if city[-1:] == "/":
         city = city[:-1]
-        
+
     try:
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() or request.GET.has_key('preview'):
             page = EventPage.objects.get(url=city)
         else:
             page = EventPage.objects.get(url=city, is_live=True)
