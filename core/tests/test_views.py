@@ -1,8 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.test.client import Client
 from django.core.urlresolvers import reverse
+from django.http import HttpRequest
 
 from core.models import User, Event, EventPage, EventPageContent, EventPageMenu, Sponsor
+from core.views import event
 
 class CoreViewsTestCase(TestCase):
 
@@ -10,6 +12,7 @@ class CoreViewsTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.factory = RequestFactory()
 
         self.ola = User.objects.get(pk=1)
         self.peter = User.objects.get(pk=2)
@@ -44,11 +47,13 @@ class CoreViewsTestCase(TestCase):
         event_page_2 = EventPage.objects.get(event=self.event_2)
 
         # Check if it's possible to access the page
-        resp_1 = self.client.get('/'+event_page_1.url)
+        url1 = '/' + event_page_1.url + '/'
+        resp_1 = self.client.get(url1)
         self.assertEqual(resp_1.status_code, 200)
 
         # Check if it's possible to access the page
-        resp_2 = self.client.get('/'+event_page_2.url)
+        url2 = '/' + event_page_2.url + '/'
+        resp_2 = self.client.get(url2)
         self.assertEqual(resp_2.status_code, 200)
 
         # Check if website is returing correct data
@@ -60,7 +65,27 @@ class CoreViewsTestCase(TestCase):
 
     def test_event_unpublished(self):
         event_page_3 = EventPage.objects.get(event=self.event_3)
+        # Check if accessing unpublished page raises 404
+        url = '/' + event_page_3.url + '/'
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
 
-        # Check if accessing the page is redirecting to index
-        resp = self.client.get('/'+event_page_3.url)
-        self.assertEqual(resp.status_code, 302)
+        # Check 404 contains custom content
+        self.assertIn("upcoming events", resp.content, "Content did not contain"
+                                                       " custom 404 text")
+
+    def test_event_unpublished_with_authenticated_user(self):
+        """ Test that an unpublished page can be accessed when the user is
+        authenticated """
+
+        event_page_3 = EventPage.objects.get(event=self.event_3)
+        url = '/' + event_page_3.url + '/'
+        request = self.factory.get(url)
+
+        # Set the user on the request to an authenticated user
+        request.user = self.ola
+
+        # Check if the unpublished page can be accessed
+        resp = event(request, event_page_3.url)
+        self.assertEqual(resp.status_code, 200)
+
