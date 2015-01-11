@@ -5,6 +5,7 @@ import icalendar
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from .models import *
 
@@ -45,12 +46,16 @@ def stories(request):
 
 def event(request, city):
 
+    now = timezone.now()
+    now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
     try:
         page = EventPage.objects.get(url=city)
-        if not (request.user.is_authenticated() \
-                or request.GET.has_key('preview') \
-                or page.is_live):
-            raise Http404
+        if not (request.user.is_authenticated()
+                or request.GET.has_key('preview')):
+            if not page.is_live:
+                past = page.event.date <= now_approx
+                return render(request, "event_not_live.html",
+                              {'city': city, 'past': past})
     except EventPage.DoesNotExist:
         raise Http404
 
