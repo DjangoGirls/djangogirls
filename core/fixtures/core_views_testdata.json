@@ -101,6 +101,22 @@
 },
 {
     "fields": {
+        "city": "Hidden_no_date",
+        "name": "Django Girls Hidden",
+        "country": "Event",
+        "latlng": null,
+        "team": [
+            1
+        ],
+        "is_on_homepage": false,
+        "main_organizer": 1,
+        "date": ""
+    },
+    "model": "core.event",
+    "pk": 4
+},
+{
+    "fields": {
         "custom_css": null,
         "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
         "title": "Django Girls Kensington",
@@ -134,6 +150,18 @@
     },
     "model": "core.eventpage",
     "pk": 3
+},
+{
+    "fields": {
+        "custom_css": null,
+        "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+        "title": "Django Girls Hidden",
+        "url": "hidden_no_date",
+        "is_live": false,
+        "main_color": "FF9400"
+    },
+    "model": "core.eventpage",
+    "pk": 4
 },
 {
     "fields": {

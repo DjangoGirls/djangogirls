@@ -1,0 +1,29 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ city|title }}</h2>
+                    {% if past %}
+                        <p>The event for {{ city|title }} has already happened and the webpage is
+                        no longer live.</p>
+                    {% else %}
+                        <p>The event page for {{ city|title }} will be coming soon.</p>
+                    {% endif %}
+                    <p>If you want to contact the organizers of this
+                    event, you can email them at
+                        <a href="mailto:{{ city }}@djangogirls.org">{{ city|lower }}@djangogirls.org</a></p>
+
+
+                    <h3>See all other <a href="{% url 'core:events' %}">upcoming events</a>.</h3>
+                </div>
+            </div>
+
+
+    </div>
+
+{% endblock content %}
+

@@ -1,8 +1,13 @@
-from django.test import TestCase
+from datetime import timedelta
+from django.test import TestCase, RequestFactory
 from django.test.client import Client
 from django.core.urlresolvers import reverse
+from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from core.models import User, Event, EventPage, EventPageContent, EventPageMenu, Sponsor
+from core.views import event
+
 
 class CoreViewsTestCase(TestCase):
 
@@ -10,6 +15,7 @@ class CoreViewsTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.factory = RequestFactory()
 
         self.ola = User.objects.get(pk=1)
         self.peter = User.objects.get(pk=2)
@@ -18,6 +24,7 @@ class CoreViewsTestCase(TestCase):
         self.event_1 = Event.objects.get(pk=1) # In the future
         self.event_2 = Event.objects.get(pk=2) # In the past
         self.event_3 = Event.objects.get(pk=3) # Hidden from homepage
+        self.event_4 = Event.objects.get(pk=4) # Not live, no date set
 
     def test_index(self):
         # Access homepage
@@ -44,14 +51,16 @@ class CoreViewsTestCase(TestCase):
         event_page_2 = EventPage.objects.get(event=self.event_2)
 
         # Check if it's possible to access the page
-        resp_1 = self.client.get('/'+event_page_1.url)
+        url1 = '/' + event_page_1.url + '/'
+        resp_1 = self.client.get(url1)
         self.assertEqual(resp_1.status_code, 200)
 
         # Check if it's possible to access the page
-        resp_2 = self.client.get('/'+event_page_2.url)
+        url2 = '/' + event_page_2.url + '/'
+        resp_2 = self.client.get(url2)
         self.assertEqual(resp_2.status_code, 200)
 
-        # Check if website is returing correct data
+        # Check if website is returning correct data
         self.assertTrue('page' and 'menu' and 'content' in resp_1.context)
         self.assertTrue('page' and 'menu' and 'content' in resp_2.context)
 
@@ -61,6 +70,58 @@ class CoreViewsTestCase(TestCase):
     def test_event_unpublished(self):
         event_page_3 = EventPage.objects.get(event=self.event_3)
 
-        # Check if accessing the page is redirecting to index
-        resp = self.client.get('/'+event_page_3.url)
-        self.assertEqual(resp.status_code, 302)
+        # Check if accessing unpublished page renders the event_not_live page
+        url = '/' + event_page_3.url + '/'
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+        # Check if website is returning correct data
+        self.assertTrue('city' and 'past' in resp.context)
+
+    def test_event_unpublished_with_future_and_past_dates(self):
+        future_date = timezone.now() + timedelta(days=1)
+        past_date = timezone.now() - timedelta(days=1)
+        event_page_4 = EventPage.objects.get(event=self.event_4)
+
+        # make the event date in the future
+        self.event_4.date = ApproximateDate(
+            year=future_date.year, month=future_date.month, day=future_date.day)
+        self.event_4.save()
+
+        # Check if accessing unpublished page renders the event_not_live page
+        url = '/' + event_page_4.url + '/'
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+        # Check if website is returning correct content
+        self.assertIn('will be coming soon', resp.content, 'Incorrect content')
+
+        # make the event date in the past
+        self.event_4.date = ApproximateDate(
+            year=past_date.year, month=past_date.month, day=past_date.day)
+        self.event_4.save()
+
+        # Check if accessing unpublished page renders the event_not_live page
+        url = '/' + event_page_4.url + '/'
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+        # Check if website is returning correct content
+        self.assertIn('has already happened', resp.content, 'Incorrect content')
+
+    def test_event_unpublished_with_authenticated_user(self):
+        """ Test that an unpublished page can be accessed when the user is
+        authenticated """
+
+        event_page_3 = EventPage.objects.get(event=self.event_3)
+        url = '/' + event_page_3.url + '/'
+        request = self.factory.get(url)
+
+        # Set the user on the request to an authenticated user
+        request.user = self.ola
+
+        # Check if the unpublished page can be accessed
+        resp = event(request, event_page_3.url)
+        self.assertEqual(resp.status_code, 200)
+        # Check if website is returning correct data
+        self.assertIn(event_page_3.title, resp.content.decode('utf-8'))

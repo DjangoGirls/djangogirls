@@ -2,11 +2,13 @@ from datetime import datetime
 
 import icalendar
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from .models import *
+
 
 def index(request):
 
@@ -18,6 +20,7 @@ def index(request):
         'stories': stories,
     })
 
+
 def events(request):
 
     return render(request, 'events.html', {
@@ -25,11 +28,14 @@ def events(request):
         'past_events': Event.objects.past(),
     })
 
+
 def resources(request):
     return render(request, 'resources.html', {})
 
+
 def organize(request):
     return render(request, 'organize.html', {})
+
 
 def stories(request):
 
@@ -39,16 +45,19 @@ def stories(request):
 
 
 def event(request, city):
-    if city[-1:] == "/":
-        city = city[:-1]
 
+    now = timezone.now()
+    now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
     try:
-        if request.user.is_authenticated() or request.GET.has_key('preview'):
-            page = EventPage.objects.get(url=city)
-        else:
-            page = EventPage.objects.get(url=city, is_live=True)
+        page = EventPage.objects.get(url=city)
+        if not (request.user.is_authenticated()
+                or request.GET.has_key('preview')):
+            if not page.is_live:
+                past = page.event.date <= now_approx
+                return render(request, "event_not_live.html",
+                              {'city': city, 'past': past})
     except EventPage.DoesNotExist:
-        return redirect('core:events')
+        raise Http404
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)
@@ -70,4 +79,5 @@ def events_ical(request):
             continue  # Skip events with an approximate date
         calendar.add_component(ical_event)
 
-    return HttpResponse(calendar.to_ical(), content_type='text/calendar; charset=UTF-8')
+    return HttpResponse(calendar.to_ical(),
+                        content_type='text/calendar; charset=UTF-8')
