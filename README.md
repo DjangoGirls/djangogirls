@@ -1,5 +1,7 @@
 # Django Girls website
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/djangogirlsjobs/djangogirls?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).
 
 ## What's in it?
