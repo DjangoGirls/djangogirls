@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django_nose',
     'easy_thumbnails',
 
+    'django_countries',
+
     'core',
     'applications',
     'jobs',
