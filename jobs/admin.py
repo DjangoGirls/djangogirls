@@ -17,5 +17,3 @@ class JobAdmin(admin.ModelAdmin):
 
 admin.site.register(Company)
 admin.site.register(Job, JobAdmin)
-
-
