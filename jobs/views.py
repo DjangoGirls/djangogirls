@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from .models import Job
 
 def jobs(request):
-    job_offers = Job.objects.all()
+    job_offers = Job.objects.filter(published=True)
     return render(
         request, 
         'jobs/jobs.html', 
