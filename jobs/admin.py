@@ -11,6 +11,7 @@ def make_published(modeladmin, request, queryset):
     queryset.update()
 make_published.short_description = "Mark selected as published"
 
+
 class JobAdmin(admin.ModelAdmin):
     readonly_fields = ('published_date',)
     list_display = ['title', 'company', 'reviewer', 'ready_to_publish']
