@@ -17,7 +17,7 @@ def jobs(request):
     )
 
 def job_details(request, id):
-    queryset = Book.objects.filter(ready_to_publish=True).filter(expiration_date__gte=timezone.now())
+    queryset = Job.objects.filter(ready_to_publish=True).filter(expiration_date__gte=timezone.now())
     job = get_object_or_404(queryset, id=id)
     return TemplateResponse(
         request,
