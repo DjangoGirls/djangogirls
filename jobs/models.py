@@ -13,6 +13,7 @@ class Company(models.Model):
     name = models.CharField(max_length=500, unique=True)
     website = models.URLField()
 
+
     class Meta:
         verbose_name = "Company"
         verbose_name_plural = "Companies"
@@ -47,6 +48,7 @@ class Job(models.Model):
         null=True,
         help_text="Automatically is set 60 days from posting. You can override this."
     )
+
 
     class Meta:
         unique_together = (("company", "title"),)
