@@ -46,7 +46,7 @@ class JobModelTests(TestCase):
 
     """Publish without review."""
     def test_publish_without_review(self):
-        assertFalse(self.job.review_status, "Job was already reviewed.")
+        self.assertFalse(self.job.review_status, "Job was already reviewed.")
         self.job.publish()
         self.assertTrue(self.job.published_date, "Job has no published date.")
 
