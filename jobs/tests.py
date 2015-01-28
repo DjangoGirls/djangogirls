@@ -1,3 +1,5 @@
+import time
+
 import pdb
 
 from django.test import TestCase
@@ -80,6 +82,13 @@ class JobModelTests(TestCase):
         self.job.publish()
         self.assertFalse(self.job.expiration_date)
         self.job.set_expiration_date()
+        first_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
+        self.job.expiration_date = None
+        self.job.published_date = None
+        time.sleep(1)
+        self.job.publish()
         self.job.set_expiration_date()
+        second_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
+        self.assertTrue(second_date.second - first_date.second > 0)
