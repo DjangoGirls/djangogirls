@@ -74,7 +74,7 @@ class JobModelTests(TestCase):
     def test_expiration_date_on_not_ready(self):
         """Test setting expiration date if job is unpublished."""
         value = self.job.set_expiration_date()
-        self.assertEqual(value, "No published date.")
+        self.assertEqual(value, None)
         self.assertFalse(self.job.expiration_date)
 
     def test_set_expiration_date_twice(self):
@@ -85,7 +85,6 @@ class JobModelTests(TestCase):
         first_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
         self.job.expiration_date = None
-        self.job.published_date = None
         time.sleep(1)
         self.job.publish()
         self.job.set_expiration_date()

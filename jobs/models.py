@@ -61,12 +61,10 @@ class Job(models.Model):
             self.save()
 
     def set_expiration_date(self):
-        if self.published_date is not None:
+        if self.published_date:
             if self.ready_to_publish and not self.expiration_date:
                 self.expiration_date = self.published_date + timedelta(60)
                 self.save()
-        elif self.published_date is None:
-            return "No published date."
 
 
     def __unicode__(self):
