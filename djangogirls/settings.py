@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'easy_thumbnails',
 
     'django_countries',
+    'floppyforms',
+    'django_extensions',
 
     'core',
     'applications',

@@ -1,0 +1,51 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+    <h1>New offer</h1>
+            <hr/>
+    <form method="POST" class="job-form">{% csrf_token %}
+        <!--{{ form.as_p }}-->
+        <div class="form-group">
+            {{ form.company_name.errors }}
+            <label for="{{ form.company_name.id_for_label }}">Company:</label>
+            {{ form.company_name }}
+        </div>
+        <div>
+            {{ form.contact_email.errors }}
+            <label for="{{ form.contact_email.id_for_label }}">Contact email:</label>
+            {{ form.contact_email }}
+        </div>
+        <div>
+            {{ form.title.errors }}
+            <label for="{{ form.title.id_for_label }}">Title:</label>
+            {{ form.title }}
+        </div>
+        <div>
+            {{ form.description.errors }}
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+        </div>
+
+        <div>
+            {{ form.city.errors }}
+            <label for="{{ form.city.id_for_label }}">City:</label>
+            {{ form.city }}
+        </div>
+        <div>
+            {{ form.country.errors }}
+            <label for="{{ form.country.id_for_label }}">Country:</label>
+            {{ form.country }}
+        </div>
+        <div>
+            {{ form.expiration_date.errors }}
+            <label for="{{ form.expiration_date.id_for_label }}">Expiration date:</label>
+            {{ form.expiration_date }}
+        </div>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+            </div>
+    </div>
+{% endblock %}
