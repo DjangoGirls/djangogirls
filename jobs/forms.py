@@ -16,6 +16,6 @@ class JobForm(forms.ModelForm):
                   'description', 'city', 'country')
         # custom labels
         labels = {
-            'title': 'Job Title'
+            'title': 'Job title'
         }
 

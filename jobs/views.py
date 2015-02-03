@@ -1,6 +1,6 @@
 from django.utils import timezone
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy

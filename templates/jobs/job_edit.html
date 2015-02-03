@@ -5,12 +5,12 @@
 {% block content %}
     <div class="container">
         <div class="row">
-    <h1>New offer</h1>
+            <h1>New offer</h1>
             <hr/>
-    <form method="POST" class="job-form">{% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-            </div>
+            <form method="POST" class="job-form">{% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
