@@ -38,7 +38,11 @@ class JobCreate(CreateView):
     success_url = reverse_lazy('jobs:jobs')
 
     def form_valid(self, form):
-        company, created = Company.objects.get_or_create(name=form.cleaned_data['company_name'])
-        form.instance.company = company
-        form.instance.created = timezone.now()
+        job = form.save(commit=False)
+        company, created = Company.objects.get_or_create(
+            name=form.cleaned_data['company_name'],
+            website=form.cleaned_data['website']
+        )
+        job.company = company
+        job.save()
         return super(JobCreate, self).form_valid(form)
