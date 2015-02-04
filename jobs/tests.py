@@ -37,7 +37,7 @@ class JobModelTests(TestCase):
         self.assertFalse(self.job.published_date)
         self.job.publish()
         self.job.ready_to_publish = False
-        # Right now if we change ready_to_publish to False, 
+        # Right now if we change ready_to_publish to False,
         # published_date stays as it was and doesn't become None.
         self.assertTrue(self.job.published_date)
         self.job.ready_to_publish = True
@@ -45,7 +45,7 @@ class JobModelTests(TestCase):
         self.assertTrue(self.job.published_date, "Job has no published date.")
 
     def test_publish_twice_in_a_row(self):
-        """Publish twice in a row 
+        """Publish twice in a row
         - every time new published date is being created"""
         self.assertFalse(self.job.published_date)
         self.job.publish()
@@ -57,7 +57,7 @@ class JobModelTests(TestCase):
 
     #TODO
     def test_publish_without_review(self):
-        """Job may be published without review - 
+        """Job may be published without review -
         possibly not something we want to be done."""
         self.assertFalse(self.job.review_status, "Job was already reviewed.")
         self.job.publish()
@@ -89,4 +89,4 @@ class JobModelTests(TestCase):
         self.job.set_expiration_date()
         second_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
-        self.assertTrue(second_date.second - first_date.second > 0)
+        self.assertTrue(second_date.second > first_date.second)
