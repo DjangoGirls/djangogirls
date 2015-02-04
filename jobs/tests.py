@@ -84,9 +84,8 @@ class JobModelTests(TestCase):
         self.job.set_expiration_date()
         first_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
-        time.sleep(1)
         self.job.publish()
         self.job.set_expiration_date()
         second_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
-        self.assertTrue(second_date.second > first_date.second)
+        self.assertEqual(second_date.second, first_date.second)

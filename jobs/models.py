@@ -65,9 +65,6 @@ class Job(models.Model):
             if self.ready_to_publish and not self.expiration_date:
                 self.expiration_date = self.published_date + timedelta(60)
                 self.save()
-            if self.ready_to_publish and self.expiration_date:
-                self.expiration_date = self.published_date + timedelta(60)
-                self.save()
 
 
     def __unicode__(self):
