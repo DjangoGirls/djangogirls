@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Current offers (<a href="">view more</a>)
+    </div>
+    <div class="panel-body">
+    <p>Some text here</p>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <th>Company</th>
+            <th>Job title</th>
+            <th>Location</th>
+            <th>Posted</th>
+        </thead>
+        <tbody>
+            {% for job in job_offers %}
+                <tr>
+                    <td>
+                        <a href="{{ job.company.website }}">
+                            {{ job.company }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'jobs:job_details' id=job.id %}">
+                            {{ job.title }}
+                        </a>
+                    </td>
+                    <td>{{ job.city }} ({{ job.country }})</td>
+                    <td>{{ job.published_date }}</td>
+                </tr>
+                {% empty %}
+                    <tr>
+                        <td>There are no job offers at this moment.</td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
