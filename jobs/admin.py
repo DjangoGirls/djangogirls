@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Company, Job
+from .models import Company, Job, Meetup
 
 
 def make_published(modeladmin, request, queryset):
@@ -18,5 +18,13 @@ class JobAdmin(admin.ModelAdmin):
     ordering = ['title']
     actions = [make_published]
 
+
+class MeetupAdmin(admin.ModelAdmin):
+    readonly_fields = ('published_date',)
+    list_display = ['title', 'city', 'reviewer', 'ready_to_publish']
+    ordering = ['title']
+    actions = [make_published]
+
 admin.site.register(Company)
 admin.site.register(Job, JobAdmin)
+admin.site.register(Meetup, MeetupAdmin)

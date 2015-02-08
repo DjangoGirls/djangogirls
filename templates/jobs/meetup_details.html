@@ -1,0 +1,25 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section id="meetup_details">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>{{ meetup.title }}
+                    <small>in {{ meetup.city }}, {{ meetup.country }}</small>
+                </h2>
+                <p>Here will be more information, when we decide how job offer
+                    should look like.</p>
+
+            </div>
+            <!--.col-xs-12-->
+        </div>
+        <!--.row-->
+    </div>
+    <!--.container-->
+</section> <!--#job_details-->
+
+
+{% endblock content %}

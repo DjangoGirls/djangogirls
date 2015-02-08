@@ -5,19 +5,22 @@ from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
 
-from .models import Job, Company
+from .models import Job, Meetup, Company
 from .forms import JobForm
 
 
 def jobs(request):
-    job_offers = Job.objects.filter(ready_to_publish=True).filter(expiration_date__gte=timezone.now())
+    job_offers = Job.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
+    meetup_list = Meetup.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
     return render(
         request, 
         'jobs/jobs.html', 
         {
-            'job_offers': job_offers
+            'job_offers': job_offers,
+            'meetup_list': meetup_list,
         }
     )
+
 
 def job_details(request, id):
     queryset = Job.objects.filter(ready_to_publish=True).filter(expiration_date__gte=timezone.now())
@@ -27,6 +30,18 @@ def job_details(request, id):
         'jobs/job_details.html',
         {
             'job': job,
+        }
+    )
+
+
+def meetup_details(request, id):
+    queryset = Meetup.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
+    meetup = get_object_or_404(queryset, id=id)
+    return TemplateResponse(
+        request,
+        'jobs/meetup_details.html',
+        {
+            'meetup': meetup,
         }
     )
 

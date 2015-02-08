@@ -16,10 +16,10 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Mauris volutpat sem id fringilla cursus.
                             Sed sit amet ornare enim. Morbi condimentum ultrices
-                            quam ac dictum. Etiam iaculis sapien velit, et 
-                            imperdiet est iaculis non. Morbi maximus auctor 
+                            quam ac dictum. Etiam iaculis sapien velit, et
+                            imperdiet est iaculis non. Morbi maximus auctor
                             nunc in pretium.
-                            Quisque molestie vitae enim quis suscipit. 
+                            Quisque molestie vitae enim quis suscipit.
                             In tempus bibendum diam eget eleifend.
                         </div> <!--text div-->
                     </div> <!--page-header-->
@@ -27,13 +27,51 @@
             </div> <!--.row-->
 
             <div class="row">
-                <h3><a href="#">Jobs</a></h3>
-                <a class="btn btn-block" href="{% url 'jobs:job_new' %}" style="margin-bottom:10px;">
-                    Add offer
-                </a>
-                {% include 'jobs/jobs.inc.html' %}
-                <h3><a href="#">Meet ups</a></h3>
-                {% include 'jobs/meetups.inc.html' %}
+                <h3>Offers</h3>
+                <a class="btn" href="{% url 'jobs:job_new' %}">Add offer</a>
+                <table class="table table-striped">
+                    <thead>
+                        <th>Company</th>
+                        <th>Job title</th>
+                        <th>Posted</th>
+                    </thead>
+                    <tbody>
+                        {% for job in job_offers %}
+                            <tr>
+                                <td><a href="{{ job.company.website }}">{{ job.company }}</a></td>
+                                <td><a href="{% url 'jobs:job_details' id=job.id %}">{{ job.title }}</a></td>
+                                <td>{{ job.published_date }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>There are no job offers at this moment.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr/>
+
+                <h3>Meetups</h3>
+                 <table class="table table-striped">
+                    <thead>
+                        <th>Meetup</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                    </thead>
+                    <tbody>
+                        {% for meetup in meetup_list %}
+                            <tr>
+                                <td><a href="{% url 'jobs:meetup_details' id=meetup.id %}">{{ meetup.title }}</a></td>
+                                <td>{{ meetup.city }}, {{meetup.country}}</td>
+                                <td>{{ meetup.published_date }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">There no meetups posted at this moment.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div> <!--.row-->
         </section>
 
