@@ -1,14 +1,12 @@
 import time
-
-import pdb
+from datetime import timedelta, datetime
 
 from django.test import TestCase
-
 from django.utils import timezone
 
 from model_mommy import mommy
 
-from jobs.models import Job
+from jobs.models import Job, Meetup
 
 
 class JobModelTests(TestCase):
@@ -88,4 +86,44 @@ class JobModelTests(TestCase):
         self.job.set_expiration_date()
         second_date = self.job.expiration_date
         self.assertTrue(self.job.expiration_date, "Job has no expiration date.")
-        self.assertEqual(second_date.second, first_date.second)
+        self.assertTrue(second_date.second > first_date.second)
+
+
+class MeetupModelTests(TestCase):
+    """Tests for custom methods of Meetup model."""
+
+    def test_publish_without_ready_to_publish(self):
+        """Trying to publish meetups which are not ready to publish
+        should results in an assertion error"""
+        meetup_not_ready = Meetup(ready_to_publish=False)
+        self.assertRaises(AssertionError,  meetup_not_ready.publish)
+
+    def test_publish_with_default_expiration_date(self):
+        """Testing the publish method with no expiration date set"""
+        meetup_ready_no_exp_date = Meetup(
+            ready_to_publish=True,
+            expiration_date=None
+        )
+        meetup_ready_no_exp_date.publish()
+        self.assertTrue(meetup_ready_no_exp_date.published_date)
+        self.assertAlmostEqual(
+            meetup_ready_no_exp_date.published_date,
+            timezone.now(),
+            delta=timedelta(seconds=10)
+        )
+        self.assertTrue(meetup_ready_no_exp_date.expiration_date)
+        result = meetup_ready_no_exp_date.expiration_date - timezone.now()
+        self.assertEqual(result.days, 59)
+
+    def test_publish_with_custom_expiration_date(self):
+        """Testing the publish method with custom expiration date set"""
+        custom_date = datetime(2016, 2, 14, 15, 30)
+        meetup_ready_custom_exp_date = Meetup(
+            ready_to_publish=True,
+            expiration_date=custom_date
+        )
+        meetup_ready_custom_exp_date.publish()
+        self.assertEqual(
+            meetup_ready_custom_exp_date.expiration_date,
+            custom_date
+        )
