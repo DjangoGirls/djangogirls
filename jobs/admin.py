@@ -5,9 +5,8 @@ from .models import Company, Job, Meetup
 
 def make_published(modeladmin, request, queryset):
     queryset.update(ready_to_publish=True)
-    for job in queryset:
-        job.publish()
-        job.set_expiration_date()
+    for item in queryset:
+        item.publish()
     queryset.update()
 make_published.short_description = "Mark selected as published"
 

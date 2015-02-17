@@ -10,8 +10,16 @@ from .forms import JobForm
 
 
 def jobs(request):
-    job_offers = Job.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
-    meetup_list = Meetup.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
+    job_offers = Job.objects.filter(
+        ready_to_publish=True,
+        published_date__isnull=False,
+        expiration_date__gte=timezone.now()
+    )
+    meetup_list = Meetup.objects.filter(
+        ready_to_publish=True,
+        published_date__isnull=False,
+        expiration_date__gte=timezone.now()
+    )
     return render(
         request, 
         'jobs/jobs.html', 
@@ -23,7 +31,11 @@ def jobs(request):
 
 
 def job_details(request, id):
-    queryset = Job.objects.filter(ready_to_publish=True).filter(expiration_date__gte=timezone.now())
+    queryset = Job.objects.filter(
+        ready_to_publish=True,
+        published_date__isnull=False,
+        expiration_date__gte=timezone.now()
+    )
     job = get_object_or_404(queryset, id=id)
     return TemplateResponse(
         request,
@@ -35,7 +47,11 @@ def job_details(request, id):
 
 
 def meetup_details(request, id):
-    queryset = Meetup.objects.filter(ready_to_publish=True, expiration_date__gte=timezone.now())
+    queryset = Meetup.objects.filter(
+        ready_to_publish=True,
+        published_date__isnull=False,
+        expiration_date__gte=timezone.now()
+    )
     meetup = get_object_or_404(queryset, id=id)
     return TemplateResponse(
         request,
