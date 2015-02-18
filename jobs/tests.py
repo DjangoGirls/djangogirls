@@ -14,7 +14,7 @@ class JobModelTests(TestCase):
 
     def setUp(self):
         """Setting up models with mommy."""
-        self.custom_date = datetime(2016, 2, 14, 15, 30)
+        self.custom_date = datetime(2016, 2, 14, 15, 30, tzinfo=timezone.utc)
         self.job_not_ready = mommy.make(Job, ready_to_publish=False)
         self.job_ready_no_exp_date = mommy.make(
             Job,
@@ -105,7 +105,7 @@ class MeetupModelTests(TestCase):
 
     def setUp(self):
         """Setting up models with mommy."""
-        self.custom_date = datetime(2016, 2, 14, 15, 30)
+        self.custom_date = datetime(2016, 2, 14, 15, 30, tzinfo=timezone.utc)
         self.meetup_not_ready = mommy.make(Meetup, ready_to_publish=False)
         self.meetup_ready_no_exp_date = mommy.make(
             Meetup,

@@ -10,12 +10,12 @@ from core.models import User
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=500, unique=True)
+    name = models.CharField(max_length=255, unique=True)
     website = models.URLField()
 
     class Meta:
-        verbose_name = "Company\Organisation"
-        verbose_name_plural = "Companies\Organisations"
+        verbose_name = "Company/Organisation"
+        verbose_name_plural = "Companies/Organisations"
         ordering = ['name']
 
     def __unicode__(self):
@@ -23,10 +23,10 @@ class Company(models.Model):
 
 
 class Job(models.Model):
-    title = models.CharField(max_length=500)
+    title = models.CharField(max_length=255)
     company = models.ForeignKey(Company, related_name="jobs")
-    contact_email = models.EmailField(max_length=254)
-    city = models.CharField(max_length=100)
+    contact_email = models.EmailField(max_length=255)
+    city = models.CharField(max_length=255)
     country = CountryField()
     description = models.TextField()
     reviewer = models.ForeignKey(
@@ -79,7 +79,7 @@ class Meetup(models.Model):
         (WORKSHOP, 'workshop'),
     )
 
-    title = models.CharField(max_length=500)
+    title = models.CharField(max_length=255)
     organisation = models.ForeignKey(
         Company,
         related_name="meetups",
@@ -87,8 +87,8 @@ class Meetup(models.Model):
         null=True,
     )
     type = models.CharField(max_length=4, choices=MEETUP_TYPES, default=MEETUP)
-    contact_email = models.EmailField(max_length=254)
-    city = models.CharField(max_length=100)
+    contact_email = models.EmailField(max_length=255)
+    city = models.CharField(max_length=255)
     country = CountryField()
     description = models.TextField()
     is_recurring = models.BooleanField(
@@ -96,7 +96,7 @@ class Meetup(models.Model):
         help_text="Is your meetup recurring?"
     )
     #TODO this field should be required if the is_recurring is True
-    recurrence = models.CharField(max_length=100, blank=True, null=True)
+    recurrence = models.CharField(max_length=255, blank=True, null=True)
     meetup_date = models.DateTimeField(
         null = True,
         help_text="This stands for a starting date if the meetup is recurring"

@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='job',
             name='created',
-            field=models.DateTimeField(default=datetime.date(2015, 1, 16), auto_now_add=True),
+            field=models.DateTimeField(auto_now_add=True),
             preserve_default=False,
         ),
         migrations.AddField(

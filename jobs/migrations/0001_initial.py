@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('review_status', models.BooleanField(default=False)),
                 ('reviewers_comment', models.TextField(max_length=2000, null=True, blank=True)),
                 ('post_date', models.DateTimeField(auto_now_add=True)),
-                ('expiration_date', models.DateTimeField(default=datetime.datetime(2015, 1, 16, 15, 44, 33, 648191))),
+                ('expiration_date', models.DateTimeField()),
                 ('company', models.ForeignKey(related_name=b'company', to='jobs.Company')),
                 ('reviewer', models.ForeignKey(related_name=b'reviewer', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],

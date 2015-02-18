@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='job',
             name='expiration_date',
-            field=models.DateTimeField(default=datetime.datetime(2015, 2, 17, 11, 47, 9, 305002), null=True, blank=True),
+            field=models.DateTimeField(null=True, blank=True),
         ),
     ]
