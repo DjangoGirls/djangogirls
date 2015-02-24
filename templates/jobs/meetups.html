@@ -1,0 +1,27 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+
+        <section id="meetups">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        Upcoming meetups
+                        <a class="ical btn btn-default btn-xs" href="{% url 'core:icalendar' %}">ICAL</a>
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for meetup in meetup_list %}
+                    {% include 'includes/_meetups.html' with meetup=meetup %}
+                    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                {% endfor %}
+            </div>
+    </div>
+
+{% endblock %}
+

@@ -15,16 +15,25 @@ def jobs(request):
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
+    return render(
+        request,
+        'jobs/jobs.html',
+        {
+            'job_offers': job_offers,
+        }
+    )
+
+
+def meetups(request):
     meetup_list = Meetup.objects.filter(
         ready_to_publish=True,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
-    return render(
-        request, 
-        'jobs/jobs.html', 
+    return TemplateResponse(
+        request,
+        'jobs/meetups.html',
         {
-            'job_offers': job_offers,
             'meetup_list': meetup_list,
         }
     )

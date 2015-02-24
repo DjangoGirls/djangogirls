@@ -19,6 +19,13 @@
                     <li><a href="https://www.patreon.com/djangogirls">Donate on Patreon</a></li>
                     <li><a href="https://www.stickermule.com/user/1068790133/stickers">Buy a sticker</a></li>
                     <li><a href="http://bit.ly/sponsordg">Sponsor us</a></li>
+                    <li><a href="{% url 'jobs:jobs' %}">Job offers <span class="label label-danger">New!</span></a></li>
+                    <li><a href="{% url 'jobs:meetups' %}">Meetups <span class="label label-danger">New!</span></a></li>
+                    <li><a href="http://gitter.im/DjangoGirls/tutorial"><strong>Chat with us!</strong></a></li>
+                    <li><a href="http://facebook.com/djangogirls">Facebook</a></li>
+                    <li><a href="http://twitter.com/djangogirls">Twitter</a></li>
+                    <li><a href="http://github.com/djangogirls">Github</a></li>
+                    <li><a href="/pages/coc/">Code of Conduct</a></li>
                 </ul>
             </div>
 
@@ -38,6 +45,8 @@
                 <ul>
                     <li><b>{{ future_events_count }}</b> upcoming events</li>
                     <li><b>{{ past_events_count }}</b> past events</li>
+                    <!--- tags to do for meetups and job offers
+                    <li><b></b> upcoming meetups</li>-->
                     <li><b>{{ applicants_sum|default_if_none:'0' }}</b> applicants</li>
                     <li><b>{{ attendees_sum|default_if_none:'0' }}</b> attendees</li>
                     <li><b>{{ countries_count }}</b> countries</li>
