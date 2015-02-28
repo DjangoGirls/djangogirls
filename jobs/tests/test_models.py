@@ -1,4 +1,3 @@
-import time
 from datetime import timedelta, datetime
 
 from django.test import TestCase
