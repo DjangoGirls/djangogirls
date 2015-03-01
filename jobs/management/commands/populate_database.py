@@ -124,9 +124,9 @@ class Command(NoArgsCommand):
                 self.stdout.write('-{0}'.format(created_object))
 
         # Publishing meetups and job offers.
-        for meetup in Meetup.objects.all():
+        for meetup in Meetup.objects.filter(ready_to_publish=True):
             meetup.publish()
-        for job in Job.objects.all():
+        for job in Job.objects.filter(ready_to_publish=True):
             job.publish()
 
         print_created_objects(Meetup)
