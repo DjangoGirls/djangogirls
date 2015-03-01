@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'django.contrib.webdesign',
 
     'raven.contrib.django.raven_compat',
     'django_date_extensions',

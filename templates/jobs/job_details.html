@@ -1,5 +1,6 @@
 {% extends 'global/base.html' %}
 {% load staticfiles %}
+{% load webdesign %}
 
 {% block content %}
 
@@ -12,7 +13,8 @@
 					<h3>Place:</h3>
 					<p>{{ job.city }}, {{ job.country }}</p>
 					<h3>Description:</h3>
-					<p>{{ job.description|linebreaks }}</p>
+					<!--<p>{{ job.description|linebreaks }}</p>-->
+					<p>{% lorem 5 p %}</p>
 
 				</div> <!--.col-xs-12-->
 			</div> <!--.row-->

@@ -1,31 +1,13 @@
-import random
-
-import os
-
 from django.core.management.base import NoArgsCommand
 
 from jobs.models import Company, Job, Meetup
-
-
-def read_lines():
-    """Reads random lines from a file to generate description."""
-    name = 'jobs/management/commands/description.txt'
-    if os.path.isfile(name):
-        with open(name, 'r') as f:
-            all_lines = f.read().splitlines()
-            for i in range(0, 4):
-                selected_lines = random.choice(all_lines)
-                description = ''.join(selected_lines)
-    else:
-        description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    return description
 
 
 class Command(NoArgsCommand):
     help = "Populates database with meetups, companies and job offers."
 
     def add_meetup(self, title, city, country, description, meetup_date):
-        meetup = Meetup.objects.get_or_create(
+        meetup, created = Meetup.objects.get_or_create(
             title=title,
             contact_email='example@example.com',
             city=city,
@@ -37,14 +19,14 @@ class Command(NoArgsCommand):
         return meetup
 
     def add_company(self, name, website):
-        company = Company.objects.get_or_create(
+        company, created = Company.objects.get_or_create(
             name=name,
             website=website
         )
         return company
 
     def add_job(self, title, company, city, country, description):
-        job = Job.objects.get_or_create(
+        job, created = Job.objects.get_or_create(
             title=title,
             company=company,
             contact_email='example@example.com',
@@ -61,21 +43,21 @@ class Command(NoArgsCommand):
             title='Django Girls Warsaw',
             city='Warsaw',
             country='PL',
-            description=read_lines(),
+            description='description',
             meetup_date='2015-04-01'
         )
         self.add_meetup(
             title='Women in Technology',
             city='London',
             country='GB',
-            description=read_lines(),
+            description='description',
             meetup_date='2015-05-15'
         )
         self.add_meetup(
             title='Learn javascript',
             city='Paris',
             country='FR',
-            description=read_lines(),
+            description='description',
             meetup_date='2015-06-12'
         )
 
@@ -83,7 +65,7 @@ class Command(NoArgsCommand):
             title='Python breakfast',
             city='Berlin',
             country='DE',
-            description=read_lines(),
+            description='description',
             meetup_date='2015-07-01'
         )
 
@@ -91,22 +73,22 @@ class Command(NoArgsCommand):
             title='Girls Meetup',
             city='New York',
             country='US',
-            description=read_lines(),
+            description='description',
             meetup_date='2015-08-01'
         )
 
         # Adding some companies.
-        self.add_company(
+        google = self.add_company(
             name='Google',
             website='http://www.google.pl/about/careers/students/'
         )
 
-        self.add_company(
+        amazon = self.add_company(
             name='Amazon',
             website='http://www.amazon.jobs/team-category/university-recruiting'
         )
 
-        self.add_company(
+        digital_ocean = self.add_company(
             name='Digital Ocean',
             website='https://careers.digitalocean.com/'
         )
@@ -114,26 +96,26 @@ class Command(NoArgsCommand):
         # Adding some job offers.
         self.add_job(
             title='Intern',
-            company=Company.objects.get(name='Google'),
+            company=google,
             city='London',
             country='GB',
-            description=read_lines(),
+            description='description',
         )
 
         self.add_job(
             title='Software Development Engineer - Paid Internship',
-            company=Company.objects.get(name='Amazon'),
+            company=amazon,
             city='Gdansk',
             country='PL',
-            description=read_lines(),
+            description='description',
         )
 
         self.add_job(
             title='Software Engineer, Front End',
-            company=Company.objects.get(name='Digital Ocean'),
+            company=digital_ocean,
             city='New York',
             country='US',
-            description=read_lines(),
+            description='description',
         )
 
         def print_created_objects(model):

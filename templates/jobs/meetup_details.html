@@ -1,5 +1,6 @@
 {% extends 'global/base.html' %}
 {% load staticfiles %}
+{% load webdesign %}
 
 {% block content %}
 
@@ -17,7 +18,8 @@
                     <p>{{ meetup.company }}</p>
                 {% endif %}
                 <h4>Description:</h4>
-                <p>{{ meetup.description|linebreaks }}</p>
+                <!--<p>{{ meetup.description|linebreaks }}</p>-->
+                <p>{% lorem 5 p %}</p>
                 {% if meetup.is_recurring %}
                     <p>This is a recurring event</p>
                 {% endif %}
