@@ -1,19 +1,6 @@
 from django import forms
-from django.utils import html
-from django.forms.widgets import HiddenInput, CheckboxInput
 
 from .models import Job, Company
-
-
-class SubmitButtonWidget(forms.Widget):
-    def render(self, name, value, attrs=None):
-        return '<input type="submit" name="%s" value="%s">' % (html.escape(name), html.escape(value))
-
-
-class SubmitButtonField(forms.Field):
-
-    def clean(self, value):
-        return value
 
 
 class JobForm(forms.ModelForm):
@@ -34,6 +21,8 @@ class JobForm(forms.ModelForm):
         }
 
     def clean(self):
+        # TODO
+        # this should be run only when the remaining fields are validated
         if 'save' in self.data:
             try:
                 company = Company.objects.get(
@@ -44,8 +33,8 @@ class JobForm(forms.ModelForm):
                     raise forms.ValidationError(
                         "The company %(name)s already exists with the "
                         "following website: %(www)s. Do you want to overwrite "
-                        "this website? %(dupa)s",
-                        params={'name': company.name, 'www': company.website, 'dupa': self.cleaned_data['website']},
+                        "this website?",
+                        params={'name': company.name, 'www': company.website},
                     )
             except Company.DoesNotExist:
                 pass

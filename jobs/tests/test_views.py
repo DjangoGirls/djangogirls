@@ -12,19 +12,23 @@ class JobCreateTests(TestCase):
             name="My Company",
             website="http://mycompany.com/"
         )
-
-    def test_job_add_new_company_clean(self):
-        """Tests adding a new job with a new company"""
-        response = self.client.post(reverse('jobs:job_new'), {
-            'company_name': 'New Company',
-            'website': 'http://newcompany.com',
-            'contact_email': 'jobs@newcompany.com',
+        self.context = {
+            'company_name': 'My Company',
+            'website': 'http://mycompany.com',
+            'contact_email': 'jobs@company.com',
             'title': 'Job offer',
             'description': 'description',
             'city': u'Kraków',
             'country': 'PL',
             'save': True,
-        })
+        }
+
+    def test_job_add_new_company_clean(self):
+        """Tests adding a new job with a new company"""
+        context = self.context
+        context['company_name'] = 'New Company'
+        context['website'] = 'http://newcompany.com'
+        response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
             Job.objects.get(company__name="New Company", title="Job offer")
@@ -32,16 +36,8 @@ class JobCreateTests(TestCase):
 
     def test_job_add_existing_company_clean(self):
         """Tests adding a new job with an existing company"""
-        response = self.client.post(reverse('jobs:job_new'), {
-            'company_name': 'My Company',
-            'website': 'http://mycompany.com',
-            'contact_email': 'jobs@mycompany.com',
-            'title': 'Job offer',
-            'description': 'description',
-            'city': u'Kraków',
-            'country': 'PL',
-            'save': True,
-        })
+        context = self.context
+        response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
             Job.objects.get(company__name="My Company", title="Job offer")
@@ -51,16 +47,9 @@ class JobCreateTests(TestCase):
         """Tests adding a new job by a company which already exists but with
          a different website. User should get a validation error and
          two buttons to make the decision: overwrite or keep"""
-        response = self.client.post(reverse('jobs:job_new'), {
-            'company_name': 'My Company',
-            'website': 'http://company.com',
-            'contact_email': 'jobs@company.com',
-            'title': 'Job offer',
-            'description': 'description',
-            'city': u'Kraków',
-            'country': 'PL',
-            'save': True,
-        })
+        context = self.context
+        context['website'] = 'http://company.com'
+        response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 200)
         self.assertIn("already exists", response.content)
         self.assertIn("overwrite", response.content)
@@ -69,16 +58,11 @@ class JobCreateTests(TestCase):
     def test_job_add_existing_company_with_different_website_overwrite(self):
         """Tests adding a new job by a company which already exists but with
         a different website when user chooses to overwrite the old website"""
-        response = self.client.post(reverse('jobs:job_new'), {
-            'company_name': 'My Company',
-            'website': 'http://company.com',
-            'contact_email': 'jobs@company.com',
-            'title': 'Job offer',
-            'description': 'description',
-            'city': u'Kraków',
-            'country': 'PL',
-            'overwrite': True,
-        })
+        context = self.context
+        context['website'] = 'http://company.com'
+        del context['save']
+        context['overwrite'] = True
+        response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
             Job.objects.get(company__name="My Company", title="Job offer")
@@ -89,16 +73,11 @@ class JobCreateTests(TestCase):
     def test_job_add_existing_company_with_different_website_keep(self):
         """Tests adding a new job by a company which already exists but with
         a different website when user chooses to keep the old website"""
-        response = self.client.post(reverse('jobs:job_new'), {
-            'company_name': 'My Company',
-            'website': 'http://company.com',
-            'contact_email': 'jobs@company.com',
-            'title': 'Job offer',
-            'description': 'description',
-            'city': u'Kraków',
-            'country': 'PL',
-            'keep': True,
-        })
+        context = self.context
+        context['website'] = 'http://company.com'
+        del context['save']
+        context['keep'] = True
+        response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
             Job.objects.get(company__name="My Company", title="Job offer")
