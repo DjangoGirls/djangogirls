@@ -21,8 +21,7 @@ class JobForm(forms.ModelForm):
         }
 
     def clean(self):
-        # TODO
-        # this should be run only when the remaining fields are validated
+        super(JobForm, self).clean()
         if 'save' in self.data:
             try:
                 company = Company.objects.get(
@@ -35,8 +34,7 @@ class JobForm(forms.ModelForm):
                         "following website: %(www)s. Do you want to overwrite "
                         "this website?",
                         params={'name': company.name, 'www': company.website},
-                    )
-            except Company.DoesNotExist:
+                        )
+            except (Company.DoesNotExist, KeyError):
                 pass
-
         return self.cleaned_data
