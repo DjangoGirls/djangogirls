@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Job, Company
+from .models import Job, Meetup, Company
 
 
 class JobForm(forms.ModelForm):
@@ -38,3 +38,18 @@ class JobForm(forms.ModelForm):
             except (Company.DoesNotExist, KeyError):
                 pass
         return self.cleaned_data
+
+class MeetupForm(forms.ModelForm):
+
+    class Meta:
+        model = Meetup
+        exclude = ['reviewer', 'review_status', 'reviewers_comment',
+            'ready_to_publish', 'published_date', 'created', 'expiration_date'
+        ]
+
+
+class CompanyForm(forms.ModelForm):
+
+    class Meta:
+        model = Company
+        fields = '__all__'

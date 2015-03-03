@@ -1,12 +1,13 @@
 from django.utils import timezone
 
-from django.shortcuts import render, get_object_or_404, render_to_response
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse_lazy
 
 from .models import Job, Meetup, Company
-from .forms import JobForm
+from .forms import JobForm, MeetupForm, CompanyForm
 
 
 def jobs(request):
@@ -95,3 +96,37 @@ class JobCreate(CreateView):
             job.company = company
         job.save()
         return super(JobCreate, self).form_valid(form)
+
+
+def create_meetup(request):
+    meetup_form = MeetupForm()
+    company_form = CompanyForm()
+    if request.method == 'POST':
+        if 'add_meetup' in request.POST:
+            meetup_form = MeetupForm(request.POST)
+            if meetup_form.is_valid():
+                meetup_form.save()
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    'Your meetup was added to our database, '
+                    'you will recieve further information shortly.'
+                )
+                return redirect('jobs:meetups')
+        if 'add_company' in request.POST:
+            company_form = CompanyForm(request.POST)
+            if company_form.is_valid():
+                company_form.save()
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    'Your company was added to our database.'
+                )
+    return TemplateResponse(
+        request,
+        'jobs/meetup_edit.html',
+        {
+            'meetup_form': meetup_form,
+            'company_form': company_form,
+        }
+    )

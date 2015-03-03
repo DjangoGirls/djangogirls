@@ -91,9 +91,12 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'django.core.context_processors.static',
     'core.context_processors.statistics',
+    'django.contrib.messages.context_processors.messages',
 )
 
 # Custom
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 AUTH_USER_MODEL = 'core.User'
 
