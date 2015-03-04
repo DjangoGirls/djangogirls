@@ -102,11 +102,11 @@ class Meetup(models.Model):
         max_length=255,
         blank=True,
         null=True,
-        help_text="Provide reccurence if your meetup is reccuring."
+        help_text="Provide details of recurrence if applicable."
     )
     meetup_date = models.DateTimeField(
         null=True,
-        help_text="This stands for a starting date if the meetup is recurring.\
+        help_text="If this is a recurring meetup/event, please enter a start date.\
             Date format: YYYY-MM-DD"
     )
     reviewer = models.ForeignKey(
