@@ -43,18 +43,6 @@ class JobCreateTests(TestCase):
             Job.objects.get(company__name="My Company", title="Job offer")
         )
 
-    def test_job_add_existing_company_with_different_website(self):
-        """Tests adding a new job by a company which already exists but with
-         a different website. User should get a validation error and
-         two buttons to make the decision: overwrite or keep"""
-        context = self.context
-        context['website'] = 'http://company.com'
-        response = self.client.post(reverse('jobs:job_new'), context)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("already exists", response.content)
-        self.assertIn("overwrite", response.content)
-        self.assertIn("keep", response.content)
-
     def test_job_add_existing_company_with_different_website_overwrite(self):
         """Tests adding a new job by a company which already exists but with
         a different website when user chooses to overwrite the old website"""
