@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Job, Meetup, Company
+from .models import Job, Meetup
 
 
 class JobForm(forms.ModelForm):
@@ -46,10 +46,6 @@ class MeetupForm(forms.ModelForm):
         exclude = ['reviewer', 'review_status', 'reviewers_comment',
             'ready_to_publish', 'published_date', 'created', 'expiration_date'
         ]
-
-
-class CompanyForm(forms.ModelForm):
-
-    class Meta:
-        model = Company
-        fields = '__all__'
+        widgets = {
+            'meetup_date': forms.DateTimeInput(format='%d-%m-%Y'),
+        }

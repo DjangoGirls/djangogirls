@@ -1,13 +1,13 @@
 from django.utils import timezone
 
-from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.views.generic.edit import CreateView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
 
 from .models import Job, Meetup, Company
-from .forms import JobForm, MeetupForm, CompanyForm
+from .forms import JobForm, MeetupForm
 
 
 def jobs(request):
@@ -98,35 +98,13 @@ class JobCreate(CreateView):
         return super(JobCreate, self).form_valid(form)
 
 
-def create_meetup(request):
-    meetup_form = MeetupForm()
-    company_form = CompanyForm()
-    if request.method == 'POST':
-        if 'add_meetup' in request.POST:
-            meetup_form = MeetupForm(request.POST)
-            if meetup_form.is_valid():
-                meetup_form.save()
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    'Your meetup was added to our database, '
-                    'you will recieve further information shortly.'
-                )
-                return redirect('jobs:meetups')
-        if 'add_company' in request.POST:
-            company_form = CompanyForm(request.POST)
-            if company_form.is_valid():
-                company_form.save()
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    'Your company was added to our database.'
-                )
-    return TemplateResponse(
-        request,
-        'jobs/meetup_edit.html',
-        {
-            'meetup_form': meetup_form,
-            'company_form': company_form,
-        }
-    )
+class MeetupCreate(SuccessMessageMixin, CreateView):
+    model = Meetup
+    template_name = 'jobs/meetup_edit.html'
+    form_class = MeetupForm
+    success_url = reverse_lazy('jobs:meetups')
+    success_message = 'Your meetup was added to our database, \
+                    you will recieve further information shortly.'
+
+    def form_valid(self, form):
+        return super(MeetupCreate, self).form_valid(form)

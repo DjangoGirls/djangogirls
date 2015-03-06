@@ -8,46 +8,14 @@
             <div class="col-xs-12">
                 <h1>New meetup</h1>
                 <hr/>
-                {% include 'includes/_info_messages.html' %}
-                <p>New here? Add your organisation if it doesn't appear in the organisations list.</p>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCompanyModal">
-                    Add organisation
-                </button>
-                <form method="POST" class="job-form">{% csrf_token %}
-                    {{ meetup_form|crispy }}
+                <form method="POST" class="job-form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
                     <button type="submit" class="save btn btn-default" name="add_meetup">
                         Save
                     </button>
                 </form>
-            </div> <!-- /.col-xs-12-->
-    
-            <div class="modal fade" id="addCompanyModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;
-                                </span>
-                            </button>
-                            <h4 class="modal-title">Add organisation</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" class="company-form" id="company-form">
-                                {% csrf_token %}
-                                {{ company_form|crispy }}
-                                <button type="submit" class="save btn btn-default" name="add_company" style="margin-top:10px;">Save</button>
-                            </form>
-                        </div>
-                    </div> <!-- /.modal-content -->
-                </div> <!-- /.modal-dialog -->
-            </div> <!-- /.modal -->
-
-            {% if company_form.errors %}
-                <script type="text/javascript">
-                    $('#addCompanyModal').modal('show');
-                </script>
-            {% endif %}
-        
+            </div> <!-- /.col-xs-12-->        
         </div> <!-- /.row -->
     </div> <!-- /.container -->
 {% endblock %}

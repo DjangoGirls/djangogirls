@@ -83,9 +83,8 @@ class Meetup(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    organisation = models.ForeignKey(
-        Company,
-        related_name="meetups",
+    organisation = models.CharField(
+        max_length=255,
         blank=True,
         null=True,
     )
@@ -107,7 +106,7 @@ class Meetup(models.Model):
     meetup_date = models.DateTimeField(
         null=True,
         help_text="If this is a recurring meetup/event, please enter a start date.\
-            Date format: YYYY-MM-DD"
+            Date format: DD/MM/YYYY"
     )
     reviewer = models.ForeignKey(
         User,
