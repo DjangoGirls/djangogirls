@@ -11,18 +11,16 @@ from .forms import JobForm, MeetupForm
 
 
 def main(request):
-    # TODO add ordering to the queries
-    # last published jobs & meetups
-    meetup_list = Meetup.objects.filter(
-        ready_to_publish=True,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    )[:4]
     job_offers = Job.objects.filter(
         ready_to_publish=True,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
-    )[:4]
+    ).order_by('-published_date')[:4]
+    meetup_list = Meetup.objects.filter(
+        ready_to_publish=True,
+        published_date__isnull=False,
+        expiration_date__gte=timezone.now()
+    ).order_by('-published_date')[:3]
     return render(
         request,
         'jobs/main.html',
