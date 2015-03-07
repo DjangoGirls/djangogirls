@@ -1,4 +1,4 @@
-{% extends 'global/base.html' %}
+{% extends 'jobs/base.html' %}
 {% load staticfiles %}
 
 {% block content %}
@@ -67,7 +67,7 @@
                         <h4>Recent meetups:</h4>
                         {% if meetup_list %}
                             {% for meetup in meetup_list %}
-                                <div class="col-md-6 event">
+                                <div class="col-md-12 event">
                                     {% include 'includes/_meetups.html' with meetup=meetup %}
                                 </div>
                             {% endfor %}
