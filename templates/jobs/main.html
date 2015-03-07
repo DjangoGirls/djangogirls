@@ -1,0 +1,86 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section id="box-with-picture">
+    <div class="black-canvas">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>
+                        You've already attended Django Girls event?
+                    </h1>
+
+                    <p>there is much more...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <section id="community">
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Community</h2>
+
+                <p>Here, you will find information about job offers for
+                    juniors, meetups, local groups and other things that will
+                    keep you get going with becoming the fully-fledged Django
+                    programmer.</p>
+            </div>
+        </div>
+    </section>
+    <section id="features">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-feature-orange">
+                    <div class="panel-heading">
+                        Jobs
+                    </div>
+                    <div class="panel-body">
+                        <p>Here you can find job offers for junior
+                            positions.</p>
+                        <h4>Recent offers:</h4>
+                        {% if job_offers %}
+                            {% for job in job_offers %}
+                                <div class="col-md-6 event">
+                                    {% include 'includes/_jobs.html' with job=job %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No job offers yet...</p>
+                        {% endif %}
+                        <a class="btn" href="{% url 'jobs:jobs' %}">More...</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-feature-blue">
+                    <div class="panel-heading">
+                        Meetups
+                    </div>
+                    <div class="panel-body">
+                        <p>Here, you can find information about local meetups,
+                            conferences and workshops.</p>
+                        <h4>Recent meetups:</h4>
+                        {% if meetup_list %}
+                            {% for meetup in meetup_list %}
+                                <div class="col-md-6 event">
+                                    {% include 'includes/_meetups.html' with meetup=meetup %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No meetups yet...</p>
+                        {% endif %}
+                        <a class="btn btn-blue" href="{% url 'jobs:meetups' %}">More...</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div> <!--.container-->
+
+{% endblock %}

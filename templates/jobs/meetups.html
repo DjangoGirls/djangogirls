@@ -19,7 +19,9 @@
 
         <div class="row">
             {% for meetup in meetup_list %}
-                {% include 'includes/_meetups.html' with meetup=meetup %}
+                <div class="col-md-4 event">
+                    {% include 'includes/_meetups.html' with meetup=meetup %}
+                </div>
                 {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
             {% endfor %}
         </div> <!-- /.row -->

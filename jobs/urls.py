@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 from . import views
 
 urlpatterns = patterns('',
+    url(r'^$', views.main, name='main'),
     url(r'^jobs$', views.jobs, name='jobs'),
     url(r'^meetups$', views.meetups, name='meetups'),
     url(r'^job/(?P<id>\d+)$', views.job_details, name='job_details'),
