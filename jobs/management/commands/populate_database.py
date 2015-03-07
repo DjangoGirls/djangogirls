@@ -1,10 +1,10 @@
 from django.core.management.base import NoArgsCommand
 
-from jobs.models import Company, Job, Meetup
+from jobs.models import Job, Meetup
 
 
 class Command(NoArgsCommand):
-    help = "Populates database with meetups, companies and job offers."
+    help = "Populates database with meetups and job offers."
 
     def add_meetup(self, title, city, country, description, meetup_date):
         meetup, created = Meetup.objects.get_or_create(
@@ -18,14 +18,7 @@ class Command(NoArgsCommand):
         )
         return meetup
 
-    def add_company(self, name, website):
-        company, created = Company.objects.get_or_create(
-            name=name,
-            website=website
-        )
-        return company
-
-    def add_job(self, title, company, city, country, description):
+    def add_job(self, title, company, website, city, country, description):
         job, created = Job.objects.get_or_create(
             title=title,
             company=company,
@@ -77,26 +70,11 @@ class Command(NoArgsCommand):
             meetup_date='2015-08-01'
         )
 
-        # Adding some companies.
-        google = self.add_company(
-            name='Google',
-            website='http://www.google.pl/about/careers/students/'
-        )
-
-        amazon = self.add_company(
-            name='Amazon',
-            website='http://www.amazon.jobs/team-category/university-recruiting'
-        )
-
-        digital_ocean = self.add_company(
-            name='Digital Ocean',
-            website='https://careers.digitalocean.com/'
-        )
-
         # Adding some job offers.
         self.add_job(
             title='Intern',
-            company=google,
+            company='Google',
+            website='http://www.google.pl/about/careers/students/',
             city='London',
             country='GB',
             description='description',
@@ -104,7 +82,8 @@ class Command(NoArgsCommand):
 
         self.add_job(
             title='Software Development Engineer - Paid Internship',
-            company=amazon,
+            company='Amazon',
+            website='http://www.amazon.jobs/team-category/university-recruiting',
             city='Gdansk',
             country='PL',
             description='description',
@@ -112,7 +91,8 @@ class Command(NoArgsCommand):
 
         self.add_job(
             title='Software Engineer, Front End',
-            company=digital_ocean,
+            company='Digital Ocean',
+            website='https://careers.digitalocean.com/',
             city='New York',
             country='US',
             description='description',
@@ -130,5 +110,4 @@ class Command(NoArgsCommand):
             job.publish()
 
         print_created_objects(Meetup)
-        print_created_objects(Company)
         print_created_objects(Job)

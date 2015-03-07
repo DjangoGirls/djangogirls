@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
 
-from .models import Job, Meetup, Company
+from .models import Job, Meetup
 from .forms import JobForm, MeetupForm
 
 
@@ -77,24 +77,10 @@ class JobCreate(CreateView):
     template_name = 'jobs/job_edit.html'
     form_class = JobForm
     success_url = reverse_lazy('jobs:jobs')
+    success_message = 'Your job offer was added to our database, \
+                    you will recieve further information shortly.'
 
     def form_valid(self, form):
-        job = form.save(commit=False)
-        if 'save' in form.data:
-            company, created = Company.objects.get_or_create(
-                name=form.cleaned_data['company_name'],
-                website=form.cleaned_data['website']
-            )
-            job.company = company
-        elif 'overwrite' in form.data:
-            company = Company.objects.get(name=form.cleaned_data['company_name'])
-            company.website = form.cleaned_data['website']
-            company.save()
-            job.company = company
-        elif 'keep' in form.data:
-            company = Company.objects.get(name=form.cleaned_data['company_name'])
-            job.company = company
-        job.save()
         return super(JobCreate, self).form_valid(form)
 
 

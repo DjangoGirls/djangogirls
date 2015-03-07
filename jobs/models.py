@@ -9,22 +9,14 @@ from django.conf import settings
 from core.models import User
 
 
-class Company(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    website = models.URLField()
-
-    class Meta:
-        verbose_name = "Company/Organisation"
-        verbose_name_plural = "Companies/Organisations"
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-
 class Job(models.Model):
     title = models.CharField(max_length=255)
-    company = models.ForeignKey(Company, related_name="jobs")
+    company = models.CharField(max_length=255)
+    website = models.URLField(
+        help_text="Link to your offer or company website.",
+        blank=True,
+        null=True
+    )
     contact_email = models.EmailField(max_length=255)
     city = models.CharField(max_length=255)
     country = CountryField()
@@ -88,8 +80,17 @@ class Meetup(models.Model):
         blank=True,
         null=True,
     )
-    type = models.CharField(max_length=4, choices=MEETUP_TYPES, default=MEETUP)
+    meetup_type = models.CharField(
+        max_length=4,
+        choices=MEETUP_TYPES,
+        default=MEETUP
+    )
     contact_email = models.EmailField(max_length=255)
+    website = models.URLField(
+        help_text="Link to your meetup or organisation website.",
+        blank=True,
+        null=True
+    )
     city = models.CharField(max_length=255)
     country = CountryField()
     description = models.TextField()
@@ -106,7 +107,7 @@ class Meetup(models.Model):
     meetup_date = models.DateTimeField(
         null=True,
         help_text="If this is a recurring meetup/event, please enter a start date.\
-            Date format: DD/MM/YYYY"
+            Date format: MM/DD/YYYY"
     )
     reviewer = models.ForeignKey(
         User,

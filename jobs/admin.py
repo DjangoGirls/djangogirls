@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Company, Job, Meetup
+from .models import Job, Meetup
 
 
 def make_published(modeladmin, request, queryset):
@@ -24,6 +24,5 @@ class MeetupAdmin(admin.ModelAdmin):
     ordering = ['title']
     actions = [make_published]
 
-admin.site.register(Company)
 admin.site.register(Job, JobAdmin)
 admin.site.register(Meetup, MeetupAdmin)
