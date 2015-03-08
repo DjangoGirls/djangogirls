@@ -1,13 +1,10 @@
-from datetime import datetime
-
 import icalendar
 
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
-from django.utils import timezone
-from django_date_extensions.fields import ApproximateDate
 
-from .models import *
+from .models import Event, EventPage, EventPageMenu, EventPageContent, Story
+from .utils import get_event_page
 
 
 def index(request):
@@ -45,19 +42,11 @@ def stories(request):
 
 
 def event(request, city):
-
-    now = timezone.now()
-    now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    try:
-        page = EventPage.objects.get(url=city)
-        if not (request.user.is_authenticated()
-                or request.GET.has_key('preview')):
-            if not page.is_live:
-                past = page.event.date <= now_approx
-                return render(request, "event_not_live.html",
-                              {'city': city, 'past': past})
-    except EventPage.DoesNotExist:
+    page = get_event_page(city, request.user.is_authenticated(), request.GET.has_key('preview'))
+    if not page:
         raise Http404
+    elif type(page) == tuple:
+        return render(request, "event_not_live.html", {'city': page[0], 'past': page[1]})
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)
