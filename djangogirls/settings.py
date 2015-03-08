@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'storages',
     'markdown_deux',
 
-    'core'
+    'core',
+    'applications',
 )
 
 MIDDLEWARE_CLASSES = (
