@@ -37,8 +37,9 @@ class MeetupForm(forms.ModelForm):
 
     class Meta:
         model = Meetup
-        exclude = ['reviewer', 'review_status', 'reviewers_comment',
-            'ready_to_publish', 'published_date', 'created', 'expiration_date'
+        fields = ['title', 'organisation', 'meetup_type', 'contact_email',
+            'website', 'city', 'country', 'description', 'is_recurring', 
+            'recurrence', 'meetup_date'
         ]
         widgets = {
             'meetup_date': forms.DateTimeInput(format='%d-%m-%Y'),
