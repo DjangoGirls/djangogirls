@@ -13,7 +13,7 @@ QUESTION_TYPES = (
 class Form(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
     text_header = models.CharField(max_length=255, default="Apply for a spot at Django Girls [City]!")
-    text_description = models.TextField(default="Yay! We're so excited you want to be a part of our workshop. Please mind that filling out the form below does not give you a place on the workshop, but a chance to get one. The application process is open from {open_from} until {open_until}. If you're curious about the criteria we use to choose applicants, you can read about it on <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Good luck!")
+    text_description = models.TextField(default="Yay! We're so excited you want to be a part of our workshop. Please mind that filling out the form below does not give you a place on the workshop, but a chance to get one. The application process is open from {INSERT DATE} until {INSERT DATE}. If you're curious about the criteria we use to choose applicants, you can read about it on <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Good luck!")
     open_from = models.DateTimeField(null=True, verbose_name="Application process is open from")
     open_until = models.DateTimeField(null=True, verbose_name="Application process is open until")
 
