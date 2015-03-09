@@ -182,6 +182,8 @@ a:hover {
 }
 .coaches .col-md-2 .coach {
   max-width: 160px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
   border-radius: 100%;
   margin-bottom: 15px;
 }
@@ -220,6 +222,74 @@ a:hover {
 }
 .leaflet-container {
   height: 400px;
+}
+.application-form {
+  padding: 30px;
+}
+.application-form label {
+  font-family: Roboto;
+  color: #000;
+  font-weight: 300;
+}
+.application-form p.help-text {
+  font-size: 16px;
+  font-family: Roboto;
+  color: rgba(0,0,0,0.6);
+  margin: 0;
+}
+.application-form span.required {
+  color: #ff9400;
+}
+.application-form input[type="email"],
+.application-form input[type="text"] {
+  padding: 5px 10px;
+  width: 50%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+}
+.application-form input[type="text"].other {
+  width: 45%;
+  margin-top: 5px;
+}
+.application-form input[type="submit"] {
+  background: #ffa500;
+  border: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 18px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: 300;
+  text-decoration: none;
+}
+.application-form input[type="checkbox"],
+.application-form input[type="radio"] {
+  margin-right: 10px;
+}
+.application-form textarea {
+  padding: 5px 10px;
+  width: 50%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+  height: 150px;
+}
+.application-form .field {
+  margin: 10px 0 30px 0;
+}
+.application-form .field label {
+  font-family: 'Linux Libertine' !important;
+  color: #4a4a4a;
+}
+.application-form .field p {
+  margin: 0;
 }
 /* ---------------------
  Responsive design fixes
@@ -286,6 +356,8 @@ a:hover {
   margin: 0 30px 0 0;
 }
 #resources .cover img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 #resources .info p {
