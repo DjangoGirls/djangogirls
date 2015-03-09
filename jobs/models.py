@@ -9,21 +9,14 @@ from django.conf import settings
 from core.models import User
 
 
-class Job(models.Model):
-    title = models.CharField(max_length=255)
-    company = models.CharField(max_length=255)
-    website = models.URLField(
-        help_text="Link to your offer or company website.",
-        blank=True,
-        null=True
-    )
-    contact_email = models.EmailField(max_length=255)
-    city = models.CharField(max_length=255)
-    country = CountryField()
-    description = models.TextField()
+class PublishFlowModel(models.Model):
+    """
+    An abstract class model that handles all logic related to publishing
+    an item that needs to be reviewed
+    """
     reviewer = models.ForeignKey(
         User,
-        related_name="jobs",
+        related_name="%(app_label)s_%(class)s_related",
         blank=True,
         null=True,
         on_delete=models.SET_NULL
@@ -42,7 +35,7 @@ class Job(models.Model):
     )
 
     class Meta:
-        unique_together = (("company", "title"),)
+        abstract = True
         ordering = ['-published_date']
 
     def publish(self):
@@ -59,11 +52,28 @@ class Job(models.Model):
                 self.expiration_date = self.published_date + timedelta(60)
                 self.save()
 
+
+class Job(PublishFlowModel):
+    title = models.CharField(max_length=255)
+    company = models.CharField(max_length=255)
+    website = models.URLField(
+        help_text="Link to your offer or company website.",
+        blank=True,
+        null=True
+    )
+    contact_email = models.EmailField(max_length=255)
+    city = models.CharField(max_length=255)
+    country = CountryField()
+    description = models.TextField()
+
+    class Meta(PublishFlowModel.Meta):
+        unique_together = (("company", "title"),)
+
     def __unicode__(self):
         return "{0}, {1}".format(self.title, self.company)
 
 
-class Meetup(models.Model):
+class Meetup(PublishFlowModel):
 
     MEETUP = 'MEET'
     CONFERENCE = 'CONF'
@@ -109,38 +119,9 @@ class Meetup(models.Model):
         help_text="If this is a recurring meetup/event, please enter a start date.\
             Date format: YYYY/MM/DD"
     )
-    reviewer = models.ForeignKey(
-        User,
-        related_name="meetups",
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-    )
-    review_status = models.BooleanField(
-        default=False,
-        help_text="Check if reviewed",
-    )
-    reviewers_comment = models.TextField(blank=True, null=True,)
-    ready_to_publish = models.BooleanField(default=False)
-    published_date = models.DateTimeField(blank=True, null=True)
-    created = models.DateTimeField(auto_now_add=True)
-    expiration_date = models.DateField(
-        blank=True,
-        null=True,
-        help_text="Automatically is set 60 days from posting. You can "
-                  "override this.",
-    )
 
-    class Meta:
+    class Meta(PublishFlowModel.Meta):
         unique_together = (("title", "city"),)
-        ordering = ['-published_date']
-
-    def publish(self):
-        assert self.ready_to_publish
-        self.published_date = timezone.now()
-        if not self.expiration_date:
-            self.expiration_date = self.published_date + timedelta(60)
-        self.save()
 
     def __unicode__(self):
         return u"{0}, {1}".format(self.title, self.city)
