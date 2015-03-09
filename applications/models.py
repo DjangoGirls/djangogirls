@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import EventPage
+from .utils import DEFAULT_QUESTIONS
 
 
 QUESTION_TYPES = (
@@ -20,6 +21,21 @@ class Form(models.Model):
     def __unicode__(self):
         return 'Application form for {}'.format(self.page.event.name)
 
+    def save(self, *args, **kwargs):
+        is_form_new = False if self.pk else True
+        super(Form, self).save(*args, **kwargs)
+
+        if is_form_new:
+            self.create_default_questions()
+
+    def create_default_questions(self):
+        i = 1
+        for question in DEFAULT_QUESTIONS:
+            question['form'] = self
+            question['order'] = i
+            Question.objects.create(**question)
+            i += 1
+
 
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
@@ -32,8 +48,17 @@ class Question(models.Model):
     is_multiple_choice = models.BooleanField(default=False, verbose_name="Are there multiple choices allowed?", help_text="Used only with 'Choices' question type")
     order = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the question")
 
+    class Meta:
+        ordering = ('form', 'order')
+
     def __unicode__(self):
         return self.title
+
+    def get_choices_as_list(self):
+        if self.question_type != 'choices':
+            raise TypeError("You can only get choices for fields that have question_type == choices.")
+
+        return self.choices.split(';')
 
 
 class Application(models.Model):
