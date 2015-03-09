@@ -26,9 +26,9 @@
                 <h2>Community</h2>
 
                 <p>Here, you will find information about job offers for
-                    juniors, meetups, local groups and other things that will
-                    keep you get going with becoming the fully-fledged Django
-                    programmer.</p>
+                    entry-level positions, meetups, local groups and other
+                    things that will help you get going with becoming a
+                    fully-fledged Django programmer.</p>
             </div>
         </div>
     </section>
@@ -40,14 +40,14 @@
                         Jobs
                     </div>
                     <div class="panel-body">
-                        <p>Here you can find job offers for junior
+                        <p>Here you can find job offers for an entry-level
                             positions.</p>
                         <h4>Recent offers:</h4>
                         {% if job_offers %}
                             {% for job in job_offers %}
-                                <div class="col-md-6 event">
-                                    {% include 'includes/_jobs.html' with job=job %}
-                                </div>
+                            <div class="col-md-6 event">
+                                {% include 'includes/_jobs.html' with job=job %}
+                            </div>
                             {% endfor %}
                         {% else %}
                             <p>No job offers yet...</p>
@@ -67,9 +67,9 @@
                         <h4>Recent meetups:</h4>
                         {% if meetup_list %}
                             {% for meetup in meetup_list %}
-                                <div class="col-md-12 event">
-                                    {% include 'includes/_meetups.html' with meetup=meetup %}
-                                </div>
+                            <div class="col-md-12 event">
+                                {% include 'includes/_meetups.html' with meetup=meetup %}
+                            </div>
                             {% endfor %}
                         {% else %}
                             <p>No meetups yet...</p>
