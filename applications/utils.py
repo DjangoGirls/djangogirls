@@ -46,7 +46,7 @@ DEFAULT_QUESTIONS = [
         "question_type": "text",
     },
     {
-        "title": "Why do you want the workshop?",
+        "title": "Why do you want to attend the workshop?",
         "help_text": "Tell us about your motivations and aspirations.",
         "question_type": "text",
     },
