@@ -22,6 +22,7 @@ class Command(NoArgsCommand):
         job, created = Job.objects.get_or_create(
             title=title,
             company=company,
+            website=website,
             contact_email='example@example.com',
             city=city,
             country=country,

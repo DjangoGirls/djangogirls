@@ -41,6 +41,3 @@ class MeetupForm(forms.ModelForm):
             'website', 'city', 'country', 'description', 'is_recurring', 
             'recurrence', 'meetup_date'
         ]
-        widgets = {
-            'meetup_date': forms.DateTimeInput(format='%d-%m-%Y'),
-        }

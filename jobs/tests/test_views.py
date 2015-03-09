@@ -7,13 +7,10 @@ from jobs.models import Job, Company, Meetup
 
 
 class JobCreateTests(TestCase):
+
     def setUp(self):
-        Company.objects.create(
-            name="My Company",
-            website="http://mycompany.com/"
-        )
         self.context = {
-            'company_name': 'My Company',
+            'company': 'My Company',
             'website': 'http://mycompany.com',
             'contact_email': 'jobs@company.com',
             'title': 'Job offer',
@@ -26,7 +23,7 @@ class JobCreateTests(TestCase):
     def test_job_add_new_company_clean(self):
         """Tests adding a new job with a new company"""
         context = self.context
-        context['company_name'] = 'New Company'
+        context['company'] = 'New Company'
         context['website'] = 'http://newcompany.com'
         response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)

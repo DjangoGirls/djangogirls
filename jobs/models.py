@@ -107,7 +107,7 @@ class Meetup(models.Model):
     meetup_date = models.DateTimeField(
         null=True,
         help_text="If this is a recurring meetup/event, please enter a start date.\
-            Date format: MM/DD/YYYY"
+            Date format: YYYY/MM/DD"
     )
     reviewer = models.ForeignKey(
         User,
