@@ -17,6 +17,9 @@ class Form(models.Model):
     open_from = models.DateTimeField(null=True, verbose_name="Application process is open from")
     open_until = models.DateTimeField(null=True, verbose_name="Application process is open until")
 
+    def __unicode__(self):
+        return 'Application form for {}'.format(self.page.event.name)
+
 
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
@@ -28,6 +31,9 @@ class Question(models.Model):
     has_option_other = models.BooleanField(default=False, verbose_name="Allow for 'Other' answer?", help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(default=False, verbose_name="Are there multiple choices allowed?", help_text="Used only with 'Choices' question type")
     order = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the question")
+
+    def __unicode__(self):
+        return self.title
 
 
 class Application(models.Model):
