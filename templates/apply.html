@@ -1,16 +1,24 @@
 {% extends 'event.html' %}
+{% load static %}
 
 {% block title %}{{ page.title }} - Apply for the workshop{% endblock %}
 
 {% block content %}
 
-<div class="container without-background" id="apply">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>{{ form.text_header }}</h3>
-            <p>{{ form.text_description|safe }}</p>
-        </div>
-    </div>
+<div id="apply" class="with-background" style="background-image: url({% static 'img/photos/apply.jpg' %}); background-position-y: -80px">
+    <div class="overlay">
+          <div class="container">
+              <div class="row">
+                <div class="col-md-7 col-md-offset-4">
+                  <h2>{{ form.text_header }}</h2>
+                  <p>{{ form.text_description|safe }}</p>
+                </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+<div class="container without-background">
     {% for question in form.question_set.all %}
     <div class="row">
         <div class="col-md-12">
