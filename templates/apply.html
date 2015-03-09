@@ -11,6 +11,32 @@
             <p>{{ form.text_description|safe }}</p>
         </div>
     </div>
+    {% for question in form.question_set.all %}
+    <div class="row">
+        <div class="col-md-12">
+            <label>{{ question.title|safe }}</label>
+            {% if question.help_text %}
+              <p class="help-text">{{ question.help_text|safe }}</p>
+            {% endif %}
+
+            <p class="field">
+            {% if question.question_type == 'paragraph' %}
+              <input type="text" />
+            {% elif question.question_type == 'text' %}
+              <textarea></textarea>
+            {% elif question.question_type == 'choices' %}
+              {% for choice in question.get_choices_as_list %}
+                  <input type="{% if question.is_multiple_choice %}checkbox{% else %}radio{% endif %}" />
+                  <label>{{ choice }}</label>
+              {% endfor %}
+              {% if question.has_option_other %}
+                  <label>Other:</label> <input type="text" />
+              {% endif %}
+            {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
