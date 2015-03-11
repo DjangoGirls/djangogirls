@@ -231,11 +231,15 @@ a:hover {
   color: #000;
   font-weight: 300;
 }
-.application-form p.help-text {
+.application-form p.help-text,
+.application-form p.error {
   font-size: 16px;
   font-family: Roboto;
   color: rgba(0,0,0,0.6);
   margin: 0;
+}
+.application-form p.error {
+  color: #f00;
 }
 .application-form span.required {
   color: #ff9400;
@@ -294,6 +298,10 @@ a:hover {
 .application-form .field ul {
   list-style-type: none;
   padding: 0;
+}
+.application-form .field.with-errors input[type="text"],
+.application-form .field.with-errors textarea {
+  border-color: #f00;
 }
 /* ---------------------
  Responsive design fixes

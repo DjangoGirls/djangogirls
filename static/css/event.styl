@@ -226,11 +226,14 @@ a, a:hover
         color: black
         font-weight: 300
 
-    p.help-text
+    p.help-text, p.error
         font-size: 16px
         font-family: sans_font
         color: rgba(0,0,0,0.6)
         margin: 0
+
+    p.error
+        color: red
 
     span.required
         color: mint
@@ -279,6 +282,9 @@ a, a:hover
         ul
             list-style-type: none
             padding: 0
+        &.with-errors
+            input[type="text"], textarea
+                border-color: red
 
 
 /* ---------------------

@@ -22,25 +22,32 @@
 <div class="container without-background application-form">
 
     <form action="" method="post">
-    {% for question in form %}
-    <div class="row">
-        <div class="col-md-12">
-            <label>
-              {{ question.label|safe }}
-              {% if question.field.required %}<span class="required">*</span>{% endif %}
-            </label>
+      {% csrf_token %}
+      {% for question in form %}
+      <div class="row">
+          <div class="col-md-12">
+              <label>
+                {{ question.label|safe }}
+                {% if question.field.required %}<span class="required">*</span>{% endif %}
+              </label>
 
-            {% if question.field.help_text %}
-              <p class="help-text">{{ question.field.help_text|safe }}</p>
-            {% endif %}
+              {% if question.field.help_text %}
+                <p class="help-text">{{ question.field.help_text|safe }}</p>
+              {% endif %}
 
-            <div class="field">
-              {{ question }}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    <input type="submit" value="Submit your application" />
+              {% if question.errors %}
+                {% for error in question.errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+
+              <div class="field{% if question.errors %} with-errors{% endif %}">
+                {{ question }}
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+      <input type="submit" value="Submit your application" />
     </form>
 </div>
 
