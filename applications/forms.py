@@ -35,7 +35,6 @@ class ApplicationForm(forms.Form):
 
     def save(self, *args, **kwargs):
         form = kwargs.pop('form')
-
         application = Application.objects.create(form=form)
 
         for name in self.cleaned_data:
