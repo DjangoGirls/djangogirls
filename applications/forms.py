@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import Question, Answer, Form, Application
+
 
 class ApplicationForm(forms.Form):
 
@@ -30,3 +32,24 @@ class ApplicationForm(forms.Form):
                 else:
                     options['widget'] = forms.RadioSelect
                     self.fields[name] = forms.ChoiceField(**options)
+
+    def save(self, *args, **kwargs):
+        form = kwargs.pop('form')
+
+        application = Application.objects.create(form=form)
+
+        for name in self.cleaned_data:
+            pk = int(name.replace('question_', ''))
+            value = self.cleaned_data[name]
+            try:
+                question = Question.objects.get(pk=pk, form=form)
+            except Question.DoesNotExist:
+                continue
+
+            value = ', '.join(value) if type(value) == list else value
+
+            Answer.objects.create(
+                application = application,
+                question = question,
+                answer = value
+            )

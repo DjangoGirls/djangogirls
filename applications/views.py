@@ -20,7 +20,9 @@ def apply(request, city):
 
     menu = EventPageMenu.objects.filter(page=page)
 
-    form = ApplicationForm(questions=form_obj.question_set.all())
+    form = ApplicationForm(request.POST or None, questions=form_obj.question_set.all())
+    if form.is_valid():
+        form.save(form=form_obj)
 
     return render(request, 'apply.html', {
         'page': page,
