@@ -291,6 +291,10 @@ a:hover {
 .application-form .field p {
   margin: 0;
 }
+.application-form .field ul {
+  list-style-type: none;
+  padding: 0;
+}
 /* ---------------------
  Responsive design fixes
 ---------------------- */
