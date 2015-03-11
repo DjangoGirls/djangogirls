@@ -64,6 +64,9 @@ class Application(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return str(self.pk)
+
 
 class Answer(models.Model):
     application = models.ForeignKey(Application, null=False, blank=False)

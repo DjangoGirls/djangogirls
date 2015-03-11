@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from suit.admin import SortableModelAdmin
 
-from .models import Form, Question
+from .models import Form, Question, Application, Answer
 from core.models import EventPage
 
 
@@ -39,5 +39,24 @@ class QuestionAdmin(SortableModelAdmin):
         return form
 
 
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('form', 'created')
+
+    def get_queryset(self, request):
+        qs = super(ApplicationAdmin, self).queryset(request)
+        return qs.filter(form__page__event__team__in=[request.user,])
+
+
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ('application', 'question', 'answer')
+    raw_id_fields = ('question', 'application')
+
+    def get_queryset(self, request):
+        qs = super(AnswerAdmin, self).queryset(request)
+        return qs.filter(application__form__page__event__team__in=[request.user,])
+
+
 admin.site.register(Form, FormAdmin)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Application, ApplicationAdmin)
+admin.site.register(Answer, AnswerAdmin)
