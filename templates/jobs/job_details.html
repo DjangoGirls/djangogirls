@@ -8,13 +8,26 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-					<h2>{{ job.title }} <small>at {{ job.company }}</small></h2>
+					<h2>{{ job.title }} 
+						<small>
+							at
+							{% if job.website %}
+								<a href="{{ job.website }}">{{ job.company }}</a>
+							{% else %}
+								{{ job.company }}
+							{% endif %}
+						</small>
+					</h2>
 					<p class="text-muted">Published on {{ job.published_date|date:'d F Y' }}</p>
 					<h3>Place:</h3>
 					<p>{{ job.city }}, {{ job.country }}</p>
 					<h3>Description:</h3>
-					<!--<p>{{ job.description|linebreaks }}</p>-->
-					<p>{% lorem 5 p %}</p>
+					{% if job.description %}
+						<p>{{ job.description|linebreaks }}</p>
+					{% else %}
+						<!--For testing purposes only! Delete before deploying!-->
+						<p>{% lorem 5 p %}</p>
+					{% endif %}
 
 				</div> <!--.col-xs-12-->
 			</div> <!--.row-->

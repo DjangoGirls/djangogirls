@@ -8,7 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>{{ meetup.title }}
+                <h2>
+                    {% if meetup.website %}
+                        <a href="{{ meetup.website }}">{{ meetup.title }}</a>
+                    {% else %}
+                        {{ meetup.title }}
+                    {% endif %}
                     <small>in {{ meetup.city }}, {{ meetup.country }}</small>
                 </h2>
                 <h4>Date and time:</h4>
@@ -18,8 +23,12 @@
                     <p>{{ meetup.company }}</p>
                 {% endif %}
                 <h4>Description:</h4>
-                <!--<p>{{ meetup.description|linebreaks }}</p>-->
-                <p>{% lorem 5 p %}</p>
+                {% if meetup.description %}
+                    <p>{{ meetup.description|linebreaks }}</p>
+                {% else %}
+                    <!--For testing purposes only! Delete before deploying!-->
+                    <p>{% lorem 5 p %}</p>
+                {% endif %}
                 {% if meetup.is_recurring %}
                     <p>This is a recurring event</p>
                 {% endif %}
