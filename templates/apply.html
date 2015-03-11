@@ -11,8 +11,8 @@
           <div class="container">
               <div class="row">
                 <div class="col-md-7 col-md-offset-4">
-                  <h2>{{ form.text_header }}</h2>
-                  <p>{{ form.text_description|safe }}</p>
+                  <h2>{{ form_obj.text_header }}</h2>
+                  <p>{{ form_obj.text_description|safe }}</p>
                 </div>
               </div>
           </div>
@@ -21,39 +21,26 @@
 
 <div class="container without-background application-form">
 
-    <form>
-    {% for question in form.question_set.all %}
+    <form action="" method="post">
+    {% for question in form %}
     <div class="row">
         <div class="col-md-12">
             <label>
-              {{ question.title|safe }}
-              {% if question.is_required %}<span class="required">*</span>{% endif %}
+              {{ question.label|safe }}
+              {% if question.field.required %}<span class="required">*</span>{% endif %}
             </label>
 
-            {% if question.help_text %}
-              <p class="help-text">{{ question.help_text|safe }}</p>
+            {% if question.field.help_text %}
+              <p class="help-text">{{ question.field.help_text|safe }}</p>
             {% endif %}
 
             <div class="field">
-              {% if question.question_type == 'paragraph' %}
-                <input type="text" />
-              {% elif question.question_type == 'text' %}
-                <textarea></textarea>
-              {% elif question.question_type == 'choices' %}
-                {% for choice in question.get_choices_as_list %}
-                    <p>
-                      <input type="{% if question.is_multiple_choice %}checkbox{% else %}radio{% endif %}" />
-                      <label>{{ choice }}</label>
-                    </p>
-                {% endfor %}
-                {% if question.has_option_other %}
-                    <p><label>Other:</label> <input type="text" class="other" /></p>
-                {% endif %}
-              {% endif %}
+              {{ question }}
             </div>
         </div>
     </div>
     {% endfor %}
+    <input type="submit" value="Submit your application" />
     </form>
 </div>
 
