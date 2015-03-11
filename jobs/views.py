@@ -92,12 +92,17 @@ def meetup_details(request, id):
         }
     )
 
+def confirm_submission(request):
+    return TemplateResponse(
+        request,
+        'jobs/confirm_submission.html'
+    )
 
 class JobCreate(SuccessMessageMixin, CreateView):
     model = Job
     template_name = 'jobs/job_edit.html'
     form_class = JobForm
-    success_url = reverse_lazy('jobs:jobs')
+    success_url = reverse_lazy('jobs:confirm_submission')
     success_message = 'Your job offer was added to our database, \
                     you will recieve further information shortly.'
 
