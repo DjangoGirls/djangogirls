@@ -36,6 +36,10 @@ class Form(models.Model):
             Question.objects.create(**question)
             i += 1
 
+    @property
+    def number_of_applications(self):
+        return self.application_set.count()
+
 
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)

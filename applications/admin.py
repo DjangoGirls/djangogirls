@@ -7,7 +7,7 @@ from core.models import EventPage
 
 
 class FormAdmin(admin.ModelAdmin):
-    list_display = ('text_header', 'page', 'text_description', 'open_from', 'open_until')
+    list_display = ('text_header', 'page', 'text_description', 'open_from', 'open_until', 'number_of_applications')
 
     def get_queryset(self, request):
         qs = super(FormAdmin, self).queryset(request)
