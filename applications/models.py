@@ -44,7 +44,6 @@ class Question(models.Model):
     question_type = models.CharField(max_length=50, choices=QUESTION_TYPES, verbose_name="Type of the question")
     is_required = models.BooleanField(default=True, verbose_name="Is the answer to the question required?")
     choices = models.TextField(null=True, verbose_name="List all available options, comma separated", help_text="Used only with 'Choices' question type")
-    has_option_other = models.BooleanField(default=False, verbose_name="Allow for 'Other' answer?", help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(default=False, verbose_name="Are there multiple choices allowed?", help_text="Used only with 'Choices' question type")
     order = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the question")
 
