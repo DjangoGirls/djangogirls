@@ -117,7 +117,7 @@ class Meetup(PublishFlowModel):
     meetup_date = models.DateTimeField(
         null=True,
         help_text="If this is a recurring meetup/event, please enter a start date.\
-            Date format: YYYY/MM/DD"
+            Date format: YYYY-MM-DD"
     )
 
     class Meta(PublishFlowModel.Meta):

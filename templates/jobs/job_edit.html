@@ -7,17 +7,10 @@
     <div class="row">
         <h1>New offer</h1>
         <hr/>
-        <form method="POST" class="job-form">{% csrf_token %}
-            {% if form.show_overwrite %}
-            <button type="submit" class="save btn btn-default"
-                    name="overwrite">Overwrite
-            </button>
-            <button type="submit" class="save btn btn-default" name="keep">Keep existing</button>
-            {% endif %}
-            {{ form|crispy }}
-            {% if not form.show_overwrite %}
-                <button type="submit" class="save btn btn-default" name="save">Save</button>
-            {% endif %}
+        <form method="POST" class="job-form">
+            {% csrf_token %}
+            {{ form|crispy }} 
+            <button type="submit" class="save btn btn-default" name="save">Save</button>
         </form>
     </div>
 </div>
