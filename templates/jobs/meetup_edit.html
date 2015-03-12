@@ -1,6 +1,21 @@
 {% extends 'jobs/base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,600,700,400i,600i,700i/Roboto:300,400,300i,400i">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet"
+              href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/sss.css' %}" media="screen">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}" media="screen">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/community.css' %}" media="screen">
+{% endblock stylesheets %}
+{% block extra_js %}
+    <script type="text/javascript" rel="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">
+    </script>
+    {{ form.media }}
+{% endblock %}
+
 
 {% block content %}
     <div class="container">
