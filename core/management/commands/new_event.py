@@ -64,7 +64,7 @@ class Command(BaseCommand):
                 try:
                     team.append({'first_name': name.split(' ')[0], 'last_name': name.split(' ')[1], 'email': email})
                 except IndexError:
-                    team.append({'first_name': main_name, 'last_name': '', 'email': main_email})
+                    team.append({'first_name': name, 'last_name': '', 'email': email})
                 click.echo(u"All right, the #{0} team member of Django Girls is {1} ({2})".format(i, name, email))
             add_team = click.prompt("Do you want to add additional team members? y/n")
 
