@@ -1,0 +1,22 @@
+{% extends 'event.html' %}
+{% load static %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+
+<div id="applications" class="with-background">
+    <div class="overlay">
+        All applications for {{page.titel}}
+      </div>
+</div>
+
+<div class="container">
+{% for app in applications %}
+    <a href='{{ app.id }}'>Application number {{ app.id }}</a>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@ import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
+from applications.models import Form
 from .models import EventPage
 
 def get_coordinates_for_city(city, country):
@@ -29,3 +30,15 @@ def get_event_page(city, is_user_authenticated, is_preview):
         return (city, past)
 
     return page
+
+
+def get_applications_for_page(page):
+    """
+    Return a QuerySet of Application objects for a given page.
+    Raises Form.DoesNotExist if Form for page does not yet exist.
+    """
+    page_form = Form.objects.filter(page=page)
+    if not page_form.exists():
+        raise Form.DoesNotExist
+    page_form = page_form.first()
+    return page_form.application_set.all()
