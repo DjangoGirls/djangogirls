@@ -27,13 +27,11 @@ DEFAULT_QUESTIONS = [
         "title": "Which operating system do you use?",
         "question_type": "choices",
         "choices": "Mac OS X; Windows; Linux",
-        "has_option_other": True,
     },
     {
         "title": "What is your current level of experience with programming?",
         "question_type": "choices",
         "choices": "I'm a total beginner, I don't know anything about it; I've tried some HTML or CSS before; I've tried some JavaScript before; I've done a few lessons of Python; I've built a website before; I work as a programmer",
-        "has_option_other": True,
     },
     {
         "title": "If you checked anything other than beginner, could you tell us a bit more about your programming knowledge?",
@@ -63,7 +61,6 @@ DEFAULT_QUESTIONS = [
         "choices": "Facebook; Twitter; From a friend; PyLadies",
         "is_required": False,
         "is_multiple_choice": True,
-        "has_option_other": True,
     },
     {
         "title": "I've read and understood the <a href='/pages/coc/'>Django Girls Code of Conduct</a>",
