@@ -1,4 +1,4 @@
-from bootstrap3_datetime.widgets import DateTimePicker
+from datetimewidget.widgets import DateTimeWidget
 from django import forms
 
 from .models import Job, Meetup
@@ -36,8 +36,10 @@ class JobForm(forms.ModelForm):
 
 class MeetupForm(forms.ModelForm):
     meetup_date = forms.DateTimeField(
-        widget=DateTimePicker(options={"format": "YYYY-MM-DD",
-            "picktime": True}
+        widget=DateTimeWidget(
+            attrs={'id':"yourdatetimeid"},
+            usel10n = True,
+            bootstrap_version=3
         )
     )
 
