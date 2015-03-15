@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 
-from core.utils import get_event_page
+from core.utils import get_event_page, get_applications_for_page
 from core.models import EventPageMenu
-from .models import Form
+
+from .decorators import organiser_only
+from .models import Application, Form
 from .forms import ApplicationForm
 
 def apply(request, city):
@@ -30,3 +32,32 @@ def apply(request, city):
         'form_obj': form_obj,
         'form': form,
     })
+
+
+@organiser_only
+def applications(request, city):
+    """
+    Display a list of applications for this city.
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    applications = get_applications_for_page(page)
+    return render(request, 'applications.html', {
+        'page': page,
+        'applications': applications,
+        }
+    )
+
+
+@organiser_only
+def application_detail(request, city, app_id):
+    """
+    Display the details of a single application.
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    application = Application.objects.get(pk=app_id)
+    return render(request, 'application_detail.html', {
+        'page': page,
+        'application': application,
+        'form': application.form,
+        }
+    )

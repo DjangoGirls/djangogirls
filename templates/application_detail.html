@@ -1,0 +1,22 @@
+{% extends 'event.html' %}
+{% load static %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+
+<div id="applications" class="with-background">
+    <div class="overlay">
+        Application {{application.id}} answers for {{page.title}}
+      </div>
+</div>
+
+<div class="container without-background">
+{% for answer in application.answer_set.all  %}
+    <p>{{ answer.question.title|safe }}</p>
+    <p>{{ answer.answer }}</p>
+{% endfor %}
+</div>
+
+{% endblock %}
