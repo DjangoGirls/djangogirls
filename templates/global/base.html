@@ -15,12 +15,15 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
 
   {% block stylesheets %}
-    <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,600,700,400i,600i,700i/Roboto:300,400,300i,400i">
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,600,700,400i,600i,700i/Roboto:300,400,300i,400i">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/bootstrap.min.css' %}" media="screen">
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/sss.css' %}" media="screen">
     <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}" media="screen">
   {% endblock stylesheets %}
+
+  {% block extra_stylesheets %}
+  {% endblock extra_stylesheets %}
   <script type="text/javascript" src="{% static 'vendor/js/jquery.min.js' %}"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
   <script type="text/javascript" src="{% static 'vendor/js/bootstrap.min.js' %}"></script>
