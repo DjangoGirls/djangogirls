@@ -82,53 +82,6 @@ input[type="submit"] {
   border-radius: 3px;
 }
 /*
--------------------------
-    Bootstrap new styles
--------------------------
-*/
-.panel-feature-orange {
-  border-color:#fbae55;
-}
-.panel-feature-orange > .panel-heading {
-  color:#a15a09;
-  background-color:#fbc281;
-  border-color:#fbae55;
-  }
-.panel-feature-orange > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color:#fbae55;
-}
-.panel-feature-orange > .panel-heading .badge {
-  color:#fbc281;
-  background-color:#a15a09;
-}
-.panel-feature-orange > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color:#fbae55;
-}
-
-.panel-feature-blue {
-  border-color:#4ca3ce;
-}
-.panel-feature-blue > .panel-heading {
-  color:#084765;
-  background-color:#6fafce;
-  border-color:#4ca3ce;
-  }
-.panel-feature-blue > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color:#4ca3ce;
-}
-.panel-feature-blue > .panel-heading .badge {
-  color:#6fafce;
-  background-color:#084765;
-}
-.panel-feature-blue > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color:#4ca3ce;
-}
-.btn-blue {
-  color:#fff;
-  background-color:#19719c;
-  border-color:#2b5D75;;
-}
-/*
 ------------------
     Navigation
 ------------------
@@ -155,7 +108,7 @@ nav ul li a {
   font-family: Roboto;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
 }
 nav ul li a:hover {
   color: #f7921d;
@@ -440,23 +393,6 @@ nav ul li:first-child {
   display: none;
 }
 /*
-------------------------
-    Jobs
-------------------------
-*/
-#community {
-  padding: 30px 0 0 0;
-}
-#community h2 {
-  margin-top: 40px;
-}
-#community h2:first-child {
-  margin-top: 20px;
-}
-#community .row {
-  margin-bottom: 20px;
-}
-/*
 --------------
     Footer
 --------------
@@ -487,6 +423,10 @@ footer .row .col-md-3 p {
   color: #f7921d;
   font-size: 18px;
   line-height: 21px;
+}
+footer .row .col-md-3 p a {
+  text-decoration: none;
+  color: #f7921d;
 }
 footer .row .col-md-3 ul {
   list-style-type: none;
