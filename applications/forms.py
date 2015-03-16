@@ -33,6 +33,9 @@ class ApplicationForm(forms.Form):
                     options['widget'] = forms.RadioSelect
                     self.fields[name] = forms.ChoiceField(**options)
 
+            if question.question_type == 'email':
+                self.fields[name] = forms.EmailField(**options)
+
     def save(self, *args, **kwargs):
         form = kwargs.pop('form')
         application = Application.objects.create(form=form)

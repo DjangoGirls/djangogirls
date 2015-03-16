@@ -6,7 +6,7 @@ DEFAULT_QUESTIONS = [
     },
     {
         "title": "Your e-mail address:",
-        "question_type": "paragraph",
+        "question_type": "email",
     },
     {
         "title": "Your phone number:",
@@ -66,9 +66,16 @@ DEFAULT_QUESTIONS = [
         "has_option_other": True,
     },
     {
-        "title": "I've read and understood the <a href='/pages/coc/'>Django Girls Code of Conduct</a>",
+        "title": "Would you like to subscribe to the Django Girls newsletter?",
+        "help_text": "Stay up to date with future Django Girls envents and endeavors.",
         "question_type": "choices",
-        "choices": "Confirm",
+        "choices": "Yes, please!",
+        "is_required": False,
+    },
+    {
+        "title": "It is important that all attendees comply with the <a href='/pages/coc/'>Django Girls Code of Conduct</a>",
+        "question_type": "choices",
+        "choices": "I've read and understood the <strong>Django Girls Code of Conduct</strong>",
         "is_required": True,
         "is_multiple_choice": True,
     }

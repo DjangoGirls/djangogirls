@@ -8,6 +8,7 @@ QUESTION_TYPES = (
     ('paragraph', 'Paragraph'),
     ('text', 'Long text'),
     ('choices', 'Choices'),
+    ('email', 'Email')
 )
 
 
