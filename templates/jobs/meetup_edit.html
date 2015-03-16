@@ -1,6 +1,12 @@
 {% extends 'jobs/base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+
+{% block bootstrap_version %}
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+{% endblock bootstrap_version %}
+
 {% block extra_js %}
     {{ form.media }}
 {% endblock %}
