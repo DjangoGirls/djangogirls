@@ -6,17 +6,32 @@
 
 {% block content %}
 
-<div id="applications" class="with-background">
-    <div class="overlay">
-        All applications for {{page.titel}}
-      </div>
-</div>
-
-<div class="container">
-{% for app in applications %}
-    <a href='{{ app.id }}'>Application number {{ app.id }}</a>
-{% endfor %}
-
+<div class="container without-background">
+    <h3 class="page-header">All applications for {{ page.title }}</h3>
+    {% if applications %}
+        <table class="table applications">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>{{ app.id }}</td>
+                    <td>{{ app.created }}</td>
+                    <td><!-- status badge or something should go here --></td>
+                    <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="lead">Nothing to see here...</p>
+    {% endif %}
 </div>
 
 {% endblock %}
