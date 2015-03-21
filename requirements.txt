@@ -5,6 +5,7 @@ click==2.5
 coverage==3.7.1
 cssselect==0.9.1
 dj-database-url==0.3.0
+django-ckeditor==4.4.7
 django-countries==3.1.1
 django-crispy-forms==1.4.0
 django-date-extensions==1.0.0

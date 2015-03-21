@@ -1,10 +1,12 @@
 from datetimewidget.widgets import DateTimeWidget
 from django import forms
+from ckeditor.widgets import CKEditorWidget
 
 from .models import Job, Meetup
 
 
 class JobForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = Job
@@ -42,6 +44,7 @@ class MeetupForm(forms.ModelForm):
             bootstrap_version=3
         )
     )
+    description = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = Meetup

@@ -104,7 +104,7 @@ class JobCreate(SuccessMessageMixin, CreateView):
     form_class = JobForm
     success_url = reverse_lazy('jobs:confirm_submission')
     success_message = 'Your job offer was added to our database, \
-                    you will recieve further information shortly.'
+                    you will receive further information shortly.'
 
     def form_valid(self, form):
         return super(JobCreate, self).form_valid(form)
@@ -116,7 +116,7 @@ class MeetupCreate(SuccessMessageMixin, CreateView):
     form_class = MeetupForm
     success_url = reverse_lazy('jobs:meetups')
     success_message = 'Your meetup was added to our database, \
-                    you will recieve further information shortly.'
+                    you will receive further information shortly.'
 
     def form_valid(self, form):
         return super(MeetupCreate, self).form_valid(form)

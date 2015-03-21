@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'', include('core.urls', namespace='core')),
     url(r'', include('applications.urls', namespace='applications')),
+    url(r'^ckeditor/', include('ckeditor.urls')),
 )

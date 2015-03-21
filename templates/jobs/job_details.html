@@ -23,7 +23,7 @@
 					<p>{{ job.city }}, {{ job.country }}</p>
 					<h3>Description:</h3>
 					{% if job.description %}
-						<p>{{ job.description|linebreaks }}</p>
+						<p>{{ job.description|safe }}</p>
 					{% else %}
 						<!--For testing purposes only! Delete before deploying!-->
 						<p>{% lorem 5 p %}</p>

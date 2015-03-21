@@ -24,7 +24,7 @@
                 {% endif %}
                 <h4>Description:</h4>
                 {% if meetup.description %}
-                    <p>{{ meetup.description|linebreaks }}</p>
+                    <p>{{ meetup.description|safe }}</p>
                 {% else %}
                     <!--For testing purposes only! Delete before deploying!-->
                     <p>{% lorem 5 p %}</p>
