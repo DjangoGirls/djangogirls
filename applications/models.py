@@ -11,6 +11,12 @@ QUESTION_TYPES = (
     ('email', 'Email')
 )
 
+APPLICATION_STATES = (
+    (0, 'Submitted'),
+    (1, 'Accepted'),
+    (2, 'Rejected'),
+)
+
 
 class Form(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
@@ -93,6 +99,11 @@ class Question(models.Model):
 class Application(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)
+    state = models.CharField(
+        max_length=50,
+        choices=APPLICATION_STATES, verbose_name="State of the application",
+        null=True
+    )
 
     def __unicode__(self):
         return str(self.pk)

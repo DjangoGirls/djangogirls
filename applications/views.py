@@ -44,9 +44,12 @@ def apply(request, city):
 def applications(request, city):
     """
     Display a list of applications for this city.
+    If 'state' get parameter is passed, filter the list.
+    e.g /applications/?state=accepted&state=rejected
     """
+    state = request.GET.getlist('state', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
-    applications = get_applications_for_page(page)
+    applications = get_applications_for_page(page, state)
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,
