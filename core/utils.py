@@ -36,7 +36,7 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_applications_for_page(page):
+def get_applications_for_page(page, state=None):
     """
     Return a QuerySet of Application objects for a given page.
     Raises Form.DoesNotExist if Form for page does not yet exist.
@@ -45,4 +45,6 @@ def get_applications_for_page(page):
     if not page_form.exists():
         raise Form.DoesNotExist
     page_form = page_form.first()
+    if state:
+        return page_form.application_set.filter(state__in=state)
     return page_form.application_set.all()
