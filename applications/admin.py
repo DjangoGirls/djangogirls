@@ -7,18 +7,21 @@ from core.models import EventPage
 
 
 class FormAdmin(admin.ModelAdmin):
-    list_display = ('text_header', 'page', 'text_description', 'open_from', 'open_until', 'number_of_applications')
+    list_display = (
+        'text_header', 'page', 'text_description',
+        'open_from', 'open_until', 'number_of_applications')
 
     def get_queryset(self, request):
         qs = super(FormAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(FormAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+            page = EventPage.objects.filter(event__team__in=[request.user])
+            form.base_fields['page'].queryset = page
         return form
 
 
@@ -30,12 +33,13 @@ class QuestionAdmin(SortableModelAdmin):
         qs = super(QuestionAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(form__page__event__team__in=[request.user,])
+        return qs.filter(form__page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(QuestionAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['form'].queryset = Form.objects.filter(page__event__team__in=[request.user])
+            form = Form.objects.filter(page__event__team__in=[request.user])
+            form.base_fields['form'].queryset = form
         return form
 
 
@@ -44,7 +48,7 @@ class ApplicationAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(ApplicationAdmin, self).queryset(request)
-        return qs.filter(form__page__event__team__in=[request.user,])
+        return qs.filter(form__page__event__team__in=[request.user])
 
 
 class AnswerAdmin(admin.ModelAdmin):
@@ -53,7 +57,8 @@ class AnswerAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(AnswerAdmin, self).queryset(request)
-        return qs.filter(application__form__page__event__team__in=[request.user,])
+        return qs.filter(
+            application__form__page__event__team__in=[request.user])
 
 
 admin.site.register(Form, FormAdmin)

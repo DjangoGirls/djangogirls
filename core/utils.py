@@ -3,7 +3,7 @@ import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from applications.models import Form
+from applications.models import Application, Form
 from .models import EventPage
 
 def get_coordinates_for_city(city, country):
@@ -48,3 +48,14 @@ def get_applications_for_page(page, state=None):
     if state:
         return page_form.application_set.filter(state__in=state)
     return page_form.application_set.all()
+
+
+def random_application(request, page, prev_application):
+    """
+    Get a new random application for a particular event,
+    that hasn't been scored by the request user.
+    """
+    return Application.objects.filter(
+        form__page=page
+        ).exclude(pk=prev_application.id
+        ).exclude(scores__user=request.user).order_by('?').first()

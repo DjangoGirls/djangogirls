@@ -1,6 +1,7 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from core.models import EventPage
+from core.models import EventPage, User
 from .utils import DEFAULT_QUESTIONS
 
 
@@ -12,9 +13,9 @@ QUESTION_TYPES = (
 )
 
 APPLICATION_STATES = (
-    (0, 'Submitted'),
-    (1, 'Accepted'),
-    (2, 'Rejected'),
+    ('submitted', 'Submitted'),
+    ('accepted', 'Accepted'),
+    ('rejected', 'Rejected'),
 )
 
 
@@ -105,6 +106,15 @@ class Application(models.Model):
         null=True
     )
 
+    @property
+    def average_score(self):
+        """
+        Return the average score for this Application.
+        """
+        scores = [s.score for s in self.scores.all() if s.score]
+        if scores:
+            return sum(scores) / float(len(scores))
+
     def __unicode__(self):
         return str(self.pk)
 
@@ -113,3 +123,22 @@ class Answer(models.Model):
     application = models.ForeignKey(Application, null=False, blank=False)
     question = models.ForeignKey(Question, null=False, blank=False)
     answer = models.TextField()
+
+
+class Score(models.Model):
+    """
+    A score represents the score given by a coach for an application.
+    """
+
+    user = models.ForeignKey(User, related_name='scores')
+    application = models.ForeignKey(Application, related_name='scores')
+    score = models.FloatField(
+        null=True, blank=True,
+        help_text='5 being the most positive, 1 being the most negative.',
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
+    )
+    comment = models.TextField(
+        null=True, blank=True, help_text='Any extra comments?')
+
+    class Meta:
+        unique_together = ('user', 'application',)

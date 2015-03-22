@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Question, Answer, Form, Application
+from .models import Application, Answer, Question, Score
 
 
 class ApplicationForm(forms.Form):
@@ -21,7 +21,8 @@ class ApplicationForm(forms.Form):
                 options['widget'] = forms.Textarea
 
             if question.question_type == 'choices':
-                options['choices'] = ((x, x) for x in question.choices.split(';'))
+                choices = ((x, x) for x in question.choices.split(';'))
+                options['choices'] = choices
 
             if question.question_type in ['paragraph', 'text']:
                 self.fields[name] = forms.CharField(**options)
@@ -51,7 +52,14 @@ class ApplicationForm(forms.Form):
             value = ', '.join(value) if type(value) == list else value
 
             Answer.objects.create(
-                application = application,
-                question = question,
-                answer = value
+                application=application,
+                question=question,
+                answer=value
             )
+
+
+class ScoreForm(forms.ModelForm):
+
+    class Meta:
+        model = Score
+        fields = ['score', 'comment']

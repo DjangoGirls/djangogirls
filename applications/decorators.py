@@ -4,6 +4,7 @@ from core.utils import get_event_page
 
 from django.http import HttpResponseNotFound
 
+
 def organiser_only(function):
     """
     Decorator for views that checks that the user is logged in and that

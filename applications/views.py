@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 
-from core.utils import get_event_page, get_applications_for_page
+from core.utils import (
+    get_event_page, get_applications_for_page, random_application
+)
 from core.models import EventPageMenu
 
 from .decorators import organiser_only
-from .models import Application, Form
-from .forms import ApplicationForm
+from .models import Application, Form, Score
+from .forms import ApplicationForm, ScoreForm
 
 
 def apply(request, city):
@@ -14,7 +16,8 @@ def apply(request, city):
     if not page:
         raise Http404
     elif type(page) == tuple:
-        return render(request, "event_not_live.html",
+        return render(
+            request, "event_not_live.html",
             {'city': page[0], 'past': page[1]}
         )
 
@@ -62,11 +65,33 @@ def application_detail(request, city, app_id):
     """
     Display the details of a single application.
     """
-    page = get_event_page(city, request.user.is_authenticated(), False)
     application = Application.objects.get(pk=app_id)
+    score, created = Score.objects.get_or_create(
+        user=request.user, application=application)
+    score_form = ScoreForm(instance=score)
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    all_scores = Score.objects.filter(application=application)
+
+    if request.POST:
+        # Handle score submission.
+        score_form = ScoreForm(request.POST, instance=score)
+        if score_form.is_valid():
+            score_form.save()
+
+        if request.POST.get('random'):
+            # Go to a new random application.
+            new_app = random_application(request, page, application)
+            if new_app:
+                return redirect(
+                    'applications:application_detail', city, new_app.id)
+            return redirect('applications:applications', city)
+
     return render(request, 'application_detail.html', {
         'page': page,
         'application': application,
         'form': application.form,
+        'scores': all_scores,
+        'user_score': score,
+        'score_form': score_form
         }
     )

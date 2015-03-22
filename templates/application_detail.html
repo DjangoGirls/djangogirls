@@ -8,15 +8,62 @@
 
 <div id="applications" class="with-background">
     <div class="overlay">
-        Application {{application.id}} answers for {{page.title}}
+        <h1>Application {{application.id}} answers for {{page.title}}</h1>
       </div>
 </div>
 
 <div class="container without-background">
-{% for answer in application.answer_set.all  %}
-    <p>{{ answer.question.title|safe }}</p>
-    <p>{{ answer.answer }}</p>
-{% endfor %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Application answers</h3>
+        {% for answer in application.answer_set.all  %}
+            <p>{{ answer.question.title|safe }}</p>
+            <p>{{ answer.answer }}</p>
+        {% endfor %}
+        </div>
+        <div class="col-md-6">
+            <h3>Scoring<h3>
+                {% if user_score.score %}
+                    <h4>All scores</h4>
+                    <p>Average score: {{ application.average_score }}</p>
+                    <p>Your score: {{ user_score.score }}</p>
+                    {% for s in scores %}
+                    <p>{{ s.user.first_name }} {{ s.user.last_name }} voted {{ s.score }}</p>
+                    <p>>>> <i>"{{ s.comment }}"</i></p>
+                    {% endfor %}
+                {% endif %}
+                <h4>Your score</h4>
+                <form action="" method="post">
+      {% csrf_token %}
+      {% for question in score_form %}
+      <div class="row">
+          <div class="col-md-12">
+              <label>
+                {{ question.label|safe }}
+                {% if question.field.required %}<span class="required">*</span>{% endif %}
+              </label>
+
+              {% if question.field.help_text %}
+                <p class="help-text">{{ question.field.help_text|safe }}</p>
+              {% endif %}
+
+              {% if question.errors %}
+                {% for error in question.errors %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+
+              <div class="field{% if question.errors %} with-errors{% endif %}">
+                {{ question }}
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+      <input class="btn" type="submit" value="Score" />
+      <input class="btn" type="submit" name="random" value="Score & Next" />
+    </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

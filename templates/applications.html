@@ -13,9 +13,11 @@
 </div>
 
 <div class="container">
+<ul>
 {% for app in applications %}
-    <a href='{{ app.id }}'>Application number {{ app.id }}</a>
+    <li><a href='{{ app.id }}'>Application number {{ app.id }}</a></li>
 {% endfor %}
+</ul>
 
 </div>
 

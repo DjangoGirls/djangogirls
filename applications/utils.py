@@ -31,10 +31,14 @@ DEFAULT_QUESTIONS = [
     {
         "title": "What is your current level of experience with programming?",
         "question_type": "choices",
-        "choices": "I'm a total beginner, I don't know anything about it; I've tried some HTML or CSS before; I've tried some JavaScript before; I've done a few lessons of Python; I've built a website before; I work as a programmer",
+        "choices": "I'm a total beginner, I don't know anything about it; "
+        "I've tried some HTML or CSS before; I've tried some JavaScript "
+        "before; I've done a few lessons of Python; I've built a website "
+        "before; I work as a programmer",
     },
     {
-        "title": "If you checked anything other than beginner, could you tell us a bit more about your programming knowledge?",
+        "title": "If you checked anything other than beginner, could you "
+        "tell us a bit more about your programming knowledge?",
         "question_type": "text",
         "is_required": False,
     },
@@ -49,14 +53,25 @@ DEFAULT_QUESTIONS = [
         "question_type": "text",
     },
     {
-        "title": "How are you planning to share what you've learnt with others?",
-        "help_text": "Django Girls is a volunteer-run organisation and we look for people who are active and can help us help more women get into the field. We want you to share what you learn at the workshop with others in different ways: by organising a Django Girls event in your city, talking about Django Girls on your local meetups, writing a blog or simply teaching your friends.",
+        "title": "How are you planning to share what you've learnt with "
+        "others?",
+        "help_text": "Django Girls is a volunteer-run organisation and we "
+        "look for people who are active and can help us help more women get "
+        "into the field. We want you to share what you learn at the workshop "
+        "with others in different ways: by organising a Django Girls event "
+        "in your city, talking about Django Girls on your local meetups, "
+        "writing a blog or simply teaching your friends.",
         "question_type": "text",
         "is_required": False
     },
     {
         "title": "How did you hear about Django Girls?",
-        "help_text": "Django Girls is a volunteer-run organisation and we look for people who are active and can help us help more women get into the field. We want you to share what you learn at the workshop with others in different ways: by organising a Django Girls event in your city, talking about Django Girls on your local meetups, writing a blog or simply teaching your friends.",
+        "help_text": "Django Girls is a volunteer-run organisation and we "
+        "look for people who are active and can help us help more women get "
+        "into the field. We want you to share what you learn at the workshop "
+        "with others in different ways: by organising a Django Girls event "
+        "in your city, talking about Django Girls on your local meetups, "
+        "writing a blog or simply teaching your friends.",
         "question_type": "choices",
         "choices": "Facebook; Twitter; From a friend; PyLadies",
         "is_required": False,
@@ -64,15 +79,18 @@ DEFAULT_QUESTIONS = [
     },
     {
         "title": "Would you like to subscribe to the Django Girls newsletter?",
-        "help_text": "Stay up to date with future Django Girls envents and endeavors.",
+        "help_text": "Stay up to date with future Django Girls envents and "
+        "endeavors.",
         "question_type": "choices",
         "choices": "Yes, please!",
         "is_required": False,
     },
     {
-        "title": "It is important that all attendees comply with the <a href='/pages/coc/'>Django Girls Code of Conduct</a>",
+        "title": "It is important that all attendees comply with the "
+        "<a href='/pages/coc/'>Django Girls Code of Conduct</a>",
         "question_type": "choices",
-        "choices": "I've read and understood the <strong>Django Girls Code of Conduct</strong>",
+        "choices": "I've read and understood the <strong>Django Girls Code "
+        "of Conduct</strong>",
         "is_required": True,
         "is_multiple_choice": True,
     }
