@@ -8,12 +8,15 @@ from .decorators import organiser_only
 from .models import Application, Form
 from .forms import ApplicationForm
 
+
 def apply(request, city):
     page = get_event_page(city, request.user.is_authenticated(), False)
     if not page:
         raise Http404
     elif type(page) == tuple:
-        return render(request, "event_not_live.html", {'city': page[0], 'past': page[1]})
+        return render(request, "event_not_live.html",
+            {'city': page[0], 'past': page[1]}
+        )
 
     try:
         form_obj = Form.objects.get(page=page)
@@ -22,7 +25,10 @@ def apply(request, city):
 
     menu = EventPageMenu.objects.filter(page=page)
 
-    form = ApplicationForm(request.POST or None, questions=form_obj.question_set.all())
+    form = ApplicationForm(
+        request.POST or None, questions=form_obj.question_set.all()
+    )
+
     if form.is_valid():
         form.save(form=form_obj)
 
@@ -38,9 +44,12 @@ def apply(request, city):
 def applications(request, city):
     """
     Display a list of applications for this city.
+    If 'state' get parameter is passed, filter the list.
+    e.g /applications/?state=accepted&state=rejected
     """
+    state = request.GET.getlist('state', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
-    applications = get_applications_for_page(page)
+    applications = get_applications_for_page(page, state)
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,

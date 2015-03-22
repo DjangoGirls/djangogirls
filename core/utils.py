@@ -8,7 +8,11 @@ from .models import EventPage
 
 def get_coordinates_for_city(city, country):
 
-    req = requests.get('http://nominatim.openstreetmap.org/search', params={'format': 'json', 'q': '{0}, {1}'.format(city.encode('utf-8'), country.encode('utf-8'))})
+    q = '{0}, {1}'.format(city.encode('utf-8'), country.encode('utf-8'))
+    req = requests.get(
+        'http://nominatim.openstreetmap.org/search',
+        params={'format': 'json', 'q': q}
+    )
 
     try:
         data = req.json()[0]
@@ -32,7 +36,7 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_applications_for_page(page):
+def get_applications_for_page(page, state=None):
     """
     Return a QuerySet of Application objects for a given page.
     Raises Form.DoesNotExist if Form for page does not yet exist.
@@ -41,4 +45,6 @@ def get_applications_for_page(page):
     if not page_form.exists():
         raise Form.DoesNotExist
     page_form = page_form.first()
+    if state:
+        return page_form.application_set.filter(state__in=state)
     return page_form.application_set.all()
