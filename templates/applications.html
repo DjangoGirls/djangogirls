@@ -9,6 +9,7 @@
 <div class="container without-background">
     <h3 class="page-header">All applications for {{ page.title }}</h3>
     {% if applications %}
+        <p>Filter: <a href="?">All</a> | <a href="?state=submitted" class="text-primary">Submitted</a> | <a href="?state=accepted" class="text-success">Accepted</a> | <a href="?state=rejected" class="text-danger">Rejected</a></p>
         <table class="table applications">
             <thead>
                 <tr>
@@ -23,7 +24,7 @@
                 <tr>
                     <td>{{ app.id }}</td>
                     <td>{{ app.created }}</td>
-                    <td><!-- status badge or something should go here --></td>
+                    <td><span class="label">{{ app.get_state_display }}</span></td>
                     <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
                 </tr>
                 {% endfor %}
@@ -33,5 +34,21 @@
         <p class="lead">Nothing to see here...</p>
     {% endif %}
 </div>
+
+<script>
+  // for setting the label color
+  $.each($('.label'), function(){
+    var status = $(this);
+    if(status.text() == 'Accepted' || status.text() == 'accepted'){
+      status.addClass(' label-success');
+    } else if (status.text() == 'Rejected' || status.text() == 'rejected'){
+      status.addClass(' label-danger');
+    } else if (status.text() == 'Submitted' || status.text() == 'submitted'){
+        status.addClass(' label-primary')
+    } else {
+        status.addClass(' label-default')
+    }
+  })
+</script>
 
 {% endblock %}
