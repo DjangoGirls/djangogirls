@@ -29,7 +29,7 @@
                     <p>Your score: {{ user_score.score }}</p>
                     {% for s in scores %}
                     <p>{{ s.user.first_name }} {{ s.user.last_name }} voted {{ s.score }}</p>
-                    <p>>>> <i>"{{ s.comment }}"</i></p>
+                    {% if s.comment %}<p>>>> <i>"{{ s.comment }}"</i></p>{% endif %}
                     {% endfor %}
                 {% endif %}
                 <h4>Your score</h4>
