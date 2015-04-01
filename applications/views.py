@@ -53,11 +53,11 @@ def applications(request, city):
     state = request.GET.getlist('state', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
     applications = get_applications_for_page(page, state)
+
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,
-        }
-    )
+    })
 
 
 @organiser_only
