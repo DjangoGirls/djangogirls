@@ -263,14 +263,6 @@ a, a:hover
     input[type="checkbox"], input[type="radio"]
         margin-right: 10px
 
-    textarea
-        padding: 5px 10px
-        width: 50%
-        border-radius(3px)
-        border: 1px solid #E7E7E7
-        margin: 0
-        height: 150px
-
     .field
         margin: 10px 0 30px 0
 
@@ -286,8 +278,30 @@ a, a:hover
             input[type="text"], textarea
                 border-color: red
 
+input[type="text"], input[type="number"]
+    padding: 5px 10px
+    width: 50%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+
+textarea
+    padding: 5px 10px
+    width: 50%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+    height: 150px
+
 .applications
     padding: 0 30px
+
+    .answer
+        margin-bottom: 25px
+        p
+            margin: 0
+        .question
+            font-weight: bold
 
     // practically resetting default button styles
     .btn, .btn:hover
@@ -295,6 +309,42 @@ a, a:hover
         padding: 6px 12px
         margin-top: 0px
 
+.scoring
+    font-family: sans_font
+    font-size: 18px
+
+    table
+        font-size: 16px
+        width: 100%
+        margin: 30px 0
+
+        thead
+            td
+                background: rgba(0,0,0,0.1)
+
+        td
+            border: 1px solid rgba(0,0,0,0.1)
+            padding: 5px
+
+    h4
+        font-size: 28px
+
+    h5
+        font-size: 22px
+
+    .scoring-form
+        label
+            font-weight: normal
+            margin: 0
+        .help-text
+            font-size: 14px
+            margin: 0 0 10px 0
+        .row
+            margin-bottom: 20px
+        .btn, .btn:hover
+            font-size: 20px
+            padding: 10px 18px
+            margin-top: 0px
 
 
 

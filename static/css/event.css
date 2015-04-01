@@ -275,16 +275,6 @@ a:hover {
 .application-form input[type="radio"] {
   margin-right: 10px;
 }
-.application-form textarea {
-  padding: 5px 10px;
-  width: 50%;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #e7e7e7;
-  margin: 0;
-  height: 150px;
-}
 .application-form .field {
   margin: 10px 0 30px 0;
 }
@@ -303,13 +293,81 @@ a:hover {
 .application-form .field.with-errors textarea {
   border-color: #f00;
 }
+input[type="text"],
+input[type="number"] {
+  padding: 5px 10px;
+  width: 50%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+}
+textarea {
+  padding: 5px 10px;
+  width: 50%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+  height: 150px;
+}
 .applications {
   padding: 0 30px;
+}
+.applications .answer {
+  margin-bottom: 25px;
+}
+.applications .answer p {
+  margin: 0;
+}
+.applications .answer .question {
+  font-weight: bold;
 }
 .applications .btn,
 .applications .btn:hover {
   font-size: 14px;
   padding: 6px 12px;
+  margin-top: 0px;
+}
+.scoring {
+  font-family: Roboto;
+  font-size: 18px;
+}
+.scoring table {
+  font-size: 16px;
+  width: 100%;
+  margin: 30px 0;
+}
+.scoring table thead td {
+  background: rgba(0,0,0,0.1);
+}
+.scoring table td {
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 5px;
+}
+.scoring h4 {
+  font-size: 28px;
+}
+.scoring h5 {
+  font-size: 22px;
+}
+.scoring .scoring-form label {
+  font-weight: normal;
+  margin: 0;
+}
+.scoring .scoring-form .help-text {
+  font-size: 14px;
+  margin: 0 0 10px 0;
+}
+.scoring .scoring-form .row {
+  margin-bottom: 20px;
+}
+.scoring .scoring-form .btn,
+.scoring .scoring-form .btn:hover {
+  font-size: 20px;
+  padding: 10px 18px;
   margin-top: 0px;
 }
 /* ---------------------

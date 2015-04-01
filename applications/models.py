@@ -125,6 +125,10 @@ class Answer(models.Model):
     answer = models.TextField()
 
 
+    class Meta:
+        ordering = ('question__order',)
+
+
 class Score(models.Model):
     """
     A score represents the score given by a coach for an application.
