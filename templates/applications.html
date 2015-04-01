@@ -7,37 +7,41 @@
 {% block content %}
 
 <div class="container without-background">
-    <h3 class="page-header">Applications for {{ page.title }}</h3>
-    {% if applications %}
-        <p>Filter: <a href="?">All</a> | <a href="?state=submitted" class="text-primary">Submitted</a> | <a href="?state=accepted" class="text-success">Accepted</a> | <a href="?state=rejected" class="text-danger">Rejected</a></p>
-        <table class="table applications">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Created</th>
-                    <th>Status</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for app in applications %}
-                <tr>
-                    <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
-                    <td>{{ app.created }}</td>
-                    <td><span class="label
-                      {% if app.state == 'accepted' %}label-success
-                      {% elif app.state == 'rejected' %}label-danger
-                      {% elif app.state == 'submitted' %}label-primary
-                      {% else %}label-default{% endif %}">
-                        {{ app.get_state_display }}
-                    </span></td>
-                    <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p class="lead">Nothing to see here...</p>
-    {% endif %}
+  <div class="row">
+    <div class="col-md-12 applications">
+      <h3 class="page-header">Applications for {{ page.title }}</h3>
+      {% if applications %}
+          <p>Filter: <a href="?">All</a> | <a href="?state=submitted" class="text-primary">Submitted</a> | <a href="?state=accepted" class="text-success">Accepted</a> | <a href="?state=rejected" class="text-danger">Rejected</a></p>
+          <table class="table ">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Created</th>
+                      <th>Status</th>
+                      <th>&nbsp;</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for app in applications %}
+                  <tr>
+                      <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
+                      <td>{{ app.created }}</td>
+                      <td><span class="label
+                        {% if app.state == 'accepted' %}label-success
+                        {% elif app.state == 'rejected' %}label-danger
+                        {% elif app.state == 'submitted' %}label-primary
+                        {% else %}label-default{% endif %}">
+                          {{ app.get_state_display }}
+                      </span></td>
+                      <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      {% else %}
+          <p class="lead">Nothing to see here...</p>
+      {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock %}

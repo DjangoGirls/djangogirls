@@ -303,6 +303,9 @@ a:hover {
 .application-form .field.with-errors textarea {
   border-color: #f00;
 }
+.applications {
+  padding: 0 30px;
+}
 .applications .btn,
 .applications .btn:hover {
   font-size: 14px;
