@@ -68,11 +68,12 @@ DEFAULT_QUESTIONS = [
         "question_type": "choices",
         "choices": "Yes, please!",
         "is_required": False,
+        "is_multiple_choice": True,
     },
     {
         "title": "It is important that all attendees comply with the <a href='/pages/coc/'>Django Girls Code of Conduct</a>",
         "question_type": "choices",
-        "choices": "I've read and understood the <strong>Django Girls Code of Conduct</strong>",
+        "choices": "I've read and understood the Django Girls Code of Conduct",
         "is_required": True,
         "is_multiple_choice": True,
     }
