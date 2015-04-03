@@ -18,13 +18,13 @@ class Command(NoArgsCommand):
         )
         return meetup
 
-    def add_job(self, title, company, website, city, country, description):
+    def add_job(self, title, company, website, cities, country, description):
         job, created = Job.objects.get_or_create(
             title=title,
             company=company,
             website=website,
             contact_email='example@example.com',
-            city=city,
+            cities=cities,
             country=country,
             description=description,
             ready_to_publish=True,
@@ -76,7 +76,7 @@ class Command(NoArgsCommand):
             title='Intern',
             company='Google',
             website='http://www.google.pl/about/careers/students/',
-            city='London',
+            cities='London',
             country='GB',
             description='description',
         )
@@ -85,7 +85,7 @@ class Command(NoArgsCommand):
             title='Software Development Engineer - Paid Internship',
             company='Amazon',
             website='http://www.amazon.jobs/team-category/university-recruiting',
-            city='Gdansk',
+            cities='Gdansk',
             country='PL',
             description='description',
         )
@@ -94,7 +94,7 @@ class Command(NoArgsCommand):
             title='Software Engineer, Front End',
             company='Digital Ocean',
             website='https://careers.digitalocean.com/',
-            city='New York',
+            cities='New York',
             country='US',
             description='description',
         )

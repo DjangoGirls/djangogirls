@@ -10,6 +10,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+         <ol class="breadcrumb">
+            <li><a href="{% url 'core:index' %}">Home</a></li>
+            <li><a href="{% url 'jobs:main' %}">Community</a></li>
+            <li><a href="{% url 'jobs:jobs' %}">Job offers</a></li>
+            <li class="active">Add job offer</li>
+        </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2>New offer</h2>

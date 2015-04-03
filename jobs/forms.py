@@ -11,7 +11,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = ('company', 'website', 'contact_email', 'title',
-                  'description', 'city', 'country')
+                  'description', 'cities', 'country')
         # custom labels
         labels = {
             'title': 'Job title'

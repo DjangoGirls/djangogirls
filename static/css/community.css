@@ -16,3 +16,12 @@ div#yourdatetimeid {
 #community .row {
   margin-bottom: 20px;
 }
+.checkbox {
+    margin-left: 20px;
+}
+#job-table {
+    max-width: 400px;
+}
+ol.breadcrumb li a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}

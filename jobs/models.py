@@ -62,9 +62,15 @@ class Job(PublishFlowModel):
         null=True
     )
     contact_email = models.EmailField(max_length=255)
-    city = models.CharField(max_length=255)
+    cities = models.CharField(max_length=255)
     country = CountryField()
     description = models.TextField()
+    remote_work = models.BooleanField(
+        default=False,
+    )
+    relocation = models.BooleanField(
+        default=False,
+    )
 
     class Meta(PublishFlowModel.Meta):
         unique_together = (("company", "title"),)

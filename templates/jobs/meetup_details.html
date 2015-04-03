@@ -7,6 +7,12 @@
 <section id="meetup_details">
     <div class="container">
         <div class="row">
+           <ol class="breadcrumb">
+                <li><a href="{% url 'core:index' %}">Home</a></li>
+                <li><a href="{% url 'jobs:main' %}">Community</a></li>
+                <li><a href="{% url 'jobs:meetups' %}">Meet ups</a></li>
+                <li class="active">{{ meetup.title }}</li>
+            </ol>
             <div class="col-md-12">
                 <h2>
                     {% if meetup.website %}

@@ -15,7 +15,7 @@ class JobCreateTests(TestCase):
             'contact_email': 'jobs@company.com',
             'title': 'Job offer',
             'description': 'description',
-            'city': u'Kraków',
+            'cities': u'Kraków',
             'country': 'PL',
             'save': True,
         }

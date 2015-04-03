@@ -114,7 +114,7 @@ class MeetupCreate(SuccessMessageMixin, CreateView):
     model = Meetup
     template_name = 'jobs/meetup_edit.html'
     form_class = MeetupForm
-    success_url = reverse_lazy('jobs:meetups')
+    success_url = reverse_lazy('jobs:confirm_submission')
     success_message = 'Your meetup was added to our database, \
                     you will receive further information shortly.'
 
