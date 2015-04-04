@@ -1,5 +1,5 @@
 {% extends 'event.html' %}
-{% load static %}
+{% load static applications_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 {% block description %}{{ page.description }}{% endblock %}
@@ -18,6 +18,7 @@
                       <th>#</th>
                       <th>Created</th>
                       <th>Status</th>
+                      <th>Score</th>
                       <th>&nbsp;</th>
                   </tr>
               </thead>
@@ -33,6 +34,7 @@
                         {% else %}label-default{% endif %}">
                           {{ app.get_state_display }}
                       </span></td>
+                      <td>{% if app|scored_by_user:request.user %}{{ app.average_score }}{% endif %}</td>
                       <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
                   </tr>
                   {% endfor %}

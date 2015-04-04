@@ -124,7 +124,6 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, null=False, blank=False)
     answer = models.TextField()
 
-
     class Meta:
         ordering = ('question__order',)
 
