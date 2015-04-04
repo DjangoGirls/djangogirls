@@ -36,7 +36,7 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_applications_for_page(page, state=None):
+def get_applications_for_page(page, state=None, order=None):
     """
     Return a QuerySet of Application objects for a given page.
     Raises Form.DoesNotExist if Form for page does not yet exist.
@@ -45,9 +45,18 @@ def get_applications_for_page(page, state=None):
     if not page_form.exists():
         raise Form.DoesNotExist
     page_form = page_form.first()
+
+    applications = page_form.application_set.all()
+
     if state:
-        return page_form.application_set.filter(state__in=state)
-    return page_form.application_set.all()
+        applications = applications.filter(state__in=state)
+
+    if order:
+        is_reversed = True if order[0] == '-' else False
+        order = order[1:] if order[0] == '-' else order
+        applications = sorted(applications, key=lambda app: getattr(app, order), reverse=is_reversed)
+
+    return applications
 
 
 def random_application(request, page, prev_application):

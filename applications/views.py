@@ -52,11 +52,13 @@ def applications(request, city):
     """
     state = request.GET.getlist('state', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
-    applications = get_applications_for_page(page, state)
+    order = request.GET.get('order', None)
+    applications = get_applications_for_page(page, state, order)
 
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,
+        'order': order
     })
 
 
