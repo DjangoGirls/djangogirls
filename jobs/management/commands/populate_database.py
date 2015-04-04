@@ -13,7 +13,7 @@ class Command(NoArgsCommand):
             city=city,
             country=country,
             description=description,
-            ready_to_publish=True,
+            review_status=Meetup.READY_TO_PUBLISH,
             meetup_date=meetup_date,
         )
         return meetup
@@ -27,7 +27,7 @@ class Command(NoArgsCommand):
             cities=cities,
             country=country,
             description=description,
-            ready_to_publish=True,
+            review_status=Meetup.READY_TO_PUBLISH,
         )
         return job
 
@@ -105,9 +105,9 @@ class Command(NoArgsCommand):
                 self.stdout.write('-{0}'.format(created_object))
 
         # Publishing meetups and job offers.
-        for meetup in Meetup.objects.filter(ready_to_publish=True):
+        for meetup in Meetup.objects.filter(review_status=Meetup.READY_TO_PUBLISH):
             meetup.publish()
-        for job in Job.objects.filter(ready_to_publish=True):
+        for job in Job.objects.filter(review_status=Meetup.READY_TO_PUBLISH):
             job.publish()
 
         print_created_objects(Meetup)

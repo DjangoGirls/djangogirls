@@ -1,26 +1,25 @@
 from django.contrib import admin
 
-from .models import Job, Meetup
+from .models import PublishFlowModel, Job, Meetup
 
 
 def make_published(modeladmin, request, queryset):
-    queryset.update(ready_to_publish=True)
     for item in queryset:
-        item.publish()
-    queryset.update()
-make_published.short_description = "Mark selected as published"
+        if item.review_status == PublishFlowModel.READY_TO_PUBLISH:
+            item.publish()
+make_published.short_description = "Publish selected items"
 
 
 class JobAdmin(admin.ModelAdmin):
     readonly_fields = ('published_date',)
-    list_display = ['title', 'company', 'reviewer', 'ready_to_publish']
+    list_display = ['title', 'company', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published]
 
 
 class MeetupAdmin(admin.ModelAdmin):
     readonly_fields = ('published_date',)
-    list_display = ['title', 'city', 'reviewer', 'ready_to_publish']
+    list_display = ['title', 'city', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published]
 
