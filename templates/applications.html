@@ -1,10 +1,14 @@
 {% extends 'event.html' %}
 {% load static applications_tags %}
 
+{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+
 {% block title %}{{ page.title }}{% endblock %}
 {% block description %}{{ page.description }}{% endblock %}
 
 {% block content %}
+
+<div id="applications" data-change-state-url="{% url 'applications:change_state' page.url %}"></div>
 
 <div class="container without-background">
   <div class="row">
@@ -27,15 +31,31 @@
                   <tr>
                       <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
                       <td>{{ app.created }}</td>
-                      <td><span class="label
-                        {% if app.state == 'accepted' %}label-success
-                        {% elif app.state == 'rejected' %}label-danger
-                        {% elif app.state == 'submitted' %}label-primary
-                        {% else %}label-default{% endif %}">
-                          {{ app.get_state_display }}
-                      </span></td>
+                      <td>
+                          <div class="dropdown">
+                            <button
+                                class="btn btn-default dropdown-toggle {% if app.state == 'accepted' %}accepted
+                                      {% elif app.state == 'rejected' %}rejected
+                                      {% elif app.state == 'submitted' %}submitted
+                                      {% else %}default{% endif %}"
+                                type="button"
+                                id="application-{{ app.id }}-state"
+                                data-toggle="dropdown"
+                              >
+                              {{ app.get_state_display }}
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Submitted</a></li>
+                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Accepted</a></li>
+                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Rejected</a></li>
+                            </ul>
+                          </div>
+                      </td>
                       <td>{% if app|scored_by_user:request.user %}{{ app.average_score }}{% endif %}</td>
-                      <td class="text-right"><a href="{{ app.id }}" class="btn">View Application</a></td>
+                      <td class="text-right">
+                          <a href="{{ app.id }}" class="btn">View Application</a>
+                      </td>
                   </tr>
                   {% endfor %}
               </tbody>

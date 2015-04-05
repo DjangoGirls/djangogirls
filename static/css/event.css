@@ -331,6 +331,29 @@ textarea {
   padding: 6px 12px;
   margin-top: 0px;
 }
+.applications .dropdown {
+  float: left;
+  margin-right: 15px;
+}
+.applications .dropdown button {
+  border: 0px;
+  color: #fff !important;
+}
+.applications .dropdown button.accepted {
+  background: #3c763d;
+}
+.applications .dropdown button.rejected {
+  background: #a94442;
+}
+.applications .dropdown button.submitted {
+  background: #428bca;
+}
+.applications .dropdown button.default {
+  background: rgba(0,0,0,0.3);
+}
+.applications .dropdown ul li {
+  font-family: Roboto;
+}
 .scoring {
   font-family: Roboto;
   font-size: 18px;

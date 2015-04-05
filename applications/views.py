@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from core.utils import (
     get_event_page, get_applications_for_page, random_application
@@ -48,6 +49,7 @@ def applications(request, city):
     """
     Display a list of applications for this city.
     If 'state' get parameter is passed, filter the list.
+    If 'order' get parameter is passed, order the list.
     e.g /applications/?state=accepted&state=rejected
     """
     state = request.GET.getlist('state', None)
@@ -97,3 +99,22 @@ def application_detail(request, city, app_id):
         'score_form': score_form
         }
     )
+
+@organiser_only
+@csrf_exempt
+def change_state(request, city):
+    """
+    Change the state of Applicaction(s). Use it like this:
+    e.g /applications/?state=accepted&application=1&application=2&application=3
+    """
+    state = request.POST.get('state', None)
+    applications = request.POST.getlist('application', None)
+    page = get_event_page(city, request.user.is_authenticated(), False)
+
+    if not state or not applications:
+        return JsonResponse({'error': 'Missing parameters'})
+
+    applications = Application.objects.filter(id__in=applications, form__page=page)
+    applications.update(state=state)
+
+    return JsonResponse({'message': 'Applications have been updated'})
