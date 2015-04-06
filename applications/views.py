@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.urlresolvers import reverse
 
 from core.utils import (
     get_event_page, get_applications_for_page, random_application
@@ -57,10 +58,16 @@ def applications(request, city):
     order = request.GET.get('order', None)
     applications = get_applications_for_page(page, state, order)
 
+    menu = [
+        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
+        {'title': 'Messaging', 'url': ''}
+    ]
+
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,
-        'order': order
+        'order': order,
+        'menu': menu,
     })
 
 
@@ -90,15 +97,20 @@ def application_detail(request, city, app_id):
                     'applications:application_detail', city, new_app.id)
             return redirect('applications:applications', city)
 
+    menu = [
+        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
+        {'title': 'Messaging', 'url': ''}
+    ]
+
     return render(request, 'application_detail.html', {
         'page': page,
         'application': application,
         'form': application.form,
         'scores': all_scores,
         'user_score': score,
-        'score_form': score_form
-        }
-    )
+        'score_form': score_form,
+        'menu': menu,
+    })
 
 @organiser_only
 @csrf_exempt
