@@ -21,6 +21,13 @@
 
 <div class="container without-background application-form">
 
+    {% if request.user and number_of_email_questions == 0 %}
+    <div class="alert alert-danger">
+        Attention! This form doesn't have a question with type "email"! It's important to collect emails of candidates correctly,
+        otherwise you won't be able to email them through our system. :sadpanda:
+    </div>
+    {% endif %}
+
     <form action="" method="post">
       {% csrf_token %}
       {% for question in form %}

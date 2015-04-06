@@ -9,7 +9,7 @@ from core.utils import (
 from core.models import EventPageMenu
 
 from .decorators import organiser_only
-from .models import Application, Form, Score
+from .models import Application, Form, Score, Question
 from .forms import ApplicationForm, ScoreForm
 
 
@@ -37,11 +37,14 @@ def apply(request, city):
     if form.is_valid():
         form.save(form=form_obj)
 
+    number_of_email_questions = Question.objects.filter(question_type='email', form=form_obj).count()
+
     return render(request, 'apply.html', {
         'page': page,
         'menu': menu,
         'form_obj': form_obj,
         'form': form,
+        'number_of_email_questions': number_of_email_questions,
     })
 
 
