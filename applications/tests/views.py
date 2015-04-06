@@ -1,3 +1,4 @@
+import json
 from datetime import timedelta
 
 from django.test import TestCase, RequestFactory
@@ -158,3 +159,60 @@ class ApplicationsView(TestCase):
         resp.self.client.get('{}?state=waitlisted'.format(self.url))
         self.assertEqual(len(resp.context['applications']), 1)
         self.assertEqual(resp.context['applications'], [self.application_4])
+
+    def test_changing_application_status(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        self.assertEqual(self.application_1.state, 'submitted')
+        resp = self.client.post(
+            reverse('applications:change_state', args=['test']),
+            {'state': 'accepted', 'application': self.application_1.id}
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.application_1 = Application.objects.get(id=self.application_1.id)
+        self.assertEqual(self.application_1.state, 'accepted')
+
+    def test_changing_application_status_errors(self):
+        # user without permissions:
+        resp = self.client.post(
+            reverse('applications:change_state', args=['test']),
+            {'state': 'accepted', 'application': self.application_1.id}
+        )
+        self.assertEqual(resp.status_code, 404)
+
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        # lack of state parameter
+        resp = self.client.post(
+            reverse('applications:change_state', args=['test']),
+            {'application': self.application_1.id}
+        )
+        self.assertTrue('error' in json.loads(resp.content))
+
+        # lack of application parameter
+        resp = self.client.post(
+            reverse('applications:change_state', args=['test']),
+            {'state': 'accepted'}
+        )
+        self.assertTrue('error' in json.loads(resp.content))
+
+    def changing_application_status_in_bulk(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        self.assertEqual(self.application_1.state, 'submitted')
+        self.assertEqual(self.application_3.state, 'rejected')
+        resp = self.client.post(
+            reverse('applications:change_state', args=['test']),
+            {'state': 'accepted', 'application': [self.application_1.id, self.application_3.id]}
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.application_1 = Application.objects.get(id=self.application_1.id)
+        self.application_3 = Application.objects.get(id=self.application_3.id)
+        self.assertEqual(self.application_1.state, 'accepted')
+        self.assertEqual(self.application_3.state, 'accepted')
