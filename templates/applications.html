@@ -63,7 +63,14 @@
                             </ul>
                           </div>
                       </td>
-                      <td>{% if app|scored_by_user:request.user %}{{ app.average_score }}{% endif %}</td>
+                      <td>
+                          {% if app|scored_by_user:request.user %}
+                              {{ app.average_score }}
+                              <span class="num_votes">({{ app.scores.count }} vote{{ app.scores.count|pluralize }}, &sigma;={{ app.stdev|floatformat:"1" }})</span>
+                          {% else %}
+                              (hidden)
+                          {% endif %}
+                      </td>
                       <td class="text-right">
                           <a href="{{ app.id }}" class="btn">View Application</a>
                       </td>

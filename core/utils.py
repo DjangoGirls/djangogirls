@@ -54,7 +54,13 @@ def get_applications_for_page(page, state=None, order=None):
     if order:
         is_reversed = True if order[0] == '-' else False
         order = order[1:] if order[0] == '-' else order
-        applications = sorted(applications, key=lambda app: getattr(app, order), reverse=is_reversed)
+        if order == 'average_score':
+            print order
+            # here is an exception for the average_score, because we also want to get
+            # the standard deviation into account in this sorting
+            applications = sorted(applications, key=lambda app: (getattr(app, order), -app.stdev()), reverse=is_reversed)
+        else:
+            applications = sorted(applications, key=lambda app: getattr(app, order), reverse=is_reversed)
 
     return applications
 
