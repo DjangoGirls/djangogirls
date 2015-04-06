@@ -16,6 +16,7 @@ APPLICATION_STATES = (
     ('submitted', 'Submitted'),
     ('accepted', 'Accepted'),
     ('rejected', 'Rejected'),
+    ('waitlisted', 'Waiting list'),
 )
 
 

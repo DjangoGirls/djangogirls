@@ -117,4 +117,7 @@ def change_state(request, city):
     applications = Application.objects.filter(id__in=applications, form__page=page)
     applications.update(state=state)
 
-    return JsonResponse({'message': 'Applications have been updated'})
+    ids = applications.values_list('id', flat=True)
+    ids = [str(id) for id in ids]
+
+    return JsonResponse({'message': 'Applications have been updated', 'updated': ids})

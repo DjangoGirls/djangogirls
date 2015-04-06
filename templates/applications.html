@@ -11,14 +11,26 @@
 <div id="applications" data-change-state-url="{% url 'applications:change_state' page.url %}"></div>
 
 <div class="container without-background">
+  <form action="{% url 'applications:change_state' page.url %}" method="post" id="change-state-form">
   <div class="row">
     <div class="col-md-12 applications">
       <h3 class="page-header">Applications for {{ page.title }}</h3>
       {% if applications %}
           <p>Filter: <a href="?">All</a> | <a href="?state=submitted" class="text-primary">Submitted</a> | <a href="?state=accepted" class="text-success">Accepted</a> | <a href="?state=rejected" class="text-danger">Rejected</a></p>
+          <p>Change the state of selected applications to:
+              <select name="state">
+                  <option value="" selected>Choose state</option>
+                  <option value="submitted">Submitted</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="waitlisted">Waiting list</option>
+              </select>
+              <input type="submit" value="Apply" />
+          </p>
           <table class="table ">
               <thead>
                   <tr>
+                      <th></th>
                       <th>#</th>
                       <th>Created</th>
                       <th>Status</th>
@@ -29,15 +41,13 @@
               <tbody>
                   {% for app in applications %}
                   <tr>
+                      <td><input type="checkbox" name="application" value="{{ app.id }}" /></div>
                       <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
                       <td>{{ app.created }}</td>
                       <td>
                           <div class="dropdown">
                             <button
-                                class="btn btn-default dropdown-toggle {% if app.state == 'accepted' %}accepted
-                                      {% elif app.state == 'rejected' %}rejected
-                                      {% elif app.state == 'submitted' %}submitted
-                                      {% else %}default{% endif %}"
+                                class="btn btn-default dropdown-toggle {{ app.state|default:'default' }}"
                                 type="button"
                                 id="application-{{ app.id }}-state"
                                 data-toggle="dropdown"
@@ -49,6 +59,7 @@
                               <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Submitted</a></li>
                               <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Accepted</a></li>
                               <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Rejected</a></li>
+                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Waiting list</a></li>
                             </ul>
                           </div>
                       </td>
@@ -65,5 +76,6 @@
       {% endif %}
     </div>
   </div>
+  </form>
 </div>
 {% endblock %}

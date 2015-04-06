@@ -313,6 +313,19 @@ textarea {
   margin: 0;
   height: 150px;
 }
+input[type="submit"] {
+  background: #ffa500;
+  border: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 18px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: 300;
+  text-decoration: none;
+}
 .applications {
   padding: 0 30px;
 }
@@ -348,11 +361,18 @@ textarea {
 .applications .dropdown button.submitted {
   background: #428bca;
 }
+.applications .dropdown button.waitlisted {
+  background: #fec500;
+}
 .applications .dropdown button.default {
   background: rgba(0,0,0,0.3);
 }
 .applications .dropdown ul li {
   font-family: Roboto;
+}
+.applications input[type="submit"] {
+  font-size: 14px;
+  padding: 0 10px;
 }
 .scoring {
   font-family: Roboto;

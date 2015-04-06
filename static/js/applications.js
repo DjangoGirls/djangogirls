@@ -6,12 +6,33 @@ $(document).ready(function() {
             name = $(this).text();
 
         $.post(url, {'state': state, 'application': appId}, function(data){
-            $('#application-'+appId+'-state').removeClass('submitted');
-            $('#application-'+appId+'-state').removeClass('accepted');
-            $('#application-'+appId+'-state').removeClass('rejected');
-            $('#application-'+appId+'-state').removeClass('default');
-            $('#application-'+appId+'-state').addClass(state);
-            $('#application-'+appId+'-state').html(name+' <span class="caret"></span>');
+            updateApplicationState(appId, state, name);
         });
     });
+
+    $('#change-state-form').submit(function(){
+        var url = $(this).attr('action'),
+            state = $($(this).find('option:selected')).val(),
+            name = $($(this).find('option:selected')).text();
+
+        $.post(url, $(this).serialize(), function(data){
+            if (data['updated']){
+                data['updated'].forEach(function(id){
+                    updateApplicationState(id, state, name);
+                });
+            }
+        });
+
+        return false;
+    });
+
+    function updateApplicationState(id, state, stateName){
+        $('#application-'+id+'-state').removeClass('submitted');
+        $('#application-'+id+'-state').removeClass('accepted');
+        $('#application-'+id+'-state').removeClass('rejected');
+        $('#application-'+id+'-state').removeClass('default');
+        $('#application-'+id+'-state').removeClass('waitlisted');
+        $('#application-'+id+'-state').addClass(state);
+        $('#application-'+id+'-state').html(stateName+' <span class="caret"></span>');
+    }
 });

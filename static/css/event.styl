@@ -293,6 +293,17 @@ textarea
     margin: 0
     height: 150px
 
+input[type="submit"]
+    background: orange
+    border: 0
+    color: white
+    font-family: sans_font
+    font-size: 18px
+    border-radius(3px)
+    padding: 5px 15px
+    font-weight: 300
+    text-decoration: none
+
 .applications
     padding: 0 30px
 
@@ -323,12 +334,19 @@ textarea
                 background: #a94442
             &.submitted
                 background: #428bca
+            &.waitlisted
+                background: #fec500
             &.default
                 background: rgba(0,0,0,0.3)
 
         ul
             li
                 font-family: sans_font
+
+    input[type="submit"]
+        font-size: 14px
+        padding: 0 10px
+
 
 
 .scoring
