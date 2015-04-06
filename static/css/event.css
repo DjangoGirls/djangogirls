@@ -374,6 +374,9 @@ input[type="submit"] {
   font-size: 14px;
   padding: 0 10px;
 }
+.applications .text-warning {
+  color: #fec500 !important;
+}
 .scoring {
   font-family: Roboto;
   font-size: 18px;
