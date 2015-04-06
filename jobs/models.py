@@ -17,12 +17,14 @@ class PublishFlowModel(models.Model):
     OPEN = 'OPN'
     UNDER_REVIEW = 'URE'
     READY_TO_PUBLISH = 'RTP'
+    REJECTED = 'REG'
     PUBLISHED = 'PUB'
     EXPIRED = 'EXP'
     STATUSES = (
         (OPEN, 'Open'),
         (UNDER_REVIEW, 'Under review'),
         (READY_TO_PUBLISH, 'Ready to publish'),
+        (REJECTED, 'Rejected'),
         (PUBLISHED, 'Published'),
         (EXPIRED, 'Expired'),
     )

@@ -63,7 +63,7 @@ def meetups(request):
 
 def job_details(request, id):
     queryset = Job.objects.filter(
-        ready_to_publish=True,
+        review_status=Job.PUBLISHED,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
@@ -79,7 +79,7 @@ def job_details(request, id):
 
 def meetup_details(request, id):
     queryset = Meetup.objects.filter(
-        ready_to_publish=True,
+        review_status=Job.PUBLISHED,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
@@ -116,7 +116,7 @@ class MeetupCreate(SuccessMessageMixin, CreateView):
     form_class = MeetupForm
     success_url = reverse_lazy('jobs:confirm_submission')
     success_message = 'Your meetup was added to our database, \
-                    you will recei  ve further information shortly.'
+                    you will receive further information shortly.'
 
     def form_valid(self, form):
         return super(MeetupCreate, self).form_valid(form)

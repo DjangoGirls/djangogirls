@@ -5,8 +5,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
+from model_mommy import mommy
 from jobs.models import Job, Company, Meetup
-from jobs.models import Job, Meetup
+
 
 
 class JobCreateTests(TestCase):
@@ -91,28 +92,19 @@ class JobsPageTests(TestCase):
         self.assertIn("There are no job offers at this moment.", response.content)
 
     def test_jobs_page_with_job_not_ready_to_publish(self):
-        Job.objects.create(
+        mommy.make(
+            Job,
             title='Intern',
-            company='Google',
-            website='http://www.google.pl/about/careers/students/',
-            city='London',
-            country='GB',
-            description='description',
-            review_status=Job.OPEN,
-        )
+            review_status=Meetup.OPEN)
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
         self.assertIn("There are no job offers at this moment.", response.content)
 
     def test_jobs_page_with_job_ready_to_publish(self):
-        Job.objects.create(
+        mommy.make(
+            Job,
             title='Intern',
-            company='Google',
-            website='http://www.google.pl/about/careers/students/',
-            city='London',
-            country='GB',
-            description='description',
-            review_status=Job.PUBLISHED,
+            review_status=Meetup.PUBLISHED,
             created=timezone.now() - timedelta(days=1),
             published_date=timezone.now(),
             expiration_date=timezone.now() + timedelta(days=45),
@@ -130,12 +122,9 @@ class MeetupsPageTests(TestCase):
         self.assertIn("Upcoming meetups", response.content)
 
     def test_meetups_page_with_meetup_not_ready_to_publish(self):
-        Meetup.objects.create(
+        mommy.make(
+            Meetup,
             title='Django Girls Warsaw',
-            city='Warsaw',
-            country='PL',
-            description='description',
-            meetup_date='2015-04-01',
             review_status=Meetup.OPEN,
         )
         response = self.client.get(reverse('jobs:meetups'))
@@ -144,12 +133,9 @@ class MeetupsPageTests(TestCase):
         self.assertNotIn("Django Girls Warsaw", response.content)
 
     def test_jobs_page_with_job_ready_to_publish(self):
-        Meetup.objects.create(
+        mommy.make(
+            Meetup,
             title='Django Girls Warsaw',
-            city='Warsaw',
-            country='PL',
-            description='description',
-            meetup_date='2015-04-01',
             review_status=Meetup.PUBLISHED,
             created=timezone.now() - timedelta(days=1),
             published_date=timezone.now(),

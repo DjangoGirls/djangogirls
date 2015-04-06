@@ -27,12 +27,12 @@ class JobModelTests(TestCase):
         )
 
     def test_is_ready_to_publish_for_not_ready(self):
-        """Tests is the is_ready_to_publish_method return correct value
+        """Tests if the is_ready_to_publish_method returns correct value
         for a job not ready to publish"""
         self.assertFalse(self.job_not_ready.is_ready_to_publish())
 
     def test_is_ready_to_publish_for_ready(self):
-        """Tests is the is_ready_to_publish_method return correct value
+        """Tests if the is_ready_to_publish_method returns correct value
         for a job ready to publish"""
         self.assertTrue(self.job_ready_no_exp_date.is_ready_to_publish())
 
