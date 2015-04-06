@@ -27,11 +27,12 @@
               </select>
               <input type="submit" value="Apply" />
           </p>
-          <table class="table ">
+          <table class="table">
               <thead>
                   <tr>
                       <th></th>
                       <th>#</th>
+                      <th>E-mail</th>
                       <th>Created</th>
                       <th>Status</th>
                       <th>Score {% display_sorting_arrow 'average_score' order %}</th>
@@ -43,6 +44,7 @@
                   <tr>
                       <td><input type="checkbox" name="application" value="{{ app.id }}" /></div>
                       <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
+                      <td>{{ app.email|default:"No email" }}</td>
                       <td>{{ app.created }}</td>
                       <td>
                           <div class="dropdown">

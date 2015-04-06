@@ -67,14 +67,14 @@ class Question(models.Model):
     title = models.CharField(max_length=255, verbose_name="Question")
     help_text = models.CharField(
         max_length=255,
-        null=True, verbose_name="Additional help text to the question?")
+        blank=True, verbose_name="Additional help text to the question?")
     question_type = models.CharField(
         max_length=50,
         choices=QUESTION_TYPES, verbose_name="Type of the question")
     is_required = models.BooleanField(
         default=True, verbose_name="Is the answer to the question required?")
     choices = models.TextField(
-        null=True, verbose_name="List all available options, comma separated",
+        blank=True, verbose_name="List all available options, comma separated",
         help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(
         default=False, verbose_name="Are there multiple choices allowed?",
@@ -104,8 +104,11 @@ class Application(models.Model):
     state = models.CharField(
         max_length=50,
         choices=APPLICATION_STATES, verbose_name="State of the application",
-        null=True
+        null=True,
+        default='submitted'
     )
+    email = models.EmailField(null=True, blank=True)
+    newsletter_optin = models.BooleanField(default=False)
 
     @property
     def average_score(self):
