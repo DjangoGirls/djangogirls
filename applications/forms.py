@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Application, Answer, Question, Score, EmailMessage
+from .models import Application, Answer, Question, Score, Email
 
 
 class ApplicationForm(forms.Form):
@@ -90,8 +90,8 @@ class ScoreForm(forms.ModelForm):
         fields = ['score', 'comment']
 
 
-class EmailMessageForm(forms.ModelForm):
+class EmailForm(forms.ModelForm):
 
     class Meta:
-        model = EmailMessage
+        model = Email
         fields = ['recipients_group', 'subject', 'text']

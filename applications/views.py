@@ -9,8 +9,8 @@ from core.utils import (
 from core.models import EventPageMenu
 
 from .decorators import organiser_only
-from .models import Application, Form, Score, Question, EmailMessage
-from .forms import ApplicationForm, ScoreForm, EmailMessageForm
+from .models import Application, Form, Score, Question, Email
+from .forms import ApplicationForm, ScoreForm, EmailForm
 
 
 def apply(request, city):
@@ -128,7 +128,7 @@ def communication(request, city):
         {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
     ]
 
-    emails = EmailMessage.objects.filter(form__page=page).order_by('-created')
+    emails = Email.objects.filter(form__page=page).order_by('-created')
 
     return render(request, 'communication.html', {
         'page': page,
@@ -144,14 +144,14 @@ def compose_email(request, city, email_id=None):
     """
     page = get_event_page(city, request.user.is_authenticated(), False)
     form_obj = get_object_or_404(Form, page=page)
-    emailmsg = None if not email_id else get_object_or_404(EmailMessage, form__page=page, id=email_id)
+    emailmsg = None if not email_id else get_object_or_404(Email, form__page=page, id=email_id)
 
     menu = [
         {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
         {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
     ]
 
-    form = EmailMessageForm(request.POST or None, instance=emailmsg, initial={
+    form = EmailForm(request.POST or None, instance=emailmsg, initial={
         'author': request.user, 'form': form_obj
     })
     if form.is_valid() and request.method == 'POST':
@@ -160,8 +160,7 @@ def compose_email(request, city, email_id=None):
         obj.form = form_obj
         obj.save()
         if request.POST.get('send'):
-            # send email here
-            pass
+            obj.send()
         return redirect('applications:communication', city)
 
     return render(request, 'compose_email.html', {

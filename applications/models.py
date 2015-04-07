@@ -1,5 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.mail import EmailMessage
 from django.db import models
+from django.utils import timezone
 
 from core.models import EventPage, User
 from .utils import DEFAULT_QUESTIONS
@@ -38,6 +40,8 @@ class Form(models.Model):
         null=True, verbose_name="Application process is open from")
     open_until = models.DateTimeField(
         null=True, verbose_name="Application process is open until")
+    emails_send_from = models.EmailField(null=True,
+        help_text="Which email should we use to send emails from? Use one in @djangogirls.org domain")
 
     def __unicode__(self):
         return 'Application form for {}'.format(self.page.event.name)
@@ -169,9 +173,9 @@ class Score(models.Model):
         unique_together = ('user', 'application',)
 
 
-class EmailMessage(models.Model):
+class Email(models.Model):
     form = models.ForeignKey(Form)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, related_name="author")
     subject = models.CharField(max_length=255)
     text = models.TextField(
         verbose_name="Content of the email",
@@ -182,7 +186,31 @@ class EmailMessage(models.Model):
         verbose_name="Recipients",
         help_text="Only people assigned to chosen group will receive this email."
     )
-    recipients_emails = models.TextField(null=True, blank=True)
+    number_of_recipients = models.IntegerField(default=0, null=True)
+    successfuly_sent = models.TextField(null=True, blank=True)
+    failed_to_sent = models.TextField(null=True, blank=True)
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)
+
+    def send(self):
+        recipients = Application.objects.filter(form=self.form, state=self.recipients_group)
+        self.number_of_recipients = recipients.count()
+        self.sent_from = self.form.emails_send_from
+        sender = "{} <{}>".format(self.form.page.title, self.sent_from)
+        successfuly_sent = []
+        failed_to_sent = []
+
+        for recipient in recipients:
+            if recipient.email:
+                msg = EmailMessage(self.subject, self.text, sender, [recipient.email,])
+                try:
+                    msg.send()
+                    successfuly_sent.append(recipient.email)
+                except:
+                    failed_to_sent.append(recipient.email)
+
+        self.sent = timezone.now()
+        self.successfuly_sent = ', '.join(successfuly_sent)
+        self.failed_to_sent = ', '.join(failed_to_sent)
+        self.save()

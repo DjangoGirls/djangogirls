@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from suit.admin import SortableModelAdmin
 
-from .models import Form, Question, Application, Answer, EmailMessage
+from .models import Form, Question, Application, Answer, Email
 from core.models import EventPage
 
 
@@ -53,7 +53,7 @@ class AnswerAdmin(admin.ModelAdmin):
     raw_id_fields = ('question', 'application')
 
 
-class EmailMessageAdmin(admin.ModelAdmin):
+class EmailAdmin(admin.ModelAdmin):
     list_display = ('form', 'author', 'subject', 'recipients_group', 'created', 'sent')
 
 
@@ -61,4 +61,4 @@ admin.site.register(Form, FormAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Application, ApplicationAdmin)
 admin.site.register(Answer, AnswerAdmin)
-admin.site.register(EmailMessage, EmailMessageAdmin)
+admin.site.register(Email, EmailAdmin)
