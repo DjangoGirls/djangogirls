@@ -63,7 +63,7 @@ def applications(request, city):
 
     menu = [
         {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': ''}
+        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
     ]
 
     return render(request, 'applications.html', {
@@ -102,7 +102,7 @@ def application_detail(request, city, app_id):
 
     menu = [
         {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': ''}
+        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
     ]
 
     return render(request, 'application_detail.html', {
@@ -114,6 +114,25 @@ def application_detail(request, city, app_id):
         'score_form': score_form,
         'menu': menu,
     })
+
+
+@organiser_only
+def communication(request, city):
+    """
+    Send emails to applicants and attendees
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+
+    menu = [
+        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
+        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
+    ]
+
+    return render(request, 'communication.html', {
+        'page': page,
+        'menu': menu,
+    })
+
 
 @organiser_only
 @csrf_exempt

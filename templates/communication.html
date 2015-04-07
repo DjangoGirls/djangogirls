@@ -1,0 +1,44 @@
+{% extends 'event.html' %}
+{% load static applications_tags %}
+
+{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 applications">
+      <h3 class="page-header">
+        Send email to applicants of {{ page.title }}
+        <a class="btn pull-right" href="">Create new e-mail</a>
+      </h3>
+
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Recipients</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Sent</th>
+                  <th>&nbsp;</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

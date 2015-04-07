@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from suit.admin import SortableModelAdmin
 
-from .models import Form, Question, Application, Answer
+from .models import Form, Question, Application, Answer, EmailMessage
 from core.models import EventPage
 
 
@@ -44,24 +44,21 @@ class QuestionAdmin(SortableModelAdmin):
 
 
 class ApplicationAdmin(admin.ModelAdmin):
-    list_display = ('form', 'created')
-
-    def get_queryset(self, request):
-        qs = super(ApplicationAdmin, self).queryset(request)
-        return qs.filter(form__page__event__team__in=[request.user])
+    list_display = ('form', 'newsletter_optin', 'email', 'created')
+    list_filter = ('form',  'newsletter_optin')
 
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('application', 'question', 'answer')
     raw_id_fields = ('question', 'application')
 
-    def get_queryset(self, request):
-        qs = super(AnswerAdmin, self).queryset(request)
-        return qs.filter(
-            application__form__page__event__team__in=[request.user])
+
+class EmailMessageAdmin(admin.ModelAdmin):
+    list_display = ('form', 'author', 'subject', 'recipients_group', 'created', 'sent')
 
 
 admin.site.register(Form, FormAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Application, ApplicationAdmin)
 admin.site.register(Answer, AnswerAdmin)
+admin.site.register(EmailMessage, EmailMessageAdmin)

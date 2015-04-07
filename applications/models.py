@@ -67,14 +67,14 @@ class Question(models.Model):
     title = models.CharField(max_length=255, verbose_name="Question")
     help_text = models.CharField(
         max_length=255,
-        blank=True, verbose_name="Additional help text to the question?")
+        blank=True, null=True, verbose_name="Additional help text to the question?")
     question_type = models.CharField(
         max_length=50,
         choices=QUESTION_TYPES, verbose_name="Type of the question")
     is_required = models.BooleanField(
         default=True, verbose_name="Is the answer to the question required?")
     choices = models.TextField(
-        blank=True, verbose_name="List all available options, comma separated",
+        blank=True, null=True, verbose_name="List all available options, comma separated",
         help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(
         default=False, verbose_name="Are there multiple choices allowed?",
@@ -167,3 +167,15 @@ class Score(models.Model):
 
     class Meta:
         unique_together = ('user', 'application',)
+
+
+class EmailMessage(models.Model):
+    form = models.ForeignKey(Form)
+    author = models.ForeignKey(User)
+    subject = models.CharField(max_length=255)
+    text = models.TextField()
+    recipients_group = models.CharField(max_length=50, choices=APPLICATION_STATES)
+    recipients_emails = models.TextField(null=True, blank=True)
+    sent_from = models.EmailField()
+    created = models.DateTimeField(auto_now_add=True)
+    sent = models.DateTimeField(null=True, blank=True)
