@@ -1,0 +1,32 @@
+{% extends 'event.html' %}
+{% load static applications_tags %}
+
+{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+<div class="container application-form">
+  <div class="row">
+    <div class="col-md-12" style="padding: 0px">
+      <h3 class="page-header">
+        Edit email for {{ page.title }}
+      </h3>
+
+      <div class="col-md-7 stretch-form">
+        <form action="" method="post">
+          {% csrf_token %}
+          {% include 'includes/_form.html' %}
+          <input type="submit" name="save" value="Save for later" />
+          <input type="submit" name="send" value="Save & send to recipients" />
+        </form>
+      </div>
+      <div class="col-md-5">
+        Markdown preview of the message here.
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

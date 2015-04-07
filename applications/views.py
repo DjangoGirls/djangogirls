@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
@@ -10,7 +10,7 @@ from core.models import EventPageMenu
 
 from .decorators import organiser_only
 from .models import Application, Form, Score, Question
-from .forms import ApplicationForm, ScoreForm
+from .forms import ApplicationForm, ScoreForm, EmailMessageForm
 
 
 def apply(request, city):
@@ -131,6 +131,40 @@ def communication(request, city):
     return render(request, 'communication.html', {
         'page': page,
         'menu': menu,
+    })
+
+
+@organiser_only
+def compose_email(request, city, email_id=None):
+    """
+    Create new email or update email to applicants and attendees
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    form_obj = get_object_or_404(Form, page=page)
+    emailmsg = None if not email_id else get_object_or_404(EmailMessage, form__page=page, id=email_id)
+
+    menu = [
+        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
+        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
+    ]
+
+    form = EmailMessageForm(request.POST or None, instance=emailmsg, initial={
+        'author': request.user, 'form': form_obj
+    })
+    if form.is_valid() and request.method == 'POST':
+        obj = form.save(commit=False)
+        obj.author = request.user
+        obj.form = form_obj
+        obj.save()
+        if request.POST.get('send'):
+            # send email here
+            pass
+        return redirect('applications:communication', city)
+
+    return render(request, 'compose_email.html', {
+        'page': page,
+        'menu': menu,
+        'form': form
     })
 
 

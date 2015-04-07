@@ -12,7 +12,7 @@
     <div class="col-md-12 applications">
       <h3 class="page-header">
         Send email to applicants of {{ page.title }}
-        <a class="btn pull-right" href="">Create new e-mail</a>
+        <a class="btn pull-right" href="{% url 'applications:compose_email' page.url %}">Create new e-mail</a>
       </h3>
 
       <table class="table">

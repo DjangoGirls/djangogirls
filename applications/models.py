@@ -173,8 +173,15 @@ class EmailMessage(models.Model):
     form = models.ForeignKey(Form)
     author = models.ForeignKey(User)
     subject = models.CharField(max_length=255)
-    text = models.TextField()
-    recipients_group = models.CharField(max_length=50, choices=APPLICATION_STATES)
+    text = models.TextField(
+        verbose_name="Content of the email",
+        help_text="You can use markdown syntax in this message. Preview on the right."
+    )
+    recipients_group = models.CharField(
+        max_length=50, choices=APPLICATION_STATES,
+        verbose_name="Recipients",
+        help_text="Only people assigned to chosen group will receive this email."
+    )
     recipients_emails = models.TextField(null=True, blank=True)
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
