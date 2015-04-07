@@ -166,7 +166,8 @@ def compose_email(request, city, email_id=None):
     return render(request, 'compose_email.html', {
         'page': page,
         'menu': menu,
-        'form': form
+        'form': form,
+        'email': emailmsg,
     })
 
 

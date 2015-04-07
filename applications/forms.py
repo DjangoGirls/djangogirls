@@ -92,6 +92,17 @@ class ScoreForm(forms.ModelForm):
 
 class EmailForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        """
+        When email is already sent, the form should be disabled
+        """
+        super(EmailForm, self).__init__(*args, **kwargs)
+        if self.instance.sent:
+            # email was sent, let's disable all fields:
+            for field in self.fields:
+                self.fields[field].widget.attrs['disabled'] = True
+
+
     class Meta:
         model = Email
         fields = ['recipients_group', 'subject', 'text']

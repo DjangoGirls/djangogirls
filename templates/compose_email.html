@@ -18,12 +18,28 @@
         <form action="" method="post">
           {% csrf_token %}
           {% include 'includes/_form.html' %}
+
+          {% if not email.sent %}
           <input type="submit" name="save" value="Save for later" />
           <input type="submit" name="send" value="Save & send to recipients" />
+          {% endif %}
         </form>
       </div>
       <div class="col-md-5">
-        Markdown preview of the message here.
+          {% if not email.sent %}
+              Markdown preview of the message here.
+          {% else %}
+              <p>
+                  This email was sent on {{ email.sent }} by {{ email.author }} to {{ email.number_of_recipients }} recipients.
+              </p>
+              <p>
+                  <b>Successfully sent emails:</b> {{ email.successfuly_sent }}
+              </p>
+              <p>
+                  <b>Emails that failed to sent:</b> {{ email.failed_to_sent }}
+              </p>
+
+          {% endif %}
       </div>
 
     </div>
