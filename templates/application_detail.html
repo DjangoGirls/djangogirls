@@ -50,29 +50,9 @@
             <h4>Your score</h4>
             <form action="" method="post" class="scoring-form">
                 {% csrf_token %}
-                {% for field in score_form %}
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>
-                          {{ field.label|safe }}
-                        </label>
-
-                        {% if field.field.help_text %}
-                          <p class="help-text">{{ field.field.help_text|safe }}</p>
-                        {% endif %}
-
-                        {% if field.errors %}
-                          {% for error in field.errors %}
-                          <p class="error">{{ error }}</p>
-                          {% endfor %}
-                        {% endif %}
-
-                        <div class="field{% if field.errors %} with-errors{% endif %}">
-                          {{ field }}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+                {% with score_form as form %}
+                    {% include 'includes/_form.html' %}
+                {% endwith %}
                 <input class="btn" type="submit" value="Save" />
                 <input class="btn" type="submit" name="random" value="Save & go to next" />
             </form>
