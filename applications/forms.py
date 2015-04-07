@@ -1,4 +1,6 @@
 from django import forms
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 from .models import Application, Answer, Question, Score, Email
 
@@ -81,6 +83,22 @@ class ApplicationForm(forms.Form):
                 if question.question_type == 'email':
                     application.email = value
                     application.save()
+
+        if application.email:
+            # Send confirmation email
+            subject = "Confirmation of your application for {}".format(form.page.title)
+            body = render_to_string(
+                'emails/application_confirmation.html',
+                {'application': application}
+            )
+            sender = "{} <{}>".format(form.page.title, form.emails_send_from)
+            msg = EmailMessage(subject, body, sender, [application.email,])
+            msg.content_subtype = "html"
+            try:
+                msg.send()
+            except:
+                # TODO: what should we do when sending fails?
+                pass
 
 
 class ScoreForm(forms.ModelForm):

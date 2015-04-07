@@ -27,6 +27,11 @@
         otherwise you won't be able to email them through our system. :sadpanda:
     </div>
     {% endif %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
 
     <form action="" method="post">
       {% csrf_token %}

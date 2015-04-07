@@ -1,0 +1,19 @@
+Hi there!
+
+This is a confirmation of your application to <a href="http://djangogirls.org/{{ application.form.page.url }}">{{ application.form.page.title }}</a>. Yay! That's a huge step already, we're proud of you!
+
+Mind that this is not a confirmation of participation in the event, but a confirmation that we received your application.
+
+You'll receive an email from the team that organizes {{ application.form.page.title }} soon. You can always reach them by answering to this email or by writing to {{ application.form.emails_send_from }}.
+
+For your reference, we're attaching your answers below.
+
+Hugs, cupcakes and high-fives!
+Django Girls
+
+-
+{% for answer in application.form.answer_set.all %}
+<b>{{ answer.question.title }}</b>
+{{ answer.answer }}
+
+{% endfor %}

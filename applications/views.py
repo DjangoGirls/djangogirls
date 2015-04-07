@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 from core.utils import (
     get_event_page, get_applications_for_page, random_application
@@ -36,6 +37,7 @@ def apply(request, city):
 
     if form.is_valid():
         form.save(form=form_obj)
+        messages.success(request, "Yay! Your application has been saved. You'll hear from us soon!")
 
     number_of_email_questions = Question.objects.filter(question_type='email', form=form_obj).count()
 
