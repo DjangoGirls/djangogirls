@@ -9,7 +9,7 @@ from core.utils import (
 from core.models import EventPageMenu
 
 from .decorators import organiser_only
-from .models import Application, Form, Score, Question
+from .models import Application, Form, Score, Question, EmailMessage
 from .forms import ApplicationForm, ScoreForm, EmailMessageForm
 
 
@@ -128,9 +128,12 @@ def communication(request, city):
         {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
     ]
 
+    emails = EmailMessage.objects.filter(form__page=page).order_by('-created')
+
     return render(request, 'communication.html', {
         'page': page,
         'menu': menu,
+        'emails': emails,
     })
 
 
