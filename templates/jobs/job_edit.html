@@ -16,7 +16,7 @@
             <li><a href="{% url 'jobs:jobs' %}">Job offers</a></li>
             <li class="active">Add job offer</li>
         </ol>
-            <div class="panel panel-default">
+            <div class="panel panel-feature-blue">
                 <div class="panel-heading">
                     <h2>New offer</h2>
                 </div>
@@ -24,7 +24,7 @@
                     <form method="POST" class="job-form">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit" class="save btn btn-default" name="save">Save</button>
+                        <button type="submit" class="save btn btn-blue" name="save">Save</button>
                     </form>
                 </div>
             </div>

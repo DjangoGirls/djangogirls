@@ -35,7 +35,7 @@
     <section id="features">
         <div class="row">
             <div class="col-md-6">
-                <div class="panel panel-feature-orange">
+                <div class="panel panel-feature-blue">
                     <div class="panel-heading">
                         Jobs
                     </div>
@@ -48,16 +48,19 @@
                             <div class="col-md-6 event">
                                 {% include 'includes/_jobs.html' with job=job %}
                             </div>
+                        
                             {% endfor %}
                         {% else %}
                             <p>No job offers yet...</p>
                         {% endif %}
-                        <a class="btn" href="{% url 'jobs:jobs' %}">More...</a>
+                        <div class="col-md-12">
+                            <a class="btn btn-blue btn-block" href="{% url 'jobs:jobs' %}">More...</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="panel panel-feature-blue">
+                <div class="panel panel-feature-orange">
                     <div class="panel-heading">
                         Meetups
                     </div>
@@ -74,7 +77,9 @@
                         {% else %}
                             <p>No meetups yet...</p>
                         {% endif %}
-                        <a class="btn btn-blue" href="{% url 'jobs:meetups' %}">More...</a>
+                        <div class="col-md-12">
+                            <a class="btn btn-block" href="{% url 'jobs:meetups' %}">More...</a>
+                        </div>
                     </div>
                 </div>
             </div>

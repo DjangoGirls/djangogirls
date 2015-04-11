@@ -130,10 +130,14 @@ class Meetup(PublishFlowModel):
         null=True,
         help_text="Provide details of recurrence if applicable."
     )
-    meetup_date = models.DateTimeField(
+    meetup_start_date = models.DateTimeField(
         null=True,
         help_text="If this is a recurring meetup/event, please enter a start date.\
             Date format: YYYY-MM-DD"
+    )
+    meetup_end_date = models.DateTimeField(
+        null=True,
+        help_text="Date format: YYYY-MM-DD"
     )
 
     class Meta(PublishFlowModel.Meta):

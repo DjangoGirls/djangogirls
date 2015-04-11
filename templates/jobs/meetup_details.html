@@ -23,7 +23,10 @@
                     <small>in {{ meetup.city }}, {{ meetup.country }}</small>
                 </h2>
                 <h4>Date and time:</h4>
-                <p> {{ meetup.meetup_date|date:"l, d F Y, f A" }}</p>
+                <p>begins: {{ meetup.meetup_start_date|date:"l, d F Y, f A" }}</p>
+                    {% if meetup.meetup_end_date %}
+                        <p>ends: {{ meetup.meetup_end_date|date:"l, d F Y, f A" }}</p>
+                    {% endif %}
                 {% if meetup.company %}
                     <h4>Organised by:</h4>
                     <p>{{ meetup.company }}</p>

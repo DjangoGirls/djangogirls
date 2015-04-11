@@ -1,9 +1,6 @@
 button.save {
   margin-top: 10px;
 }
-div#yourdatetimeid {
-  width: 250px;
-}
 #community {
   padding: 30px 0 0 0;
 }
@@ -17,11 +14,15 @@ div#yourdatetimeid {
   margin-bottom: 20px;
 }
 .checkbox {
-    margin-left: 20px;
+  margin-left: 10px;
 }
 #job-table {
-    max-width: 400px;
+  max-width: 400px;
 }
-ol.breadcrumb li a:link, a:visited, a:hover, a:active {
-    text-decoration: none;
+ol.breadcrumb li a {
+  text-decoration: none;
+}
+#start_date_time,
+#end_date_time {
+  width: 250px;
 }

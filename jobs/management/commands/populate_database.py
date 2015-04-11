@@ -6,15 +6,15 @@ from jobs.models import Job, Meetup
 class Command(NoArgsCommand):
     help = "Populates database with meetups and job offers."
 
-    def add_meetup(self, title, city, country, description, meetup_date):
+    def add_meetup(self, title, city, country, description, meetup_start_date, meetup_end_date):
         meetup, created = Meetup.objects.get_or_create(
             title=title,
             contact_email='example@example.com',
             city=city,
             country=country,
             description=description,
-            review_status=Meetup.READY_TO_PUBLISH,
-            meetup_date=meetup_date,
+            meetup_start_date=meetup_start_date,
+            meetup_end_date=meetup_end_date
         )
         return meetup
 
@@ -38,21 +38,24 @@ class Command(NoArgsCommand):
             city='Warsaw',
             country='PL',
             description='description',
-            meetup_date='2015-04-01'
+            meetup_start_date='2015-04-01',
+            meetup_end_date='2015-04-01'
         )
         self.add_meetup(
             title='Women in Technology',
             city='London',
             country='GB',
             description='description',
-            meetup_date='2015-05-15'
+            meetup_start_date='2015-05-15',
+            meetup_end_date='2015-05-15'
         )
         self.add_meetup(
             title='Learn javascript',
             city='Paris',
             country='FR',
             description='description',
-            meetup_date='2015-06-12'
+            meetup_start_date='2015-06-12',
+            meetup_end_date='2015-06-12',
         )
 
         self.add_meetup(
@@ -60,7 +63,8 @@ class Command(NoArgsCommand):
             city='Berlin',
             country='DE',
             description='description',
-            meetup_date='2015-07-01'
+            meetup_start_date='2015-07-01',
+            meetup_end_date='2015-07-01',
         )
 
         self.add_meetup(
@@ -68,7 +72,8 @@ class Command(NoArgsCommand):
             city='New York',
             country='US',
             description='description',
-            meetup_date='2015-08-01'
+            meetup_start_date='2015-08-01',
+            meetup_end_date='2015-08-01'
         )
 
         # Adding some job offers.
