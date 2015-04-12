@@ -16,6 +16,11 @@ class Migration(migrations.Migration):
             old_name='city',
             new_name='cities',
         ),
+        migrations.RenameField(
+            model_name='meetup',
+            old_name='meetup_date',
+            new_name='meetup_start_date',
+        ),
         migrations.AddField(
             model_name='job',
             name='relocation',
@@ -26,6 +31,12 @@ class Migration(migrations.Migration):
             model_name='job',
             name='remote_work',
             field=models.BooleanField(default=False),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='meetup',
+            name='meetup_end_date',
+            field=models.DateTimeField(help_text=b'Date format: YYYY-MM-DD', null=True, blank=True),
             preserve_default=True,
         ),
     ]

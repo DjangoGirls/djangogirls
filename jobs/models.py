@@ -137,6 +137,7 @@ class Meetup(PublishFlowModel):
     )
     meetup_end_date = models.DateTimeField(
         null=True,
+        blank=True,
         help_text="Date format: YYYY-MM-DD"
     )
 
