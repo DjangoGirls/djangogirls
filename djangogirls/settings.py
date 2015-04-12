@@ -103,7 +103,10 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 AUTH_USER_MODEL = 'core.User'
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Django Girls'
+    'ADMIN_NAME': 'Django Girls',
+    'MENU_ICONS': {
+        'jobs': 'icon-list-alt',
+    }
 }
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')

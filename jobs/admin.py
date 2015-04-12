@@ -1,4 +1,6 @@
+from django.db import models
 from django.contrib import admin
+from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
 
 from .models import PublishFlowModel, Job, Meetup
 
@@ -15,6 +17,10 @@ class JobAdmin(admin.ModelAdmin):
     list_display = ['title', 'company', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published]
+    formfield_overrides = {
+        models.DateField: {'widget': SuitDateWidget},
+        models.TextField: {'widget': AutosizedTextarea},
+    }
 
 
 class MeetupAdmin(admin.ModelAdmin):
@@ -22,6 +28,12 @@ class MeetupAdmin(admin.ModelAdmin):
     list_display = ['title', 'city', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published]
+    formfield_overrides = {
+        models.DateField: {'widget': SuitDateWidget},
+        models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
+        models.TextField: {'widget': AutosizedTextarea},
+    }
+
 
 admin.site.register(Job, JobAdmin)
 admin.site.register(Meetup, MeetupAdmin)
