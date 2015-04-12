@@ -31,8 +31,9 @@ def create_reviewer_group(apps, schema_editor, with_create_permissions=True):
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        ('jobs', '0030_auto_20150406_1940'),
+        ('jobs', '0033_auto_20150412_1509'),
     ]
 
     operations = [

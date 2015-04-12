@@ -14,7 +14,8 @@ class Command(NoArgsCommand):
             country=country,
             description=description,
             meetup_start_date=meetup_start_date,
-            meetup_end_date=meetup_end_date
+            meetup_end_date=meetup_end_date,
+            review_status=Meetup.READY_TO_PUBLISH,
         )
         return meetup
 
