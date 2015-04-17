@@ -139,7 +139,8 @@ a:hover {
   color: #fff;
 }
 .without-background {
-  padding: 60px 0px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 #about .overlay {
   padding: 150px 0;
