@@ -333,3 +333,11 @@ a:hover {
     margin-top: 20px;
   }
 }
+@media only screen and (max-width: 320px) {
+  #about .overlay h1 {
+    font-size: 50px;
+  }
+  #about .overlay h2 {
+    font-size: 30px;
+  }
+}
