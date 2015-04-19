@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.db import models, migrations
 from django.contrib.auth.models import Group, Permission
 
 
@@ -33,7 +34,7 @@ def create_reviewer_group(apps, schema_editor, with_create_permissions=True):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jobs', '0033_auto_20150412_1509'),
+        ('jobs', '0001_initial'),
     ]
 
     operations = [
