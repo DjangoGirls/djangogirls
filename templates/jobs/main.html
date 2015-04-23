@@ -23,12 +23,10 @@
     <section id="community">
         <div class="row">
             <div class="col-md-9">
-                <h2>Community</h2>
+                <h2>Django Girls Community</h2>
 
-                <p>Here, you will find information about job offers for
-                    entry-level positions, meetups, local groups and other
-                    things that will help you get going with becoming a
-                    fully-fledged Django programmer.</p>
+                <p>If you find yourself on this page, you probably recently completed Django Girls tutorial — either on one of our workshops, at the event in your city or alone at home.</p>
+                <p>That’s so awesome, congratulations! Time to meet the Django and Python community and make the next important step to make being a developer your daily job. Excited? We are!</p>
             </div>
         </div>
     </section>
@@ -40,8 +38,12 @@
                         Jobs
                     </div>
                     <div class="panel-body">
-                        <p>Here you can find job offers for an entry-level
-                            positions.</p>
+                        <p>
+                            Working as a software developer is a great way to become one. There is lots of companies out there who are hiring, but how to tell which one is good?
+                        </p>
+                        <p>
+                            We talked to a lot of them and here you can find offers from companies who hire beginners and want to train them. They’re not targeting women only, but they do care about diversity in a workplace. We trust they do the right things.
+                        </p>
                         <h4>Recent offers:</h4>
                         {% if job_offers %}
                             {% for job in job_offers %}
@@ -65,8 +67,15 @@
                         Meetups
                     </div>
                     <div class="panel-body">
-                        <p>Here, you can find information about local meetups,
-                            conferences and workshops.</p>
+                        <p>
+                            Did you know that Dori, Django Girls alumn from our first event in Berlin, got a job because she gave a talk about Django Girls at her local Django meetup in Budapest?
+                        </p>
+                        <p>
+                            That’s why your local meetups and user groups can help you make a career in tech. Here you can find (or add!) meetups in your city where programmers meet to talk about technology.
+                        </p>
+                        <p>
+                            They all have published Code of Conduct, we checked!
+                        </p>
                         <h4>Recent meetups:</h4>
                         {% if meetup_list %}
                             {% for meetup in meetup_list %}
