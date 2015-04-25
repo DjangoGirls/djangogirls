@@ -3,7 +3,7 @@ from datetime import datetime
 import icalendar
 
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
@@ -48,16 +48,15 @@ def event(request, city):
 
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    try:
-        page = EventPage.objects.get(url=city)
-        if not (request.user.is_authenticated()
-                or request.GET.has_key('preview')):
-            if not page.is_live:
-                past = page.event.date <= now_approx
-                return render(request, "event_not_live.html",
-                              {'city': city, 'past': past})
-    except EventPage.DoesNotExist:
-        raise Http404
+    page = get_object_or_404(EventPage, url=city)
+
+    can_show = request.user.is_authenticated() or 'preview' in request.GET
+    if not page.is_live and not can_show:
+        return render(
+            request,
+            'event_not_live.html',
+            {'city': city, 'past': page.event.date <= now_approx}
+        )
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)
