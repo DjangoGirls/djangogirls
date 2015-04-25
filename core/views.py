@@ -48,7 +48,10 @@ def event(request, city):
 
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    page = get_object_or_404(EventPage, url=city)
+    page = get_object_or_404(EventPage, url__iexact=city)
+
+    if page.url != city:
+        return redirect('core:event', city=page.url, permanent=True)
 
     can_show = request.user.is_authenticated() or 'preview' in request.GET
     if not page.is_live and not can_show:
