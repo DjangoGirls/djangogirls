@@ -3,6 +3,9 @@ from django.core.mail import send_mail
 from django.contrib import admin, messages
 from django.template.loader import get_template
 from django.template import Context
+from django.conf.urls import patterns, url
+from django.shortcuts import redirect, get_object_or_404
+
 from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
 
 from djangogirls.local_settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
@@ -92,7 +95,7 @@ send_status_update_meetup.short_description = "Send notification about meetup st
 
 
 class JobAdmin(admin.ModelAdmin):
-    readonly_fields = ('published_date',)
+    readonly_fields = ('reviewer', 'published_date')
     list_display = ['title', 'company', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published, send_status_update_job_offer]
@@ -101,9 +104,37 @@ class JobAdmin(admin.ModelAdmin):
         models.TextField: {'widget': AutosizedTextarea},
     }
 
+    def get_urls(self):
+        urls = super(JobAdmin, self).get_urls()
+        my_urls = patterns('',
+            url(
+                r'^(?P<id>\d+)/assign/$',
+                self.assign_job_reviewer,
+                name='assign_job_reviewer'
+            ),
+            url(
+                r'^(?P<id>\d+)/unassign/$',
+                self.unassign_job_reviewer,
+                name='unassign_job_reviewer'
+            ),
+        )
+        return my_urls + urls
+
+    def assign_job_reviewer(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.reviewer = request.user
+        job.save()
+        return redirect('/admin/jobs/job/%s/' % id)
+
+    def unassign_job_reviewer(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.reviewer = None
+        job.save()
+        return redirect('/admin/jobs/job/%s/' % id)
+
 
 class MeetupAdmin(admin.ModelAdmin):
-    readonly_fields = ('published_date',)
+    readonly_fields = ('reviewer', 'published_date',)
     list_display = ['title', 'city', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published, send_status_update_meetup]
@@ -112,6 +143,34 @@ class MeetupAdmin(admin.ModelAdmin):
         models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
         models.TextField: {'widget': AutosizedTextarea},
     }
+
+    def get_urls(self):
+        urls = super(MeetupAdmin, self).get_urls()
+        my_urls = patterns('',
+            url(
+                r'^(?P<id>\d+)/assign/$',
+                self.assign_meetup_reviewer,
+                name='assign_meetup_reviewer'
+            ),
+            url(
+                r'^(?P<id>\d+)/unassign/$',
+                self.unassign_meetup_reviewer,
+                name='unassign_meetup_reviewer'
+            ),
+        )
+        return my_urls + urls
+
+    def assign_meetup_reviewer(self, request, id):
+        meetup = get_object_or_404(Meetup, id=id)
+        meetup.reviewer = request.user
+        meetup.save()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def unassign_meetup_reviewer(self, request, id):
+        meetup = get_object_or_404(Meetup, id=id)
+        meetup.reviewer = None
+        meetup.save()
+        return redirect('/admin/jobs/meetup/%s/' % id)
 
 
 admin.site.register(Job, JobAdmin)
