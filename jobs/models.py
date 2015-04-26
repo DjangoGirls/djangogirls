@@ -54,6 +54,34 @@ class PublishFlowModel(models.Model):
     def is_ready_to_publish(self):
         return self.review_status == self.READY_TO_PUBLISH
 
+    def assign(self, user):
+        assert self.review_status == self.OPEN
+        self.reviewer = user
+        self.review_status = self.UNDER_REVIEW
+        self.save()
+
+    def unassign(self):
+        assert self.review_status == self.UNDER_REVIEW
+        self.reviewer = None
+        self.review_status = self.OPEN
+        self.save()
+
+    def accept(self):
+        assert self.review_status == self.UNDER_REVIEW
+        self.review_status = self.READY_TO_PUBLISH
+        self.save()
+
+    def reject(self):
+        assert self.review_status in [self.UNDER_REVIEW, self.READY_TO_PUBLISH, self.PUBLISHED]
+        self.review_status = self.REJECTED
+        self.published_date = None
+        self.save()
+
+    def restore(self):
+        assert self.review_status == self.REJECTED
+        self.review_status = self.UNDER_REVIEW
+        self.save()
+
     def publish(self):
         assert self.is_ready_to_publish()
         self.published_date = timezone.now()

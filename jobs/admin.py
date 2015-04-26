@@ -95,7 +95,15 @@ send_status_update_meetup.short_description = "Send notification about meetup st
 
 
 class JobAdmin(admin.ModelAdmin):
-    readonly_fields = ('reviewer', 'published_date')
+    fieldsets = (
+        ('Job info', {'fields': ('title', 'company', 'website', 'contact_email',
+                           ('cities', 'country'), 'description', 'remote_work',
+                           'relocation')}),
+        ('Flow info', {'fields': ('review_status', 'reviewers_comment',
+                                  'expiration_date', 'reviewer',
+                                  'published_date')}),
+    )
+    readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'company', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published, send_status_update_job_offer]
@@ -117,24 +125,62 @@ class JobAdmin(admin.ModelAdmin):
                 self.unassign_job_reviewer,
                 name='unassign_job_reviewer'
             ),
+            url(
+                r'^(?P<id>\d+)/accept/$',
+                self.accept_job,
+                name='accept_job'
+            ),
+            url(
+                r'^(?P<id>\d+)/reject/$',
+                self.reject_job,
+                name='reject_job'
+            ),
+            url(
+                r'^(?P<id>\d+)/restore/$',
+                self.restore_job,
+                name='restore_job'
+            ),
+            url(
+                r'^(?P<id>\d+)/publish/$',
+                self.publish_job,
+                name='publish_job'
+            ),
         )
         return my_urls + urls
 
     def assign_job_reviewer(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.reviewer = request.user
-        job.save()
+        job.assign(request.user)
         return redirect('/admin/jobs/job/%s/' % id)
 
     def unassign_job_reviewer(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.reviewer = None
-        job.save()
+        job.unassign()
+        return redirect('/admin/jobs/job/%s/' % id)
+
+    def accept_job(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.accept()
+        return redirect('/admin/jobs/job/%s/' % id)
+
+    def reject_job(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.reject()
+        return redirect('/admin/jobs/job/%s/' % id)
+
+    def restore_job(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.restore()
+        return redirect('/admin/jobs/job/%s/' % id)
+
+    def publish_job(self, request, id):
+        job = get_object_or_404(Job, id=id)
+        job.publish()
         return redirect('/admin/jobs/job/%s/' % id)
 
 
 class MeetupAdmin(admin.ModelAdmin):
-    readonly_fields = ('reviewer', 'published_date',)
+    readonly_fields = ('review_status', 'reviewer', 'published_date',)
     list_display = ['title', 'city', 'reviewer', 'review_status']
     ordering = ['title']
     actions = [make_published, send_status_update_meetup]
@@ -157,19 +203,62 @@ class MeetupAdmin(admin.ModelAdmin):
                 self.unassign_meetup_reviewer,
                 name='unassign_meetup_reviewer'
             ),
+            url(
+                r'^(?P<id>\d+)/accept/$',
+                self.accept_meetup,
+                name='accept_meetup'
+            ),
+            url(
+                r'^(?P<id>\d+)/reject/$',
+                self.reject_meetup,
+                name='reject_meetup'
+            ),
+            url(
+                r'^(?P<id>\d+)/restore/$',
+                self.restore_meetup,
+                name='restore_meetup'
+            ),
+            url(
+                r'^(?P<id>\d+)/publish/$',
+                self.publish_meetup,
+                name='publish_meetup'
+            ),
         )
         return my_urls + urls
 
     def assign_meetup_reviewer(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
-        meetup.reviewer = request.user
-        meetup.save()
+        meetup.assign(request.user)
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def unassign_meetup_reviewer(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
-        meetup.reviewer = None
-        meetup.save()
+        meetup.unassign()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def accept_meetup(self, request, id):
+        meetup = get_object_or_404(Meetup, id=id)
+        meetup.accept()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def reject_meetup(self, request, id):
+        meetup = get_object_or_404(Meetup, id=id)
+        meetup.reject()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def reject_meetp(self, request, id):
+        meetup = get_object_or_404(Job, id=id)
+        meetup.reject()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def restore_meetup(self, request, id):
+        meetup = get_object_or_404(Job, id=id)
+        meetup.restore()
+        return redirect('/admin/jobs/meetup/%s/' % id)
+
+    def publish_meetup(self, request, id):
+        meetup = get_object_or_404(Job, id=id)
+        meetup.publish()
         return redirect('/admin/jobs/meetup/%s/' % id)
 
 

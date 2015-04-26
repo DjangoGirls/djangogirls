@@ -26,12 +26,14 @@
                 <li><a href="{% url 'admin:unassign_meetup_reviewer' original.id %}" class="historylink"><i
                     class="icon-eye-close icon-alpha75"></i>{% trans "Unassign" %}</a>
                 </li>
-                <li><a href='/' class="historylink"><i
+                {% if original.review_status == original.UNDER_REVIEW %}
+                <li><a href="{% url 'admin:accept_meetup' original.id %}" class="historylink"><i
                     class="icon-ok icon-alpha75"></i>{% trans "Accept" %}</a>
                 </li>
-                <li><a href='/' class="historylink"><i
+                <li><a href="{% url 'admin:reject_meetup' original.id %}" class="historylink"><i
                     class="icon-remove icon-alpha75"></i>{% trans "Reject" %}</a>
                 </li>
+                {% endif %}
 
               {% endblock %}
             </ul>

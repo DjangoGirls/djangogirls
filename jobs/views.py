@@ -48,7 +48,7 @@ def jobs(request):
 
 def meetups(request):
     meetup_list = Meetup.objects.filter(
-        review_status=Job.PUBLISHED,
+        review_status=Meetup.PUBLISHED,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
@@ -79,7 +79,7 @@ def job_details(request, id):
 
 def meetup_details(request, id):
     queryset = Meetup.objects.filter(
-        review_status=Job.PUBLISHED,
+        review_status=Meetup.PUBLISHED,
         published_date__isnull=False,
         expiration_date__gte=timezone.now()
     )
@@ -90,7 +90,7 @@ def meetup_details(request, id):
         {
             'meetup': meetup,
         }
-    )
+    )   
 
 def confirm_submission(request):
     return TemplateResponse(
