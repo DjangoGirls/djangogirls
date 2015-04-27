@@ -1,0 +1,3 @@
+{{ option }} has been succesfully submitted, we will publish it soon!
+Greetings!
+Django Girls Team

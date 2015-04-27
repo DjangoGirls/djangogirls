@@ -1,0 +1,6 @@
+Hello there!
+
+This is an automatic information about your {{ option }}. Current status is: {{ status }}.
+
+Greetings!
+Django Girls team

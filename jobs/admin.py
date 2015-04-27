@@ -21,15 +21,22 @@ make_published.short_description = "Publish selected items"
 
 
 def send_status_update_job_offer(modeladmin, request, queryset):
+    option = 'job offer'
     for item in queryset:
         subject = "Status update on your job offer - {0}.".format(item.title)
         message_plain = get_template(
-            'jobs/email_templates/job_status.txt').render(
-                Context({'status': item.get_review_status_display()})
+            'jobs/email_templates/status.txt').render(
+                Context({
+                    'status': item.get_review_status_display(),
+                    'option': option
+                })
         )
         message_html = get_template(
-            'jobs/email_templates/job_status.html').render(
-                Context({'status': item.get_review_status_display()})
+            'jobs/email_templates/status.html').render(
+                Context({
+                    'status': item.get_review_status_display(),
+                    'option': option
+                })
         )
         send_from = "jobs@djangogirls.org"
         recipient = [item.contact_email, ]
@@ -58,15 +65,22 @@ send_status_update_job_offer.short_description = "Send notification about job of
 
 
 def send_status_update_meetup(modeladmin, request, queryset):
+    option = 'meetup'
     for item in queryset:
         subject = "Status update on your meetup - {0}.".format(item.title)
         message_plain = get_template(
-            'jobs/email_templates/meetup_status.txt').render(
-                Context({'status': item.get_review_status_display()})
+            'jobs/email_templates/status.txt').render(
+                Context({
+                    'status': item.get_review_status_display(),
+                    'option': option
+                })
         )
         message_html = message_plain = get_template(
-            'jobs/email_templates/meetup_status.html').render(
-                Context({'status': item.get_review_status_display()})
+            'jobs/email_templates/status.html').render(
+                Context({
+                    'status': item.get_review_status_display(),
+                    'option': option
+                })
         )
         send_from = "meetups@djangogirls.org"
         recipient = [item.contact_email, ]

@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     url(r'^job/(?P<id>\d+)$', views.job_details, name='job_details'),
     url(r'^confirm_submission$', views.confirm_submission, name='confirm_submission'),
     url(r'^meetup/(?P<id>\d+)$', views.meetup_details, name='meetup_details'),
-    url(r'^job/new$', views.JobCreate.as_view(), name='job_new'),
-    url(r'^meetup/new$', views.MeetupCreate.as_view(), name='meetup_new'),
+    url(r'^job/new$', views.create_job, name='job_new'),
+    url(r'^meetup/new$', views.create_meetup, name='meetup_new'),
 )
