@@ -131,32 +131,32 @@ class JobAdmin(admin.ModelAdmin):
         my_urls = patterns('',
             url(
                 r'^(?P<id>\d+)/assign/$',
-                self.assign_job_reviewer,
+                self.admin_site.admin_view(self.assign_job_reviewer),
                 name='assign_job_reviewer'
             ),
             url(
                 r'^(?P<id>\d+)/unassign/$',
-                self.unassign_job_reviewer,
+                self.admin_site.admin_view(self.unassign_job_reviewer),
                 name='unassign_job_reviewer'
             ),
             url(
                 r'^(?P<id>\d+)/accept/$',
-                self.accept_job,
+                self.admin_site.admin_view(self.accept_job),
                 name='accept_job'
             ),
             url(
                 r'^(?P<id>\d+)/reject/$',
-                self.reject_job,
+                self.admin_site.admin_view(self.reject_job),
                 name='reject_job'
             ),
             url(
                 r'^(?P<id>\d+)/restore/$',
-                self.restore_job,
+                self.admin_site.admin_view(self.restore_job),
                 name='restore_job'
             ),
             url(
                 r'^(?P<id>\d+)/publish/$',
-                self.publish_job,
+                self.admin_site.admin_view(self.publish_job),
                 name='publish_job'
             ),
         )
@@ -209,32 +209,32 @@ class MeetupAdmin(admin.ModelAdmin):
         my_urls = patterns('',
             url(
                 r'^(?P<id>\d+)/assign/$',
-                self.assign_meetup_reviewer,
+                self.admin_site.admin_view(self.assign_meetup_reviewer),
                 name='assign_meetup_reviewer'
             ),
             url(
                 r'^(?P<id>\d+)/unassign/$',
-                self.unassign_meetup_reviewer,
+                self.admin_site.admin_view(self.unassign_meetup_reviewer),
                 name='unassign_meetup_reviewer'
             ),
             url(
                 r'^(?P<id>\d+)/accept/$',
-                self.accept_meetup,
+                self.admin_site.admin_view(self.accept_meetup),
                 name='accept_meetup'
             ),
             url(
                 r'^(?P<id>\d+)/reject/$',
-                self.reject_meetup,
+                self.admin_site.admin_view(self.reject_meetup),
                 name='reject_meetup'
             ),
             url(
                 r'^(?P<id>\d+)/restore/$',
-                self.restore_meetup,
+                self.admin_site.admin_view(self.restore_meetup),
                 name='restore_meetup'
             ),
             url(
                 r'^(?P<id>\d+)/publish/$',
-                self.publish_meetup,
+                self.admin_site.admin_view(self.publish_meetup),
                 name='publish_meetup'
             ),
         )
@@ -260,18 +260,13 @@ class MeetupAdmin(admin.ModelAdmin):
         meetup.reject()
         return redirect('/admin/jobs/meetup/%s/' % id)
 
-    def reject_meetp(self, request, id):
-        meetup = get_object_or_404(Job, id=id)
-        meetup.reject()
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
     def restore_meetup(self, request, id):
-        meetup = get_object_or_404(Job, id=id)
+        meetup = get_object_or_404(Meetup, id=id)
         meetup.restore()
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def publish_meetup(self, request, id):
-        meetup = get_object_or_404(Job, id=id)
+        meetup = get_object_or_404(Meetup, id=id)
         meetup.publish()
         return redirect('/admin/jobs/meetup/%s/' % id)
 

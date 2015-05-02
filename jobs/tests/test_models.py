@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from model_mommy import mommy
 
+from core.models import User
 from jobs.models import Job, Meetup
 
 
@@ -14,7 +15,8 @@ class JobModelTests(TestCase):
     def setUp(self):
         """Setting up models with mommy."""
         self.custom_date = timezone.now() + timedelta(days=45)
-        self.job_not_ready = mommy.make(Job, review_status=Job.OPEN)
+        self.job_open = mommy.make(Job, review_status=Job.OPEN)
+        self.job_under_review = mommy.make(Job, review_status=Job.UNDER_REVIEW)
         self.job_ready_no_exp_date = mommy.make(
             Job,
             review_status=Job.READY_TO_PUBLISH,
@@ -25,21 +27,90 @@ class JobModelTests(TestCase):
             review_status=Job.READY_TO_PUBLISH,
             expiration_date=self.custom_date
         )
+        self.job_rejected = mommy.make(Job, review_status=Job.REJECTED)
+        self.job_published = mommy.make(
+            Job,
+            review_status=Job.PUBLISHED,
+            published_date=timezone.now()
+        )
+        self.sample_user = mommy.make(
+            User,
+            first_name="Ola",
+            last_name="Smith"
+        )
 
     def test_is_ready_to_publish_for_not_ready(self):
         """Tests if the is_ready_to_publish_method returns correct value
         for a job not ready to publish"""
-        self.assertFalse(self.job_not_ready.is_ready_to_publish())
+        self.assertFalse(self.job_open.is_ready_to_publish())
 
     def test_is_ready_to_publish_for_ready(self):
         """Tests if the is_ready_to_publish_method returns correct value
         for a job ready to publish"""
         self.assertTrue(self.job_ready_no_exp_date.is_ready_to_publish())
 
+    def test_assign_for_jobs_open(self):
+        """Tests the assign method for jobs in the OPEN state"""
+        self.job_open.assign(self.sample_user)
+        self.assertTrue(self.job_open.review_status == Job.UNDER_REVIEW)
+        self.assertTrue(self.job_open.reviewer == self.sample_user)
+
+    def test_assign_for_jobs_not_open(self):
+        """Tests the assign method for jobs not in the OPEN state"""
+        self.assertRaises(AssertionError, self.job_under_review.assign, self.sample_user)
+
+    def test_unassign_for_jobs_under_review(self):
+        """Tests the unassign method for jobs in the UNDER_REVIEW state"""
+        self.job_under_review.unassign()
+        self.assertTrue(self.job_under_review.review_status == Job.OPEN)
+        self.assertFalse(self.job_under_review.reviewer)
+
+    def test_unassign_for_jobs_not_under_review(self):
+        """Tests the unassign method for jobs not in the UNDER_REVIEW state"""
+        self.assertRaises(AssertionError, self.job_open.unassign)
+
+    def test_accept_for_jobs_under_review(self):
+        """Tests the accept method for jobs in the UNDER_REVIEW state"""
+        self.job_under_review.accept()
+        self.assertTrue(self.job_under_review.review_status == Job.READY_TO_PUBLISH)
+
+    def test_accept_for_jobs_not_under_review(self):
+        """Tests the unassign method for jobs not in the UNDER_REVIEW state"""
+        self.assertRaises(AssertionError, self.job_open.accept)
+
+    def test_reject_for_jobs_under_review(self):
+        """Tests the reject method for jobs in the UNDER_REVIEW state"""
+        self.job_under_review.reject()
+        self.assertTrue(self.job_under_review.review_status == Job.REJECTED)
+
+    def test_reject_for_jobs_ready_to_publish(self):
+        """Tests the reject method for jobs in the READY_TO_PUBLISHED state"""
+        self.job_ready_no_exp_date.reject()
+        self.assertTrue(self.job_ready_no_exp_date.review_status == Job.REJECTED)
+
+    def test_reject_for_jobs_published(self):
+        """Tests the reject method for jobs in the PUBLISHED state"""
+        self.job_published.reject()
+        self.assertTrue(self.job_published.review_status == Job.REJECTED)
+        self.assertFalse(self.job_published.published_date)
+
+    def test_reject_for_jobs_in_wrong_state(self):
+        """Tests the reject method for jobs not in the wrong state"""
+        self.assertRaises(AssertionError, self.job_open.reject)
+
+    def test_restore_for_jobs_rejected(self):
+        """Tests the restore method for jobs in the REJECTED state"""
+        self.job_rejected.restore()
+        self.assertTrue(self.job_rejected.review_status == Job.UNDER_REVIEW)
+
+    def test_restore_for_jobs_not_rejected(self):
+        """Tests the restore method for jobs not in the REJECTED state"""
+        self.assertRaises(AssertionError, self.job_open.restore)
+
     def test_publish_not_ready_to_publish(self):
         """Attempts to publish jobs which are not in the READY_TO_PUBLISH state,
         it should results in an assertion error"""
-        self.assertRaises(AssertionError,  self.job_not_ready.publish)
+        self.assertRaises(AssertionError,  self.job_open.publish)
 
     def test_expiration_date_default_value(self):
         """Tests if default value is 60 days from now."""
