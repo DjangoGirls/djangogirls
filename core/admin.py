@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
+from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin
 
@@ -26,6 +28,16 @@ class EventPageAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(event__team__in=[request.user,])
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            now = timezone.now()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            # Don't let change objects for events that already happened
+            if obj.event.date < now_approx:
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
+
 class EventPageContentForm(ModelForm):
     class Meta:
         widgets = {
@@ -47,8 +59,19 @@ class EventPageContentAdmin(SortableModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+            if 'page' in form.base_fields:
+                form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            now = timezone.now()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            # Don't let change objects for events that already happened
+            if obj.page.event.date < now_approx:
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class EventPageMenuAdmin(SortableModelAdmin):
     list_display = ('title', 'page', 'url', 'position')
@@ -64,8 +87,19 @@ class EventPageMenuAdmin(SortableModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+            if 'page' in form.base_fields:
+                form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            now = timezone.now()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            # Don't let change objects for events that already happened
+            if obj.page.event.date < now_approx:
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class SponsorAdmin(SortableModelAdmin):
     list_display = ('name', 'event_page_content', 'url', 'position')
@@ -80,8 +114,19 @@ class SponsorAdmin(SortableModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+            if 'event_page_content' in form.base_fields:
+                form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            now = timezone.now()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            # Don't let change objects for events that already happened
+            if obj.event_page_content.page.event.date < now_approx:
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class CoachAdmin(admin.ModelAdmin):
     list_display = ('name', 'event_page_content', 'twitter_handle', 'url')
@@ -95,8 +140,19 @@ class CoachAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+            if 'event_page_content' in form.base_fields:
+                form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            now = timezone.now()
+            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+            # Don't let change objects for events that already happened
+            if obj.event_page_content.page.event.date < now_approx:
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
