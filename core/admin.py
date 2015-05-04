@@ -11,7 +11,7 @@ from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
-    search_fields = ('city', 'country')
+    search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).queryset(request)
@@ -21,6 +21,7 @@ class EventAdmin(admin.ModelAdmin):
 
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
+    search_fields = ('title', 'event__name', 'event__city', 'event__country')
 
     def get_queryset(self, request):
         qs = super(EventPageAdmin, self).queryset(request)
@@ -63,7 +64,8 @@ class CoachInline(admin.TabularInline):
 
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
-    list_filter = ('page','is_public')
+    list_filter = ('page', 'is_public')
+    search_fields = ('name', 'page__title', 'content', 'page__event__city', 'page__event__country', 'page__event__name')
     form = EventPageContentForm
     sortable = 'position'
     inlines = [
@@ -124,6 +126,7 @@ class EventPageMenuAdmin(SortableModelAdmin):
 
 class SponsorAdmin(SortableModelAdmin):
     list_display = ('name', 'logo_display_for_admin', 'url', 'position')
+    list_filter = ('event_page_content__page',)
     sortable = 'position'
 
     def get_queryset(self, request):
@@ -151,6 +154,7 @@ class SponsorAdmin(SortableModelAdmin):
 
 class CoachAdmin(admin.ModelAdmin):
     list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url',)
+    list_filter = ('event_page_content__page',)
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).queryset(request)
