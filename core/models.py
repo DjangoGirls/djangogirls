@@ -167,6 +167,16 @@ class Sponsor(models.Model):
     class Meta:
         ordering = ('position', )
 
+    def logo_display_for_admin(self):
+        if self.logo:
+            return '<a href="{}" target="_blank"><img src="{}" alt="{}" width="100" /></a>'.format(
+                self.logo.url, self.logo.url, self.name)
+        else:
+            return 'No logo'
+    logo_display_for_admin.allow_tags = True
+    logo_display_for_admin.text = 'A'
+
+
 class Coach(models.Model):
     event_page_content = models.ForeignKey(EventPageContent, null=False, blank=False)
     name = models.CharField(max_length=200, null=False, blank=False)
@@ -181,6 +191,15 @@ class Coach(models.Model):
     class Meta:
         ordering = ('?',)
         verbose_name_plural = "Coaches"
+
+    def photo_display_for_admin(self):
+        if self.photo:
+            return '<a href="{}" target="_blank"><img src="{}" alt="{}" width="100" /></a>'.format(
+                self.photo.url, self.photo.url, self.name)
+        else:
+            return 'No image'
+    photo_display_for_admin.allow_tags = True
+
 
 class Postmortem(models.Model):
     event = models.ForeignKey(Event, null=False, blank=False)

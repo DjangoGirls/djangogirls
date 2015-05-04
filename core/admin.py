@@ -4,7 +4,7 @@ from django.contrib.auth import admin as auth_admin
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 from suit_redactor.widgets import RedactorWidget
-from suit.admin import SortableModelAdmin
+from suit.admin import SortableModelAdmin, SortableTabularInline
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
@@ -44,11 +44,32 @@ class EventPageContentForm(ModelForm):
             'content': RedactorWidget(editor_options={'lang': 'en'})
         }
 
+
+class SponsorInline(SortableTabularInline):
+    model = Sponsor
+    extra = 1
+    verbose_name_plural = 'Sponsors'
+    sortable = 'position'
+    fields = ('name', 'logo', 'url', 'position')
+
+
+class CoachInline(admin.TabularInline):
+    model = Coach
+    extra = 1
+    verbose_name_plural = 'Coaches'
+    sortable = 'position'
+    fields = ('name', 'twitter_handle', 'url', 'photo')
+
+
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
     list_filter = ('page','is_public')
     form = EventPageContentForm
     sortable = 'position'
+    inlines = [
+        SponsorInline,
+        CoachInline
+    ]
 
     def get_queryset(self, request):
         qs = super(EventPageContentAdmin, self).queryset(request)
@@ -102,7 +123,7 @@ class EventPageMenuAdmin(SortableModelAdmin):
 
 
 class SponsorAdmin(SortableModelAdmin):
-    list_display = ('name', 'event_page_content', 'url', 'position')
+    list_display = ('name', 'logo_display_for_admin', 'url', 'position')
     sortable = 'position'
 
     def get_queryset(self, request):
@@ -129,7 +150,7 @@ class SponsorAdmin(SortableModelAdmin):
 
 
 class CoachAdmin(admin.ModelAdmin):
-    list_display = ('name', 'event_page_content', 'twitter_handle', 'url')
+    list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url',)
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).queryset(request)
