@@ -174,7 +174,6 @@ class Sponsor(models.Model):
         else:
             return 'No logo'
     logo_display_for_admin.allow_tags = True
-    logo_display_for_admin.text = 'A'
 
 
 class Coach(models.Model):

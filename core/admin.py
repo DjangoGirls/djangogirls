@@ -9,6 +9,10 @@ from suit.admin import SortableModelAdmin, SortableTabularInline
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
+now = timezone.now()
+NOW_APPROX = ApproximateDate(year=now.year, month=now.month, day=now.day)
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
     search_fields = ('city', 'country', 'name')
@@ -17,7 +21,8 @@ class EventAdmin(admin.ModelAdmin):
         qs = super(EventAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(team__in=[request.user,])
+        return qs.filter(team__in=[request.user])
+
 
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
@@ -27,14 +32,12 @@ class EventPageAdmin(admin.ModelAdmin):
         qs = super(EventPageAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event__team__in=[request.user,])
+        return qs.filter(event__team__in=[request.user])
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            now = timezone.now()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             # Don't let change objects for events that already happened
-            if obj.event.date < now_approx:
+            if obj.event.date < NOW_APPROX:
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -65,7 +68,8 @@ class CoachInline(admin.TabularInline):
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
     list_filter = ('page', 'is_public')
-    search_fields = ('name', 'page__title', 'content', 'page__event__city', 'page__event__country', 'page__event__name')
+    search_fields = ('name', 'page__title', 'content', 'page__event__city',
+                     'page__event__country', 'page__event__name')
     form = EventPageContentForm
     sortable = 'position'
     inlines = [
@@ -77,21 +81,21 @@ class EventPageContentAdmin(SortableModelAdmin):
         qs = super(EventPageContentAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'page' in form.base_fields:
-                form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+                form.base_fields['page'].queryset = EventPage.objects.filter(
+                    event__team__in=[request.user]
+                )
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            now = timezone.now()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             # Don't let change objects for events that already happened
-            if obj.page.event.date < now_approx:
+            if obj.page.event.date < NOW_APPROX:
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -105,21 +109,21 @@ class EventPageMenuAdmin(SortableModelAdmin):
         qs = super(EventPageMenuAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'page' in form.base_fields:
-                form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+                form.base_fields['page'].queryset = EventPage.objects.filter(
+                    event__team__in=[request.user]
+                )
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            now = timezone.now()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             # Don't let change objects for events that already happened
-            if obj.page.event.date < now_approx:
+            if obj.page.event.date < NOW_APPROX:
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -133,48 +137,46 @@ class SponsorAdmin(SortableModelAdmin):
         qs = super(SponsorAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user,])
+        return qs.filter(event_page_content__page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                qs = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                form.base_fields['event_page_content'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            now = timezone.now()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             # Don't let change objects for events that already happened
-            if obj.event_page_content.page.event.date < now_approx:
+            if obj.event_page_content.page.event.date < NOW_APPROX:
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
 
 class CoachAdmin(admin.ModelAdmin):
-    list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url',)
+    list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url')
     list_filter = ('event_page_content__page',)
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user,])
+        return qs.filter(event_page_content__page__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                qs = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                form.base_fields['event_page_content'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            now = timezone.now()
-            now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             # Don't let change objects for events that already happened
-            if obj.event_page_content.page.event.date < now_approx:
+            if obj.event_page_content.page.event.date < NOW_APPROX:
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -182,12 +184,13 @@ class CoachAdmin(admin.ModelAdmin):
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
 
+
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+                                    'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
     limited_fieldsets = (
@@ -198,8 +201,8 @@ class UserAdmin(auth_admin.UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
-        ),
+            'fields': ('email', 'password1', 'password2')
+        }),
     )
     form = UserChangeForm
     limited_form = UserLimitedChangeForm
