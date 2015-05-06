@@ -116,7 +116,7 @@ class Event(models.Model):
         return event
 
     def organizers(self):
-        members = ['{} <{}>'.format(x.get_full_name(), x.email) for x in self.team.all()]
+        members = [u'{} <{}>'.format(x.get_full_name(), x.email) for x in self.team.all()]
         return ', '.join(members)
 
 
