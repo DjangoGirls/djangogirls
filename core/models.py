@@ -115,6 +115,10 @@ class Event(models.Model):
         event.add('location', u'%s, %s' % (self.country, self.city))
         return event
 
+    def organizers(self):
+        members = ['{} <{}>'.format(x.get_full_name(), x.email) for x in self.team.all()]
+        return ', '.join(members)
+
 
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)

@@ -10,7 +10,7 @@ from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
+    list_display = ('name', 'organizers', 'date', 'city', 'country', 'is_on_homepage')
     search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
