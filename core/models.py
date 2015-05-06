@@ -5,8 +5,10 @@ import icalendar
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
-from django_date_extensions.fields import ApproximateDateField
+from django_date_extensions.fields import ApproximateDate, ApproximateDateField
+
 
 class UserManager(auth_models.BaseUserManager):
     def create_user(self, email, password=None):
@@ -86,6 +88,13 @@ class Event(models.Model):
     class Meta:
         verbose_name_plural = "List of events"
 
+    def is_upcoming(self):
+        now = timezone.now()
+        now = ApproximateDate(year=now.year, month=now.month, day=now.day)
+        if now < self.date:
+            return True
+        return False
+
     @property
     def ical_uid(self):
         return 'event%d@djangogirls.org' % self.pk
@@ -106,6 +115,7 @@ class Event(models.Model):
         event.add('location', u'%s, %s' % (self.country, self.city))
         return event
 
+
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -121,6 +131,7 @@ class EventPage(models.Model):
 
     class Meta:
         verbose_name = "Website"
+
 
 class EventPageContent(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
@@ -151,6 +162,7 @@ class EventPageMenu(models.Model):
     class Meta:
         ordering = ('position', )
         verbose_name = "Website Menu"
+
 
 class Sponsor(models.Model):
     event_page_content = models.ForeignKey(EventPageContent, null=False, blank=False)
@@ -183,7 +195,6 @@ class Coach(models.Model):
     photo = models.ImageField(upload_to="event/coaches/", null=True, blank=True, help_text="For best display keep it square")
     url = models.URLField(null=True, blank=True)
 
-
     def __unicode__(self):
         return self.name
 
@@ -212,6 +223,7 @@ class Postmortem(models.Model):
 
     def __unicode__(self):
         return self.event.city
+
 
 class Story(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)

@@ -1,16 +1,12 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
-from django.utils import timezone
-from django_date_extensions.fields import ApproximateDate
+
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin, SortableTabularInline
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
-
-now = timezone.now()
-NOW_APPROX = ApproximateDate(year=now.year, month=now.month, day=now.day)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -21,7 +17,7 @@ class EventAdmin(admin.ModelAdmin):
         qs = super(EventAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(team__in=[request.user])
+        return qs.filter(team=request.user)
 
 
 class EventPageAdmin(admin.ModelAdmin):
@@ -32,12 +28,12 @@ class EventPageAdmin(admin.ModelAdmin):
         qs = super(EventPageAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event__team__in=[request.user])
+        return qs.filter(event__team=request.user)
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if obj.event.date < NOW_APPROX:
+            if not obj.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -81,21 +77,21 @@ class EventPageContentAdmin(SortableModelAdmin):
         qs = super(EventPageContentAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user])
+        return qs.filter(page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'page' in form.base_fields:
                 form.base_fields['page'].queryset = EventPage.objects.filter(
-                    event__team__in=[request.user]
+                    event__team=request.user
                 )
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if obj.page.event.date < NOW_APPROX:
+            if not obj.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -109,21 +105,21 @@ class EventPageMenuAdmin(SortableModelAdmin):
         qs = super(EventPageMenuAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user])
+        return qs.filter(page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'page' in form.base_fields:
                 form.base_fields['page'].queryset = EventPage.objects.filter(
-                    event__team__in=[request.user]
+                    event__team=request.user
                 )
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if obj.page.event.date < NOW_APPROX:
+            if not obj.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -137,20 +133,20 @@ class SponsorAdmin(SortableModelAdmin):
         qs = super(SponsorAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user])
+        return qs.filter(event_page_content__page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                qs = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                qs = EventPageContent.objects.filter(page__event__team=request.user)
                 form.base_fields['event_page_content'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if obj.event_page_content.page.event.date < NOW_APPROX:
+            if not obj.event_page_content.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -163,20 +159,20 @@ class CoachAdmin(admin.ModelAdmin):
         qs = super(CoachAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user])
+        return qs.filter(event_page_content__page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                qs = EventPageContent.objects.filter(page__event__team__in=[request.user])
+                qs = EventPageContent.objects.filter(page__event__team=request.user)
                 form.base_fields['event_page_content'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if obj.event_page_content.page.event.date < NOW_APPROX:
+            if not obj.event_page_content.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
