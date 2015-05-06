@@ -185,8 +185,8 @@ class Sponsor(models.Model):
 
     def logo_display_for_admin(self):
         if self.logo:
-            return '<a href="{}" target="_blank"><img src="{}" alt="{}" width="100" /></a>'.format(
-                self.logo.url, self.logo.url, self.name)
+            return '<a href="{}" target="_blank"><img src="{}" width="100" /></a>'.format(
+                self.logo.url, self.logo.url)
         else:
             return 'No logo'
     logo_display_for_admin.allow_tags = True
@@ -208,8 +208,8 @@ class Coach(models.Model):
 
     def photo_display_for_admin(self):
         if self.photo:
-            return '<a href="{}" target="_blank"><img src="{}" alt="{}" width="100" /></a>'.format(
-                self.photo.url, self.photo.url, self.name)
+            return '<a href="{}" target="_blank"><img src="{}" width="100" /></a>'.format(
+                self.photo.url, self.photo.url)
         else:
             return 'No image'
     photo_display_for_admin.allow_tags = True

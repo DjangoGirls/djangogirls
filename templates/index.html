@@ -83,7 +83,9 @@
                 <div class="col-md-12">
                     <h2>Past events</h2>
                     {% for event in past_events %}
-                        <a href="/{{ event.eventpage.url }}">{{ event.city }}, {{ event.date }}</a>
+                        <a href="{% if event.eventpage.is_live %}/{{ event.eventpage.url }}{% endif %}">
+                            {{ event.city }}, {{ event.date }}
+                        </a>
                     {% endfor %}
                 </div>
             </div>
