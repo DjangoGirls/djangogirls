@@ -1,30 +1,42 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
+
 from suit_redactor.widgets import RedactorWidget
-from suit.admin import SortableModelAdmin
+from suit.admin import SortableModelAdmin, SortableTabularInline
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'city', 'country', 'is_on_homepage')
-    search_fields = ('city', 'country')
+    search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(team__in=[request.user,])
+        return qs.filter(team=request.user)
+
 
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
+    search_fields = ('title', 'event__name', 'event__city', 'event__country')
 
     def get_queryset(self, request):
         qs = super(EventPageAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event__team__in=[request.user,])
+        return qs.filter(event__team=request.user)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            # Don't let change objects for events that already happened
+            if not obj.event.is_upcoming():
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class EventPageContentForm(ModelForm):
     class Meta:
@@ -32,23 +44,57 @@ class EventPageContentForm(ModelForm):
             'content': RedactorWidget(editor_options={'lang': 'en'})
         }
 
+
+class SponsorInline(SortableTabularInline):
+    model = Sponsor
+    extra = 1
+    verbose_name_plural = 'Sponsors'
+    sortable = 'position'
+    fields = ('name', 'logo', 'url', 'position')
+
+
+class CoachInline(admin.TabularInline):
+    model = Coach
+    extra = 1
+    verbose_name_plural = 'Coaches'
+    sortable = 'position'
+    fields = ('name', 'twitter_handle', 'url', 'photo')
+
+
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'page', 'content', 'position', 'is_public')
-    list_filter = ('page','is_public')
+    list_filter = ('page', 'is_public')
+    search_fields = ('name', 'page__title', 'content', 'page__event__city',
+                     'page__event__country', 'page__event__name')
     form = EventPageContentForm
     sortable = 'position'
+    inlines = [
+        SponsorInline,
+        CoachInline
+    ]
 
     def get_queryset(self, request):
         qs = super(EventPageContentAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+            if 'page' in form.base_fields:
+                form.base_fields['page'].queryset = EventPage.objects.filter(
+                    event__team=request.user
+                )
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            # Don't let change objects for events that already happened
+            if not obj.page.event.is_upcoming():
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class EventPageMenuAdmin(SortableModelAdmin):
     list_display = ('title', 'page', 'url', 'position')
@@ -59,54 +105,88 @@ class EventPageMenuAdmin(SortableModelAdmin):
         qs = super(EventPageMenuAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(page__event__team__in=[request.user,])
+        return qs.filter(page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['page'].queryset = EventPage.objects.filter(event__team__in=[request.user])
+            if 'page' in form.base_fields:
+                form.base_fields['page'].queryset = EventPage.objects.filter(
+                    event__team=request.user
+                )
         return form
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            # Don't let change objects for events that already happened
+            if not obj.page.event.is_upcoming():
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
+
 class SponsorAdmin(SortableModelAdmin):
-    list_display = ('name', 'event_page_content', 'url', 'position')
+    list_display = ('name', 'logo_display_for_admin', 'url', 'position')
+    list_filter = ('event_page_content__page',)
     sortable = 'position'
 
     def get_queryset(self, request):
         qs = super(SponsorAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user,])
+        return qs.filter(event_page_content__page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+            if 'event_page_content' in form.base_fields:
+                qs = EventPageContent.objects.filter(page__event__team=request.user)
+                form.base_fields['event_page_content'].queryset = qs
         return form
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            # Don't let change objects for events that already happened
+            if not obj.event_page_content.page.event.is_upcoming():
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
+
 class CoachAdmin(admin.ModelAdmin):
-    list_display = ('name', 'event_page_content', 'twitter_handle', 'url')
+    list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url')
+    list_filter = ('event_page_content__page',)
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team__in=[request.user,])
+        return qs.filter(event_page_content__page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form.base_fields['event_page_content'].queryset = EventPageContent.objects.filter(page__event__team__in=[request.user])
+            if 'event_page_content' in form.base_fields:
+                qs = EventPageContent.objects.filter(page__event__team=request.user)
+                form.base_fields['event_page_content'].queryset = qs
         return form
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            # Don't let change objects for events that already happened
+            if not obj.event_page_content.page.event.is_upcoming():
+                return set([x.name for x in self.model._meta.fields])
+        return self.readonly_fields
+
 
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
+
 
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+                                    'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
     limited_fieldsets = (
@@ -117,8 +197,8 @@ class UserAdmin(auth_admin.UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
-        ),
+            'fields': ('email', 'password1', 'password2')
+        }),
     )
     form = UserChangeForm
     limited_form = UserLimitedChangeForm
