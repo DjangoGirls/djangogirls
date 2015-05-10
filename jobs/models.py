@@ -9,6 +9,23 @@ from django.conf import settings
 from core.models import User
 
 
+class PublishFlowManager(models.Manager):
+
+    def get_queryset(self):
+        now = timezone.now().date().strftime("%Y-%m-%d")
+        return super(PublishFlowManager, self).get_queryset().extra(
+            select={'not_expired': "coalesce(expiration_date > '%s', 1)" % now})
+
+
+class VisiblePublishFlowManager(PublishFlowManager):
+    
+    def get_queryset(self):
+        return super(VisiblePublishFlowManager, self).get_queryset().filter(
+            review_status=PublishFlowModel.PUBLISHED,
+            expiration_date__gte=timezone.now()
+        )
+
+
 class PublishFlowModel(models.Model):
     """
     An abstract class model that handles all logic related to publishing
@@ -19,14 +36,12 @@ class PublishFlowModel(models.Model):
     READY_TO_PUBLISH = 'RTP'
     REJECTED = 'REJ'
     PUBLISHED = 'PUB'
-    EXPIRED = 'EXP'
     STATUSES = (
         (OPEN, 'Open'),
         (UNDER_REVIEW, 'Under review'),
         (READY_TO_PUBLISH, 'Ready to publish'),
         (REJECTED, 'Rejected'),
         (PUBLISHED, 'Published'),
-        (EXPIRED, 'Expired'),
     )
 
     reviewer = models.ForeignKey(
@@ -46,6 +61,9 @@ class PublishFlowModel(models.Model):
         help_text="Automatically is set 60 days from posting. You can"
                   " override this."
     )
+
+    objects = PublishFlowManager()
+    visible_objects = VisiblePublishFlowManager()
 
     class Meta:
         abstract = True

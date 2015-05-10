@@ -13,16 +13,8 @@ from community_mails import send_job_mail, send_meetup_mail
 
 
 def main(request):
-    job_offers = Job.objects.filter(
-        review_status=Job.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    ).order_by('-published_date')[:4]
-    meetup_list = Meetup.objects.filter(
-        review_status=Job.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    ).order_by('-published_date')[:3]
+    job_offers = Job.visible_objects.all().order_by('-published_date')[:4]
+    meetup_list = Meetup.visible_objects.all().order_by('-published_date')[:3]
     return render(
         request,
         'jobs/main.html',
@@ -34,11 +26,7 @@ def main(request):
 
 
 def jobs(request):
-    job_offers = Job.objects.filter(
-        review_status=Job.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    )
+    job_offers = Job.visible_objects.all()
     return render(
         request,
         'jobs/jobs.html',
@@ -49,11 +37,7 @@ def jobs(request):
 
 
 def meetups(request):
-    meetup_list = Meetup.objects.filter(
-        review_status=Meetup.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    )
+    meetup_list = Meetup.visible_objects.all()
     return TemplateResponse(
         request,
         'jobs/meetups.html',
@@ -64,11 +48,7 @@ def meetups(request):
 
 
 def job_details(request, id):
-    queryset = Job.objects.filter(
-        review_status=Job.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    )
+    queryset = Job.visible_objects.all()
     job = get_object_or_404(queryset, id=id)
     return TemplateResponse(
         request,
@@ -80,11 +60,7 @@ def job_details(request, id):
 
 
 def meetup_details(request, id):
-    queryset = Meetup.objects.filter(
-        review_status=Meetup.PUBLISHED,
-        published_date__isnull=False,
-        expiration_date__gte=timezone.now()
-    )
+    queryset = Meetup.visible_objects.all()
     meetup = get_object_or_404(queryset, id=id)
     return TemplateResponse(
         request,
@@ -93,6 +69,7 @@ def meetup_details(request, id):
             'meetup': meetup,
         }
     )
+
 
 def confirm_submission(request):
     return TemplateResponse(

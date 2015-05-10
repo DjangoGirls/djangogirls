@@ -53,3 +53,9 @@
 </ul>
 {% endif %}{% endif %}
 {% endblock %}
+
+{% block form_top %}
+    {% if not original.not_expired %}
+        <h3 class="text-error">{% trans "Expired" %}</h3>
+    {% endif %}
+{% endblock %}

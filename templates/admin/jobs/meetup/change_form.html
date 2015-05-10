@@ -29,7 +29,7 @@
     <li><a href="{% url 'admin:unassign_meetup_reviewer' original.id %}" class="historylink"><i
             class="icon-eye-close icon-alpha75"></i>{% trans "Unassign" %}</a>
     </li>
-    <li><a href="{% url 'admin:accept_meetup' original.id %}" class="historylink"><i
+    <li><a href="{% url 'admin:accept_meetup    ' original.id %}" class="historylink"><i
             class="icon-ok icon-alpha75"></i>{% trans "Accept" %}</a>
     </li>
     {% endif %}
@@ -52,4 +52,10 @@
     {% endblock %}
 </ul>
 {% endif %}{% endif %}
+{% endblock %}
+
+{% block form_top %}
+    {% if not original.not_expired %}
+        <h3 class="text-error">{% trans "Expired" %}</h3>
+    {% endif %}
 {% endblock %}

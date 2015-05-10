@@ -14,7 +14,8 @@ class JobModelTests(TestCase):
 
     def setUp(self):
         """Setting up models with mommy."""
-        self.custom_date = timezone.now() + timedelta(days=45)
+        self.future_date = timezone.now().date() + timedelta(days=45)
+        self.past_date = timezone.now().date() - timedelta(days=45)
         self.job_open = mommy.make(Job, review_status=Job.OPEN)
         self.job_under_review = mommy.make(Job, review_status=Job.UNDER_REVIEW)
         self.job_ready_no_exp_date = mommy.make(
@@ -22,10 +23,15 @@ class JobModelTests(TestCase):
             review_status=Job.READY_TO_PUBLISH,
             expiration_date=None
         )
-        self.job_ready_custom_exp_date = mommy.make(
+        self.job_ready_future_exp_date = mommy.make(
             Job,
             review_status=Job.READY_TO_PUBLISH,
-            expiration_date=self.custom_date
+            expiration_date=self.future_date
+        )
+        self.job_ready_past_exp_date = mommy.make(
+            Job,
+            review_status=Job.READY_TO_PUBLISH,
+            expiration_date=self.past_date
         )
         self.job_rejected = mommy.make(Job, review_status=Job.REJECTED)
         self.job_published = mommy.make(
@@ -127,10 +133,10 @@ class JobModelTests(TestCase):
 
     def test_publish_with_custom_expiration_date(self):
         """Tests the publish method with custom expiration date set"""
-        self.job_ready_custom_exp_date.publish()
+        self.job_ready_future_exp_date.publish()
         self.assertEqual(
-            self.job_ready_custom_exp_date.expiration_date,
-            self.custom_date
+            self.job_ready_future_exp_date.expiration_date,
+            self.future_date
         )
 
     def test_publish_twice_in_a_row(self):
@@ -146,17 +152,17 @@ class MeetupModelTests(TestCase):
 
     def setUp(self):
         """Setting up models with mommy."""
-        self.custom_date = timezone.now() + timedelta(days=45)
+        self.future_date = timezone.now().date() + timedelta(days=45)
         self.meetup_not_ready = mommy.make(Meetup, review_status=Meetup.OPEN)
         self.meetup_ready_no_exp_date = mommy.make(
             Meetup,
             review_status=Meetup.READY_TO_PUBLISH,
             expiration_date=None
         )
-        self.meetup_ready_custom_exp_date = mommy.make(
+        self.meetup_ready_future_exp_date = mommy.make(
             Meetup,
             review_status=Meetup.READY_TO_PUBLISH,
-            expiration_date=self.custom_date
+            expiration_date=self.future_date
         )
 
     def test_publish_without_ready_to_publish(self):
@@ -179,8 +185,8 @@ class MeetupModelTests(TestCase):
 
     def test_publish_with_custom_expiration_date(self):
         """Tests the publish method with custom expiration date set"""
-        self.meetup_ready_custom_exp_date.publish()
+        self.meetup_ready_future_exp_date.publish()
         self.assertEqual(
-            self.meetup_ready_custom_exp_date.expiration_date,
-            self.custom_date
+            self.meetup_ready_future_exp_date.expiration_date,
+            self.future_date
         )

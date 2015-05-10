@@ -118,13 +118,18 @@ class JobAdmin(admin.ModelAdmin):
                                   'published_date')}),
     )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
-    list_display = ['title', 'company', 'reviewer', 'review_status']
+    list_display = ['title', 'company', 'reviewer', 'review_status', 'not_expired']
     ordering = ['title']
     actions = [make_published, send_status_update_job_offer]
     formfield_overrides = {
         models.DateField: {'widget': SuitDateWidget},
         models.TextField: {'widget': AutosizedTextarea},
     }
+
+    def not_expired(self, obj):
+        return obj.not_expired
+    not_expired.boolean = True
+    not_expired.admin_order_field = 'not_expired'
 
     def get_urls(self):
         urls = super(JobAdmin, self).get_urls()
@@ -194,8 +199,8 @@ class JobAdmin(admin.ModelAdmin):
 
 
 class MeetupAdmin(admin.ModelAdmin):
-    readonly_fields = ('review_status', 'reviewer', 'published_date',)
-    list_display = ['title', 'city', 'reviewer', 'review_status']
+    readonly_fields = ('review_status', 'reviewer', 'published_date')
+    list_display = ['title', 'city', 'reviewer', 'review_status', 'not_expired']
     ordering = ['title']
     actions = [make_published, send_status_update_meetup]
     formfield_overrides = {
@@ -203,6 +208,11 @@ class MeetupAdmin(admin.ModelAdmin):
         models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
         models.TextField: {'widget': AutosizedTextarea},
     }
+
+    def not_expired(self, obj):
+        return obj.not_expired
+    not_expired.boolean = True
+    not_expired.admin_order_field = 'not_expired'
 
     def get_urls(self):
         urls = super(MeetupAdmin, self).get_urls()
