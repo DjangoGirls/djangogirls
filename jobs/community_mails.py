@@ -1,7 +1,7 @@
 from django.core.mail import send_mail
 
-from djangogirls.local_settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
-from djangogirls.local_settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
+from djangogirls.settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
+from djangogirls.settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
 
 
 def send_job_mail(subject, message_plain, message_html, recipient):

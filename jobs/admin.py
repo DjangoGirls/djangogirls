@@ -8,8 +8,8 @@ from django.shortcuts import redirect, get_object_or_404
 
 from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
 
-from djangogirls.local_settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
-from djangogirls.local_settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
+from djangogirls.settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
+from djangogirls.settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
 from .models import PublishFlowModel, Job, Meetup
 
 
