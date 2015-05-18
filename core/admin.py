@@ -10,7 +10,7 @@ from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'organizers', 'date', 'city', 'country', 'is_on_homepage')
+    list_display = ('name', 'organizers', 'date', 'city', 'country', 'is_on_homepage', 'is_past_event', 'has_stats')
     search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
@@ -18,6 +18,14 @@ class EventAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(team=request.user)
+
+    def is_past_event(self, obj):
+        return not obj.is_upcoming()
+    is_past_event.boolean = True
+
+    def has_stats(self, obj):
+        return Postmortem.objects.filter(event=obj).exists()
+    has_stats.boolean = True
 
 
 class EventPageAdmin(admin.ModelAdmin):
