@@ -10,7 +10,7 @@
    
     <script>
         L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
-        var map = L.mapbox.map('map', 'olasitarska.m8nged0f').setView([30, 0], 2);
+        var map = L.mapbox.map('map', 'olasitarska.m8nged0f', {scrollWheelZoom: false}).setView([30, 0], 2);
 
         {% for event in events %}
             {% if event.latlng %}
