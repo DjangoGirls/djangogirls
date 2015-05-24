@@ -9,28 +9,21 @@
     </div>
    
     <script>
-        var map = L.map('map', {
-            center: [30, 0],
-            zoom: 2,
-            scrollWheelZoom: false
-        });
+        L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
+        var map = L.mapbox.map('map', 'olasitarska.m8nged0f');
 
-        L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accesstoken}', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'examples.map-i875mjb7',
-            accesstoken: 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ'
-        }).addTo(map);
 
-        var pixelHeart = L.icon({
-            iconUrl: '{% static 'img/global/map_icon.png' %}',
-            iconSize: [24, 21],
-        });
 
         {% for event in events %}
-            L.marker([{{ event.latlng }}], {icon: pixelHeart, riseOnHover: true}).addTo(map).bindPopup('{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}');
+            {% if event.latlng %}
+            L.marker([{{ event.latlng }}], {
+                icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'heart',
+                    'marker-color': '#{{ event.eventpage.main_color }}'
+                })
+            }).addTo(map).bindPopup('{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}');
+            {% endif %}
         {% endfor %}
     </script>
 
