@@ -106,12 +106,13 @@ class JobModelTests(TestCase):
 
     def test_restore_for_jobs_rejected(self):
         """Tests the restore method for jobs in the REJECTED state"""
-        self.job_rejected.restore()
+        self.job_rejected.restore(self.sample_user)
         self.assertTrue(self.job_rejected.review_status == Job.UNDER_REVIEW)
+        self.assertTrue(self.job_rejected.reviewer == self.sample_user)
 
     def test_restore_for_jobs_not_rejected(self):
         """Tests the restore method for jobs not in the REJECTED state"""
-        self.assertRaises(AssertionError, self.job_open.restore)
+        self.assertRaises(AssertionError, self.job_open.restore, self.sample_user)
 
     def test_publish_not_ready_to_publish(self):
         """Attempts to publish jobs which are not in the READY_TO_PUBLISH state,

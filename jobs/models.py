@@ -132,8 +132,9 @@ class PublishFlowModel(models.Model):
                 recipient,
             )
 
-    def restore(self):
+    def restore(self, user):
         assert self.review_status == self.REJECTED
+        self.reviewer = user
         self.review_status = self.UNDER_REVIEW
         self.save()
 

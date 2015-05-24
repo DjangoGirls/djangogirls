@@ -219,6 +219,7 @@ class JobAdmin(admin.ModelAdmin):
             messages.INFO,
             '{0} is now restored.'.format(job)
         )
+        job.restore(request.user)
         return redirect('/admin/jobs/job/%s/' % id)
 
     def publish_job(self, request, id):
@@ -233,6 +234,16 @@ class JobAdmin(admin.ModelAdmin):
 
 
 class MeetupAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Meetup info', {'fields': ('title', 'organisation', 'website',
+                                    'contact_email', ('city', 'country'),
+                                    'meetup_type', 'description', 'is_recurring',
+                                    'recurrence', 'meetup_start_date',
+                                    'meetup_end_date')}),
+        ('Flow info', {'fields': ('review_status', 'reviewers_comment',
+                                  'expiration_date', 'reviewer',
+                                  'published_date')}),
+    )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'city', 'reviewer', 'review_status', 'not_expired']
     ordering = ['title']
@@ -331,6 +342,7 @@ class MeetupAdmin(admin.ModelAdmin):
             messages.INFO,
             '{0} is now restored.'.format(meetup)
         )
+        meetup.restore(request.user)
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def publish_meetup(self, request, id):
