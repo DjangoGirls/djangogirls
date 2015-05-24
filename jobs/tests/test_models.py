@@ -86,17 +86,17 @@ class JobModelTests(TestCase):
 
     def test_reject_for_jobs_under_review(self):
         """Tests the reject method for jobs in the UNDER_REVIEW state"""
-        self.job_under_review.reject()
+        self.job_under_review.reject(option='job')
         self.assertTrue(self.job_under_review.review_status == Job.REJECTED)
 
     def test_reject_for_jobs_ready_to_publish(self):
         """Tests the reject method for jobs in the READY_TO_PUBLISHED state"""
-        self.job_ready_no_exp_date.reject()
+        self.job_ready_no_exp_date.reject(option='job')
         self.assertTrue(self.job_ready_no_exp_date.review_status == Job.REJECTED)
 
     def test_reject_for_jobs_published(self):
         """Tests the reject method for jobs in the PUBLISHED state"""
-        self.job_published.reject()
+        self.job_published.reject(option='job')
         self.assertTrue(self.job_published.review_status == Job.REJECTED)
         self.assertFalse(self.job_published.published_date)
 
@@ -133,7 +133,7 @@ class JobModelTests(TestCase):
 
     def test_publish_with_custom_expiration_date(self):
         """Tests the publish method with custom expiration date set"""
-        self.job_ready_future_exp_date.publish()
+        self.job_ready_future_exp_date.publish(option='job')
         self.assertEqual(
             self.job_ready_future_exp_date.expiration_date,
             self.future_date
@@ -142,7 +142,7 @@ class JobModelTests(TestCase):
     def test_publish_twice_in_a_row(self):
         """It is not possible to publish a job offer twice"""
         self.assertFalse(self.job_ready_no_exp_date.published_date)
-        self.job_ready_no_exp_date.publish()
+        self.job_ready_no_exp_date.publish(option='job offer')
         self.assertTrue(self.job_ready_no_exp_date.published_date, "Job has no published date.")
         self.assertRaises(AssertionError, self.job_ready_no_exp_date.publish)
 
@@ -172,7 +172,7 @@ class MeetupModelTests(TestCase):
 
     def test_publish_with_default_expiration_date(self):
         """Tests the publish method with no expiration date set"""
-        self.meetup_ready_no_exp_date.publish()
+        self.meetup_ready_no_exp_date.publish(option='meet')
         self.assertTrue(self.meetup_ready_no_exp_date.published_date)
         self.assertAlmostEqual(
             self.meetup_ready_no_exp_date.published_date,
@@ -185,7 +185,7 @@ class MeetupModelTests(TestCase):
 
     def test_publish_with_custom_expiration_date(self):
         """Tests the publish method with custom expiration date set"""
-        self.meetup_ready_future_exp_date.publish()
+        self.meetup_ready_future_exp_date.publish(option='meet')
         self.assertEqual(
             self.meetup_ready_future_exp_date.expiration_date,
             self.future_date
