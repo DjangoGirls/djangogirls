@@ -6,7 +6,12 @@ from django.db import models
 from django_countries.fields import CountryField
 from django.conf import settings
 
+from django.template.loader import get_template
+from django.template import Context
+
 from core.models import User
+
+from community_mails import send_job_mail, send_meetup_mail
 
 
 class PublishFlowManager(models.Manager):
@@ -18,7 +23,7 @@ class PublishFlowManager(models.Manager):
 
 
 class VisiblePublishFlowManager(PublishFlowManager):
-    
+
     def get_queryset(self):
         return super(VisiblePublishFlowManager, self).get_queryset().filter(
             review_status=PublishFlowModel.PUBLISHED,
@@ -89,24 +94,88 @@ class PublishFlowModel(models.Model):
         self.review_status = self.READY_TO_PUBLISH
         self.save()
 
-    def reject(self):
+    def reject(self, option):
         assert self.review_status in [self.UNDER_REVIEW, self.READY_TO_PUBLISH, self.PUBLISHED]
         self.review_status = self.REJECTED
         self.published_date = None
         self.save()
+        subject = '{0} was rejected.'.format(self.title)
+        message_plain = get_template(
+            'jobs/email_templates/status.txt').render(
+            Context({
+                    'status': self.get_review_status_display(),
+                    'option': option,
+                    'reviewers_comment': self.reviewers_comment,
+                })
+            )
+        message_html = get_template(
+            'jobs/email_templates/status.html').render(
+            Context({
+                'status': self.get_review_status_display(),
+                'option': option,
+                'reviewers_comment': self.reviewers_comment,
+            })
+        )
+        recipient = self.contact_email
+        if option == 'job offer':
+            send_job_mail(
+                    subject,
+                    message_plain,
+                    message_html,
+                    recipient
+                )
+        elif option == 'meetup':
+            send_meetup_mail(
+                subject,
+                message_plain,
+                message_html,
+                recipient,
+            )
 
     def restore(self):
         assert self.review_status == self.REJECTED
         self.review_status = self.UNDER_REVIEW
         self.save()
 
-    def publish(self):
+    def publish(self, option):
         assert self.is_ready_to_publish()
         self.published_date = timezone.now()
         if not self.expiration_date:
             self.expiration_date = self.published_date + timedelta(60)
         self.review_status = self.PUBLISHED
         self.save()
+        subject = '{0} is now published.'.format(self.title)
+        message_plain = get_template(
+            'jobs/email_templates/status.txt').render(
+                Context({
+                    'status': self.get_review_status_display(),
+                    'option': option,
+                    'reviewers_comment': self.reviewers_comment,
+                })
+            )
+        message_html = get_template(
+            'jobs/email_templates/status.html').render(
+            Context({
+                'status': self.get_review_status_display(),
+                'option': option,
+                'reviewers_comment': self.reviewers_comment,
+            })
+        )
+        recipient = self.contact_email
+        if option == 'job offer':
+            send_job_mail(
+                    subject,
+                    message_plain,
+                    message_html,
+                    recipient
+                )
+        elif option == 'meetup':
+            send_meetup_mail(
+                subject,
+                message_plain,
+                message_html,
+                recipient,
+            )
 
 
 class Job(PublishFlowModel):

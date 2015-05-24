@@ -2,5 +2,10 @@ Hello there!
 
 This is an automatically generated email about your {{ option }}. Current status is: {{ status }}.
 
+{% if reviewers_comment %}
+    This is your feedback:
+    {{ reviewers_comment|linebreaks }}
+{% endif %}
+
 Greetings!
-Django Girls team
+Django Girls Team

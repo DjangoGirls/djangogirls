@@ -28,14 +28,16 @@ def send_status_update_job_offer(modeladmin, request, queryset):
             'jobs/email_templates/status.txt').render(
                 Context({
                     'status': item.get_review_status_display(),
-                    'option': option
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
                 })
         )
         message_html = get_template(
             'jobs/email_templates/status.html').render(
                 Context({
                     'status': item.get_review_status_display(),
-                    'option': option
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
                 })
         )
         send_from = "jobs@djangogirls.org"
@@ -72,14 +74,16 @@ def send_status_update_meetup(modeladmin, request, queryset):
             'jobs/email_templates/status.txt').render(
                 Context({
                     'status': item.get_review_status_display(),
-                    'option': option
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
                 })
         )
         message_html = message_plain = get_template(
             'jobs/email_templates/status.html').render(
                 Context({
                     'status': item.get_review_status_display(),
-                    'option': option
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
                 })
         )
         send_from = "meetups@djangogirls.org"
@@ -170,31 +174,61 @@ class JobAdmin(admin.ModelAdmin):
     def assign_job_reviewer(self, request, id):
         job = get_object_or_404(Job, id=id)
         job.assign(request.user)
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now assigned.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
     def unassign_job_reviewer(self, request, id):
         job = get_object_or_404(Job, id=id)
         job.unassign()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now unassigned.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
     def accept_job(self, request, id):
         job = get_object_or_404(Job, id=id)
         job.accept()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now accepted.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
     def reject_job(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.reject()
+        job.reject(option='job offer')
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now rejected - an email to submitter was sent.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
     def restore_job(self, request, id):
         job = get_object_or_404(Job, id=id)
         job.restore()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now restored.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
     def publish_job(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.publish()
+        job.publish(option='job')
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now published - an email to submitter was sent.'.format(job)
+        )
         return redirect('/admin/jobs/job/%s/' % id)
 
 
@@ -253,31 +287,60 @@ class MeetupAdmin(admin.ModelAdmin):
     def assign_meetup_reviewer(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
         meetup.assign(request.user)
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now assigned.'.format(meetup)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def unassign_meetup_reviewer(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
         meetup.unassign()
+        messages.add_message(
+            request,
+            messages.INFO, '{0} is now unassigned.'.format(meetup)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def accept_meetup(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
         meetup.accept()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now accepted.'.format(meetup)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def reject_meetup(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
-        meetup.reject()
+        meetup.reject(option='meetup')
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now rejected - an email to submitter was sent.'.format(meetup)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def restore_meetup(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
         meetup.restore()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now restored.'.format(meetup)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def publish_meetup(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
-        meetup.publish()
+        meetup.publish(option='meetup')
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now published - an email to submitter was sent.'.format(job)
+        )
         return redirect('/admin/jobs/meetup/%s/' % id)
 
 
