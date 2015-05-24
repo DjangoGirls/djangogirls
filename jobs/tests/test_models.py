@@ -102,7 +102,7 @@ class JobModelTests(TestCase):
 
     def test_reject_for_jobs_in_wrong_state(self):
         """Tests the reject method for jobs not in the wrong state"""
-        self.assertRaises(AssertionError, self.job_open.reject)
+        self.assertRaises(AssertionError, self.job_open.reject(option='job'))
 
     def test_restore_for_jobs_rejected(self):
         """Tests the restore method for jobs in the REJECTED state"""
@@ -116,11 +116,11 @@ class JobModelTests(TestCase):
     def test_publish_not_ready_to_publish(self):
         """Attempts to publish jobs which are not in the READY_TO_PUBLISH state,
         it should results in an assertion error"""
-        self.assertRaises(AssertionError,  self.job_open.publish)
+        self.assertRaises(AssertionError,  self.job_open.publish(option='job'))
 
     def test_expiration_date_default_value(self):
         """Tests if default value is 60 days from now."""
-        self.job_ready_no_exp_date.publish()
+        self.job_ready_no_exp_date.publish(option='job')
         self.assertTrue(self.job_ready_no_exp_date.published_date)
         self.assertAlmostEqual(
             self.job_ready_no_exp_date.published_date,
@@ -142,9 +142,9 @@ class JobModelTests(TestCase):
     def test_publish_twice_in_a_row(self):
         """It is not possible to publish a job offer twice"""
         self.assertFalse(self.job_ready_no_exp_date.published_date)
-        self.job_ready_no_exp_date.publish(option='job offer')
+        self.job_ready_no_exp_date.publish(option='job')
         self.assertTrue(self.job_ready_no_exp_date.published_date, "Job has no published date.")
-        self.assertRaises(AssertionError, self.job_ready_no_exp_date.publish)
+        self.assertRaises(AssertionError, self.job_ready_no_exp_date.publish(option='job'))
 
 
 class MeetupModelTests(TestCase):
@@ -168,7 +168,7 @@ class MeetupModelTests(TestCase):
     def test_publish_without_ready_to_publish(self):
         """Attempts to publish meetups with ready_to_published=False
         should results in an assertion error"""
-        self.assertRaises(AssertionError,  self.meetup_not_ready.publish)
+        self.assertRaises(AssertionError,  self.meetup_not_ready.publish(option='meet'))
 
     def test_publish_with_default_expiration_date(self):
         """Tests the publish method with no expiration date set"""
