@@ -32,7 +32,7 @@ def events(request):
 def events_map(request):
 
     return render(request, 'events_map.html', {
-        'events': Event.objects.all(),
+        'events': Event.objects.all().order_by('date'),
     })
 
 
