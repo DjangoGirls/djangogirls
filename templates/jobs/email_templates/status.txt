@@ -3,8 +3,10 @@ Hello there!
 This is an automatically generated email about your {{ option }}. Current status is: {{ status }}.
 
 {% if reviewers_comment %}
-    This is your feedback:
-    {{ reviewers_comment|linebreaks }}
+This is your feedback:
+{{ reviewers_comment|linebreaks }}
+{% else %}
+There was no additional information provided.
 {% endif %}
 
 Greetings!

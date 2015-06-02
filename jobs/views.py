@@ -92,18 +92,11 @@ def create_job(request):
                 success_message
             )
             subject = '{0} was submitted succesfully.'.format(new_job)
+            context = Context({ 'option': new_job })
             message_plain = get_template(
-            'jobs/email_templates/community_confirm.txt').render(
-                Context({
-                    'option': new_job
-                })
-            )
+            'jobs/email_templates/community_confirm.txt').render(context)
             message_html = get_template(
-                'jobs/email_templates/community_confirm.html').render(
-                Context({
-                    'option': new_job
-                })
-            )
+                'jobs/email_templates/community_confirm.html').render(context)
             recipient = new_job.contact_email
             send_job_mail(
                 subject,
@@ -135,18 +128,11 @@ def create_meetup(request):
                 success_message
             )
             subject = '{0} was submitted succesfully.'.format(new_meetup)
+            context =  Context({ 'option': new_meetup })
             message_plain = get_template(
-            'jobs/email_templates/community_confirm.txt').render(
-                Context({
-                    'option': new_meetup
-                })
-            )
+            'jobs/email_templates/community_confirm.txt').render(context)
             message_html = get_template(
-                'jobs/email_templates/community_confirm.html').render(
-                Context({
-                    'option': new_meetup
-                })
-            )
+                'jobs/email_templates/community_confirm.html').render(context)
             recipient = new_meetup.contact_email
             send_meetup_mail(
                 subject,

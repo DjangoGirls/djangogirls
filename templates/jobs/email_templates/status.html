@@ -5,6 +5,8 @@
         {% if reviewers_comment %}
             <p>This is your feedback:</p>
             <p> {{ reviewers_comment|linebreaks }}</p>
+        {% else %}
+            <p>There was no additional information provided.</p>
         {% endif %}
         <p>Greetings!</p>
         <p>Django Girls Team</p>

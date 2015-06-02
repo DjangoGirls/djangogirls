@@ -24,22 +24,15 @@ def send_status_update_job_offer(modeladmin, request, queryset):
     option = 'job offer'
     for item in queryset:
         subject = "Status update on your job offer - {0}.".format(item.title)
+        context = Context({
+                    'status': item.get_review_status_display(),
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
+                })
         message_plain = get_template(
-            'jobs/email_templates/status.txt').render(
-                Context({
-                    'status': item.get_review_status_display(),
-                    'option': option,
-                    'reviewers_comment': item.reviewers_comment,
-                })
-        )
+            'jobs/email_templates/status.txt').render(context)
         message_html = get_template(
-            'jobs/email_templates/status.html').render(
-                Context({
-                    'status': item.get_review_status_display(),
-                    'option': option,
-                    'reviewers_comment': item.reviewers_comment,
-                })
-        )
+            'jobs/email_templates/status.html').render(context)
         send_from = "jobs@djangogirls.org"
         recipient = [item.contact_email, ]
         send_mail(
@@ -70,22 +63,15 @@ def send_status_update_meetup(modeladmin, request, queryset):
     option = 'meetup'
     for item in queryset:
         subject = "Status update on your meetup - {0}.".format(item.title)
+        context = Context({
+                    'status': item.get_review_status_display(),
+                    'option': option,
+                    'reviewers_comment': item.reviewers_comment,
+                })
         message_plain = get_template(
-            'jobs/email_templates/status.txt').render(
-                Context({
-                    'status': item.get_review_status_display(),
-                    'option': option,
-                    'reviewers_comment': item.reviewers_comment,
-                })
-        )
+            'jobs/email_templates/status.txt').render(context)
         message_html = message_plain = get_template(
-            'jobs/email_templates/status.html').render(
-                Context({
-                    'status': item.get_review_status_display(),
-                    'option': option,
-                    'reviewers_comment': item.reviewers_comment,
-                })
-        )
+            'jobs/email_templates/status.html').render(context)
         send_from = "meetups@djangogirls.org"
         recipient = [item.contact_email, ]
         send_mail(
@@ -224,7 +210,7 @@ class JobAdmin(admin.ModelAdmin):
 
     def publish_job(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.publish(option='job')
+        job.publish(option='job offer')
         messages.add_message(
             request,
             messages.INFO,
@@ -351,7 +337,7 @@ class MeetupAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now published - an email to submitter was sent.'.format(job)
+            '{0} is now published - an email to submitter was sent.'.format(meetup)
         )
         return redirect('/admin/jobs/meetup/%s/' % id)
 

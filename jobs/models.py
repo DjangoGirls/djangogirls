@@ -100,22 +100,15 @@ class PublishFlowModel(models.Model):
         self.published_date = None
         self.save()
         subject = '{0} was rejected.'.format(self.title)
-        message_plain = get_template(
-            'jobs/email_templates/status.txt').render(
-            Context({
+        context = Context({
                     'status': self.get_review_status_display(),
                     'option': option,
                     'reviewers_comment': self.reviewers_comment,
                 })
-            )
+        message_plain = get_template(
+            'jobs/email_templates/status.txt').render(context)
         message_html = get_template(
-            'jobs/email_templates/status.html').render(
-            Context({
-                'status': self.get_review_status_display(),
-                'option': option,
-                'reviewers_comment': self.reviewers_comment,
-            })
-        )
+            'jobs/email_templates/status.html').render(context)
         recipient = self.contact_email
         if option == 'job offer':
             send_job_mail(
@@ -146,22 +139,15 @@ class PublishFlowModel(models.Model):
         self.review_status = self.PUBLISHED
         self.save()
         subject = '{0} is now published.'.format(self.title)
-        message_plain = get_template(
-            'jobs/email_templates/status.txt').render(
-                Context({
+        context = Context({
                     'status': self.get_review_status_display(),
                     'option': option,
                     'reviewers_comment': self.reviewers_comment,
                 })
-            )
+        message_plain = get_template(
+            'jobs/email_templates/status.txt').render(context)
         message_html = get_template(
-            'jobs/email_templates/status.html').render(
-            Context({
-                'status': self.get_review_status_display(),
-                'option': option,
-                'reviewers_comment': self.reviewers_comment,
-            })
-        )
+            'jobs/email_templates/status.html').render(context)
         recipient = self.contact_email
         if option == 'job offer':
             send_job_mail(
