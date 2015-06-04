@@ -1,4 +1,4 @@
-Django==1.7
+Django==1.7.8
 Pillow==2.5.1
 boto==2.32.0
 click==2.5
