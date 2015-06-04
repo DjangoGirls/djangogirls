@@ -116,12 +116,12 @@ class Event(models.Model):
         event.add('dtstart', event_date)
         event.add('dtend', event_date + timedelta(days=1))
         event.add('uid', self.ical_uid)
-        event.add('summary', u'Django Girls %s' % self.city)
-        event.add('location', u'%s, %s' % (self.country, self.city))
+        event.add('summary', 'Django Girls %s' % self.city)
+        event.add('location', '%s, %s' % (self.country, self.city))
         return event
 
     def organizers(self):
-        members = [u'{} <{}>'.format(x.get_full_name(), x.email) for x in self.team.all()]
+        members = ['{} <{}>'.format(x.get_full_name(), x.email) for x in self.team.all()]
         return ', '.join(members)
 
 

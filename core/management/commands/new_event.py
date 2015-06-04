@@ -198,7 +198,7 @@ class Command(BaseCommand):
         members = self.create_users(team)
 
         #Event and EventPage objects
-        name = u'Django Girls '+city
+        name = 'Django Girls '+city
         latlng = get_coordinates_for_city(city, country)
         event = Event.objects.create(name=name, city=city, country=country, latlng=latlng,
                                      main_organizer=members[0], date=date, is_on_homepage=False)
