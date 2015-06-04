@@ -1,8 +1,6 @@
-from datetime import datetime
-
 from django.db.models import Sum
 
-from .models import EventPage, Event, Postmortem
+from .models import Event, Postmortem
 
 
 def statistics(request):
