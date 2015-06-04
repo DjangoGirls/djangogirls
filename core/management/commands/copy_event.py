@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
 import click
 from datetime import datetime
 
@@ -129,5 +131,5 @@ class Command(BaseCommand):
             obj.page = new_eventpage
             obj.save()
 
-        click.echo(u"Website is ready here: http://djangogirls.org/{0}".format(url))
+        click.echo("Website is ready here: http://djangogirls.org/{0}".format(url))
         click.echo("Congrats on yet another event!")
