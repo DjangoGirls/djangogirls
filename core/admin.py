@@ -14,7 +14,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
-        qs = super(EventAdmin, self).queryset(request)
+        qs = super(EventAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(team=request.user)
@@ -33,7 +33,7 @@ class EventPageAdmin(admin.ModelAdmin):
     search_fields = ('title', 'event__name', 'event__city', 'event__country')
 
     def get_queryset(self, request):
-        qs = super(EventPageAdmin, self).queryset(request)
+        qs = super(EventPageAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(event__team=request.user)
@@ -82,7 +82,7 @@ class EventPageContentAdmin(SortableModelAdmin):
     ]
 
     def get_queryset(self, request):
-        qs = super(EventPageContentAdmin, self).queryset(request)
+        qs = super(EventPageContentAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(page__event__team=request.user)
@@ -110,7 +110,7 @@ class EventPageMenuAdmin(SortableModelAdmin):
     sortable = 'position'
 
     def get_queryset(self, request):
-        qs = super(EventPageMenuAdmin, self).queryset(request)
+        qs = super(EventPageMenuAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(page__event__team=request.user)
@@ -138,7 +138,7 @@ class SponsorAdmin(SortableModelAdmin):
     sortable = 'position'
 
     def get_queryset(self, request):
-        qs = super(SponsorAdmin, self).queryset(request)
+        qs = super(SponsorAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(event_page_content__page__event__team=request.user)
@@ -164,7 +164,7 @@ class CoachAdmin(admin.ModelAdmin):
     list_filter = ('event_page_content__page',)
 
     def get_queryset(self, request):
-        qs = super(CoachAdmin, self).queryset(request)
+        qs = super(CoachAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(event_page_content__page__event__team=request.user)
@@ -219,7 +219,7 @@ class UserAdmin(auth_admin.UserAdmin):
     readonly_fields = ('last_login', 'date_joined',)
 
     def get_queryset(self, request):
-        qs = super(UserAdmin, self).queryset(request)
+        qs = super(UserAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(pk=request.user.pk)
