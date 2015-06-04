@@ -29,6 +29,11 @@ def apply(request, city):
     except Form.DoesNotExist:
         return redirect('core:event', city)
 
+    organiser = request.user in page.event.team.all() or request.user.is_superuser
+
+    if not organiser and not form_obj.application_open:
+        return redirect('core:event', city)
+
     menu = EventPageMenu.objects.filter(page=page)
 
     form = ApplicationForm(

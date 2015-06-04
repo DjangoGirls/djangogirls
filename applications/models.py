@@ -65,6 +65,12 @@ class Form(models.Model):
     def number_of_applications(self):
         return self.application_set.count()
 
+    @property
+    def application_open(self):
+        if self.open_from and self.open_until:
+            return (self.open_from < timezone.now() < self.open_until)
+        return True
+
 
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)

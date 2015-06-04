@@ -40,6 +40,58 @@ class ApplyView(TestCase):
         resp = self.client.get(reverse('applications:apply', args=['test']))
         self.assertEqual(resp.status_code, 404)
 
+    def test_application_not_open(self):
+        now = timezone.now()
+        self.form.open_from = now + timedelta(days=1)
+        self.form.open_until = now + timedelta(days=2)
+        self.form.save()
+
+        resp = self.client.get(reverse('applications:apply', args=['test']))
+        self.assertEqual(resp.status_code, 302)
+
+    def test_application_open(self):
+        now = timezone.now()
+        self.form.open_from = now - timedelta(days=1)
+        self.form.open_until = now + timedelta(days=1)
+        self.form.save()
+
+        resp = self.client.get(reverse('applications:apply', args=['test']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context['form_obj'], self.form)
+
+    def test_application_not_open_organiser(self):
+        now = timezone.now()
+        self.form.open_from = now + timedelta(days=1)
+        self.form.open_until = now + timedelta(days=2)
+        self.form.save()
+
+        user = User.objects.create(email='test@user.com', is_active=True)
+        user.set_password('test')
+        user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        self.event.team.add(user)
+        self.event.save()
+
+        resp = self.client.get(reverse('applications:apply', args=['test']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context['form_obj'], self.form)
+
+    def test_application_not_open_super_user(self):
+        now = timezone.now()
+        self.form.open_from = now + timedelta(days=1)
+        self.form.open_until = now + timedelta(days=2)
+        self.form.save()
+
+        user = User.objects.create(email='test@user.com', is_active=True, is_staff=True, is_superuser=True)
+        user.set_password('test')
+        user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        resp = self.client.get(reverse('applications:apply', args=['test']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context['form_obj'], self.form)
+
 
 class ApplicationsView(TestCase):
 
