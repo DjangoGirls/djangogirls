@@ -41,8 +41,8 @@
                 <ul>
                     <li><b>{{ future_events_count }}</b> upcoming events</li>
                     <li><b>{{ past_events_count }}</b> past events</li>
-                    <li><b>{{ applicants_sum }}</b> applicants</li>
-                    <li><b>{{ attendees_sum }}</b> attendees</li>
+                    <li><b>{{ applicants_sum|default_if_none:'0' }}</b> applicants</li>
+                    <li><b>{{ attendees_sum|default_if_none:'0' }}</b> attendees</li>
                     <li><b>{{ countries_count }}</b> countries</li>
                 </ul>
             </div>
