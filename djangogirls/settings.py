@@ -132,6 +132,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+AWS_S3_FILE_OVERWRITE = False
+
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN')
 }
