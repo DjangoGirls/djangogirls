@@ -1,8 +1,12 @@
+from datetime import timedelta
+
 from django.test import TestCase
+from django.utils import timezone
 
 from core.models import Event, EventPage
 from applications.models import Form, Application, Question
 from applications.utils import DEFAULT_QUESTIONS
+
 
 class FormModel(TestCase):
 
@@ -27,6 +31,28 @@ class FormModel(TestCase):
         Application.objects.create(form=form)
         self.assertEqual(form.application_set.count(), form.number_of_applications)
         self.assertEqual(form.application_set.count(), 1)
+
+    def test_no_application_dates(self):
+        form = Form.objects.create(page=self.page)
+        self.assertTrue(form.application_open)
+
+    def test_application_open(self):
+        now = timezone.now()
+        form = Form.objects.create(page=self.page, open_from=now - timedelta(days=1),
+                                   open_until=now + timedelta(days=1))
+        self.assertTrue(form.application_open)
+
+    def test_application_in_future(self):
+        now = timezone.now()
+        form = Form.objects.create(page=self.page, open_from=now + timedelta(days=1),
+                                   open_until=now + timedelta(days=2))
+        self.assertFalse(form.application_open)
+
+    def test_application_closed(self):
+        now = timezone.now()
+        form = Form.objects.create(page=self.page, open_from=now - timedelta(days=2),
+                                   open_until=now - timedelta(days=1))
+        self.assertFalse(form.application_open)
 
 
 class QuestionModel(TestCase):
