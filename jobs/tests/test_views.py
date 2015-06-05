@@ -1,13 +1,12 @@
 # encoding: utf-8
 from datetime import timedelta
+from model_mommy import mommy
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
-from model_mommy import mommy
-from jobs.models import Job, Company, Meetup
-
+from jobs.models import Job, Meetup
 
 
 class JobCreateTests(TestCase):
@@ -32,47 +31,8 @@ class JobCreateTests(TestCase):
         response = self.client.post(reverse('jobs:job_new'), context)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
-            Job.objects.get(company__name="New Company", title="Job offer")
+            Job.objects.get(company="New Company", title="Job offer")
         )
-
-    def test_job_add_existing_company_clean(self):
-        """Tests adding a new job with an existing company"""
-        context = self.context
-        response = self.client.post(reverse('jobs:job_new'), context)
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(
-            Job.objects.get(company__name="My Company", title="Job offer")
-        )
-
-    def test_job_add_existing_company_with_different_website_overwrite(self):
-        """Tests adding a new job by a company which already exists but with
-        a different website when user chooses to overwrite the old website"""
-        context = self.context
-        context['website'] = 'http://company.com'
-        del context['save']
-        context['overwrite'] = True
-        response = self.client.post(reverse('jobs:job_new'), context)
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(
-            Job.objects.get(company__name="My Company", title="Job offer")
-        )
-        self.assertEqual(Company.objects.get(name="My Company").website,
-                         'http://company.com/')
-
-    def test_job_add_existing_company_with_different_website_keep(self):
-        """Tests adding a new job by a company which already exists but with
-        a different website when user chooses to keep the old website"""
-        context = self.context
-        context['website'] = 'http://company.com'
-        del context['save']
-        context['keep'] = True
-        response = self.client.post(reverse('jobs:job_new'), context)
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(
-            Job.objects.get(company__name="My Company", title="Job offer")
-        )
-        self.assertEqual(Company.objects.get(name="My Company").website,
-                         'http://mycompany.com/')
 
 
 class MainPageTests(TestCase):
@@ -80,8 +40,8 @@ class MainPageTests(TestCase):
     def test_main_page_with_empty_database(self):
         response = self.client.get(reverse('jobs:main'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("No job offers yet", response.content)
-        self.assertIn("No meetups yet", response.content)
+        self.assertIn("No job offers yet", str(response.content))
+        self.assertIn("No meetups yet", str(response.content))
 
 
 class JobsPageTests(TestCase):
@@ -89,7 +49,9 @@ class JobsPageTests(TestCase):
     def test_jobs_page_with_empty_database(self):
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("There are no job offers at this moment.", response.content)
+        self.assertIn(
+        "There are no job offers at this moment.", str(response.content)
+        )
 
     def test_jobs_page_with_job_not_ready_to_publish(self):
         mommy.make(
@@ -98,7 +60,9 @@ class JobsPageTests(TestCase):
             review_status=Meetup.OPEN)
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("There are no job offers at this moment.", response.content)
+        self.assertIn(
+        "There are no job offers at this moment.", str(response.content)
+        )
 
     def test_jobs_page_with_job_ready_to_publish(self):
         mommy.make(
@@ -111,7 +75,7 @@ class JobsPageTests(TestCase):
         )
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Intern", response.content)
+        self.assertIn("Intern", str(response.content))
 
 
 class MeetupsPageTests(TestCase):
@@ -119,7 +83,7 @@ class MeetupsPageTests(TestCase):
     def test_meetups_page_with_empty_database(self):
         response = self.client.get(reverse('jobs:meetups'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Upcoming meetups", response.content)
+        self.assertIn("Upcoming meetups", str(response.content))
 
     def test_meetups_page_with_meetup_not_ready_to_publish(self):
         mommy.make(
@@ -129,8 +93,8 @@ class MeetupsPageTests(TestCase):
         )
         response = self.client.get(reverse('jobs:meetups'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Upcoming meetups", response.content)
-        self.assertNotIn("Django Girls Warsaw", response.content)
+        self.assertIn("Upcoming meetups", str(response.content))
+        self.assertNotIn("Django Girls Warsaw", str(response.content))
 
     def test_jobs_page_with_job_ready_to_publish(self):
         mommy.make(
@@ -143,4 +107,4 @@ class MeetupsPageTests(TestCase):
         )
         response = self.client.get(reverse('jobs:meetups'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Django Girls Warsaw", response.content)
+        self.assertIn("Django Girls Warsaw", str(response.content))

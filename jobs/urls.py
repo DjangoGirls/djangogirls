@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from . import views
+from jobs import views
 
 urlpatterns = patterns('',
     url(r'^$', views.main, name='main'),

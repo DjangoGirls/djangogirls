@@ -10,7 +10,7 @@ from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTexta
 
 from djangogirls.settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
 from djangogirls.settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
-from .models import PublishFlowModel, Job, Meetup
+from jobs.models import PublishFlowModel, Job, Meetup
 
 
 def make_published(modeladmin, request, queryset):

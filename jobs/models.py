@@ -4,14 +4,13 @@ from django.utils import timezone
 
 from django.db import models
 from django_countries.fields import CountryField
-from django.conf import settings
 
 from django.template.loader import get_template
 from django.template import Context
 
 from core.models import User
 
-from community_mails import send_job_mail, send_meetup_mail
+from jobs.community_mails import send_job_mail, send_meetup_mail
 
 
 class PublishFlowManager(models.Manager):

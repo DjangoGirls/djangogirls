@@ -7,9 +7,9 @@ from django.contrib import messages
 from django.template.loader import get_template
 from django.template import Context
 
-from .models import Job, Meetup
-from .forms import JobForm, MeetupForm
-from community_mails import send_job_mail, send_meetup_mail
+from jobs.models import Job, Meetup
+from jobs.forms import JobForm, MeetupForm
+from jobs.community_mails import send_job_mail, send_meetup_mail
 
 
 def main(request):

@@ -18,51 +18,36 @@
             </div> <!--.row-->
 
             <div class="row">
-                <h3>Offers</h3>
-                <a class="btn" href="{% url 'jobs:job_new' %}">Add offer</a>
-                <table class="table table-striped">
-                    <thead>
-                        <th>Company</th>
-                        <th>Job title</th>
-                        <th>Posted</th>
-                    </thead>
-                    <tbody>
-                        {% for job in job_offers %}
-                            <tr>
-                                <td><a href="{{ job.company.website }}">{{ job.company }}</a></td>
-                                <td><a href="{% url 'jobs:job_details' id=job.id %}">{{ job.title }}</a></td>
-                                <td>{{ job.published_date }}</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td>There are no job offers at this moment.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <hr/>
-
-                <h3>Meetups</h3>
-                 <table class="table table-striped">
-                    <thead>
-                        <th>Meetup</th>
-                        <th>Location</th>
-                        <th>Date</th>
-                    </thead>
-                    <tbody>
-                        {% for meetup in meetup_list %}
-                            <tr>
-                                <td><a href="{% url 'jobs:meetup_details' id=meetup.id %}">{{ meetup.title }}</a></td>
-                                <td>{{ meetup.city }}, {{meetup.country}}</td>
-                                <td>{{ meetup.published_date }}</td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="3">There are no meetups posted at this moment.</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="col-md-12">
+                    <h3>Offers</h3>
+                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Company</th>
+                            <th>Job title</th>
+                            <th>Posted</th>
+                        </thead>
+                        <tbody>
+                            {% for job in job_offers %}
+                                <tr>
+                                    <td>
+                                        {{ job.company }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'jobs:job_details' id=job.id %}">
+                                            {{ job.title }}
+                                        </a>
+                                    </td>
+                                    <td>{{ job.published_date }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td>There are no job offers at this moment.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!--.col-md-12-->
             </div> <!--.row-->
         </section>
     </div> <!--.container-->
