@@ -6,7 +6,6 @@ import icalendar
 
 from django.db import models
 from django.contrib.auth import models as auth_models
-from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -82,7 +81,7 @@ class Event(models.Model):
     photo_credit = models.CharField(max_length=200, null=True, blank=True)
     photo_link = models.URLField(null=True, blank=True)
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
-    team = models.ManyToManyField(User, null=True, blank=True)
+    team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)
 
     objects = EventQuerySet.as_manager()
