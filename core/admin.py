@@ -51,22 +51,26 @@ class EventPageContentForm(ModelForm):
         widgets = {
             'content': RedactorWidget(editor_options={'lang': 'en'})
         }
+        fields = (
+            'page',
+            'name',
+            'content',
+            'background',
+            'position',
+            'is_public',
+        )
 
 
-class SponsorInline(SortableTabularInline):
-    model = Sponsor
+class SponsorInline(admin.TabularInline):
+    model = EventPageContent.sponsors.through
     extra = 1
     verbose_name_plural = 'Sponsors'
-    sortable = 'position'
-    fields = ('name', 'logo', 'url', 'position')
 
 
 class CoachInline(admin.TabularInline):
-    model = Coach
+    model = EventPageContent.coaches.through
     extra = 1
     verbose_name_plural = 'Coaches'
-    sortable = 'position'
-    fields = ('name', 'twitter_handle', 'url', 'photo')
 
 
 class EventPageContentAdmin(SortableModelAdmin):
@@ -134,7 +138,6 @@ class EventPageMenuAdmin(SortableModelAdmin):
 
 class SponsorAdmin(SortableModelAdmin):
     list_display = ('name', 'logo_display_for_admin', 'url', 'position')
-    list_filter = ('event_page_content__page',)
     sortable = 'position'
 
     def get_queryset(self, request):
@@ -161,7 +164,6 @@ class SponsorAdmin(SortableModelAdmin):
 
 class CoachAdmin(admin.ModelAdmin):
     list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url')
-    list_filter = ('event_page_content__page',)
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).get_queryset(request)
