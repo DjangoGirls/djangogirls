@@ -10,11 +10,11 @@ def migrate_data(apps, schema_editor):
 
     # Updating sponsors
     for sponsor in Sponsor.objects.all():
-        sponsor.eventpagecontent.sponsors.add(sponsor)
+        sponsor.event_page_content.sponsors.add(sponsor)
 
     # Updating coaches
     for coach in Coach.objects.all():
-        coach.eventpagecontent.coaches.add(coach)
+        coach.event_page_content.coaches.add(coach)
 
 
 class Migration(migrations.Migration):
