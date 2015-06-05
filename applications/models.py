@@ -36,12 +36,21 @@ class Form(models.Model):
         "<a href='http://blog.djangogirls.org/post/91067112853/"
         "djangogirls-how-we-scored-applications'>Django Girls "
         "blog</a>. Good luck!")
+    confirmation_mail = models.TextField(
+        default="Hi there!"
+        "This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. "
+        "Yay! That's a huge step already, we're proud of you!\n\n"
+        "Mind that this is not a confirmation of participation in the event, but a confirmation that we received your application.\n\n"
+        "You'll receive an email from the team that organizes Django Girls {CITY} soon. "
+        "You can always reach them by answering to this email or by writing to {your event mail}.\n"
+        "For your reference, we're attaching your answers below.\n\n"
+        "Hugs, cupcakes and high-fives!\n"
+        "Django Girls",
+        help_text="Mail will be sent from your event mail.\nAlso the answers will be attached.")
     open_from = models.DateTimeField(
         null=True, verbose_name="Application process is open from")
     open_until = models.DateTimeField(
         null=True, verbose_name="Application process is open until")
-    emails_send_from = models.EmailField(null=True,
-        help_text="Which email should we use to send emails from? Use one in @djangogirls.org domain")
 
     def __unicode__(self):
         return 'Application form for {}'.format(self.page.event.name)

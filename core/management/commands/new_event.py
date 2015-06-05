@@ -36,9 +36,10 @@ class Command(BaseCommand):
             date = self.prepare_date(click.prompt("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)"))
 
         url = click.prompt("What should be the URL of website? djangogirls.org/xxxx")
+        event_mail = click.prompt("What is the mail adress of the event? xxxx@djangogirls.org")
         click.echo(u"Ok, got that! Your new event will happen in {0}, {1} on {2}".format(city, country, date))
 
-        return (city, country, date, url)
+        return (city, country, date, url, event_mail)
 
     def get_main_organizer(self):
         team = []
@@ -182,7 +183,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         #Basics
-        (city, country, date, url) = self.get_basic_info()
+        (city, country, date, url, event_mail) = self.get_basic_info()
 
         #Main organizer
         team = self.get_main_organizer()
@@ -199,7 +200,8 @@ class Command(BaseCommand):
         #Event and EventPage objects
         name = u'Django Girls '+city
         latlng = get_coordinates_for_city(city, country)
-        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, main_organizer=members[0], date=date, is_on_homepage=False)
+        mail = event_mail+u'@djangogirls.org'
+        event = Event.objects.create(name=name, city=city, country=country, latlng=latlng, event_mail=mail, main_organizer=members[0], date=date, is_on_homepage=False)
         for member in members:
             event.team.add(member)
 
