@@ -84,14 +84,13 @@ class ApplicationForm(forms.Form):
                     application.email = value
                     application.save()
 
-        if application.email:
+        if application.email and form.page.event.event_mail:
             # Send confirmation email
             subject = "Confirmation of your application for {}".format(form.page.title)
-            body = render_to_string(
-                'emails/application_confirmation.html',
-                {'application': application}
-            )
-            sender = "{} <{}>".format(form.page.title, form.emails_send_from)
+            body = "{}\n\n----\n{}".format(
+                form.confirmation_mail,
+                render_to_string('emails/application_confirmation.html', {'application': application}))
+            sender = "{} <{}>".format(form.page.title, form.page.event.event_mail)
             msg = EmailMessage(subject, body, sender, [application.email,])
             msg.content_subtype = "html"
             try:

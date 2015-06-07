@@ -17,6 +17,11 @@ class EventAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(team__in=[request.user,])
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj and not request.user.is_superuser:
+            return ('event_mail',)
+        return self.readonly_fields
+
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
 
