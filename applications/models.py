@@ -211,7 +211,7 @@ class Email(models.Model):
     def send(self):
         recipients = Application.objects.filter(form=self.form, state=self.recipients_group)
         self.number_of_recipients = recipients.count()
-        self.sent_from = self.form.emails_send_from
+        self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
         sender = "{} <{}>".format(self.form.page.title, self.sent_from)
         successfuly_sent = []
         failed_to_sent = []
@@ -219,6 +219,7 @@ class Email(models.Model):
         for recipient in recipients:
             if recipient.email:
                 msg = EmailMessage(self.subject, self.text, sender, [recipient.email,])
+                msg.content_subtype = "html"
                 try:
                     msg.send()
                     successfuly_sent.append(recipient.email)
