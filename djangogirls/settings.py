@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'django_date_extensions',
     'storages',
     'markdown_deux',
+    'djrill',
 
     'core',
     'applications',
@@ -124,3 +125,7 @@ STATICFILES_FINDERS = (
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN')
 }
+
+MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
