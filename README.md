@@ -51,8 +51,50 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 - URL
 
 
-# Contribute to website
+# Contributing to Django Girls website
 
-## CSS
+The website is hosted on Heroku and is available here: http://djangogirls.org/
+
+We have an auto-deploy thing going on, so everything commited to master is automatically deployed to our Heroku. 
+
+## Setting up a development environment
+
+First, clone the repository:
+
+    git clone git@github.com:DjangoGirls/djangogirls.git
+  
+Step into newly created `djangogirls` directory:
+
+    cd djangogirls
+  
+Then, install all the required dependencies:
+
+    pip install -r requirements.txt
+
+Create your database:
+
+    ./manage.py migrate
+  
+Add a sample event
+
+    ./manage.py new_event
+  
+Run your local server:
+
+     ./manage.py runserver
+  
+:tada: You're done.
+
+### CSS processing
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
+
+This means you shouldn't change any css files, but `.styl` files. They're in /static/css/ directory.
+
+Install stylus:
+
+    npm install stylus -g
+  
+Autocompiling of `.styl` files to `.css`:
+
+    stylus -w static/css

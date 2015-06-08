@@ -2,7 +2,10 @@
 from __future__ import unicode_literals, print_function
 
 import requests
-import urllib2
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib import urlopen
 from xml.etree import ElementTree
 from pyquery import PyQuery as pq
 
@@ -37,7 +40,7 @@ class Command(BaseCommand):
                         story = Story(name=name, post_url=post_url)
 
                         img = NamedTemporaryFile(delete=True)
-                        img.write(urllib2.urlopen(image_url).read())
+                        img.write(urlopen(image_url).read())
                         img.flush()
 
                         story.image.save(image_url.split('/')[-1], File(img))
