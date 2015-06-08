@@ -10,7 +10,7 @@ from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'organizers', 'date', 'city', 'country', 'is_on_homepage', 'is_past_event', 'has_stats')
+    list_display = ('name', 'organizers', 'email', 'date', 'city', 'country', 'is_on_homepage', 'is_past_event', 'has_stats')
     search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
@@ -27,10 +27,9 @@ class EventAdmin(admin.ModelAdmin):
         return Postmortem.objects.filter(event=obj).exists()
     has_stats.boolean = True
 
-
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            return ('event_mail',)
+            return ('email',)
         return self.readonly_fields
 
 class EventPageAdmin(admin.ModelAdmin):

@@ -80,7 +80,7 @@ class Event(models.Model):
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True, help_text="The best would be 356 x 210px")
     photo_credit = models.CharField(max_length=200, null=True, blank=True)
     photo_link = models.URLField(null=True, blank=True)
-    event_mail = models.EmailField(max_length=75, null=True, blank=True)
+    email = models.EmailField(max_length=75, null=True, blank=True)
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)

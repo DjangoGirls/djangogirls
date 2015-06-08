@@ -203,7 +203,7 @@ class Command(BaseCommand):
         latlng = get_coordinates_for_city(city, country)
         mail = event_mail+'@djangogirls.org'
         event = Event.objects.create(name=name, city=city, country=country, latlng=latlng,
-                                     event_mail=mail, main_organizer=members[0], date=date,
+                                     email=mail, main_organizer=members[0], date=date,
                                      is_on_homepage=False)
         for member in members:
             event.team.add(member)
