@@ -12,7 +12,7 @@ class FormAdmin(admin.ModelAdmin):
         'open_from', 'open_until', 'number_of_applications')
 
     def get_queryset(self, request):
-        qs = super(FormAdmin, self).queryset(request)
+        qs = super(FormAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(page__event__team__in=[request.user])
@@ -30,7 +30,7 @@ class QuestionAdmin(SortableModelAdmin):
     sortable = 'order'
 
     def get_queryset(self, request):
-        qs = super(QuestionAdmin, self).queryset(request)
+        qs = super(QuestionAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(form__page__event__team__in=[request.user])
