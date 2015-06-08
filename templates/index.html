@@ -37,7 +37,7 @@
 
                     <h2>Mission</h2>
                     <p>
-                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and everyone should be able to build it. We are making technology more approchable by creating simple tools and resources designed with empathy.
+                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and everyone should be able to build it. We are making technology more approachable by creating simple tools and resources designed with empathy.
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -60,7 +60,30 @@
                 </div>
 
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>This Is What A Programmer Looks Like!</h2>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        This tee will challenge the stereotypes for you, so you can focus on talking about the awesome things you code without explaining everyone around that you are a programmer. 
+                    </p>
+                    <p>
+                        All proceeds from the t-shirt will go into making the Django Girls and Django Girls Foundation sustainable. We're a completely volunteer run initiative, and we're extremaly grateful for your support. 
+                    </p>
+                    <p><a href="https://cottonbureau.com/products/this-is-what-a-programmer-looks-like" class="btn">Get your t-shirt</a></p>
+                </div>
+                <div class="col-md-8">
+                    <a href="https://cottonbureau.com/products/this-is-what-a-programmer-looks-like">
+                        <img src="{% static 'img/global/tiwapll.png' %}" alt="This Is What A Programmer Looks Like" />
+                    </a>
+                </div>
+
+            </div>
         </section>
+
+
 
         <section id="events">
             <div class="row">
@@ -83,7 +106,9 @@
                 <div class="col-md-12">
                     <h2>Past events</h2>
                     {% for event in past_events %}
-                        <a href="/{{ event.eventpage.url }}">{{ event.city }}, {{ event.date }}</a>
+                        <a href="{% if event.eventpage.is_live %}/{{ event.eventpage.url }}{% endif %}">
+                            {{ event.city }}, {{ event.date }}
+                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -136,6 +161,11 @@
                 <div class="col-md-3">
                     <a href="http://megiteam.pl/">
                         <img src="{% static 'img/global/supporters/megiteam.png' %}" alt="MegiTeam" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://lincolnloop.com/">
+                        <img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" />
                     </a>
                 </div>
             </div>

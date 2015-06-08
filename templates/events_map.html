@@ -1,0 +1,28 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>Django Girls events</h2>
+        <div id="map"></div>
+    </div>
+   
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
+        var map = L.mapbox.map('map', 'olasitarska.m8nged0f', {scrollWheelZoom: false}).setView([30, 0], 2);
+
+        {% for event in events %}
+            {% if event.latlng %}
+            L.marker([{{ event.latlng }}], {
+                icon: L.mapbox.marker.icon({
+                    'marker-size': 'medium',
+                    'marker-symbol': 'heart',
+                    'marker-color': '#{{ event.eventpage.main_color }}'
+                })
+            }).addTo(map).bindPopup('{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}');
+            {% endif %}
+        {% endfor %}
+    </script>
+
+{% endblock %}

@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
-import requests, urllib2
+from __future__ import unicode_literals, print_function
+
+import requests
+import urllib2
 from xml.etree import ElementTree
 from pyquery import PyQuery as pq
 
@@ -8,6 +11,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
 from core.models import Story
+
 
 class Command(BaseCommand):
     help = 'Fetch Django Girls stories from our blog'
@@ -39,4 +43,4 @@ class Command(BaseCommand):
                         story.image.save(image_url.split('/')[-1], File(img))
                         story.save()
 
-                        print 'Story of %s has been fetched' % name
+                        print('Story of %s has been fetched' % name)

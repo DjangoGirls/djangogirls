@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import User, Event, EventPage, EventPageContent, EventPageMenu, Sponsor
+from core.models import User, Event, EventPage
 from core.views import event
 
 
@@ -21,10 +21,10 @@ class CoreViewsTestCase(TestCase):
         self.peter = User.objects.get(pk=2)
         self.tinker = User.objects.get(pk=3)
 
-        self.event_1 = Event.objects.get(pk=1) # In the future
-        self.event_2 = Event.objects.get(pk=2) # In the past
-        self.event_3 = Event.objects.get(pk=3) # Hidden from homepage
-        self.event_4 = Event.objects.get(pk=4) # Not live, no date set
+        self.event_1 = Event.objects.get(pk=1)  # In the future
+        self.event_2 = Event.objects.get(pk=2)  # In the past
+        self.event_3 = Event.objects.get(pk=3)  # Hidden from homepage
+        self.event_4 = Event.objects.get(pk=4)  # Not live, no date set
 
     def test_index(self):
         # Access homepage
@@ -94,7 +94,7 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
         # Check if website is returning correct content
-        self.assertIn('will be coming soon', resp.content, 'Incorrect content')
+        self.assertIn('will be coming soon', str(resp.content), 'Incorrect content')
 
         # make the event date in the past
         self.event_4.date = ApproximateDate(
@@ -107,7 +107,7 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
         # Check if website is returning correct content
-        self.assertIn('has already happened', resp.content, 'Incorrect content')
+        self.assertIn('has already happened', str(resp.content), 'Incorrect content')
 
     def test_event_unpublished_with_authenticated_user(self):
         """ Test that an unpublished page can be accessed when the user is

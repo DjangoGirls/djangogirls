@@ -1,7 +1,9 @@
 import icalendar
 
-from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from .models import Event, EventPage, EventPageMenu, EventPageContent, Story
 from .utils import get_event_page
@@ -26,6 +28,13 @@ def events(request):
     })
 
 
+def events_map(request):
+
+    return render(request, 'events_map.html', {
+        'events': Event.objects.all().order_by('date'),
+    })
+
+
 def resources(request):
     return render(request, 'resources.html', {})
 
@@ -42,11 +51,20 @@ def stories(request):
 
 
 def event(request, city):
-    page = get_event_page(city, request.user.is_authenticated(), request.GET.has_key('preview'))
-    if not page:
-        raise Http404
-    elif type(page) == tuple:
-        return render(request, "event_not_live.html", {'city': page[0], 'past': page[1]})
+    now = timezone.now()
+    now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
+    page = get_object_or_404(EventPage, url__iexact=city)
+
+    if page.url != city:
+        return redirect('core:event', city=page.url, permanent=True)
+
+    can_show = request.user.is_authenticated() or 'preview' in request.GET
+    if not page.is_live and not can_show:
+        return render(
+            request,
+            'event_not_live.html',
+            {'city': city, 'past': page.event.date <= now_approx}
+        )
 
     menu = EventPageMenu.objects.filter(page=page)
     content = EventPageContent.objects.filter(page=page, is_public=True)

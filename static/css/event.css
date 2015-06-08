@@ -139,7 +139,8 @@ a:hover {
   color: #fff;
 }
 .without-background {
-  padding: 60px 0px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 #about .overlay {
   padding: 150px 0;
@@ -534,5 +535,13 @@ input[type="submit"] {
   .navbar-default .navbar-collapse {
     border: 0px !important;
     margin-top: 20px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  #about .overlay h1 {
+    font-size: 50px;
+  }
+  #about .overlay h2 {
+    font-size: 30px;
   }
 }
