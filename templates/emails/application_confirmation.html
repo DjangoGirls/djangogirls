@@ -1,5 +1,8 @@
-{% for answer in application.answer_set.all %}
-<b>{{ answer.question.title }}</b>
-{{ answer.answer }}
+{{ intro|safe|linebreaks }}
 
+----
+
+{% for answer in application.answer_set.all %}
+	<p><b>{{ answer.question.title|safe }}</b><br />
+	{{ answer.answer|linebreaksbr }}</p>
 {% endfor %}
