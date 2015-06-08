@@ -27,7 +27,8 @@
       </div>
       <div class="col-md-5">
           {% if not email.sent %}
-              Markdown preview of the message here.
+              <h4>Email preview</h3>
+              <div id="preview" style="white-space: pre;">{{ email.text|safe }}</div>
           {% else %}
               <p>
                   This email was sent on {{ email.sent }} by {{ email.author }} to {{ email.number_of_recipients }} recipients.

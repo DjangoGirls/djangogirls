@@ -194,7 +194,7 @@ class Email(models.Model):
     subject = models.CharField(max_length=255)
     text = models.TextField(
         verbose_name="Content of the email",
-        help_text="You can use markdown syntax in this message. Preview on the right."
+        help_text="You can use HTML syntax in this message. Preview on the right."
     )
     recipients_group = models.CharField(
         max_length=50, choices=APPLICATION_STATES,

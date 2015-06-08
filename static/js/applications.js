@@ -26,6 +26,10 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#id_text').keyup(function(){
+        $('#preview').html($(this).val());
+    });
+
     function updateApplicationState(id, state, stateName){
         $('#application-'+id+'-state').removeClass('submitted');
         $('#application-'+id+'-state').removeClass('accepted');
@@ -35,4 +39,6 @@ $(document).ready(function() {
         $('#application-'+id+'-state').addClass(state);
         $('#application-'+id+'-state').html(stateName+' <span class="caret"></span>');
     }
+
+
 });
