@@ -15,6 +15,12 @@
       </h3>
 
       <div class="col-md-7 stretch-form">
+        <div class="rsvp-buttons">
+          <a class="btn small" data-option="yes">Add a "RSVP: yes" link to email</a>
+          <a class="btn small" data-option="no">Add a "RSVP: no" link to email</a>
+          <a href="" target="_blank">What's that?</a>
+        </div>
+
         <form action="" method="post">
           {% csrf_token %}
           {% include 'includes/_form.html' %}

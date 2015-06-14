@@ -27,8 +27,25 @@ $(document).ready(function() {
     });
 
     $('#id_text').keyup(function(){
-        $('#preview').html($(this).val());
+        updatePreview($(this).val());
     });
+
+    $('.rsvp-buttons .btn').click(function(){
+        var option = $(this).data('option');
+        if (option == 'yes' || option == 'no'){
+            var rsvp_link = '\n[rsvp-url-'+option+']';
+            var message = $('#id_text').val()+rsvp_link;
+            $('#id_text').val(message);
+            updatePreview(message);
+        }
+    });
+
+    function updatePreview(value) {
+        var message = value;
+        message = message.replace(/\[rsvp-url-yes\]/g, '<a href="">http://djangogirls.org/rsvp-YES-generated-url</a>');
+        message = message.replace(/\[rsvp-url-no\]/g, '<a href="">http://djangogirls.org/rsvp-NO-generated-url</a>');
+        $('#preview').html(message);
+    }
 
     function updateApplicationState(id, state, stateName){
         $('#application-'+id+'-state').removeClass('submitted');

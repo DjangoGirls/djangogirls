@@ -132,6 +132,16 @@ a:hover {
   margin: 20px 0 0 0;
   padding: 15px 30px;
 }
+.rsvp-buttons a {
+  font-size: 12px;
+  font-family: Roboto;
+}
+.rsvp-buttons .btn {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin: 0 10px 20px 0;
+  float: left;
+}
 .with-background {
   background: url("../img/photos/photo1.jpg") 50% 0 no-repeat fixed;
   background-size: cover;
