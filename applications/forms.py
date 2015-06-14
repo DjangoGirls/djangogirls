@@ -14,43 +14,7 @@ class ApplicationForm(forms.Form):
 
         questions = kwargs.pop('questions')
         super(ApplicationForm, self).__init__(*args, **kwargs)
-
-        for question in questions:
-            options = {
-                'label': question.title,
-                'help_text': question.help_text or None,
-                'required': question.is_required,
-            }
-            name = 'question_{}'.format(question.pk)
-
-            if question.question_type == 'text':
-                options['widget'] = forms.Textarea
-
-            if question.question_type == 'choices':
-                choices = ((x, x) for x in question.choices.split(';'))
-                options['choices'] = choices
-
-            if question.question_type in ['paragraph', 'text']:
-                self.fields[name] = forms.CharField(**options)
-            elif question.question_type == 'choices':
-                if question.is_multiple_choice:
-                    options['widget'] = forms.CheckboxSelectMultiple
-                    self.fields[name] = forms.MultipleChoiceField(**options)
-                else:
-                    options['widget'] = forms.RadioSelect
-                    self.fields[name] = forms.ChoiceField(**options)
-
-            if question.question_type == 'email':
-                self.fields[name] = forms.EmailField(**options)
-
-        self.fields['newsletter_optin'] = forms.ChoiceField(
-            widget = forms.RadioSelect,
-            label = 'Do you want to receive news from the Django Girls team?',
-            help_text = 'No spam, pinky swear! Only helpful programming tips and '
-                'latest news from Django Girls world. We sent this very rarely.',
-            required = True,
-            choices = (('yes','Yes please!'), ('no','No, thank you'))
-        )
+        self.fields = generate_form_from_questions(questions)
 
 
     def save(self, *args, **kwargs):
@@ -128,7 +92,6 @@ class EmailForm(forms.ModelForm):
             # email was sent, let's disable all fields:
             for field in self.fields:
                 self.fields[field].widget.attrs['disabled'] = True
-
 
     class Meta:
         model = Email
