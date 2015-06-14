@@ -20,10 +20,10 @@
           <p>Change the state of selected applications to:
               <select name="state">
                   <option value="" selected>Choose state</option>
-                  <option value="submitted">Submitted</option>
-                  <option value="accepted">Accepted</option>
-                  <option value="rejected">Rejected</option>
-                  <option value="waitlisted">Waiting list</option>
+                  <option value="submitted">Application submitted</option>
+                  <option value="accepted">Application accepted</option>
+                  <option value="rejected">Application rejected</option>
+                  <option value="waitlisted">Application on waiting list</option>
               </select>
               <input type="submit" value="Apply" />
           </p>
@@ -33,8 +33,8 @@
                       <th></th>
                       <th>#</th>
                       <th>E-mail</th>
-                      <th>Created</th>
-                      <th>Status</th>
+                      <th>Application status</th>
+                      <th>RSVP</th>
                       <th>Score {% display_sorting_arrow 'average_score' order %}</th>
                       <th>&nbsp;</th>
                   </tr>
@@ -45,7 +45,6 @@
                       <td><input type="checkbox" name="application" value="{{ app.id }}" /></div>
                       <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
-                      <td>{{ app.created }}</td>
                       <td>
                           <div class="dropdown">
                             <button
@@ -58,13 +57,14 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Submitted</a></li>
-                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Accepted</a></li>
-                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Rejected</a></li>
-                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Waiting list</a></li>
+                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
+                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
+                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
+                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Application on waiting list</a></li>
                             </ul>
                           </div>
                       </td>
+                      <td>??/YES/NO</td>
                       <td>
                           {% if app|scored_by_user:request.user %}
                               {{ app.average_score }}

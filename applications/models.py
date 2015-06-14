@@ -15,10 +15,10 @@ QUESTION_TYPES = (
 )
 
 APPLICATION_STATES = (
-    ('submitted', 'Submitted'),
-    ('accepted', 'Accepted'),
-    ('rejected', 'Rejected'),
-    ('waitlisted', 'Waiting list'),
+    ('submitted', 'Application submitted'),
+    ('accepted', 'Application accepted'),
+    ('rejected', 'Application rejected'),
+    ('waitlisted', 'Application on waiting list'),
 )
 
 

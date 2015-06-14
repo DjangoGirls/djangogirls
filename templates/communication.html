@@ -21,7 +21,6 @@
                   <th>Subject</th>
                   <th>Recipients</th>
                   <th>Status</th>
-                  <th>Created</th>
                   <th>Sent</th>
                   <th>&nbsp;</th>
               </tr>
@@ -33,7 +32,6 @@
                     <td><a href="{% url 'applications:compose_email' page.url email.id %}">{{ email.subject }}</a></td>
                     <td>{{ email.get_recipients_group_display }}</td>
                     <td><span class="label label-{% if email.sent %}success">Sent{% else %}default">Draft{% endif %}</span></td>
-                    <td>{{ email.created }}</td>
                     <td>{{ email.sent|default:"−" }}</td>
                     <td><a href="{% url 'applications:compose_email' page.url email.id %}" class="btn pull-right">View message</a></td>
                 </tr>
