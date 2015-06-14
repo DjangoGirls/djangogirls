@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.mail import EmailMessage
 from django.db import models
@@ -20,6 +23,15 @@ APPLICATION_STATES = (
     ('rejected', 'Application rejected'),
     ('waitlisted', 'Application on waiting list'),
 )
+
+RSVP_STATUSES = (
+    ('waiting', 'Waiting for response'),
+    ('yes', 'Confirmed attendance'),
+    ('no', 'Rejected invitation')
+
+)
+
+RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 
 class Form(models.Model):
@@ -129,6 +141,14 @@ class Application(models.Model):
     email = models.EmailField(null=True, blank=True)
     newsletter_optin = models.BooleanField(default=False)
 
+    rsvp_status = models.CharField(
+        max_length=50,
+        choices=RSVP_STATUSES, verbose_name="RSVP status",
+        default='waiting'
+    )
+    rsvp_yes_code = models.CharField(max_length=24, null=True)
+    rsvp_no_code = models.CharField(max_length=24, null=True)
+
     @property
     def average_score(self):
         """
@@ -155,6 +175,21 @@ class Application(models.Model):
 
     def stdev(self):
         return self.variance() ** 0.5
+
+    def generate_code(self):
+        return ''.join([random.choice(string.letters + string.digits) for i in range(24)])
+
+    def get_rsvp_yes_code(self):
+        if not self.rsvp_yes_code:
+            self.rsvp_yes_code = self.generate_code()
+            self.save()
+        return self.rsvp_yes_code
+
+    def get_rsvp_no_code(self):
+        if not self.rsvp_no_code:
+            self.rsvp_no_code = self.generate_code()
+            self.save()
+        return self.rsvp_no_code
 
     def __unicode__(self):
         return str(self.pk)
@@ -208,6 +243,14 @@ class Email(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)
 
+    def get_rsvp_link(self, code):
+        return 'http://djangogirls.org/{}/rsvp/{}'.format(self.form.page.url, code)
+
+    def add_rsvp_links(self, body, application):
+        body = body.replace('[rsvp-url-yes]', self.get_rsvp_link(application.get_rsvp_yes_code()))
+        body = body.replace('[rsvp-url-no]', self.get_rsvp_link(application.get_rsvp_no_code()))
+        return body
+
     def send(self):
         recipients = Application.objects.filter(form=self.form, state=self.recipients_group)
         self.number_of_recipients = recipients.count()
@@ -218,7 +261,14 @@ class Email(models.Model):
 
         for recipient in recipients:
             if recipient.email:
-                msg = EmailMessage(self.subject, self.text, sender, [recipient.email,])
+                body = self.text.replace('\n', '<br />')
+
+                for rsvp_link in RSVP_LINKS:
+                    if rsvp_link in body:
+                        body = self.add_rsvp_links(body, recipient)
+                        break
+
+                msg = EmailMessage(self.subject, body, sender, [recipient.email])
                 msg.content_subtype = "html"
                 try:
                     msg.send()
