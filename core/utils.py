@@ -36,7 +36,7 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_applications_for_page(page, state=None, order=None):
+def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
     """
     Return a QuerySet of Application objects for a given page.
     Raises Form.DoesNotExist if Form for page does not yet exist.
@@ -48,7 +48,9 @@ def get_applications_for_page(page, state=None, order=None):
 
     applications = page_form.application_set.all()
 
-    if state:
+    if rsvp_status: 
+        applications = applications.filter(state='accepted', rsvp_status__in=rsvp_status)
+    elif state:
         applications = applications.filter(state__in=state)
 
     if order:

@@ -64,9 +64,10 @@ def applications(request, city):
     e.g /applications/?state=accepted&state=rejected
     """
     state = request.GET.getlist('state', None)
+    rsvp_status = request.GET.getlist('rsvp_status', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
     order = request.GET.get('order', None)
-    applications = get_applications_for_page(page, state, order)
+    applications = get_applications_for_page(page, state, rsvp_status, order)
 
     menu = [
         {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
