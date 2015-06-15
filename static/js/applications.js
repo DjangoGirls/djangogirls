@@ -26,6 +26,17 @@ $(document).ready(function() {
         return false;
     });
 
+    $('.rsvp-change').click(function(){
+        var rsvp_status = $(this).data('rsvp'),
+            appId = $(this).data('app-id'),
+            url = $('#applications').data('change-rsvp-url'),
+            name = $(this).text();
+
+        $.post(url, {'rsvp_status': rsvp_status, 'application': appId}, function(data){
+            updateApplicationRsvp(appId, rsvp_status, name);
+        });
+    });
+
     $('#id_text').keyup(function(){
         updatePreview($(this).val());
     });
@@ -57,5 +68,12 @@ $(document).ready(function() {
         $('#application-'+id+'-state').html(stateName+' <span class="caret"></span>');
     }
 
+    function updateApplicationRsvp(id, rsvp, rsvpName){
+        $('#application-'+id+'-rsvp-status').removeClass('waiting');
+        $('#application-'+id+'-rsvp-status').removeClass('yes');
+        $('#application-'+id+'-rsvp-status').removeClass('no');
+        $('#application-'+id+'-rsvp-status').addClass(rsvp);
+        $('#application-'+id+'-rsvp-status').html(rsvpName+' <span class="caret"></span>');
+    }
 
 });

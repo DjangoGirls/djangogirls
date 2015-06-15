@@ -8,7 +8,10 @@
 
 {% block content %}
 
-<div id="applications" data-change-state-url="{% url 'applications:change_state' page.url %}"></div>
+<div id="applications"
+     data-change-state-url="{% url 'applications:change_state' page.url %}"
+     data-change-rsvp-url="{% url 'applications:change_rsvp' page.url %}"
+></div>
 
 <div class="container">
   <form action="{% url 'applications:change_state' page.url %}" method="post" id="change-state-form">

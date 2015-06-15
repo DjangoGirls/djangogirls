@@ -201,6 +201,29 @@ def change_state(request, city):
     return JsonResponse({'message': 'Applications have been updated', 'updated': ids})
 
 
+@organiser_only
+@csrf_exempt
+def change_rsvp(request, city):
+    """
+    Change the rsvp_status of Applicaction(s). Use it like this:
+    e.g /applications/?rsvp=yes&application=1&application=2&application=3
+    """
+    rsvp_status = request.POST.get('rsvp_status', None)
+    applications = request.POST.getlist('application', None)
+    page = get_event_page(city, request.user.is_authenticated(), False)
+
+    if not rsvp_status or not applications:
+        return JsonResponse({'error': 'Missing parameters'})
+
+    applications = Application.objects.filter(id__in=applications, form__page=page)
+    applications.update(rsvp_status=rsvp_status)
+
+    ids = applications.values_list('id', flat=True)
+    ids = [str(id) for id in ids]
+
+    return JsonResponse({'message': 'Applications have been updated', 'updated': ids})
+
+
 def rsvp(request, city, code):
     page = get_event_page(city, request.user.is_authenticated(), False)
     if not page:
