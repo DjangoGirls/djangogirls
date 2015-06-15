@@ -64,7 +64,28 @@
                             </ul>
                           </div>
                       </td>
-                      <td>??/YES/NO</td>
+                      <td>
+                        {% if app.is_accepted %}
+                          <div class="dropdown">
+                            <button
+                                class="btn btn-default dropdown-toggle {{ app.rsvp_status|default:'default' }}"
+                                type="button"
+                                id="application-{{ app.id }}-rsvp-status"
+                                data-toggle="dropdown"
+                              >
+                              {{ app.get_rsvp_status_display }}
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a href="#" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">Waiting for response</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">Confirmed attendance</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">Rejected invitation</a></li>
+                            </ul>
+                          </div>
+                        {% else %}
+                          —
+                        {% endif %}
+                      </td>
                       <td>
                           {% if app|scored_by_user:request.user %}
                               {{ app.average_score }}

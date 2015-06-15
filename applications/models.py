@@ -205,6 +205,10 @@ class Application(models.Model):
                 return None
         return None
 
+    @property
+    def is_accepted(self):
+        return self.state == 'accepted'
+
     def __unicode__(self):
         return str(self.pk)
 

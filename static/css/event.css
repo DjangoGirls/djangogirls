@@ -363,10 +363,12 @@ input[type="submit"] {
   border: 0px;
   color: #fff !important;
 }
-.applications .dropdown button.accepted {
+.applications .dropdown button.accepted,
+.applications .dropdown button.yes {
   background: #3c763d;
 }
-.applications .dropdown button.rejected {
+.applications .dropdown button.rejected,
+.applications .dropdown button.no {
   background: #a94442;
 }
 .applications .dropdown button.submitted {
@@ -375,7 +377,8 @@ input[type="submit"] {
 .applications .dropdown button.waitlisted {
   background: #fec500;
 }
-.applications .dropdown button.default {
+.applications .dropdown button.default,
+.applications .dropdown button.waiting {
   background: rgba(0,0,0,0.3);
 }
 .applications .dropdown ul li {
