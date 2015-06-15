@@ -2,7 +2,7 @@ from django import forms
 
 
 def generate_form_from_questions(questions):
-    fields = []
+    fields = {}
 
     for question in questions:
         options = {

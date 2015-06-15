@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 
 from .models import Application, Answer, Question, Score, Email
+from .utils import generate_form_from_questions
 
 
 class ApplicationForm(forms.Form):

@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'storages',
     'markdown_deux',
     'djrill',
+    'django_nose',
 
     'core',
     'applications',
@@ -129,3 +130,10 @@ RAVEN_CONFIG = {
 MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=core,applications',
+    '--with-progressive',
+]
