@@ -33,11 +33,13 @@
     </div>
     {% endfor %}
 
+    {% if form %}
     <form action="" method="post">
       {% csrf_token %}
       {% include 'includes/_form.html' %}
       <input type="submit" value="Submit your application" />
     </form>
+    {% endif %}
 </div>
 
 {% endblock %}

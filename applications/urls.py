@@ -16,4 +16,6 @@ urlpatterns = patterns(
         'applications.views.compose_email', name='compose_email'),
     url(r'^(?P<city>[\w\d/]+)/communication/compose/(?P<email_id>\d+)$',
         'applications.views.compose_email', name='compose_email'),
+    url(r'^(?P<city>[\w\d/]+)/rsvp/(?P<code>[\w\d/]+)$',
+        'applications.views.rsvp', name='rsvp'),
 )

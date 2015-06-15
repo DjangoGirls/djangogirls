@@ -199,3 +199,34 @@ def change_state(request, city):
     ids = [str(id) for id in ids]
 
     return JsonResponse({'message': 'Applications have been updated', 'updated': ids})
+
+
+def rsvp(request, city, code):
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    if not page:
+        raise Http404
+    elif type(page) == tuple:
+        return render(
+            request, "event_not_live.html",
+            {'city': page[0], 'past': page[1]}
+        )
+
+    application, rsvp = Application.get_by_rsvp_code(code, page)
+    if not application:
+        return redirect('/{}/'.format(page.url))   
+
+    application.rsvp_status = rsvp
+    application.save()
+
+    if rsvp == 'yes':
+        message = "Your answer has been saved, your participation in the workshop has been confirmed! We can't wait to meet you. We will be in touch with details soon."
+    else:
+        message = "Your answer has been saved, thanks for letting us know. Your spot will be assigned to another person on the waiting list." 
+    messages.success(request, message)
+
+    menu = EventPageMenu.objects.filter(page=page)
+
+    return render(request, 'apply.html', {
+        'page': page,
+        'menu': menu,
+    })

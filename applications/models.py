@@ -191,6 +191,20 @@ class Application(models.Model):
             self.save()
         return self.rsvp_no_code
 
+    @classmethod
+    def get_by_rsvp_code(self, code, page):
+        """ Returns application and RSVP status or None """
+        try:
+            application = self.objects.get(rsvp_yes_code=code, form__page=page)
+            return application, 'yes'
+        except self.DoesNotExist:
+            try:
+                application = self.objects.get(rsvp_no_code=code, form__page=page)
+                return application, 'no'
+            except self.DoesNotExist:
+                return None
+        return None
+
     def __unicode__(self):
         return str(self.pk)
 
