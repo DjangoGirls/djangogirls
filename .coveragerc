@@ -1,4 +1,6 @@
 [run]
+source = 
+	applications/
 omit = 
     */migrations*
     */admin.py
