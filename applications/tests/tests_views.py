@@ -143,6 +143,12 @@ class ApplicationsView(TestCase):
         resp = applications(request, city='test')
         self.assertEqual(resp.status_code, 200)
 
+    def test_organiser_only_decorator_without_city(self):
+        request = self.factory.get('')
+        request.user = self.user
+        with self.assertRaises(ValueError):
+            resp = applications(request, city=None)
+
     def test_get_applications_list(self):
         self.user.is_superuser = True
         self.user.save()
