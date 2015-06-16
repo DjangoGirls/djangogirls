@@ -11,7 +11,7 @@ django-markdown-deux==1.0.5
 django-nose==1.4
 django-storages==1.1.8
 django-storages-redux==1.2.3
-django-suit==0.2.9
+django-suit==0.2.13
 django-suit-redactor==0.0.2
 djrill==1.4.0
 gunicorn==19.1.0
@@ -27,6 +27,4 @@ pytz==2014.9
 raven==5.0.0
 requests==2.3.0
 six==1.7.3
-suit==2.0.2
 whitenoise==1.0.3
-wsgiref==0.1.2
