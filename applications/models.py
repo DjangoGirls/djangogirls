@@ -95,17 +95,16 @@ class Form(models.Model):
 
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
-    title = models.CharField(max_length=255, verbose_name="Question")
-    help_text = models.CharField(
-        max_length=255,
-        blank=True, null=True, verbose_name="Additional help text to the question?")
+    title = models.TextField(verbose_name="Question")
+    help_text = models.TextField(
+        blank=True, default='', verbose_name="Additional help text to the question?")
     question_type = models.CharField(
         max_length=50,
         choices=QUESTION_TYPES, verbose_name="Type of the question")
     is_required = models.BooleanField(
         default=True, verbose_name="Is the answer to the question required?")
     choices = models.TextField(
-        blank=True, null=True, verbose_name="List all available options, comma separated",
+        blank=True, default='', verbose_name="List all available options, comma separated",
         help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(
         default=False, verbose_name="Are there multiple choices allowed?",
