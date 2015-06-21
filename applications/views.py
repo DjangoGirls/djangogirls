@@ -4,14 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
-from core.utils import (
-    get_event_page, get_applications_for_page, random_application
-)
+from core.utils import get_event_page
 from core.models import EventPageMenu
-
 from .decorators import organiser_only
 from .models import Application, Form, Score, Question, Email
 from .forms import ApplicationForm, ScoreForm, EmailForm
+from .utils import get_applications_for_page, random_application
 
 
 def apply(request, city):
@@ -237,7 +235,7 @@ def rsvp(request, city, code):
 
     application, rsvp = Application.get_by_rsvp_code(code, page)
     if not application:
-        return redirect('/{}/'.format(page.url))   
+        return redirect('/{}/'.format(page.url))
 
     application.rsvp_status = rsvp
     application.save()
@@ -245,7 +243,7 @@ def rsvp(request, city, code):
     if rsvp == 'yes':
         message = "Your answer has been saved, your participation in the workshop has been confirmed! We can't wait to meet you. We will be in touch with details soon."
     else:
-        message = "Your answer has been saved, thanks for letting us know. Your spot will be assigned to another person on the waiting list." 
+        message = "Your answer has been saved, thanks for letting us know. Your spot will be assigned to another person on the waiting list."
     messages.success(request, message)
 
     menu = EventPageMenu.objects.filter(page=page)

@@ -3,8 +3,8 @@ import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from applications.models import Application, Form
 from .models import EventPage
+
 
 def get_coordinates_for_city(city, country):
 
@@ -36,42 +36,4 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
-    """
-    Return a QuerySet of Application objects for a given page.
-    Raises Form.DoesNotExist if Form for page does not yet exist.
-    """
-    page_form = Form.objects.filter(page=page)
-    if not page_form.exists():
-        raise Form.DoesNotExist
-    page_form = page_form.first()
 
-    applications = page_form.application_set.all()
-
-    if rsvp_status: 
-        applications = applications.filter(state='accepted', rsvp_status__in=rsvp_status)
-    elif state:
-        applications = applications.filter(state__in=state)
-
-    if order:
-        is_reversed = True if order[0] == '-' else False
-        order = order[1:] if order[0] == '-' else order
-        if order == 'average_score':
-            # here is an exception for the average_score, because we also want to get
-            # the standard deviation into account in this sorting
-            applications = sorted(applications, key=lambda app: (getattr(app, order), -app.stdev()), reverse=is_reversed)
-        else:
-            applications = sorted(applications, key=lambda app: getattr(app, order), reverse=is_reversed)
-
-    return applications
-
-
-def random_application(request, page, prev_application):
-    """
-    Get a new random application for a particular event,
-    that hasn't been scored by the request user.
-    """
-    return Application.objects.filter(
-        form__page=page
-        ).exclude(pk=prev_application.id
-        ).exclude(scores__user=request.user).order_by('?').first()
