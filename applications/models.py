@@ -176,7 +176,7 @@ class Application(models.Model):
         return self.variance() ** 0.5
 
     def generate_code(self):
-        return ''.join([random.choice(string.letters + string.digits) for i in range(24)])
+        return ''.join([random.choice(string.ascii_letters + string.digits) for i in range(24)])
 
     def get_rsvp_yes_code(self):
         if not self.rsvp_yes_code:
