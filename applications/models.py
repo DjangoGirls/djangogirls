@@ -113,7 +113,7 @@ class Question(models.Model):
         null=False, blank=False, help_text="Position of the question")
 
     class Meta:
-        ordering = ('form', 'order')
+        ordering = ['order']
 
     def __unicode__(self):
         return self.title

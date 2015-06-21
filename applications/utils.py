@@ -124,15 +124,6 @@ DEFAULT_QUESTIONS = [
         "is_multiple_choice": True,
     },
     {
-        "title": "Would you like to subscribe to the Django Girls newsletter?",
-        "help_text": "Stay up to date with future Django Girls envents and "
-        "endeavors.",
-        "question_type": "choices",
-        "choices": "Yes, please!",
-        "is_required": False,
-        "is_multiple_choice": True,
-    },
-    {
         "title": "It is important that all attendees comply with the "
         "<a href='/pages/coc/'>Django Girls Code of Conduct</a>",
         "question_type": "choices",
