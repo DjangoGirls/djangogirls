@@ -15,7 +15,7 @@ It's a simple CMS that contains 4 models:
 
 Simply go to command line and run this command:
 
-    python ./manage.py new_event
+    make event
 
 And then follow the instructions.
 
@@ -69,19 +69,19 @@ Step into newly created `djangogirls` directory:
   
 Then, install all the required dependencies:
 
-    pip install -r requirements.txt
+    make requirements
 
 Create your database:
 
-    ./manage.py migrate
+    make migrate
   
 Add a sample event
 
-    ./manage.py new_event
+    make event
   
 Run your local server:
 
-     ./manage.py runserver
+     make run
   
 :tada: You're done.
 
