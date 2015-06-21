@@ -38,8 +38,8 @@ class QuestionAdmin(SortableModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(QuestionAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            form = Form.objects.filter(page__event__team__in=[request.user])
-            form.base_fields['form'].queryset = form
+            form_objs = Form.objects.filter(page__event__team__in=[request.user])
+            form.base_fields['form'].queryset = form_objs
         return form
 
 
