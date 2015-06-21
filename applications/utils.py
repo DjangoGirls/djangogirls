@@ -71,6 +71,7 @@ DEFAULT_QUESTIONS = [
         "title": "Which operating system do you use?",
         "question_type": "choices",
         "choices": "Mac OS X; Windows; Linux",
+        "is_multiple_choice": True,
     },
     {
         "title": "What is your current level of experience with programming?",
@@ -79,6 +80,7 @@ DEFAULT_QUESTIONS = [
         "I've tried some HTML or CSS before; I've tried some JavaScript "
         "before; I've done a few lessons of Python; I've built a website "
         "before; I work as a programmer",
+        "is_multiple_choice": True,
     },
     {
         "title": "If you checked anything other than beginner, could you "
