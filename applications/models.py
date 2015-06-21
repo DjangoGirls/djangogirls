@@ -155,7 +155,7 @@ class Application(models.Model):
         """
         scores = [s.score for s in self.scores.all() if s.score]
         if not scores:
-            return None
+            return 0
         else:
             return sum(scores) / float(len(scores))
 

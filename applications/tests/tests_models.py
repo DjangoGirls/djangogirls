@@ -86,7 +86,7 @@ class ApplicationModel(TestCase):
         self.application = Application.objects.create(form=self.form)
 
     def test_average_score(self):
-        self.assertIsNone(self.application.average_score)
+        self.assertEqual(self.application.average_score, 0)
 
         score_1 = Score.objects.create(user=self.user_1, application=self.application, score=random.randint(0,5))
         score_2 = Score.objects.create(user=self.user_2, application=self.application, score=random.randint(0,5))
