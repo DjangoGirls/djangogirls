@@ -234,6 +234,20 @@ class ApplicationsView(TestCase):
         self.application_1 = Application.objects.get(id=self.application_1.id)
         self.assertEqual(self.application_1.state, 'accepted')
 
+    def test_changing_application_rsvp(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        self.assertEqual(self.application_1.rsvp_status, 'waiting')
+        resp = self.client.post(
+            reverse('applications:change_rsvp', args=['test']),
+            {'rsvp_status': 'yes', 'application': self.application_1.id}
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.application_1 = Application.objects.get(id=self.application_1.id)
+        self.assertEqual(self.application_1.rsvp_status, 'yes')
+
     def test_changing_application_status_errors(self):
         # user without permissions:
         resp = self.client.post(
@@ -257,6 +271,32 @@ class ApplicationsView(TestCase):
         resp = self.client.post(
             reverse('applications:change_state', args=['test']),
             {'state': 'accepted'}
+        )
+        self.assertTrue('error' in json.loads(resp.content))
+
+    def test_changing_application_rsvp_errors(self):
+        # user without permissions:
+        resp = self.client.post(
+            reverse('applications:change_rsvp', args=['test']),
+            {'rsvp_status': 'yes', 'application': self.application_1.id}
+        )
+        self.assertEqual(resp.status_code, 404)
+
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+
+        # lack of rsvp_status parameter
+        resp = self.client.post(
+            reverse('applications:change_rsvp', args=['test']),
+            {'application': self.application_1.id}
+        )
+        self.assertTrue('error' in json.loads(resp.content))
+
+        # lack of application parameter
+        resp = self.client.post(
+            reverse('applications:change_rsvp', args=['test']),
+            {'rsvp_status': 'yes'}
         )
         self.assertTrue('error' in json.loads(resp.content))
 
