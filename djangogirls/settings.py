@@ -123,3 +123,18 @@ STATICFILES_FINDERS = (
 RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN')
 }
+
+MARKDOWN_DEUX_STYLES = {
+    "default": {
+        "extras": {
+            "code-friendly": None,
+        },
+        "safe_mode": "escape",
+    },
+    "trusted": {
+        "extras": {
+            "code-friendly": None,
+        },
+        "safe_mode": False,
+    }
+}
