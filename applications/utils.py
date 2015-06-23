@@ -1,8 +1,10 @@
+from collections import OrderedDict
+
 from django import forms
 
 
 def generate_form_from_questions(questions):
-    fields = {}
+    fields = OrderedDict()
 
     for question in questions:
         options = {
