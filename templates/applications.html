@@ -40,6 +40,7 @@
               </select>
               <input type="submit" value="Apply" />
           </p>
+          <p>Showing {{ applications.count }} applications out of {{ all_applications_count }}:</p>
           <table class="table">
               <thead>
                   <tr>
@@ -56,7 +57,7 @@
                   {% for app in applications %}
                   <tr>
                       <td><input type="checkbox" name="application" value="{{ app.id }}" /></div>
-                      <td><a href='{{ app.id }}'>{{ app.id }}</a></td>
+                      <td><a href='{{ app.id }}'>{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>
                           <div class="dropdown">

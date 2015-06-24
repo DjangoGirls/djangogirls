@@ -81,6 +81,7 @@ def applications(request, city):
     return render(request, 'applications.html', {
         'page': page,
         'applications': applications,
+        'all_applications_count': Application.objects.filter(form__page=page).count(),
         'order': order,
         'menu': menu,
     })

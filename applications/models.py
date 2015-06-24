@@ -130,6 +130,7 @@ class Question(models.Model):
 
 class Application(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
+    number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.CharField(
         max_length=50,
@@ -147,6 +148,11 @@ class Application(models.Model):
     )
     rsvp_yes_code = models.CharField(max_length=24, null=True)
     rsvp_no_code = models.CharField(max_length=24, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.number = Application.objects.filter(form=self.form).count() + 1
+        super(Application, self).save(*args, **kwargs)
 
     @property
     def average_score(self):
