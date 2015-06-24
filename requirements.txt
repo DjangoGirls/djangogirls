@@ -26,3 +26,4 @@ raven==5.0.0
 requests==2.3.0
 six==1.7.3
 whitenoise==1.0.3
+django-storages-redux==1.2.3
