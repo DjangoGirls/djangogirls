@@ -104,7 +104,7 @@ class Question(models.Model):
     is_required = models.BooleanField(
         default=True, verbose_name="Is the answer to the question required?")
     choices = models.TextField(
-        blank=True, default='', verbose_name="List all available options, comma separated",
+        blank=True, default='', verbose_name="List all available options, separated with semicolon (;)",
         help_text="Used only with 'Choices' question type")
     is_multiple_choice = models.BooleanField(
         default=False, verbose_name="Are there multiple choices allowed?",
