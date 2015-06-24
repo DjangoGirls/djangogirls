@@ -42,6 +42,12 @@ def apply(request, city):
         form.save(form=form_obj)
         messages.success(request, "Yay! Your application has been saved. You'll hear from us soon!")
 
+        return render(request, 'apply.html', {
+            'page': page,
+            'menu': menu,
+            'form_obj': form_obj,
+        })
+
     number_of_email_questions = Question.objects.filter(question_type='email', form=form_obj).count()
 
     return render(request, 'apply.html', {
