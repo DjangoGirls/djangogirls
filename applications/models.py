@@ -25,9 +25,9 @@ APPLICATION_STATES = (
 )
 
 RSVP_STATUSES = (
-    ('waiting', 'Waiting for response'),
-    ('yes', 'Confirmed attendance'),
-    ('no', 'Rejected invitation')
+    ('waiting', 'RSVP: Waiting for response'),
+    ('yes', 'RSVP: Confirmed attendance'),
+    ('no', 'RSVP: Rejected invitation')
 
 )
 
@@ -255,7 +255,7 @@ class Email(models.Model):
         help_text="You can use HTML syntax in this message. Preview on the right."
     )
     recipients_group = models.CharField(
-        max_length=50, choices=APPLICATION_STATES,
+        max_length=50, choices=APPLICATION_STATES+RSVP_STATUSES,
         verbose_name="Recipients",
         help_text="Only people assigned to chosen group will receive this email."
     )
@@ -274,8 +274,19 @@ class Email(models.Model):
         body = body.replace('[rsvp-url-no]', self.get_rsvp_link(application.get_rsvp_no_code()))
         return body
 
+    def get_applications(self):
+        application_states = [x[0] for x in APPLICATION_STATES]
+        rsvp_statuses = [x[0] for x in RSVP_STATUSES]
+
+        if self.recipients_group in application_states:
+            return Application.objects.filter(form=self.form, state=self.recipients_group)
+        elif self.recipients_group in rsvp_statuses:
+            return Application.objects.filter(form=self.form, state='accepted', rsvp_status=self.recipients_group)
+        else:
+            return Application.objects.none()
+
     def send(self):
-        recipients = Application.objects.filter(form=self.form, state=self.recipients_group)
+        recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
         self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
         sender = "{} <{}>".format(self.form.page.title, self.sent_from)
