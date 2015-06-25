@@ -5,6 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.mail import EmailMessage
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 
 from core.models import EventPage, User
 from .utils import DEFAULT_QUESTIONS
@@ -34,6 +35,7 @@ RSVP_STATUSES = (
 RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 
+@python_2_unicode_compatible
 class Form(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
     text_header = models.CharField(
@@ -64,7 +66,7 @@ class Form(models.Model):
     open_until = models.DateTimeField(
         null=True, verbose_name="Application process is open until")
 
-    def __unicode__(self):
+    def __str__(self):
         return 'Application form for {}'.format(self.page.event.name)
 
     def save(self, *args, **kwargs):
@@ -93,6 +95,7 @@ class Form(models.Model):
         return True
 
 
+@python_2_unicode_compatible
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     title = models.TextField(verbose_name="Question")
@@ -115,7 +118,7 @@ class Question(models.Model):
     class Meta:
         ordering = ['order']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_choices_as_list(self):
@@ -128,6 +131,7 @@ class Question(models.Model):
         return self.choices.split(';')
 
 
+@python_2_unicode_compatible
 class Application(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     number = models.PositiveIntegerField(default=1, blank=True)
@@ -214,7 +218,7 @@ class Application(models.Model):
     def is_accepted(self):
         return self.state == 'accepted'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.pk)
 
 
@@ -246,6 +250,7 @@ class Score(models.Model):
         unique_together = ('user', 'application',)
 
 
+@python_2_unicode_compatible
 class Email(models.Model):
     form = models.ForeignKey(Form)
     author = models.ForeignKey(User, related_name="author")
@@ -265,6 +270,9 @@ class Email(models.Model):
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.subject
 
     def get_rsvp_link(self, code):
         return 'http://djangogirls.org/{}/rsvp/{}'.format(self.form.page.url, code)
