@@ -38,7 +38,7 @@ def generate_form_from_questions(questions):
         widget=forms.RadioSelect,
         label='Do you want to receive news from the Django Girls team?',
         help_text='No spam, pinky swear! Only helpful programming tips and '
-            'latest news from Django Girls world. We sent this very rarely.',
+            'latest news from Django Girls world. We send this very rarely.',
         required=True,
         choices=(('yes', 'Yes please!'), ('no', 'No, thank you'))
     )
