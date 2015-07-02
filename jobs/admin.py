@@ -10,6 +10,7 @@ from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTexta
 
 from djangogirls.settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
 from djangogirls.settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
+
 from jobs.models import PublishFlowModel, Job, Meetup
 
 
@@ -199,13 +200,12 @@ class JobAdmin(admin.ModelAdmin):
 
     def restore_job(self, request, id):
         job = get_object_or_404(Job, id=id)
-        job.restore()
+        job.restore(request.user)
         messages.add_message(
             request,
             messages.INFO,
             '{0} is now restored.'.format(job)
         )
-        job.restore(request.user)
         return redirect('/admin/jobs/job/%s/' % id)
 
     def publish_job(self, request, id):
@@ -322,13 +322,12 @@ class MeetupAdmin(admin.ModelAdmin):
 
     def restore_meetup(self, request, id):
         meetup = get_object_or_404(Meetup, id=id)
-        meetup.restore()
+        meetup.restore(request.user)
         messages.add_message(
             request,
             messages.INFO,
             '{0} is now restored.'.format(meetup)
         )
-        meetup.restore(request.user)
         return redirect('/admin/jobs/meetup/%s/' % id)
 
     def publish_meetup(self, request, id):
