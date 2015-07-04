@@ -32,12 +32,7 @@
                     <p>{{ meetup.company }}</p>
                 {% endif %}
                 <h4>Description:</h4>
-                {% if meetup.description %}
-                    <p>{{ meetup.description|safe }}</p>
-                {% else %}
-                    <!--For testing purposes only! Delete before deploying!-->
-                    <p>{% lorem 5 p %}</p>
-                {% endif %}
+                <p>{{ meetup.description|safe }}</p>
                 {% if meetup.is_recurring %}
                     <p>This is a recurring event</p>
                 {% endif %}

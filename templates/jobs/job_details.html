@@ -33,12 +33,7 @@
                     <h3>Place:</h3>
                     <p>{{ job.cities }}, {{ job.country }}</p>
                     <h3>Description:</h3>
-                    {% if job.description %}
-                        <p>{{ job.description|safe }}</p>
-                    {% else %}
-                        <!--For testing purposes only! Delete before deploying!-->
-                        <p>{% lorem 5 p %}</p>
-                    {% endif %}
+                    <p>{{ job.description|safe }}</p>
                     <h3>Contact and more information:</h3>
                         <p>{{ job.contact_email }}</p>
                         <p><a href="{{ job.website }}">view website</a></p>
