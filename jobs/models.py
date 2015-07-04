@@ -93,15 +93,16 @@ class PublishFlowModel(models.Model):
         self.review_status = self.READY_TO_PUBLISH
         self.save()
 
-    def reject(self, option):
+    def reject(self):
         assert self.review_status in [self.UNDER_REVIEW, self.READY_TO_PUBLISH, self.PUBLISHED]
         self.review_status = self.REJECTED
         self.published_date = None
         self.save()
         subject = '{0} was rejected.'.format(self.title)
+        model_name = self._meta.model_name
         context = Context({
                     'status': self.get_review_status_display(),
-                    'option': option,
+                    'option': model_name,
                     'reviewers_comment': self.reviewers_comment,
                 })
         message_plain = get_template(
@@ -109,14 +110,14 @@ class PublishFlowModel(models.Model):
         message_html = get_template(
             'jobs/email_templates/status.html').render(context)
         recipient = self.contact_email
-        if option == 'job offer':
+        if model_name == 'job':
             send_job_mail(
                     subject,
                     message_plain,
                     message_html,
                     recipient
                 )
-        elif option == 'meetup':
+        elif model_name == 'meetup':
             send_meetup_mail(
                 subject,
                 message_plain,
@@ -130,17 +131,21 @@ class PublishFlowModel(models.Model):
         self.review_status = self.UNDER_REVIEW
         self.save()
 
-    def publish(self, option):
+    def publish(self):
         assert self.is_ready_to_publish()
         self.published_date = timezone.now()
-        if not self.expiration_date:
+        # the line below covers the situation when there is no expiration date
+        # set or when somebody wants to republish an expired post but
+        # hasn't changed the expiration date
+        if not self.expiration_date or self.expiration_date < self.published_date.date():
             self.expiration_date = self.published_date + timedelta(60)
         self.review_status = self.PUBLISHED
         self.save()
         subject = '{0} is now published.'.format(self.title)
+        model_name = self._meta.model_name
         context = Context({
                     'status': self.get_review_status_display(),
-                    'option': option,
+                    'option': model_name,
                     'reviewers_comment': self.reviewers_comment,
                 })
         message_plain = get_template(
@@ -148,14 +153,14 @@ class PublishFlowModel(models.Model):
         message_html = get_template(
             'jobs/email_templates/status.html').render(context)
         recipient = self.contact_email
-        if option == 'job offer':
+        if model_name == 'job':
             send_job_mail(
                     subject,
                     message_plain,
                     message_html,
                     recipient
                 )
-        elif option == 'meetup':
+        elif model_name == 'meetup':
             send_meetup_mail(
                 subject,
                 message_plain,

@@ -161,7 +161,7 @@ SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=core,applications',
+    '--cover-package=core,applications,jobs',
     '--with-progressive',
 ]
 

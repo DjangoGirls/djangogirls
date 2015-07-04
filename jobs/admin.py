@@ -22,7 +22,7 @@ make_published.short_description = "Publish selected items"
 
 
 def send_status_update_job_offer(modeladmin, request, queryset):
-    option = 'job offer'
+    option = 'job'
     for item in queryset:
         subject = "Status update on your job offer - {0}.".format(item.title)
         context = Context({
@@ -99,7 +99,114 @@ def send_status_update_meetup(modeladmin, request, queryset):
 send_status_update_meetup.short_description = "Send notification about meetup status."
 
 
-class JobAdmin(admin.ModelAdmin):
+class PublishFlowModelAdmin(admin.ModelAdmin):
+
+    def get_urls(self):
+        urls = super(PublishFlowModelAdmin, self).get_urls()
+        my_urls = patterns('',
+            url(
+                r'^(?P<id>\d+)/assign/$',
+                self.admin_site.admin_view(self.assign_reviewer),
+                name='assign_%s_reviewer' % self.get_print_name()
+            ),
+            url(
+                r'^(?P<id>\d+)/unassign/$',
+                self.admin_site.admin_view(self.unassign_reviewer),
+                name='unassign_%s_reviewer' % self.get_print_name()
+            ),
+            url(
+                r'^(?P<id>\d+)/accept/$',
+                self.admin_site.admin_view(self.accept),
+                name='accept_%s' % self.get_print_name()
+            ),
+            url(
+                r'^(?P<id>\d+)/reject/$',
+                self.admin_site.admin_view(self.reject),
+                name='reject_%s' % self.get_print_name()
+            ),
+            url(
+                r'^(?P<id>\d+)/restore/$',
+                self.admin_site.admin_view(self.restore),
+                name='restore_%s' % self.get_print_name()
+            ),
+            url(
+                r'^(?P<id>\d+)/publish/$',
+                self.admin_site.admin_view(self.publish),
+                name='publish_%s' % self.get_print_name()
+            ),
+        )
+        return my_urls + urls
+
+    def get_print_name(self):
+        return self.model._meta.model_name
+
+    def not_expired(self, obj):
+        return obj.not_expired
+    not_expired.boolean = True
+    not_expired.admin_order_field = 'not_expired'
+
+    def assign_reviewer(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.assign(request.user)
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now assigned.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+    def unassign_reviewer(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.unassign()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now unassigned.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+    def accept(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.accept()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now accepted.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+    def reject(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.reject()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now rejected - an email to submitter was sent.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+    def restore(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.restore(request.user)
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now restored.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+    def publish(self, request, id):
+        post = get_object_or_404(self.model, id=id)
+        post.publish()
+        messages.add_message(
+            request,
+            messages.INFO,
+            '{0} is now published - an email to submitter was sent.'.format(post)
+        )
+        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+
+
+class JobAdmin(PublishFlowModelAdmin):
     fieldsets = (
         ('Job info', {'fields': ('title', 'company', 'website', 'contact_email',
                            ('cities', 'country'), 'description', 'remote_work',
@@ -117,109 +224,8 @@ class JobAdmin(admin.ModelAdmin):
         models.TextField: {'widget': AutosizedTextarea},
     }
 
-    def not_expired(self, obj):
-        return obj.not_expired
-    not_expired.boolean = True
-    not_expired.admin_order_field = 'not_expired'
 
-    def get_urls(self):
-        urls = super(JobAdmin, self).get_urls()
-        my_urls = patterns('',
-            url(
-                r'^(?P<id>\d+)/assign/$',
-                self.admin_site.admin_view(self.assign_job_reviewer),
-                name='assign_job_reviewer'
-            ),
-            url(
-                r'^(?P<id>\d+)/unassign/$',
-                self.admin_site.admin_view(self.unassign_job_reviewer),
-                name='unassign_job_reviewer'
-            ),
-            url(
-                r'^(?P<id>\d+)/accept/$',
-                self.admin_site.admin_view(self.accept_job),
-                name='accept_job'
-            ),
-            url(
-                r'^(?P<id>\d+)/reject/$',
-                self.admin_site.admin_view(self.reject_job),
-                name='reject_job'
-            ),
-            url(
-                r'^(?P<id>\d+)/restore/$',
-                self.admin_site.admin_view(self.restore_job),
-                name='restore_job'
-            ),
-            url(
-                r'^(?P<id>\d+)/publish/$',
-                self.admin_site.admin_view(self.publish_job),
-                name='publish_job'
-            ),
-        )
-        return my_urls + urls
-
-    def assign_job_reviewer(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.assign(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now assigned.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-    def unassign_job_reviewer(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.unassign()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now unassigned.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-    def accept_job(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.accept()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now accepted.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-    def reject_job(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.reject(option='job offer')
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now rejected - an email to submitter was sent.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-    def restore_job(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.restore(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now restored.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-    def publish_job(self, request, id):
-        job = get_object_or_404(Job, id=id)
-        job.publish(option='job offer')
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now published - an email to submitter was sent.'.format(job)
-        )
-        return redirect('/admin/jobs/job/%s/' % id)
-
-
-class MeetupAdmin(admin.ModelAdmin):
+class MeetupAdmin(PublishFlowModelAdmin):
     fieldsets = (
         ('Meetup info', {'fields': ('title', 'organisation', 'website',
                                     'contact_email', ('city', 'country'),
@@ -239,106 +245,6 @@ class MeetupAdmin(admin.ModelAdmin):
         models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
         models.TextField: {'widget': AutosizedTextarea},
     }
-
-    def not_expired(self, obj):
-        return obj.not_expired
-    not_expired.boolean = True
-    not_expired.admin_order_field = 'not_expired'
-
-    def get_urls(self):
-        urls = super(MeetupAdmin, self).get_urls()
-        my_urls = patterns('',
-            url(
-                r'^(?P<id>\d+)/assign/$',
-                self.admin_site.admin_view(self.assign_meetup_reviewer),
-                name='assign_meetup_reviewer'
-            ),
-            url(
-                r'^(?P<id>\d+)/unassign/$',
-                self.admin_site.admin_view(self.unassign_meetup_reviewer),
-                name='unassign_meetup_reviewer'
-            ),
-            url(
-                r'^(?P<id>\d+)/accept/$',
-                self.admin_site.admin_view(self.accept_meetup),
-                name='accept_meetup'
-            ),
-            url(
-                r'^(?P<id>\d+)/reject/$',
-                self.admin_site.admin_view(self.reject_meetup),
-                name='reject_meetup'
-            ),
-            url(
-                r'^(?P<id>\d+)/restore/$',
-                self.admin_site.admin_view(self.restore_meetup),
-                name='restore_meetup'
-            ),
-            url(
-                r'^(?P<id>\d+)/publish/$',
-                self.admin_site.admin_view(self.publish_meetup),
-                name='publish_meetup'
-            ),
-        )
-        return my_urls + urls
-
-    def assign_meetup_reviewer(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.assign(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now assigned.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
-    def unassign_meetup_reviewer(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.unassign()
-        messages.add_message(
-            request,
-            messages.INFO, '{0} is now unassigned.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
-    def accept_meetup(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.accept()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now accepted.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
-    def reject_meetup(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.reject(option='meetup')
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now rejected - an email to submitter was sent.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
-    def restore_meetup(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.restore(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now restored.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
-
-    def publish_meetup(self, request, id):
-        meetup = get_object_or_404(Meetup, id=id)
-        meetup.publish(option='meetup')
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now published - an email to submitter was sent.'.format(meetup)
-        )
-        return redirect('/admin/jobs/meetup/%s/' % id)
 
 
 admin.site.register(Job, JobAdmin)
