@@ -217,6 +217,7 @@ class JobAdmin(PublishFlowModelAdmin):
     )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'company', 'reviewer', 'review_status', 'not_expired']
+    list_filter = ('reviewer', 'review_status')
     ordering = ['title']
     actions = [make_published, send_status_update_job_offer]
     formfield_overrides = {
@@ -238,6 +239,7 @@ class MeetupAdmin(PublishFlowModelAdmin):
     )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'city', 'reviewer', 'review_status', 'not_expired']
+    list_filter = ('reviewer', 'review_status')
     ordering = ['title']
     actions = [make_published, send_status_update_meetup]
     formfield_overrides = {
