@@ -18,4 +18,10 @@ $(document).ready(function() {
         imitate_link(this);
         return false;
     });
+
+    $('.show-more a').click(function(){
+        $('.past-events .col-md-12').css('max-height', '100%');
+        $('.past-events .col-md-12').css('overflow', 'visible');
+        $('.show-more').css('display', 'none');
+    });
 });
