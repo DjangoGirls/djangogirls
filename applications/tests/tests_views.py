@@ -265,14 +265,14 @@ class ApplicationsView(TestCase):
             reverse('applications:change_state', args=['test']),
             {'application': self.application_1.id}
         )
-        self.assertTrue('error' in json.loads(resp.content))
+        self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
         # lack of application parameter
         resp = self.client.post(
             reverse('applications:change_state', args=['test']),
             {'state': 'accepted'}
         )
-        self.assertTrue('error' in json.loads(resp.content))
+        self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
     def test_changing_application_rsvp_errors(self):
         # user without permissions:
@@ -291,14 +291,14 @@ class ApplicationsView(TestCase):
             reverse('applications:change_rsvp', args=['test']),
             {'application': self.application_1.id}
         )
-        self.assertTrue('error' in json.loads(resp.content))
+        self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
         # lack of application parameter
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
             {'rsvp_status': 'yes'}
         )
-        self.assertTrue('error' in json.loads(resp.content))
+        self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
     def changing_application_status_in_bulk(self):
         self.user.is_superuser = True
