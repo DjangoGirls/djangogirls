@@ -7,6 +7,11 @@
         <section id="jobs">
             <div class="row">
                 <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'core:index' %}">Home</a></li>
+                        <li><a href="{% url 'jobs:main' %}">Community</a></li>
+                        <li class="active">Job offers</li>
+                    </ol>
                     <h2>
                         Job offers
                     </h2>
@@ -22,13 +27,13 @@
                        On this page we only list offers that require no experience, from companies who
                        want to hire beginners and care about diversity.
                     </p>
+                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
                 </div> <!--.col-md-12-->
             </div> <!--.row-->
 
             <div class="row">
                 <div class="col-md-12">
                     <h3>Offers</h3>
-                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
                     <table class="table table-striped">
                         <thead>
                             <th>Company</th>

@@ -22,7 +22,11 @@
 <div class="container">
     <section id="community">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
+                 <ol class="breadcrumb">
+                    <li><a href="{% url 'core:index' %}">Home</a></li>
+                    <li class="active">Community</li>
+                </ol>
                 <h2>Django Girls Community</h2>
 
                 <p>If you find yourself on this page, you probably recently completed the Django Girls tutorial — either at one of our workshops, at an event in your city or at home on your own.</p>
@@ -35,7 +39,7 @@
             <div class="col-md-6">
                 <div class="panel panel-feature-blue">
                     <div class="panel-heading">
-                        Jobs
+                        <h3>Jobs</h3>
                     </div>
                     <div class="panel-body">
                         <p>
@@ -47,24 +51,19 @@
                         <h4>Recent offers:</h4>
                         {% if job_offers %}
                             {% for job in job_offers %}
-                            <div class="col-md-6 event">
                                 {% include 'includes/_jobs.html' with job=job %}
-                            </div>
-                        
                             {% endfor %}
                         {% else %}
                             <p>No job offers yet...</p>
                         {% endif %}
-                        <div class="col-md-12">
                             <a class="btn btn-blue btn-block" href="{% url 'jobs:jobs' %}">More...</a>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="panel panel-feature-orange">
                     <div class="panel-heading">
-                        Meetups
+                        <h3>Meetups</h3>
                     </div>
                     <div class="panel-body">
                         <p>
@@ -79,16 +78,12 @@
                         <h4>Recent meetups:</h4>
                         {% if meetup_list %}
                             {% for meetup in meetup_list %}
-                            <div class="col-md-12 event">
                                 {% include 'includes/_meetups.html' with meetup=meetup %}
-                            </div>
                             {% endfor %}
                         {% else %}
                             <p>No meetups yet...</p>
                         {% endif %}
-                        <div class="col-md-12">
                             <a class="btn btn-block" href="{% url 'jobs:meetups' %}">More...</a>
-                        </div>
                     </div>
                 </div>
             </div>
