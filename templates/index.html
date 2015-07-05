@@ -16,7 +16,7 @@
                         We want to inspire women to fall in love with programming.
                     </h1>
                     <p>
-                        So we organize free Python and Django workshops, create open sourced online tutorials and care about amazing first experiences.
+                        We organize free Python and Django workshops, create open sourced online tutorials and care about curating amazing first experiences with technology.
                     </p>
                 </div>
             </div>
@@ -32,12 +32,12 @@
                 <div class="col-md-6">
                     <h2>About</h2>
                     <p>
-                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in Berlin and started by two Polish girls: <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asendecka">Ola Sendecka</a>.
+                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in July 2014 in Berlin and started by two Polish girls: <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asendecka">Ola Sendecka</a>.
                     </p>
 
                     <h2>Mission</h2>
                     <p>
-                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and everyone should be able to build it. We are making technology more approachable by creating simple tools and resources designed with empathy.
+                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and <em>everyone</em> should be able to build it. We are making technology more approachable by creating simple tools and resources designed with empathy.
                     </p>
                 </div>
                 <div class="col-md-6">
@@ -55,7 +55,7 @@
                 <div class="col-md-6">
                     <h2>Tutorial</h2>
                     <p>
-                        During the workshop, attendees follow a tutorial written especially for this purpose. The tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch until deployment to Heroku.
+                        During the workshop, attendees follow a tutorial written especially for this purpose. The tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch, including deployment to <a href="https://www.pythonanywhere.com/">Python Anywhere</a>.
                     </p>
                 </div>
 
@@ -68,6 +68,7 @@
                     <h2>
                         Upcoming events
                         <a class="ical btn btn-default btn-xs" href="{% url 'core:icalendar' %}">ICAL</a>
+                        <a class="ical btn btn-default btn-xs" href="{% url 'core:events_map' %}">MAP</a>
                     </h2>
                 </div>
             </div>
@@ -115,7 +116,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <p><a href="http://blog.djangogirls.org/">See more on our blog »</a></p>
+                    <p><a href="{% url 'core:stories' %}">See more stories »</a></p>
                 </div>
             </div>
 
@@ -143,6 +144,11 @@
                 <div class="col-md-3">
                     <a href="http://lincolnloop.com/">
                         <img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://www.divio.ch/en/">
+                        <img src="{% static 'img/global/supporters/divio.png' %}" alt="Divio" />
                     </a>
                 </div>
             </div>
