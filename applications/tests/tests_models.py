@@ -88,8 +88,8 @@ class ApplicationModel(TestCase):
     def test_average_score(self):
         self.assertEqual(self.application.average_score, 0)
 
-        score_1 = Score.objects.create(user=self.user_1, application=self.application, score=random.randint(0,5))
-        score_2 = Score.objects.create(user=self.user_2, application=self.application, score=random.randint(0,5))
+        score_1 = Score.objects.create(user=self.user_1, application=self.application, score=random.randint(1,5))
+        score_2 = Score.objects.create(user=self.user_2, application=self.application, score=random.randint(1,5))
         average = sum([score_1.score, score_2.score]) / 2.0
 
         self.assertEqual(self.application.average_score, average)
