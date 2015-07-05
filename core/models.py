@@ -165,7 +165,7 @@ class EventPageContent(models.Model):
 class EventPageMenu(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False)
     title = models.CharField(max_length=255, null=False, blank=False)
-    url = models.CharField(max_length=255, null=False, blank=False)
+    url = models.CharField(max_length=255, null=False, blank=False, help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(null=False, blank=False, help_text="Order of menu")
 
     def __str__(self):
