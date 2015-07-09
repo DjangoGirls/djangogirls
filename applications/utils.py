@@ -1,6 +1,25 @@
 from collections import OrderedDict
 
 from django import forms
+from django.core.urlresolvers import reverse
+
+
+def get_organiser_menu(city):
+    """
+    Get menu entries for organiser-visible pages
+    """
+    menu = [
+        {
+            'title': 'Applications',
+            'url': reverse('applications:applications', args=[city])
+        },
+        {
+            'title': 'Messaging',
+            'url': reverse('applications:communication', args=[city])
+        },
+    ]
+
+    return menu
 
 
 def generate_form_from_questions(questions):
