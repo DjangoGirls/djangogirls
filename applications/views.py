@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.core.urlresolvers import reverse
 from django.contrib import messages
 
 from core.utils import get_event_page
@@ -9,7 +8,7 @@ from core.models import EventPageMenu
 from .decorators import organiser_only
 from .models import Application, Form, Score, Question, Email
 from .forms import ApplicationForm, ScoreForm, EmailForm
-from .utils import get_applications_for_page, random_application
+from .utils import get_applications_for_page, get_organiser_menu, random_application
 
 
 def apply(request, city):
@@ -73,10 +72,7 @@ def applications(request, city):
     order = request.GET.get('order', None)
     applications = get_applications_for_page(page, state, rsvp_status, order)
 
-    menu = [
-        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
-    ]
+    menu = get_organiser_menu(city)
 
     return render(request, 'applications.html', {
         'page': page,
@@ -113,10 +109,7 @@ def application_detail(request, city, app_id):
                     'applications:application_detail', city, new_app.id)
             return redirect('applications:applications', city)
 
-    menu = [
-        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
-    ]
+    menu = get_organiser_menu(city)
 
     return render(request, 'application_detail.html', {
         'page': page,
@@ -136,10 +129,7 @@ def communication(request, city):
     """
     page = get_event_page(city, request.user.is_authenticated(), False)
 
-    menu = [
-        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
-    ]
+    menu = get_organiser_menu(city)
 
     emails = Email.objects.filter(form__page=page).order_by('-created')
 
@@ -159,10 +149,7 @@ def compose_email(request, city, email_id=None):
     form_obj = get_object_or_404(Form, page=page)
     emailmsg = None if not email_id else get_object_or_404(Email, form__page=page, id=email_id)
 
-    menu = [
-        {'title': 'Applications', 'url': reverse('applications:applications', args=[city])},
-        {'title': 'Messaging', 'url': reverse('applications:communication', args=[city])},
-    ]
+    menu = get_organiser_menu(city)
 
     form = EmailForm(request.POST or None, instance=emailmsg, initial={
         'author': request.user, 'form': form_obj

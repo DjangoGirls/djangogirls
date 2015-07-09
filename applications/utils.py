@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django import forms
+from django.core.urlresolvers import reverse
 
 
 def generate_form_from_questions(questions):
@@ -178,3 +179,30 @@ DEFAULT_QUESTIONS = [
         "is_multiple_choice": True,
     }
 ]
+
+
+def get_organiser_menu(city):
+    """
+    Get menu entries for organiser-visible pages
+    """
+    # Remove the city prefix from the URL
+    # as it is already added in by the menu system
+    def strip_url(url):
+        return url.replace('/{}/'.format(city), '')
+
+    menu = [
+        {
+            'title': 'Applications',
+            'url': strip_url(
+                reverse('applications:applications', args=[city])
+            )
+        },
+        {
+            'title': 'Messaging',
+            'url': strip_url(
+                reverse('applications:communication', args=[city])
+            )
+        },
+    ]
+
+    return menu
