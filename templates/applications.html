@@ -56,7 +56,7 @@
               <tbody>
                   {% for app in applications %}
                   <tr>
-                      <td><input type="checkbox" name="application" value="{{ app.id }}" /></div>
+                      <td><input type="checkbox" name="application" value="{{ app.id }}" /></td>
                       <td><a href='{{ app.id }}'>{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>

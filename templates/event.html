@@ -4,7 +4,7 @@
 {% block description %}{{ page.description }}{% endblock %}
 {% block custom_css %}
     <style>
-        {{ page.custom_css }}
+        {{ page.custom_css|default_if_none:'' }}
     </style>
 {% endblock %}
 
@@ -15,5 +15,5 @@
         {% include 'includes/item.html' with item=item %}
 
     {% endfor %}
-    
+
 {% endblock %}
