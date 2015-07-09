@@ -3,7 +3,7 @@
 <div class="col-md-3">
     <a href="{{ sponsor.url }}" target="_blank">
         {% if sponsor.logo %}
-            {% thumbnail sponsor.logo "160x160" padding=True as im %}
+            {% thumbnail sponsor.logo "204x204" padding=True as im %}
             <img src="{{ im.url }}" alt="{{ sponsor.name }}" />
             {% endthumbnail %}
         {% else %}

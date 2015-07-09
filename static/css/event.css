@@ -489,8 +489,7 @@ input[type="submit"] {
   text-align: center;
 }
 .sponsor-logos .col-md-3 img {
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 80%;
   height: auto;
 }
 .sponsor-logos .col-md-3 p {
