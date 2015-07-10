@@ -1,0 +1,39 @@
+Hi there!
+
+Congrats! I just created your Django Girls chapter website & email.
+
+1) Email
+
+Your e-mail is {{ event.email }}
+
+Login here:
+https://webmail.megiteam.pl/
+{{ event.email }} (@djangogirls.com works too!)
+===ADD PASSWORD HERE===
+
+You can also add this inbox to your email client:
+- IMAP: imap.megiteam.pl (SSL, port 993)
+- SMTP: smtp.megiteam.pl (SSL, port 465)
+
+Or you can forward incoming mail to your private email account:
+- Login to webmail
+- Click settings icon in the top bar
+- Click filters on the left
+- Click + button in the filters column
+- Filter name: Send all to me, then select “all messages” and “Send messages copy to” and input your > email. Then click save
+
+2) Website
+
+Your website address is http://djangogirls.org/{{ event.page.url }}
+
+Login here:
+http://djangogirls.org/admin/
+{% for member in members %}{{ member.first_name }} - email: {{ member.email }} password: {{ member.password }}
+{% endfor %}
+Your website is currently hidden for public, you can only see it if you’re logged in. If you want to make it available for everyone, go here: http://djangogirls.org/admin/core/eventpage/ and edit your website changing “is live” option.
+
+Instructions on editing website: http://organize.djangogirls.org/website/
+
+Let me know if you need anything. It’s usually faster to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
+
+Hugs, rainbows and sunshines!
