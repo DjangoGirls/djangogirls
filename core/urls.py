@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^resources/$', views.resources, name='resources'),
     url(r'^organize/$', views.organize, name='organize'),
     url(r'^story/$', views.stories, name='stories'),
+    url(r'^newsletter/$', views.newsletter, name='newsletter'),
 
     url(r'^(?P<city>[\w\d]+)/$', 'core.views.event', name='event'),
     url(r'^$', views.index, name='index'),

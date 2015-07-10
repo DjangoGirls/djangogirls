@@ -88,3 +88,7 @@ def events_ical(request):
 
     return HttpResponse(calendar.to_ical(),
                         content_type='text/calendar; charset=UTF-8')
+
+
+def newsletter(request):
+    return render(request, 'newsletter.html', {})

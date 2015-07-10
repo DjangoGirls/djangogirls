@@ -1,0 +1,42 @@
+{% extends 'global/base.html' %}
+{% load staticfiles markdown_deux_tags %}
+
+{% block title %}Django Girls Dispatch - Newsletter{% endblock %}
+
+{% block content %}
+    <div class="container without-background" id="flatpage">
+          <div id="value" class="row">
+              <div class="col-md-12">
+                  <h1>Django Girls Dispatch</h1>
+
+                  <p>
+                      We're sending a biweekly newsletter for friends and strangers
+                      who support us and are curious how we're doing. 
+                  </p>
+              </div>
+          </div>
+          <div class="row" style="margin-top: 20px">
+              <div class="col-md-12">
+                  <h2>Subscribe</h2>
+                  
+                  <p>
+                      We don't send advertisement, spam and we won't share your email with anyone. <br />
+                      Only biweekly dispatch and awesome announcement about things we're proud of.
+                  </p>
+                  
+                  <form action="http://test2975.createsend.com/t/i/s/tykhhd/" method="post" id="subForm">
+                      <input id="fieldEmail" name="cm-tykhhd-tykhhd" type="email" placeholder="Your e-mail" required />
+                      <input type="submit" value="Subscribe" />
+                  </form>
+              </div>
+          </div>
+          
+          <div class="row newsletter-archive">
+              <div class="col-md-12">
+                  <h2>Past editions</h2>
+                  
+                  <script type="text/javascript" src="http://djangogirls.createsend.com/t/i/p/mtyuh/-1/0/0/1/0/"></script>
+              </div>
+          </div>
+    </div>
+{% endblock %}

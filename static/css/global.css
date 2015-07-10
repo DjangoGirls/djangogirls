@@ -271,6 +271,24 @@ nav ul li:first-child {
 #organize .centered {
   text-align: center;
 }
+.newsletter-archive {
+  margin-top: 20px;
+}
+.newsletter-archive ul {
+  list-style-type: none;
+  padding: 0;
+}
+.newsletter-archive ul li {
+  padding: 0 0 15px 0;
+  font-family: Roboto;
+  font-size: 14px;
+}
+.newsletter-archive ul li a {
+  text-decoration: none;
+  color: #f7921d;
+  font-family: 'Linux Libertine';
+  font-size: 20px;
+}
 /*
 -------------
     Story
