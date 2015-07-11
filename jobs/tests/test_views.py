@@ -54,7 +54,6 @@ class JobsPageTests(TestCase):
             "There are no job offers at this moment.", str(response.content)
         )
 
-
     def test_jobs_page_with_job_not_ready_to_publish(self):
         mommy.make(
             Job,
@@ -110,4 +109,3 @@ class MeetupsPageTests(TestCase):
         response = self.client.get(reverse('jobs:meetups'))
         self.assertEqual(response.status_code, 200)
         self.assertIn("Django Girls Warsaw", str(response.content))
-

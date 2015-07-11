@@ -15,13 +15,11 @@
                         <li><a href="{% url 'jobs:jobs' %}">Job offers</a></li>
                         <li class="active">{{ job.title }}</li>
                     </ol>
+                    <div class="page-header">
+                        <h3>{{ job.title }} <small>at {{ job.company }}</small></h3>
+                    </div>
                     <div class="panel panel-feature-blue">
                         <div class="panel-heading">
-                            <h2>{{ job.title }}
-                                <small>
-                                    at <span class="white">{{ job.company }}</span>
-                                </small>
-                            </h2>
                         </div>
                         <div class="panel-body">
                             <div class="text-muted pull-right">
@@ -37,11 +35,11 @@
                                     </tr>
                                 </table>
                             </div>
-                            <h3>Where</h3>
+                            <h4>Where</h4>
                             <p>{{ job.cities }}, {{ job.country }}</p>
-                            <h3>Description</h3>
+                            <h4>Description</h4>
                             <p>{{ job.description|safe }}</p>
-                            <h3>Contact</h3>
+                            <h4>Contact</h4>
                             <p>{{ job.contact_email }}</p>
                             <p><a href="{{ job.website }}">view website</a></p>
                         </div>

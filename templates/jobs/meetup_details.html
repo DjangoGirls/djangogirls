@@ -15,23 +15,24 @@
                     <li><a href="{% url 'jobs:meetups' %}">Meetups</a></li>
                     <li class="active">{{ meetup.title }}</li>
                 </ol>
-
+                <div class="page-header">
+                    <h3>
+                        {% if meetup.website %}
+                            <a href="{{ meetup.website }}">{{ meetup.title }}</a>
+                        {% else %}
+                            {{ meetup.title }}
+                        {% endif %}
+                        <small>in {{ meetup.city }}, {{ meetup.country }}</small>
+                    </h3>
+                </div>
                 <div class="panel panel-feature-orange">
                     <div class="panel-heading">
-                        <h2>
-                            {% if meetup.website %}
-                                <a href="{{ meetup.website }}">{{ meetup.title }}</a>
-                            {% else %}
-                                {{ meetup.title }}
-                            {% endif %}
-                            <small>in <span class="white">{{ meetup.city }}, {{ meetup.country }}</span></small>
-                        </h2>
                     </div>
                     <div class="panel-body">
                         <div class="text-muted pull-right">
                             <p>Published on {{ meetup.published_date|date:'d F Y' }}</p>
                         </div>
-                        <h3>When</h3>
+                        <h4>When</h4>
                         <p>
                             <strong>Begins:</strong> {{ meetup.meetup_start_date|date:"l, d F Y, f A" }}
                         </p>
@@ -40,16 +41,16 @@
                                     <strong>Ends:</strong> {{ meetup.meetup_end_date|date:"l, d F Y, f A" }}
                                 </p>
                             {% endif %}
-                        <h3>Description</h3>
+                        <h4>Description</h4>
                         <p>{{ meetup.description|safe }}</p>
                         {% if meetup.is_recurring %}
                             <p>This is a recurring event</p>
                         {% endif %}
                         {% if meetup.organisation %}
-                            <h3>Organised by</h3>
+                            <h4>Organised by</h4>
                             <p>{{ meetup.organisation }}</p>
                         {% endif %}
-                        <h3>Contact</h3>
+                        <h4>Contact</h4>
                         <p>{{ meetup.contact_email }}</p>
                     </div>
                 </div>
@@ -62,4 +63,3 @@
 
 
 {% endblock content %}
- 

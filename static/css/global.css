@@ -463,27 +463,27 @@ footer {
 footer .row {
   margin: 0;
 }
-footer .row .col-md-3 p {
+footer .row .col-md-2 p {
   text-transform: uppercase;
   font-family: Roboto;
   color: #f7921d;
   font-size: 18px;
   line-height: 21px;
 }
-footer .row .col-md-3 p a {
+footer .row .col-md-2 p a {
   text-decoration: none;
   color: #f7921d;
 }
-footer .row .col-md-3 ul {
+footer .row .col-md-2 ul {
   list-style-type: none;
   padding: 0;
 }
-footer .row .col-md-3 ul li {
+footer .row .col-md-2 ul li {
   margin-left: 0;
   font-size: 18px;
   line-height: 28px;
 }
-footer .row .col-md-3 ul li a {
+footer .row .col-md-2 ul li a {
   text-decoration: none;
 }
 /*

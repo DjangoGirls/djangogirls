@@ -1,5 +1,7 @@
+from __future__ import unicode_literals
 from datetime import timedelta
 
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 
 from django.db import models
@@ -169,6 +171,7 @@ class PublishFlowModel(models.Model):
             )
 
 
+@python_2_unicode_compatible
 class Job(PublishFlowModel):
     title = models.CharField(max_length=255)
     company = models.CharField(max_length=255)
@@ -191,10 +194,11 @@ class Job(PublishFlowModel):
     class Meta(PublishFlowModel.Meta):
         unique_together = (("company", "title"),)
 
-    def __unicode__(self):
+    def __str__(self):
         return "{0}, {1}".format(self.title, self.company)
 
 
+@python_2_unicode_compatible
 class Meetup(PublishFlowModel):
 
     MEETUP = 'MEET'
@@ -250,5 +254,5 @@ class Meetup(PublishFlowModel):
     class Meta(PublishFlowModel.Meta):
         unique_together = (("title", "city"),)
 
-    def __unicode__(self):
-        return u"{0}, {1}".format(self.title, self.city)
+    def __str__(self):
+        return "{0}, {1}".format(self.title, self.city)

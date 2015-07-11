@@ -91,8 +91,8 @@ def create_job(request):
                 messages.INFO,
                 success_message
             )
-            subject = '{0} was submitted succesfully.'.format(new_job)
-            context = Context({ 'option': new_job })
+            subject = '{0} was submitted succesfully.'.format(new_job.title)
+            context = Context({'option': new_job.title})
             message_plain = get_template(
             'jobs/email_templates/community_confirm.txt').render(context)
             message_html = get_template(
@@ -127,8 +127,8 @@ def create_meetup(request):
                 messages.INFO,
                 success_message
             )
-            subject = '{0} was submitted succesfully.'.format(new_meetup)
-            context =  Context({ 'option': new_meetup })
+            subject = '{0} was submitted succesfully.'.format(new_meetup.title)
+            context = Context({'option': new_meetup.title})
             message_plain = get_template(
             'jobs/email_templates/community_confirm.txt').render(context)
             message_html = get_template(

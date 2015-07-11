@@ -8,10 +8,8 @@ from django.shortcuts import redirect, get_object_or_404
 
 from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
 
-from djangogirls.settings import JOBS_EMAIL_USER, JOBS_EMAIL_PASSWORD
-from djangogirls.settings import MEETUPS_EMAIL_PASSWORD, MEETUPS_EMAIL_USER
-
 from jobs.models import PublishFlowModel, Job, Meetup
+from jobs.community_mails import send_job_mail, send_meetup_mail
 
 
 def make_published(modeladmin, request, queryset):
@@ -21,82 +19,31 @@ def make_published(modeladmin, request, queryset):
 make_published.short_description = "Publish selected items"
 
 
-def send_status_update_job_offer(modeladmin, request, queryset):
-    option = 'job'
+def send_status_update(modeladmin, request, queryset):
     for item in queryset:
-        subject = "Status update on your job offer - {0}.".format(item.title)
+        subject = "Status update on: {0}.".format(item.title)
         context = Context({
                     'status': item.get_review_status_display(),
-                    'option': option,
+                    'option': modeladmin.get_print_name(),
                     'reviewers_comment': item.reviewers_comment,
                 })
         message_plain = get_template(
             'jobs/email_templates/status.txt').render(context)
         message_html = get_template(
             'jobs/email_templates/status.html').render(context)
-        send_from = "jobs@djangogirls.org"
-        recipient = [item.contact_email, ]
-        send_mail(
+        recipient = item.contact_email
+        status = send_job_mail(
             subject,
             message_plain,
-            send_from,
+            message_html,
             recipient,
-            auth_user=JOBS_EMAIL_USER,
-            auth_password=JOBS_EMAIL_PASSWORD,
-            html_message=message_html,
         )
-        if send_mail != 0:
-            messages.add_message(
-                request,
-                messages.INFO,
-                'Email to {0} has been sent.'.format(' '.join(recipient))
-            )
-        else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                'Email to {0} has NOT been sent.'.format(' '.join(recipient))
-            )
-send_status_update_job_offer.short_description = "Send notification about job offer status."
-
-
-def send_status_update_meetup(modeladmin, request, queryset):
-    option = 'meetup'
-    for item in queryset:
-        subject = "Status update on your meetup - {0}.".format(item.title)
-        context = Context({
-                    'status': item.get_review_status_display(),
-                    'option': option,
-                    'reviewers_comment': item.reviewers_comment,
-                })
-        message_plain = get_template(
-            'jobs/email_templates/status.txt').render(context)
-        message_html = message_plain = get_template(
-            'jobs/email_templates/status.html').render(context)
-        send_from = "meetups@djangogirls.org"
-        recipient = [item.contact_email, ]
-        send_mail(
-            subject,
-            message_plain,
-            send_from,
-            recipient,
-            auth_user=MEETUPS_EMAIL_USER,
-            auth_password=MEETUPS_EMAIL_PASSWORD,
-            html_message=message_html
+        messages.add_message(
+            request,
+            messages.INFO,
+            status
         )
-        if send_mail != 0:
-            messages.add_message(
-                request,
-                messages.INFO,
-                'Email to {0} has been sent.'.format(' '.join(recipient))
-            )
-        else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                'Email to {0} has NOT been sent.'.format(' '.join(recipient))
-            )
-send_status_update_meetup.short_description = "Send notification about meetup status."
+send_status_update.short_description = "Send notification about status."
 
 
 class PublishFlowModelAdmin(admin.ModelAdmin):
@@ -137,6 +84,13 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         )
         return my_urls + urls
 
+    def get_actions(self, request):
+        actions = super(PublishFlowModelAdmin, self).get_actions(request)
+        if request.user.groups.filter(name='Reviewers').exists():
+            if 'delete_selected' in actions:
+                del actions['delete_selected']
+        return actions
+
     def get_print_name(self):
         return self.model._meta.model_name
 
@@ -151,7 +105,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now assigned.'.format(post)
+            '{0} is now assigned.'.format(post.title)
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -161,7 +115,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now unassigned.'.format(post)
+            '{0} is now unassigned.'.format(post.title)
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -171,7 +125,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now accepted.'.format(post)
+            '{0} is now accepted.'.format(post.title)
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -181,7 +135,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now rejected - an email to submitter was sent.'.format(post)
+            '{0} is now rejected - an email to submitter was sent.'.format(
+                post.title
+            )
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -191,7 +147,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now restored.'.format(post)
+            '{0} is now restored.'.format(post.title)
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -201,7 +157,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
         messages.add_message(
             request,
             messages.INFO,
-            '{0} is now published - an email to submitter was sent.'.format(post)
+            '{0} is now published - an email to submitter was sent.'.format(
+                post.title
+            )
         )
         return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
 
@@ -219,7 +177,7 @@ class JobAdmin(PublishFlowModelAdmin):
     list_display = ['title', 'company', 'reviewer', 'review_status', 'not_expired']
     list_filter = ('reviewer', 'review_status')
     ordering = ['title']
-    actions = [make_published, send_status_update_job_offer]
+    actions = [make_published, send_status_update]
     formfield_overrides = {
         models.DateField: {'widget': SuitDateWidget},
         models.TextField: {'widget': AutosizedTextarea},
@@ -241,7 +199,7 @@ class MeetupAdmin(PublishFlowModelAdmin):
     list_display = ['title', 'city', 'reviewer', 'review_status', 'not_expired']
     list_filter = ('reviewer', 'review_status')
     ordering = ['title']
-    actions = [make_published, send_status_update_meetup]
+    actions = [make_published, send_status_update]
     formfield_overrides = {
         models.DateField: {'widget': SuitDateWidget},
         models.DateTimeField: {'widget': SuitSplitDateTimeWidget},

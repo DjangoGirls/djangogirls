@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Django Girls</p>
                 <ul>
                     <li><a href="{% url 'core:events' %}">Events</a></li>
@@ -13,24 +13,26 @@
                 </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Support us</p>
-                <p><a href="{% url 'jobs:main' %}">Community</a></p>
                 <ul>
                     <li><a href="https://www.patreon.com/djangogirls">Donate on Patreon</a></li>
                     <li><a href="https://www.stickermule.com/user/1068790133/stickers">Buy a sticker</a></li>
                     <li><a href="http://bit.ly/sponsordg">Sponsor us</a></li>
-                    <li><a href="{% url 'jobs:jobs' %}">Job offers <span class="label label-danger">New!</span></a></li>
-                    <li><a href="{% url 'jobs:meetups' %}">Meetups <span class="label label-danger">New!</span></a></li>
-                    <li><a href="http://gitter.im/DjangoGirls/tutorial"><strong>Chat with us!</strong></a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <p><a href="{% url 'jobs:main' %}">Community</a></p>
+                <ul>
+                    <li><a href="{% url 'jobs:jobs' %}">Job offers</a></li>
+                    <li><a href="{% url 'jobs:meetups' %}">Meetups</a></li>
                     <li><a href="http://facebook.com/djangogirls">Facebook</a></li>
                     <li><a href="http://twitter.com/djangogirls">Twitter</a></li>
                     <li><a href="http://github.com/djangogirls">Github</a></li>
-                    <li><a href="/pages/coc/">Code of Conduct</a></li>
                 </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Resources</p>
                 <ul>
                     <li><a href="http://tutorial.djangogirls.org/">Tutorial</a></li>
@@ -41,7 +43,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>♥</p>
                 <ul>
                     <li><b>{{ future_events_count }}</b> upcoming events</li>
