@@ -144,6 +144,21 @@ class Command(BaseCommand):
                 click.secho("!! {} not invited to Slack, because {}".format(member.email, e), fg='red')
 
 
+    def brag_on_slack_bang(self, city, country, team):
+        """
+            This is posting a message about Django Girls new event to #general channel on Slack!
+        """
+        text = ':django_pony: :zap: Woohoo! :tada: New Django Girls alert! Welcome Django Girls {city}, {country}. Congrats {team}!'.format(
+            city=city, country=country, team=', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])
+        )
+        slack.chat.post_message(
+            channel='#general',
+            text=text,
+            username='Django Girls',
+            icon_emoji=':django_heart:'
+        )
+
+
     def handle(self, *args, **options):
         #Basics
         (city, country, date, url, event_mail) = self.get_basic_info()
@@ -208,3 +223,4 @@ class Command(BaseCommand):
             'email_password': 'UNDEFINED'
         }))
         
+        self.brag_on_slack_bang(city, country, members)
