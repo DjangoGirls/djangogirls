@@ -33,14 +33,14 @@ class Command(BaseCommand):
         """
         click.echo("Hello there! Let's create new Django Girls event! So exciting!")
         click.echo("Let's start with some basics.")
-        city = click.prompt("What is the name of the city?")
-        country = click.prompt("What is the name of the country?")
-        date = get_approximate_date(click.prompt("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)"))
+        city = click.prompt(click.style("What is the name of the city?", bold=True, fg='yellow'))
+        country = click.prompt(click.style("What is the name of the country?", bold=True, fg='yellow'))
+        date = get_approximate_date(click.prompt(click.style("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow')))
         while not date:
-            date = get_approximate_date(click.prompt("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)"))
+            date = get_approximate_date(click.prompt(click.style("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow')))
 
-        url = click.prompt("What should be the URL of website? djangogirls.org/xxxx")
-        event_mail = click.prompt("What is the mail adress of the event? xxxx@djangogirls.org")
+        url = click.prompt(click.style("What should be the URL of website? djangogirls.org/xxxx", bold=True, fg='yellow'))
+        event_mail = click.prompt(click.style("What is the mail adress of the event? xxxx@djangogirls.org", bold=True, fg='yellow'))
         click.echo("Ok, got that! Your new event will happen in {0}, {1} on {2}".format(city, country, date))
 
         return (city, country, date, url, event_mail)
@@ -52,8 +52,8 @@ class Command(BaseCommand):
         """
         team = []
         click.echo("Now let's talk about the team. First the main organizer:")
-        main_name = click.prompt("First and last name")
-        main_email = click.prompt("E-mail address")
+        main_name = click.prompt(click.style("First and last name", bold=True, fg='yellow'))
+        main_email = click.prompt(click.style("E-mail address", bold=True, fg='yellow'))
         try:
             team.append({'first_name': main_name.split(' ')[0], 'last_name': main_name.split(' ')[1], 'email': main_email})
         except IndexError:
@@ -67,19 +67,19 @@ class Command(BaseCommand):
             We're asking user for names and addresss of the rest of the team, and 
             append that to a list we got from get_main_organizer
         """
-        add_team = click.confirm("Do you want to add additional team members?", default=False)
+        add_team = click.confirm(click.style("Do you want to add additional team members?", bold=True, fg='yellow'), default=False)
         i = 1
         while add_team:
             i += 1
-            name = click.prompt("First and last name of #{0} member".format(i))
-            email = click.prompt("E-mail address of #{0} member".format(i))
+            name = click.prompt(click.style("First and last name of #{0} member".format(i), bold=True, fg='yellow'))
+            email = click.prompt(click.style("E-mail address of #{0} member".format(i), bold=True, fg='yellow'))
             if len(name) > 0:
                 try:
                     team.append({'first_name': name.split(' ')[0], 'last_name': name.split(' ')[1], 'email': email})
                 except IndexError:
                     team.append({'first_name': name, 'last_name': '', 'email': email})
                 click.echo("All right, the #{0} team member of Django Girls is {1} ({2})".format(i, name, email))
-            add_team = click.confirm("Do you want to add additional team members?", default=False)
+            add_team = click.confirm(click.style("Do you want to add additional team members?", bold=True, fg='yellow'), default=False)
 
         return team
 
@@ -133,12 +133,15 @@ class Command(BaseCommand):
 
 
     def invite_team_to_slack(self, team):
+        """
+            This uses Slack API to invite organizers to our Slack channel
+        """
         for member in team:
             try:
                 response = slack.users.invite(member.email, member.first_name)
-                click.echo("OK {} invited to Slack".format(member.email))
+                click.secho("OK {} invited to Slack".format(member.email), fg='green')
             except SlackerError as e:
-                click.echo("!! {} not invited to Slack, because {}".format(member.email, e))
+                click.secho("!! {} not invited to Slack, because {}".format(member.email, e), fg='red')
 
 
     def handle(self, *args, **options):
@@ -172,16 +175,27 @@ class Command(BaseCommand):
         self.add_default_content(page)
         self.add_default_menu(page)
 
-        click.echo("Website is ready here: http://djangogirls.org/{0}".format(url))
+        click.secho("Website is ready here: http://djangogirls.org/{0}".format(url), fg='green')
+        click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+
+        self.invite_team_to_slack(members)
+
+        click.echo("")
         click.echo("---------------------------------------------------------------")
         click.echo("")
         
-        click.echo("Ok, now follow this:")
+        click.secho("Ok, now follow this:", fg='black', bg='green')
         click.echo("1. Find a photo of a city with CC license on Flickr. Download it.")
         click.echo("2. Go here: http://djangogirls.org/admin/core/event/{0}/".format(event.id))
         click.echo("3. Upload a photo of city, add credits and tick 'is on homepage' checkbox. Save.")
-        click.echo("4. Send e-mail with instructions to a team:")
+        click.echo("4. Send e-mail with instructions to a team!")
         click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+        click.secho("This is a ready, filled out mail to sent to organizers:", fg='green')
+
         click.echo("SUBJECT: Django Girls {} setup".format(event.city))
         click.echo("TO: {}, {}, hello@djangogirls.org".format(
             ', '.join([x.email for x in members]),
@@ -194,8 +208,3 @@ class Command(BaseCommand):
             'email_password': 'UNDEFINED'
         }))
         
-        click.echo("")
-        click.echo("---------------------------------------------------------------")
-        click.echo("")
-        
-        self.invite_team_to_slack(members)
