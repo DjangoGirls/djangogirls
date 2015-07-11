@@ -8,11 +8,14 @@ import click
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
+from slacker import Slacker
 
 from core.models import *
 from core.utils import get_coordinates_for_city, get_approximate_date
 from core.default_eventpage_content import get_default_eventpage_data, get_default_menu
 
+
+slack = Slacker(settings.SLACK_API_KEY)
 
 class Command(BaseCommand):
     help = 'Creates new Django Girls event'
@@ -129,7 +132,6 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-
         #Basics
         (city, country, date, url, event_mail) = self.get_basic_info()
 

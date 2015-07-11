@@ -25,6 +25,7 @@ pytz==2014.9
 raven==5.0.0
 requests==2.3.0
 six==1.7.3
+slacker==0.6.3
 whitenoise==1.0.3
 django-storages-redux==1.2.3
 django-sslify>=0.2.0
