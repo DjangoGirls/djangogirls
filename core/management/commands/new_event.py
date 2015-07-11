@@ -9,6 +9,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
 from slacker import Slacker
+from slacker import Error as SlackerError
 
 from core.models import *
 from core.utils import get_coordinates_for_city, get_approximate_date
@@ -131,6 +132,15 @@ class Command(BaseCommand):
             i += 1
 
 
+    def invite_team_to_slack(self, team):
+        for member in team:
+            try:
+                response = slack.users.invite(member.email, member.first_name)
+                click.echo("OK {} invited to Slack".format(member.email))
+            except SlackerError as e:
+                click.echo("!! {} not invited to Slack, because {}".format(member.email, e))
+
+
     def handle(self, *args, **options):
         #Basics
         (city, country, date, url, event_mail) = self.get_basic_info()
@@ -183,3 +193,9 @@ class Command(BaseCommand):
             'members': members_as_list,
             'email_password': 'UNDEFINED'
         }))
+        
+        click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+        
+        self.invite_team_to_slack(members)
