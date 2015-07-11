@@ -67,9 +67,9 @@ class Command(BaseCommand):
             We're asking user for names and addresss of the rest of the team, and 
             append that to a list we got from get_main_organizer
         """
-        add_team = click.prompt("Do you want to add additional team members? y/n")
+        add_team = click.confirm("Do you want to add additional team members?", default=False)
         i = 1
-        while add_team != 'n':
+        while add_team:
             i += 1
             name = click.prompt("First and last name of #{0} member".format(i))
             email = click.prompt("E-mail address of #{0} member".format(i))
@@ -79,7 +79,7 @@ class Command(BaseCommand):
                 except IndexError:
                     team.append({'first_name': name, 'last_name': '', 'email': email})
                 click.echo("All right, the #{0} team member of Django Girls is {1} ({2})".format(i, name, email))
-            add_team = click.prompt("Do you want to add additional team members? y/n")
+            add_team = click.confirm("Do you want to add additional team members?", default=False)
 
         return team
 
