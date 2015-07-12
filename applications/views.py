@@ -70,7 +70,10 @@ def applications(request, city):
     rsvp_status = request.GET.getlist('rsvp_status', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
     order = request.GET.get('order', None)
-    applications = get_applications_for_page(page, state, rsvp_status, order)
+    try:
+        applications = get_applications_for_page(page, state, rsvp_status, order)
+    except:
+        return redirect('core:event', city=city)
 
     return render(request, 'applications.html', {
         'page': page,
