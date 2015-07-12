@@ -164,6 +164,22 @@ class ApplicationsView(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 3)
 
+    def test_organisor_menu_in_applications_list(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+        resp = self.client.get(self.url)
+        self.assertContains(
+            resp,
+            '<li><a href="/test/applications/">Applications</a></li>',
+            html=True,
+        )
+        self.assertContains(
+            resp,
+            '<li><a href="/test/communication/">Messaging</a></li>',
+            html=True,
+        )
+
     def test_get_sorted_applications_list(self):
         self.user.is_superuser = True
         self.user.save()
