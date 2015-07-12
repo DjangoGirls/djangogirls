@@ -14,6 +14,7 @@ django-storages-redux==1.2.3
 django-suit==0.2.13
 django-suit-redactor==0.0.2
 djrill==1.4.0
+easy_thumbnails==2.2
 gunicorn==19.1.0
 icalendar==3.8.4
 lxml==3.4.0
@@ -27,7 +28,6 @@ pytz==2014.9
 raven==5.0.0
 requests==2.3.0
 six==1.7.3
-sorl-thumbnail==12.3
 whitenoise==1.0.3
 
 

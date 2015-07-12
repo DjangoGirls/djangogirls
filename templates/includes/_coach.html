@@ -7,9 +7,7 @@
 {% endif %}
 
 {% if coach.photo %}
-    {% thumbnail coach.photo "160x160" crop="center" as im %}
-        <img src="{{ im.url }}" alt="{{ coach.name }}" class="coach" />
-    {% endthumbnail %}
+    <img src="{{ coach.photo|thumbnail_url:'coach' }}" alt="{{ coach.name }}" class="coach" />
 {% endif %}
 
 {% if coach.url %}

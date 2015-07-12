@@ -487,10 +487,9 @@ input[type="submit"] {
 }
 .sponsor-logos .col-md-3 {
   text-align: center;
-}
-.sponsor-logos .col-md-3 img {
-  max-width: 80%;
-  height: auto;
+  height: 285px;
+  display: flex;
+  align-items: center;
 }
 .sponsor-logos .col-md-3 p {
   margin-top: 15px;

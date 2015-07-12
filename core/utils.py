@@ -34,6 +34,3 @@ def get_event_page(city, is_user_authenticated, is_preview):
         return (city, past)
 
     return page
-
-
-
