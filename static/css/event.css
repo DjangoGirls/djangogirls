@@ -193,6 +193,7 @@ a:hover {
 }
 .coaches .col-md-2 .coach {
   max-width: 160px;
+  max-height: 160px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;

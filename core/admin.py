@@ -10,7 +10,8 @@ from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'organizers', 'email', 'date', 'city', 'country', 'is_on_homepage', 'is_past_event', 'has_stats')
+    list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
+                    'is_on_homepage', 'is_past_event', 'has_stats')
     search_fields = ('city', 'country', 'name')
 
     def get_queryset(self, request):
@@ -31,6 +32,7 @@ class EventAdmin(admin.ModelAdmin):
         if obj and not request.user.is_superuser:
             return ('email',)
         return self.readonly_fields
+
 
 class EventPageAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'is_live')
@@ -151,7 +153,8 @@ class SponsorAdmin(SortableModelAdmin):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                qs = EventPageContent.objects.filter(page__event__team=request.user)
+                qs = EventPageContent.objects.filter(
+                    page__event__team=request.user)
                 form.base_fields['event_page_content'].queryset = qs
         return form
 
@@ -177,7 +180,8 @@ class CoachAdmin(admin.ModelAdmin):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'event_page_content' in form.base_fields:
-                qs = EventPageContent.objects.filter(page__event__team=request.user)
+                qs = EventPageContent.objects.filter(
+                    page__event__team=request.user)
                 form.base_fields['event_page_content'].queryset = qs
         return form
 

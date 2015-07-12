@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'markdown_deux',
     'djrill',
     'django_nose',
+    'sorl.thumbnail',
 
     'core',
     'applications',
@@ -95,6 +96,7 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls'
 }
 
+THUMBNAIL_PRESERVE_FORMAT = True
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
