@@ -164,7 +164,7 @@ class ApplicationsView(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 3)
 
-    def test_organisor_menu_in_applications_list(self):
+    def test_organiser_menu_in_applications_list(self):
         self.user.is_superuser = True
         self.user.save()
         self.client.login(email='test@user.com', password='test')
