@@ -18,7 +18,7 @@
         {% for answer in application.answer_set.all %}
             <div class="answer">
                 <p class="question">{{ answer.question.title|safe }}</p>
-                <p>{{ answer.answer }}</p>
+                <p>{{ answer.answer|urlize }}</p>
             </div>
         {% endfor %}
         </div>
