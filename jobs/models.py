@@ -58,7 +58,17 @@ class PublishFlowModel(models.Model):
         on_delete=models.SET_NULL
     )
     review_status = models.CharField(max_length=3, choices=STATUSES, default=OPEN)
-    reviewers_comment = models.TextField(blank=True, null=True)
+    message_to_organisation = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Write your message to the company/organisation here."
+    )
+    internal_comment = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Write you comments here. They won't be sent to "
+                  "the company/organisation."
+    )
     published_date = models.DateTimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     expiration_date = models.DateField(
@@ -105,7 +115,7 @@ class PublishFlowModel(models.Model):
         context = Context({
                     'status': self.get_review_status_display(),
                     'option': model_name,
-                    'reviewers_comment': self.reviewers_comment,
+                    'message_to_organisation': self.message_to_organisation,
                 })
         message_plain = get_template(
             'jobs/email_templates/status.txt').render(context)
@@ -148,7 +158,7 @@ class PublishFlowModel(models.Model):
         context = Context({
                     'status': self.get_review_status_display(),
                     'option': model_name,
-                    'reviewers_comment': self.reviewers_comment,
+                    'message_to_organisation': self.message_to_organisation,
                 })
         message_plain = get_template(
             'jobs/email_templates/status.txt').render(context)

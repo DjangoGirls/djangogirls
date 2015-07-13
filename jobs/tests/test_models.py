@@ -140,6 +140,20 @@ class JobModelTests(TestCase):
             self.future_date
         )
 
+    def test_publish_expired_post(self):
+        """Tests the publish method with past expiration date. It might happen
+         if the expired post is rejected and than re-published"""
+        self.job_ready_past_exp_date.publish()
+        self.assertTrue(self.job_ready_past_exp_date.published_date)
+        self.assertAlmostEqual(
+            self.job_ready_past_exp_date.published_date,
+            timezone.now(),
+            delta=timedelta(seconds=10)
+        )
+        self.assertTrue(self.job_ready_past_exp_date.expiration_date)
+        result = self.job_ready_past_exp_date.expiration_date - timezone.now()
+        self.assertEqual(result.days, 59)
+
     def test_publish_twice_in_a_row(self):
         """It is not possible to publish a job offer twice"""
         self.assertFalse(self.job_ready_no_exp_date.published_date)

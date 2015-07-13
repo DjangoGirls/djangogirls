@@ -5,6 +5,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf.urls import patterns, url
 from django.shortcuts import redirect, get_object_or_404
+from django.http import HttpResponseBadRequest
 
 from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
 
@@ -25,7 +26,7 @@ def send_status_update(modeladmin, request, queryset):
         context = Context({
                     'status': item.get_review_status_display(),
                     'option': modeladmin.get_print_name(),
-                    'reviewers_comment': item.reviewers_comment,
+                    'message_to_organisation': item.message_to_organisation,
                 })
         message_plain = get_template(
             'jobs/email_templates/status.txt').render(context)
@@ -100,68 +101,86 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
     not_expired.admin_order_field = 'not_expired'
 
     def assign_reviewer(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.assign(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now assigned.'.format(post.title)
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.assign(request.user)
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now assigned.'.format(post.title)
+            )
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
     def unassign_reviewer(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.unassign()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now unassigned.'.format(post.title)
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.unassign()
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now unassigned.'.format(post.title)
+            )
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
     def accept(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.accept()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now accepted.'.format(post.title)
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.accept()
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now accepted.'.format(post.title)
+            )
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
     def reject(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.reject()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now rejected - an email to submitter was sent.'.format(
-                post.title
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.reject()
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now rejected - an email to submitter was sent.'.format(
+                    post.title
+                )
             )
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
     def restore(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.restore(request.user)
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now restored.'.format(post.title)
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.restore(request.user)
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now restored.'.format(post.title)
+            )
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
     def publish(self, request, id):
-        post = get_object_or_404(self.model, id=id)
-        post.publish()
-        messages.add_message(
-            request,
-            messages.INFO,
-            '{0} is now published - an email to submitter was sent.'.format(
-                post.title
+        try:
+            post = get_object_or_404(self.model, id=id)
+            post.publish()
+            messages.add_message(
+                request,
+                messages.INFO,
+                '{0} is now published - an email to submitter was sent.'.format(
+                    post.title
+                )
             )
-        )
-        return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+            return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
+        except AssertionError:
+            return HttpResponseBadRequest("Post in a wrong state")
 
 
 class JobAdmin(PublishFlowModelAdmin):
@@ -169,9 +188,9 @@ class JobAdmin(PublishFlowModelAdmin):
         ('Job info', {'fields': ('title', 'company', 'website', 'contact_email',
                            ('cities', 'country'), 'description', 'remote_work',
                            'relocation')}),
-        ('Flow info', {'fields': ('review_status', 'reviewers_comment',
-                                  'expiration_date', 'reviewer',
-                                  'published_date')}),
+        ('Flow info', {'fields': ('review_status', 'message_to_organisation',
+                                  'internal_comment', 'expiration_date',
+                                  'reviewer', 'published_date')}),
     )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'company', 'reviewer', 'review_status', 'not_expired']
@@ -191,9 +210,9 @@ class MeetupAdmin(PublishFlowModelAdmin):
                                     'meetup_type', 'description', 'is_recurring',
                                     'recurrence', 'meetup_start_date',
                                     'meetup_end_date')}),
-        ('Flow info', {'fields': ('review_status', 'reviewers_comment',
-                                  'expiration_date', 'reviewer',
-                                  'published_date')}),
+        ('Flow info', {'fields': ('review_status', 'message_to_organisation',
+                                  'internal_comment', 'expiration_date',
+                                  'reviewer', 'published_date')}),
     )
     readonly_fields = ('review_status', 'reviewer', 'published_date')
     list_display = ['title', 'city', 'reviewer', 'review_status', 'not_expired']
