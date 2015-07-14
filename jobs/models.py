@@ -19,8 +19,11 @@ class PublishFlowManager(models.Manager):
 
     def get_queryset(self):
         now = timezone.now().date().strftime("%Y-%m-%d")
+        # 1=1 to ensure compatibility between different DBs
+        # this is to fix the error:
+        # 'COALESCE types boolean and integer cannot be matched'
         return super(PublishFlowManager, self).get_queryset().extra(
-            select={'not_expired': "coalesce(expiration_date > '%s', 1)" % now})
+            select={'not_expired': "coalesce(expiration_date > '%s', 1=1)" % now})
 
 
 class VisiblePublishFlowManager(PublishFlowManager):
