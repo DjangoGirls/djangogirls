@@ -13,7 +13,8 @@ from jobs.models import Job, Meetup
 
 
 class JobAdminTest(TestCase):
-    """Tests for custom methods of JobAdmin model."""
+    """Tests for custom methods of JobAdmin model. Most importantly
+    the publish flow in admin"""
 
     def setUp(self):
         self.admin_user = User.objects.create_superuser('myemail@test.com', 'example')
