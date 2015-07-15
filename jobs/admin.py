@@ -17,6 +17,12 @@ def make_published(modeladmin, request, queryset):
     for item in queryset:
         if item.review_status == PublishFlowModel.READY_TO_PUBLISH:
             item.publish()
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "{0} couldn't be published.".format(item.title)
+            )
 make_published.short_description = "Publish selected items"
 
 
@@ -111,7 +117,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to assign reviewer: post is in a wrong state."
+            )
 
     def unassign_reviewer(self, request, id):
         try:
@@ -124,7 +132,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to unassign reviewer: post is in a wrong state."
+            )
 
     def accept(self, request, id):
         try:
@@ -137,7 +147,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to accept post: post is in a wrong state."
+            )
 
     def reject(self, request, id):
         try:
@@ -152,7 +164,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to reject reviewer: post is in a wrong state."
+            )
 
     def restore(self, request, id):
         try:
@@ -165,7 +179,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to restore post: post is in a wrong state."
+            )
 
     def publish(self, request, id):
         try:
@@ -180,7 +196,9 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
             )
             return redirect('/admin/jobs/%s/%s/' % (self.get_print_name(), id))
         except AssertionError:
-            return HttpResponseBadRequest("Post in a wrong state")
+            return HttpResponseBadRequest(
+                "It's not possible to publish post: post is in a wrong state."
+            )
 
 
 class JobAdmin(PublishFlowModelAdmin):

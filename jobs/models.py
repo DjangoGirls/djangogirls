@@ -69,7 +69,7 @@ class PublishFlowModel(models.Model):
     internal_comment = models.TextField(
         blank=True,
         null=True,
-        help_text="Write you comments here. They won't be sent to "
+        help_text="Write your comments here. They won't be sent to "
                   "the company/organisation."
     )
     published_date = models.DateTimeField(blank=True, null=True)

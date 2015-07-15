@@ -59,6 +59,9 @@ class JobAdminTest(TestCase):
         self.assertEqual(self.job_open.review_status, Job.UNDER_REVIEW)
 
     def test_assigning_job_reviewer_to_under_review_post(self):
+        """This test secures a situation when someone enters the URL manually.
+        If a post is not in the OPEN state, it is not possible to execute
+        the assign method and the app returns Error 400"""
         assign_reviewer_url = reverse(
             'admin:assign_job_reviewer',
             args=[self.job_under_review.id]
