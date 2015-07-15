@@ -40,7 +40,7 @@
                             <h4>Description</h4>
                             <p>{{ job.description|safe }}</p>
                             <h4>Contact</h4>
-                            <p>{{ job.contact_email }}</p>
+                            <p>{{ job.contact_email|urlize }}</p>
                             <p><a href="{{ job.website }}">view website</a></p>
                         </div>
                     </div>
