@@ -7,11 +7,20 @@ from jobs.models import Job, Meetup
 
 class JobForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
+    website = forms.URLField(
+        initial='http://',
+        help_text='Rememebr to start with http:// or https://'
+    )
+    cities = forms.CharField(
+        help_text="If you have opportunities in several \
+            countries, please either specify that in the job description, \
+            or add job opportunities for each country in which you have a space."
+        )
 
     class Meta:
         model = Job
         fields = ('company', 'website', 'contact_email', 'title',
-                  'description', 'cities', 'country')
+                  'description', 'cities', 'country', 'remote_work', 'relocation')
         # custom labels
         labels = {
             'title': 'Job title'
@@ -34,6 +43,10 @@ class MeetupForm(forms.ModelForm):
         )
     )
     description = forms.CharField(widget=CKEditorWidget())
+    website = forms.URLField(
+        initial='http://',
+        help_text='Rememebr to start with http:// or https://'
+    )
 
     class Meta:
         model = Meetup
