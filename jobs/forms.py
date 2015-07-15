@@ -9,7 +9,7 @@ class JobForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     website = forms.URLField(
         initial='http://',
-        help_text='Rememebr to start with http:// or https://'
+        help_text='Rememeber to start with http:// or https://'
     )
     cities = forms.CharField(
         help_text="If you have opportunities in several \
