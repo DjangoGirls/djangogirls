@@ -15,7 +15,9 @@
                     <h2>
                         Job offers
                     </h2>
+
                     {% include 'includes/_jobs_intro.html' %}
+
                     <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
                 </div> <!--.col-md-12-->
             </div> <!--.row-->
@@ -27,6 +29,7 @@
                         <thead>
                             <th>Company</th>
                             <th>Job title</th>
+                            <th>Location</th>
                             <th>Posted</th>
                         </thead>
                         <tbody>
@@ -40,6 +43,7 @@
                                             {{ job.title }}
                                         </a>
                                     </td>
+                                    <td>{{ job.cities }}, {{ job.country }}</td>
                                     <td>{{ job.published_date }}</td>
                                 </tr>
                             {% empty %}

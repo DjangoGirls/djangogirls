@@ -188,6 +188,7 @@ MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
 
 APPEND_SLASH = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {

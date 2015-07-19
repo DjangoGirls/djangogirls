@@ -77,8 +77,8 @@ class PublishFlowModel(models.Model):
     expiration_date = models.DateField(
         blank=True,
         null=True,
-        help_text="Automatically is set 60 days from posting. You can"
-                  " override this."
+        help_text="Enter the date until which the post should be published. "
+                  "By default, it is set to 60 days from posting."
     )
 
     objects = PublishFlowManager()
