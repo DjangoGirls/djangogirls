@@ -3,6 +3,6 @@
         <p class="title"><a href="{% url 'jobs:job_details' id=job.id %}">{{ job.title }}</a></p>
 
         <p><strong>For:</strong> {{ job.company }}</p>
-        <p><strong>Where:</strong> {{ job.cities }}, {{job.country}}</p>
+        <p><strong>Where:</strong> {{ job.cities }} ({{ job.country }})</p>
     </div>
 </div>

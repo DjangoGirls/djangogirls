@@ -5,6 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/community.css' %}" media="screen">
 {% endblock extra_stylesheets %}
 
+{% block bootstrap_version %}
+    <link rel="stylesheet"
+              href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css" />
+{% endblock bootstrap_version %}
+
 {% block menu %}
     {% include 'jobs/menu.html' %}
 {% endblock %}
