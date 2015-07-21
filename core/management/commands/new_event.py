@@ -4,53 +4,58 @@ from __future__ import unicode_literals
 import random
 import string
 import click
-from datetime import datetime
 
 from django.conf import settings
-from django.core.files import File
 from django.core.management.base import BaseCommand
-from django_date_extensions.fields import ApproximateDate
+from django.template.loader import render_to_string
+from slacker import Slacker
+from slacker import Error as SlackerError
 
 from core.models import *
-from core.utils import get_coordinates_for_city
+from core.utils import get_coordinates_for_city, get_approximate_date
+from core.default_eventpage_content import get_default_eventpage_data, get_default_menu
 
+
+slack = Slacker(settings.SLACK_API_KEY)
 
 class Command(BaseCommand):
     help = 'Creates new Django Girls event'
 
-    def prepare_date(self, date_str):
-        try:
-            date_obj = datetime.strptime(date_str, '%d/%m/%Y')
-            return ApproximateDate(year=date_obj.year, month=date_obj.month, day=date_obj.day)
-        except ValueError:
-            try:
-                date_obj = datetime.strptime(date_str, '%m/%Y')
-                return ApproximateDate(year=date_obj.year, month=date_obj.month)
-            except ValueError:
-                return False
-
-        return False
-
     def get_basic_info(self):
+        """
+            Here we're asking the user for:
+            - city
+            - country
+            - date
+            - url 
+            - event_email
+            And return all these information.
+        """
         click.echo("Hello there! Let's create new Django Girls event! So exciting!")
         click.echo("Let's start with some basics.")
-        city = click.prompt("What is the name of the city?")
-        country = click.prompt("What is the name of the country?")
-        date = self.prepare_date(click.prompt("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)"))
+        city = click.prompt(click.style("What is the name of the city?", bold=True, fg='yellow'))
+        country = click.prompt(click.style("What is the name of the country?", bold=True, fg='yellow'))
+        date = click.prompt(click.style("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow'))
+        date = get_approximate_date(date)
         while not date:
-            date = self.prepare_date(click.prompt("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)"))
+            date = click.prompt(click.style("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow'))
+            date = get_approximate_date(date)
 
-        url = click.prompt("What should be the URL of website? djangogirls.org/xxxx")
-        event_mail = click.prompt("What is the mail adress of the event? xxxx@djangogirls.org")
+        url = click.prompt(click.style("What should be the URL of website? djangogirls.org/xxxx", bold=True, fg='yellow'))
+        event_mail = click.prompt(click.style("What is the mail adress of the event? xxxx@djangogirls.org", bold=True, fg='yellow'))
         click.echo("Ok, got that! Your new event will happen in {0}, {1} on {2}".format(city, country, date))
 
         return (city, country, date, url, event_mail)
 
     def get_main_organizer(self):
+        """
+            We're asking user for name and address of main organizer, and return
+            a list of dictionary.
+        """
         team = []
         click.echo("Now let's talk about the team. First the main organizer:")
-        main_name = click.prompt("First and last name")
-        main_email = click.prompt("E-mail address")
+        main_name = click.prompt(click.style("First and last name", bold=True, fg='yellow'))
+        main_email = click.prompt(click.style("E-mail address", bold=True, fg='yellow'))
         try:
             team.append({'first_name': main_name.split(' ')[0], 'last_name': main_name.split(' ')[1], 'email': main_email})
         except IndexError:
@@ -60,27 +65,32 @@ class Command(BaseCommand):
         return team
 
     def get_team(self, team):
-        add_team = click.prompt("Do you want to add additional team members? y/n")
+        """
+            We're asking user for names and addresss of the rest of the team, and 
+            append that to a list we got from get_main_organizer
+        """
+        add_team = click.confirm(click.style("Do you want to add additional team members?", bold=True, fg='yellow'), default=False)
         i = 1
-        while add_team != 'n':
+        while add_team:
             i += 1
-            name = click.prompt("First and last name of #{0} member".format(i))
-            email = click.prompt("E-mail address of #{0} member".format(i))
+            name = click.prompt(click.style("First and last name of #{0} member".format(i), bold=True, fg='yellow'))
+            email = click.prompt(click.style("E-mail address of #{0} member".format(i), bold=True, fg='yellow'))
             if len(name) > 0:
                 try:
                     team.append({'first_name': name.split(' ')[0], 'last_name': name.split(' ')[1], 'email': email})
                 except IndexError:
                     team.append({'first_name': name, 'last_name': '', 'email': email})
                 click.echo("All right, the #{0} team member of Django Girls is {1} ({2})".format(i, name, email))
-            add_team = click.prompt("Do you want to add additional team members? y/n")
+            add_team = click.confirm(click.style("Do you want to add additional team members?", bold=True, fg='yellow'), default=False)
 
         return team
 
     def create_users(self, team):
-        main_organizer = None
+        """
+            Create or get User objects based on team list
+        """
         members = []
         for member in team:
-
             if not User.objects.filter(email=member['email']).exists():
                 member['password'] = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
                 user = User.objects.create(email=member['email'],
@@ -91,112 +101,82 @@ class Command(BaseCommand):
                 user.set_password(member['password'])
                 user.save()
                 user.groups.add(1)
-
-                click.echo("{0} - email: {1} password: {2}".format(member['first_name'], member['email'], member['password']))
             else:
                 user = User.objects.get(email=member['email'])
-                click.echo("{0} - email: {1} already has account in Django Girls".format(member['first_name'], member['email']))
-
-            if not main_organizer:
-                main_organizer = user
             members.append(user)
-
-        return members
+        return members, team
 
     def add_default_content(self, page):
-        about_photos = [
-            settings.STATICFILES_DIRS[0]+'/img/photos/about1.jpg',
-            settings.STATICFILES_DIRS[0]+'/img/photos/about2.jpg'
-        ]
-        apply_photos = [
-            settings.STATICFILES_DIRS[0]+'/img/photos/apply.jpg'
-        ]
-        coach_photos = [
-            settings.STATICFILES_DIRS[0]+'/img/photos/coach1.jpg',
-            settings.STATICFILES_DIRS[0]+'/img/photos/coach2.jpg'
-        ]
-        footer_photos = [
-            settings.STATICFILES_DIRS[0]+'/img/photos/footer1.jpg',
-            settings.STATICFILES_DIRS[0]+'/img/photos/footer2.jpg'
-        ]
+        """
+            Populate EventPageContent with default layout
+        """
+        data = get_default_eventpage_data()
+        
+        i = 0
+        for section in data:
+            section['page'] = page
+            section['position'] = i
+            section['content'] = render_to_string(section['template'])
+            del section['template']
+            EventPageContent.objects.create(**section)
+            i += 1
 
-        EventPageContent.objects.create(
-            page=page,
-            name='about',
-            position=1,
-            is_public=True,
-            background=File(open(about_photos[random.randint(0, len(about_photos)-1)], 'rb')),
-            content='<div style="text-align: center;"><h1>Free programming workshop for women</h1><h2>Build your first website at EuroPython 2014 in Berlin!</h2><a class="btn" href="#value">Learn more »</a></div>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='values',
-            position=10,
-            is_public=True,
-            content='<div class="row">      <div class="col-md-6">          <h3>Django Girls</h3>          <p>If you are a female and you want to learn how to make websites,          we have good news for you! We are holding a one-day workshop for beginners!</p>        <p>It will take place on <strong>21st of July</strong> in <strong>Berlin</strong>,        on the first day of a big IT conference:        <a href="http://europython.eu/">EuroPython</a>, which gathers a lot of talented programmers from all over the world.</p>        <p>We believe that IT industry will greatly benefit from bringing more women        into technology. We want to give you an opportunity to learn how to program        and become one of us - female programmers!</p>        <p>Workshops are free of charge and if you can’t afford coming to Berlin,        but you are very motivated to learn and then share your knowledge with others,        we have some funds to help you out        with your travel costs and accommodation. Don’t wait too long -        you can apply for a pass only until <strong>30th of June</strong>!</p>      </div>      <div class="col-md-6">          <h3>Apply for a pass!</h3>          <p>If you are a woman, you know English and have a laptop - you can apply          for a pass! You don’t need to know any technical stuff - workshops          are for people who are new to programming.</p>        <p>As a workshop attendee you will:        <ul>            <li>attend one-day Django workshops during which you will            create your first website</li>            <li>get a free EuroPython ticket (which normally costs 400 €!),            where you can meet people from the industry and learn more about programming</li>            <li>be fed by us - during workshops and EuroPython food is provided</li>        </ul>        </p>        <p>We have space only for 40 people, so make sure to fill the form very carefully!</p>      </div>  </div>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='apply',
-            position=20,
-            is_public=True,
-            background=File(open(apply_photos[random.randint(0, len(apply_photos)-1)], 'rb')),
-            content='<div class="row"><div class="col-md-7 col-md-offset-5"><h2>Applications are now open!</h2><p>Application process closes on July 23rd and you\'ll be informedabout acceptance or rejection by July 28th (or sooner)!.</p><a class="btn" href="http://t.co/YvvAFiUvKN">Register</a><p></p></div></div>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='faq',
-            position=30,
-            is_public=True,
-            content='<div class="row"><div class="col-md-4"><p><b>Do I need to know anything about websites or programming?</b></p><p>No! Workshops are for beginners. You don’t need to know anything about it.However, if you have a little bit of technical knowledge(i.e. you know what HTML or CSS are) you still can apply!</p></div><div class="col-md-4"><p><b>I am not living in Germany, can I attend?</b></p><p>Of course! Workshops will be in English, so if you have notroubles with speaking and understanding English - you should apply.If you need financial aid to get toBerlin or you need assistance with booking flights or hotel in Berlin -let us know. We are willing to help you!</p></div><div class="col-md-4"><p><b>Should I bring my own laptop?</b></p><p>Yes. We have no hardware, so we expect you to bring your computer with you.It is also important for us that you will take home everything you’llwrite and create during workshops. </p></div></div><div class="row" style="margin-top: 30px"><div class="col-md-4"><p><b>Do I need to have something installed on my laptop? </b></p><p>It would be helpful to have Django installed before workshops, but wouldn\'t expect you to install anything on your own.We will make sure that one of our coaches will helpyou out with this task. </p></div><div class="col-md-4"><p><b>Is EuroPython conference good for a total beginner?</b></p><p>As a workshop attendee you will get a free ticket to EuroPython -conference for Python programmers. Even though you are new to programming,conference is a good place to meet many interestingpeople in the industry and find inspiration.</p></div><div class="col-md-4"><p><b>Is food provided? </b></p><p>Yes. Thanks to EuroPython, snacks and lunch will be served during workshops. </p></div></div>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='coach',
-            position=40,
-            is_public=True,
-            background=File(open(coach_photos[random.randint(0, len(coach_photos)-1)], 'rb')),
-            content='<div class="row"><div class="col-md-6"><h2>Be a Mentor!</h2><p>We would be delighted if you would like to join us as a mentor! Fill in the form  <a href="http://t.co/YvvAFiUvKN">here</a>, but select the option to be a mentor.</p><p>We will contact you :)</p></div><div class="col-md-6"><h2>Django Girls</h2><p>Django Girls Australia is a part of bigger initiative: <a href="http://djangogirls.org/">Django Girls</a>.  It is a non-profit organization and events are organized by volunteersin different places of the world.  </p><p>To see the source for the program find us on gihub: <a href="https://github.com/DjangoGirls/">github.com/DjangoGirls</a>.</p><p>If you want to bring Django Girls to your city, drop us a line: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.</p></div></div>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='partners',
-            position=50,
-            is_public=True,
-            content='<h3>Sponsors</h3><p>We couldn\'t be here without the support from amazing people and organizations who donated money, knowledge and time to help us make this a reality. If you want to contribute and support our goal, please get in touch: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a></p>')
-
-        EventPageContent.objects.create(
-            page=page,
-            name='footer',
-            position=60,
-            is_public=True,
-            background=File(open(footer_photos[random.randint(0, len(footer_photos)-1)], 'rb')),
-            content='<div class="row social"><div class="col-md-4"><div class="facebook"><div class="fb-page" data-href="https://www.facebook.com/djangogirls" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/djangogirls"><a href="https://www.facebook.com/djangogirls">Django Girls</a></blockquote></div></div></div></div><div class="col-md-4"><div class="twitter"> <a href="https://twitter.com/djangogirls" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @djangogirls</a></div> </div><div class="col-md-4">Get in touch: <br> <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a><br><br></div></div><div class="row credits"><div class="col-md-12">♥ Django Girls Europe is organized by <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asednecka">Ola Sendecka</a> with the support from <a href="http://europython.eu/">EuroPython 2014</a>.<br>Django Girls Europe is a part of <a href="/">Django Girls</a>.<br>Every participant needs to follow the <a href="/pages/coc/">Code of Conduct</a>.</div></div>')
 
     def add_default_menu(self, page):
+        """
+            Populate EventPageMenu with default links
+        """
+        data = get_default_menu()
+        
+        i = 0
+        for link in data:
+            link['page'] = page
+            link['position'] = i
+            EventPageMenu.objects.create(**link)
+            i += 1
 
-        EventPageMenu.objects.create(page=page, title='About', position=1, url='#values')
-        EventPageMenu.objects.create(page=page, title='Apply for a pass!', position=10, url='#apply')
-        EventPageMenu.objects.create(page=page, title='FAQ', position=20, url='#faq')
-        EventPageMenu.objects.create(page=page, title='Become a coach', position=30, url='#coach')
-        EventPageMenu.objects.create(page=page, title='Partners', position=40, url='#partners')
+
+    def invite_team_to_slack(self, team):
+        """
+            This uses Slack API to invite organizers to our Slack channel
+        """
+        for member in team:
+            try:
+                response = slack.users.invite(member.email, member.first_name)
+                click.secho("OK {} invited to Slack".format(member.email), fg='green')
+            except SlackerError as e:
+                click.secho("!! {} not invited to Slack, because {}".format(member.email, e), fg='red')
+
+
+    def brag_on_slack_bang(self, city, country, team):
+        """
+            This is posting a message about Django Girls new event to #general channel on Slack!
+        """
+        text = ':django_pony: :zap: Woohoo! :tada: New Django Girls alert! Welcome Django Girls {city}, {country}. Congrats {team}!'.format(
+            city=city, country=country, team=', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])
+        )
+        slack.chat.post_message(
+            channel='#general',
+            text=text,
+            username='Django Girls',
+            icon_emoji=':django_heart:'
+        )
+
 
     def handle(self, *args, **options):
-
         #Basics
         (city, country, date, url, event_mail) = self.get_basic_info()
 
         #Main organizer
-        team = self.get_main_organizer()
+        main_organizer = self.get_main_organizer()
 
         #Team
-        team = self.get_team(team)
+        team = self.get_team(main_organizer)
 
         #Create users
         click.echo("OK! That's it. Now I'll create your event.")
-        click.echo("Here is an access info for team members:")
 
-        members = self.create_users(team)
+        members, members_as_list = self.create_users(team)
 
         #Event and EventPage objects
         name = 'Django Girls '+city
@@ -214,7 +194,37 @@ class Command(BaseCommand):
         self.add_default_content(page)
         self.add_default_menu(page)
 
-        click.echo("Website is ready here: http://djangogirls.org/{0}".format(url))
-        click.echo("Congrats on yet another event!")
-        click.echo("------------")
-        click.echo("Important! Go here: http://djangogirls.org/admin/core/event/{0}/ Upload a photo of city and tick is on homepage checkbox!".format(event.id))
+        click.secho("Website is ready here: http://djangogirls.org/{0}".format(url), fg='green')
+        click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+
+        self.invite_team_to_slack(members)
+
+        click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+        
+        click.secho("Ok, now follow this:", fg='black', bg='green')
+        click.echo("1. Find a photo of a city with CC license on Flickr. Download it.")
+        click.echo("2. Go here: http://djangogirls.org/admin/core/event/{0}/".format(event.id))
+        click.echo("3. Upload a photo of city, add credits and tick 'is on homepage' checkbox. Save.")
+        click.echo("4. Send e-mail with instructions to a team!")
+        click.echo("")
+        click.echo("---------------------------------------------------------------")
+        click.echo("")
+        click.secho("This is a ready, filled out mail to sent to organizers:", fg='green')
+
+        click.echo("SUBJECT: Django Girls {} setup".format(event.city))
+        click.echo("TO: {}, {}, hello@djangogirls.org".format(
+            ', '.join([x.email for x in members]),
+            event.email
+        ))
+        click.echo("BODY:")
+        click.echo(render_to_string('emails/setup.txt', {
+            'event': event,
+            'members': members_as_list,
+            'email_password': 'UNDEFINED'
+        }))
+        
+        self.brag_on_slack_bang(city, country, members)

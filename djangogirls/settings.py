@@ -132,6 +132,8 @@ MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
+SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
+
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage',
@@ -156,4 +158,3 @@ MARKDOWN_DEUX_STYLES = {
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = DEBUG
-
