@@ -10,7 +10,7 @@ django-countries==3.1.1
 django-crispy-forms==1.4.0
 django-date-extensions==1.0.0
 django-leaflet==0.16.0
-django-datetime-widget==0.9.3
+django-bootstrap3-datetimepicker==2.2.3
 django-markdown-deux==1.0.5
 django-nose==1.4
 django-sslify>=0.2.0

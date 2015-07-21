@@ -29,3 +29,10 @@ ol.breadcrumb li a {
 #end_date_time {
   width: 250px;
 }
+.bootstrap-datetimepicker-widget .btn {
+  color: #f7921d;
+  background-color: transparent;
+}
+.bootstrap-datetimepicker-widget td.active {
+  background-color: #f7921d !important;
+}
