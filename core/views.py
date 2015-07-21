@@ -32,7 +32,7 @@ def events(request):
 def events_map(request):
 
     return render(request, 'events_map.html', {
-        'events': Event.objects.all().order_by('date'),
+        'events': Event.objects.public().order_by('date'),
         'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
 
