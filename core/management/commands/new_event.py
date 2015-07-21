@@ -114,6 +114,8 @@ class Command(BaseCommand):
         for section in data:
             section['page'] = page
             section['position'] = i
+            section['content'] = render_to_string(section['template'])
+            del section['template']
             EventPageContent.objects.create(**section)
             i += 1
 
