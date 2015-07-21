@@ -12,10 +12,10 @@ class JobForm(forms.ModelForm):
         help_text='Rememeber to start with http:// or https://'
     )
     cities = forms.CharField(
-        help_text="If you have opportunities in several \
-            countries, please either specify that in the job description, \
-            or add job opportunities for each country in which you have a space."
-        )
+        help_text="List the cities where this opportunity is available. \
+            If you have opportunities in cities in more than one country, \
+            please submit a separate job opportunity per country."
+    )
 
     class Meta:
         model = Job
@@ -45,7 +45,7 @@ class MeetupForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     website = forms.URLField(
         initial='http://',
-        help_text='Rememebr to start with http:// or https://'
+        help_text='Rememeber to start with http:// or https://'
     )
 
     class Meta:
