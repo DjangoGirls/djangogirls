@@ -158,3 +158,6 @@ MARKDOWN_DEUX_STYLES = {
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = DEBUG
+
+# Mapbox maps to use on the Events map
+MAPBOX_MAP_ID = 'olasitarska.m8nged0f'

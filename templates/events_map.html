@@ -12,7 +12,7 @@
         L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
         var past = L.layerGroup()
         var future = L.layerGroup()
-        var map = L.mapbox.map('map', 'olasitarska.m8nged0f', {scrollWheelZoom: false, layers: [past, future]}).setView([30, 0], 2);
+        var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false, layers: [past, future]}).setView([30, 0], 2);
         L.control.layers(null, {
           'Upcoming': future,
           'Past': past,
