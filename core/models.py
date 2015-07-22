@@ -49,7 +49,6 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def __str__(self):
         if self.first_name == '' and self.last_name == '': 
             return '{0}'.format(self.email)
-        print('Name:', self.get_full_name())
         return '{0}'.format(self.get_full_name())
 
     def get_short_name(self):
