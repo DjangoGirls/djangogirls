@@ -47,6 +47,8 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name_plural = 'Organizers'
 
     def __str__(self):
+        if self.first_name == '' and self.last_name == '': 
+            return '{0}'.format(self.email)
         return '{0} ({1})'.format(self.get_full_name(), self.email)
 
     def get_short_name(self):
