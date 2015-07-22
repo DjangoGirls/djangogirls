@@ -39,12 +39,7 @@
                 </thead>
                 {% for s in scores %}
                 <tr>
-                    <td>{% if s.user.first_name or s.user.last_name %} 
-                            {{ s.user.first_name }} {{ s.user.last_name }}
-                        {% else %}
-                            {{ s.user.email }}
-                        {% endif %} 
-                    </td>
+                    <td>{{ s.user }}</td>
                     <td>{{ s.score }}</td>
                     <td>{{ s.comment }}</td>
                 </tr>
