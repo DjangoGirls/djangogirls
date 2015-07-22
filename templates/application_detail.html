@@ -25,7 +25,7 @@
 
 
         <div class="col-md-5 scoring">
-            {% if user_score.score %}
+            {% if user_score.score > 0 %}
             <h4>Scores</h4>
             <ul>
                 <li>Average score: {{ application.average_score }}</li>
@@ -39,7 +39,7 @@
                 </thead>
                 {% for s in scores %}
                 <tr>
-                    <td>{{ s.user.first_name }} {{ s.user.last_name }}</td>
+                    <td>{{ s.user }}</td>
                     <td>{{ s.score }}</td>
                     <td>{{ s.comment }}</td>
                 </tr>
