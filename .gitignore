@@ -12,3 +12,4 @@ lib
 src
 include
 .coverage
+.venv

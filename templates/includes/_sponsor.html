@@ -1,7 +1,9 @@
+{% load thumbnail %}
+
 <div class="col-md-3">
     <a href="{{ sponsor.url }}" target="_blank">
         {% if sponsor.logo %}
-            <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}" />
+            <img src="{{ sponsor.logo|thumbnail_url:'sponsor' }}" alt="{{ sponsor.name }}" />
         {% else %}
             <b>{{ sponsor.name }}</b>
         {% endif %}

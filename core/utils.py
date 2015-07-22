@@ -47,6 +47,4 @@ def get_approximate_date(date_str):
             return ApproximateDate(year=date_obj.year, month=date_obj.month)
         except ValueError:
             return False
-
     return False
-
