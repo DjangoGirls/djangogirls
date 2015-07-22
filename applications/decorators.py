@@ -4,6 +4,8 @@ from core.utils import get_event_page
 
 from django.http import HttpResponseNotFound
 
+from django.shortcuts import redirect
+
 
 def organiser_only(function):
     """
@@ -18,7 +20,7 @@ def organiser_only(function):
                 '"City" slug must be present to user this decorator.')
 
         if not request.user.is_authenticated():
-            return HttpResponseNotFound()
+            return redirect('core:event', kwargs.get('city')) 
 
         city = kwargs.get('city')
         page = get_event_page(city, request.user.is_authenticated(), False)
