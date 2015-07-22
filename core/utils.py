@@ -49,4 +49,3 @@ def get_approximate_date(self, date_str):
             return False
 
     return False
-
