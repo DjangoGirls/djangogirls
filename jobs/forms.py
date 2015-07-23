@@ -10,7 +10,7 @@ class JobForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     website = forms.URLField(
         initial='http://',
-        help_text='Rememeber to start with http:// or https://'
+        help_text='Remember to start with http:// or https://'
     )
     cities = forms.CharField(
         help_text="List the cities where this opportunity is available. \
@@ -45,7 +45,7 @@ class MeetupForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     website = forms.URLField(
         initial='http://',
-        help_text='Rememeber to start with http:// or https://'
+        help_text='Remember to start with http:// or https://'
     )
     expiration_date = forms.DateField(
         required=False,

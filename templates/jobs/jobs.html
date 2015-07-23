@@ -16,8 +16,12 @@
                         Job offers
                     </h2>
 
-                    {% include 'includes/_jobs_intro.html' %}
-
+                    <hr/>
+                      {% include 'includes/_jobs_intro.html' %}
+                    <p class="text-info">
+                       On this page, we only list opportunities that require no experience from companies who
+                       want to hire beginners and care about diversity.
+                    </p>
                     <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
                 </div> <!--.col-md-12-->
             </div> <!--.row-->
