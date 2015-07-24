@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+
 
 from core.utils import get_event_page
 from core.models import EventPageMenu
