@@ -35,9 +35,11 @@ class Command(BaseCommand):
         click.echo("Let's start with some basics.")
         city = click.prompt(click.style("What is the name of the city?", bold=True, fg='yellow'))
         country = click.prompt(click.style("What is the name of the country?", bold=True, fg='yellow'))
-        date = get_approximate_date(click.prompt(click.style("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow')))
+        date = click.prompt(click.style("What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow'))
+        date = get_approximate_date(date)
         while not date:
-            date = get_approximate_date(click.prompt(click.style("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow')))
+            date = click.prompt(click.style("Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)", bold=True, fg='yellow'))
+            date = get_approximate_date(date)
 
         url = click.prompt(click.style("What should be the URL of website? djangogirls.org/xxxx", bold=True, fg='yellow'))
         event_mail = click.prompt(click.style("What is the mail adress of the event? xxxx@djangogirls.org", bold=True, fg='yellow'))

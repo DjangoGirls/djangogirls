@@ -1,5 +1,6 @@
 import icalendar
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
@@ -31,7 +32,8 @@ def events(request):
 def events_map(request):
 
     return render(request, 'events_map.html', {
-        'events': Event.objects.all().order_by('date'),
+        'events': Event.objects.public().order_by('date'),
+        'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
 
 

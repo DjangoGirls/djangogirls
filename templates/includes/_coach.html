@@ -1,8 +1,21 @@
+{% load thumbnail %}
 
+{% if coach.url %}
 <a href="{{ coach.url }}" target="_blank">
-    {% if coach.photo %}
-        <img src="{{ coach.photo.url }}" alt="{{ coach.name }}" class="coach" />
-    {% endif %}
-</a><br />
+{% else %}
+<span>
+{% endif %}
+
+{% if coach.photo %}
+    <img src="{{ coach.photo|thumbnail_url:'coach' }}" alt="{{ coach.name }}" class="coach" />
+{% endif %}
+
+{% if coach.url %}
+</a>
+{% else %}
+</span>
+{% endif %}
+
+<br />
 <a href="{{ coach.url }}" target="_blank">{{ coach.name }}</a><br />
 {% if coach.twitter_handle %}<a href="https://twitter.com/{{ coach.twitter_handle }}" target="_blank">@{{ coach.twitter_handle }}</a><br />{% endif %}

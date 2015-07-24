@@ -37,7 +37,7 @@ def get_event_page(city, is_user_authenticated, is_preview):
     return page
 
 
-def get_approximate_date(self, date_str):
+def get_approximate_date(date_str):
     try:
         date_obj = datetime.strptime(date_str, '%d/%m/%Y')
         return ApproximateDate(year=date_obj.year, month=date_obj.month, day=date_obj.day)
@@ -47,6 +47,4 @@ def get_approximate_date(self, date_str):
             return ApproximateDate(year=date_obj.year, month=date_obj.month)
         except ValueError:
             return False
-
     return False
-

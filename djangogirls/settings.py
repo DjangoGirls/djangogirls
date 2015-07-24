@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'markdown_deux',
     'djrill',
     'django_nose',
+    'easy_thumbnails',
 
     'core',
     'applications',
@@ -95,7 +96,6 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls'
 }
 
-
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = 'djangogirls'
@@ -113,6 +113,17 @@ else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
     MEDIA_ROOT = 'staticfiles/media'
+
+
+THUMBNAIL_PRESERVE_EXTENSIONS = True
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+THUMBNAIL_ALIASES = {
+    '': {
+        'coach': {'size': (160, 160), 'crop': "smart"},
+        'sponsor': {'size': (204, 204), 'crop': False}
+    },
+}
+
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 STATIC_ROOT = 'staticfiles'
@@ -158,3 +169,6 @@ MARKDOWN_DEUX_STYLES = {
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = DEBUG
+
+# Mapbox maps to use on the Events map
+MAPBOX_MAP_ID = 'olasitarska.m8nged0f'

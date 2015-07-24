@@ -92,8 +92,11 @@ def application_detail(request, city, app_id):
     Display the details of a single application.
     """
     application = Application.objects.get(pk=app_id)
-    score, created = Score.objects.get_or_create(
-        user=request.user, application=application)
+    try:
+        score = Score.objects.get(
+            user=request.user, application=application)
+    except Score.DoesNotExist:
+        score = None
     score_form = ScoreForm(instance=score)
     page = get_event_page(city, request.user.is_authenticated(), False)
     all_scores = Score.objects.filter(application=application)
@@ -102,7 +105,10 @@ def application_detail(request, city, app_id):
         # Handle score submission.
         score_form = ScoreForm(request.POST, instance=score)
         if score_form.is_valid():
-            score_form.save()
+            score = score_form.save(commit=False)
+            score.user = request.user
+            score.application = application
+            score.save()
 
         if request.POST.get('random'):
             # Go to a new random application.
