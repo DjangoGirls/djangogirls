@@ -40,6 +40,7 @@ class MeetupForm(forms.ModelForm):
         widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
                                        "pickSeconds": False}))
     meetup_end_date = forms.DateTimeField(
+        required=False,
         widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
                                        "pickSeconds": False}))
     description = forms.CharField(widget=CKEditorWidget())

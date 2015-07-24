@@ -41,7 +41,7 @@ class MainPageTests(TestCase):
     def test_main_page_with_empty_database(self):
         response = self.client.get(reverse('jobs:main'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn("No job offers yet", str(response.content))
+        self.assertIn("No job opportunities yet", str(response.content))
         self.assertIn("No meetups yet", str(response.content))
 
 
@@ -51,7 +51,7 @@ class JobsPageTests(TestCase):
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            "There are no job offers at this moment.", str(response.content)
+            "There are no job opportunities at this moment.", str(response.content)
         )
 
     def test_jobs_page_with_job_not_ready_to_publish(self):
@@ -62,7 +62,7 @@ class JobsPageTests(TestCase):
         response = self.client.get(reverse('jobs:jobs'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            "There are no job offers at this moment.", str(response.content)
+            "There are no job opportunities at this moment.", str(response.content)
         )
 
     def test_jobs_page_with_job_ready_to_publish(self):

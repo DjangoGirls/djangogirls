@@ -80,7 +80,7 @@ def confirm_submission(request):
 
 def create_job(request):
     job_form = JobForm()
-    success_message = 'Your job offer was added to our database, \
+    success_message = 'Your job opportunity was added to our database, \
                     you will receive further information shortly.'
     if request.method == 'POST':
         job_form = JobForm(request.POST)

@@ -155,7 +155,7 @@ class JobModelTests(TestCase):
         self.assertEqual(result.days, 59)
 
     def test_publish_twice_in_a_row(self):
-        """It is not possible to publish a job offer twice"""
+        """It is not possible to publish a job opportunity twice"""
         self.assertFalse(self.job_ready_no_exp_date.published_date)
         self.job_ready_no_exp_date.publish()
         self.assertTrue(self.job_ready_no_exp_date.published_date, "Job has no published date.")

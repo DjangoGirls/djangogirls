@@ -43,13 +43,15 @@
                     </div>
                     <div class="panel-body">
                           {% include 'includes/_jobs_intro.html' %}
-                        <h4>Recent offers:</h4>
+                        <br/>
+                        <h4>Recent opportunities:</h4>
+                        <hr/>
                         {% if job_offers %}
                             {% for job in job_offers %}
                                 {% include 'includes/_jobs.html' with job=job %}
                             {% endfor %}
                         {% else %}
-                            <p>No job offers yet...</p>
+                            <p>No job opportunities yet...</p>
                         {% endif %}
                             <a class="btn btn-blue btn-block" href="{% url 'jobs:jobs' %}">More...</a>
                     </div>
@@ -62,7 +64,9 @@
                     </div>
                     <div class="panel-body">
                           {% include 'includes/_meetups_intro.html' %}
+                        <br/>
                         <h4>Recent meetups:</h4>
+                        <hr/>
                         {% if meetup_list %}
                             {% for meetup in meetup_list %}
                                 {% include 'includes/_meetups.html' with meetup=meetup %}

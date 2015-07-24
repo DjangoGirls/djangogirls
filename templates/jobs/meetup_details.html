@@ -30,6 +30,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="text-muted pull-right">
+                            <p>{{ meetup.get_meetup_type_display }}</p>
                             <p>Published on {{ meetup.published_date|date:'d F Y' }}</p>
                         </div>
                         <h4>When</h4>
@@ -44,7 +45,7 @@
                         <h4>Description</h4>
                         <p>{{ meetup.description|safe }}</p>
                         {% if meetup.is_recurring %}
-                            <p>This is a recurring event</p>
+                            <p><strong>This is a recurring event:</strong> {{ meetup.recurrence }}</p>
                         {% endif %}
                         {% if meetup.organisation %}
                             <h4>Organised by</h4>

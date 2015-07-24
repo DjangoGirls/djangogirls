@@ -13,22 +13,23 @@
                         <li class="active">Job opportunities</li>
                     </ol>
                     <h2>
-                        Job offers
+                        Job opportunities
                     </h2>
 
                     <hr/>
                       {% include 'includes/_jobs_intro.html' %}
+
                     <p class="text-info">
                        On this page, we only list opportunities that require no experience from companies who
                        want to hire beginners and care about diversity.
                     </p>
-                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add offer</a>
+                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add opportunity</a>
                 </div> <!--.col-md-12-->
             </div> <!--.row-->
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Offers</h3>
+                    <h3>Open opportunities</h3>
                     <table class="table table-striped">
                         <thead>
                             <th>Company</th>
@@ -52,7 +53,7 @@
                                 </tr>
                             {% empty %}
                                 <tr>
-                                    <td>There are no job offers at this moment.</td>
+                                    <td>There are no job opportunities at this moment.</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

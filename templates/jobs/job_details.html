@@ -4,51 +4,51 @@
 
 {% block content %}
 
-    <section id="job_details">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li><a href="{% url 'core:index' %}">Home</a></li>
-                        <li><a href="{% url 'jobs:main' %}">Community</a></li>
-                        <li><a href="{% url 'jobs:jobs' %}">Job offers</a></li>
-                        <li class="active">{{ job.title }}</li>
-                    </ol>
-                    <div class="page-header">
-                        <h3>{{ job.title }} <small>at {{ job.company }}</small></h3>
+<section id="job_details">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'core:index' %}">Home</a></li>
+                    <li><a href="{% url 'jobs:main' %}">Community</a></li>
+                    <li><a href="{% url 'jobs:jobs' %}">Job opportunities</a></li>
+                    <li class="active">{{ job.title }}</li>
+                </ol>
+                <div class="page-header">
+                    <h3>{{ job.title }} <small>at {{ job.company }}</small></h3>
+                </div>
+                <div class="panel panel-feature-blue">
+                    <div class="panel-heading">
                     </div>
-                    <div class="panel panel-feature-blue">
-                        <div class="panel-heading">
+                    <div class="panel-body">
+                        <div class="text-muted pull-right">
+                            <p>Published on {{ job.published_date|date:'d F Y' }}</p>
+                            <table class="table" id="job-table">
+                                <tr>
+                                    <td>Remote work</td>
+                                    <td><strong>{{ job.remote_work|yesno }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Relocation offered</td>
+                                    <td><strong>{{ job.relocation|yesno }}</strong></td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="panel-body">
-                            <div class="text-muted pull-right">
-                                <p>Published on {{ job.published_date|date:'d F Y' }}</p>
-                                <table class="table" id="job-table">
-                                    <tr>
-                                        <td>Remote work</td>
-                                        <td><strong>{{ job.remote_work|yesno }}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Relocation offered</td>
-                                        <td><strong>{{ job.relocation|yesno }}</strong></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <h4>Where</h4>
-                            <p>{{ job.cities }} ({{ job.country }})</p>
-                            <h4>Description</h4>
-                            <p>{{ job.description|safe }}</p>
-                            <h4>Contact</h4>
-                            <p>{{ job.contact_email|urlize }}</p>
-                            <p><a href="{{ job.website }}">view website</a></p>
-                        </div>
+                        <h4>Where</h4>
+                        <p>{{ job.cities }} ({{ job.country }})</p>
+                        <h4>Description</h4>
+                        <p>{{ job.description|safe }}</p>
+                        <h4>Contact</h4>
+                        <p>{{ job.contact_email|urlize }}</p>
+                        <p><a href="{{ job.website }}">view website</a></p>
                     </div>
+                </div>
 
-                </div> <!--.col-md-12-->
-            </div> <!--.row-->
-        </div> <!--.container-->
-    </section> <!--#job_details-->
+            </div> <!--.col-md-12-->
+        </div> <!--.row-->
+    </div> <!--.container-->
+</section> <!--#job_details-->
 
 
 {% endblock content %}
