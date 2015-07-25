@@ -103,18 +103,6 @@ AWS_HEADERS = {'Cache-Control': 'public, max-age=86400'}
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 
-if DEBUG:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    STATIC_URL = '/static/'
-    MEDIA_ROOT = 'static/media'
-else:
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-    MEDIA_ROOT = 'staticfiles/media'
-
-
 THUMBNAIL_PRESERVE_EXTENSIONS = True
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 THUMBNAIL_ALIASES = {
@@ -124,10 +112,11 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
-MEDIA_URL = '/static/media/'
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = 'static/media'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_FINDERS = (
