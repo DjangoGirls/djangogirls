@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+import csv
 
 from core.utils import get_event_page
 from core.models import EventPageMenu
@@ -82,6 +83,25 @@ def applications(request, city):
         'order': order,
         'menu': get_organiser_menu(city),
     })
+
+@organiser_only
+def applications_csv(request, city):
+    """
+    Download a csv of applications for this city.
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    try:
+        applications = get_applications_for_page(page, None, None, None)
+    except:
+        return redirect('core:event', city=city)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = u'attachment; filename="{}.csv"'.format(city)
+    writer = csv.writer(response)
+    writer.writerow(["Application Number", "email", "Application State", "RSVP Status", "Average Score"])
+    for app in applications:
+        writer.writerow([app.number, app.email, app.state, app.rsvp_status, app.average_score])
+    return response
 
 
 @organiser_only
