@@ -1,0 +1,13 @@
+Hello there!
+
+This is an automatically generated email about your {{ option }}. Current status is: {{ status }}.
+
+{% if message_to_organisation %}
+This is your feedback:
+{{ message_to_organisation|linebreaks }}
+{% else %}
+There was no additional information provided.
+{% endif %}
+
+Greetings!
+Django Girls Team
