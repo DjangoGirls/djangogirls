@@ -1,8 +1,8 @@
 .DS_Store
 *.sqlite3
 *.pyc
-static/media
-staticfiles
+staticfiles/
+uploads/
 local_settings.py
 .anvil/*
 __pycache__

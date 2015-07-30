@@ -69,7 +69,9 @@ WSGI_APPLICATION = 'djangogirls.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default='sqlite:///%s' % (os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3'))))
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///' + os.path.abspath(os.path.join(BASE_DIR, 'db.sqlite3'))
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -110,27 +112,7 @@ SUIT_CONFIG = {
     }
 }
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = 'djangogirls'
-AWS_HEADERS = {'Cache-Control': 'public, max-age=86400'}
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_FILE_OVERWRITE = False
-
-if DEBUG:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    STATIC_URL = '/static/'
-    MEDIA_ROOT = 'static/media'
-else:
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATIC_URL = 'https://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-    MEDIA_ROOT = 'staticfiles/media'
-
-
 THUMBNAIL_PRESERVE_EXTENSIONS = True
-THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 THUMBNAIL_ALIASES = {
     '': {
         'coach': {'size': (160, 160), 'crop': "smart"},
@@ -138,10 +120,10 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-STATIC_ROOT = 'staticfiles'
-MEDIA_URL = '/static/media/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_FINDERS = (
