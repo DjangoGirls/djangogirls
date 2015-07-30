@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'django.contrib.webdesign',
 
     'raven.contrib.django.raven_compat',
     'django_date_extensions',
@@ -38,8 +39,15 @@ INSTALLED_APPS = (
     'django_nose',
     'easy_thumbnails',
 
+    'django_countries',
+    'crispy_forms',
+    'bootstrap3_datetime',
+
+    'ckeditor',
+
     'core',
     'applications',
+    'jobs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -86,14 +94,20 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'django.core.context_processors.static',
     'core.context_processors.statistics',
+    'django.contrib.messages.context_processors.messages',
 )
 
 # Custom
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 AUTH_USER_MODEL = 'core.User'
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Django Girls'
+    'ADMIN_NAME': 'Django Girls',
+    'MENU_ICONS': {
+        'jobs': 'icon-list-alt',
+    }
 }
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_KEY_ID')
@@ -148,7 +162,7 @@ SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=core,applications',
+    '--cover-package=core,applications,jobs',
     '--with-progressive',
 ]
 
@@ -172,3 +186,29 @@ SSLIFY_DISABLE = DEBUG
 
 # Mapbox maps to use on the Events map
 MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
+
+APPEND_SLASH = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+    		 ['-', 'Bold', 'Italic', 'Underline'],
+             ['-', 'Link', 'Unlink'],
+             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-'],
+        ],
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.megiteam.pl'
+EMAIL_PORT = 465
+EMAIL_SUBJECT_PREFIX = '[Django Girls]'
+
+JOBS_EMAIL_USER = os.environ.get('JOBS_EMAIL_USER')
+JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
+
+MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
+MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')

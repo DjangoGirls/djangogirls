@@ -82,6 +82,52 @@ input[type="submit"] {
   border-radius: 3px;
 }
 /*
+--------------------------
+-    Bootstrap new styles
+--------------------------
+*/
+.panel-feature-orange {
+  border-color: #fbae55;
+}
+.panel-feature-orange > .panel-heading {
+  color: #a15a09;
+  background-color: #fbc281;
+  border-color: #fbae55;
+}
+.panel-feature-orange > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #fbae55;
+}
+.panel-feature-orange > .panel-heading .badge {
+  color: #fbc281;
+  background-color: #a15a09;
+}
+.panel-feature-orange > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #fbae55;
+}
+.panel-feature-blue {
+  border-color: #4ca3ce;
+}
+.panel-feature-blue > .panel-heading {
+  color: #084765;
+  background-color: #6fafce;
+  border-color: #4ca3ce;
+}
+.panel-feature-blue > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #4ca3ce;
+}
+.panel-feature-blue > .panel-heading .badge {
+  color: #6fafce;
+  background-color: #084765;
+}
+.panel-feature-blue > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #4ca3ce;
+}
+.btn-blue {
+  color: #fff;
+  background-color: #19719c;
+  border-color: #2b5d75;
+}
+/*
 ------------------
     Navigation
 ------------------
@@ -417,23 +463,27 @@ footer {
 footer .row {
   margin: 0;
 }
-footer .row .col-md-3 p {
+footer .row .col-md-2 p {
   text-transform: uppercase;
   font-family: Roboto;
   color: #f7921d;
   font-size: 18px;
   line-height: 21px;
 }
-footer .row .col-md-3 ul {
+footer .row .col-md-2 p a {
+  text-decoration: none;
+  color: #f7921d;
+}
+footer .row .col-md-2 ul {
   list-style-type: none;
   padding: 0;
 }
-footer .row .col-md-3 ul li {
+footer .row .col-md-2 ul li {
   margin-left: 0;
   font-size: 18px;
   line-height: 28px;
 }
-footer .row .col-md-3 ul li a {
+footer .row .col-md-2 ul li a {
   text-decoration: none;
 }
 /*

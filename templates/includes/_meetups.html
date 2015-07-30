@@ -1,0 +1,8 @@
+<div class="overlay">
+    <div class="thumbnail">
+        <p class="title"><a href="{% url 'jobs:meetup_details' id=meetup.id %}">{{ meetup.title }}</a></p>
+
+        <p><strong>When:</strong> {{ meetup.meetup_start_date|date:"l, d F Y, f A" }}</p>
+        <p><strong>Where:</strong> {{ meetup.city }} ({{meetup.country}})</p>
+    </div>
+</div>

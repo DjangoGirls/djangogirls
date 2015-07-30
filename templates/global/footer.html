@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Django Girls</p>
                 <ul>
                     <li><a href="{% url 'core:events' %}">Events</a></li>
@@ -13,7 +13,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Support us</p>
                 <ul>
                     <li><a href="https://www.patreon.com/djangogirls">Donate on Patreon</a></li>
@@ -21,8 +21,18 @@
                     <li><a href="http://bit.ly/sponsordg">Sponsor us</a></li>
                 </ul>
             </div>
+            <div class="col-md-2">
+                <p><a href="{% url 'jobs:main' %}">Community</a></p>
+                <ul>
+                    <li><a href="{% url 'jobs:jobs' %}">Job opportunities</a></li>
+                    <li><a href="{% url 'jobs:meetups' %}">Meetups</a></li>
+                    <li><a href="http://facebook.com/djangogirls">Facebook</a></li>
+                    <li><a href="http://twitter.com/djangogirls">Twitter</a></li>
+                    <li><a href="http://github.com/djangogirls">Github</a></li>
+                </ul>
+            </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Resources</p>
                 <ul>
                     <li><a href="http://tutorial.djangogirls.org/">Tutorial</a></li>
@@ -33,11 +43,13 @@
                 </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>♥</p>
                 <ul>
                     <li><b>{{ future_events_count }}</b> upcoming events</li>
                     <li><b>{{ past_events_count }}</b> past events</li>
+                    <!--- tags to do for meetups and job opportunities
+                    <li><b></b> upcoming meetups</li>-->
                     <li><b>{{ applicants_sum|default_if_none:'0' }}</b> applicants</li>
                     <li><b>{{ attendees_sum|default_if_none:'0' }}</b> attendees</li>
                     <li><b>{{ countries_count }}</b> countries</li>
