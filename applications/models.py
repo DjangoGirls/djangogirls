@@ -297,7 +297,6 @@ class Email(models.Model):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
         self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
-        sender = "{} <{}>".format(self.form.page.title, self.sent_from)
         successfuly_sent = []
         failed_to_sent = []
 
@@ -310,7 +309,7 @@ class Email(models.Model):
                         body = self.add_rsvp_links(body, recipient)
                         break
 
-                msg = EmailMessage(self.subject, body, sender, [recipient.email])
+                msg = EmailMessage(self.subject, body, self.sent_from, [recipient.email])
                 msg.content_subtype = "html"
                 try:
                     msg.send()

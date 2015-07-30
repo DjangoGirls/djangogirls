@@ -65,8 +65,7 @@ class ApplicationForm(forms.Form):
                     'intro': form.confirmation_mail,
                 }
             )
-            sender = "{} <{}>".format(form.page.title, form.page.event.email)
-            msg = EmailMessage(subject, body, sender, [application.email,])
+            msg = EmailMessage(subject, body, form.page.event.email, [application.email,])
             msg.content_subtype = "html"
             try:
                 msg.send()
