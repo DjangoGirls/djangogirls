@@ -183,12 +183,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.megiteam.pl'
-EMAIL_PORT = 465
-EMAIL_SUBJECT_PREFIX = '[Django Girls]'
-
 JOBS_EMAIL_USER = os.environ.get('JOBS_EMAIL_USER')
 JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 
