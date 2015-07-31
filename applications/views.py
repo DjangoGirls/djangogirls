@@ -100,12 +100,14 @@ def applications_csv(request, city):
     response['Content-Disposition'] = u'attachment; filename="{}.csv"'.format(city)
     writer = csv.writer(response)
     csv_header = ["Application Number","Application State", "RSVP Status", "Average Score"]
+    questions = page.form_set.first().question_set.values_list('title', flat=True)
     # replace commas with semicolons so it won't confuse csv parsers
-    csv_header.extend([striptags(question).replace(',', ';') for question in Question.objects.values_list('title', flat=True)])
+    csv_header.extend([striptags(question).replace(',', ';') for question in questions])
     writer.writerow(csv_header)
     for app in applications:
         app_info = [app.number, app.state, app.rsvp_status, app.average_score]
-        app_info.extend([answer.replace(',', ';') for answer in app.answer_set.values_list('answer', flat=True)])
+        app_answers = app.answer_set.values_list('answer', flat=True)
+        app_info.extend([answer.replace(',', ';') for answer in app_answers])
         writer.writerow(app_info)
     return response
 
