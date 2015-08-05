@@ -101,13 +101,11 @@ def applications_csv(request, city):
     writer = csv.writer(response)
     csv_header = ["Application Number","Application State", "RSVP Status", "Average Score"]
     questions = page.form_set.first().question_set.values_list('title', flat=True)
-    # replace commas with semicolons so it won't confuse csv parsers
-    csv_header.extend([striptags(question) for question in questions])
+    csv_header.extend(map(striptags, questions))
     writer.writerow(csv_header)
     for app in applications:
         app_info = [app.number, app.state, app.rsvp_status, app.average_score]
-        app_answers = app.answer_set.values_list('answer', flat=True)
-        app_info.extend([answer for answer in app_answers])
+        app_info.extend(app.answer_set.values_list('answer', flat=True))
         writer.writerow(app_info)
     return response
 
