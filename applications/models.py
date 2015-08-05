@@ -218,6 +218,13 @@ class Application(models.Model):
     def is_accepted(self):
         return self.state == 'accepted'
 
+    def is_scored_by_user(self, user):
+        """
+        Returns true if the given user has scored this application
+        or false if they have not, or there is a zero score.
+        """
+        return self.scores.filter(user=user, score__gt=0).exists()
+
     def __str__(self):
         return str(self.pk)
 
