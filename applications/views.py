@@ -85,6 +85,7 @@ def applications(request, city):
         'menu': get_organiser_menu(city),
     })
 
+
 @organiser_only
 def applications_csv(request, city):
     """
@@ -99,7 +100,7 @@ def applications_csv(request, city):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = u'attachment; filename="{}.csv"'.format(city)
     writer = csv.writer(response)
-    csv_header = ["Application Number","Application State", "RSVP Status", "Average Score"]
+    csv_header = ["Application Number", "Application State", "RSVP Status", "Average Score"]
     questions = page.form_set.first().question_set.values_list('title', flat=True)
     csv_header.extend(map(striptags, questions))
     writer.writerow(csv_header)
