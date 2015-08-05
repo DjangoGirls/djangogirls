@@ -1,18 +1,13 @@
 # -*- encoding: utf-8 -*-
 from django import template
 
-from applications.models import Score
-
 
 register = template.Library()
 
+
 @register.filter
-def scored_by_user(value, arg):
-    try:
-        score = Score.objects.get(application=value, user=arg)
-        return True if score.score else False
-    except Score.DoesNotExist:
-        return False
+def scored_by_user(application, user):
+    return application.is_scored_by_user(user)
 
 
 @register.simple_tag
