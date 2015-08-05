@@ -104,7 +104,8 @@ def applications_csv(request, city):
     csv_header.extend(map(striptags, questions))
     writer.writerow(csv_header)
     for app in applications:
-        app_info = [app.number, app.state, app.rsvp_status, app.average_score]
+        score = app.average_score if app.is_scored_by_user(request.user) else '(hidden)'
+        app_info = [app.number, app.state, app.rsvp_status, score]
         app_info.extend(app.answer_set.values_list('answer', flat=True))
         writer.writerow(app_info)
     return response
