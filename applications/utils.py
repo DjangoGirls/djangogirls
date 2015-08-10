@@ -76,10 +76,12 @@ def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
         raise Form.DoesNotExist
     page_form = page_form.first()
 
-    applications = page_form.application_set.all()
+    applications = page_form.application_set.all().order_by('id')
 
     if rsvp_status:
-        applications = applications.filter(state='accepted', rsvp_status__in=rsvp_status)
+        applications = applications.filter(
+            state='accepted', rsvp_status__in=rsvp_status
+        )
     elif state:
         applications = applications.filter(state__in=state)
 
