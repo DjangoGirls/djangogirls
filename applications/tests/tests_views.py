@@ -119,7 +119,7 @@ class ApplicationsView(TestCase):
     def test_access_applications_view(self):
         # as anonymous user
         resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         # as logged in user, but not orgarniser of given event
         request = self.factory.get(self.url)
@@ -272,7 +272,7 @@ class ApplicationsView(TestCase):
             reverse('applications:change_state', args=['test']),
             {'state': 'accepted', 'application': self.application_1.id}
         )
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         self.user.is_superuser = True
         self.user.save()
@@ -298,7 +298,7 @@ class ApplicationsView(TestCase):
             reverse('applications:change_rsvp', args=['test']),
             {'rsvp_status': 'yes', 'application': self.application_1.id}
         )
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         self.user.is_superuser = True
         self.user.save()
