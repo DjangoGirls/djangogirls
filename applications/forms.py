@@ -1,7 +1,6 @@
 from django import forms
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from django.core.exceptions import ValidationError
 
 from .models import Application, Answer, Question, Score, Email
 from .utils import generate_form_from_questions
@@ -66,8 +65,7 @@ class ApplicationForm(forms.Form):
                     'intro': form.confirmation_mail,
                 }
             )
-            sender = "{} <{}>".format(form.page.title, form.page.event.email)
-            msg = EmailMessage(subject, body, sender, [application.email,])
+            msg = EmailMessage(subject, body, form.page.event.email, [application.email,])
             msg.content_subtype = "html"
             try:
                 msg.send()
@@ -81,14 +79,6 @@ class ScoreForm(forms.ModelForm):
     class Meta:
         model = Score
         fields = ['score', 'comment']
-
-    def clean(self):
-        cleaned_data = super(ScoreForm, self).clean()
-        score = cleaned_data.get('score')
-        comment = cleaned_data.get('comment')
-        if not score and not comment:
-            raise forms.ValidationError('You must enter a score or a comment to'+ 
-                'save this application.')
 
 
 class EmailForm(forms.ModelForm):

@@ -1,0 +1,51 @@
+{% extends 'jobs/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block extra_js %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+             <ol class="breadcrumb">
+                <li><a href="{% url 'core:index' %}">Home</a></li>
+                <li><a href="{% url 'jobs:main' %}">Community</a></li>
+                <li><a href="{% url 'jobs:meetups' %}">Meetups</a></li>
+                <li class="active">Add meetup</li>
+            </ol>
+            <div>
+                <h2>
+                    Add meetup
+                </h2>
+                <hr/>
+                <p>
+                    Adding a meetup on Django Girls website is free. Our website is visited
+                    by many enthusiastic beginner developers and we can help you reach them.
+                    However, all the meetups listed here need to meet following requirements:
+                </p>
+                <ul>
+                    <li>The meetup needs to be beginner-friendly.</li>
+                    <li>The meetup needs to have a published and enforced Code of Conduct.</li>
+                </ul>
+                <p><strong>Yay!</strong></p>
+                <br/>
+            </div>
+            <div class="panel panel-feature-orange">
+                <div class="panel-heading">
+                    <h2>New meetup</h2>
+                </div>
+                <div class="panel-body">
+                    <form method="POST" class="job-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="save btn btn-warning" name="add_meetup">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.col-md-12-->
+    </div><!-- /.row -->
+</div> <!-- /.container -->
+{% endblock %}

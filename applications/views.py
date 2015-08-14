@@ -1,9 +1,8 @@
+import csv
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from django.core.exceptions import ValidationError
-
 
 from core.utils import get_event_page
 from core.models import EventPageMenu
@@ -84,6 +83,32 @@ def applications(request, city):
         'order': order,
         'menu': get_organiser_menu(city),
     })
+
+
+@organiser_only
+def applications_csv(request, city):
+    """
+    Download a csv of applications for this city.
+    """
+    page = get_event_page(city, request.user.is_authenticated(), False)
+    try:
+        applications = get_applications_for_page(page, None, None, None)
+    except:
+        return redirect('core:event', city=city)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = u'attachment; filename="{}.csv"'.format(city)
+    writer = csv.writer(response)
+    csv_header = ["Application Number", "Application State", "RSVP Status", "Average Score"]
+    questions = page.form_set.first().question_set.values_list('title', flat=True)
+    csv_header.extend(map(striptags, questions))
+    writer.writerow(csv_header)
+    for app in applications:
+        score = app.average_score if app.is_scored_by_user(request.user) else '(hidden)'
+        app_info = [app.number, app.state, app.rsvp_status, score]
+        app_info.extend(app.answer_set.values_list('answer', flat=True))
+        writer.writerow(app_info)
+    return response
 
 
 @organiser_only

@@ -1,0 +1,66 @@
+{% extends 'jobs/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container">
+        <section id="jobs">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'core:index' %}">Home</a></li>
+                        <li><a href="{% url 'jobs:main' %}">Community</a></li>
+                        <li class="active">Job opportunities</li>
+                    </ol>
+                    <h2>
+                        Job opportunities
+                    </h2>
+
+                    <hr/>
+                      {% include 'includes/_jobs_intro.html' %}
+
+                    <p class="text-info">
+                       On this page, we only list opportunities that require no experience from companies who
+                       want to hire beginners and care about diversity.
+                    </p>
+                    <a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add opportunity</a>
+                </div> <!--.col-md-12-->
+            </div> <!--.row-->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Open opportunities</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Company</th>
+                            <th>Job title</th>
+                            <th>Location</th>
+                            <th>Posted</th>
+                        </thead>
+                        <tbody>
+                            {% for job in job_offers %}
+                                <tr>
+                                    <td>
+                                        {{ job.company }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'jobs:job_details' id=job.id %}">
+                                            {{ job.title }}
+                                        </a>
+                                    </td>
+                                    <td>{{ job.cities }} ({{ job.country }})</td>
+                                    <td>{{ job.published_date }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td>There are no job opportunities at this moment.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div> <!--.col-md-12-->
+            </div> <!--.row-->
+        </section>
+    </div> <!--.container-->
+
+{% endblock %}

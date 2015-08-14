@@ -12,6 +12,8 @@ urlpatterns = patterns(
         'applications.views.change_state', name='change_state'),
     url(r'^(?P<city>[\w\d/]+)/applications/change_rsvp/$',
         'applications.views.change_rsvp', name='change_rsvp'),
+    url(r'^(?P<city>[\w\d/]+)/applications/download/$',
+        'applications.views.applications_csv', name='applications_csv'),
     url(r'^(?P<city>[\w\d/]+)/communication/$',
         'applications.views.communication', name='communication'),
     url(r'^(?P<city>[\w\d/]+)/communication/compose/$',

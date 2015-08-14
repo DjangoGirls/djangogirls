@@ -1,0 +1,60 @@
+{% extends 'jobs/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block extra_js %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+         <ol class="breadcrumb">
+            <li><a href="{% url 'core:index' %}">Home</a></li>
+            <li><a href="{% url 'jobs:main' %}">Community</a></li>
+            <li><a href="{% url 'jobs:jobs' %}">Job opportunities</a></li>
+            <li class="active">Add job opportunity</li>
+        </ol>
+        <div>
+            <h2>
+                Add job opportunity
+            </h2>
+            <hr/>
+            <p>
+                Adding a job opportunity on Django Girls website is free. Yay!
+                Our website is visited by many enthusiastic beginner developers and we can help you reach them with your offer.
+                However, all the opportunities listed here need to meet following requirements:
+            </p>
+            <ul>
+                <li>The opportunity needs to be beginner-friendly - no experience required.</li>
+                <li>The opportunity must not discriminate any gender.</li>
+            </ul>
+            <p>
+                By submitting a job opportunity to us, you're demonstrating that you care about diversity in your workplace and in the tech community in general.
+                Thank you!
+            </p>
+            <br/>
+            <p class="text-info">
+                Publishing a job opportunity here is free, however, Django Girls is a non-profit organisation
+                with a mission to show more women how amazing programming is. We would appreciate it if you would
+                consider <a href="https://www.patreon.com/djangogirls">making a donation through Patreon</a> to help us make a bigger impact.
+            </p>
+            <br/>
+        </div>
+            <div class="panel panel-feature-blue">
+                <div class="panel-heading">
+                    <h2>New job opportunity</h2>
+                </div>
+                <div class="panel-body">
+                    <form method="POST" class="job-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="save btn btn-blue" name="save">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

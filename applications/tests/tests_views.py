@@ -1,4 +1,6 @@
 import json
+from io import StringIO
+import csv
 from datetime import timedelta
 
 from django.test import TestCase, RequestFactory
@@ -117,7 +119,7 @@ class ApplicationsView(TestCase):
     def test_access_applications_view(self):
         # as anonymous user
         resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         # as logged in user, but not orgarniser of given event
         request = self.factory.get(self.url)
@@ -270,7 +272,7 @@ class ApplicationsView(TestCase):
             reverse('applications:change_state', args=['test']),
             {'state': 'accepted', 'application': self.application_1.id}
         )
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         self.user.is_superuser = True
         self.user.save()
@@ -296,7 +298,7 @@ class ApplicationsView(TestCase):
             reverse('applications:change_rsvp', args=['test']),
             {'rsvp_status': 'yes', 'application': self.application_1.id}
         )
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(resp.status_code, 302)
 
         self.user.is_superuser = True
         self.user.save()
@@ -332,3 +334,43 @@ class ApplicationsView(TestCase):
         self.application_3 = Application.objects.get(id=self.application_3.id)
         self.assertEqual(self.application_1.state, 'accepted')
         self.assertEqual(self.application_3.state, 'accepted')
+
+class ApplicationsDownloadView(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.factory = RequestFactory()
+
+        self.event = Event.objects.create(name='Test', city='Test', country='Test')
+        self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
+        self.form = Form.objects.create(page=self.page)
+        self.user = User.objects.create(email='test@user.com', is_active=True, is_staff=True)
+        self.user.set_password('test')
+
+        self.application_1 = Application.objects.create(form=self.form, state='submitted')
+        self.application_2 = Application.objects.create(form=self.form, state='accepted')
+        self.application_3 = Application.objects.create(form=self.form, state='rejected')
+        self.application_4 = Application.objects.create(form=self.form, state='waitlisted')
+
+        self.url = reverse('applications:applications_csv', args=['test'])
+
+    def test_download_applications_list(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEquals(
+            resp.get('Content-Disposition'),
+            'attachment; filename="test.csv"'
+        )
+        csv_file = StringIO(resp.content.decode('utf-8'))
+        reader = csv.reader(csv_file)
+        csv_list = list(reader)
+        self.assertEquals(len(csv_list), 5)
+        self.assertEquals(len(csv_list[0]), 17)
+        self.assertEquals(csv_list[0][0], "Application Number")
+        self.assertEquals(csv_list[1][1], "submitted")
+        self.assertEquals(csv_list[2][1], "accepted")
+        self.assertEquals(csv_list[3][1], "rejected")
+        self.assertEquals(csv_list[4][1], "waitlisted")

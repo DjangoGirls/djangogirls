@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <p>Hello there!</p>
+        <p>This is an automatically generated email about your {{ option }}. Current status is: {{ status }}.</p>
+        {% if message_to_organisation %}
+            <p>This is your feedback:</p>
+            <p> {{ message_to_organisation|linebreaks }}</p>
+        {% else %}
+            <p>There was no additional information provided.</p>
+        {% endif %}
+        <p>Greetings!</p>
+        <p>Django Girls Team</p>
+    </body>
+</html>

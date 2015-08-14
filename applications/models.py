@@ -163,7 +163,7 @@ class Application(models.Model):
         """
         Return the average score for this Application.
         """
-        scores = [s.score for s in self.scores.all() if s.score]
+        scores = [s.score for s in self.scores.all() if (s.score and s.score > 0)]
         if not scores:
             return 0
         else:
@@ -218,6 +218,13 @@ class Application(models.Model):
     def is_accepted(self):
         return self.state == 'accepted'
 
+    def is_scored_by_user(self, user):
+        """
+        Returns true if the given user has scored this application
+        or false if they have not, or there is a zero score.
+        """
+        return self.scores.filter(user=user, score__gt=0).exists()
+
     def __str__(self):
         return str(self.pk)
 
@@ -239,9 +246,9 @@ class Score(models.Model):
     user = models.ForeignKey(User, related_name='scores')
     application = models.ForeignKey(Application, related_name='scores')
     score = models.FloatField(
-        null=True, blank=True,
         help_text='5 being the most positive, 1 being the most negative.',
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
+        validators=[MaxValueValidator(5), MinValueValidator(0)], 
+        default=0
     )
     comment = models.TextField(
         null=True, blank=True, help_text='Any extra comments?')
@@ -297,7 +304,6 @@ class Email(models.Model):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
         self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
-        sender = "{} <{}>".format(self.form.page.title, self.sent_from)
         successfuly_sent = []
         failed_to_sent = []
 
@@ -310,7 +316,7 @@ class Email(models.Model):
                         body = self.add_rsvp_links(body, recipient)
                         break
 
-                msg = EmailMessage(self.subject, body, sender, [recipient.email])
+                msg = EmailMessage(self.subject, body, self.sent_from, [recipient.email])
                 msg.content_subtype = "html"
                 try:
                     msg.send()
