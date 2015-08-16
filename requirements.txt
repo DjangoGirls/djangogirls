@@ -31,7 +31,7 @@ psycopg2==2.5.3
 pyquery==1.2.9
 pytz==2014.9
 raven==5.0.0
-requests==2.3.0
+requests==2.7.0
 six==1.7.3
 -e git://github.com/olasitarska/slacker.git#egg=slacker
 whitenoise==1.0.3
