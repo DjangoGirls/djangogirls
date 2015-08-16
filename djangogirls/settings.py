@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'core',
     'applications',
     'jobs',
+    'patreonmanager',
 )
 
 MIDDLEWARE_CLASSES = (
