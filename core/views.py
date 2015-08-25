@@ -94,3 +94,11 @@ def events_ical(request):
 
 def newsletter(request):
     return render(request, 'newsletter.html', {})
+
+
+def foundation(request):
+    return render(request, 'foundation.html', {})
+
+
+def governing_document(request):
+    return render(request, 'governing_document.html', {})
