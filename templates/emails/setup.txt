@@ -24,7 +24,7 @@ Or you can forward incoming mail to your private email account:
 
 2) Website
 
-Your website address is http://djangogirls.org/{{ event.page.url }}
+Your website address is http://djangogirls.org/{{ event.eventpage.url }}
 
 Login here:
 http://djangogirls.org/admin/
