@@ -13,4 +13,4 @@ src
 include
 .coverage
 .venv
-/static/media
+static/media
