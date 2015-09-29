@@ -1,6 +1,6 @@
 Django==1.8.2
 Pillow==2.5.1
-boto==2.32.0
+boto3==1.1.4
 click==2.5
 coverage==3.7.1
 cssselect==0.9.1
