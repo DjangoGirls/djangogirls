@@ -1,0 +1,20 @@
+{% extends 'global/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row centered">
+        <div class="col-md-6 col-md-offset-4">
+            <h2>{% block title %}{% endblock title %}</h2>
+            <p>{% block description %}{% endblock description %}</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% block submit_button %}{% endblock submit_button %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
