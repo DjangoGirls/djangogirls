@@ -18,6 +18,8 @@ class Command(BaseCommand):
         c = Counter(payment.patron for payment in payments.select_related('patron'))
 
         for patron, count in c.most_common():
-            if count < 3:
-                break
-            self.stdout.write("%s: %d months" % (patron.name, count))
+            self.stdout.write("%s: %d month%s in a row" % (
+                patron.name,
+                count,
+                's' if count > 1 else '',  # plural mark
+            ))
