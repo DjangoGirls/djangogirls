@@ -13,6 +13,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
                     'is_on_homepage', 'is_past_event', 'has_stats')
     search_fields = ('city', 'country', 'name')
+    filter_horizontal = ['team']
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).get_queryset(request)
@@ -30,7 +31,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            return ('email',)
+            return ('email', 'team')
         return self.readonly_fields
 
 
