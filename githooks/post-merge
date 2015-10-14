@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Get secret token values from https://opbeat.com/django-girls/djangogirlsorg/releases/setup/instructions/
-notify_opbeat_release(){
+function notify_opbeat_release {
     echo "Uploading release to opbeat..."
     curl https://intake.opbeat.com/api/v1/organizations/<snip>/apps/<snip>/releases/ \
         -H "Authorization: Bearer <snip>" \
@@ -10,4 +10,4 @@ notify_opbeat_release(){
         -d status=completed
 }
 
-notify_opbeat_release()
+notify_opbeat_release
