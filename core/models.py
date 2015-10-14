@@ -110,6 +110,8 @@ class Event(models.Model):
         """
         Return a representation of the current event as an icalendar.Event.
         """
+        if not self.date:
+            return None
         ymd = (self.date.year, self.date.month, self.date.day)
         if not all(ymd):
             return None
