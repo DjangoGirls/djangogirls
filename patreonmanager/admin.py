@@ -6,13 +6,20 @@ from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _, ungettext
 
 from .models import Patron, Reward, Payment
+from .filters import PendingRewardsFilter
+
+
+class InlinePaymentAdmin(admin.StackedInline):
+    model = Payment
+    extra = 1
 
 
 @admin.register(Patron)
 class PatronAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'twitter_link', 'since', 'payments_link')
-    list_filter = ['since']
+    list_display = ('name', 'email', 'twitter_link', 'since', 'uncompleted_payments', 'payments_link')
+    list_filter = ['since', PendingRewardsFilter]
     search_fields = ['name', 'email', 'twitter']
+    inlines = (InlinePaymentAdmin,)
 
     def twitter_link(self, patron):
         if not patron.twitter:
@@ -26,6 +33,11 @@ class PatronAdmin(admin.ModelAdmin):
         count = patron.payments.count()
         return format_html('<a href="{}">{}</a>', link, ungettext("%d payment", "%d payments", count) % count)
     payments_link.short_description = _('Payments')
+
+    def uncompleted_payments(self, patron):
+        count = patron.payments.filter(completed=False).count()
+        return format_html('{}', ungettext("%d payment", "%d payments", count) % count)
+    uncompleted_payments.short_description = _('Uncompleted payments')
 
 
 @admin.register(Reward)
