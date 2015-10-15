@@ -15,28 +15,31 @@ class PendingRewardsFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        patron_pks = []
+        if self.value() == 'true':
+            patron_pks = []
 
-        # Fetch all regular payments that hasn't been rewarded yet
-        payments = Payment.objects.filter(
-            status=Payment.STATUS.PROCESSED,
-            completed=False,
-            reward__value__gte=10,
-        )
-        c = Counter(payment.patron for payment in payments.select_related('patron'))
-        for patron, count in c.most_common():
-            # Gather pks of patrons who have at least 3 payments
-            if count >= 3:
+            # Fetch all regular payments that hasn't been rewarded yet
+            payments = Payment.objects.filter(
+                status=Payment.STATUS.PROCESSED,
+                completed=False,
+                reward__value__gte=10,
+            )
+            c = Counter(payment.patron for payment in payments.select_related('patron'))
+            for patron, count in c.most_common():
+                # Gather pks of patrons who have at least 3 payments
+                if count >= 3:
+                    patron_pks.append(patron.pk)
+
+            # Fetch all special payments for patrons who supported us in non-financial way
+            payments = Payment.objects.filter(
+                status=Payment.STATUS.PROCESSED,
+                completed=False,
+                reward__name="Special Support Reward",
+            )
+            c = Counter(payment.patron for payment in payments.select_related('patron'))
+            for patron, count in c.most_common():
                 patron_pks.append(patron.pk)
 
-        # Fetch all special payments for patrons who supported us in non-financial way
-        payments = Payment.objects.filter(
-            status=Payment.STATUS.PROCESSED,
-            completed=False,
-            reward__name="Special Support Reward",
-        )
-        c = Counter(payment.patron for payment in payments.select_related('patron'))
-        for patron, count in c.most_common():
-            patron_pks.append(patron.pk)
+            return queryset.filter(pk__in=set(patron_pks))
 
-        return queryset.filter(pk__in=set(patron_pks))
+        return queryset
