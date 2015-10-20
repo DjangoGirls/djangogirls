@@ -102,3 +102,6 @@ def foundation(request):
 
 def governing_document(request):
     return render(request, 'governing_document.html', {})
+
+def contribute(request):
+    return render(request, 'contribute.html', {})

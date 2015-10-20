@@ -1,0 +1,49 @@
+{% extends 'global/base.html' %}
+{% load staticfiles markdown_deux_tags %}
+
+{% block title %}Contribute!{% endblock %}
+
+{% block content %}
+    <div class="container without-background" id="flatpage">
+          <div id="value" class="row">
+              <div class="col-md-12">
+                  <h1>How to contribute</h1>
+                  {% markdown "trusted" %}
+
+There are many ways to contribute to Django Girls: you can organize an event, coach, work on the tutorial and help on Gitter. If you don't have time but want to help, you can always support us on [Patreon](https://www.patreon.com/djangogirls) ❤
+
+## Organize
+
+Each Django Girls event is a free, one-day workshop for 30-60 people about building your first application using HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.
+
+We provide resources, tutorial and support to help local volunteers run their event.
+
+Want to get started? Check our [Organizer's Manual](http://organize.djangogirls.org/) and [bring Django Girls to your city!](https://djangogirls.org/organize/)
+
+## Coach
+
+You have just heard that an event is happening in your city and went to help? You can contact the local organizing team and ask if they need more coaches!
+
+You will help a 3-person group to install what they need for the event and guide them through our [tutorial](http://tutorial.djangogirls.org/). It's a great way to share your knowledge, meet new people and contribute to increase the diversity in the Django community.
+
+If you attended a previous event and think that coaching may be too hard, don't worry: other coaches are here to help you! You will also see that teaching helps a lot strengthen what you learned.
+
+## Work on the tutorial
+
+### Improve it!
+
+Something in the tutorial is not clear or there is a typo? You can improve the tutorial by making pull request on our [Github repository](https://github.com/DjangoGirls/tutorial).
+
+### Translate it!
+
+A cool way to contribute to the tutorial is to help to translate it. The translation project is hosted on [Crowdin](https://crowdin.com/project/django-girls-tutorial). If you want to join a team or translate the tutorial in a new language, send us an [email!](translations@djangogirls.org)
+
+## Work on the website
+
+
+
+                  {% endmarkdown %}
+              </div>
+          </div>
+    </div>
+{% endblock %}
