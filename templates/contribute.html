@@ -1,49 +1,109 @@
 {% extends 'global/base.html' %}
-{% load staticfiles markdown_deux_tags %}
-
-{% block title %}Contribute!{% endblock %}
+{% load staticfiles %}
 
 {% block content %}
-    <div class="container without-background" id="flatpage">
-          <div id="value" class="row">
-              <div class="col-md-12">
-                  <h1>How to contribute</h1>
-                  {% markdown "trusted" %}
 
-There are many ways to contribute to Django Girls: you can organize an event, coach, work on the tutorial and help on Gitter. If you don't have time but want to help, you can always support us on [Patreon](https://www.patreon.com/djangogirls) ❤
+    <div class="container">
 
-## Organize
+        <section id="resources">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Contribute</h2>
+                    <p>
+                        There are many ways to contribute to Django Girls: you can organize an event, coach, work on the tutorial and help on Gitter. If you don't have time but want to help, you can always support us on <a href="https://www.patreon.com/djangogirls">Patreon</a>.
+                    </p>
+                </div>
+            </div>
 
-Each Django Girls event is a free, one-day workshop for 30-60 people about building your first application using HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <h3>Organize!</h3>
+                    <div class="cover">
+                        <a href="http://organize.djangogirls.org/">
+                            <img src="{% static 'img/global/contribute/organize.jpg' %}" alt="Flowers and name tag on a table." />
+                        </a>
+                    </div>
+                    <div class="info">
 
-We provide resources, tutorial and support to help local volunteers run their event.
+                        <p>Each Django Girls event is a free, one-day workshop for 30-60 people on HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.</p>
 
-Want to get started? Check our [Organizer's Manual](http://organize.djangogirls.org/) and [bring Django Girls to your city!](https://djangogirls.org/organize/)
+                        <p>Want to get started? Check our <a href="http://organize.djangogirls.org/">Organizer's Manual</a> and <a href="https://djangogirls.org/organize/">bring Django Girls to your city!</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Coach!</h3>
+                    <div class="cover">
+                        <a href="http://djangogirls.org/events">
+                            <img src="{% static 'img/global/contribute/coach.jpg' %}" alt="A coach helping an attendee." />
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p>You have just heard that an event is happening in your city and went to help? Contact the local organizing team and ask if they need more coaches!</p>
 
-## Coach
+                        <p>You will help a 3-person group to install what they need for the event and guide them through our <a href="http://tutorial.djangogirls.org/">tutorial</a>.</p>
 
-You have just heard that an event is happening in your city and went to help? You can contact the local organizing team and ask if they need more coaches!
+                        <p>Don't forget to check our <a href="http://coach.djangogirls.org/">Coach Manual</a>!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Improve the tutorial!</h3>
+                    <div class="cover">
+                        <a href="https://github.com/DjangoGirls/tutorial">
+                            <img src="{% static 'img/global/contribute/tutoedit.jpg' %}" alt="A note book and a pen." />
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p>Something in the tutorial is not clear or there is a typo? You can improve the tutorial by making pull request on our <a href="https://github.com/DjangoGirls/tutorial">Github repository</a>.</p>
 
-You will help a 3-person group to install what they need for the event and guide them through our [tutorial](http://tutorial.djangogirls.org/). It's a great way to share your knowledge, meet new people and contribute to increase the diversity in the Django community.
+                        <p>You can also work on the <a href="https://crowdin.com/project/django-girls-tutorial">translation</a> of the tutorial. If you want to join a team or launch a new translation, <a href="mailto:translations@djangogirls.org">contact us</a>.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Work on the website!</h3>
+                    <div class="cover">
+                        <a href="https://github.com/DjangoGirls/djangogirls">
+                            <img src="{% static 'img/global/contribute/debug.jpg' %}" alt="Computer screen with a console and a webpage." />
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p>There is always something to do to make our website better. You can report bugs and typo, fix those or work on new features.</p>
 
-If you attended a previous event and think that coaching may be too hard, don't worry: other coaches are here to help you! You will also see that teaching helps a lot strengthen what you learned.
+                        <p>We are waiting for your <a href="https://github.com/DjangoGirls/djangogirls"> pull requests!</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Help on Gitter!</h3>
+                    <div class="cover">
+                        <a href="https://gitter.im/DjangoGirls/tutorial">
+                            <img src="{% static 'img/global/contribute/gitter.jpg' %}" alt="A web page opened on a computer." />
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p>Many people are doing our tutorial outside of a workshop. Sometimes, they get stuck and need help. How about spending a few hours in a week to help them?</p>
 
-## Work on the tutorial
+                        <p>This <a href="https://gitter.im/DjangoGirls/tutorial">Gitter room </a> is designed to be a friendly space, especially to beginner. Remember that our <a href="https://djangogirls.org/pages/coc/">Code of Conduct</a> also apply there.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Want to do more?</h3>
+                    <div class="cover">
+                        <a href="https://trello.com/b/q7p6jcfg/django-girls">
+                            <img src="{% static 'img/global/contribute/more.jpg' %}" alt="A pile a tattoo." />
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p>You want to do something and it's not list here? You can look at our <a href="https://trello.com/b/q7p6jcfg/django-girls">Trello board</a> and propose new projects to work on.</p>
 
-### Improve it!
+                        <p>Don't forget to read the rules described in the first column before adding a new card! ❤</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-Something in the tutorial is not clear or there is a typo? You can improve the tutorial by making pull request on our [Github repository](https://github.com/DjangoGirls/tutorial).
-
-### Translate it!
-
-A cool way to contribute to the tutorial is to help to translate it. The translation project is hosted on [Crowdin](https://crowdin.com/project/django-girls-tutorial). If you want to join a team or translate the tutorial in a new language, send us an [email!](translations@djangogirls.org)
-
-## Work on the website
-
-
-
-                  {% endmarkdown %}
-              </div>
-          </div>
     </div>
+
 {% endblock %}
