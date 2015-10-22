@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'core',
     'applications',
     'jobs',
+    'patreonmanager.apps.PatreonManagerConfig',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -188,3 +189,16 @@ JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 
 MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
 MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')
+
+if 'OPBEAT_SECRET_TOKEN' in os.environ:
+    INSTALLED_APPS += (
+        'opbeat.contrib.django',
+    )
+    OPBEAT = {
+        'ORGANIZATION_ID': os.environ['OPBEAT_ORGANIZATION_ID'],
+        'APP_ID': os.environ['OPBEAT_APP_ID'],
+        'SECRET_TOKEN': os.environ['OPBEAT_SECRET_TOKEN'],
+    }
+    MIDDLEWARE_CLASSES = (
+        'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    ) + MIDDLEWARE_CLASSES

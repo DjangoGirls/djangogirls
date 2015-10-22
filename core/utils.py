@@ -6,19 +6,20 @@ from django_date_extensions.fields import ApproximateDate
 
 from .models import EventPage
 
+NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
+
 
 def get_coordinates_for_city(city, country):
-
-    q = '{0}, {1}'.format(city.encode('utf-8'), country.encode('utf-8'))
+    q = '{0}, {1}'.format(city, country)
     req = requests.get(
-        'http://nominatim.openstreetmap.org/search',
+        NOMINATIM_URL,
         params={'format': 'json', 'q': q}
     )
 
     try:
         data = req.json()[0]
         return '{0}, {1}'.format(data['lat'], data['lon'])
-    except:
+    except (IndexError, KeyError):
         return None
 
 

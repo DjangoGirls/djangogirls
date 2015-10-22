@@ -1,0 +1,64 @@
+{% extends 'global/base.html' %}
+{% load staticfiles markdown_deux_tags %}
+
+{% block title %}Django Girls Foundation{% endblock %}
+
+{% block content %}
+    <div class="container without-background" id="flatpage">
+          <div id="value" class="row">
+              <div class="col-md-12">
+                  <h1>Django Girls Foundation</h1>
+                  {% markdown "trusted" %}
+Django Girls Foundation is a Charitable Incorporated Organisation (“the CIO”). The goal of the foundation is to advance the education of the public in particular but not exclusively women in the subject of computer science by providing or assisting in the provision of programming workshops and educational material.
+
+The foundation achieves that by:
+
+- providing opportunities, such as free, accessible programming workshops for women and creating educational materials available online;
+- promoting the image of female software engineer by driving advertising campaigns to encourage women to join the IT field and highlighting existing role models.
+
+The Django Girls Foundation is a legal entity protecting Django Girls, but **it is not Django Girls initiative itself**. Django Girls term could be used by anyone involved with Django Girls community and being a trustee is not required.
+
+## Foundation details
+
+**Official name:** Django Girls Foundation
+
+**Other names:** Django Girls Foundation of Awesome, Cupcake and Emoji, DGF, DGFACE, 🐶
+
+**Registered Charity Number:** [1163260](http://apps.charitycommission.gov.uk/Showcharity/RegisterOfCharities/CharityFramework.aspx?RegisteredCharityNumber=1163260&SubsidiaryNumber=0)
+
+[Charity Certificate of Registration is available here](https://drive.google.com/file/d/0B-eUYObdf2QbUTVtb2cwU2M1M00/view?usp=sharing)
+
+[Governing document is available here]({% url 'core:foundation-governing-document' %}).
+
+**Address:**
+United House,
+North Road,
+London N7 9DP,
+United Kingdom
+
+### Trustees
+
+- Baptiste Mispelone
+- Aleksandra Sendecka
+- Aleksandra Sitarska
+- Anna Warzecha
+
+## Who owns Django Girls?
+
+The Django Girls Foundation and **the community**.
+
+## How can I financially support Django Girls Foundation?
+
+There are several ways to financially support Django Girls Foundation:
+
+- you could support us on [Patreon](https://www.patreon.com/djangogirls) by monthly donations.
+- sponsoring one of [Django Girls events]({% url 'core:events' %}), by contacting local organizers.
+
+## More information
+
+If you want to learn more about Django Girls Foundation or have a question about the foundation, you can contact us by writing an e-mail to [foundation@djangogirls.org](mailto:foundation@djangogirls.org).
+                  {% endmarkdown %}
+              </div>
+          </div>
+    </div>
+{% endblock %}
