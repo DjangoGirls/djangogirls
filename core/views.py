@@ -96,6 +96,10 @@ def newsletter(request):
     return render(request, 'newsletter.html', {})
 
 
+def faq(request):
+    return render(request, 'faq.html', {})
+
+
 def foundation(request):
     return render(request, 'foundation.html', {})
 
