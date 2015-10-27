@@ -23,6 +23,7 @@ APPLICATION_STATES = (
     ('accepted', 'Application accepted'),
     ('rejected', 'Application rejected'),
     ('waitlisted', 'Application on waiting list'),
+    ('declined', 'Applicant declined'),
 )
 
 RSVP_STATUSES = (
