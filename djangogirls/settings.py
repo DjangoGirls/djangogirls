@@ -110,7 +110,8 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls',
     'MENU_ICONS': {
         'jobs': 'icon-list-alt',
-    }
+    },
+    'SEARCH_URL': '/admin/core/event/',
 }
 
 THUMBNAIL_PRESERVE_EXTENSIONS = True
