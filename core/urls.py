@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^foundation/$', views.foundation, name='foundation'),
     url(r'^foundation/governing-document/$', views.governing_document, name='foundation-governing-document'),
 
+    url(r'^contribute/$', views.contribute, name='contribute'),
+
     url(r'^(?P<city>[\w\d]+)/$', 'core.views.event', name='event'),
     url(r'^$', views.index, name='index'),
 )
