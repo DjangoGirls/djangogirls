@@ -24,7 +24,7 @@ def apply(request, city):
         )
 
     try:
-        form_obj = Form.objects.get(page=page)
+        form_obj = Form.objects.filter(page=page).first()
     except Form.DoesNotExist:
         return redirect('core:event', city)
 
