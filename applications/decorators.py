@@ -20,12 +20,11 @@ def organiser_only(function):
                 '"City" slug must be present to user this decorator.')
 
         if not request.user.is_authenticated():
-            return redirect('core:event', kwargs.get('city')) 
+            return redirect('core:event', kwargs.get('city'))
 
         city = kwargs.get('city')
         page = get_event_page(city, request.user.is_authenticated(), False)
-        if request.user in page.event.team.all() or request.user.is_superuser:
+        if page and (request.user in page.event.team.all() or request.user.is_superuser):
             return function(request, *args, **kwargs)
-        else:
-            return HttpResponseNotFound()
+        return HttpResponseNotFound()
     return decorator
