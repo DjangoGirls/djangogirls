@@ -17,6 +17,6 @@ urlpatterns = patterns('',
 
     url(r'^contribute/$', views.contribute, name='contribute'),
 
-    url(r'^(?P<city>[\w\d/]+)/$', 'core.views.event', name='event'),
+    url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
     url(r'^$', views.index, name='index'),
 )

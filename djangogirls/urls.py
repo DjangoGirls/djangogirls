@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
-    url(r'', include('core.urls', namespace='core')),
     url(r'', include('applications.urls', namespace='applications')),
+    url(r'', include('core.urls', namespace='core')),
     url(r'^ckeditor/', include('ckeditor.urls')),
 )
