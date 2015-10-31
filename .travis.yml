@@ -1,4 +1,5 @@
 language: python
 python: 3.4
+install: "pip install -r requirements.txt"
 cache: pip
 script: python manage.py test
