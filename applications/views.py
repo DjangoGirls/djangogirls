@@ -23,9 +23,8 @@ def apply(request, city):
             {'city': page[0], 'past': page[1]}
         )
 
-    try:
-        form_obj = Form.objects.filter(page=page).first()
-    except Form.DoesNotExist:
+    form_obj = Form.objects.filter(page=page).first()
+    if form_obj is None:
         return redirect('core:event', city)
 
     organiser = request.user in page.event.team.all() or request.user.is_superuser
