@@ -4,3 +4,5 @@ install: "pip install -r requirements.txt"
 cache: pip
 script: python manage.py test
 sudo: false
+notifications:
+  slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
