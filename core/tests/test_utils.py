@@ -1,5 +1,5 @@
 from unittest import TestCase
-from mock import patch
+from unittest.mock import patch
 
 from core.utils import get_coordinates_for_city, NOMINATIM_URL
 
