@@ -45,7 +45,6 @@ a:hover {
   text-decoration: none;
 }
 form input[type="email"],
-form input[type="password"],
 form input[type="text"] {
   padding: 5px 10px;
   width: 260px;
