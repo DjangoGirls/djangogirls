@@ -69,7 +69,7 @@ class EventQuerySet(models.QuerySet):
         return self.public().filter(date__gte=datetime.now().strftime('%Y-%m-%d')).order_by('date')
 
     def past(self):
-        return self.public().filter(date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
+        return self.public().filter(date__isnull=False, date__lt=datetime.now().strftime('%Y-%m-%d')).order_by('-date')
 
 
 @python_2_unicode_compatible
