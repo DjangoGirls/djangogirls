@@ -111,6 +111,7 @@ def applications_csv(request, city):
         answers = app.answer_set.all()
         for q in questions:
             # find the answer corresponding to a question or empty string if not found
+            # this keeps the csv columns correct if some applications have less questions than others
             answer = next((a.answer for a in answers if a.question_id == q.id), '')
             app_info.extend([answer])
         writer.writerow(app_info)
