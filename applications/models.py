@@ -164,7 +164,7 @@ class Application(models.Model):
         """
         Return the average score for this Application.
         """
-        scores = [s.score for s in self.scores.all() if s.score]
+        scores = [s.score for s in self.scores.all() if (s.score and s.score > 0)]
         if not scores:
             return 0
         else:
@@ -247,9 +247,9 @@ class Score(models.Model):
     user = models.ForeignKey(User, related_name='scores')
     application = models.ForeignKey(Application, related_name='scores')
     score = models.FloatField(
-        null=True, blank=True,
         help_text='5 being the most positive, 1 being the most negative.',
-        validators=[MaxValueValidator(5), MinValueValidator(1)]
+        validators=[MaxValueValidator(5), MinValueValidator(0)], 
+        default=0
     )
     comment = models.TextField(
         null=True, blank=True, help_text='Any extra comments?')
