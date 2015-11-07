@@ -93,7 +93,7 @@ def applications_csv(request, city):
     """
     page = get_event_page(city, request.user.is_authenticated(), False)
     try:
-        applications = get_applications_for_page(page, None, None, None)
+        applications = get_applications_for_page(page, None, None, None).prefetch_related('answer_set')
     except:
         return redirect('core:event', city=city)
 
@@ -101,13 +101,18 @@ def applications_csv(request, city):
     response['Content-Disposition'] = u'attachment; filename="{}.csv"'.format(city)
     writer = csv.writer(response)
     csv_header = ["Application Number", "Application State", "RSVP Status", "Average Score"]
-    questions = page.form_set.first().question_set.values_list('title', flat=True)
-    csv_header.extend(map(striptags, questions))
+    question_titles = page.form_set.first().question_set.values_list('title', flat=True)
+    csv_header.extend(map(striptags, question_titles))
     writer.writerow(csv_header)
+    questions = page.form_set.first().question_set.all()
     for app in applications:
         score = app.average_score if app.is_scored_by_user(request.user) else '(hidden)'
         app_info = [app.number, app.state, app.rsvp_status, score]
-        app_info.extend(app.answer_set.values_list('answer', flat=True))
+        answers = app.answer_set.all()
+        for q in questions:
+            # find the answer corresponding to a question or empty string if not found
+            answer = next((a.answer for a in answers if a.question_id == q.id), '')
+            app_info.extend([answer])
         writer.writerow(app_info)
     return response
 
