@@ -80,6 +80,10 @@ Create your database:
 Load sample data to the database
 
     ./manage.py loaddata sample_db.json
+    
+Create a user so you can login to the admin:
+
+    ./manage.py createsuperuser
   
 Run your local server:
 
