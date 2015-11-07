@@ -104,16 +104,16 @@ def applications_csv(request, city):
     question_titles = page.form_set.first().question_set.values_list('title', flat=True)
     csv_header.extend(map(striptags, question_titles))
     writer.writerow(csv_header)
-    questions = page.form_set.first().question_set.all()
+    question_ids = page.form_set.first().question_set.values_list('id', flat=True)
     for app in applications:
         score = app.average_score if app.is_scored_by_user(request.user) else '(hidden)'
         app_info = [app.number, app.state, app.rsvp_status, score]
-        answers = app.answer_set.all()
-        for q in questions:
-            # find the answer corresponding to a question or empty string if not found
-            # this keeps the csv columns correct if some applications have less questions than others
-            answer = next((a.answer for a in answers if a.question_id == q.id), '')
-            app_info.extend([answer])
+        # get all answers for the application
+        answer_dict = dict([(a.question_id, a.answer)for a in app.answer_set.all()])
+        # find the answer corresponding to a question or empty string if not found
+        # this keeps the csv columns correct if some applications have less questions than others
+        answers = [answer_dict.get(q_id, '') for q_id in question_ids]
+        app_info.extend(answers)
         writer.writerow(app_info)
     return response
 
