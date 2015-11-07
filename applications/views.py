@@ -1,8 +1,9 @@
 import csv
-from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.defaultfilters import striptags
+from django.views.decorators.csrf import csrf_exempt
 
 from core.utils import get_event_page
 from core.models import EventPageMenu
