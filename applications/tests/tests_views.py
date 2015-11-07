@@ -374,3 +374,18 @@ class ApplicationsDownloadView(TestCase):
         self.assertEquals(csv_list[2][1], "accepted")
         self.assertEquals(csv_list[3][1], "rejected")
         self.assertEquals(csv_list[4][1], "waitlisted")
+
+    def test_download_applications_list_uses_query_parameters_to_filter_applications(self):
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+        resp = self.client.get(self.url + '?state=submitted&state=accepted')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEquals(
+            resp.get('Content-Disposition'),
+            'attachment; filename="test.csv"'
+        )
+        csv_file = StringIO(resp.content.decode('utf-8'))
+        reader = csv.reader(csv_file)
+        csv_list = list(reader)
+        self.assertEquals(len(csv_list), 3)

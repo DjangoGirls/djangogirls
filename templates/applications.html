@@ -42,7 +42,7 @@
               </select>
               <input type="submit" value="Apply" />
           </p>
-          <a href="{% url 'applications:applications_csv' page.url %}" class="btn download">Download to csv</a>
+          <a href="{% url 'applications:applications_csv' page.url %}{{ active_query_string }}" class="btn download">Download to csv</a>
           <p>Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}:</p>
           <table class="table">
               <thead>

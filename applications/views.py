@@ -71,6 +71,7 @@ def applications(request, city):
     rsvp_status = request.GET.getlist('rsvp_status', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
     order = request.GET.get('order', None)
+    active_query_string = '?' + request.META.get('QUERY_STRING') if request.META.get('QUERY_STRING') else ''
     try:
         applications = get_applications_for_page(page, state, rsvp_status, order)
     except:
@@ -80,6 +81,7 @@ def applications(request, city):
         'page': page,
         'applications': applications,
         'all_applications_count': Application.objects.filter(form__page=page).count(),
+        'active_query_string': active_query_string,
         'order': order,
         'menu': get_organiser_menu(city),
     })
@@ -88,11 +90,14 @@ def applications(request, city):
 @organiser_only
 def applications_csv(request, city):
     """
-    Download a csv of applications for this city.
+    Download a csv of applications for this city, respecting filter and order parameters from url.
     """
+    state = request.GET.getlist('state', None)
+    rsvp_status = request.GET.getlist('rsvp_status', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
+    order = request.GET.get('order', None)
     try:
-        applications = get_applications_for_page(page, None, None, None).prefetch_related('answer_set')
+        applications = get_applications_for_page(page, state, rsvp_status, order).prefetch_related('answer_set')
     except:
         return redirect('core:event', city=city)
 
