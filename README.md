@@ -77,9 +77,9 @@ Create your database:
 
     ./manage.py migrate
   
-Add a sample event
+Load sample data to the database
 
-    ./manage.py new_event
+    ./manage.py loaddata sample_db.json
   
 Run your local server:
 

@@ -138,7 +138,8 @@ RAVEN_CONFIG = {
 }
 
 MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
-EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
+                               "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')

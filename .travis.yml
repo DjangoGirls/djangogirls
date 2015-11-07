@@ -5,3 +5,6 @@ script: python manage.py test
 sudo: false
 notifications:
   slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
+cache:
+  directories:
+    - $HOME/virtualenv
