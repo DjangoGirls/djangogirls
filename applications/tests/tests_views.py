@@ -10,7 +10,7 @@ from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
 from core.models import Event, EventPage, User
-from applications.models import Form, Application, Score
+from applications.models import Form, Application, Score, Question, Answer
 from applications.utils import DEFAULT_QUESTIONS
 from applications.views import applications
 
@@ -344,6 +344,7 @@ class ApplicationsDownloadView(TestCase):
         self.event = Event.objects.create(name='Test', city='Test', country='Test')
         self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
         self.form = Form.objects.create(page=self.page)
+
         self.user = User.objects.create(email='test@user.com', is_active=True, is_staff=True)
         self.user.set_password('test')
 
@@ -351,6 +352,9 @@ class ApplicationsDownloadView(TestCase):
         self.application_2 = Application.objects.create(form=self.form, state='accepted')
         self.application_3 = Application.objects.create(form=self.form, state='rejected')
         self.application_4 = Application.objects.create(form=self.form, state='waitlisted')
+
+        self.last_question = self.form.question_set.last()
+        self.application_1_last_answer = Answer.objects.create(application=self.application_1, question=self.last_question, answer='answer to last for app 1')
 
         self.url = reverse('applications:applications_csv', args=['test'])
 
@@ -374,6 +378,7 @@ class ApplicationsDownloadView(TestCase):
         self.assertEquals(csv_list[2][1], "accepted")
         self.assertEquals(csv_list[3][1], "rejected")
         self.assertEquals(csv_list[4][1], "waitlisted")
+        self.assertEquals(csv_list[1][16], "answer to last for app 1")
 
     def test_download_applications_list_uses_query_parameters_to_filter_applications(self):
         self.user.is_superuser = True
@@ -389,3 +394,42 @@ class ApplicationsDownloadView(TestCase):
         reader = csv.reader(csv_file)
         csv_list = list(reader)
         self.assertEquals(len(csv_list), 3)
+
+
+    def test_download_applications_list_with_question_added(self):
+
+        # add new question x as next to last question
+        self.question_x = Question.objects.create(form=self.form, question_type='text', order=self.last_question.order, title='questionx')
+        self.last_question.order = self.last_question.order + 1
+        self.last_question.save()
+
+        # now create a new application with answer to the new question
+        self.application_5 = Application.objects.create(form=self.form, state='submitted')
+        self.application_5_x_answer = Answer.objects.create(application=self.application_5, question=self.question_x, answer='answer to questionx for app 5')
+        self.application_5_last_answer = Answer.objects.create(application=self.application_5, question=self.last_question, answer='answer to last for app 5')
+
+        self.user.is_superuser = True
+        self.user.save()
+        self.client.login(email='test@user.com', password='test')
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEquals(
+            resp.get('Content-Disposition'),
+            'attachment; filename="test.csv"'
+        )
+        csv_file = StringIO(resp.content.decode('utf-8'))
+        reader = csv.reader(csv_file)
+        csv_list = list(reader)
+        self.assertEquals(len(csv_list), 6)
+        self.assertEquals(len(csv_list[0]), 18)
+
+        # question x should be in next to last column
+        self.assertEquals(csv_list[0][16], "questionx")
+
+        # old application should have blank for question x in next-to-last column
+        self.assertEquals(csv_list[1][16], "")
+        self.assertEquals(csv_list[1][17], "answer to last for app 1")
+
+        # new application should have answer for question x in next-to-last column
+        self.assertEquals(csv_list[5][16], "answer to questionx for app 5")
+        self.assertEquals(csv_list[5][17], "answer to last for app 5")
