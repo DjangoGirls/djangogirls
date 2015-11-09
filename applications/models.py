@@ -218,6 +218,10 @@ class Application(models.Model):
     def is_accepted(self):
         return self.state == 'accepted'
 
+    @property
+    def city(self):
+        return self.form.page.event.city
+
     def __str__(self):
         return str(self.pk)
 

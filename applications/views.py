@@ -82,6 +82,7 @@ def applications(request, city):
         'all_applications_count': Application.objects.filter(form__page=page).count(),
         'order': order,
         'menu': get_organiser_menu(city),
+        'city': city
     })
 
 @organiser_only
@@ -105,11 +106,11 @@ def applications_csv(request, city):
 
 
 @organiser_only
-def application_detail(request, city, app_id):
+def application_detail(request, city, app_number):
     """
     Display the details of a single application.
     """
-    application = Application.objects.get(pk=app_id)
+    application = [app for app in Application.objects.filter(number=app_number) if app.city == city][0]
     try:
         score = Score.objects.get(
             user=request.user, application=application)
