@@ -57,7 +57,7 @@
                   {% for app in applications %}
                   <tr>
                       <td><input type="checkbox" name="application" value="{{ app.id }}" /></td>
-                      <td><a href='{{ app.number }}'>{{ app.number }}</a></td>
+                      <td><a href="{% url 'applications:application_detail' city=app.form.page.url app_number=app.number %}">{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>
                           <div class="dropdown">
@@ -109,7 +109,7 @@
                           {% endif %}
                       </td>
                       <td class="text-right">
-                          <a href="{{ app.number }}" class="btn">View Application</a>
+                          <a href="{% url 'applications:application_detail' city=app.form.page.url app_number=app.number %}" class="btn">View Application</a>
                       </td>
                   </tr>
                   {% endfor %}

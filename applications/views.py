@@ -82,7 +82,6 @@ def applications(request, city):
         'all_applications_count': Application.objects.filter(form__page=page).count(),
         'order': order,
         'menu': get_organiser_menu(city),
-        'city': city
     })
 
 @organiser_only
@@ -110,7 +109,7 @@ def application_detail(request, city, app_number):
     """
     Display the details of a single application.
     """
-    application = [app for app in Application.objects.filter(number=app_number) if app.city == city][0]
+    application = Application.objects.get(form__page__url=city, number=app_number)
     try:
         score = Score.objects.get(
             user=request.user, application=application)
