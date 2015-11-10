@@ -17,6 +17,10 @@ class JobForm(forms.ModelForm):
             If you have opportunities in cities in more than one country, \
             please submit a separate job opportunity per country."
     )
+    state_province = forms.CharField(
+        required=False,
+        help_text="If relevant, add the name of the state or province where the meetup/event is happening."
+    )
     expiration_date = forms.DateField(
         required=False,
         help_text="Enter the date until which the post should be published. "
@@ -27,7 +31,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = ('company', 'website', 'contact_email', 'title',
-                  'description', 'cities', 'country', 'remote_work', 'relocation')
+                  'description', 'cities', 'state_province', 'country', 'remote_work', 'relocation')
         # custom labels
         labels = {
             'title': 'Job title'
@@ -58,6 +62,6 @@ class MeetupForm(forms.ModelForm):
     class Meta:
         model = Meetup
         fields = ['title', 'organisation', 'meetup_type', 'contact_email',
-            'website', 'city', 'country', 'description', 'is_recurring',
+            'website', 'city', 'state_province', 'country', 'description', 'is_recurring',
             'recurrence', 'meetup_start_date', 'meetup_end_date', 'expiration_date'
         ]
