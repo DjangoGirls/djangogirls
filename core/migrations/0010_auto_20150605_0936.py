@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('core', '0009_auto_20150605_0922'),
+    ]
+
+    operations = [
+        migrations.RemoveField(
+            model_name='coach',
+            name='event_page_content',
+        ),
+        migrations.RemoveField(
+            model_name='sponsor',
+            name='event_page_content',
+        ),
+    ]
