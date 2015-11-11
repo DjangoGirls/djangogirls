@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django import forms
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin, SortableTabularInline
@@ -249,6 +252,20 @@ class UserAdmin(auth_admin.UserAdmin):
         if obj and not request.user.is_superuser:
             return self.limited_fieldsets
         return super(UserAdmin, self).get_fieldsets(request, obj)
+
+class MyFlatPageAdmin(FlatPageAdmin):
+
+    class MyFlatpageForm(FlatpageForm):
+        template_name = forms.CharField(
+            initial='flatpage.html',
+            help_text="Change this only if you know what you are doing")
+
+    form = MyFlatpageForm
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, MyFlatPageAdmin)
+
+
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventPage, EventPageAdmin)
