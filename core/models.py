@@ -153,12 +153,13 @@ class EventPage(models.Model):
 
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False)
+    page = models.ForeignKey(EventPage, null=False, blank=False, related_name="content")
     name = models.CharField(null=False, blank=False, max_length=100)
     content = models.TextField(null=False, blank=False, help_text="HTML allowed")
     background = models.ImageField(upload_to="event/backgrounds/", null=True, blank=True,
                                    help_text="Optional background photo")
-    position = models.PositiveIntegerField(null=False, blank=False, help_text="Position of the block on the website")
+    position = models.PositiveIntegerField(
+        null=False, blank=False, help_text="Position of the block on the website")
     is_public = models.BooleanField(null=False, blank=False, default=False)
     coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
@@ -173,7 +174,7 @@ class EventPageContent(models.Model):
 
 @python_2_unicode_compatible
 class EventPageMenu(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False)
+    page = models.ForeignKey(EventPage, null=False, blank=False, related_name="menu")
     title = models.CharField(max_length=255, null=False, blank=False)
     url = models.CharField(max_length=255, null=False, blank=False,
                            help_text="http://djangogirls.org/city/<the value you enter here>")

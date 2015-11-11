@@ -101,7 +101,7 @@ class Command(BaseCommand):
         new_eventpage = EventPage.objects.get(event=new_event)
 
         # Copy all EventPageContent objects
-        for obj in event.eventpage.eventpagecontent_set.all():
+        for obj in event.eventpage.content.all():
             obj_id = obj.id
             new_content = obj
             new_content.id = None
@@ -115,7 +115,7 @@ class Command(BaseCommand):
             new_content.sponsors.add(*obj.sponsors.all())
 
         # Copy all EventPageMenu objects
-        for obj in event.eventpage.eventpagemenu_set.all():
+        for obj in event.eventpage.menu.all():
             obj.id = None
             obj.pk = None
             obj.page = new_eventpage

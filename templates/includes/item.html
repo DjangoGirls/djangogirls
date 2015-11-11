@@ -14,18 +14,21 @@
     <div class="container without-background" id="{{ item.name }}">
         {{ item.content|safe }}
 
-        {% if item.sponsors.count > 0 %}
+        {% with sponsors=item.sponsors.all %}
+        {% if sponsors %}
             <div class="row sponsor-logos">
-                {% for sponsor in item.sponsors.all %}
+                {% for sponsor in sponsors %}
                     {% include 'includes/_sponsor.html' with sponsor=sponsor %}
                 {% endfor %}
             </div>
         {% endif %}
+        {% endwith %}
 
-        {% if item.coaches.count > 0 %}
+        {% with coaches=item.coaches.all %}
+        {% if coaches %}
             <div class="row coaches">
 
-                {% for coach in item.coaches.all %}
+                {% for coach in coaches %}
                     <div class="col-md-2{% cycle ' col-md-offset-1' '' '' '' '' %}">
                         {% include 'includes/_coach.html' with coach=coach %}
                     </div>
@@ -35,6 +38,7 @@
 
             </div>
         {% endif %}
+        {% endwith %}
 
     </div>
 

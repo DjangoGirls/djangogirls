@@ -24,8 +24,8 @@ def index(request):
 def events(request):
 
     return render(request, 'events.html', {
-        'future_events': Event.objects.future(),
-        'past_events': Event.objects.past(),
+        'future_events': Event.objects.select_related('eventpage').future(),
+        'past_events': Event.objects.select_related('eventpage').past(),
     })
 
 
@@ -55,7 +55,10 @@ def stories(request):
 def event(request, city):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    page = get_object_or_404(EventPage, url__iexact=city)
+    page = get_object_or_404(
+        EventPage.objects.select_related('event'),
+        url=city.lower()
+    )
 
     if page.url != city:
         return redirect('core:event', city=page.url, permanent=True)
@@ -68,13 +71,10 @@ def event(request, city):
             {'city': city, 'past': page.event.date <= now_approx}
         )
 
-    menu = EventPageMenu.objects.filter(page=page)
-    content = EventPageContent.objects.filter(page=page, is_public=True)
-
     return render(request, "event.html", {
         'page': page,
-        'menu': menu,
-        'content': content,
+        'menu': page.menu.all(),
+        'content': page.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
     })
 
 
