@@ -110,19 +110,9 @@ class Command(BaseCommand):
             new_content.save()
 
             obj = EventPageContent.objects.get(id=obj_id)
-            # Copy all Sponsors
-            for sponsor in obj.sponsor_set.all():
-                sponsor.id = None
-                sponsor.pk = None
-                sponsor.event_page_content = new_content
-                sponsor.save()
-
-            # Copy all Coaches
-            for coach in obj.coach_set.all():
-                coach.id = None
-                coach.pk = None
-                coach.event_page_content = new_content
-                coach.save()
+            
+            new_content.coaches.add(*obj.coaches.all())
+            new_content.sponsors.add(*obj.sponsors.all())
 
         # Copy all EventPageMenu objects
         for obj in event.eventpage.eventpagemenu_set.all():
