@@ -212,8 +212,8 @@ class Application(models.Model):
                 application = self.objects.get(rsvp_no_code=code, form__page=page)
                 return application, 'no'
             except self.DoesNotExist:
-                return None
-        return None
+                return None, None
+        return None, None
 
     @property
     def is_accepted(self):
