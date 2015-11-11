@@ -123,11 +123,11 @@ def applications_csv(request, city):
 
 
 @organiser_only
-def application_detail(request, city, app_id):
+def application_detail(request, city, app_number):
     """
     Display the details of a single application.
     """
-    application = Application.objects.get(pk=app_id)
+    application = Application.objects.get(form__page__url=city, number=app_number)
     try:
         score = Score.objects.get(
             user=request.user, application=application)
