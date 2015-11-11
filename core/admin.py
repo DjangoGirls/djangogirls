@@ -144,28 +144,28 @@ class EventPageMenuAdmin(SortableModelAdmin):
 
 
 class SponsorAdmin(SortableModelAdmin):
-    list_display = ('name', 'logo_display_for_admin', 'url', 'position')
+    list_display = ('id', 'name', 'logo_display_for_admin', 'url', 'position')
     sortable = 'position'
 
     def get_queryset(self, request):
         qs = super(SponsorAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team=request.user)
+        return qs.filter(eventpagecontent__page__event__team=request.user).distinct()
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            if 'event_page_content' in form.base_fields:
+            if 'eventpagecontent' in form.base_fields:
                 qs = EventPageContent.objects.filter(
                     page__event__team=request.user)
-                form.base_fields['event_page_content'].queryset = qs
+                form.base_fields['eventpagecontent'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if not obj.event_page_content.page.event.is_upcoming():
+            if not obj.eventpagecontent.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 
@@ -177,21 +177,21 @@ class CoachAdmin(admin.ModelAdmin):
         qs = super(CoachAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(event_page_content__page__event__team=request.user)
+        return qs.filter(eventpagecontent__page__event__team=request.user).distinct()
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            if 'event_page_content' in form.base_fields:
+            if 'eventpagecontent' in form.base_fields:
                 qs = EventPageContent.objects.filter(
                     page__event__team=request.user)
-                form.base_fields['event_page_content'].queryset = qs
+                form.base_fields['eventpagecontent'].queryset = qs
         return form
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
             # Don't let change objects for events that already happened
-            if not obj.event_page_content.page.event.is_upcoming():
+            if not obj.eventpagecontent.page.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
 

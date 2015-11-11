@@ -121,7 +121,7 @@ class ApplicationModel(TestCase):
 
         self.assertEqual(Application.get_by_rsvp_code(rsvp_code_yes, self.page), (self.application, 'yes'))
         self.assertEqual(Application.get_by_rsvp_code(rsvp_code_no, self.page), (self.application, 'no'))
-        self.assertIsNone(Application.get_by_rsvp_code('notexisting', self.page))
+        self.assertEqual(Application.get_by_rsvp_code('notexisting', self.page), (None, None))
 
     def test_is_accepted(self):
         for state in APPLICATION_STATES:
