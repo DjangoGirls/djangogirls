@@ -110,6 +110,7 @@ SUIT_CONFIG = {
     'MENU_ICONS': {
         'jobs': 'icon-list-alt',
     },
+    'MENU_EXCLUDE': ('core.sponsor', 'core.coach'),
     'SEARCH_URL': '/admin/core/event/',
 }
 
