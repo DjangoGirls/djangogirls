@@ -151,7 +151,7 @@ def application_detail(request, city, app_number):
             new_app = random_application(request, page, application)
             if new_app:
                 return redirect(
-                    'applications:application_detail', city, new_app.id)
+                    'applications:application_detail', city, new_app.number)
             return redirect('applications:applications', city)
 
     return render(request, 'application_detail.html', {
