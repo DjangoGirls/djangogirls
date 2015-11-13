@@ -1,0 +1,50 @@
+{% extends 'event.html' %}
+{% load static applications_tags %}
+
+{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 applications">
+      <h3 class="page-header">
+        Send email to applicants of {{ page.title }}
+        <a class="btn pull-right" href="{% url 'coaches:compose_coach_email' page.url %}">Create new e-mail</a>
+      </h3>
+
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Recipients</th>
+                  <th>Status</th>
+                  <th>Sent</th>
+                  <th>&nbsp;</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% if emails %}
+                {% for email in emails %}
+                <tr>
+                    <td><a href="{% url 'coaches:compose_coach_email' page.url email.id %}">{{ email.subject }}</a></td>
+                    <td>{{ email.get_recipients_group_display }}</td>
+                    <td><span class="label label-{% if email.sent %}success">Sent{% else %}default">Draft{% endif %}</span></td>
+                    <td>{{ email.sent|default:"−" }}</td>
+                    <td><a href="{% url 'coaches:compose_coach_email' page.url email.id %}" class="btn pull-right">View message</a></td>
+                </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                    <td colspan="6">No messages yet. <a href="{% url 'coaches:compose_coach_email' page.url %}">Create one!</a></td>
+                </tr>
+              {% endif %}
+          </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

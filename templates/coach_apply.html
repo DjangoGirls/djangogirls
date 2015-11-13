@@ -1,0 +1,45 @@
+{% extends 'event.html' %}
+{% load static %}
+
+{% block title %}{{ form.text_header }}{% endblock %}
+{% block description %}{{ form.text_description|striptags }}{% endblock %}
+
+{% block content %}
+
+<div id="apply" class="with-background" style="background-image: url({% static 'img/photos/apply.jpg' %}); background-position-y: -80px">
+    <div class="overlay">
+          <div class="container">
+              <div class="row">
+                <div class="col-md-7 col-md-offset-4">
+                  <h2>{{ form_obj.text_header }}</h2>
+                  <p>{{ form_obj.text_description|safe }}</p>
+                </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+<div class="container without-background application-form">
+
+    {% if request.user and number_of_email_questions == 0 %}
+    <div class="alert alert-danger">
+        Attention! This form doesn't have a question with type "email"! It's important to collect emails of coaches correctly,
+        otherwise you won't be able to email them through our system. :sadpanda:
+    </div>
+    {% endif %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% if form %}
+    <form action="" method="post">
+      {% csrf_token %}
+      {% include 'includes/_form.html' %}
+      <input type="submit" value="Submit your application" />
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

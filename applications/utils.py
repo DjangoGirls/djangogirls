@@ -10,12 +10,20 @@ def get_organiser_menu(city):
     """
     menu = [
         {
-            'title': 'Applications',
+            'title': 'Attendee Applications',
             'url': reverse('applications:applications', args=[city])
         },
         {
-            'title': 'Messaging',
+            'title': 'Applicant Messaging',
             'url': reverse('applications:communication', args=[city])
+        },
+        {
+            'title': 'Coach Applications',
+            'url': reverse('coaches:coach_applications', args=[city])
+        },
+        {
+            'title': 'Coach Messaging',
+            'url': reverse('coaches:coach_communication', args=[city])
         },
     ]
 

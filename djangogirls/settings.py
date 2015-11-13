@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 
     'core',
     'applications',
+    'coaches',
     'jobs',
     'patreonmanager.apps.PatreonManagerConfig',
 )

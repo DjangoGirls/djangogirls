@@ -1,0 +1,87 @@
+{% extends 'event.html' %}
+{% load static applications_tags %}
+
+{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+
+{% block content %}
+
+<div id="applications"
+     data-change-state-url="{% url 'coaches:change_coach_state' page.url %}"
+></div>
+
+<div class="container">
+  <form action="{% url 'coaches:change_coach_state' page.url %}" method="post" id="change-state-form">
+  <div class="row">
+    <div class="col-md-12 applications">
+      <h3 class="page-header">Applications for {{ page.title }}</h3>
+      {% if applications %}
+          <p>
+              Filter: 
+              <a href="?">All</a> | 
+              <a href="?state=submitted" class="text-primary">Submitted</a> | 
+              <a href="?state=accepted" class="text-success">Accepted</a> | 
+              <a href="?state=rejected" class="text-danger">Rejected</a> |
+          </p>
+          <p>Change the status of selected applications to:
+              <select name="state">
+                  <option value="" selected>Choose status</option>
+                  <option value="submitted">Application submitted</option>
+                  <option value="accepted">Application accepted</option>
+                  <option value="rejected">Application rejected</option>
+              </select>
+              <input type="submit" value="Apply" />
+          </p>
+          <a href="{% url 'coaches:coach_applications_csv' page.url %}{{ active_query_string }}" class="btn download">Download to csv</a>
+          <p>Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}:</p>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>#</th>
+                      <th>E-mail</th>
+                      <th>Application status</th>
+                      <th>&nbsp;</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for app in applications %}
+                  <tr>
+                      <td><input type="checkbox" name="application" value="{{ app.id }}" /></td>
+                      <td><a href='{{ app.id }}'>{{ app.number }}</a></td>
+                      <td>{{ app.email|default:"No email" }}</td>
+                      <td>
+                          <div class="dropdown">
+                            <button
+                                class="btn btn-default dropdown-toggle {{ app.state|default:'default' }}"
+                                type="button"
+                                id="application-{{ app.id }}-state"
+                                data-toggle="dropdown"
+                              >
+                              {{ app.get_state_display }}
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a href="javascript:;" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
+                              <li><a href="javascript:;" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
+                              <li><a href="javascript:;" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
+                            </ul>
+                          </div>
+                      </td>
+                      <td class="text-right">
+                          <a href="{{ app.id }}" class="btn">View Application</a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      {% else %}
+          <p class="lead">Nothing to see here...</p>
+      {% endif %}
+    </div>
+  </div>
+  </form>
+</div>
+{% endblock %}

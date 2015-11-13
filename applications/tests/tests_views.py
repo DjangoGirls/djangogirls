@@ -173,12 +173,12 @@ class ApplicationsView(TestCase):
         resp = self.client.get(self.url)
         self.assertContains(
             resp,
-            '<li><a href="/test/applications/">Applications</a></li>',
+            '<li><a href="/test/applications/">Attendee Applications</a></li>',
             html=True,
         )
         self.assertContains(
             resp,
-            '<li><a href="/test/communication/">Messaging</a></li>',
+            '<li><a href="/test/communication/">Applicant Messaging</a></li>',
             html=True,
         )
 
