@@ -29,7 +29,7 @@ def register(request, city):
 
     organiser = request.user in page.event.team.all() or request.user.is_superuser
 
-    if not organiser and not form_obj.application_open:
+    if not organiser and not form_obj.coach_application_open:
         return redirect('core:event', city)
 
     menu = EventPageMenu.objects.filter(page=page)
@@ -122,17 +122,22 @@ def applications_csv(request, city):
 @organiser_only
 def coach_application_detail(request, city, coach_app_id):
     """
-    Display the details of a single application.
+    Display the details of a single coach application.
+    Redirect to list of coach applications if requested application doesn't exist.
     """
-    application = CoachApplication.objects.get(pk=coach_app_id)
+    application = None
     page = get_event_page(city, request.user.is_authenticated(), False)
-
-    return render(request, 'coach_application_detail.html', {
-        'page': page,
-        'application': application,
-        'form': application.form,
-        'menu': get_organiser_menu(city),
-    })
+    try:
+        application = CoachApplication.objects.get(pk=coach_app_id)
+    finally:
+        if application:
+            return render(request, 'coach_application_detail.html', {
+                'page': page,
+                'application': application,
+                'form': application.form,
+                'menu': get_organiser_menu(city),
+            })
+        return redirect('coaches:coach_applications', city=city)
 
 
 @organiser_only

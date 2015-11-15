@@ -16,7 +16,7 @@
   <form action="{% url 'coaches:change_coach_state' page.url %}" method="post" id="change-state-form">
   <div class="row">
     <div class="col-md-12 applications">
-      <h3 class="page-header">Applications for {{ page.title }}</h3>
+      <h3 class="page-header">Coach Applications for {{ page.title }}</h3>
       {% if applications %}
           <p>
               Filter: 
@@ -28,9 +28,9 @@
           <p>Change the status of selected applications to:
               <select name="state">
                   <option value="" selected>Choose status</option>
-                  <option value="submitted">Application submitted</option>
-                  <option value="accepted">Application accepted</option>
-                  <option value="rejected">Application rejected</option>
+                  <option value="submitted">Coach form submitted</option>
+                  <option value="accepted">Registration accepted</option>
+                  <option value="rejected">Registration rejected</option>
               </select>
               <input type="submit" value="Apply" />
           </p>
@@ -64,9 +64,9 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="javascript:;" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
+                              <li><a href="javascript:;" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Coach form submitted</a></li>
+                              <li><a href="javascript:;" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Registration accepted</a></li>
+                              <li><a href="javascript:;" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Registration rejected</a></li>
                             </ul>
                           </div>
                       </td>
