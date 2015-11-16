@@ -165,13 +165,6 @@ class SponsorAdmin(SortableModelAdmin):
                 form.base_fields['eventpagecontent'].queryset = qs
         return form
 
-    def get_readonly_fields(self, request, obj=None):
-        if obj and not request.user.is_superuser:
-            # Don't let change objects for events that already happened
-            if not obj.eventpagecontent.page.event.is_upcoming():
-                return set([x.name for x in self.model._meta.fields])
-        return self.readonly_fields
-
 
 class CoachAdmin(admin.ModelAdmin):
     list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url')
@@ -190,13 +183,6 @@ class CoachAdmin(admin.ModelAdmin):
                     page__event__team=request.user)
                 form.base_fields['eventpagecontent'].queryset = qs
         return form
-
-    def get_readonly_fields(self, request, obj=None):
-        if obj and not request.user.is_superuser:
-            # Don't let change objects for events that already happened
-            if not obj.eventpagecontent.page.event.is_upcoming():
-                return set([x.name for x in self.model._meta.fields])
-        return self.readonly_fields
 
 
 class PostmortemAdmin(admin.ModelAdmin):
