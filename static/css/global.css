@@ -213,7 +213,7 @@ nav ul li:first-child {
 #about .row {
   margin-bottom: 20px;
 }
-#about iframe {
+#about .embed-responsive {
   margin-top: 80px;
 }
 /*
