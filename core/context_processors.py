@@ -9,7 +9,7 @@ def statistics(request):
     past_events = Event.objects.past()
     countries = Event.objects.values('country').distinct()
     attendees = Postmortem.objects.all().aggregate(attendees=Sum('attendees_count'), applicants=Sum('applicants_count'))
-    meetup_count = Meetup.visible_objects.all()
+    meetup_count = Meetup.visible_objects.count()
 
     return {
         'past_events_count': past_events.count(),
@@ -17,5 +17,5 @@ def statistics(request):
         'countries_count': countries.count(),
         'attendees_sum': attendees['attendees'],
         'applicants_sum': attendees['applicants'],
-        'meetup_count': meetup_count.count()
+        'meetup_count': meetup_count
     }
