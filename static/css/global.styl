@@ -15,7 +15,7 @@ border-radius(n)
 */
 
 html, body
-    height: 100%;
+    height: 100%
 
 body
     font: 20px serif_font
@@ -355,7 +355,6 @@ nav
             height: 255px
             width: 255px
             padding: 0
-            margin: 0
             background-size: cover
             background-position: center center
             background-repeat: no-repeat
@@ -448,24 +447,21 @@ nav
 */
 .page-wrap
     min-height: 100%
-    margin-bottom: -300px
 
     &:after
         content: ""
         display: block
 
-footer, .page-wrap:after
-    height: 300px
-
 footer
     background: #F9F7F7
-    padding: 65px 0 0 0
+    padding: 65px 0 40px 0
     margin-top: 90px
 
     .row
         margin: 0
 
-        .col-md-2
+        .col-md-2,
+        .col-md-3
             p
                 text-transform: uppercase
                 font-family: sans_font
@@ -476,6 +472,7 @@ footer
                 a
                     text-decoration: none
                     color: orange
+                  
             ul
                 list-style-type: none
                 padding: 0
@@ -524,16 +521,12 @@ footer
     footer
         padding-top: 50px
         .row
+            .col-md-2,
             .col-md-3
                 float: left
-                width: calc(50% - 30px)
+                width: 50%
+                height: 210px
                 margin-bottom: 30px
-
-    footer, .page-wrap:after
-        height: 480px
-
-    .page-wrap
-        margin-bottom: -480px
 
 
 @media (max-width: 725px)
@@ -555,7 +548,6 @@ footer
                 font-size: 18px
                 line-height: 22px
 
-
     #about
         .gallery
             display: none
@@ -576,14 +568,10 @@ footer
                 width: 90%
 
     footer
-        padding-top: 50px
+        padding: 50px 0px 20px 0px
         .row
+            .col-md-2,
             .col-md-3
                 width: 90%
+                height auto
                 margin-bottom: 30px
-
-    footer, .page-wrap:after
-        height: 900px
-
-    .page-wrap
-        margin-bottom: -900px
