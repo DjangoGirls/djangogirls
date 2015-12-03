@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
-from .models import User
+
+from .models import User, Event
 
 
 class UserCreationForm(forms.ModelForm):
@@ -58,3 +59,22 @@ class UserLimitedChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name')
+
+
+class ContactForm(forms.Form):
+    CHAPTER, SUPPORT = 1, 2
+    CONTACT_TYPE_CHOICES = (
+        (CHAPTER, 'Djangogirls Chapter'),
+        (SUPPORT, 'Djangogirls Support team'),
+    )
+
+    name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    contact_type = forms.ChoiceField(
+        choices=CONTACT_TYPE_CHOICES, widget=forms.RadioSelect
+    )
+    event = forms.ModelChoiceField(
+        required=False,
+        queryset=Event.objects.all().exclude(email__isnull=True).exclude(email__exact='')
+    )
+    message = forms.CharField(required=True, widget=forms.Textarea)

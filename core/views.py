@@ -1,13 +1,16 @@
 import icalendar
+from smtplib import SMTPException
 
 from django.conf import settings
 from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import Event, EventPage, EventPageMenu, EventPageContent, Story
-from .utils import get_event_page
+from .models import Event, EventPage, Story
+from .forms import ContactForm
 
 
 def index(request):
@@ -100,12 +103,55 @@ def faq(request):
     return render(request, 'faq.html', {})
 
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            event = form.cleaned_data.get('event')
+            if event and event.email:
+                to_email = event.email
+            else:
+                to_email = 'hello@djangogirls.com'
+
+            from_text = "%s %s" % (
+                form.cleaned_data['name'], ' - from the djangogirls.org website'
+            )
+
+            try:
+                send_mail(
+                    from_text,
+                    form.cleaned_data['message'],
+                    form.cleaned_data['email'],
+                    [to_email],
+                    fail_silently=False,
+                )
+            except SMTPException:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Ooops. We couldn't send your email :( Please try again later"
+                )
+                return render(request, 'contact.html', {'form': form})
+            messages.add_message(
+                request,
+                messages.INFO,
+                "Thank you for your email. We will be in touch shortly."
+            )
+            return render(request, 'contact.html', {'form': ContactForm()})
+
+    else:
+        form = ContactForm(initial={'contact_type': ContactForm.CHAPTER})
+    return render(request, 'contact.html', {'form': form})
+
+
 def foundation(request):
     return render(request, 'foundation.html', {})
 
 
 def governing_document(request):
     return render(request, 'governing_document.html', {})
+
 
 def contribute(request):
     return render(request, 'contribute.html', {})

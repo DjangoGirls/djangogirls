@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^newsletter/$', views.newsletter, name='newsletter'),
 
     url(r'^faq/$', views.faq, name='faq'),
+    url(r'^contact/$', views.contact, name='contact'),
     url(r'^foundation/$', views.foundation, name='foundation'),
     url(r'^foundation/governing-document/$', views.governing_document, name='foundation-governing-document'),
 

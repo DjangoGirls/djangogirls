@@ -1,0 +1,30 @@
+{% extends 'global/base.html' %}
+{% block title %}Django Girls Contact{% endblock %}
+
+{% block content %}
+    <div class="container without-background" id="flatpage">
+        <div id="value" class="row">
+            <div class="col-md-12">
+                <h2>Contact us</h2>
+
+                {% include 'includes/_info_messages.html' %}
+
+                <p>
+                    We might have an answer for you already, please check our <a href="{% url 'core:faq' %}">FAQ section</a>.
+                </p>
+                <p>
+                    If you'd still like to contact us or just to say Hello, please use the form bellow.
+                </p>
+
+                <div class="application-form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        {% include 'includes/_form.html' %}
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
