@@ -1,0 +1,85 @@
+.public-form
+    padding: 30px;
+
+    label
+        font-family: sans_font
+        color: black
+        font-weight: 300
+
+    p.help-text, p.error
+        font-size: 16px
+        font-family: sans_font
+        color: rgba(0,0,0,0.6)
+        margin: 0
+
+    p.error
+        color: red
+
+    span.required
+        color: mint
+
+    input[type="email"], input[type="text"]
+        padding: 5px 10px
+        width: 50%
+        border-radius(3px)
+        border: 1px solid #E7E7E7
+        margin: 0
+
+    input[type="text"].other
+        width: 45%
+        margin-top: 5px
+
+    input[type="submit"]
+        background: orange
+        border: 0
+        color: white
+        font-family: sans_font
+        font-size: 18px
+        border-radius(3px)
+        padding: 5px 15px
+        font-weight: 300
+        text-decoration: none
+
+    input[type="checkbox"], input[type="radio"]
+        margin-right: 10px
+
+    .field
+        margin: 10px 0 30px 0
+
+        label
+            font-family: serif_font !important
+            color: gray
+        p
+            margin: 0
+        ul
+            list-style-type: none
+            padding: 0
+        &.with-errors
+            input[type="text"], textarea
+                border-color: red
+
+input[type="text"], input[type="number"]
+    padding: 5px 10px
+    width: 50%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+
+textarea
+    padding: 5px 10px
+    width: 50%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+    height: 150px
+
+input[type="submit"]
+    background: orange
+    border: 0
+    color: white
+    font-family: sans_font
+    font-size: 18px
+    border-radius(3px)
+    padding: 5px 15px
+    font-weight: 300
+    text-decoration: none
