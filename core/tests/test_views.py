@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.core import mail
 from django.test import TestCase, RequestFactory
 from django.test.client import Client
 from django.core.urlresolvers import reverse
@@ -7,6 +8,7 @@ from django_date_extensions.fields import ApproximateDate
 
 from core.models import User, Event, EventPage
 from core.views import event
+from core.forms import ContactForm
 
 
 class CoreViewsTestCase(TestCase):
@@ -125,3 +127,53 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         # Check if website is returning correct data
         self.assertIn(event_page_3.title, resp.content.decode('utf-8'))
+
+
+class ContactTestCase(TestCase):
+    fixtures = ['core_views_testdata.json']
+
+    def test_contact_page_loads(self):
+        url = reverse('core:contact')
+        resp = self.client.get(url)
+        self.assertEqual(200, resp.status_code)
+
+    def test_form_sends_email_to_support(self):
+        url = reverse('core:contact')
+        post_data = {
+            'name': 'test name',
+            'message': 'nice message',
+            'email': 'lord@dracula.trans',
+            'contact_type': ContactForm.SUPPORT,
+        }
+        resp = self.client.post(url, data=post_data)
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual(len(mail.outbox), 1)
+        email = mail.outbox[0]
+
+        self.assertEqual(email.to, ['hello@djangogirls.com'])
+        self.assertEqual(email.from_email, 'lord@dracula.trans')
+        self.assertEqual(email.body, 'nice message')
+
+    def test_form_sends_email_to_chapter(self):
+        event = Event.objects.get(pk=1)
+        event.email = 'test@test.com'
+        event.save()
+
+        url = reverse('core:contact')
+        post_data = {
+            'name': 'test name',
+            'message': 'nice message',
+            'email': 'lord@dracula.trans',
+            'contact_type': ContactForm.CHAPTER,
+            'event': "1",
+        }
+        resp = self.client.post(url, data=post_data)
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual(len(mail.outbox), 1)
+        email = mail.outbox[0]
+
+        self.assertEqual(email.to, ['test@test.com'])
+        self.assertEqual(email.from_email, 'lord@dracula.trans')
+        self.assertEqual(email.body, 'nice message')
+
+
