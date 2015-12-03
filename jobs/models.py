@@ -195,6 +195,11 @@ class Job(PublishFlowModel):
     )
     contact_email = models.EmailField(max_length=255)
     cities = models.CharField(max_length=255)
+    state_province = models.CharField(max_length=255,
+        help_text="If relevant, add the name of the state or province where the job is available.",
+        blank=True,
+        null=True,
+    )
     country = CountryField()
     description = models.TextField()
     remote_work = models.BooleanField(
@@ -241,6 +246,11 @@ class Meetup(PublishFlowModel):
         null=True
     )
     city = models.CharField(max_length=255)
+    state_province = models.CharField(max_length=255,
+        help_text="If relevant, add the name of the state or province where the meetup/event is happening.",
+        blank=True,
+        null=True
+    )
     country = CountryField()
     description = models.TextField()
     is_recurring = models.BooleanField(

@@ -204,7 +204,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
 class JobAdmin(PublishFlowModelAdmin):
     fieldsets = (
         ('Job info', {'fields': ('title', 'company', 'website', 'contact_email',
-                           ('cities', 'country'), 'description', 'remote_work',
+                           ('cities', 'country'), 'state_province', 'description', 'remote_work',
                            'relocation')}),
         ('Flow info', {'fields': ('review_status', 'message_to_organisation',
                                   'internal_comment', 'expiration_date',
@@ -225,7 +225,7 @@ class MeetupAdmin(PublishFlowModelAdmin):
     fieldsets = (
         ('Meetup info', {'fields': ('title', 'organisation', 'website',
                                     'contact_email', ('city', 'country'),
-                                    'meetup_type', 'description', 'is_recurring',
+                                    'state_province', 'meetup_type', 'description', 'is_recurring',
                                     'recurrence', 'meetup_start_date',
                                     'meetup_end_date')}),
         ('Flow info', {'fields': ('review_status', 'message_to_organisation',
