@@ -176,4 +176,16 @@ class ContactTestCase(TestCase):
         self.assertEqual(email.from_email, 'lord@dracula.trans')
         self.assertEqual(email.body, 'nice message')
 
-
+    def test_chapter_contact_requires_event(self):
+        url = reverse('core:contact')
+        post_data = {
+            'name': 'test name',
+            'message': 'nice message',
+            'email': 'lord@dracula.trans',
+            'contact_type': ContactForm.CHAPTER,
+            'event': "",
+        }
+        resp = self.client.post(url, data=post_data)
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual(len(mail.outbox), 0)
+        self.assertIn('event', resp.context['form'].errors)

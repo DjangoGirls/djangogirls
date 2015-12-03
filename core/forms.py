@@ -78,3 +78,11 @@ class ContactForm(forms.Form):
         queryset=Event.objects.all().exclude(email__isnull=True).exclude(email__exact='')
     )
     message = forms.CharField(required=True, widget=forms.Textarea)
+
+    def clean_event(self):
+        contact_type = self.cleaned_data['contact_type']
+        event = self.cleaned_data.get('event')
+        if contact_type == str(self.CHAPTER):
+            if not event:
+                raise forms.ValidationError('Please select the event')
+        return event
