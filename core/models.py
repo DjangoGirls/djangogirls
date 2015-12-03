@@ -151,6 +151,20 @@ class EventPage(models.Model):
         verbose_name = "Website"
 
 
+class ContactEmail(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.CharField(max_length=128)
+    sent_to = models.CharField(max_length=128)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __unicode__(self):
+        return "%s to %s" % (self.email, self.sent_to)
+
+
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
     page = models.ForeignKey(EventPage, null=False, blank=False, related_name="content")

@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import Event, EventPage, Story
+from .models import Event, EventPage, Story, ContactEmail
 from .forms import ContactForm
 
 
@@ -116,6 +116,14 @@ def contact(request):
 
             from_text = "%s %s" % (
                 form.cleaned_data['name'], ' - from the djangogirls.org website'
+            )
+
+            # Make a note of this email
+            ContactEmail.objects.create(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message'],
+                sent_to=to_email,
             )
 
             try:

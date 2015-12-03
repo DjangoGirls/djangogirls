@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import User, Event, EventPage
+from core.models import User, Event, EventPage, ContactEmail
 from core.views import event
 from core.forms import ContactForm
 
@@ -189,3 +189,22 @@ class ContactTestCase(TestCase):
         self.assertEqual(200, resp.status_code)
         self.assertEqual(len(mail.outbox), 0)
         self.assertIn('event', resp.context['form'].errors)
+        self.assertFalse(ContactEmail.objects.all())
+
+    def test_email_is_saved_into_database(self):
+        self.assertFalse(ContactEmail.objects.all())
+        url = reverse('core:contact')
+        post_data = {
+            'name': 'test name',
+            'message': 'nice message',
+            'email': 'lord@dracula.trans',
+            'contact_type': ContactForm.SUPPORT,
+        }
+        resp = self.client.post(url, data=post_data)
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual(len(mail.outbox), 1)
+        contact_email = ContactEmail.objects.all()[0]
+        self.assertTrue(contact_email.name, 'test name')
+        self.assertTrue(contact_email.sent_to, 'hello@djangogirls.com')
+        self.assertTrue(contact_email.message, 'nice message')
+        self.assertTrue(contact_email.email, 'lord@dracula.trans')
