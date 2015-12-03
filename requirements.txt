@@ -1,4 +1,4 @@
-Django==1.8.5
+Django==1.9
 Pillow==3.0.0
 boto3==1.2.1
 click==5.1
@@ -10,6 +10,7 @@ django-countries==3.4.1
 django-crispy-forms==1.5.2
 django-date-extensions==1.1.0
 django-leaflet==0.16.0
+-e git://github.com/HireAnEsquire/django-bootstrap3-datetimepicker#egg=cc22c145c348af441c39471021ee752978ed7624
 django-bootstrap3-datetimepicker==2.2.3
 django-markdown-deux==1.0.5
 django-nose==1.4.2
