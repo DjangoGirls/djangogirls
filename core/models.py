@@ -58,12 +58,15 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         return "{0} {1}".format(self.first_name, self.last_name)
 
 
-class EventQuerySet(models.QuerySet):
+class EventManager(models.Manager):
+    def get_queryset(self):
+        return super(EventManager, self).get_queryset().filter(is_deleted=False)
+
     def public(self):
         """
         Only include events that are on the homepage.
         """
-        return self.filter(is_on_homepage=True)
+        return self.get_queryset().filter(is_on_homepage=True)
 
     def future(self):
         return self.public().filter(date__gte=datetime.now().strftime("%Y-%m-%d")).order_by("date")
@@ -87,8 +90,10 @@ class Event(models.Model):
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
 
-    objects = EventQuerySet.as_manager()
+    objects = EventManager()
+    all_objects = models.Manager()  # This includes deleted objects
 
     def __str__(self):
         return self.name
@@ -129,6 +134,15 @@ class Event(models.Model):
         members = ["{} <{}>".format(x.get_full_name(), x.email) for x in self.team.all()]
         return ", ".join(members)
 
+    def delete(self):
+        self.is_deleted = True
+        self.save()
+
+
+class EventPageManager(models.Manager):
+    def get_queryset(self):
+        return super(EventPageManager, self).get_queryset().filter(is_deleted=False)
+
 
 @python_2_unicode_compatible
 class EventPage(models.Model):
@@ -143,12 +157,20 @@ class EventPage(models.Model):
     url = models.CharField(max_length=200, null=True, blank=True)
 
     is_live = models.BooleanField(null=False, blank=False, default=False)
+    is_deleted = models.BooleanField(default=False)
+
+    objects = EventPageManager()
+    all_objects = models.Manager()  # This includes deleted objects
 
     def __str__(self):
         return "Website for %s" % self.event.name
 
     class Meta:
         verbose_name = "Website"
+
+    def delete(self):
+        self.is_deleted = True
+        self.save()
 
 
 @python_2_unicode_compatible
