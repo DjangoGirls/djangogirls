@@ -50,8 +50,8 @@
                 <ul>
                     <li><b>{{ future_events_count }}</b> upcoming events</li>
                     <li><b>{{ past_events_count }}</b> past events</li>
-                    <!--- tags to do for meetups and job opportunities
-                    <li><b></b> upcoming meetups</li>-->
+                    <!--- tags to do for job opportunities -->
+                    <li><b>{{ meetup_count|default_if_none:'0' }}</b> upcoming meetups</li>
                     <li><b>{{ applicants_sum|default_if_none:'0' }}</b> applicants</li>
                     <li><b>{{ attendees_sum|default_if_none:'0' }}</b> attendees</li>
                     <li><b>{{ countries_count }}</b> countries</li>
