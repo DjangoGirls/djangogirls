@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 
-from .models import User, Event
+from .models import User, ContactEmail
 
 
 class UserCreationForm(forms.ModelForm):
@@ -61,28 +61,23 @@ class UserLimitedChangeForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name')
 
 
-class ContactForm(forms.Form):
-    CHAPTER, SUPPORT = 1, 2
-    CONTACT_TYPE_CHOICES = (
-        (CHAPTER, 'Djangogirls Chapter'),
-        (SUPPORT, 'Djangogirls Support team'),
-    )
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactEmail
+        fields = (
+            'name',
+            'email',
+            'contact_type',
+            'event',
+            'message',
+        )
 
-    name = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    contact_type = forms.ChoiceField(
-        choices=CONTACT_TYPE_CHOICES, widget=forms.RadioSelect
-    )
-    event = forms.ModelChoiceField(
-        required=False,
-        queryset=Event.objects.all().exclude(email__isnull=True).exclude(email__exact='')
-    )
-    message = forms.CharField(required=True, widget=forms.Textarea)
+        widgets = {'contact_type': forms.RadioSelect}
 
     def clean_event(self):
         contact_type = self.cleaned_data['contact_type']
         event = self.cleaned_data.get('event')
-        if contact_type == str(self.CHAPTER):
+        if contact_type == ContactEmail.CHAPTER:
             if not event:
                 raise forms.ValidationError('Please select the event')
         return event

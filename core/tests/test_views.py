@@ -143,7 +143,7 @@ class ContactTestCase(TestCase):
             'name': 'test name',
             'message': 'nice message',
             'email': 'lord@dracula.trans',
-            'contact_type': ContactForm.SUPPORT,
+            'contact_type': ContactEmail.SUPPORT,
         }
         resp = self.client.post(url, data=post_data)
         self.assertEqual(200, resp.status_code)
@@ -164,7 +164,7 @@ class ContactTestCase(TestCase):
             'name': 'test name',
             'message': 'nice message',
             'email': 'lord@dracula.trans',
-            'contact_type': ContactForm.CHAPTER,
+            'contact_type': ContactEmail.CHAPTER,
             'event': "1",
         }
         resp = self.client.post(url, data=post_data)
@@ -182,7 +182,7 @@ class ContactTestCase(TestCase):
             'name': 'test name',
             'message': 'nice message',
             'email': 'lord@dracula.trans',
-            'contact_type': ContactForm.CHAPTER,
+            'contact_type': ContactEmail.CHAPTER,
             'event': "",
         }
         resp = self.client.post(url, data=post_data)
@@ -192,19 +192,25 @@ class ContactTestCase(TestCase):
         self.assertFalse(ContactEmail.objects.all())
 
     def test_email_is_saved_into_database(self):
+        event = Event.objects.get(pk=1)
         self.assertFalse(ContactEmail.objects.all())
         url = reverse('core:contact')
         post_data = {
             'name': 'test name',
             'message': 'nice message',
             'email': 'lord@dracula.trans',
-            'contact_type': ContactForm.SUPPORT,
+            'contact_type': ContactEmail.CHAPTER,
+            'event': event.pk
         }
         resp = self.client.post(url, data=post_data)
         self.assertEqual(200, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(1, ContactEmail.objects.all().count())
+
         contact_email = ContactEmail.objects.all()[0]
         self.assertTrue(contact_email.name, 'test name')
         self.assertTrue(contact_email.sent_to, 'hello@djangogirls.com')
         self.assertTrue(contact_email.message, 'nice message')
         self.assertTrue(contact_email.email, 'lord@dracula.trans')
+        self.assertTrue(contact_email.event, event)
+        self.assertTrue(contact_email.contact_type, ContactEmail.CHAPTER)

@@ -1,12 +1,13 @@
 from __future__ import unicode_literals
 
-from datetime import date, datetime, timedelta
-
 import icalendar
+from smtplib import SMTPException
+from datetime import date, datetime, timedelta
 
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils import timezone
+from django.core.mail import send_mail
 from django.utils.encoding import python_2_unicode_compatible
 
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
@@ -151,18 +152,56 @@ class EventPage(models.Model):
         verbose_name = "Website"
 
 
+@python_2_unicode_compatible
 class ContactEmail(models.Model):
+    CHAPTER, SUPPORT = 'chapter', 'support'
+    CONTACT_TYPE_CHOICES = (
+        (CHAPTER, 'Djangogirls Chapter'),
+        (SUPPORT, 'Djangogirls Support team'),
+    )
+
     name = models.CharField(max_length=128)
-    email = models.CharField(max_length=128)
-    sent_to = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    sent_to = models.EmailField(max_length=128)
     message = models.TextField()
+    event = models.ForeignKey(
+        'core.Event', help_text='required for Chapter contact', null=True, blank=True
+    )
+    contact_type = models.CharField(
+        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False, default=CHAPTER
+    )
     created_at = models.DateTimeField(auto_now_add=True)
+    sent_successfully = models.BooleanField(default=True)
 
     class Meta:
         ordering = ('-created_at',)
 
     def __unicode__(self):
         return "%s to %s" % (self.email, self.sent_to)
+
+    def save(self, *args, **kwargs):
+        self.sent_to = self._get_to_email()
+
+        try:
+            send_mail(
+                self._get_from_text(),
+                self.message,
+                self.email,
+                [self.sent_to],
+                fail_silently=False,
+            )
+        except SMTPException:
+            self.sent_successfully = False
+
+        super().save(*args, **kwargs)
+
+    def _get_to_email(self):
+        if self.event and self.event.email:
+            return self.event.email
+        return 'hello@djangogirls.com'
+
+    def _get_from_text(self):
+        return "%s - from the djangogirls.org website" % self.name
 
 
 @python_2_unicode_compatible
@@ -184,6 +223,7 @@ class EventPageContent(models.Model):
     class Meta:
         ordering = ("position", )
         verbose_name = "Website Content"
+
 
 
 @python_2_unicode_compatible
