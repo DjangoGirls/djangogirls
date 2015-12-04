@@ -150,7 +150,7 @@ class ContactTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
 
-        self.assertEqual(email.to, ['hello@djangogirls.com'])
+        self.assertEqual(email.to, ['hello@djangogirls.org'])
         self.assertEqual(email.from_email, 'lord@dracula.trans')
         self.assertEqual(email.body, 'nice message')
 
@@ -209,7 +209,7 @@ class ContactTestCase(TestCase):
 
         contact_email = ContactEmail.objects.all()[0]
         self.assertTrue(contact_email.name, 'test name')
-        self.assertTrue(contact_email.sent_to, 'hello@djangogirls.com')
+        self.assertTrue(contact_email.sent_to, 'hello@djangogirls.org')
         self.assertTrue(contact_email.message, 'nice message')
         self.assertTrue(contact_email.email, 'lord@dracula.trans')
         self.assertTrue(contact_email.event, event)

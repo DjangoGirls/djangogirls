@@ -220,7 +220,7 @@ class ContactEmail(models.Model):
     def _get_to_email(self):
         if self.event and self.event.email:
             return self.event.email
-        return 'hello@djangogirls.com'
+        return 'hello@djangogirls.org'
 
     def _get_from_text(self):
         return "%s - from the djangogirls.org website" % self.name
