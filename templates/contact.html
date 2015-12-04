@@ -5,7 +5,7 @@
     <div class="container without-background public-form" id="flatpage">
         <div id="value" class="row">
             <div class="col-md-12">
-                <h2>Contact us</h2>
+                <h2>Contact Django Girls</h2>
 
                 {% include 'includes/_info_messages.html' %}
 
@@ -13,13 +13,34 @@
                     We might have an answer for you already, please check our <a href="{% url 'core:faq' %}">FAQ section</a>.
                 </p>
                 <p>
-                    If you'd still like to contact us or just to say Hello, please use the form bellow.
+                    If you'd still like to contact us or just to say hello, please use the form bellow :)
                 </p>
 
-                <form action="" method="post">
+                <form action="" method="post" style="margin-top: 30px;">
                     {% csrf_token %}
 
-                    {% include 'includes/_form.html' %}
+                    <div class="row">
+                        <div class="col-md-6">
+                          {% include 'includes/_field.html' with field=form.name %}
+                        </div>
+                        <div class="col-md-6">
+                          {% include 'includes/_field.html' with field=form.email %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                          {% include 'includes/_field.html' with field=form.contact_type %}
+                        </div>
+                        <div class="col-md-6">
+                          {% include 'includes/_field.html' with field=form.event %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                          {% include 'includes/_field.html' with field=form.message %}
+                        </div>
+                    </div>
+
                     <input type="submit" value="Send" />
                 </form>
             </div>

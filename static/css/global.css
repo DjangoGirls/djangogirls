@@ -571,6 +571,40 @@ footer .row .col-md-2 ul li a {
     margin-bottom: -900px;
   }
 }
+input[type="text"],
+input[type="number"],
+input[type="email"] {
+  padding: 5px 10px;
+  width: 80%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+}
+textarea {
+  padding: 5px 10px;
+  width: 50%;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+  height: 150px;
+}
+input[type="submit"] {
+  background: #f7921d;
+  border: 0;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 18px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px 15px;
+  font-weight: 300;
+  text-decoration: none;
+}
 .public-form {
   padding: 30px;
 }
@@ -595,12 +629,20 @@ footer .row .col-md-2 ul li a {
 .public-form input[type="email"],
 .public-form input[type="text"] {
   padding: 5px 10px;
-  width: 50%;
+  width: 100%;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #e7e7e7;
   margin: 0;
+}
+.public-form .col-md-12 input[type="email"],
+.public-form .col-md-12 input[type="text"] {
+  width: 50%;
+}
+.public-form .col-md-6 input[type="email"],
+.public-form .col-md-6 input[type="text"] {
+  width: 90%;
 }
 .public-form input[type="text"].other {
   width: 45%;
@@ -640,37 +682,4 @@ footer .row .col-md-2 ul li a {
 .public-form .field.with-errors input[type="text"],
 .public-form .field.with-errors textarea {
   border-color: #f00;
-}
-input[type="text"],
-input[type="number"] {
-  padding: 5px 10px;
-  width: 50%;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #e7e7e7;
-  margin: 0;
-}
-textarea {
-  padding: 5px 10px;
-  width: 50%;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  border: 1px solid #e7e7e7;
-  margin: 0;
-  height: 150px;
-}
-input[type="submit"] {
-  background: #f7921d;
-  border: 0;
-  color: #fff;
-  font-family: Roboto;
-  font-size: 18px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding: 5px 15px;
-  font-weight: 300;
-  text-decoration: none;
 }

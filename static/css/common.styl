@@ -1,3 +1,29 @@
+input[type="text"], input[type="number"], input[type="email"]
+    padding: 5px 10px
+    width: 80%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+
+textarea
+    padding: 5px 10px
+    width: 50%
+    border-radius(3px)
+    border: 1px solid #E7E7E7
+    margin: 0
+    height: 150px
+
+input[type="submit"]
+    background: orange
+    border: 0
+    color: white
+    font-family: sans_font
+    font-size: 18px
+    border-radius(3px)
+    padding: 5px 15px
+    font-weight: 300
+    text-decoration: none
+
 .public-form
     padding: 30px;
 
@@ -20,10 +46,18 @@
 
     input[type="email"], input[type="text"]
         padding: 5px 10px
-        width: 50%
+        width: 100%
         border-radius(3px)
         border: 1px solid #E7E7E7
         margin: 0
+
+    .col-md-12
+        input[type="email"], input[type="text"]
+            width: 50%
+
+    .col-md-6
+        input[type="email"], input[type="text"]
+            width: 90%
 
     input[type="text"].other
         width: 45%
@@ -57,29 +91,3 @@
         &.with-errors
             input[type="text"], textarea
                 border-color: red
-
-input[type="text"], input[type="number"]
-    padding: 5px 10px
-    width: 50%
-    border-radius(3px)
-    border: 1px solid #E7E7E7
-    margin: 0
-
-textarea
-    padding: 5px 10px
-    width: 50%
-    border-radius(3px)
-    border: 1px solid #E7E7E7
-    margin: 0
-    height: 150px
-
-input[type="submit"]
-    background: orange
-    border: 0
-    color: white
-    font-family: sans_font
-    font-size: 18px
-    border-radius(3px)
-    padding: 5px 15px
-    font-weight: 300
-    text-decoration: none

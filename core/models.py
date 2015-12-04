@@ -48,7 +48,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name_plural = "Organizers"
 
     def __str__(self):
-        if self.first_name == '' and self.last_name == '': 
+        if self.first_name == '' and self.last_name == '':
             return '{0}'.format(self.email)
         return '{0} ({1})'.format(self.get_full_name(), self.email)
 
@@ -178,8 +178,8 @@ class EventPage(models.Model):
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = 'chapter', 'support'
     CONTACT_TYPE_CHOICES = (
-        (CHAPTER, 'Djangogirls Chapter'),
-        (SUPPORT, 'Djangogirls Support team'),
+        (CHAPTER, 'Django Girls Chapter'),
+        (SUPPORT, 'Django Girls HQ (Support Team)'),
     )
 
     name = models.CharField(max_length=128)
@@ -187,9 +187,10 @@ class ContactEmail(models.Model):
     sent_to = models.EmailField(max_length=128)
     message = models.TextField()
     event = models.ForeignKey(
-        'core.Event', help_text='required for Chapter contact', null=True, blank=True
+        'core.Event', help_text='required for contacting a chapter', null=True, blank=True
     )
     contact_type = models.CharField(
+        verbose_name="Who do you want to contact?",
         max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False, default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -206,9 +207,9 @@ class ContactEmail(models.Model):
 
         try:
             send_mail(
-                self._get_from_text(),
+                self._get_subject(),
                 self.message,
-                self.email,
+                "{} <{}>".format(self.name, self.email),
                 [self.sent_to],
                 fail_silently=False,
             )
@@ -222,7 +223,7 @@ class ContactEmail(models.Model):
             return self.event.email
         return 'hello@djangogirls.org'
 
-    def _get_from_text(self):
+    def _get_subject(self):
         return "%s - from the djangogirls.org website" % self.name
 
 

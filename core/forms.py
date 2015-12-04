@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
 
-from .models import User, ContactEmail
+from .models import User, ContactEmail, Event
 
 
 class UserCreationForm(forms.ModelForm):
@@ -61,7 +61,17 @@ class UserLimitedChangeForm(forms.ModelForm):
         fields = ('email', 'first_name', 'last_name')
 
 
+class EventChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return "{}, {}".format(obj.city, obj.country)
+
+
 class ContactForm(forms.ModelForm):
+    event = EventChoiceField(
+        queryset=Event.objects.public().distinct('city', 'country').order_by('city'),
+        required=False, label="Django Girls workshop in..."
+    )
+
     class Meta:
         model = ContactEmail
         fields = (
@@ -71,7 +81,6 @@ class ContactForm(forms.ModelForm):
             'event',
             'message',
         )
-
         widgets = {'contact_type': forms.RadioSelect}
 
     def clean_event(self):

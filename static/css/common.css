@@ -1,3 +1,28 @@
+input[type="text"],
+input[type="number"],
+input[type="email"] {
+  padding: 5px 10px;
+  width: 80%;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+}
+textarea {
+  padding: 5px 10px;
+  width: 50%;
+  border: 1px solid #e7e7e7;
+  margin: 0;
+  height: 150px;
+}
+input[type="submit"] {
+  background: #ffa500;
+  border: 0;
+  color: #fff;
+  font-family: sans_font;
+  font-size: 18px;
+  padding: 5px 15px;
+  font-weight: 300;
+  text-decoration: none;
+}
 .public-form {
   padding: 30px;
 }
@@ -22,9 +47,17 @@
 .public-form input[type="email"],
 .public-form input[type="text"] {
   padding: 5px 10px;
-  width: 50%;
+  width: 100%;
   border: 1px solid #e7e7e7;
   margin: 0;
+}
+.public-form .col-md-12 input[type="email"],
+.public-form .col-md-12 input[type="text"] {
+  width: 50%;
+}
+.public-form .col-md-6 input[type="email"],
+.public-form .col-md-6 input[type="text"] {
+  width: 90%;
 }
 .public-form input[type="text"].other {
   width: 45%;
@@ -61,28 +94,4 @@
 .public-form .field.with-errors input[type="text"],
 .public-form .field.with-errors textarea {
   border-color: #f00;
-}
-input[type="text"],
-input[type="number"] {
-  padding: 5px 10px;
-  width: 50%;
-  border: 1px solid #e7e7e7;
-  margin: 0;
-}
-textarea {
-  padding: 5px 10px;
-  width: 50%;
-  border: 1px solid #e7e7e7;
-  margin: 0;
-  height: 150px;
-}
-input[type="submit"] {
-  background: #ffa500;
-  border: 0;
-  color: #fff;
-  font-family: sans_font;
-  font-size: 18px;
-  padding: 5px 15px;
-  font-weight: 300;
-  text-decoration: none;
 }

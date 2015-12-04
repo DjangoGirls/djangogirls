@@ -1,24 +1,7 @@
 {% for field in form %}
 <div class="row">
     <div class="col-md-12">
-        <label>
-          {{ field.label|safe }}
-          {% if field.field.required %}<span class="required">*</span>{% endif %}
-        </label>
-
-        {% if field.field.help_text %}
-          <p class="help-text">{{ field.field.help_text|safe }}</p>
-        {% endif %}
-
-        {% if field.errors %}
-          {% for error in field.errors %}
-          <p class="error">{{ error }}</p>
-          {% endfor %}
-        {% endif %}
-
-        <div class="field{% if field.errors %} with-errors{% endif %}">
-          {{ field }}
-        </div>
+        {% include 'includes/_field.html' with field=field %}
     </div>
 </div>
 {% endfor %}
