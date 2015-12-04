@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contactemail',
             name='contact_type',
-            field=models.CharField(choices=[('chapter', 'Djangogirls Chapter'), ('support', 'Djangogirls Support team')], default='chapter', max_length=20),
+            field=models.CharField(max_length=20, default='chapter', choices=[('chapter', 'Djangogirls Chapter'), ('support', 'Djangogirls Support team')]),
         ),
         migrations.AddField(
             model_name='contactemail',
             name='event',
-            field=models.ForeignKey(blank=True, null=True, to='core.Event'),
+            field=models.ForeignKey(null=True, help_text='required for Chapter contact', to='core.Event', blank=True),
         ),
         migrations.AddField(
             model_name='contactemail',
