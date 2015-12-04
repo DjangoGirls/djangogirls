@@ -16,8 +16,8 @@ def index(request):
     stories = Story.objects.all().order_by('-created')[:4]
 
     return render(request, 'index.html', {
-        'future_events': Event.objects.select_related('eventpage').future(),
-        'past_events': Event.objects.select_related('eventpage').past(),
+        'future_events': Event.objects.future().select_related('eventpage'),
+        'past_events': Event.objects.past().select_related('eventpage'),
         'stories': stories,
     })
 
@@ -25,8 +25,8 @@ def index(request):
 def events(request):
 
     return render(request, 'events.html', {
-        'future_events': Event.objects.select_related('eventpage').future(),
-        'past_events': Event.objects.select_related('eventpage').past(),
+        'future_events': Event.objects.future().select_related('eventpage'),
+        'past_events': Event.objects.past().select_related('eventpage'),
     })
 
 
