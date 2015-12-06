@@ -440,6 +440,46 @@ nav ul li:first-child {
   display: none;
 }
 /*
+--------------------
+    Support us
+--------------------
+*/
+#support {
+  margin: 60px 0;
+}
+#support .support-stats {
+  margin: 30px 0 0 0;
+  font-family: Roboto;
+  font-size: 24px;
+}
+#support .support-stats span {
+  font-weight: 400;
+}
+#support .partnership {
+  margin-top: 30px;
+  font-family: Roboto;
+  font-size: 16px;
+}
+#support .support-bar {
+  width: 90%;
+  background: #f9f7f7;
+  height: 50px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin: 30px 0;
+}
+#support .support-bar .pledge {
+  background: #00b16a;
+  height: 50px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  font-family: Roboto;
+  padding: 10px 0 10px 20px;
+}
+/*
 --------------
     Footer
 --------------

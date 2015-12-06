@@ -9,6 +9,7 @@ from django_date_extensions.fields import ApproximateDate
 
 from .models import Event, EventPage, Story, ContactEmail
 from .forms import ContactForm
+from patreonmanager.models import FundraisingStatus
 
 
 def index(request):
@@ -19,6 +20,7 @@ def index(request):
         'future_events': Event.objects.future().select_related('eventpage'),
         'past_events': Event.objects.past().select_related('eventpage'),
         'stories': stories,
+        'patreon_stats': FundraisingStatus.objects.all().first(),
     })
 
 

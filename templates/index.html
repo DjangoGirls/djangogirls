@@ -62,6 +62,35 @@
             </div>
         </section>
 
+        <section id="support">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Support Django Girls! 💕</h2>
+                    <p class="support-stats">
+                        <span>${{ patreon_stats.amount_raised }}</span> of <span>${{ patreon_stats.GOAL }}</span> monthly goal pledged
+                    </p>
+                    <div class="support-bar">
+                      <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%</div>
+                    </div>
+                    <a class="btn">Make a donation</a>
+                    <p class="partnership">
+                        Or if you would like to discuss a bigger partnership, <a href="mailto:hello@djangogirls.org">please get in touch</a>.
+                    </p>
+                </div>
+                <div class="col-md-6" style="padding-top: 95px;">
+                    <p>
+                        Django Girls is a <a href="{% url 'core:foundation' %}">non-profit organization</a> and we're crowdfunding money to help us pay for <a href="https://github.com/DjangoGirls/wiki/blob/master/general/ambassador.md" target="_blank">Awesomeness Ambassador</a>, a part-time position that makes it possible to run daily operations of Django Girls: providing support to local organizers, maintaining our freeily available resources or managing volunteers.
+                    </p>
+                    <p>
+                        To date we organized {{ past_events_count }} free workshops attended by {{ attendees_sum }} women in {{ countries_count }} countries on all continents. We're currently organizing {{ future_events_count }} more workshops in the next couple of weeks.
+                    </p>
+                    <p>
+                        Django Girls is a volunteer run organization, and we depend on your support to make it happen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <section id="events">
             <div class="row">
                 <div class="col-md-12">
