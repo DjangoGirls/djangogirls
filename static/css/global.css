@@ -86,6 +86,21 @@ input[type="submit"] {
 -    Bootstrap new styles
 --------------------------
 */
+.panel-default {
+  border: 0;
+  box-shadow: none;
+}
+.panel-default > .panel-heading {
+  background: none;
+  border: 0;
+  padding: 0 0 10px 0;
+}
+.panel-default > .panel-heading strong {
+  font-weight: 400;
+}
+.panel-default .panel-body {
+  padding: 10px 0;
+}
 .panel-feature-orange {
   border-color: #fbae55;
 }
