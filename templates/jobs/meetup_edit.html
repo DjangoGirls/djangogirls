@@ -1,6 +1,6 @@
 {% extends 'jobs/base.html' %}
 {% load staticfiles %}
-{% load crispy_forms_tags %}
+{% load jobs_tags %}
 
 {% block extra_js %}
     {{ form.media }}
@@ -38,10 +38,34 @@
                     <h2>New meetup</h2>
                 </div>
                 <div class="panel-body">
-                    <form method="POST" class="job-form">
+                    <form class="form-horizontal job-form" method="POST">
                         {% csrf_token %}
-                        {{ form|crispy }}
-                        <button type="submit" class="save btn btn-warning" name="add_meetup">Save</button>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <div class="form-group has-error">
+                                    <label class="col-sm-2 control-label">{{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                    <div class="controls col-sm-10">{{ field|addclass:"form-control" }}
+                                        <p><span class="help-inline text-danger">
+                                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                                        </span></p>
+                                        <p class="help-inline text-danger"><small>{{ field.help_text }}</small></p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">{{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                    <div class="controls col-sm-10">{{ field|addclass:"form-control" }}
+                                        {% if field.help_text %}
+                                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="form-actions">
+                            <button type="submit" class="save btn btn-warning" name="add_meetup">Save</button>
+                        </div>
                     </form>
                 </div>
             </div>
