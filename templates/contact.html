@@ -9,11 +9,14 @@
 
                 {% include 'includes/_info_messages.html' %}
 
+                <p>Hi! We would love to hear about you!</p>
+
+                <p>To be sure your email reach the good person, check this FAQ first!</p>
+
+                {% include 'includes/_faq.html' %}
+
                 <p>
-                    We might have an answer for you already, please check our <a href="{% url 'core:faq' %}">FAQ section</a>.
-                </p>
-                <p>
-                    If you'd still like to contact us or just to say hello, please use the form bellow :)
+                    If you didn't find what you wanted, please check our extended <a href="{% url 'core:faq' %}">FAQ section</a> or use the form bellow :).
                 </p>
 
                 <form action="" method="post" style="margin-top: 30px;">

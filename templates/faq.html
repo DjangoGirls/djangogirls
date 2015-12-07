@@ -10,11 +10,21 @@
                 <h1>FAQ: Frequently Asked Questions</h1>
 
                 <p>Django Girls events have been happening all over the world for a while now, and we get some repeat
-                    questions. Hopefully this page will help you if part of the planning process has you confused!</p>
+                    questions. If you need more help: <a href="{% url 'core:contact' %}">contact us</a>!</p>
 
-                <p><strong>Q: Isn't Django Girls sexist?</strong></p>
+                <h2>Django Girls workshops</h2>
+                {% include 'includes/_faq.html' %}
 
-                <p>A: It really isn't, but we can understand why people might feel that way.
+                <h2>Django Girls in general</h2>
+
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+		            <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_sexist"><strong>Q: Isn't Django Girls sexist?</strong></a>
+		            </div>
+                    <div id="Django_Girls_sexist" class="panel-collapse collapse">
+                        <div class="panel-body">
+                    <p>A: It really isn't, but we can understand why people might feel that way.
                     We've found that by having a women-only space for learning Python and Django,
                     women are more comfortable participating. See
                     <a href="http://jennifermann.ghost.io/minority-groups-in-tech-is-it-just-reverse-sexism/"
@@ -61,9 +71,16 @@
                     our workshop to a majority of women participants, women are more comfortable
                     signing up, asking questions, getting involved, and even staying involved later
                     on. And that's a good thing!</p>
+                        </div>
+                    </div>
+                    </div>
 
-                <p><strong>Q: Are Django Girls events trans-inclusive?</strong></p>
-
+                    <div class="panel panel-default">
+		            <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_trans_inclusive"><strong>Q: Are Django Girls events trans-inclusive?</strong></a>
+		            </div>
+                    <div id="Django_Girls_trans_inclusive" class="panel-collapse collapse">
+                        <div class="panel-body">
                 <p>A: Yes! We encourage you to make this explicit on your website. Some events have used this
                     wording: </p>
 
@@ -77,18 +94,29 @@
                     <a href="http://www.roostertailscomic.com/comic/queer-101-third-edition/" target="_blank">this
                         comic</a>, or any of the many other introductions to trans issues on the internet. Thanks to the
                     <a href="http://kit.pyladies.com/en/latest/faqs.html" target="_blank">PyLadies FAQ</a> for pointing
-                    us to these excellent resorces. </p>
+                    us to these excellent resorces.</p>
+                        </div>
+                    </div>
+                    </div>
 
-                <p><strong>Q: Is there a Django Girls for men?</strong></p>
-
+                	<div class="panel panel-default">
+		            <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_for_men"><strong>Q: Is there a Django Girls for men?</strong></a>
+		            </div>
+                    <div id="Django_Girls_for_men" class="panel-collapse collapse">
+                        <div class="panel-body">
                 <p>A: There doesn't seem to be a need for Django Boys at the moment. But all of our content,
                     including our tutorial and this manual, is open sourced, so if you'd like to start a workshop
                     aimed at another audience, we encourage you to do so! We support you starting an organization that
                     reaches an audience you care about. All the resources we've created, including the tutorial and
                     this manual, are open sourced under Creative Commons Attribution 4.0 International (CC BY 4). This
                     means that you can modify, distribute and use commercially, but you cannot sublicense and you have
-                    to give us credit and include copyright. </p>
-            </div>
-        </div>
+                    to give us credit and include copyright.</p>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
     </div>
+</div>
 {% endblock %}

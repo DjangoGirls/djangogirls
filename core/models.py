@@ -178,7 +178,7 @@ class EventPage(models.Model):
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = 'chapter', 'support'
     CONTACT_TYPE_CHOICES = (
-        (CHAPTER, 'Django Girls Chapter'),
+        (CHAPTER, 'Django Girls Local Organizers'),
         (SUPPORT, 'Django Girls HQ (Support Team)'),
     )
 
