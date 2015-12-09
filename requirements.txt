@@ -27,7 +27,7 @@ mandrill==1.0.57
 markdown2==2.3.0
 nose==1.3.7
 nose-progressive==1.5.1
-model-mommy==1.2.5.1
+model-mommy==1.2.6
 opbeat==3.1.3
 psycopg2==2.6.1
 pyquery==1.2.9
