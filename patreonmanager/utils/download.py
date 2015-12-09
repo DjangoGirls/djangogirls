@@ -22,6 +22,8 @@ MONTH_CSV_DOWNLOAD_URL = BASE_URL + '/downloadCsv'
 MONTH_CONTAINER_XPATH = '//div[@id="boxGrid"]/div[@class="box mylink"]'
 MONTH_LINK_XPATH = './/div[@class="pledge"]/a'
 MONTH_TITLE_RE = re.compile('^(?P<month_year>.+) Patreon supported$')
+# In November 2015 the title changed:
+NEW_MONTH_TITLE_RE = re.compile('^(?P<month_year>.+) patron supported$')
 
 FILENAME_FORMAT = '{:%Y-%m}-Patreon.csv'
 
@@ -85,8 +87,12 @@ def _get_hid_from_url(url):
 
 
 def _get_datetime_from_title(title):
-    match = MONTH_TITLE_RE.search(title.strip())
-    assert match is not None
+    match = NEW_MONTH_TITLE_RE.search(title.strip())
+    try:
+        assert match is not None
+    except:
+        match = MONTH_TITLE_RE.search(title.strip())
+        assert match is not None
 
     date_format = '%B %Y'
     return datetime.strptime(match.group('month_year'), date_format)

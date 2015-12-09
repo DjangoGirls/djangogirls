@@ -2,12 +2,14 @@ import icalendar
 
 from django.conf import settings
 from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import Event, EventPage, EventPageMenu, EventPageContent, Story
-from .utils import get_event_page
+from .models import Event, EventPage, Story, ContactEmail
+from .forms import ContactForm
+from patreonmanager.models import FundraisingStatus
 
 
 def index(request):
@@ -15,17 +17,18 @@ def index(request):
     stories = Story.objects.all().order_by('-created')[:4]
 
     return render(request, 'index.html', {
-        'future_events': Event.objects.select_related('eventpage').future(),
-        'past_events': Event.objects.select_related('eventpage').past(),
+        'future_events': Event.objects.future().select_related('eventpage'),
+        'past_events': Event.objects.past().select_related('eventpage'),
         'stories': stories,
+        'patreon_stats': FundraisingStatus.objects.all().first(),
     })
 
 
 def events(request):
 
     return render(request, 'events.html', {
-        'future_events': Event.objects.select_related('eventpage').future(),
-        'past_events': Event.objects.select_related('eventpage').past(),
+        'future_events': Event.objects.future().select_related('eventpage'),
+        'past_events': Event.objects.past().select_related('eventpage'),
     })
 
 
@@ -100,12 +103,37 @@ def faq(request):
     return render(request, 'faq.html', {})
 
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            contact_email = form.save()
+            if contact_email.sent_successfully:
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    "Thank you for your email. We will be in touch shortly."
+                )
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Ooops. We couldn't send your email :( Please try again later"
+                )
+            return render(request, 'contact.html', {'form': ContactForm()})
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
+
+
 def foundation(request):
     return render(request, 'foundation.html', {})
 
 
 def governing_document(request):
     return render(request, 'governing_document.html', {})
+
 
 def contribute(request):
     return render(request, 'contribute.html', {})

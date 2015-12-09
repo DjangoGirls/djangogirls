@@ -86,6 +86,22 @@ form
 --------------------------
 */
 
+.panel-default
+    border: 0
+    box-shadow: none
+
+    > .panel-heading
+        background: none
+        border: 0
+        padding: 0 0 10px 0
+
+        strong
+            font-weight: 400
+
+    .panel-body
+        padding: 10px 0
+
+
 .panel-feature-orange
     border-color:#fbae55
 
@@ -134,7 +150,7 @@ form
 */
 
 nav
-    margin: 30px 0 30px 0
+    margin: 20px 0
 
     .logo
         float: left
@@ -155,7 +171,8 @@ nav
                 font-family: sans_font
                 text-decoration: none
                 text-transform: uppercase
-                font-size: 18px
+                font-weight: 500
+                font-size: 15px
 
                 &:hover
                     color: orange
@@ -170,7 +187,7 @@ nav
 ------------------------
 */
 #box-with-picture
-    background: url('../img/global/mainphoto.jpg') 50% 0 no-repeat fixed
+    background: url('../img/global/mainphoto-04122015.jpg') 50% 0 no-repeat fixed
     background-position: center -100px
     background-size: cover
 
@@ -321,19 +338,19 @@ nav
 
     .centered
         text-align: center
-        
+
 .newsletter-archive
     margin-top: 20px
-    
+
     ul
         list-style-type: none
         padding: 0
-        
+
         li
             padding: 0 0 15px 0
             font-family: sans_font
             font-size: 14px
-            
+
             a
                 text-decoration: none
                 color: orange
@@ -439,6 +456,43 @@ nav
 
     iframe #header
         display: none;
+
+
+/*
+--------------------
+    Support us
+--------------------
+*/
+#support
+    margin: 60px 0
+
+    .support-stats
+        margin: 30px 0 0 0
+        font-family: sans_font
+        font-size: 24px
+
+        span
+            font-weight: 400
+
+    .partnership
+        margin-top: 30px
+        font-family: sans_font
+        font-size: 16px
+
+    .support-bar
+        width: 90%
+        background: #F9F7F7
+        height: 50px
+        border-radius: 3px
+        margin: 30px 0
+
+        .pledge
+            background: #00B16A
+            height: 50px
+            border-radius: 3px
+            color: white
+            font-family: sans_font
+            padding: 10px 0 10px 20px
 
 
 /*
@@ -587,3 +641,6 @@ footer
 
     .page-wrap
         margin-bottom: -900px
+
+
+@import "common"

@@ -1,0 +1,34 @@
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#apply"><strong>Q: How can I register?</strong></a>
+        </div>
+                    <div id="apply" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>A: You want to attend a workshop happening in your city? So cool! You can register on the event's website. If there is no website, it means that registrations are not opened yet. Come back in a few days to check or send an email to the local organizers of the workshop you want to attend.</p>
+                        </div>
+                    </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#too_late"><strong>Q: I missed the deadline! Can I still apply to a workshop?</strong></a>
+        </div>
+                    <div id="too_late" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>A: Sadly, you won't be able to apply: events receive many applications and already have a waiting list in case an attendee has to cancel. You can subscribe to our <a href="{% url 'core:newsletter' %}">newsletter</a> to know where the next events are planed.</p>
+                        </div>
+                    </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coach_sponsor"><strong>Q: I want to coach or sponsor an event!</strong></a>
+        </div>
+        <div id="coach_sponsor" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>A: You rock! Just send an email to the local organizers of the workshop!</p>
+            </div>
+        </div>
+    </div>
+</div>

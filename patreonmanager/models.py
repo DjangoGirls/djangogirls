@@ -70,3 +70,18 @@ class Payment(models.Model):
 
     def get_month_display(self):
         return self.month.strftime('%B %Y')
+
+
+class FundraisingStatus(models.Model):
+    GOAL = 1500
+
+    date_updated = models.DateTimeField(auto_now_add=True)
+    number_of_patrons = models.IntegerField()
+    amount_raised = models.IntegerField()
+
+    class Meta:
+        ordering = ('-date_updated',)
+
+    @property
+    def percentage_of_goal(self):
+        return int(float(self.amount_raised)/float(self.GOAL)*100.0)

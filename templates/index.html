@@ -13,10 +13,10 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h1>
-                        We want to inspire women to fall in love with programming.
+                        We inspire women to fall in love with programming.
                     </h1>
                     <p>
-                        We organize free Python and Django workshops, create open sourced online tutorials and care about curating amazing first experiences with technology.
+                        Django Girls organize free Python and Django workshops, create open sourced online tutorials and curate amazing first experiences with technology.
                     </p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <h2>About</h2>
                     <p>
-                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in July 2014 in Berlin and started by two Polish girls: <a href="http://twitter.com/olasitarska">Ola Sitarska</a> and <a href="http://twitter.com/asendecka">Ola Sendecka</a>.
+                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in July 2014 in Berlin and started by two Olas: <a href="http://twitter.com/olasitarska">Sitarska</a> and <a href="http://twitter.com/asendecka">Sendecka</a>. Today, Django Girls is a volunteer run organization with hundreds of people contributing to bring more women to Python & Django community.
                     </p>
 
                     <h2>Mission</h2>
@@ -59,6 +59,35 @@
                     </p>
                 </div>
 
+            </div>
+        </section>
+
+        <section id="support">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Support Django Girls! 💕</h2>
+                    <p class="support-stats">
+                        <span>${{ patreon_stats.amount_raised }}</span> of <span>${{ patreon_stats.GOAL }}</span> monthly goal pledged
+                    </p>
+                    <div class="support-bar">
+                      <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%</div>
+                    </div>
+                    <a class="btn" href="http://patreon.com/djangogirls">Make a donation on Patreon</a>
+                    <p class="partnership">
+                        Or if you would like to discuss a bigger partnership, <a href="mailto:hello@djangogirls.org">please get in touch</a>.
+                    </p>
+                </div>
+                <div class="col-md-6" style="padding-top: 95px;">
+                    <p>
+                        Django Girls is a <a href="{% url 'core:foundation' %}">non-profit organization</a> and we're crowdfunding money to help us pay for <a href="https://github.com/DjangoGirls/wiki/blob/master/general/ambassador.md" target="_blank">Awesomeness Ambassador</a>, a part-time position that makes it possible to run daily operations of Django Girls: providing support to local organizers, maintaining our freeily available resources or managing volunteers.
+                    </p>
+                    <p>
+                        To date we organized {{ past_events_count }} free workshops attended by {{ attendees_sum }} women in {{ countries_count }} countries on all continents. We're currently organizing {{ future_events_count }} more workshops in the next couple of weeks.
+                    </p>
+                    <p>
+                        Django Girls is a volunteer run organization, and we depend on your support to make it happen.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -133,14 +162,14 @@
             </div>
 
             <div class="row">
+              <div class="col-md-3">
+                  <a href="https://www.elastic.co/">
+                      <img src="{% static 'img/global/supporters/elastic.png' %}" alt="Elastic" />
+                  </a>
+              </div>
                 <div class="col-md-3">
                     <a href="http://lincolnloop.com/">
                         <img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" />
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="http://getsentry.com/">
-                        <img src="{% static 'img/global/supporters/sentry.png' %}" alt="Sentry" style="margin-top: 15px" />
                     </a>
                 </div>
                 <div class="col-md-3">
@@ -149,18 +178,14 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="http://megiteam.pl/">
-                        <img src="{% static 'img/global/supporters/megiteam.png' %}" alt="MegiTeam" style="margin-top: 25px" />
+                    <a href="http://pythonanywhere.com/">
+                        <img src="{% static 'img/global/supporters/pythonanywhere.png' %}" alt="Python Anywhere" style="margin-top: 25px" />
                     </a>
                 </div>
             </div>
-            
+
             <div class="row">
-                <div class="col-md-3">
-                    <a href="http://djangoproject.com/">
-                        <img src="{% static 'img/global/supporters/django.png' %}" alt="Django Software Foundation" />
-                    </a>
-                </div>
+
                 <div class="col-md-3">
                     <a href="https://www.mandrill.com/">
                         <img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" style="margin-top: 0px" />
@@ -170,7 +195,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>Wanna join us on the mission? Support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or drop us a line: <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.</p>
+                    <p>Wanna join us on the mission? Support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or <a href="{% url 'core:contact' %}">drop us a line</a>.</p>
                 </div>
             </div>
 

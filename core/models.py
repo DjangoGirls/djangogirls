@@ -1,12 +1,13 @@
 from __future__ import unicode_literals
 
-from datetime import date, datetime, timedelta
-
 import icalendar
+from smtplib import SMTPException
+from datetime import date, datetime, timedelta
 
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils import timezone
+from django.core.mail import send_mail
 from django.utils.encoding import python_2_unicode_compatible
 
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
@@ -47,7 +48,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name_plural = "Organizers"
 
     def __str__(self):
-        if self.first_name == '' and self.last_name == '': 
+        if self.first_name == '' and self.last_name == '':
             return '{0}'.format(self.email)
         return '{0} ({1})'.format(self.get_full_name(), self.email)
 
@@ -58,12 +59,15 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         return "{0} {1}".format(self.first_name, self.last_name)
 
 
-class EventQuerySet(models.QuerySet):
+class EventManager(models.Manager):
+    def get_queryset(self):
+        return super(EventManager, self).get_queryset().filter(is_deleted=False)
+
     def public(self):
         """
         Only include events that are on the homepage.
         """
-        return self.filter(is_on_homepage=True)
+        return self.get_queryset().filter(is_on_homepage=True)
 
     def future(self):
         return self.public().filter(date__gte=datetime.now().strftime("%Y-%m-%d")).order_by("date")
@@ -87,8 +91,10 @@ class Event(models.Model):
     main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
 
-    objects = EventQuerySet.as_manager()
+    objects = EventManager()
+    all_objects = models.Manager()  # This includes deleted objects
 
     def __str__(self):
         return self.name
@@ -129,6 +135,15 @@ class Event(models.Model):
         members = ["{} <{}>".format(x.get_full_name(), x.email) for x in self.team.all()]
         return ", ".join(members)
 
+    def delete(self):
+        self.is_deleted = True
+        self.save()
+
+
+class EventPageManager(models.Manager):
+    def get_queryset(self):
+        return super(EventPageManager, self).get_queryset().filter(is_deleted=False)
+
 
 @python_2_unicode_compatible
 class EventPage(models.Model):
@@ -143,12 +158,73 @@ class EventPage(models.Model):
     url = models.CharField(max_length=200, null=True, blank=True)
 
     is_live = models.BooleanField(null=False, blank=False, default=False)
+    is_deleted = models.BooleanField(default=False)
+
+    objects = EventPageManager()
+    all_objects = models.Manager()  # This includes deleted objects
 
     def __str__(self):
         return "Website for %s" % self.event.name
 
     class Meta:
         verbose_name = "Website"
+
+    def delete(self):
+        self.is_deleted = True
+        self.save()
+
+
+@python_2_unicode_compatible
+class ContactEmail(models.Model):
+    CHAPTER, SUPPORT = 'chapter', 'support'
+    CONTACT_TYPE_CHOICES = (
+        (CHAPTER, 'Django Girls Local Organizers'),
+        (SUPPORT, 'Django Girls HQ (Support Team)'),
+    )
+
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    sent_to = models.EmailField(max_length=128)
+    message = models.TextField()
+    event = models.ForeignKey(
+        'core.Event', help_text='required for contacting a chapter', null=True, blank=True
+    )
+    contact_type = models.CharField(
+        verbose_name="Who do you want to contact?",
+        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False, default=CHAPTER
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    sent_successfully = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __unicode__(self):
+        return "%s to %s" % (self.email, self.sent_to)
+
+    def save(self, *args, **kwargs):
+        self.sent_to = self._get_to_email()
+
+        try:
+            send_mail(
+                self._get_subject(),
+                self.message,
+                "{} <{}>".format(self.name, self.email),
+                [self.sent_to],
+                fail_silently=False,
+            )
+        except SMTPException:
+            self.sent_successfully = False
+
+        super().save(*args, **kwargs)
+
+    def _get_to_email(self):
+        if self.event and self.event.email:
+            return self.event.email
+        return 'hello@djangogirls.org'
+
+    def _get_subject(self):
+        return "%s - from the djangogirls.org website" % self.name
 
 
 @python_2_unicode_compatible
@@ -170,6 +246,7 @@ class EventPageContent(models.Model):
     class Meta:
         ordering = ("position", )
         verbose_name = "Website Content"
+
 
 
 @python_2_unicode_compatible

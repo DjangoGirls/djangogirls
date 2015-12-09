@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://djangogirls.org/" />
+  <meta property="og:url" content="http://djangogirls.org/{{ page.url }}" />
   <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
 
   <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,600,700,400i,600i,700i/Roboto:300,400,300i,400i">
@@ -26,10 +26,10 @@
     .navbar-default {
         border-color: #{{ page.main_color }};
     }
-    .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .btn, .btn:hover, input[type="submit"], .application-form input[type="submit"] {
+    .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .btn, .btn:hover, input[type="submit"], .public-form input[type="submit"] {
         background-color: #{{ page.main_color }};
     }
-    .navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:hover, a, a:hover, .application-form span.required {
+    .navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:hover, a, a:hover, .public-form span.required {
         color: #{{ page.main_color }};
     }
 

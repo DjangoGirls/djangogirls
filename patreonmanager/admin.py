@@ -5,7 +5,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _, ungettext
 
-from .models import Patron, Reward, Payment
+from .models import Patron, Reward, Payment, FundraisingStatus
 from .filters import PendingRewardsFilter
 
 
@@ -67,3 +67,8 @@ class PaymentAdmin(admin.ModelAdmin):
         msg = ungettext("Marked %d payment as completed", "Marked %d payments as completed", updated)
         messages.success(request, msg % updated)
     mark_completed.short_description = _('Mark selected payments as completed')
+
+
+@admin.register(FundraisingStatus)
+class FundraisingStatusAdmin(admin.ModelAdmin):
+    pass
