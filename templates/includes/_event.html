@@ -1,4 +1,4 @@
-{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}
+<a href="/{{ event.eventpage.url }}">
     <div class="col-md-4 event"{% if event.photo %} style="background-image: url({{ event.photo.url }})"{% endif %}>
         <div class="overlay">
             <p class="city">{{ event.city }}</p>
@@ -6,4 +6,4 @@
             {% if event.photo_credit %}<p class="credit" rel="{{ event.photo_link }}">Photo credit: {{ event.photo_credit }} (<span rel="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC</span>)</p>{% endif %}
         </div>
     </div>
-{% if event.eventpage.is_live %}</a>{% endif %}
+</a>
