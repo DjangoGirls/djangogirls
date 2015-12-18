@@ -36,3 +36,4 @@ requests==2.8.1
 six==1.10.0
 -e git://github.com/olasitarska/slacker.git#egg=slacker
 whitenoise==2.0.4
+py-trello==0.4.3
