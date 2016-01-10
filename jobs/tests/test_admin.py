@@ -78,9 +78,8 @@ class JobAdminTest(TestCase):
         response = self.client.get(unassign_reviewer_url, follow=True)
         self.assertEqual(response.status_code, 200)
         self.job_under_review.refresh_from_db()
-        self.assertIn("Open", str(response.content))
-        self.assertIn("None", str(response.content))
         self.assertEqual(self.job_under_review.review_status, Job.OPEN)
+        self.assertIsNone(self.job_under_review.reviewer)
 
     def test_accept_job_for_under_review_post(self):
         accept_url = reverse(
