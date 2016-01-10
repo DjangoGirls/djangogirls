@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 
     'core',
     'applications',
+    'coaches',
     'jobs',
     'patreonmanager.apps.PatreonManagerConfig',
 )
@@ -146,7 +147,7 @@ SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=core,applications,jobs',
+    '--cover-package=core,applications,jobs,coaches',
     '--with-progressive',
 ]
 
