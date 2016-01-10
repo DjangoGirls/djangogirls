@@ -8,9 +8,8 @@
                 {% include 'includes/_info_messages.html' %}
                 <h3 class="text-success">Yay, high-five! Thank you for adding a job opportunity/meetup.</h3>
                 <hr/>
-                <p> 
+                <p>
                     We carefully review each job opportunity and meetup. We will get in touch with you shortly.
-                    
                 </p>
                 <p>
                     Would you help us out too? We don’t charge for helping you reach people
@@ -21,6 +20,11 @@
                 <p>
                     <strong>Thank you!</strong>
                 </p>
+		<br/>
+		<p>
+                    Do you have another job opportunity?
+		</p>
+		<a class="btn btn-blue" href="{% url 'jobs:job_new' %}">Add another opportunity</a>
             </div>
         </div>
     </div>
