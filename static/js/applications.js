@@ -23,6 +23,7 @@ $(document).ready(function() {
             if (data['updated']){
                 data['updated'].forEach(function(id){
                     updateApplicationState(id, state, name);
+                    $('#application-'+id+'-box').prop('checked', false);
                 });
             }
         });
@@ -63,21 +64,17 @@ $(document).ready(function() {
     }
 
     function updateApplicationState(id, state, stateName){
-        $('#application-'+id+'-state').removeClass('submitted');
-        $('#application-'+id+'-state').removeClass('accepted');
-        $('#application-'+id+'-state').removeClass('rejected');
-        $('#application-'+id+'-state').removeClass('default');
-        $('#application-'+id+'-state').removeClass('waitlisted');
-        $('#application-'+id+'-state').addClass(state);
-        $('#application-'+id+'-state').html(stateName+' <span class="caret"></span>');
+        $('#application-'+id+'-state')
+            .removeClass('submitted accepted rejected default waitlisted')
+            .addClass(state)
+            .html(stateName+' <span class="caret"></span>');
     }
 
     function updateApplicationRsvp(id, rsvp, rsvpName){
-        $('#application-'+id+'-rsvp-status').removeClass('waiting');
-        $('#application-'+id+'-rsvp-status').removeClass('yes');
-        $('#application-'+id+'-rsvp-status').removeClass('no');
-        $('#application-'+id+'-rsvp-status').addClass(rsvp);
-        $('#application-'+id+'-rsvp-status').html(rsvpName+' <span class="caret"></span>');
+        $('#application-'+id+'-rsvp-status')
+            .removeClass('waiting yes no')
+            .addClass(rsvp)
+            .html(rsvpName+' <span class="caret"></span>');
     }
 
 });

@@ -59,7 +59,13 @@
               <tbody>
                   {% for app in applications %}
                   <tr>
-                      <td><input type="checkbox" name="application" class="application-box" value="{{ app.id }}" /></td>
+                      <td>
+                        <input type="checkbox"
+                               name="application"
+                               class="application-box"
+                               value="{{ app.id }}"
+                               id="application-{{ app.id }}-box" />
+                      </td>
                       <td><a href="{% url 'applications:application_detail' city=app.form.page.url app_number=app.number %}">{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>
@@ -74,11 +80,11 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="javascript:;" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Application on waiting list</a></li>
-                              <li><a href="javascript:;" class="state-change" data-state="declined" data-app-id="{{ app.id }}"> Applicant declined</a></li>
+                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
+                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
+                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
+                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Application on waiting list</a></li>
+                              <li><a href="#" class="state-change" data-state="declined" data-app-id="{{ app.id }}"> Applicant declined</a></li>
                             </ul>
                           </div>
                       </td>
@@ -95,9 +101,9 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="javascript:;" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">Waiting for response</a></li>
-                              <li><a href="javascript:;" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">Confirmed attendance</a></li>
-                              <li><a href="javascript:;" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">Rejected invitation</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">Waiting for response</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">Confirmed attendance</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">Rejected invitation</a></li>
                             </ul>
                           </div>
                         {% else %}

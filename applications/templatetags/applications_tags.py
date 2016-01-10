@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import template
+from django.utils.safestring import mark_safe
 
 
 register = template.Library()
@@ -17,6 +18,6 @@ def display_sorting_arrow(name, current_order):
         is_reversed = True
 
     if is_reversed:
-        return '<a href="?order={}">▼</a>'.format(name)
+        return mark_safe('<a href="?order={}">▼</a>'.format(name))
     else:
-        return '<a href="?order=-{}">▲</a>'.format(name)
+        return mark_safe('<a href="?order=-{}">▲</a>'.format(name))
