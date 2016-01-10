@@ -25,10 +25,6 @@ button.save {
 ol.breadcrumb li a {
   text-decoration: none;
 }
-#start_date_time,
-#end_date_time {
-  width: 250px;
-}
 .bootstrap-datetimepicker-widget .btn {
   color: #f7921d;
   background-color: transparent;
@@ -36,13 +32,20 @@ ol.breadcrumb li a {
 .bootstrap-datetimepicker-widget td.active {
   background-color: #f7921d !important;
 }
-#id_website,
+form.job-form input {
+  width: 400px;
+}
 #id_country,
 #id_expiration_date_picker,
 #id_meetup_type,
 #id_meetup_start_date_picker,
 #id_meetup_end_date_picker {
-  max-width: 260px;
+  max-width: 400px;
+}
+#id_remote_work,
+#id_relocation,
+#id_is_recurring {
+  max-width: 1em;
 }
 input[type="text"],
 input[type="number"],

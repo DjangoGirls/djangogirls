@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'easy_thumbnails',
 
     'django_countries',
-    'crispy_forms',
     'bootstrap3_datetime',
 
     'ckeditor',
@@ -173,7 +172,6 @@ MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
 
 APPEND_SLASH = True
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {

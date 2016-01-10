@@ -7,7 +7,6 @@ cssselect==0.9.1
 dj-database-url==0.3.0
 django-ckeditor==5.0.2
 django-countries==3.4.1
-django-crispy-forms==1.5.2
 django-date-extensions==1.1.0
 django-leaflet==0.16.0
 -e git://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker

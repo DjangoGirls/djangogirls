@@ -1,7 +1,5 @@
 {% extends 'global/base.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
 <div class="container">
     <div class="row centered">
@@ -10,7 +8,26 @@
             <p>{% block description %}{% endblock description %}</p>
             <form action="" method="post">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="form-group has-error">
+                            <label class="control-label">{{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                            {{ field }}
+                                <p><span class="help-inline text-danger">
+                                    {% for error in  field.errors %}{{ error }}{% endfor %}
+                                </span></p>
+                                <p class="help-inline text-danger"><small>{{ field.help_text }}</small></p>
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            <label class="control-label">{{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                            {{ field }}
+                                {% if field.help_text %}
+                                    <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                                {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 {% block submit_button %}{% endblock submit_button %}
             </form>
         </div>
