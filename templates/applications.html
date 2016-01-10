@@ -20,15 +20,15 @@
       <h3 class="page-header">Applications for {{ page.title }}</h3>
       {% if applications %}
           <p>
-              Filter: 
-              <a href="?">All</a> | 
-              <a href="?state=submitted" class="text-primary">Submitted</a> | 
-              <a href="?state=accepted" class="text-success">Accepted</a> | 
-              <a href="?state=rejected" class="text-danger">Rejected</a> | 
+              Filter:
+              <a href="?">All</a> |
+              <a href="?state=submitted" class="text-primary">Submitted</a> |
+              <a href="?state=accepted" class="text-success">Accepted</a> |
+              <a href="?state=rejected" class="text-danger">Rejected</a> |
               <a href="?state=waitlisted" class="text-warning">Waiting list</a> |
               <a href="?state=declined" class="text-danger">Declined</a> |
-              <a href="?rsvp_status=waiting" class="text-primary">RSVP: waiting</a> | 
-              <a href="?rsvp_status=yes" class="text-success">RSVP: confirmed</a> | 
+              <a href="?rsvp_status=waiting" class="text-primary">RSVP: waiting</a> |
+              <a href="?rsvp_status=yes" class="text-success">RSVP: confirmed</a> |
               <a href="?rsvp_status=no" class="text-danger">RSVP: rejected</a>
           </p>
           <p>Change the status of selected applications to:
@@ -47,7 +47,7 @@
           <table class="table">
               <thead>
                   <tr>
-                      <th></th>
+                      <th><input type="checkbox" name="application" id="select-all-box" /></th>
                       <th>#</th>
                       <th>E-mail</th>
                       <th>Application status</th>
@@ -59,7 +59,7 @@
               <tbody>
                   {% for app in applications %}
                   <tr>
-                      <td><input type="checkbox" name="application" value="{{ app.id }}" /></td>
+                      <td><input type="checkbox" name="application" class="application-box" value="{{ app.id }}" /></td>
                       <td><a href="{% url 'applications:application_detail' city=app.form.page.url app_number=app.number %}">{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>

@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    $("#select-all-box").click(function () {
+        $(".application-box").prop('checked', $(this).prop('checked'));
+    });
+
     $('.state-change').click(function(){
         var state = $(this).data('state'),
             appId = $(this).data('app-id'),
