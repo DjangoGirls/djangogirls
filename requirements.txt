@@ -10,8 +10,7 @@ django-countries==3.4.1
 django-crispy-forms==1.5.2
 django-date-extensions==1.1.0
 django-leaflet==0.16.0
--e git://github.com/HireAnEsquire/django-bootstrap3-datetimepicker#egg=cc22c145c348af441c39471021ee752978ed7624
-django-bootstrap3-datetimepicker==2.2.3
+-e git://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker
 django-markdown-deux==1.0.5
 django-nose==1.4.2
 django-sslify>=0.2.0
