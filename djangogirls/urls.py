@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Redirect old links:
     url(r'^pages/in-your-city/$', RedirectView.as_view(url='/organize/', permanent=True)),
     url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
@@ -21,4 +21,4 @@ urlpatterns = patterns('',
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'', include('applications.urls', namespace='applications')),
     url(r'', include('core.urls', namespace='core'))
-)
+]

@@ -4,7 +4,6 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
-TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
     SECRET_KEY = 'hello!'
@@ -87,14 +86,28 @@ USE_TZ = True
 
 # Templates
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-TEMPLATE_CONTEXT_PROCESSORS = TCP + [
-    'django.core.context_processors.request',
-    'django.core.context_processors.static',
-    'core.context_processors.statistics',
-    'django.contrib.messages.context_processors.messages',
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.core.context_processors.request',
+                'core.context_processors.statistics',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'debug': DEBUG,
+        },
+    },
 ]
 
 # Custom

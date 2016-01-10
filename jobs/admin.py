@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.mail import send_mail
 from django.contrib import admin, messages
 from django.template.loader import get_template
 from django.template import Context
@@ -7,10 +6,11 @@ from django.conf.urls import patterns, url
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponseBadRequest
 
-from suit.widgets import SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea
+from suit.widgets import (
+    SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea)
 
 from jobs.models import PublishFlowModel, Job, Meetup
-from jobs.community_mails import send_job_mail, send_meetup_mail
+from jobs.community_mails import send_job_mail
 
 
 def make_published(modeladmin, request, queryset):
@@ -30,10 +30,10 @@ def send_status_update(modeladmin, request, queryset):
     for item in queryset:
         subject = "Status update on: {0}.".format(item.title)
         context = Context({
-                    'status': item.get_review_status_display(),
-                    'option': modeladmin.get_print_name(),
-                    'message_to_organisation': item.message_to_organisation,
-                })
+            'status': item.get_review_status_display(),
+            'option': modeladmin.get_print_name(),
+            'message_to_organisation': item.message_to_organisation,
+        })
         message_plain = get_template(
             'jobs/email_templates/status.txt').render(context)
         message_html = get_template(
@@ -57,7 +57,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(PublishFlowModelAdmin, self).get_urls()
-        my_urls = patterns('',
+        my_urls = [
             url(
                 r'^(?P<id>\d+)/assign/$',
                 self.admin_site.admin_view(self.assign_reviewer),
@@ -88,7 +88,7 @@ class PublishFlowModelAdmin(admin.ModelAdmin):
                 self.admin_site.admin_view(self.publish),
                 name='publish_%s' % self.get_print_name()
             ),
-        )
+        ]
         return my_urls + urls
 
     def get_actions(self, request):
