@@ -55,7 +55,7 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 
 # Contributing to Django Girls website
 
-The website is hosted on Heroku and is available here: http://djangogirls.org/
+The website is hosted on PyhtonAnywhere and is available here: http://djangogirls.org/
 
 We have an auto-deploy thing going on, so everything commited to master is automatically deployed to our Heroku. 
 
