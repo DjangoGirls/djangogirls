@@ -187,7 +187,7 @@ class CoachAdmin(admin.ModelAdmin):
 
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
-
+    raw_id_fields = ('event',)
 
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
