@@ -101,13 +101,13 @@ def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
 def random_application(request, page, prev_application):
     """
     Get a new random application for a particular event,
-    that hasn't been scored by the request user.
+    that hasn't been scored by the request user and is not declined.
     """
     from applications.models import Application  # circular import
     return Application.objects.filter(
-        form__page=page
-        ).exclude(pk=prev_application.id
-        ).exclude(scores__user=request.user).order_by('?').first()
+        form__page=page).exclude(
+        pk=prev_application.id, state='declined').exclude(
+        scores__user=request.user).order_by('?').first()
 
 
 DEFAULT_QUESTIONS = [
