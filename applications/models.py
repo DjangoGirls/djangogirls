@@ -156,7 +156,8 @@ class Application(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            self.number = Application.objects.filter(form=self.form).count() + 1
+            current_max = Application.objects.filter(form=self.form).aggregate(models.Max('number'))['number__max']
+            self.number = (current_max or 0) + 1
         super(Application, self).save(*args, **kwargs)
 
     @property
