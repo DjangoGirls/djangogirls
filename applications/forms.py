@@ -17,7 +17,6 @@ class ApplicationForm(forms.Form):
         super(ApplicationForm, self).__init__(*args, **kwargs)
         self.fields = generate_form_from_questions(questions)
 
-
     def save(self, *args, **kwargs):
         form = kwargs.pop('form')
         application = Application.objects.create(form=form)
@@ -46,8 +45,11 @@ class ApplicationForm(forms.Form):
                 )
 
                 if question.question_type == 'email':
-                    application.email = value
-                    application.save()
+                    try:
+                        Application.objects.get(email=value)
+                    except Application.DoesNotExist:
+                        application.email = value
+                        application.save()
 
         if not form.page.event.email:
             # If event doesn't have an email (legacy events), create
@@ -65,7 +67,7 @@ class ApplicationForm(forms.Form):
                     'intro': form.confirmation_mail,
                 }
             )
-            msg = EmailMessage(subject, body, form.page.event.email, [application.email,])
+            msg = EmailMessage(subject, body, form.page.event.email, [application.email])
             msg.content_subtype = "html"
             try:
                 msg.send()
