@@ -137,3 +137,7 @@ def governing_document(request):
 
 def contribute(request):
     return render(request, 'contribute.html', {})
+
+
+def year_2015(request):
+    return render(request, '2015.html', {})

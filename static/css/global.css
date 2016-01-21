@@ -544,9 +544,67 @@ footer .row .col-md-2 ul li a {
 }
 /*
 ---------------------
-    Flatpages
+    Annual report
 ---------------------
 */
+#annual-report {
+  margin: 60px 0 0 0;
+  font-family: 'Lora';
+  font-size: 18px;
+  line-height: 180%;
+  color: #000;
+}
+#annual-report .report-head {
+  text-align: center;
+}
+#annual-report h1,
+#annual-report h2,
+#annual-report h3,
+#annual-report h4,
+#annual-report h5 {
+  font-family: 'Lora';
+  margin: 40px 0 20px 0;
+}
+#annual-report h1 {
+  font-size: 46px;
+  margin: 20px 0 40px 0;
+}
+#annual-report a {
+  color: #f7921d;
+}
+#annual-report span {
+  background: rgba(255,127,0,0.3);
+  padding: 3px 3px 3px 5px;
+  margin-right: 5px;
+}
+#annual-report p {
+  margin-bottom: 15px;
+}
+#annual-report .centered {
+  text-align: center;
+}
+#annual-report table {
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+#annual-report table thead {
+  background: rgba(255,127,0,0.3);
+}
+#annual-report table td {
+  padding: 2px 15px;
+  border: 1px solid rgba(255,127,0,0.3);
+}
+#annual-report table tr {
+  border: 1px solid rgba(255,127,0,0.3);
+}
+#annual-report table tfoot {
+  background: rgba(0,0,0,0.1);
+}
+#annual-report ul li {
+  margin-bottom: 15px;
+}
 /*
 ---------------------
     Responsiveness

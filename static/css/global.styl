@@ -1,5 +1,6 @@
 sans_font = Roboto
 serif_font = 'Linux Libertine'
+lora_font = 'Lora'
 gray = #4A4A4A
 orange = #F7921D
 
@@ -542,14 +543,54 @@ footer
                     a
                         text-decoration: none
 
+
 /*
 ---------------------
-    Flatpages
+    Annual report
 ---------------------
 */
-
-#flatpage
+#annual-report
+    margin: 60px 0 0 0
+    font-family: lora_font
+    font-size: 18px
+    line-height: 180%
+    color: black
+    .report-head
+        text-align: center
+    h1, h2, h3, h4, h5
+        font-family: lora_font
+        margin: 40px 0 20px 0
     h1
+        font-size: 46px
+        margin: 20px 0 40px 0
+    a
+        color: orange
+    span
+        background: rgba(255, 127, 0, 0.3)
+        padding: 3px 3px 3px 5px
+        margin-right: 5px
+    p
+        margin-bottom: 15px
+    .centered
+        text-align: center
+    table
+        width: 100%
+        font-size: 16px
+        margin-bottom: 40px
+        margin-top: 20px
+        thead
+            background: rgba(255, 127, 0, 0.3)
+        td
+            padding: 2px 15px
+            border: 1px solid rgba(255, 127, 0, 0.3)
+        tr
+            border: 1px solid rgba(255, 127, 0, 0.3)
+        tfoot
+            background: rgba(0, 0, 0, 0.1)
+    ul
+        li
+            margin-bottom: 15px
+
 
 
 /*
@@ -641,6 +682,7 @@ footer
 
     .page-wrap
         margin-bottom: -900px
+
 
 
 @import "common"

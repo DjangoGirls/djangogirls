@@ -10,14 +10,13 @@ urlpatterns = [
     url(r'^organize/$', views.organize, name='organize'),
     url(r'^story/$', views.stories, name='stories'),
     url(r'^newsletter/$', views.newsletter, name='newsletter'),
-
     url(r'^faq/$', views.faq, name='faq'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^foundation/$', views.foundation, name='foundation'),
     url(r'^foundation/governing-document/$', views.governing_document,
         name='foundation-governing-document'),
-
     url(r'^contribute/$', views.contribute, name='contribute'),
+    url(r'^2015/$', views.year_2015, name='year_2015'),
 
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
     url(r'^$', views.index, name='index'),
