@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'djrill',
     'django_nose',
     'easy_thumbnails',
+    'captcha',
 
     'django_countries',
     'bootstrap3_datetime',
