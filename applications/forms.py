@@ -1,7 +1,7 @@
 from django import forms
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
 
 from .models import Application, Answer, Question, Score, Email
 from .utils import generate_form_from_questions
@@ -17,7 +17,7 @@ class ApplicationForm(forms.Form):
         questions = kwargs.pop('questions')
         super(ApplicationForm, self).__init__(*args, **kwargs)
         self.fields = generate_form_from_questions(questions)
-        self.fields['captcha'] = CaptchaField()
+        self.fields['captcha'] = ReCaptchaField()
 
 
     def save(self, *args, **kwargs):
