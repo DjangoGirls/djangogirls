@@ -29,6 +29,14 @@ Your website is currently hidden for public, you can only see it if you’re log
 
 Instructions on editing website: http://organize.djangogirls.org/website/
 
-Let me know if you need anything. It’s usually faster to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
+3) Your event in Django Girls Dispatch
+
+If you want to announce when registration for your event is open in Django Girls bi-weekly newsletter, send an email to hello@djangogirls.org.
+
+4) Postponing or cancelling
+
+If you need to cancel or postpone your event, please, send us an email. It can happen and we won't be mad at you ;) Also, if you're stuck on something, we can try to help you!
+
+We wrote an FAQ (http://organize.djangogirls.org/faq/index.html) but don't hesitate to let me know if you need anything. It’s usually faster to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
 
 Hugs, rainbows and sunshines!
