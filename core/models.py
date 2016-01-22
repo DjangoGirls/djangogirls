@@ -9,6 +9,7 @@ from django.contrib.auth import models as auth_models
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.exceptions import ValidationError
 
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 
@@ -75,11 +76,16 @@ class EventManager(models.Manager):
     def past(self):
         return self.public().filter(date__isnull=False, date__lt=datetime.now().strftime("%Y-%m-%d")).order_by("-date")
 
+# Event date can't be a year only
+def validate_approximatedate(date):
+    if date.month == 0:
+        raise ValidationError('Event date can\'t be a year only. Please, provide at least a month and a year.')
+
 
 @python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    date = ApproximateDateField(null=True, blank=True)
+    date = ApproximateDateField(null=True, blank=False, validators=[validate_approximatedate])
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
     latlng = models.CharField(max_length=30, null=True, blank=True)
