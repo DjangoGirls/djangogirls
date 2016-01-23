@@ -639,6 +639,42 @@ footer .row .col-md-2 ul li a {
   color: #f7921d;
   text-align: center;
 }
+#annual-report .success-story {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#annual-report .success-story .col-md-3 img {
+  width: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+#annual-report .success-story .col-md-9 {
+  padding-top: 15px;
+}
+#annual-report hr {
+  border-color: #f7921d;
+  border-width: 10px;
+  width: 10%;
+}
+@media screen and (min-width: 766px) {
+  #annual-report blockquote {
+    border: 0;
+    padding: 0;
+    font-style: italic;
+  }
+  #annual-report blockquote:before {
+    content: "“";
+    display: block;
+    color: #f7921d;
+    font-size: 112px;
+    line-height: 0.2;
+    font-weight: 800;
+    margin-top: 60px;
+    font-style: normal;
+    font-family: 'Lora';
+  }
+}
 /*
 ---------------------
     Responsiveness
