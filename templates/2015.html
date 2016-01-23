@@ -33,6 +33,8 @@
                       <p>In 2015, we also resolved <span>180 issues</span> and reviewed <span>378 pull requests</span> submitted by <span>73 contributors</span> across <a href="https://github.com/DjangoGirls">all of our repositories</a>.</p>
                       <p>In 2015, we used many emojis on our Twitter. The most common one was ❤, which we used 118 times. The runner up, ✨, has been used by us in 77 tweets.</p>
                       <p>In 2015, we handwritten <span>84 thank you notes</span> and mailed them to our <a href="https://www.patreon.com/djangogirls">Patreon</a> supporters. We also acquired <span>356 gold letter balloons</span>.
+
+                      <div id="map"></div>
                     </div>
                 </div>
             </div>
@@ -272,4 +274,22 @@
             </div>
       </section>
 
+
+      <script>
+          L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
+          var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false}).setView([30, 0], 2);
+
+          {% for event in events %}
+              {% if event.latlng %}
+              L.marker([{{ event.latlng }}], {
+                  icon: L.mapbox.marker.icon({
+                      'marker-size': 'medium',
+                      'marker-symbol': 'heart'
+                  })
+                }).bindPopup(
+                    '{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}'
+                );
+              {% endif %}
+          {% endfor %}
+      </script>
 {% endblock %}

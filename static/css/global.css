@@ -664,6 +664,10 @@ footer .row .col-md-2 ul li a {
 #annual-report .sponsors p {
   margin-bottom: 30px;
 }
+#annual-report #map {
+  height: 400px;
+  margin-top: 30px;
+}
 @media screen and (min-width: 766px) {
   #annual-report blockquote {
     border: 0;
