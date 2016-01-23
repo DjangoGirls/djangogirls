@@ -555,20 +555,34 @@ footer
     font-size: 18px
     line-height: 180%
     color: black
+
+    ::selection
+        text-shadow: none
+        background: orange
+        color: #fff
     .report-head
         text-align: center
+    .wrap
+        background: #F9F7F7
+        padding: 60px 0 75px 0
+        margin: 30px
     h1, h2, h3, h4, h5
         font-family: lora_font
         margin: 40px 0 20px 0
     h1
         font-size: 46px
         margin: 20px 0 40px 0
+        font-weight: bold
+    h2
+        text-align: center
+        font-weight: bold
     a
         color: orange
     span
-        background: rgba(255, 127, 0, 0.3)
+        background: rgba(255, 127, 0, 0.6)
         padding: 3px 3px 3px 5px
         margin-right: 5px
+        color: white
     p
         margin-bottom: 15px
     .centered
@@ -579,19 +593,18 @@ footer
         margin-bottom: 40px
         margin-top: 20px
         thead
-            background: rgba(255, 127, 0, 0.3)
+            background: rgba(255, 127, 0, 0.6)
+            color: white
         td
             padding: 2px 15px
-            border: 1px solid rgba(255, 127, 0, 0.3)
+            border: 1px solid rgba(255, 127, 0, 0.6)
         tr
-            border: 1px solid rgba(255, 127, 0, 0.3)
+            border: 1px solid rgba(255, 127, 0, 0.6)
         tfoot
-            background: rgba(0, 0, 0, 0.1)
+            background: #F9F7F7
     ul
         li
             margin-bottom: 15px
-
-
 
 /*
 ---------------------

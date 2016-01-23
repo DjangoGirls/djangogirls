@@ -554,8 +554,18 @@ footer .row .col-md-2 ul li a {
   line-height: 180%;
   color: #000;
 }
+#annual-report ::selection {
+  text-shadow: none;
+  background: #f7921d;
+  color: #fff;
+}
 #annual-report .report-head {
   text-align: center;
+}
+#annual-report .wrap {
+  background: #f9f7f7;
+  padding: 60px 0 75px 0;
+  margin: 30px;
 }
 #annual-report h1,
 #annual-report h2,
@@ -568,14 +578,20 @@ footer .row .col-md-2 ul li a {
 #annual-report h1 {
   font-size: 46px;
   margin: 20px 0 40px 0;
+  font-weight: bold;
+}
+#annual-report h2 {
+  text-align: center;
+  font-weight: bold;
 }
 #annual-report a {
   color: #f7921d;
 }
 #annual-report span {
-  background: rgba(255,127,0,0.3);
+  background: rgba(255,127,0,0.6);
   padding: 3px 3px 3px 5px;
   margin-right: 5px;
+  color: #fff;
 }
 #annual-report p {
   margin-bottom: 15px;
@@ -590,17 +606,18 @@ footer .row .col-md-2 ul li a {
   margin-top: 20px;
 }
 #annual-report table thead {
-  background: rgba(255,127,0,0.3);
+  background: rgba(255,127,0,0.6);
+  color: #fff;
 }
 #annual-report table td {
   padding: 2px 15px;
-  border: 1px solid rgba(255,127,0,0.3);
+  border: 1px solid rgba(255,127,0,0.6);
 }
 #annual-report table tr {
-  border: 1px solid rgba(255,127,0,0.3);
+  border: 1px solid rgba(255,127,0,0.6);
 }
 #annual-report table tfoot {
-  background: rgba(0,0,0,0.1);
+  background: #f9f7f7;
 }
 #annual-report ul li {
   margin-bottom: 15px;
