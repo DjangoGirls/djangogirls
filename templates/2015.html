@@ -290,7 +290,8 @@
               L.marker([{{ event.latlng }}], {
                   icon: L.mapbox.marker.icon({
                       'marker-size': 'medium',
-                      'marker-symbol': 'heart'
+                      'marker-symbol': 'heart',
+                      'marker-color': '#FF9400'
                   })
                 }).addTo(
                     {% if event.is_upcoming %}future{% else %}past{% endif %}
