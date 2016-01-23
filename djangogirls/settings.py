@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'djrill',
     'django_nose',
     'easy_thumbnails',
+    'captcha',
 
     'django_countries',
     'bootstrap3_datetime',
@@ -152,6 +153,11 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+# Using new No Captcha reCaptcha with SSL
+NOCAPTCHA = True
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [

@@ -28,9 +28,9 @@ class ApplyView(TestCase):
         resp = self.client.get(reverse('applications:apply', args=['test']))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context['form_obj'], self.form)
-        # there is one more field than default questions,
-        # because we always add newsletter optin at the end
-        self.assertEqual(len(resp.context['form'].fields), len(DEFAULT_QUESTIONS)+1)
+        # there is two more fields than default questions,
+        # because we always add newsletter option at the end and a captcha
+        self.assertEqual(len(resp.context['form'].fields), len(DEFAULT_QUESTIONS)+2)
 
         # Redirect to event page because there is no form
         self.form.delete()

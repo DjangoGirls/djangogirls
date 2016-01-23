@@ -168,6 +168,7 @@ class SponsorAdmin(SortableModelAdmin):
 
 class CoachAdmin(admin.ModelAdmin):
     list_display = ('name', 'photo_display_for_admin', 'twitter_handle', 'url')
+    search_fields = ('name', 'twitter_handle', 'url')
 
     def get_queryset(self, request):
         qs = super(CoachAdmin, self).get_queryset(request)
@@ -187,7 +188,7 @@ class CoachAdmin(admin.ModelAdmin):
 
 class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
-
+    raw_id_fields = ('event',)
 
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
