@@ -553,6 +553,7 @@ footer .row .col-md-2 ul li a {
   font-size: 18px;
   line-height: 180%;
   color: #000;
+  overflow-x: hidden;
 }
 #annual-report ::selection {
   text-shadow: none;
@@ -564,8 +565,12 @@ footer .row .col-md-2 ul li a {
 }
 #annual-report .wrap {
   background: #f9f7f7;
-  padding: 60px 0 75px 0;
+  padding-top: 30px;
+  padding-bottom: 75px;
   margin: 30px;
+}
+#annual-report .wrap .row {
+  margin: 0;
 }
 #annual-report h1,
 #annual-report h2,
@@ -621,6 +626,18 @@ footer .row .col-md-2 ul li a {
 }
 #annual-report ul li {
   margin-bottom: 15px;
+}
+#annual-report .seasons {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#annual-report .seasons .season {
+  font-style: 'Lora';
+  font-size: 160px;
+  line-height: 160px;
+  padding: 20px 0 0 0;
+  color: #f7921d;
+  text-align: center;
 }
 /*
 ---------------------
