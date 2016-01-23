@@ -277,7 +277,13 @@
 
       <script>
           L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
-          var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false}).setView([30, 0], 2);
+          var past = L.layerGroup()
+          var future = L.layerGroup()
+          var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false, layers: [past, future]}).setView([30, 0], 2);
+          L.control.layers(null, {
+            'Upcoming': future,
+            'Past': past,
+          }).addTo(map);
 
           {% for event in events %}
               {% if event.latlng %}
@@ -286,7 +292,9 @@
                       'marker-size': 'medium',
                       'marker-symbol': 'heart'
                   })
-                }).bindPopup(
+                }).addTo(
+                    {% if event.is_upcoming %}future{% else %}past{% endif %}
+                ).bindPopup(
                     '{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}'
                 );
               {% endif %}
