@@ -587,7 +587,6 @@ footer .row .col-md-2 ul li a {
 }
 #annual-report h2 {
   text-align: center;
-  font-weight: bold;
 }
 #annual-report a {
   color: #f7921d;
@@ -638,6 +637,9 @@ footer .row .col-md-2 ul li a {
   padding: 20px 0 0 0;
   color: #f7921d;
   text-align: center;
+}
+#annual-report .seasons ul {
+  padding-left: 0;
 }
 #annual-report .success-story {
   padding-top: 30px;
