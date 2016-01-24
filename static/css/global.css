@@ -563,6 +563,10 @@ footer .row .col-md-2 ul li a {
 #annual-report .report-head {
   text-align: center;
 }
+#annual-report .report-head img {
+  width: 100%;
+  max-width: 500px;
+}
 #annual-report .wrap {
   background: #f9f7f7;
   padding-top: 30px;
