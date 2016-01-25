@@ -1,0 +1,304 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+<link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+{% endblock extra_css %}
+
+{% block menu %}{% endblock %}
+
+{% block content %}
+        <section id="annual-report">
+            <div class="row clearfix">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="report-head">
+                        <a href="http://djangogirls.org/"><img src="{% static 'img/logo-bigger.png' %}" /></a>
+                        <h1>Annual Report 2015</h1>
+                    </div>
+                    <p>🎉<b>Thanks to the organizers, coaches, and volunteers in countries all over the world, 2015 was an absolutely incredible year for Django Girls. </b>🎉</p>
+                    <p>We released some awesome new organizer tools, <a href="http://blog.djangogirls.org/post/127160095788/meet-our-awesomeness-ambassador-lucie">hired our first staff member</a>, <a href="https://djangogirls.org/foundation/">became a charity</a>, and merged hundreds of improvements to the Tutorial, Coaches Manual and the website! The <a href="http://tutorial.djangogirls.org/">Django Girls tutorial</a> has now been translated into 12 languages, thanks to the hard work of our translation team and volunteer translators from all over. </p>
+                    <p>In this report, we would like to highlight our achievements, present some statistics, and tell you all about the things that we - as a Django Girls community - made happen this year.</p>
+                    <p>Sit back and enjoy!</p>
+                </div>
+            </div>
+            <div class="wrap">
+                <div class="row clearfix">
+                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                      <h2>Numbers 📈🗺</h2>
+                      <p>In 2015, the Django Girls community organized <span>89 events</span> - almost 6 times as much as year before. We've been to <span>77 cities</span> across <span>36 countries</span> and all 6 continents.</p>
+                      <p>In 2015, <span>2785 women attended our events</span>, and more than 8,600 applied. All of those events were organized by volunteers: an army of <span>221 organizers</span> and <span>920 coaches</span> supported by <span>393 sponsors</span>.</p>
+                      <p>In 2015, the <a href="http://tutorial.djangogirls.org/">Django Girls tutorial</a> was translated to <span>12 languages</span> thanks to thousands hours of work contributed by <span>358 translators</span>. That's <span>29,4036 translated words</span>. <span>169,107 people visited our Tutorial</span> generating <span>more than 2 million page views</span>!</p>
+                      <p>In 2015, we also resolved <span>180 issues</span> and reviewed <span>378 pull requests</span> submitted by <span>73 contributors</span> across <a href="https://github.com/DjangoGirls">all of our repositories</a>.</p>
+                      <p>In 2015, we used many emojis on our Twitter. The most common one was ❤, which we used 118 times. The runner up, ✨, has been used by us in 77 tweets.</p>
+                      <p>In 2015, we handwritten <span>84 thank you notes</span> and mailed them to our <a href="https://www.patreon.com/djangogirls">Patreon</a> supporters. We also acquired <span>356 gold letter balloons</span>.
+
+                      <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                  <h2>Financial Transparency 💰🔍</h2>
+                  <p>Financial fundraising for Django Girls began in February 2015, when we started our <a href="https://www.patreon.com/djangogirls">Patreon campaign</a> and budget tracking. In June 2015 we incorporated the non-profit <a href="https://djangogirls.org/foundation/">Django Girls Foundation</a> in England. While we're still working on the best way to present our finances, here is a first step: aggregated data about our expenses and income in 2015.</p>
+                  <h3>Expenses 💸</h3>
+                  <p>In total, <span>we spent $6,095.80 USD in 2015</span>. The <a href="https://djangogirls.org/pages/awesomness-ambassador/">Awesomeness Ambassador</a> position encompassed the majority (70%) of all of our costs. The Awesomeness Ambassador is responsible for running the daily operations of the organization: responding to organizer's requests, handling our mail, doing administrative tasks, updating the blog and newsletter, and maintaining the website and resources. </p>
+
+                  <p>Another significant cost was sending some Django Girls team members to EuroPython, but that cost was entirely offset by a generous grant from Divio. Their sponsorship completely covered the cost of sending 3 of Django Girls team members to EuroPython in Spain. </p>
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <td>Expense</td>
+                        <td>Amount</td>
+                        <td>% of expenses</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>AWS</td><td>$ 10.27</td><td>0.17%</td></tr>
+                      <tr><td>Typeform</td><td>$ 62.20</td><td>1.02%</td></tr>
+                      <tr><td>Meldium</td><td>$ 180.00</td><td>2.95%</td></tr>
+                      <tr><td>Shopify</td><td>$ 87.00</td><td>1.43%</td></tr>
+                      <tr><td>Creative Market credits</td><td>$ 81.37</td><td>1.33%</td></tr>
+                      <tr><td>Awesomness Ambassador</td><td>$ 4,270.00</td><td>70.05%</td></tr>
+                      <tr><td>Lawyer</td><td>$ 81.19</td><td>1.33%</td></tr>
+                      <tr><td>Patreon Thank-yous</td><td>$ 84.77</td><td>1.39%</td></tr>
+                      <tr><td>Paypal fees</td><td>$ 51.73</td><td>0.85%</td></tr>
+                      <tr><td>Birthday Party</td><td>$ 430.00</td><td>7.05%</td></tr>
+                      <tr><td>EuroPython Grants sponsored by Divio</td><td>$ 757.27</td><td>12.42%</td></tr>
+                    </tbody>
+                    <tfoot>
+                      <tr><td>Total expenses</td><td colspan="2">$ 6,095.80</td></tr>
+                    </tfoot>
+                  </table>
+
+                  <h3>Income 🌟👀</h3>
+                  <p><span>We raised $37,157.5 USD in 2015</span>. The most significant part of our incomes comes from one company: <a href="https://www.elastic.co/">Elastic</a>. Their generosity accounts for 60% of our overall budget for 2015: they <a href="http://blog.djangogirls.org/post/135185350903/meet-our-new-sponsor-elastic">donated $17,000 USD</a> from the tickets sales for Elastic{ON} Tour event series, and sponsored our Awesomeness Ambassador position with an additional $5,645.19 USD.</p>
+
+                  <p class="centered"><img src="{% static 'img/report-2015/patreon.png' %}" /></p>
+
+                  <p>We also raised almost 19% of our total income through <a href="https://www.patreon.com/djangogirls">Patreon</a>. We're currently receiving $899 USD a month from 48 people or organizations.</p>
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <td>Income</td>
+                        <td>Amount</td>
+                        <td>% of income</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Patreon</td><td>$6,867.79</td><td>18.48%</td></tr>
+                      <tr><td>Income from t-shirts (Sales atPyCon booth + Cotton Bureau)</td><td>$3,322.70</td><td>8.94%</td></tr>
+                      <tr><td>Elastic sponsorship of Awesomeness Ambassador</td><td>$5,645.19</td><td>15.19%</td></tr>
+                      <tr><td>Gratipay</td><td>$43.14</td><td>0.12%</td></tr>
+                      <tr><td>Elastic{ON} Tour donation</td><td>$17,000.00</td><td>45.75%</td></tr>
+                      <tr><td>Django Girls workshops donations</td><td>$1,903.81</td><td>5.12%</td></tr>
+                      <tr><td>EuroPython Grant from Divio</td><td>$787.37</td><td>2.12%</td></tr>
+                      <tr><td>PGOpen Donation</td><td>$500.00</td><td>1.35%</td></tr>
+                      <tr><td>DjangoCon US Honza Král Tutorial donation</td><td>$1,087.50</td><td>2.93%</td></tr>
+                    </tbody>
+                    <tfoot>
+                      <tr><td>Total income</td><td colspan="2">$ 37,157.50</td></tr>
+                    </tfoot>
+                  </table>
+
+                  <p>
+                  <span>Our total balance for end-of-year 2015 is $31,061.70 USD. </span>
+                  We're incredibly thankful to all the generous people and organizations that donated this year and helped us secure a budget for even more activities in 2016. </p>
+
+                  <h3>Budget for 2016 💵💡</h3>
+                  <p>In 2016, we're planning to focus on the following initiatives:
+                  </p>
+                  <ul>
+                    <li>Make the Django Girls Foundation sustainable by growing our monthly recurring income to cover recurring costs. Currently, we need at least $1,500 a month to cover the costs of accounting, the Ambassador's salary, and the cost of other services we're using to maintain the website. We want to grow this revenue by focusing more effort on our <a href="https://www.patreon.com/djangogirls">Patreon campaign</a>, reaching out to more organizations with a fundraising deck, and establishing a permanent online merchandise store. (T-shirts all the time! 👕)
+                    </li>
+                    <li>We would like to start the Django Girls Box: we would allow all organizers to order a free box of Django Girls stickers, room decorations, cheat sheets, balloons, pins and other small goodies that are almost always ordered for workshops 🎈🍬. We can significantly decrease the cost of that merchandise for all workshops by pre-purchasing them in bulk.</li>
+                    <li>We're expecting that the cost of hiring the Awesomeness Ambassador will increase next year for a variety of reasons, so we're preparing for that.</li>
+                    <li>We're planning to organize our first Django Girls Summit: a two days unconference where organizers could meet and share their experiences about Django Girls workshops. 👭👫</li>
+                  </ul>
+
+                </div>
+            </div>
+
+            <div class="wrap">
+                <div class="row clearfix">
+                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <h2>Achievements & Events in 2015 🏆🏅</h2>
+                    <p>2015 was a pretty exciting year for us. Here is a rundown of what happened, season by season.</p>
+
+                    <div class="row seasons">
+                      <div class="col-md-3 season">
+                          ⛄️
+                      </div>
+                      <div class="col-md-9">
+                          <ul>
+                            <li>At the very beginning of the year, Ola & Ola decided that they need help to keep growing Django Girls, and invited <a href="http://blog.djangogirls.org/post/108268319658/django-girls-core-team-grows">Ania & Baptiste to form a Support Team</a> (back then called a core team). This is when the first formal processes for creating new events, adding new organizers, and making decisions were established. We began documenting those processes in a tiny <a href="https://github.com/DjangoGirls/wiki">wiki</a>.</li>
+                            <li>The first quarter kept us busy with wonderful people knocking to our doors, asking us if they can help with translating the tutorial. We chose <a href="https://crowdin.com/project/django-girls-tutorial">Crowdin</a> as our translation platform, and began a never-ending process of figuring out how this translation thing even works. The Polish translation was the first one to be published that year!</li>
+                            <li>The end of winter was marked with a Django Girls booth at PyCon US. We had a wonderful time answering everyone's questions and spreading the word about Django Girls. We also debuted the <a href="https://cottonbureau.com/products/this-is-what-a-programmer-looks-like">&ldquo;This is what a programmer looks like&rdquo; t-shirts</a>, and sold 100 of them!</li>
+                            <li>Through the whole year, we kept promoting badass Django developers by publishing <a href="https://djangogirls.org/story/">53 stories of amazing women on our blog</a> -- one for each week of the year. Huge thank you to Anna Ossowski who led this project for over a year, and to <a href="http://blog.djangogirls.org/post/132398930020/your-django-story-meet-adrienne-lowe">Adrienne Lowe</a> who is now in charge of it.</li>
+                          </ul>
+                      </div>
+                    </div>
+
+                    <div class="row seasons">
+                      <div class="col-md-3 col-md-push-9 season">
+                          🌷
+                      </div>
+                      <div class="col-md-9 col-md-pull-3">
+                        <ul>
+                          <li>We focused on improving our organizer's tools. Thanks to the hard work of our volunteers, we've seen some incredible contributions to our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>. We also built an Applications tool for organizers that finally allows them to receive and score applications through the Django Girls website, instead of Google Forms and Spreadsheets. Phew!</li>
+                          <li>More people joined the Support Team: we welcomed <a href="http://blog.djangogirls.org/post/120136694238/welcome-kasia-and-geoffrey-to-django-girls-core">Kasia and Geoffrey</a>. This also kicked off a process of increasing our transparency efforts. We spent a significant amount of time writing new documentation and improving current internal docs, and then open sourced it in a form of the <a href="https://github.com/DjangoGirls/wiki">Support Team Wiki</a>. From now on, everything about what we believe and how we work is open and public.</li>
+                          <li>In May, we also made a major update to the Django Girls tutorial, <a href="http://blog.djangogirls.org/post/118716365753/django-girls-now-deploy-to-python-anywhere">rewriting the deploy chapter</a> to use Python Anywhere. Big thank you to Harry Percival for making it possible.</li>
+                          <li>Last, but definitely not least, we incorporated the Django Girls Foundation during DjangoCon Europe 2015. We signed the papers, put the emoji sticker on them, and made it official. Django Girls is now a charity! </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="row seasons">
+                      <div class="col-md-3 season">
+                        🏖
+                      </div>
+                      <div class="col-md-9">
+                        <ul>
+                          <li>Oh my, summer was one hell of a ride. First, the Birthday Party! <a href="http://blog.djangogirls.org/post/125086409433/django-girls-1st-birthday-thank-you">Django Girls' 1st Birthday Party</a> happened at EuroPython on the 22nd of July. We celebrated with 50 wonderful friends in a park, shared cupcakes, raised some glasses of sangria, and played a couple of games.</li>
+                          <li>August was also the month when the <a href="http://blog.djangogirls.org/post/126496144993/django-girls-winter-of-code">Jobs & Meetups</a> pages of our website were born. This happened thanks to amazing work of Marysia Lowas-Rzechonek & Kasia Siedlarek, both Django Girls attendees who wanted to learn more about Django by contributing to open source, as well as Becky Smith who mentored them, and Ania Warzecha who provided guidance and merged the final pull request. YAY!</li>
+                          <li>Growing the Support Team yet again, we <a href="http://blog.djangogirls.org/post/125437235598/yay-lacey-williams-henschel-is-joining-the-django">invited Lacey to join us</a>.Right from the start, she did an amazing job of establishing new processes, improving old ones, and increasing our transparency efforts. </li>
+                          <li>Summer also kept us incredibly busy with a process of hiring Awesomeness Ambassador -- our first paid staff member! We spent literally hundreds of hours to recruit the best applicant: Lucie Daeye. Totally paid off. If youwant to learn more about the recruitment process, <a href="http://blog.djangogirls.org/post/129169522198/django-girls-is-hiring-lessons-learned-from-our">we shared it in detail on our blog</a>.</li></ul>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="row seasons">
+                      <div class="col-md-3 col-md-push-9 season">
+                        🍂
+                      </div>
+                      <div class="col-md-9 col-md-pull-3">
+                        <ul>
+                          <li>After the very busy summer, the time came to rest and recharge batteries a little bit. We let Lucie (the Awesomeness Ambassador) run the show for a few weeks, and she did an amazing job. This is also when we realized how many of us were so close to burnout, and the decision of hiring our first paid staff member came at such a perfect time.</li>
+                          <li>Lucie focused some of her efforts on fundraising activities, and traveled to Munich for Elastic{ON} Tour event to run Django Girls booth. We partnered with Elastic and after the event they made an amazing donation of $17,000! That's the biggest donation we've seen yet, and completely unexpected. Thank you again!</li>
+                          <li>In October, Ania Warzecha decided to step down from Support Team, and wrote a valuable post on  <a href="http://blog.djangogirls.org/post/131283812099/overcommitment-and-burnout">overcommitment and burnout</a>. This made us more aware of the need to practice excellent self-care while doing volunteer and open-source work.</li>
+                          <li>We made a jump from hosting our emails on a VPS provided generously by Megiteam to Google Apps, which became free to us once we officially registered as charity. This turned out to be quite a project: moving 100+ email accounts and tens of thousands of emails without interrupting anyone's organization! This wouldn't have happened so smoothly if it wasn't for Adria Richards, who volunteered and offered us her knowledge and experience free of charge. Thank you, Adria!</li>
+                          <li>Since Lucie joined the team, we've also vastly improved our communication: the Django Girls Dispatch goes out regularly every two weeks to almost 1,100 people! <a href="https://djangogirls.org/newsletter/">Here</a> you can find all the Dispatches we sent so far.</li>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                  <h2>Success stories 💖</h2>
+                  <p>We don't have information on the number of people who became developers after Django Girls, and that information is difficult to gather. But it's an important metric. In this section, we're featuring interviews with some Django Girls attendees who've become professional developers since taking our workshop. We hope these anecdotes give you an idea of how powerful and life-changing attending a Django Girls workshop can be. </p>
+
+                  <div class="row success-story">
+                    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+                      <img src="{% static 'img/report-2015/agata.jpg' %}" alt="Agata Grdal" />
+                    </div>
+                    <div class="col-md-9 col-md-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                      <p>Agata Grdal is 23 and lives in Wrocław, Poland. She attended first ever Django Girls event at EuroPython, and started to work as Python Developer shortly after. She now also studies Computer Science and co-organizes local meetup for Python developers in her city.</p>
+                      <blockquote>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I've created my own blog and then prepared workshops and taught other women to code. Nothing is impossible with this bunch of crazy, positive people! </blockquote>
+                      <p>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <div class="row success-story">
+                    <div class="col-md-3 col-md-offset-0 col-md-push-9 col-sm-3 col-sm-offset-0 col-sm-push-9 col-xs-6 col-xs-offset-3">
+                      <img src="{% static 'img/report-2015/hello.jpg' %}" alt="Catherine" />
+                    </div>
+                    <div class="col-md-9 col-md-offset-0 col-md-pull-3 col-sm-9 col-sm-offset-0 col-sm-pull-3 col-xs-10 col-xs-offset-1">
+                      <p>Catherine is 25 years old and lives in France. After attending Django Girls event organized in Paris, she decided to switch career and is now studying computer programming fulltime.</p>
+                      <blockquote>I was looking for a professional reconversion when I came across Django Girls, and it was my very first immersion into the programming world. It was wonderful! The learning pace was intense and thrilling, and the community, built around strong values, very welcoming. It encouraged me to keep looking into this field and I am now studying it full time!</blockquote>
+                      <p>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <div class="row success-story">
+                    <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3">
+                      <img src="{% static 'img/report-2015/maria.jpg' %}" alt="Maria Lowas-Rzechonek" />
+                    </div>
+                    <div class="col-md-9 col-md-offset-0 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                      <p>Maria Lowas-Rzechonek is 32 years old and lives in Kraków, Poland. Since December 2015 she can proudly add "Junior Django Developer" as her new job title. She also co-organized Django Girls Kraków 2014 and was a coach at Django Girls Kraków 2015. Last Spring with a group of people, she organized a two-month weekly workshops for beginners to practise resolving simple programming problems in Python. Most recently she also got involved in the organization of the Krakow Python User Group and DjangoCon Europe 2016. </p>
+                      <blockquote>I wouldn't be where I am now if not Django Girls. I wouldn't have been so motivated to carry on learning programming if I hadn't participated in Django Girls at EuroPython 2014. I wouldn't have such a wonderful experience of Django/Python community, and probably I wouldn't get involved in local meetups because of that. I wouldn't have that great opportunity to practise and get my code public, if not Django Girls Winter of Code. Lastly, if not Django Girls, I wouldn't meet all those wonderful people, who actually get me in touch with people looking for junior developers. Learning how to program is a dangerous journey to go alone.</blockquote>
+                      <p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="row clearfix">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                  <h2>Summary 👍</h2>
+                  <p>2015 was an incredibly busy year for Django Girls. </p>
+
+                  <p>From a tiny and loosely defined organization in 2014, we grew to develop the Django Girls Foundation and hired one person to work exclusively on Django Girls.</p>
+
+                  <p>We are incredibly proud of how much the Django Girls community achieved in the past year, and we hope that 2016 will be even better and more exciting! </p>
+
+                  <p>To make Django Girls sustainable and allow further growth, <span><b>we need your help</b></span>. One of our goals for 2016 is to secure the position of Awesomeness Ambassador for the future and increase the revenue from <a href="https://www.patreon.com/djangogirls">Patreon</a> to cover the expenses associated with it. We hope that in the next months, with the help of the amazing community around Django Girls,we will be able to continue spreading love for programming around the world. To help us further our goal, please consider becoming a monthly contributor to <a href="https://www.patreon.com/djangogirls">our Patreon campaign</a>, or <a href="https://djangogirls.org/contact/">email us</a> to discuss corporate sponsorship. We promise you won't regret it! </p>
+
+                  <p>Thank you for constant support and love we receive from you! </p>
+              </div>
+          </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-8 col-md-offset-2 sponsors col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                  <h2>Sponsors 📢️</h2>
+                  <p>
+                    Again, we would like to thank amazing sponsors of Django Girls and of the individual Django Girls workshops all over the world. They help us make Django Girls sustainable and more importantly, they help local organizers keep their events free. We want Django Girls to be accessible to many people as possible, and that couldn't happen without them.
+                  </p>
+                  <a href="https://www.elastic.co/" target="_blank"><img src="{% static 'img/global/supporters/elastic.png' %}" alt="Elastic" /></a>
+                  <p>Known for Elasticsearch, Kibana, Beats, and Logstash, Elastic creates products to to search, analyze, and visualize your data, allowing you to get actionable insight in real time. Before becoming one of our biggest sponsors, they also sponsored several local events. Thanks <3</p>
+                  <a href="http://djangoproject.com/" target="_blank"><img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" /></a>
+                  <p>The Django Software Foundation (DSF) is a non-profit organization created to promote, support, and advance the development of Django. They've helped many Django Girls events that had problems finding local sponsors. Thanks <3</p>
+                  <a href="http://python.org/" target="_blank"><img src="{% static 'img/report-2015/python.png' %}" alt="Python Software Foundation" /></a>
+                  <p>The Python Software Foundation (PSF) is a non-profit organization that holds the intellectual property rights behind the Python programming language. They are one of the biggest sponsors for local events. Thanks <3</p>
+                  <a href="http://github.com/" target="_blank"><img src="{% static 'img/report-2015/github.png' %}" alt="Github" style="height: 60px" /></a>
+                  <p>GitHub is a Git repository hosting service. They have sponsored many Django Girls events, and they provide useful materials for new learners like cheat-sheets. Thanks <3</p>
+                  <a href="https://www.divio.com/en/" target="_blank"><img src="{% static 'img/global/supporters/divio.png' %}" alt="Divio" style="height: 50px"/></a>
+                  <p>Divio, that created Django CMS and Aldryn, uses Python and Django to provide support for website installation, maintenance, troubleshooting, and development. They sponsored many local events and joined as Patreon supporters in June 2015. Thanks <3</p>
+                  <a href="https://lincolnloop.com/" target="_blank"><img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" /></a>
+                  <p>Lincoln Loop is a full service web studio offering user experience and development based on the Django Web Framework. They joined our Patreon campaign in April 2015, and have contributed to local events. Thanks <3</p>
+                  <a href="https://pythonanywhere.com/" target="_blank"><img src="{% static 'img/global/supporters/pythonanywhere.png' %}" alt="Python Anywhere" /></a>
+                  <p>Since May, Django Girls has been hosted on PythonAnywhere! They host, run, and code Python in the cloud, and have made the lives of our attendees much easier by being really simple and pleasant to use. Thanks <3</p>
+                  <a href="https://mandrill.com/" target="_blank"><img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" /></a>
+                  <p>Mandrill is a transactional email platform from MailChimp. They'vebeen supporting our emails since September 2015 and have also sponsored local events. Thanks <3</p>
+
+                  <p>We would also like to thank our regular donors from <a href="https://www.patreon.com/djangogirls">Patreon</a>: your commitment to help us every month is amazing. Thanks <3</p>
+                </div>
+            </div>
+      </section>
+
+
+      <script>
+          L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
+          var past = L.layerGroup()
+          var future = L.layerGroup()
+          var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false, layers: [past, future]}).setView([30, 0], 2);
+          L.control.layers(null, {
+            'Upcoming': future,
+            'Past': past,
+          }).addTo(map);
+
+          {% for event in events %}
+              {% if event.latlng %}
+              L.marker([{{ event.latlng }}], {
+                  icon: L.mapbox.marker.icon({
+                      'marker-size': 'medium',
+                      'marker-symbol': 'heart',
+                      'marker-color': '#FF9400'
+                  })
+                }).addTo(
+                    {% if event.is_upcoming %}future{% else %}past{% endif %}
+                ).bindPopup(
+                    '{% if event.eventpage.is_live %}<a href="/{{ event.eventpage.url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.eventpage.is_live %}</a>{% endif %}'
+                );
+              {% endif %}
+          {% endfor %}
+      </script>
+{% endblock %}

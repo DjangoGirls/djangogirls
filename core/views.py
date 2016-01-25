@@ -137,3 +137,10 @@ def governing_document(request):
 
 def contribute(request):
     return render(request, 'contribute.html', {})
+
+
+def year_2015(request):
+    return render(request, '2015.html', {
+        'events': Event.objects.public().filter(date__lt='2016-01-01').order_by('date'),
+        'mapbox_map_id': settings.MAPBOX_MAP_ID,
+    })

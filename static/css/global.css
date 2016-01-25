@@ -544,9 +544,154 @@ footer .row .col-md-2 ul li a {
 }
 /*
 ---------------------
-    Flatpages
+    Annual report
 ---------------------
 */
+#annual-report {
+  margin: 60px 0 0 0;
+  font-family: 'Lora';
+  font-size: 18px;
+  line-height: 180%;
+  color: #000;
+  overflow-x: hidden;
+}
+#annual-report ::selection {
+  text-shadow: none;
+  background: #f7921d;
+  color: #fff;
+}
+#annual-report .report-head {
+  text-align: center;
+}
+#annual-report .report-head img {
+  width: 100%;
+  max-width: 500px;
+}
+#annual-report .wrap {
+  background: #f9f7f7;
+  padding-top: 30px;
+  padding-bottom: 75px;
+  margin: 30px;
+}
+#annual-report .wrap .row {
+  margin: 0;
+}
+#annual-report h1,
+#annual-report h2,
+#annual-report h3,
+#annual-report h4,
+#annual-report h5 {
+  font-family: 'Lora';
+  margin: 40px 0 20px 0;
+}
+#annual-report h1 {
+  font-size: 46px;
+  margin: 20px 0 40px 0;
+  font-weight: bold;
+}
+#annual-report h2 {
+  text-align: center;
+}
+#annual-report a {
+  color: #f7921d;
+}
+#annual-report span {
+  background: rgba(255,127,0,0.6);
+  padding: 3px 3px 3px 5px;
+  margin-right: 5px;
+  color: #fff;
+}
+#annual-report p {
+  margin-bottom: 15px;
+}
+#annual-report .centered {
+  text-align: center;
+}
+#annual-report table {
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+#annual-report table thead {
+  background: rgba(255,127,0,0.6);
+  color: #fff;
+}
+#annual-report table td {
+  padding: 2px 15px;
+  border: 1px solid rgba(255,127,0,0.6);
+}
+#annual-report table tr {
+  border: 1px solid rgba(255,127,0,0.6);
+}
+#annual-report table tfoot {
+  background: #f9f7f7;
+}
+#annual-report ul li {
+  margin-bottom: 15px;
+}
+#annual-report .seasons {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#annual-report .seasons .season {
+  font-style: 'Lora';
+  font-size: 160px;
+  line-height: 160px;
+  padding: 20px 0 0 0;
+  color: #f7921d;
+  text-align: center;
+}
+#annual-report .seasons ul {
+  padding-left: 0;
+}
+#annual-report .success-story {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#annual-report .success-story .col-md-3 img {
+  width: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+#annual-report .success-story .col-md-9 {
+  padding-top: 15px;
+}
+#annual-report hr {
+  border-color: #f7921d;
+  border-width: 10px;
+  width: 10%;
+}
+#annual-report .sponsors img {
+  height: 80px;
+  margin: 20px 0;
+}
+#annual-report .sponsors p {
+  margin-bottom: 30px;
+}
+#annual-report #map {
+  height: 400px;
+  margin-top: 30px;
+}
+@media screen and (min-width: 766px) {
+  #annual-report blockquote {
+    border: 0;
+    padding: 0;
+    font-style: italic;
+  }
+  #annual-report blockquote:before {
+    content: "“";
+    display: block;
+    color: #f7921d;
+    font-size: 112px;
+    line-height: 0.2;
+    font-weight: 800;
+    margin-top: 60px;
+    font-style: normal;
+    font-family: 'Lora';
+  }
+}
 /*
 ---------------------
     Responsiveness
