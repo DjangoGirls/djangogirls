@@ -8,11 +8,10 @@
   <meta name="keywords" content="programming, python, django, workshop, women, females">
   <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Django Girls is a one-day workshop about programming in Python and Django for women" />
+  <meta property="og:title" content="{% block og_title %}Django Girls is a one-day workshop about programming in Python and Django for women{% endblock %}" />
   <meta property="og:type" content="website" />
-  <meta property="og:description" content="Join us and become female developer! Build your first website in Python and Django in a friendly, safe enviroment." />
-  <meta property="og:url" content="http://djangogirls.org/" />
-  <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
+  <meta property="og:description" content="{% block og_description %}Join us and become female developer! Build your first website in Python and Django in a friendly, safe enviroment.{% endblock %}" />
+  <meta property="og:image" content="{% block og_image %}https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png{% endblock %}" />
 
 
   <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,600,700,400i,600i,700i/Roboto:300,400,300i,400i">
