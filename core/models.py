@@ -205,7 +205,7 @@ class ContactEmail(models.Model):
     class Meta:
         ordering = ('-created_at',)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s to %s" % (self.email, self.sent_to)
 
     def save(self, *args, **kwargs):
@@ -222,7 +222,7 @@ class ContactEmail(models.Model):
         except SMTPException:
             self.sent_successfully = False
 
-        super().save(*args, **kwargs)
+        super(ContactEmail, self).save(*args, **kwargs)
 
     def _get_to_email(self):
         if self.event and self.event.email:
