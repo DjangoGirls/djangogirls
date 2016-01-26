@@ -31,9 +31,9 @@ Instructions on editing website: http://organize.djangogirls.org/website/
 
 3) Your event in Django Girls Dispatch
 
-If you want to announce when registration for your event is open in Django Girls bi-weekly newsletter, send an email to hello@djangogirls.org.
+When you open the registrations for your event, send us an email at hello@djangogirls.com so we can announce it in the Django Girls bi-weekly newsletter.
 
-4) Postponing or cancelling
+4) Postponing or canceling
 
 If you need to cancel or postpone your event, please, send us an email. It can happen and we won't be mad at you ;) Also, if you're stuck on something, we can try to help you!
 
