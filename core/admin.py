@@ -190,6 +190,14 @@ class PostmortemAdmin(admin.ModelAdmin):
     list_display = ('event', 'attendees_count', 'applicants_count')
     raw_id_fields = ('event',)
 
+    def get_changeform_initial_data(self, request):
+        initial = super(PostmortemAdmin, self).get_changeform_initial_data(request)
+        if "event" in request.GET:
+            event = Event.objects.get(pk=request.GET['event'])
+            initial ['event'] = event
+        return initial
+
+
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
