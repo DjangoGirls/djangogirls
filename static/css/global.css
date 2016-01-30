@@ -666,6 +666,7 @@ footer .row .col-md-2 ul li a {
 #annual-report .sponsors img {
   height: 80px;
   margin: 20px 0;
+  max-width:100%;
 }
 #annual-report .sponsors p {
   margin-bottom: 30px;
