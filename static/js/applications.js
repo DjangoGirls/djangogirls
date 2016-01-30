@@ -3,7 +3,7 @@ $(document).ready(function() {
         $(".application-box").prop('checked', $(this).prop('checked'));
     });
 
-    $('.state-change').click(function(){
+    $('.state-change').click(function(e){
         var state = $(this).data('state'),
             appId = $(this).data('app-id'),
             url = $('#applications').data('change-state-url'),
@@ -12,6 +12,7 @@ $(document).ready(function() {
         $.post(url, {'state': state, 'application': appId}, function(data){
             updateApplicationState(appId, state, name);
         });
+        e.preventDefault();
     });
 
     $('#change-state-form').submit(function(){
