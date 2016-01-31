@@ -1,5 +1,5 @@
 body {
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   color: #4a4a4a;
   font-size: 19px;
   line-height: 150%;
@@ -41,7 +41,7 @@ a:hover {
   background: #fff;
   border: 0px;
   border-top: 3px solid #ff9400;
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
 }
 .navbar-default .navbar-brand {
   color: #000;
@@ -156,7 +156,7 @@ a:hover {
   padding: 150px 0;
 }
 #about .overlay h1 {
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   font-size: 60px;
   color: #fff;
   line-height: 60px;
@@ -164,7 +164,7 @@ a:hover {
   margin-bottom: 20px;
 }
 #about .overlay h2 {
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   font-size: 40px;
   color: #e7e7e7;
   line-height: 40px;
@@ -200,7 +200,7 @@ a:hover {
 }
 .coaches .col-md-2 a {
   color: #000;
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   font-size: 18px;
 }
 .social {
@@ -551,7 +551,7 @@ input[type="submit"] {
   margin: 10px 0 30px 0;
 }
 .public-form .field label {
-  font-family: 'Linux Libertine' !important;
+  font-family: 'Lora' !important;
   color: #4a4a4a;
 }
 .public-form .field p {
