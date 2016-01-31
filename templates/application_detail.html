@@ -47,6 +47,7 @@
             </table>
             {% endif %}
 
+            {% if application.state == 'declined' %}
             <h4>Your score</h4>
             <form action="" method="post" class="scoring-form">
                 {% csrf_token %}
@@ -54,8 +55,9 @@
                     {% include 'includes/_form.html' %}
                 {% endwith %}
                 <input class="btn" type="submit" value="Save" />
-                <input class="btn" type="submit" name="random" value="Save & go to next" />
+                <input class="btn" type="submit" name="random" value="Save &amp; go to next" />
             </form>
+            {% endif %}
         </div>
     </div>
 </div>
