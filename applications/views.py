@@ -19,7 +19,7 @@ def apply(request, city):
         raise Http404
     elif type(page) == tuple:
         return render(
-            request, "event_not_live.html",
+            request, "applications/event_not_live.html",
             {'city': page[0], 'past': page[1]}
         )
 
@@ -42,7 +42,7 @@ def apply(request, city):
         form.save(form=form_obj)
         messages.success(request, "Yay! Your application has been saved. You'll hear from us soon!")
 
-        return render(request, 'apply.html', {
+        return render(request, 'applications/apply.html', {
             'page': page,
             'menu': menu,
             'form_obj': form_obj,
@@ -50,7 +50,7 @@ def apply(request, city):
 
     number_of_email_questions = Question.objects.filter(question_type='email', form=form_obj).count()
 
-    return render(request, 'apply.html', {
+    return render(request, 'applications/apply.html', {
         'page': page,
         'menu': menu,
         'form_obj': form_obj,
@@ -77,7 +77,7 @@ def applications(request, city):
     except:
         return redirect('core:event', city=city)
 
-    return render(request, 'applications.html', {
+    return render(request, 'applications/applications.html', {
         'page': page,
         'applications': applications,
         'all_applications_count': Application.objects.filter(form__page=page).count(),
@@ -154,7 +154,7 @@ def application_detail(request, city, app_number):
                     'applications:application_detail', city, new_app.number)
             return redirect('applications:applications', city)
 
-    return render(request, 'application_detail.html', {
+    return render(request, 'applications/application_detail.html', {
         'page': page,
         'application': application,
         'form': application.form,
@@ -174,7 +174,7 @@ def communication(request, city):
 
     emails = Email.objects.filter(form__page=page).order_by('-created')
 
-    return render(request, 'communication.html', {
+    return render(request, 'applications/communication.html', {
         'page': page,
         'menu': get_organiser_menu(city),
         'emails': emails,
@@ -202,7 +202,7 @@ def compose_email(request, city, email_id=None):
             obj.send()
         return redirect('applications:communication', city)
 
-    return render(request, 'compose_email.html', {
+    return render(request, 'applications/compose_email.html', {
         'page': page,
         'menu': get_organiser_menu(city),
         'form': form,
@@ -262,7 +262,7 @@ def rsvp(request, city, code):
         raise Http404
     elif type(page) == tuple:
         return render(
-            request, "event_not_live.html",
+            request, "applications/event_not_live.html",
             {'city': page[0], 'past': page[1]}
         )
 
@@ -281,7 +281,7 @@ def rsvp(request, city, code):
 
     menu = EventPageMenu.objects.filter(page=page)
 
-    return render(request, 'apply.html', {
+    return render(request, 'applications/apply.html', {
         'page': page,
         'menu': menu,
     })

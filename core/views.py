@@ -16,7 +16,7 @@ def index(request):
 
     stories = Story.objects.all().order_by('-created')[:4]
 
-    return render(request, 'index.html', {
+    return render(request, 'core/index.html', {
         'future_events': Event.objects.future().select_related('eventpage'),
         'past_events': Event.objects.past().select_related('eventpage'),
         'stories': stories,
@@ -26,7 +26,7 @@ def index(request):
 
 def events(request):
 
-    return render(request, 'events.html', {
+    return render(request, 'core/events.html', {
         'future_events': Event.objects.future().select_related('eventpage'),
         'past_events': Event.objects.past().select_related('eventpage'),
     })
@@ -34,23 +34,23 @@ def events(request):
 
 def events_map(request):
 
-    return render(request, 'events_map.html', {
+    return render(request, 'core/events_map.html', {
         'events': Event.objects.public().order_by('date'),
         'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
 
 
 def resources(request):
-    return render(request, 'resources.html', {})
+    return render(request, 'core/resources.html', {})
 
 
 def organize(request):
-    return render(request, 'organize.html', {})
+    return render(request, 'core/organize.html', {})
 
 
 def stories(request):
 
-    return render(request, 'stories.html', {
+    return render(request, 'core/stories.html', {
         'stories': Story.objects.all().order_by('-created'),
     })
 
@@ -70,11 +70,11 @@ def event(request, city):
     if not page.is_live and not can_show:
         return render(
             request,
-            'event_not_live.html',
+            'applications/event_not_live.html',
             {'city': city, 'past': page.event.date <= now_approx}
         )
 
-    return render(request, "event.html", {
+    return render(request, "core/event.html", {
         'page': page,
         'menu': page.menu.all(),
         'content': page.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
@@ -96,11 +96,11 @@ def events_ical(request):
 
 
 def newsletter(request):
-    return render(request, 'newsletter.html', {})
+    return render(request, 'core/newsletter.html', {})
 
 
 def faq(request):
-    return render(request, 'faq.html', {})
+    return render(request, 'core/faq.html', {})
 
 
 def contact(request):
@@ -121,26 +121,26 @@ def contact(request):
                     messages.ERROR,
                     "Ooops. We couldn't send your email :( Please try again later"
                 )
-            return render(request, 'contact.html', {'form': ContactForm()})
+            return render(request, 'core/contact.html', {'form': ContactForm()})
     else:
         form = ContactForm()
-    return render(request, 'contact.html', {'form': form})
+    return render(request, 'core/contact.html', {'form': form})
 
 
 def foundation(request):
-    return render(request, 'foundation.html', {})
+    return render(request, 'core/foundation.html', {})
 
 
 def governing_document(request):
-    return render(request, 'governing_document.html', {})
+    return render(request, 'core/governing_document.html', {})
 
 
 def contribute(request):
-    return render(request, 'contribute.html', {})
+    return render(request, 'core/contribute.html', {})
 
 
 def year_2015(request):
-    return render(request, '2015.html', {
+    return render(request, 'core/2015.html', {
         'events': Event.objects.public().filter(date__lt='2016-01-01').order_by('date'),
         'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
