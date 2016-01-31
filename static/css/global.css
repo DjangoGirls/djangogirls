@@ -232,6 +232,15 @@ nav ul li:first-child {
 #about iframe {
   margin-top: 80px;
 }
+#about .newsletter {
+  margin: 18px 0;
+}
+span.highlighted-number {
+  background: rgba(255,127,0,0.6);
+  padding: 3px 3px 3px 5px;
+  margin-right: 5px;
+  color: #fff;
+}
 /*
 ------------------------
     Events
@@ -282,19 +291,11 @@ nav ul li:first-child {
 #events .event:hover p.credit {
   opacity: 1;
 }
-#events .past-events {
-  margin-top: 40px;
-}
-#events .past-events a {
-  margin-right: 60px;
-  margin-bottom: 15px;
-  float: left;
-}
-#events .past-events .col-md-12 {
-  max-height: 200px;
+#events .upcoming-events .row-container {
+  max-height: 450px;
   overflow: hidden;
 }
-#events .past-events .show-more {
+#events .upcoming-events .show-more {
   width: 100%;
   height: 100px;
   position: relative;
@@ -302,13 +303,15 @@ nav ul li:first-child {
   margin-top: -55px;
   padding-top: 63px;
   text-align: center;
+  font-size: 26px;
+  font-style: italic;
   background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, #fff 53%); /* FF3.6+ */
   background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, #fff 53%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, #fff 53%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, #fff 53%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 53%); /* W3C */
 }
-#events .past-events .show-more a {
+#events .upcoming-events .show-more a {
   float: none;
   margin: 0;
 }
@@ -362,7 +365,7 @@ nav ul li:first-child {
 }
 #story .row,
 #stories .row {
-  margin: 15px 0;
+  margin: 15px -15px;
 }
 #story .row .girl,
 #stories .row .girl {
@@ -409,7 +412,7 @@ nav ul li:first-child {
   margin-bottom: 30px;
 }
 #supporters .row {
-  margin: 30px 0;
+  margin: 30px -15px;
 }
 #supporters .row .col-md-3 {
   text-align: center;
@@ -472,7 +475,6 @@ nav ul li:first-child {
 }
 #support .partnership {
   margin-top: 30px;
-  font-family: Roboto;
   font-size: 16px;
 }
 #support .support-bar {

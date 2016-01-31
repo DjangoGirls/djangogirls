@@ -25,20 +25,17 @@
     </section>
 
     <div class="container">
-
         <section id="about">
-
             <div class="row">
                 <div class="col-md-6">
-                    <h2>About</h2>
+                    <h2>What is Django Girls?</h2>
                     <p>
-                        Django Girls is a non-profit organization that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. It was born in July 2014 in Berlin and started by two Olas: <a href="http://twitter.com/olasitarska">Sitarska</a> and <a href="http://twitter.com/asendecka">Sendecka</a>. Today, Django Girls is a volunteer run organization with hundreds of people contributing to bring more women to Python & Django community.
+                        Django Girls is a <a href="{% url 'core:foundation' %}">non-profit organization</a> and a community that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. We are a volunteer run organization with hundreds of people contributing to bring more amazing women into the world of technology. We are making technology more approachable by creating simpler tools and resources designed with empathy.
                     </p>
-
-                    <h2>Mission</h2>
                     <p>
-                        Our goal is to bring more amazing women into the world of technology and increase the diversity in the Django community. We believe that technology is for people and <em>everyone</em> should be able to build it. We are making technology more approachable by creating simple tools and resources designed with empathy.
+                        During each of our events, 30-60 women build their first web application using HTML, CSS, Python and Django.
                     </p>
+                    {# <p><a href="">Learn more about Django Girls »</a></p> #}
                 </div>
                 <div class="col-md-6">
                   <iframe src="//player.vimeo.com/video/112325567?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="585" height="329" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -47,47 +44,36 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Workshops</h2>
+                    <h2>Django Girls impact</h2>
                     <p>
-                        Each Django Girls event is a free, one-day workshop for 30-60 people about building your first application using HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.
+                        Since 2014, an army of <span class="highlighted-number">{{ organizers_count|default_if_none:'0' }} volunteers</span> in the Django Girls community organized <span class="highlighted-number">{{ all_events_count|default_if_none:'0' }} events.</span> We've been to <span class="highlighted-number">{{ cities_count|default_if_none:'0' }} cities</span> in <span class="highlighted-number">{{ country_count|default_if_none:'0' }} countries</span> (<a href="{% url 'core:events_map' %}">see them all on a map</a>).
                     </p>
-                </div>
-                <div class="col-md-6">
-                    <h2>Tutorial</h2>
                     <p>
-                        During the workshop, attendees follow a tutorial written especially for this purpose. The tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch, including deployment to <a href="https://www.pythonanywhere.com/">Python Anywhere</a>.
+                        A total of <span class="highlighted-number">{{ attendees_sum|default_if_none:'0' }} incredible women attended</span> events organized by members of our community.
                     </p>
+                    <p><a href="{% url 'core:year_2015' %}">Read our Annual Report to learn about the impact we make »</a></p>
                 </div>
 
-            </div>
-        </section>
-
-        <section id="support">
-            <div class="row">
                 <div class="col-md-6">
-                    <h2>Support Django Girls! 💕</h2>
-                    <h3>Make a donation on Patreon!</h3>
-                    <p class="support-stats">
-                        <span>${{ patreon_stats.amount_raised }}</span> of <span>${{ patreon_stats.GOAL }}</span> monthly goal pledged
-                    </p>
-                    <div class="support-bar">
-                      <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%</div>
-                    </div>
-                    <a class="btn" href="http://patreon.com/djangogirls">Make a donation on Patreon</a>
-                    <p class="partnership">
-                        Or if you would like to discuss a bigger partnership, <a href="mailto:hello@djangogirls.org">please get in touch</a>.
-                    </p>
-                </div>
-                <div class="col-md-6" style="padding-top: 95px;">
+                    <h2>Stay up to date!</h2>
                     <p>
-                        Django Girls is a <a href="{% url 'core:foundation' %}">non-profit organization</a> and we're crowdfunding money to help us pay for <a href="https://github.com/DjangoGirls/wiki/blob/master/general/ambassador.md" target="_blank">Awesomeness Ambassador</a>, a part-time position that makes it possible to run daily operations of Django Girls: providing support to local organizers, maintaining our freeily available resources or managing volunteers.
+                        Subscribe to Django Girls Dispatch to receive the latest and greatest from our community every two weeks, straight to your inbox!
                     </p>
                     <p>
-                        To date we organized {{ past_events_count }} free workshops attended by {{ attendees_sum }} women in {{ countries_count }} countries on all continents. We're currently organizing {{ future_events_count }} more workshops in the next couple of weeks.
+                      <form action="http://test2975.createsend.com/t/i/s/tykhhd/" method="post" id="subForm" class="newsletter">
+                          <input id="fieldEmail" name="cm-tykhhd-tykhhd" type="email" placeholder="you@reaweso.me" required />
+                          <input type="submit" value="Subscribe" />
+                      </form>
                     </p>
                     <p>
-                        Django Girls is a volunteer run organization, and we depend on your support to make it happen.
+                        <a href="{% url 'core:newsletter' %}">See the Django Girls Dispatch archives »</a>
                     </p>
+                    <!--
+                      <h2>Tutorial</h2>
+                      <p>
+                          During the workshop, attendees follow a tutorial written especially for this purpose. The tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch, including deployment to <a href="https://www.pythonanywhere.com/">Python Anywhere</a>.
+                      </p>
+                    -->
                 </div>
             </div>
         </section>
@@ -103,62 +89,66 @@
                 </div>
             </div>
 
-            <div class="row">
-                {% for event in future_events %}
-                    {% include 'includes/_event.html' with event=event %}
-                    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-                {% endfor %}
-            </div>
-
-            <div class="row past-events">
-                <div class="col-md-12">
-                    <h2>Past events</h2>
-                    {% for event in past_events %}
-                        <a href="{% if event.eventpage.is_live %}/{{ event.eventpage.url }}{% endif %}">
-                            {{ event.city }}, {{ event.date }}
-                        </a>
+            <div class="upcoming-events">
+                <div class="row-container">
+                    <div class="row">
+                    {% for event in future_events %}
+                        {% include 'includes/_event.html' with event=event %}
+                        {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                     {% endfor %}
-
+                    </div>
                 </div>
-                <div class="show-more"><a href="javascript:;">Show more</a></div>
+                <div class="show-more"><a href="javascript:;">Show all {{ future_events_count }} upcoming events »</a></div>
             </div>
-
-        </section>
-
-        <section id="organize">
-
-            {% include 'includes/_no_event.html' %}
-
         </section>
 
         <section id="story">
-
             <div class="row">
-                <div class="col-md-12">
-                    <h2>Django Girls Story</h2>
-                    <p>Each week we try to introduce two badass ladies who use Python or Django to highlight their work:</p>
+                <div class="col-md-6">
+                    <h2>Badass Django Ladies</h2>
+                    <p>Each week we try to introduce one badass lady who use Python or Django and highlight her work:</p>
+
+                    <div class="row">
+                    {% for story in stories %}
+                        {% include 'includes/_story.html' with story=story %}
+                    {% endfor %}
+                    </div>
+
+                    <p><a href="{% url 'core:stories' %}">Read all Django Stories »</a></p>
                 </div>
             </div>
+        </section>
 
+        <section id="support">
             <div class="row">
-                {% for story in stories %}
-                    {% include 'includes/_story.html' with story=story %}
-                {% endfor %}
-            </div>
+                <div class="col-md-6">
+                    <h2>Support our work</h2>
+                    <p>Django Girls is a volunteer run organization, and we depend on your support to make it happen.</p>
+                    <p class="support-stats">
+                        <span class="highlighted-number">${{ patreon_stats.amount_raised }}</span> of <span class="highlighted-number">${{ patreon_stats.GOAL }}</span> monthly goal pledged
+                    </p>
+                    <div class="support-bar">
+                      <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%</div>
+                    </div>
+                    <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
+                    <p class="partnership">
+                        Or if you would like to discuss a bigger partnership, <a href="mailto:hello@djangogirls.org">please get in touch</a>.
+                    </p>
+                </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p><a href="{% url 'core:stories' %}">See more stories »</a></p>
+                <div class="col-md-6">
+                    <h2>Get involved</h2>
+                    <p>There are many ways to contribute to Django Girls: organize an event, coach, work on the tutorial, fix an issue with this website or help people on Gitter.</p>
+                    <p><a href="{% url 'core:contribute' %}">Learn more about ways you can get involved »</a>
                 </div>
             </div>
-
         </section>
 
         <section id="supporters">
-
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Supporters</h2>
+                    <h2>They already support us! 💕</h2>
+                    <p>Those incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br /> If you wish to join them, support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or <a href="{% url 'core:contact' %}">drop us a line</a>.</p>
                 </div>
             </div>
 
@@ -191,12 +181,6 @@
                     <a href="https://www.mandrill.com/">
                         <img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" style="margin-top: 0px" />
                     </a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Wanna join us on the mission? Support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or <a href="{% url 'core:contact' %}">drop us a line</a>.</p>
                 </div>
             </div>
 

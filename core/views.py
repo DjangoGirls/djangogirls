@@ -7,20 +7,21 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import Event, EventPage, Story, ContactEmail
+from .models import Event, EventPage, Story, ContactEmail, User
 from .forms import ContactForm
 from patreonmanager.models import FundraisingStatus
 
 
 def index(request):
 
-    stories = Story.objects.all().order_by('-created')[:4]
+    stories = Story.objects.all().order_by('-created')[:2]
 
     return render(request, 'core/index.html', {
-        'future_events': Event.objects.future().select_related('eventpage'),
-        'past_events': Event.objects.past().select_related('eventpage'),
+        'future_events': Event.objects.future().select_related('eventpage')[:6],
         'stories': stories,
         'patreon_stats': FundraisingStatus.objects.all().first(),
+        'organizers_count': User.objects.all().count(),
+        'cities_count': Event.objects.values('city').distinct().count(),
     })
 
 

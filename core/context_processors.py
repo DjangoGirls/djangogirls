@@ -14,6 +14,7 @@ def statistics(request):
     return {
         'past_events_count': past_events.count(),
         'future_events_count': future_events.count(),
+        'all_events_count': past_events.count() + future_events.count(),
         'countries_count': countries.count(),
         'attendees_sum': attendees['attendees'],
         'applicants_sum': attendees['applicants'],
