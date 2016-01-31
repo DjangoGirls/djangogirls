@@ -8,8 +8,8 @@ body {
   height: 100%;
 }
 body {
-  font: 20px 'Linux Libertine';
-  color: #4a4a4a;
+  font: 18px 'Lora';
+  color: #000;
   line-height: 29px;
   font-weight: 300;
 }
@@ -22,7 +22,7 @@ h5 {
   color: #000;
   font-weight: 300;
   font-size: 40px;
-  line-height: 120%;
+  line-height: 180%;
 }
 h2 {
   font-size: 36px;
@@ -198,7 +198,7 @@ nav ul li:first-child {
   text-align: center;
 }
 #box-with-picture h1 {
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   font-size: 48px;
   color: #fff;
   line-height: 55px;
@@ -206,8 +206,8 @@ nav ul li:first-child {
   margin-bottom: 20px;
 }
 #box-with-picture p {
-  font-family: 'Linux Libertine';
-  font-size: 24px;
+  font-family: 'Lora';
+  font-size: 20px;
   color: #e7e7e7;
   line-height: 30px;
   font-style: italic;
@@ -348,7 +348,7 @@ nav ul li:first-child {
 .newsletter-archive ul li a {
   text-decoration: none;
   color: #f7921d;
-  font-family: 'Linux Libertine';
+  font-family: 'Lora';
   font-size: 20px;
 }
 /*
@@ -536,8 +536,9 @@ footer .row .col-md-2 ul {
 }
 footer .row .col-md-2 ul li {
   margin-left: 0;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 28px;
+  color: #4a4a4a;
 }
 footer .row .col-md-2 ul li a {
   text-decoration: none;
@@ -870,7 +871,7 @@ input[type="submit"] {
   margin: 10px 0 30px 0;
 }
 .public-form .field label {
-  font-family: 'Linux Libertine' !important;
+  font-family: 'Lora' !important;
   color: #4a4a4a;
 }
 .public-form .field p {
