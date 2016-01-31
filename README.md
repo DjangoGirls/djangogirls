@@ -1,7 +1,5 @@
 # Django Girls website
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/djangogirlsjobs/djangogirls?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).
 
 ## What's in it?
@@ -57,14 +55,14 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 
 The website is hosted on PyhtonAnywhere and is available here: http://djangogirls.org/
 
-We have an auto-deploy thing going on, so everything commited to master is automatically deployed to our Heroku. 
+We have an auto-deploy thing going on, so everything commited to master is automatically deployed to our Heroku.
 
 ## Setting up a development environment
 
 First, clone the repository:
 
     git clone git@github.com:DjangoGirls/djangogirls.git
-  
+
 Step into newly created `djangogirls` directory:
 
     cd djangogirls
@@ -76,19 +74,19 @@ Create a new virtual environment if needed. Then, install all the required depen
 Create your database:
 
     ./manage.py migrate
-  
+
 Load sample data to the database
 
     ./manage.py loaddata sample_db.json
-    
+
 Create a user so you can login to the admin:
 
     ./manage.py createsuperuser
-  
+
 Run your local server:
 
      ./manage.py runserver
-  
+
 :tada: You're done.
 
 ### CSS processing
@@ -100,7 +98,7 @@ This means you shouldn't change any css files, but `.styl` files. They're in /st
 Install stylus:
 
     npm install stylus -g
-  
+
 Autocompiling of `.styl` files to `.css`:
 
     stylus -w static/css
@@ -112,4 +110,3 @@ Key bits of config and secrets are stored in environment variables in two places
 
 * in the WSGI file (linked from the Web Tab)
 * in the virtualenv postactivate at ~/.virtualenvs/djangogirls.com/bin/postactivate
-
