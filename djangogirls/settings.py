@@ -117,11 +117,20 @@ AUTH_USER_MODEL = 'core.User'
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls',
-    'MENU_ICONS': {
-        'jobs': 'icon-list-alt',
-    },
-    'MENU_EXCLUDE': ('core.sponsor', 'core.coach'),
     'SEARCH_URL': '/admin/core/event/',
+    'MENU': (
+        {'label': 'Users & Groups', 'icon':'icon-user', 'models': ('core.user', 'auth.group')},
+        {'label': 'Events', 'icon':'icon-star', 'models': (
+            'core.event', 'core.eventpage', 'core.eventpagecontent',
+            'core.eventpagemenu', 'core.postmortem',
+        )},
+        {'label': 'Application Form', 'app': 'applications', 'icon':'icon-tasks'},
+        {'app': 'flatpages', 'icon':'icon-file'},
+        {'app': 'jobs', 'icon':'icon-briefcase'},
+        {'app': 'patreonmanager', 'icon':'icon-gift', 'models': ('patron', 'payment', 'reward')},
+        {'label': 'Organizer\'s Manual', 'icon':'icon-bookmark', 'url': 'http://organize.djangogirls.org/'},
+        {'label': 'Support', 'icon':'icon-question-sign', 'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'},
+    )
 }
 
 THUMBNAIL_PRESERVE_EXTENSIONS = True
