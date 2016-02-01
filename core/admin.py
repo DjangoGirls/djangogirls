@@ -7,6 +7,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin, SortableTabularInline
+from codemirror import CodeMirrorTextarea
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
@@ -59,7 +60,7 @@ class EventPageAdmin(admin.ModelAdmin):
 class EventPageContentForm(ModelForm):
     class Meta:
         widgets = {
-            'content': RedactorWidget(editor_options={'lang': 'en'})
+            'content': CodeMirrorTextarea(mode="xml")
         }
         fields = (
             'page',
