@@ -7,10 +7,10 @@ local_settings.py
 .anvil/*
 __pycache__
 .Python
-bin
-lib
-src
-include
+/bin
+/lib
+/src
+/include
 .coverage
 .venv
 static/media
