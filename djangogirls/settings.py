@@ -125,6 +125,7 @@ SUIT_CONFIG = {
             'core.eventpagemenu', 'core.postmortem',
         )},
         {'label': 'Application Form', 'app': 'applications', 'icon':'icon-tasks'},
+        {'label': 'Submitted Applications', 'url': '/admin/applications/form/submissions/', 'icon':'icon-user'},
         {'app': 'flatpages', 'icon':'icon-file'},
         {'app': 'jobs', 'icon':'icon-briefcase'},
         {'app': 'patreonmanager', 'icon':'icon-gift', 'models': ('patron', 'payment', 'reward')},

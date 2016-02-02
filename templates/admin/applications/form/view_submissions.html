@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Submitted applications</h1>
+{% if forms %}
+<p>To see applications that have been submitted to your workshop, choose an event from the list below:</p>
+<ul>
+  {% for form in forms %}
+    <li><a href="{% url 'applications:applications' form.page.url %}">{{ form.page.event.name }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>To see submitted applications, you need to <a href="{% url 'admin:applications_form_add' %}">add an application form</a> first.
+{% endif %}
+{% endblock %}
