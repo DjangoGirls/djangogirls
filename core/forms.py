@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import forms as auth_forms
+from captcha.fields import ReCaptchaField
 
 from .models import User, ContactEmail, Event
 
@@ -71,6 +72,7 @@ class ContactForm(forms.ModelForm):
         queryset=Event.objects.public().distinct('city', 'country').order_by('city'),
         required=False, label="Django Girls workshop in..."
     )
+    captcha = ReCaptchaField()
 
     class Meta:
         model = ContactEmail
