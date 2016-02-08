@@ -5,6 +5,7 @@ from captcha.fields import ReCaptchaField
 
 from .models import Application, Answer, Question, Score, Email
 from .utils import generate_form_from_questions
+from core.forms import BetterReCaptchaField
 
 
 class ApplicationForm(forms.Form):
@@ -17,7 +18,7 @@ class ApplicationForm(forms.Form):
         questions = kwargs.pop('questions')
         super(ApplicationForm, self).__init__(*args, **kwargs)
         self.fields = generate_form_from_questions(questions)
-        self.fields['captcha'] = ReCaptchaField()
+        self.fields['captcha'] = BetterReCaptchaField()
 
 
     def save(self, *args, **kwargs):

@@ -1,3 +1,4 @@
+import os
 from datetime import timedelta
 from django.core import mail
 from django.test import TestCase, RequestFactory
@@ -132,6 +133,13 @@ class CoreViewsTestCase(TestCase):
 class ContactTestCase(TestCase):
     fixtures = ['core_views_testdata.json']
 
+    def setUp(self):
+        os.environ['RECAPTCHA_TESTING'] = 'True'
+
+    def tearDown(self):
+        del os.environ['RECAPTCHA_TESTING']
+
+
     def test_contact_page_loads(self):
         url = reverse('core:contact')
         resp = self.client.get(url)
@@ -144,6 +152,7 @@ class ContactTestCase(TestCase):
             'message': 'nice message',
             'email': 'lord@dracula.trans',
             'contact_type': ContactEmail.SUPPORT,
+            'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
         self.assertEqual(200, resp.status_code)
@@ -166,6 +175,7 @@ class ContactTestCase(TestCase):
             'email': 'lord@dracula.trans',
             'contact_type': ContactEmail.CHAPTER,
             'event': "1",
+            'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
         self.assertEqual(200, resp.status_code)
@@ -200,7 +210,8 @@ class ContactTestCase(TestCase):
             'message': 'nice message',
             'email': 'lord@dracula.trans',
             'contact_type': ContactEmail.CHAPTER,
-            'event': event.pk
+            'event': event.pk,
+            'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
         self.assertEqual(200, resp.status_code)
