@@ -1,8 +1,16 @@
 from django import forms
+from django.conf import settings
 from django.contrib.auth import forms as auth_forms
 from captcha.fields import ReCaptchaField
 
 from .models import User, ContactEmail, Event
+
+class BetterReCaptchaField(ReCaptchaField):
+    """A ReCaptchaField that always works in DEBUG mode"""
+    def clean(self, values):
+        if settings.DEBUG:
+            return values[0]
+        return super(BetterReCaptchaField, self).clean(values)
 
 
 class UserCreationForm(forms.ModelForm):
@@ -72,7 +80,7 @@ class ContactForm(forms.ModelForm):
         queryset=Event.objects.public().distinct('city', 'country').order_by('city'),
         required=False, label="Django Girls workshop in..."
     )
-    captcha = ReCaptchaField()
+    captcha = BetterReCaptchaField()
 
     class Meta:
         model = ContactEmail
