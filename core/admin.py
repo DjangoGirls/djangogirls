@@ -12,11 +12,13 @@ from codemirror import CodeMirrorTextarea
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
+from .filters import OpenRegistrationFilter
 
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
                     'is_on_homepage', 'is_past_event', 'has_stats')
+    list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
     filter_horizontal = ['team']
 
