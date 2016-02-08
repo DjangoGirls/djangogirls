@@ -37,3 +37,4 @@ six==1.10.0
 -e git://github.com/olasitarska/slacker.git#egg=slacker
 whitenoise==2.0.6
 django-recaptcha
+django-codemirror-widget

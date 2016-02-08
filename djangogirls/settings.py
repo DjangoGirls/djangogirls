@@ -228,3 +228,5 @@ if 'OPBEAT_SECRET_TOKEN' in os.environ:
     MIDDLEWARE_CLASSES = (
         'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     ) + MIDDLEWARE_CLASSES
+
+CODEMIRROR_PATH = "vendor/codemirror/"

@@ -4,9 +4,11 @@ from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
+from django.utils.safestring import mark_safe
 
 from suit_redactor.widgets import RedactorWidget
 from suit.admin import SortableModelAdmin, SortableTabularInline
+from codemirror import CodeMirrorTextarea
 
 from .models import *
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
@@ -56,10 +58,31 @@ class EventPageAdmin(admin.ModelAdmin):
         return self.readonly_fields
 
 
+class ResizableCodeMirror(CodeMirrorTextarea):
+    def __init__(self, **kwargs):
+        super(ResizableCodeMirror, self).__init__(js_var_format='%s_editor', **kwargs)
+
+    @property
+    def media(self):
+        mine= forms.Media(css={'all': ('vendor/jquery-ui/jquery-ui.min.css',)},
+                          js=('vendor/jquery-ui/jquery-ui.min.js',))
+        return super(ResizableCodeMirror, self).media + mine
+
+    def render(self, name, value, attrs=None):
+        output = super(ResizableCodeMirror, self).render(name, value, attrs)
+        return output + mark_safe('''
+<script type="text/javascript">
+$('.CodeMirror').resizable({
+  resize: function() {
+    %s_editor.setSize($(this).width(), $(this).height());
+  }
+});
+</script>''' % name)
+
 class EventPageContentForm(ModelForm):
     class Meta:
         widgets = {
-            'content': RedactorWidget(editor_options={'lang': 'en'})
+            'content': ResizableCodeMirror(mode="xml")
         }
         fields = (
             'page',
