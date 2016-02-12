@@ -130,6 +130,9 @@ SUIT_CONFIG = {
         {'app': 'jobs', 'icon':'icon-briefcase'},
         {'app': 'patreonmanager', 'icon':'icon-gift', 'models': ('patron', 'payment', 'reward')},
         {'label': 'Organizer\'s Manual', 'icon':'icon-bookmark', 'url': 'http://organize.djangogirls.org/'},
+        {'label': 'Organizer\'s FAQ', 'icon':'icon-bookmark', 'url': 'http://organize.djangogirls.org/faq/'},
+        {'label': 'Organizer\'s Google Group', 'icon':'icon-bookmark', 'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'},
+        {'label': 'Organizer\'s Slack', 'icon':'icon-bookmark', 'url': 'https://djangogirls.slack.com/'},
         {'label': 'Support', 'icon':'icon-question-sign', 'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'},
     )
 }
