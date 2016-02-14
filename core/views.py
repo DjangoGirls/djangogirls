@@ -14,11 +14,10 @@ from patreonmanager.models import FundraisingStatus
 
 def index(request):
 
-    stories = Story.objects.all().order_by('-created')[:2]
-
     return render(request, 'core/index.html', {
         'future_events': Event.objects.future().select_related('eventpage')[:6],
-        'stories': stories,
+        'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
+        'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
         'patreon_stats': FundraisingStatus.objects.all().first(),
         'organizers_count': User.objects.all().count(),
         'cities_count': Event.objects.values('city').distinct().count(),
@@ -52,7 +51,7 @@ def organize(request):
 def stories(request):
 
     return render(request, 'core/stories.html', {
-        'stories': Story.objects.all().order_by('-created'),
+        'stories': Story.objects.filter(is_story=True).order_by('-created'),
     })
 
 

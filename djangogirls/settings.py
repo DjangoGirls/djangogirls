@@ -127,6 +127,7 @@ SUIT_CONFIG = {
         {'label': 'Application Form', 'app': 'applications', 'icon':'icon-tasks'},
         {'label': 'Submitted Applications', 'url': '/admin/applications/form/submissions/', 'icon':'icon-user'},
         {'app': 'flatpages', 'icon':'icon-file'},
+        {'label': 'Blog & Django Stories', 'icon':'icon-comment', 'models': ('core.Story',)},
         {'app': 'jobs', 'icon':'icon-briefcase'},
         {'app': 'patreonmanager', 'icon':'icon-gift', 'models': ('patron', 'payment', 'reward')},
         {'label': 'Organizer\'s Manual', 'icon':'icon-bookmark', 'url': 'http://organize.djangogirls.org/'},

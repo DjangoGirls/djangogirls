@@ -775,6 +775,10 @@ footer .row .col-md-2 ul li a {
     margin-bottom: -900px;
   }
 }
+.post-content {
+  font-size: 16px;
+  margin-bottom: 25px;
+}
 input[type="text"],
 input[type="number"],
 input[type="email"] {

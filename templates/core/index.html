@@ -110,6 +110,13 @@
 
                     <p><a href="{% url 'core:stories' %}">Read all Django Stories »</a></p>
                 </div>
+                <div class="col-md-6">
+                    <h2>Latest from our blog</h2>
+                    {% for blog in blogposts %}
+                    <a href="{{ blog.post_url }}" target="_blank" class="post-title">{{ blog.name }}</a>
+                    <p class="post-content">{{ blog.content|striptags|truncatewords:25 }} <a href="{{ blog.post_url }}" target="_blank">Read all »</a></p>
+                    {% endfor %}
+                </div>
             </div>
         </section>
 
