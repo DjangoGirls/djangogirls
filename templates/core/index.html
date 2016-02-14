@@ -68,12 +68,6 @@
                     <p>
                         <a href="{% url 'core:newsletter' %}">See the Django Girls Dispatch archives »</a>
                     </p>
-                    <!--
-                      <h2>Tutorial</h2>
-                      <p>
-                          During the workshop, attendees follow a tutorial written especially for this purpose. The tutorial is also <a href="http://github.com/djangogirls/tutorial">open sourced</a> and <a href="http://tutorial.djangogirls.org/">available for free</a>. It covers creating your blog application from scratch, including deployment to <a href="https://www.pythonanywhere.com/">Python Anywhere</a>.
-                      </p>
-                    -->
                 </div>
             </div>
         </section>
@@ -132,14 +126,15 @@
                     </div>
                     <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
                     <p class="partnership">
-                        Or if you would like to discuss a bigger partnership, <a href="mailto:hello@djangogirls.org">please get in touch</a>.
+                        Or if you would like to discuss a bigger partnership, <a href="{% url 'core:contact' %}">please get in touch</a>.
                     </p>
                 </div>
 
                 <div class="col-md-6">
-                    <h2>Get involved</h2>
-                    <p>There are many ways to contribute to Django Girls: organize an event, coach, work on the tutorial, fix an issue with this website or help people on Gitter.</p>
-                    <p><a href="{% url 'core:contribute' %}">Learn more about ways you can get involved »</a>
+                    <h2>Bring Django Girls to your city!</h2>
+                    <p>Is there no Django Girls event in your city? You can help make that happen!</p>
+                    <p>We open sourced the <a href="http://organize.djangogirls.org/">Organizer Manual</a> that provides you with all information required to organize Django Girls workshop. By volunteering to organize, you're joining a vibrant and supportive community of {{ organizers_count|default_if_none:'0' }} organizers all over the world!</p>
+                    <p><a class="btn" href="{% url 'core:organize' %}">Apply to organize a workshop</a></p>
                 </div>
             </div>
         </section>
