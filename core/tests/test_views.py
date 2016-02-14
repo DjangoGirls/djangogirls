@@ -41,12 +41,7 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual([event.pk for event in resp.context['future_events']], [1])
         self.assertNotEqual([event.pk for event in resp.context['future_events']], [2])
 
-        # Is past event on past list?
-        self.assertEqual([event.pk for event in resp.context['past_events']], [2])
-        self.assertNotEqual([event.pk for event in resp.context['past_events']], [1])
-
         # Is hidden event on the list?
-        self.assertNotEqual([event.pk for event in resp.context['past_events']], [3])
         self.assertNotEqual([event.pk for event in resp.context['future_events']], [3])
 
     def test_event_published(self):
