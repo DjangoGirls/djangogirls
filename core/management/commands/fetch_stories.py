@@ -30,20 +30,26 @@ class Command(BaseCommand):
             title = post.find('title').text
             if 'Your Django Story: Meet' in title:
                 name = title.replace('Your Django Story: Meet ', '')
+                is_story = True
+            else:
+                name = title
+                is_story = False
 
-                if not Story.objects.filter(name=name).exists():
-                    post_url = post.find('link').text
-                    post = pq(post.find('description').text)
-                    image_url = post('img').attr.src
+            if not Story.objects.filter(name=name).exists():
+                post_url = post.find('link').text
+                post = pq(post.find('description').text)
+                image_url = post('img').attr.src
+                story = Story(name=name, post_url=post_url, content=post, is_story=is_story)
 
-                    if image_url:
-                        story = Story(name=name, post_url=post_url)
+                if image_url:
+                    img = NamedTemporaryFile(delete=True)
+                    img.write(urlopen(image_url).read())
+                    img.flush()
+                    story.image.save(image_url.split('/')[-1], File(img))
 
-                        img = NamedTemporaryFile(delete=True)
-                        img.write(urlopen(image_url).read())
-                        img.flush()
+                story.save()
 
-                        story.image.save(image_url.split('/')[-1], File(img))
-                        story.save()
-
-                        print('Story of %s has been fetched' % name)
+                if is_story:
+                    print('Story of %s has been fetched' % name)
+                else:
+                    print('Blogpost "%s" has been fetched' % name)

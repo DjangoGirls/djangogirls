@@ -273,6 +273,13 @@ class UserAdmin(auth_admin.UserAdmin):
             return self.limited_fieldsets
         return super(UserAdmin, self).get_fieldsets(request, obj)
 
+
+class StoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_story', 'created')
+    search_fields = ('name', 'content')
+    list_filter = ('is_story',)
+
+
 class MyFlatPageAdmin(FlatPageAdmin):
 
     class MyFlatpageForm(FlatpageForm):
@@ -284,9 +291,6 @@ class MyFlatPageAdmin(FlatPageAdmin):
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, MyFlatPageAdmin)
-
-
-
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventPage, EventPageAdmin)
 admin.site.register(EventPageContent, EventPageContentAdmin)
@@ -295,3 +299,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Postmortem, PostmortemAdmin)
 admin.site.register(Coach, CoachAdmin)
+admin.site.register(Story, StoryAdmin)
