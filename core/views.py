@@ -21,6 +21,7 @@ def index(request):
         'patreon_stats': FundraisingStatus.objects.all().first(),
         'organizers_count': User.objects.all().count(),
         'cities_count': Event.objects.values('city').distinct().count(),
+        'country_count': Event.objects.values('country').distinct().count(),
     })
 
 
