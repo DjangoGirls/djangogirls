@@ -55,6 +55,7 @@ class FormAdmin(admin.ModelAdmin):
 class QuestionAdmin(SortableModelAdmin):
     list_display = ('form', 'title', 'question_type', 'is_required', 'order')
     sortable = 'order'
+    list_filter = ('form',)
 
     def get_queryset(self, request):
         qs = super(QuestionAdmin, self).get_queryset(request)
