@@ -15,7 +15,7 @@ from patreonmanager.models import FundraisingStatus
 def index(request):
 
     return render(request, 'core/index.html', {
-        'future_events': Event.objects.future().select_related('eventpage')[:6],
+        'future_events': Event.objects.future().select_related('eventpage'),
         'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
         'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
         'patreon_stats': FundraisingStatus.objects.all().first(),
