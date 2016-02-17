@@ -145,3 +145,9 @@ def year_2015(request):
         'events': Event.objects.public().filter(date__lt='2016-01-01').order_by('date'),
         'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
+
+def terms_conditions(request):
+    return render(request, 'core/terms_conditions.html', {})
+
+def privacy_cookies(request):
+    return render(request, 'core/privacy_cookies.html', {})
