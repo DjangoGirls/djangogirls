@@ -21,15 +21,15 @@
       {% if applications %}
           <p>
               Filter:
-              <a href="?">All</a> |
-              <a href="?state=submitted" class="text-primary">Submitted</a> |
-              <a href="?state=accepted" class="text-success">Accepted</a> |
-              <a href="?state=rejected" class="text-danger">Rejected</a> |
-              <a href="?state=waitlisted" class="text-warning">Waiting list</a> |
-              <a href="?state=declined" class="text-danger">Declined</a> |
-              <a href="?rsvp_status=waiting" class="text-primary">RSVP: waiting</a> |
-              <a href="?rsvp_status=yes" class="text-success">RSVP: confirmed</a> |
-              <a href="?rsvp_status=no" class="text-danger">RSVP: rejected</a>
+              <a href="?{% if order %}order={{ order }}{% endif %}">All</a> |
+              <a href="?state=submitted{% if order %}&order={{ order }}{% endif %}" class="text-primary">Submitted</a> |
+              <a href="?state=accepted{% if order %}&order={{ order }}{% endif %}" class="text-success">Accepted</a> |
+              <a href="?state=rejected{% if order %}&order={{ order }}{% endif %}" class="text-danger">Rejected</a> |
+              <a href="?state=waitlisted{% if order %}&order={{ order }}{% endif %}" class="text-warning">Waiting list</a> |
+              <a href="?state=declined{% if order %}&order={{ order }}{% endif %}" class="text-danger">Declined</a> |
+              <a href="?rsvp_status=waiting{% if order %}&order={{ order }}{% endif %}" class="text-primary">RSVP: waiting</a> |
+              <a href="?rsvp_status=yes{% if order %}&order={{ order }}{% endif %}" class="text-success">RSVP: confirmed</a> |
+              <a href="?rsvp_status=no{% if order %}&order={{ order }}{% endif %}" class="text-danger">RSVP: rejected</a>
           </p>
           <p>Change the status of selected applications to:
               <select name="state">
@@ -43,7 +43,7 @@
               <input type="submit" value="Apply" />
           </p>
           <a href="{% url 'applications:applications_csv' page.url %}{{ active_query_string }}" class="btn download">Download to csv</a>
-          <p>Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}:</p>
+          <p>Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}, selected: <span id="selected-count">0</span></p>
           <table class="table">
               <thead>
                   <tr>
