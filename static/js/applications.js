@@ -3,6 +3,10 @@ $(document).ready(function() {
         $(".application-box").prop('checked', $(this).prop('checked'));
     });
 
+    $('.application-box, #select-all-box').click(function() {
+        updateSelectedCount();
+    });
+
     $('.state-change').click(function(e){
         var state = $(this).data('state'),
             appId = $(this).data('app-id'),
@@ -76,6 +80,10 @@ $(document).ready(function() {
             .removeClass('waiting yes no')
             .addClass(rsvp)
             .html(rsvpName+' <span class="caret"></span>');
+    }
+
+    function updateSelectedCount(){
+        $('#selected-count').html($('.application-box:checked').length);
     }
 
 });
