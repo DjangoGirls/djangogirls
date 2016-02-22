@@ -697,6 +697,38 @@ footer .row .col-md-2 ul li a {
 }
 /*
 ---------------------
+    Text Pages
+---------------------
+*/
+#textonly-pages {
+  font-size: 18px;
+  line-height: 180%;
+  color: #000;
+  overflow-x: hidden;
+}
+#textonly-pages h1 {
+  font-size: 32px;
+  margin: 20px 0 40px 0;
+  font-weight: bold;
+  text-align: center;
+}
+#textonly-pages a {
+  color: #f7921d;
+}
+#textonly-pages p {
+  margin-bottom: 15px;
+}
+#textonly-pages .important {
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+#textonly-pages ul {
+li
+  margin-bottom: 15px;
+}
+/*
+---------------------
     Responsiveness
 ---------------------
 */
