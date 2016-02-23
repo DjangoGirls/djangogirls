@@ -70,6 +70,7 @@ input[type="submit"] {
 }
 .btn {
   padding: 8px 20px;
+  white-space: normal;
 }
 .btn:hover {
   color: #fff;
