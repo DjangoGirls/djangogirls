@@ -372,13 +372,13 @@ class ApplicationsDownloadView(TestCase):
         reader = csv.reader(csv_file)
         csv_list = list(reader)
         self.assertEquals(len(csv_list), 5)
-        self.assertEquals(len(csv_list[0]), 17)
+        self.assertEquals(len(csv_list[0]), 18)
         self.assertEquals(csv_list[0][0], "Application Number")
         self.assertEquals(csv_list[1][1], "submitted")
         self.assertEquals(csv_list[2][1], "accepted")
         self.assertEquals(csv_list[3][1], "rejected")
         self.assertEquals(csv_list[4][1], "waitlisted")
-        self.assertEquals(csv_list[1][16], "answer to last for app 1")
+        self.assertEquals(csv_list[1][17], "answer to last for app 1")
 
     def test_download_applications_list_uses_query_parameters_to_filter_applications(self):
         self.user.is_superuser = True
@@ -421,15 +421,15 @@ class ApplicationsDownloadView(TestCase):
         reader = csv.reader(csv_file)
         csv_list = list(reader)
         self.assertEquals(len(csv_list), 6)
-        self.assertEquals(len(csv_list[0]), 18)
+        self.assertEquals(len(csv_list[0]), 19)
 
         # question x should be in next to last column
-        self.assertEquals(csv_list[0][16], "questionx")
+        self.assertEquals(csv_list[0][17], "questionx")
 
         # old application should have blank for question x in next-to-last column
-        self.assertEquals(csv_list[1][16], "")
-        self.assertEquals(csv_list[1][17], "answer to last for app 1")
+        self.assertEquals(csv_list[1][17], "")
+        self.assertEquals(csv_list[1][18], "answer to last for app 1")
 
         # new application should have answer for question x in next-to-last column
-        self.assertEquals(csv_list[5][16], "answer to questionx for app 5")
-        self.assertEquals(csv_list[5][17], "answer to last for app 5")
+        self.assertEquals(csv_list[5][17], "answer to questionx for app 5")
+        self.assertEquals(csv_list[5][18], "answer to last for app 5")
