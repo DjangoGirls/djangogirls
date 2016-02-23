@@ -231,6 +231,7 @@ nav ul li:first-child {
 }
 #about iframe {
   margin-top: 80px;
+  width: 100%;
 }
 #about .newsletter {
   margin: 18px 0;
