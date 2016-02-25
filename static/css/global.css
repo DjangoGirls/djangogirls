@@ -70,6 +70,7 @@ input[type="submit"] {
 }
 .btn {
   padding: 8px 20px;
+  white-space: normal;
 }
 .btn:hover {
   color: #fff;
@@ -231,6 +232,7 @@ nav ul li:first-child {
 }
 #about iframe {
   margin-top: 80px;
+  width: 100%;
 }
 #about .newsletter {
   margin: 18px 0;
