@@ -505,15 +505,10 @@ span.highlighted-number {
 */
 .page-wrap {
   min-height: 100%;
-  margin-bottom: -300px;
 }
 .page-wrap:after {
   content: "";
   display: block;
-}
-footer,
-.page-wrap:after {
-  height: 300px;
 }
 footer {
   background: #f9f7f7;
@@ -722,13 +717,6 @@ footer .row .col-md-2 ul li a {
     width: calc(50% - 30px);
     margin-bottom: 30px;
   }
-  footer,
-  .page-wrap:after {
-    height: 480px;
-  }
-  .page-wrap {
-    margin-bottom: -480px;
-  }
 }
 @media (max-width: 725px) {
   nav ul {
@@ -768,13 +756,6 @@ footer .row .col-md-2 ul li a {
   footer .row .col-md-3 {
     width: 90%;
     margin-bottom: 30px;
-  }
-  footer,
-  .page-wrap:after {
-    height: 900px;
-  }
-  .page-wrap {
-    margin-bottom: -900px;
   }
 }
 .post-content {
