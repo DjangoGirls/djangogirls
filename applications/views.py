@@ -246,6 +246,9 @@ def change_state(request, city):
     if not state or not applications:
         return JsonResponse({'error': 'Missing parameters'})
 
+    # cleanup applications so we don't put something unwated in the db
+    applications = [value for value in applications if value.isdigit()]
+
     applications = Application.objects.filter(
         id__in=applications, form__page=page)
     applications.update(state=state)
