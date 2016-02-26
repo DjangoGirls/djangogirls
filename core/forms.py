@@ -5,6 +5,7 @@ from captcha.fields import ReCaptchaField
 
 from .models import User, ContactEmail, Event
 
+
 class BetterReCaptchaField(ReCaptchaField):
     """A ReCaptchaField that always works in DEBUG mode"""
     def clean(self, values):
@@ -18,8 +19,11 @@ class UserCreationForm(forms.ModelForm):
         'password_mismatch': "The two password fields didn't match.",
     }
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Password confirmation", widget=forms.PasswordInput,
-                                help_text="Enter the same password as above, for verification.")
+    password2 = forms.CharField(
+        label="Password confirmation",
+        widget=forms.PasswordInput,
+        help_text="Enter the same password as above, for verification."
+    )
 
     class Meta:
         model = User
@@ -44,7 +48,8 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = auth_forms.ReadOnlyPasswordHashField(label="Password",
+    password = auth_forms.ReadOnlyPasswordHashField(
+        label="Password",
         help_text="Raw passwords are not stored, so there is no way to see "
                   "this user's password, but you can change the password "
                   "using <a href=\"password/\">this form</a>.")
@@ -94,7 +99,7 @@ class ContactForm(forms.ModelForm):
         widgets = {'contact_type': forms.RadioSelect}
 
     def clean_event(self):
-        contact_type = self.cleaned_data['contact_type']
+        contact_type = self.cleaned_data.get('contact_type')
         event = self.cleaned_data.get('event')
         if contact_type == ContactEmail.CHAPTER:
             if not event:
