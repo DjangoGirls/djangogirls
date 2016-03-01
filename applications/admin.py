@@ -1,6 +1,5 @@
+from django.conf.urls import url
 from django.contrib import admin
-from django.template import RequestContext
-from django.conf.urls import patterns
 from django.shortcuts import render, redirect
 from django.utils.html import format_html
 from django.core.urlresolvers import reverse
@@ -14,7 +13,8 @@ from core.models import EventPage
 class FormAdmin(admin.ModelAdmin):
     list_display = (
         'text_header', 'page', 'text_description',
-        'open_from', 'open_until', 'number_of_applications', 'get_submissions_url')
+        'open_from', 'open_until', 'number_of_applications',
+        'get_submissions_url')
 
     def get_queryset(self, request):
         qs = super(FormAdmin, self).get_queryset(request)
@@ -31,9 +31,10 @@ class FormAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(FormAdmin, self).get_urls()
-        my_urls = patterns('',
-            (r'submissions/$', self.admin_site.admin_view(self.view_submissions)),
-        )
+        my_urls = [
+            url(r'submissions/$',
+                self.admin_site.admin_view(self.view_submissions)),
+        ]
         return my_urls + urls
 
     def view_submissions(self, request):
@@ -55,6 +56,7 @@ class FormAdmin(admin.ModelAdmin):
 class QuestionAdmin(SortableModelAdmin):
     list_display = ('form', 'title', 'question_type', 'is_required', 'order')
     sortable = 'order'
+    list_filter = ('form',)
 
     def get_queryset(self, request):
         qs = super(QuestionAdmin, self).get_queryset(request)
@@ -81,7 +83,8 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class EmailAdmin(admin.ModelAdmin):
-    list_display = ('form', 'author', 'subject', 'recipients_group', 'created', 'sent')
+    list_display = ('form', 'author', 'subject', 'recipients_group', 'created',
+                    'sent')
 
 
 admin.site.register(Form, FormAdmin)

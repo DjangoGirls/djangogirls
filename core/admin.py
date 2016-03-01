@@ -6,13 +6,16 @@ from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
 
-from suit_redactor.widgets import RedactorWidget
-from suit.admin import SortableModelAdmin, SortableTabularInline
 from codemirror import CodeMirrorTextarea
+from suit.admin import SortableModelAdmin
 
-from .models import *
+
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
 from .filters import OpenRegistrationFilter
+from .models import (
+    Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
+    Sponsor, Story
+)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -61,27 +64,34 @@ class EventPageAdmin(admin.ModelAdmin):
 
 
 class ResizableCodeMirror(CodeMirrorTextarea):
+
     def __init__(self, **kwargs):
-        super(ResizableCodeMirror, self).__init__(js_var_format='%s_editor', **kwargs)
+        super(ResizableCodeMirror, self).__init__(
+            js_var_format='%s_editor', **kwargs)
 
     @property
     def media(self):
-        mine= forms.Media(css={'all': ('vendor/jquery-ui/jquery-ui.min.css',)},
-                          js=('vendor/jquery-ui/jquery-ui.min.js',))
+        mine = forms.Media(
+            css={'all': ('vendor/jquery-ui/jquery-ui.min.css',)},
+            js=('vendor/jquery-ui/jquery-ui.min.js',))
         return super(ResizableCodeMirror, self).media + mine
 
     def render(self, name, value, attrs=None):
         output = super(ResizableCodeMirror, self).render(name, value, attrs)
-        return output + mark_safe('''
-<script type="text/javascript">
-$('.CodeMirror').resizable({
-  resize: function() {
-    %s_editor.setSize($(this).width(), $(this).height());
-  }
-});
-</script>''' % name)
+        return output + mark_safe(
+            '''
+                <script type="text/javascript">
+                $('.CodeMirror').resizable({
+                  resize: function() {
+                    %s_editor.setSize($(this).width(), $(this).height());
+                  }
+                });
+                </script>
+            ''' % name)
+
 
 class EventPageContentForm(ModelForm):
+
     class Meta:
         widgets = {
             'content': ResizableCodeMirror(mode="xml")
@@ -127,7 +137,8 @@ class EventPageContentAdmin(SortableModelAdmin):
         return qs.filter(page__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
+        form = super(EventPageContentAdmin, self).get_form(
+            request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'page' in form.base_fields:
                 form.base_fields['page'].queryset = EventPage.objects.filter(
@@ -216,10 +227,11 @@ class PostmortemAdmin(admin.ModelAdmin):
     raw_id_fields = ('event',)
 
     def get_changeform_initial_data(self, request):
-        initial = super(PostmortemAdmin, self).get_changeform_initial_data(request)
+        initial = super(PostmortemAdmin,
+                        self).get_changeform_initial_data(request)
         if "event" in request.GET:
             event = Event.objects.get(pk=request.GET['event'])
-            initial ['event'] = event
+            initial['event'] = event
         return initial
 
 

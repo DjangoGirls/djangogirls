@@ -15,6 +15,7 @@ from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 
 
 class UserManager(auth_models.BaseUserManager):
+
     def create_user(self, email, password=None):
         if not email:
             raise ValueError("Users must have an email address")
@@ -61,8 +62,10 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class EventManager(models.Manager):
+
     def get_queryset(self):
-        return super(EventManager, self).get_queryset().filter(is_deleted=False)
+        return (super(EventManager, self).get_queryset()
+                                         .filter(is_deleted=False))
 
     def public(self):
         """
@@ -71,21 +74,30 @@ class EventManager(models.Manager):
         return self.get_queryset().filter(is_on_homepage=True)
 
     def future(self):
-        return self.public().filter(date__gte=datetime.now().strftime("%Y-%m-%d")).order_by("date")
+        return self.public().filter(
+            date__gte=datetime.now().strftime("%Y-%m-%d")
+        ).order_by("date")
 
     def past(self):
-        return self.public().filter(date__isnull=False, date__lt=datetime.now().strftime("%Y-%m-%d")).order_by("-date")
+        return self.public().filter(
+            date__isnull=False,
+            date__lt=datetime.now().strftime("%Y-%m-%d")
+        ).order_by("-date")
 
 # Event date can't be a year only
+
+
 def validate_approximatedate(date):
     if date.month == 0:
-        raise ValidationError('Event date can\'t be a year only. Please, provide at least a month and a year.')
+        raise ValidationError(
+            'Event date can\'t be a year only. Please, provide at least a month and a year.')
 
 
 @python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    date = ApproximateDateField(null=True, blank=False, validators=[validate_approximatedate])
+    date = ApproximateDateField(null=True, blank=False, validators=[
+                                validate_approximatedate])
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
     latlng = models.CharField(max_length=30, null=True, blank=True)
@@ -94,7 +106,8 @@ class Event(models.Model):
     photo_credit = models.CharField(max_length=200, null=True, blank=True)
     photo_link = models.URLField(null=True, blank=True)
     email = models.EmailField(max_length=75, null=True, blank=True)
-    main_organizer = models.ForeignKey(User, null=True, blank=True, related_name="main_organizer")
+    main_organizer = models.ForeignKey(
+        User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
@@ -138,7 +151,8 @@ class Event(models.Model):
         return event
 
     def organizers(self):
-        members = ["{} <{}>".format(x.get_full_name(), x.email) for x in self.team.all()]
+        members = ["{} <{}>".format(x.get_full_name(), x.email)
+                   for x in self.team.all()]
         return ", ".join(members)
 
     def delete(self):
@@ -147,6 +161,7 @@ class Event(models.Model):
 
 
 class EventPageManager(models.Manager):
+
     def get_queryset(self):
         return super(EventPageManager, self).get_queryset().filter(is_deleted=False)
 
@@ -235,9 +250,11 @@ class ContactEmail(models.Model):
 
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False, related_name="content")
+    page = models.ForeignKey(EventPage, null=False,
+                             blank=False, related_name="content")
     name = models.CharField(null=False, blank=False, max_length=100)
-    content = models.TextField(null=False, blank=False, help_text="HTML allowed")
+    content = models.TextField(
+        null=False, blank=False, help_text="HTML allowed")
     background = models.ImageField(upload_to="event/backgrounds/", null=True, blank=True,
                                    help_text="Optional background photo")
     position = models.PositiveIntegerField(
@@ -254,14 +271,15 @@ class EventPageContent(models.Model):
         verbose_name = "Website Content"
 
 
-
 @python_2_unicode_compatible
 class EventPageMenu(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False, related_name="menu")
+    page = models.ForeignKey(EventPage, null=False,
+                             blank=False, related_name="menu")
     title = models.CharField(max_length=255, null=False, blank=False)
     url = models.CharField(max_length=255, null=False, blank=False,
                            help_text="http://djangogirls.org/city/<the value you enter here>")
-    position = models.PositiveIntegerField(null=False, blank=False, help_text="Order of menu")
+    position = models.PositiveIntegerField(
+        null=False, blank=False, help_text="Order of menu")
 
     def __str__(self):
         return self.title
@@ -351,7 +369,8 @@ class Story(models.Model):
     post_url = models.URLField(null=False, blank=False)
     image = models.ImageField(upload_to="stories/", null=True)
     created = models.DateField(auto_now_add=True, null=False, blank=False)
-    is_story = models.BooleanField(default=True)  # False means a regular blogpost, not a story
+    # False means a regular blogpost, not a story
+    is_story = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
