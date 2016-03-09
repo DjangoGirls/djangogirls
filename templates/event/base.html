@@ -11,8 +11,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://djangogirls.org/{{ page.url }}" />
-  <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
+  <meta property="og:url" content="https://djangogirls.org/{{ page.url }}/" />
+  {% if page.event.photo %}
+    <meta property="og:image" content="https://djangogirls.org{{ page.event.photo.url }}" />
+  {% else %}
+    <meta property="og:image" content="https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png" />
+  {% endif %}
+  <meta property="og:title" content="{{ page.title }} on {{ page.event.date }}" />
+  <meta property="og:description" content="{{ page.description }}" />
 
   <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Lora:400,700,400i,700i/Roboto:300,400,300i,400i">
   <link rel="stylesheet" type="text/css" href="{% static 'vendor/css/bootstrap.min.css' %}" media="screen">
