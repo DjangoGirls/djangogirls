@@ -188,6 +188,7 @@ class EventPage(models.Model):
         return "Website for %s" % self.event.name
 
     class Meta:
+        ordering = ('title', )
         verbose_name = "Website"
 
     def delete(self):
@@ -304,7 +305,7 @@ class Sponsor(models.Model):
         return self.name
 
     class Meta:
-        ordering = ("position", )
+        ordering = ("name", )
 
     def logo_display_for_admin(self):
         if self.logo:
@@ -328,7 +329,7 @@ class Coach(models.Model):
         return self.name
 
     class Meta:
-        ordering = ("?",)
+        ordering = ("name",)
         verbose_name_plural = "Coaches"
 
     def photo_display_for_admin(self):
