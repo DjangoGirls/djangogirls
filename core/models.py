@@ -119,7 +119,7 @@ class Event(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('date', )
+        ordering = ('pk', )
         verbose_name_plural = "List of events"
 
     def is_upcoming(self):
