@@ -71,7 +71,22 @@ Create a new virtual environment if needed. Then, install all the required depen
 
     pip install -r requirements.txt
 
-Create your database:
+Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
+
+    psql
+
+In the `psql` shell, create a database and a role with the nessesary permissions:
+
+    CREATE DATABASE djangogirls;
+    CREATE ROLE postgres;
+    GRANT ALL privileges ON DATABASE djangogirls TO postgres;
+    ALTER ROLE postgres WITH LOGIN;
+
+Exit the `psql` shell:
+
+    \q
+
+Run the migration to create database schema:
 
     ./manage.py migrate
 
