@@ -1,37 +1,46 @@
 from __future__ import unicode_literals
 from datetime import timedelta
 
+from django.db import models
+from django.db.models import Value, BooleanField
+from django.db.models.expressions import CombinedExpression, F
+from django.db.models.functions import Coalesce, Now
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
-
-from django.db import models
-from django_countries.fields import CountryField
-
 from django.template.loader import get_template
 from django.template import Context
+
+from django_countries.fields import CountryField
 
 from core.models import User
 
 from jobs.community_mails import send_job_mail, send_meetup_mail
 
 
-class PublishFlowManager(models.Manager):
+class Greater(CombinedExpression):
+    def __init__(self, lhs, rhs):
+        super(Greater, self).__init__(lhs, ">", rhs, output_field=BooleanField())
 
+
+class PublishFlowManager(models.Manager):
     def get_queryset(self):
-        now = timezone.now().date().strftime("%Y-%m-%d")
-        # 1=1 to ensure compatibility between different DBs
-        # this is to fix the error:
-        # 'COALESCE types boolean and integer cannot be matched'
-        return super(PublishFlowManager, self).get_queryset().extra(
-            select={'not_expired': "coalesce(expiration_date > '%s', 1=1)" % now})
+        """
+        The queryset returns an additional field: not_expired which is True
+        for posts with the expiration date in the future or not set
+        and False if the expiration date is in the past
+        """
+        not_expired = Greater(F('expiration_date'), Now())
+
+        return super(PublishFlowManager, self).get_queryset().annotate(
+                not_expired=Coalesce(not_expired, Value(True))
+        )
 
 
 class VisiblePublishFlowManager(PublishFlowManager):
-
     def get_queryset(self):
         return super(VisiblePublishFlowManager, self).get_queryset().filter(
             review_status=PublishFlowModel.PUBLISHED,
-            expiration_date__gte=timezone.now()
+            not_expired=True
         )
 
 
