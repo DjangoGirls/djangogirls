@@ -38,7 +38,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 @python_2_unicode_compatible
 class Form(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False)
+    page = models.ForeignKey(EventPage, null=False, blank=False, unique=True)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
