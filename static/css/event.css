@@ -122,6 +122,13 @@ a:hover {
   background: rgba(0,0,0,0.6);
   color: #fff;
 }
+.overlay button,
+.overlay input,
+.overlay optgroup,
+.overlay select,
+.overlay textarea {
+  color: initial;
+}
 .btn,
 .btn:hover {
   background: #ff9400;
