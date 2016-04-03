@@ -33,7 +33,8 @@ class Command(BaseCommand):
         db_name = settings.DATABASES['default']['NAME']
         db_user = settings.DATABASES['default']['USER']
 
-        pg_dump_command = "pg_dump --host={host} --port={port} --user={user} --format=c --file={file_name} {name}".format(
+        # See command definitions at http://www.postgresql.org/docs/9.4/static/app-pgdump.html
+        pg_dump_command = "pg_dump --host={host} --port={port} --user={user} --format=c -O -x --file={file_name} {name}".format(
             host=db_host,
             port=db_port,
             user=db_user,
