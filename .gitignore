@@ -16,3 +16,4 @@ __pycache__
 static/media
 .idea/*
 .cache/
+*.sw*

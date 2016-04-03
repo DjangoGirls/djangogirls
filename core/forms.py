@@ -6,6 +6,20 @@ from captcha.fields import ReCaptchaField
 from .models import User, ContactEmail, Event
 
 
+class EventAdminForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        request = kwargs.get('request')
+        try:
+            self.user = request.user
+        except AttributeError:
+            self.user = None
+        super().__init__(*args, **kwargs)
+
+
 class BetterReCaptchaField(ReCaptchaField):
     """A ReCaptchaField that always works in DEBUG mode"""
     def clean(self, values):
