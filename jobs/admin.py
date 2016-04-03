@@ -239,7 +239,8 @@ class MeetupAdmin(PublishFlowModelAdmin):
     actions = [make_published, send_status_update]
     formfield_overrides = {
         models.DateField: {'widget': SuitDateWidget},
-        models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
+        # This causes the problem with Django (Ticket #26449) and should be commented out until it's fixed
+        # models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
         models.TextField: {'widget': AutosizedTextarea},
     }
 
