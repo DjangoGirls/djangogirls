@@ -1,16 +1,21 @@
 from django.contrib import admin
 from django import forms
 from django.forms import ModelForm
+from django.conf.urls import url
 from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
+from django.shortcuts import get_object_or_404, render
 from django.utils.safestring import mark_safe
 
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
 
 
-from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
+from .forms import (
+    EventAdminForm, UserChangeForm,
+    UserCreationForm, UserLimitedChangeForm
+)
 from .filters import OpenRegistrationFilter
 from .models import (
     Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
@@ -19,6 +24,7 @@ from .models import (
 
 
 class EventAdmin(admin.ModelAdmin):
+    form = EventAdminForm
     list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
                     'is_on_homepage', 'is_past_event', 'has_stats')
     list_filter = (OpenRegistrationFilter,)
@@ -30,6 +36,16 @@ class EventAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(team=request.user)
+
+    def get_urls(self):
+        urlpatterns = super().get_urls()
+        extra_urls = [
+            # url(r'^events/(?P<id>[\d/]+)/organizers/$',
+            # url(r'^\d+/organizers/$',
+            url(r'^(.+)/organizers/$',
+                self.admin_site.admin_view(self.organizers))
+        ]
+        return extra_urls + urlpatterns
 
     def is_past_event(self, obj):
         return not obj.is_upcoming()
@@ -43,6 +59,12 @@ class EventAdmin(admin.ModelAdmin):
         if obj and not request.user.is_superuser:
             return ('email', 'team')
         return self.readonly_fields
+
+    def organizers(self, request, id):
+        event = get_object_or_404(Event, pk=id)
+        return render(request,
+                      'admin/core/event/organizers.html',
+                      {'event': event})
 
 
 class EventPageAdmin(admin.ModelAdmin):
