@@ -106,12 +106,8 @@ def applications_csv(request, city):
     rsvp_status = request.GET.getlist('rsvp_status', None)
     page = get_event_page(city, request.user.is_authenticated(), False)
     order = request.GET.get('order', None)
-    try:
-        applications = get_applications_for_page(
-            page, state, rsvp_status, order) #.prefetch_related('answer_set')
-    except:
-        return redirect('core:event', city=city)
-
+    applications = get_applications_for_page(
+        page, state, rsvp_status, order)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = (
         u'attachment; filename="{}.csv"'.format(city)
