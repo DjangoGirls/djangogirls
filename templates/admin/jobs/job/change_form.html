@@ -1,60 +1,36 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
-{% block object-tools %}
-{% if change %}{% if not is_popup %}
-<h4 class="italic-title">{% trans 'tools'|capfirst %}</h4>
-<ul class="box menu-box">
-    {% block object-tools-items %}
-    <li><a href="history/" class="historylink"><i
-            class="icon-time icon-alpha75"></i>{% trans "History" %}</a>
-    </li>
-    {% if has_absolute_url %}
-    <li>
-        <a href="{{ original.get_absolute_url }}" class="viewsitelink"><i class="icon-eye-open icon-alpha75"></i>{% trans "View on site" %}</a>
-    </li>
-    {% endif %}
 
-    {% if has_add_permission %}
-    <li>
-        <a href="../add/"><i class="icon-plus-sign icon-alpha75"></i>{% blocktrans with opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-        </a></li>
-    {# {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</a>#}
-    {% endif %}
+{% block object-tools-items %}
+    {{ block.super }}
+
     {% if original.review_status == original.OPEN %}
-    <li><a href="{% url 'admin:assign_job_reviewer' original.id %}" class="historylink"><i
-            class="icon-eye-open icon-alpha75"></i>{% trans "Assign" %}</a>
+    <li><a href="{% url 'admin:assign_job_reviewer' original.id %}"><i class="icon-eye-open icon-alpha75"></i>{% trans "Assign" %}</a>
     </li>
     {% endif %}
     {% if original.review_status == original.UNDER_REVIEW %}
-    <li><a href="{% url 'admin:unassign_job_reviewer' original.id %}" class="historylink"><i
-            class="icon-eye-close icon-alpha75"></i>{% trans "Unassign" %}</a>
+    <li><a href="{% url 'admin:unassign_job_reviewer' original.id %}"><i class="icon-eye-close icon-alpha75"></i>{% trans "Unassign" %}</a>
     </li>
-    <li><a href="{% url 'admin:accept_job' original.id %}" class="historylink"><i
-            class="icon-ok icon-alpha75"></i>{% trans "Accept" %}</a>
+    <li><a href="{% url 'admin:accept_job' original.id %}"><i class="icon-ok icon-alpha75"></i>{% trans "Accept" %}</a>
     </li>
     {% endif %}
     {% if original.review_status == original.REJECTED %}
-    <li><a href="{% url 'admin:restore_job' original.id %}" class="historylink"><i
-            class="icon-repeat icon-alpha75"></i>{% trans "Restore" %}</a>
+    <li><a href="{% url 'admin:restore_job' original.id %}"><i class="icon-repeat icon-alpha75"></i>{% trans "Restore" %}</a>
     </li>
     {% endif %}
     {% if original.review_status == original.READY_TO_PUBLISH %}
-    <li><a href="{% url 'admin:publish_job' original.id %}" class="historylink"><i
-            class="icon-check icon-alpha75"></i>{% trans "Publish" %}</a>
+    <li><a href="{% url 'admin:publish_job' original.id %}"><i class="icon-check icon-alpha75"></i>{% trans "Publish" %}</a>
     </li>
     {% endif %}
     {% if original.review_status == original.UNDER_REVIEW or original.review_status == original.READY_TO_PUBLISH or original.review_status == original.PUBLISHED %}
-    <li><a href="{% url 'admin:reject_job' original.id %}" class="historylink"><i
-            class="icon-remove icon-alpha75"></i>{% trans "Reject" %}</a>
+    <li><a href="{% url 'admin:reject_job' original.id %}"><i class="icon-remove icon-alpha75"></i>{% trans "Reject" %}</a>
     </li>
     {% endif %}
-
-    {% endblock %}
-</ul>
-{% endif %}{% endif %}
 {% endblock %}
 
 {% block form_top %}
+    {{block.super}}
+
     {% if change %}
     {% if not original.not_expired %}
         <h3 class="text-error">{% trans "Expired" %}</h3>

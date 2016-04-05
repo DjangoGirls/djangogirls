@@ -102,9 +102,11 @@ class ApplicationsView(TestCase):
         self.factory = RequestFactory()
 
         self.event = Event.objects.create(name='Test', city='Test', country='Test')
+        self.event2 = Event.objects.create(name='Test 2', city='Test 2', country='Test 2')
         self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
+        self.page2 = EventPage.objects.create(event=self.event2, is_live=True, url='test2')
         self.form = Form.objects.create(page=self.page)
-        self.form_2 = Form.objects.create(page=self.page)
+        self.form_2 = Form.objects.create(page=self.page2)
         self.user = User.objects.create(email='test@user.com', is_active=True, is_staff=True)
         self.user.set_password('test')
         self.user_2 = User.objects.create(email='test2@user.com')
