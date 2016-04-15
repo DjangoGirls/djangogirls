@@ -5,7 +5,7 @@ from django.conf import settings
 from captcha.fields import ReCaptchaField
 import requests
 import hashlib
-import json
+
 
 from .models import Application, Answer, Question, Score, Email
 from .utils import generate_form_from_questions
