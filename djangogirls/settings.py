@@ -161,6 +161,8 @@ RAVEN_CONFIG = {
     'dsn': os.environ.get('SENTRY_DSN')
 }
 
+MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
+
 MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
                                "django.core.mail.backends.console.EmailBackend")
