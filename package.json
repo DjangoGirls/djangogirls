@@ -1,0 +1,27 @@
+{
+  "name": "djangogirls",
+  "version": "1.0.0",
+  "description": "This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DjangoGirls/djangogirls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DjangoGirls/djangogirls/issues"
+  },
+  "homepage": "https://github.com/DjangoGirls/djangogirls#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-environments": "^0.1.1",
+    "gulp-rev": "^7.0.0",
+    "gulp-rev-css-url": "^0.1.0",
+    "gulp-rev-napkin": "^0.1.0",
+    "gulp-stylus": "^2.3.1",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "require-dir": "^0.3.0",
+    "stylus": "^0.54.2"
+  }
+}
