@@ -87,7 +87,7 @@ class ApplicationForm(forms.Form):
             r = requests.get("https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/%s" %emailhash, auth=('user', settings.MAILCHIMP_API_KEY))
             # Mailchimp will return a 404 if the email we want to add is not on the Dispatch subscriber list
             if r.status_code == 404:
-                url = "https://us8.api.mailchimp.com/3.0/lists/e1c8df9cbb/members/"
+                url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
                 payload = {"email_address" : application.email, "status": "pending"}
                 requests.post(url, auth=('user', settings.MAILCHIMP_API_KEY), json=payload)
 
