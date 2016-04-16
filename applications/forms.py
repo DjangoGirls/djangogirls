@@ -84,7 +84,7 @@ class ApplicationForm(forms.Form):
         if application.newsletter_optin and application.email:
             emailb = application.email.encode()
             emailhash = hashlib.md5(emailb).hexdigest()
-            r = requests.get("https://us8.api.mailchimp.com/3.0/lists/e1c8df9cbb/members/%s" %emailhash, auth=('user', settings.MAILCHIMP_API_KEY))
+            r = requests.get("https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/%s" %emailhash, auth=('user', settings.MAILCHIMP_API_KEY))
             # Mailchimp will return a 404 if the email we want to add is not on the Dispatch subscriber list
             if r.status_code == 404:
                 url = "https://us8.api.mailchimp.com/3.0/lists/e1c8df9cbb/members/"
