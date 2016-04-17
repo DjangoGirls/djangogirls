@@ -37,6 +37,19 @@ module.exports = {
         development: './static/local/js/',
       }
     },
+    copy: {
+      src: [
+        './static/source/**',
+        '!./static/source/css/',
+        '!./static/source/css/**',
+        '!./static/source/js/',
+        '!./static/source/js/**'
+      ],
+      dest: {
+        production: './static/build/',
+        development: './static/local/',
+      }
+    },
     manifest: './static/',
     revisioning: ['./static/build/css/*.css', './static/build/js/*.js'],
     temp: './temp/'

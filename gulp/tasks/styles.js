@@ -3,8 +3,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   stylus = require('gulp-stylus'),
   environments = require('gulp-environments'),
-  concat = require('gulp-concat'),
-  strip = require('gulp-strip-comments');
+  concat = require('gulp-concat');
 
 var development = environments.development;
 var production = environments.production;
