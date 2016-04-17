@@ -97,6 +97,14 @@ Load sample data to the database
 Create a user so you can login to the admin:
 
     ./manage.py createsuperuser
+    
+Install dependencies for static files:
+
+    npm install
+    
+Compile CSS and JS files:
+
+    gulp watch
 
 Run your local server:
 
@@ -104,19 +112,23 @@ Run your local server:
 
 :tada: You're done.
 
-### CSS processing
+### Static files
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
 
-This means you shouldn't change any css files, but `.styl` files. They're in /static/css/ directory.
-
-Install stylus:
-
-    npm install stylus -g
+This means you shouldn't change any css files, but `.styl` files. They're in /static/source/css/ directory.
 
 Autocompiling of `.styl` files to `.css`:
 
-    stylus -w static/css
+    gulp watch
+    
+We're also using gulp for our static files builds. To build static files for production, run this:
+
+    gulp build
+    
+For local development:
+
+    gulp local
 
 
 ### Hosting on PythonAnywhere
