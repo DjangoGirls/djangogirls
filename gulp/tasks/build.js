@@ -1,4 +1,4 @@
 var gulp = require('gulp');
 
 
-gulp.task('build', ['set-production', 'clean', 'styles', 'revisioning']);
+gulp.task('build', ['set-production', 'clean', 'styles', 'scripts', 'revisioning']);

@@ -7,7 +7,7 @@ var gulp = require('gulp'),
   revCSS = require('gulp-rev-css-url');
 
 
-gulp.task('revisioning', ['styles'], function () {
+gulp.task('revisioning', ['styles', 'scripts'], function () {
   return gulp.src(config.paths.revisioning, {base: config.paths.build})
     .pipe(rev())
     .pipe(revCSS())
