@@ -37,11 +37,10 @@ INSTALLED_APPS = (
     'django_nose',
     'easy_thumbnails',
     'captcha',
-
     'django_countries',
     'bootstrap3_datetime',
-
     'ckeditor',
+    'gulp_rev',
 
     'core',
     'applications',
@@ -150,8 +149,13 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+DJANGO_GULP_REV_PATH = os.path.join(BASE_DIR, 'static/rev-manifest.json')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/local')]
+else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/build')]
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'

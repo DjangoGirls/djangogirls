@@ -1,14 +1,7 @@
 {% extends 'global/base.html' %}
-{% load staticfiles %}
+{% load staticfiles rev %}
 
-{% block extra_stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/community.css' %}" media="screen">
-{% endblock extra_stylesheets %}
-
-{% block bootstrap_version %}
-    <link rel="stylesheet"
-              href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" />
-{% endblock bootstrap_version %}
+{% block main_stylesheet %}<link rel="stylesheet" type="text/css" href="{% static_rev 'css/community.css' %}" media="screen">{% endblock %}
 
 {% block menu %}
     {% include 'jobs/menu.html' %}
