@@ -3,6 +3,7 @@ import icalendar
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
@@ -155,3 +156,8 @@ def terms_conditions(request):
 
 def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
+    
+
+@login_required
+def workshop_box(request):
+    return render(request, 'core/workshop_box.html', {})
