@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^foundation/governing-document/$', views.governing_document,
         name='foundation-governing-document'),
     url(r'^contribute/$', views.contribute, name='contribute'),
+    url(r'^donate/$', views.donate, name='donate'),
     url(r'^2015/$', views.year_2015, name='year_2015'),
     url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
     url(r'^privacy-cookies/$', views.privacy_cookies, name='privacy-cookies'),
