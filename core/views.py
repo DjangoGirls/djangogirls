@@ -158,6 +158,5 @@ def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
     
 
-@login_required
 def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
