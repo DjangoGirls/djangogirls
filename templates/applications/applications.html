@@ -18,7 +18,6 @@
   <div class="row">
     <div class="col-md-12 applications">
       <h3 class="page-header">Applications for {{ page.title }}</h3>
-      {% if applications %}
           <p>
               Filter:
               <a href="?{% if order %}order={{ order }}{% endif %}">All</a> |
@@ -31,6 +30,7 @@
               <a href="?rsvp_status=yes{% if order %}&order={{ order }}{% endif %}" class="text-success">RSVP: confirmed</a> |
               <a href="?rsvp_status=no{% if order %}&order={{ order }}{% endif %}" class="text-danger">RSVP: rejected</a>
           </p>
+      {% if applications %}
           <p>Change the status of selected applications to:
               <select name="state">
                   <option value="" selected>Choose status</option>
