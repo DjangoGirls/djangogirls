@@ -31,6 +31,7 @@ $(document).ready(function() {
                     $('#application-'+id+'-box').prop('checked', false);
                 });
             }
+	    updateSelectedCount();
         });
 
         return false;
