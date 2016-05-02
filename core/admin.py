@@ -41,7 +41,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj and not request.user.is_superuser:
-            return ('email', 'team')
+            return ('email', 'team', 'is_deleted', 'is_on_homepage')
         return self.readonly_fields
 
 
@@ -60,6 +60,8 @@ class EventPageAdmin(admin.ModelAdmin):
             # Don't let change objects for events that already happened
             if not obj.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
+            else:
+                return ('url', 'is_deleted')
         return self.readonly_fields
 
 
