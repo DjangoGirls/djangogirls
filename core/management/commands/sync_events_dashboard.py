@@ -3,8 +3,10 @@ from core.models import Event
 import re
 import datetime
 from collections import namedtuple
+import time
 
-from trello import TrelloClient
+from trello import TrelloClient, ResourceUnavailable
+
 
 # Create new command
 
@@ -60,7 +62,12 @@ def sync(events, token):
             create_checklist(card)
 
         #fetch card to get due date
-        card.fetch()
+        try:
+            card.fetch()
+        except ResourceUnavailable:
+            print("Oopsie: too many requests! Let's wait 10 seconds!")
+            time.sleep(10)
+            card.fetch()
 
         if e.date != card.due_date.date():
             print('Changing due date of {} to {}'.format(e.city, e.date))
