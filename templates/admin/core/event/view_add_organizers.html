@@ -1,0 +1,42 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h1 style="margin: 0 0 10px 0">Add a new organizer to your event</h1>
+<p>We will send them access instructions through automated email.</p>
+
+<div id="content" class="colM row-fluid">
+ <div id="content-main">
+   <form action="" method="post" class="form-horizontal">
+     <div>
+       {% csrf_token %}
+       <div class="tab-content tab-content-main">
+         <fieldset class="module aligned first ">
+           {% for field in form %}
+             <div class="control-group form-row">
+             <div>
+              <div class="control-label">
+                {{ field.label }}
+              </div>
+              <div class="controls">
+                {{ field }}
+                {{ field.errors }}
+              </div>
+            </div>
+            </div>
+          {% endfor %}
+             <div class="control-group form-row field-is_deleted ">
+               <div>
+                  <div class="control-label"></div>
+                  <div class="controls">
+                    <button type="submit" class="btn btn-high btn-info" name="_save">Add organizer</button>
+                  </div>
+              </div>
+            </div>
+        </fieldset>
+      </div>
+     </div>
+   </form>
+ </div>
+</div>
+{% endblock %}

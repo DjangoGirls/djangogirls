@@ -14,8 +14,7 @@ from django.shortcuts import render, redirect
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
 
-
-from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
+from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm, AddOrganizerForm
 from .filters import OpenRegistrationFilter
 from .models import (
     Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
@@ -52,22 +51,34 @@ class EventAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(EventAdmin, self).get_urls()
         my_urls = [
-            url(r'manage_organizers/$', self.view_manage_organizers),
+            url(r'manage_organizers/$',
+                self.admin_site.admin_view(self.view_manage_organizers)),
+            url(r'add_organizers/$',
+                self.admin_site.admin_view(self.view_add_organizers)),
         ]
         return my_urls + urls
 
-    def view_manage_organizers(self, request):
-        all_events = self.get_queryset(request) \
+    def _get_future_events_for_user(self, request):
+        return self.get_queryset(request) \
             .filter(date__gte=datetime.now() \
             .strftime("%Y-%m-%d")).order_by('name')
-        event = None
+
+    def _get_event_from_get(self, request, all_events):
+        """
+        Retrieves a particular event from request.GET['event_id'], or
+        returns the first one from all events available to the user.
+        """
         if 'event_id' in request.GET:
             try:
-                event = all_events.get(id=request.GET['event_id'])
+                return all_events.get(id=request.GET['event_id'])
             except Event.DoesNotExist:
                 pass
         else:
-            event = all_events.first()
+            return all_events.first()
+
+    def view_manage_organizers(self, request):
+        all_events = self._get_future_events_for_user(request)
+        event = self._get_event_from_get(request, all_events)
 
         if 'remove' in request.GET:
             user = User.objects.get(id=request.GET['remove'])
@@ -79,6 +90,26 @@ class EventAdmin(admin.ModelAdmin):
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,
             'event': event,
+        })
+
+    def view_add_organizers(self, request):
+        all_events = self._get_future_events_for_user(request)
+        event = self._get_event_from_get(request, all_events)
+
+        if request.method == 'POST':
+            form = AddOrganizerForm(all_events, request.POST)
+            if form.is_valid():
+                user = form.save()
+                messages.success(request,
+                    '{} has been added to your event, yay!'.format(user.get_full_name()))
+                return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
+        else:
+            form = AddOrganizerForm(all_events)
+
+        return render(request, 'admin/core/event/view_add_organizers.html', {
+            'all_events': all_events,
+            'event': event,
+            'form': form,
         })
 
 
