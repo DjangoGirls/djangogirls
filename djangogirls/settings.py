@@ -117,7 +117,9 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls',
     'SEARCH_URL': '/admin/core/event/',
     'MENU': (
-        {'label': 'Users & Groups', 'icon':'icon-user', 'models': ('core.user', 'auth.group')},
+        {'label': 'Users & Groups', 'icon':'icon-user', 'models': ('core.user', 'auth.group'),
+            'permissions': ('auth.add_user', 'auth.add_group')
+        },
         {'label': 'Events', 'icon':'icon-star', 'models': (
             'core.event', 'core.eventpage', 'core.eventpagecontent',
             'core.eventpagemenu', 'core.postmortem',
@@ -125,7 +127,9 @@ SUIT_CONFIG = {
         {'label': 'Application Form', 'app': 'applications', 'icon':'icon-tasks'},
         {'label': 'Submitted Applications', 'url': '/admin/applications/form/submissions/', 'icon':'icon-user'},
         {'app': 'flatpages', 'icon':'icon-file'},
-        {'label': 'Blog & Django Stories', 'icon':'icon-comment', 'models': ('core.Story',)},
+        {'label': 'Blog & Django Stories', 'icon':'icon-comment', 'models': ('core.Story',),
+            'permissions': ('core.add_story',)
+        },
         {'app': 'jobs', 'icon':'icon-briefcase'},
         {'app': 'patreonmanager', 'icon':'icon-gift', 'models': ('patron', 'payment', 'reward')},
         {'label': 'Organizer\'s Manual', 'icon':'icon-bookmark', 'url': 'http://organize.djangogirls.org/'},
