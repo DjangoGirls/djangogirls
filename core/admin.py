@@ -1,10 +1,15 @@
-from django.contrib import admin
+from datetime import datetime
+
+from django.contrib import admin, messages
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
+from django.http import Http404
+from django.conf.urls import url
+from django.shortcuts import render, redirect
 
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
@@ -43,6 +48,38 @@ class EventAdmin(admin.ModelAdmin):
         if obj and not request.user.is_superuser:
             return ('email', 'team', 'is_deleted', 'is_on_homepage')
         return self.readonly_fields
+
+    def get_urls(self):
+        urls = super(EventAdmin, self).get_urls()
+        my_urls = [
+            url(r'manage_organizers/$', self.view_manage_organizers),
+        ]
+        return my_urls + urls
+
+    def view_manage_organizers(self, request):
+        all_events = self.get_queryset(request) \
+            .filter(date__gte=datetime.now() \
+            .strftime("%Y-%m-%d")).order_by('name')
+        event = None
+        if 'event_id' in request.GET:
+            try:
+                event = all_events.get(id=request.GET['event_id'])
+            except Event.DoesNotExist:
+                pass
+        else:
+            event = all_events.first()
+
+        if 'remove' in request.GET:
+            user = User.objects.get(id=request.GET['remove'])
+            event.team.remove(user)
+            event.save()
+            messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
+            return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
+
+        return render(request, 'admin/core/event/view_manage_organizers.html', {
+            'all_events': all_events,
+            'event': event,
+        })
 
 
 class EventPageAdmin(admin.ModelAdmin):

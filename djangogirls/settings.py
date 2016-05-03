@@ -124,6 +124,10 @@ SUIT_CONFIG = {
             'core.event', 'core.eventpage', 'core.eventpagecontent',
             'core.eventpagemenu', 'core.postmortem',
         )},
+        {'label': 'Organizers', 'icon':'icon-eye-open', 'models': (
+            {'url': '/admin/core/event/add_organizers/', 'label': 'Add organizers'},
+            {'url': '/admin/core/event/manage_organizers/', 'label': 'Remove organizers'},
+        )},
         {'label': 'Application Form', 'app': 'applications', 'icon':'icon-tasks'},
         {'label': 'Submitted Applications', 'url': '/admin/applications/form/submissions/', 'icon':'icon-user'},
         {'app': 'flatpages', 'icon':'icon-file'},
