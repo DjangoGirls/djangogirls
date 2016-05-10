@@ -12,5 +12,7 @@ addons:
   postgresql: "9.3"
 services:
   - postgresql
+env:
+  - COVERAGE=TRUE
 before_script:
   - psql -c 'create database djangogirls;' -U postgres
