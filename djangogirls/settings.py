@@ -183,10 +183,13 @@ SHOP_DISCOUNT = os.environ.get('STORE_CODE')
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=core,applications,jobs',
     '--with-progressive',
 ]
+if os.environ.get('COVERAGE') == 'TRUE':
+    NOSE_ARGS += [
+        '--with-coverage',
+        '--cover-package=core,applications,jobs,patreonmanager',
+    ]
 
 MARKDOWN_DEUX_STYLES = {
     "default": {
