@@ -16,3 +16,8 @@ __pycache__
 static/media
 .idea/*
 .cache/
+node_modules/
+static/build/
+static/local/
+static/rev-manifest.json
+temp/

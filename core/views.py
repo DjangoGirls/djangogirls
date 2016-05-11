@@ -3,6 +3,7 @@ import icalendar
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
@@ -140,6 +141,10 @@ def contribute(request):
     return render(request, 'core/contribute.html', {})
 
 
+def donate(request):
+    return render(request, 'core/donate.html', {})
+
+
 def year_2015(request):
     return render(request, 'core/2015.html', {
         'events': Event.objects.public().filter(date__lt='2016-01-01').order_by('date'),
@@ -151,3 +156,7 @@ def terms_conditions(request):
 
 def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
+    
+
+def workshop_box(request):
+    return render(request, 'core/workshop_box.html', {})

@@ -1,8 +1,8 @@
 {% extends 'global/base.html' %}
-{% load staticfiles %}
+{% load staticfiles rev %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{% static 'js/global.js' %}?refresh_js=1"></script>
+    <script type="text/javascript" src="{% static_rev 'js/global.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -213,8 +213,8 @@
                   </a>
               </div>
                 <div class="col-md-3">
-                    <a href="https://www.mandrill.com/">
-                        <img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" style="margin-top: 0px" />
+                    <a href="https://www.mailchimp.com/">
+                        <img src="{% static 'img/global/supporters/mailchimp.png' %}" alt="Mailchimp" style="margin-top: 0px" />
                     </a>
                 </div>
             </div>

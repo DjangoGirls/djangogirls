@@ -1,7 +1,7 @@
 {% extends 'core/event.html' %}
-{% load static applications_tags %}
+{% load static applications_tags rev %}
 
-{% block custom_js %}<script type="text/javascript" src="{% static 'js/applications.js' %}"></script>{% endblock %}
+{% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
 
 {% block title %}{{ page.title }}{% endblock %}
 {% block description %}{{ page.description }}{% endblock %}
