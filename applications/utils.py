@@ -76,7 +76,7 @@ def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
         raise Form.DoesNotExist
     page_form = page_form.first()
 
-    applications = page_form.application_set.all().order_by('id')
+    applications = page_form.application_set.all().order_by('id').prefetch_related('answer_set')
 
     if rsvp_status:
         applications = applications.filter(
