@@ -179,6 +179,8 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
+SHOP_DISCOUNT = os.environ.get('STORE_CODE')
+
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--with-coverage',

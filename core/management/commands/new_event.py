@@ -224,7 +224,8 @@ class Command(BaseCommand):
         click.echo(render_to_string('emails/setup.txt', {
             'event': event,
             'members': members_as_list,
-            'email_password': 'UNDEFINED'
+            'email_password': 'UNDEFINED',
+            'settings' : settings
         }))
         
         self.brag_on_slack_bang(city, country, members)

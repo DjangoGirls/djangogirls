@@ -33,6 +33,14 @@ Instructions on editing website: http://organize.djangogirls.org/website/
 
 If you need to cancel or postpone your event, please, send us an email. It can happen and we won't be mad at you ;) Also, if you're stuck on something, we can try to help you!
 
-We wrote an FAQ (http://organize.djangogirls.org/faq/index.html) but don't hesitate to let me know if you need anything. It’s usually faster to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
+4) Workshop Box
+
+To help you reduce the cost of your event, we created a Workshop Box full of Django Girls stickers, nametags, badges and golden letter balloons. When your website is ready and your registration open, you can order one here(https://djangogirls.org/workshop-box). To be sure it arrives on time, you'll need to order it at least 6 weeks before your event.
+
+5) Django Girls shop discount code
+
+Since we now have our own shop (https://store.djangogirls.org/), we can generate discount codes! Use {{ settings.SHOP_DISCOUNT }} to get a 15% discount on your order. You can share this code with your coaches and attendees ;) All proceeds will go to Django Girls Foundation to make the charity sustainable.
+
+You can contact me again if you need assistance but it’s usually faster to check our FAQ (http://organize.djangogirls.org/faq/index.html) or to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
 
 Hugs, rainbows and sunshines!
