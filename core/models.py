@@ -232,7 +232,8 @@ class ContactEmail(models.Model):
             self.message,
             "Django Girls Contact <hello@djangogirls.org>",
             [self.sent_to],
-            reply_to=["{} <{}>".format(self.name, self.email)]
+            reply_to=["{} <{}>".format(self.name, self.email)],
+            headers={'Reply-To': "{} <{}>".format(self.name, self.email)} # Seems like this is needed for Mandrill
         )
         try:
             email.send(fail_silently=False)

@@ -155,7 +155,7 @@ class ContactTestCase(TestCase):
         email = mail.outbox[0]
 
         self.assertEqual(email.to, ['hello@djangogirls.org'])
-        self.assertEqual(email.from_email, 'test name <lord@dracula.trans>')
+        self.assertEqual(email.reply_to, ['test name <lord@dracula.trans>'])
         self.assertEqual(email.body, 'nice message')
 
     def test_form_sends_email_to_chapter(self):
@@ -178,7 +178,7 @@ class ContactTestCase(TestCase):
         email = mail.outbox[0]
 
         self.assertEqual(email.to, ['test@test.com'])
-        self.assertEqual(email.from_email, 'test name <lord@dracula.trans>')
+        self.assertEqual(email.reply_to, ['test name <lord@dracula.trans>'])
         self.assertEqual(email.body, 'nice message')
 
     def test_chapter_contact_requires_event(self):
