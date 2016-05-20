@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils import timezone
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.exceptions import ValidationError
 
@@ -227,15 +227,15 @@ class ContactEmail(models.Model):
 
     def save(self, *args, **kwargs):
         self.sent_to = self._get_to_email()
-
+        email = EmailMessage(
+            self._get_subject(),
+            self.message,
+            "Django Girls Contact <hello@djangogirls.org>",
+            [self.sent_to],
+            reply_to=["{} <{}>".format(self.name, self.email)]
+        )
         try:
-            send_mail(
-                self._get_subject(),
-                self.message,
-                "{} <{}>".format(self.name, self.email),
-                [self.sent_to],
-                fail_silently=False,
-            )
+            email.send(fail_silently=False)
         except SMTPException:
             self.sent_successfully = False
 
