@@ -111,7 +111,7 @@ class Event(models.Model):
     team = models.ManyToManyField(User, blank=True)
     is_on_homepage = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = EventManager()
     all_objects = models.Manager()  # This includes deleted objects
