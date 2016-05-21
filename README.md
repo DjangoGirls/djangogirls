@@ -112,6 +112,18 @@ Run your local server:
 
 :tada: You're done.
 
+
+## Run the tests
+
+You can run the tests like this:
+
+	./manage.py test
+
+Or if you want coverage reports:
+
+	COVERAGE=TRUE ./manage.py test
+
+
 ### Static files
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
