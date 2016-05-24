@@ -3,23 +3,37 @@ import datetime
 from itertools import groupby
 from django.core.management import BaseCommand
 from django.utils import timezone
+from django.contrib.humanize.templatetags.humanize import apnumber
 
 from core.models import Event
 import click
+
+
+def generate_html_content(event_list):
+    result = []
+    for event in event_list:
+        city = event.city
+        url = event.eventpage.url
+        html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
+        result.append(html)
+    return result
 
 
 class Command(BaseCommand):
     help = 'Generate "Next events" section for the Dispatch.'
 
     def handle(self, *args, **options):
+
         now = timezone.now()
         raw_dispatch_date = click.prompt(click.style("What is the date of the previous Dispatch? (Format: YYYY-MM-DD)", bold=True, fg='yellow'))
         dispatch_date = datetime.datetime.strptime(raw_dispatch_date, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
 
+        # Get the events that happened since the last Dispatch.
+
         click.echo(click.style("PREVIOUS EVENTS", bold=True))
 
         def done_since_last_dispatch(event):
-            # Sadly, ApproximateDate won't let us do that in SQL
+            # Sadly, ApproximateDate won't let us do that in SQL :(
             approx_date = event.date
             if not approx_date.day:
                 return False  # No specific date, so ignore it
@@ -27,52 +41,39 @@ class Command(BaseCommand):
             return dispatch_date < date < now
 
         previous_events = filter(done_since_last_dispatch, Event.objects.all().filter(eventpage__isnull=False))
-        result_previous = []
-
-        for event in previous_events:
-            city = event.city
-            url = event.eventpage.url
-            html = "<a href='https://djangogirls.org/%s'>%s</a>"%(url, city)
-            result_previous.append(html)
+        result_previous = generate_html_content(previous_events)
 
         num_events = len(result_previous)
 
-        if not result_previous:
-            print("No event took place since the last Dispatch.")
+        if result_previous:
+            click.echo("%s event%s happened since the last dispatch: " % (apnumber(num_events), "s" if num_events > 1 else "")
+                  + ", ".join(result_previous) + ".")
         else:
-            print("%s event%s happened since the last dispatch: " %(num_events, "s" if num_events > 1 else "")
-              + ", ".join(result_previous) + ".")
+            click.echo("No event took place since the last Dispatch.")
+
+
+        # Get the events that were created since the last Dispatch.
 
         click.echo(click.style("NEXT EVENTS", bold=True))
         next_events = Event.objects.all().filter(created_at__range=(dispatch_date, now), eventpage__isnull=False)
 
         sorted_event = groupby(next_events, key=lambda event: event.date.month)
 
-        if not next_events:
-            print("There's no new event to announce. Don't forget to check our <a href='https://djangogirls.org/events/'>website</a> to get a list of our events planned for the next few months.")
-        else:
+        if next_events:
             for month, events in sorted_event:
-                month_list = []
-                for event in events:
-                    city = event.city
-                    url = event.eventpage.url
-                    html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
-                    month_list.append(html)
-                print(calendar.month_name[month] + ": " + ", ".join(month_list) + ".")
+                month_list = generate_html_content(events)
+                click.echo(calendar.month_name[month] + ": " + ", ".join(month_list) + "." + "<br />")
+        else:
+            click.echo("There's no new event to announce. Don't forget to check our <a href='https://djangogirls.org/events/'>website</a> to get a list of our events planned for the next few months.")
 
 
+        # Get the events with open registration.
 
         click.echo("OPEN REGISTRATION")
         open_events = Event.objects.all().filter(eventpage__form__open_from__lte=now, eventpage__form__open_until__gte=now, eventpage__isnull=False)
-        result_open = []
+        result_open = generate_html_content(open_events)
 
-        for event in open_events:
-            city = event.city
-            url = event.eventpage.url
-            html = "<a href='https://djangogirls.org/%s'>%s</a>"%(url, city)
-            result_open.append(html)
-
-        if not result_open:
-            print("There's no event with open registration.")
+        if result_open:
+            click.echo("Registrations are still open for: " + ", ".join(result_open) + ".")
         else:
-            print("Registrations are still open for: " + ", ".join(result_open) + ".")
+            click.echo("There's no event with open registration.")
