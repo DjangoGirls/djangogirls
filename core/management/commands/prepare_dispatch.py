@@ -37,7 +37,10 @@ class Command(BaseCommand):
 
         num_events = len(result_previous)
 
-        print("%s event%s happened since the last dispatch: " %(num_events, "s" if num_events > 1 else "")
+        if not result_previous:
+            print("No event took place since the last Dispatch.")
+        else:
+            print("%s event%s happened since the last dispatch: " %(num_events, "s" if num_events > 1 else "")
               + ", ".join(result_previous) + ".")
 
         click.echo(click.style("NEXT EVENTS", bold=True))
@@ -45,14 +48,17 @@ class Command(BaseCommand):
 
         sorted_event = groupby(next_events, key=lambda event: event.date.month)
 
-        for month, events in sorted_event:
-            month_list = []
-            for event in events:
-                city = event.city
-                url = event.eventpage.url
-                html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
-                month_list.append(html)
-            print(calendar.month_name[month] + ": " + ", ".join(month_list) + ".")
+        if not next_events:
+            print("There's no new event to announce. Don't forget to check our <a href='https://djangogirls.org/events/'>website</a> to get a list of our events planned for the next few months.")
+        else:
+            for month, events in sorted_event:
+                month_list = []
+                for event in events:
+                    city = event.city
+                    url = event.eventpage.url
+                    html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
+                    month_list.append(html)
+                print(calendar.month_name[month] + ": " + ", ".join(month_list) + ".")
 
 
 
@@ -66,4 +72,7 @@ class Command(BaseCommand):
             html = "<a href='https://djangogirls.org/%s'>%s</a>"%(url, city)
             result_open.append(html)
 
-        print("Registrations are still open for: " + ", ".join(result_open) + ".")
+        if not result_open:
+            print("There's no event with open registration.")
+        else:
+            print("Registrations are still open for: " + ", ".join(result_open) + ".")
