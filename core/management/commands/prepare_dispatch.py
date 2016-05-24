@@ -1,4 +1,6 @@
+import calendar
 import datetime
+from itertools import groupby
 from django.core.management import BaseCommand
 from django.utils import timezone
 
@@ -39,16 +41,23 @@ class Command(BaseCommand):
               + ", ".join(result_previous) + ".")
 
         click.echo(click.style("NEXT EVENTS", bold=True))
-        '''TODO: print a list of the next events listed by month, with links to eventpage: ex
-        June: a
-        July: b, c
-        '''
         next_events = Event.objects.all().filter(created_at__range=(dispatch_date, now), eventpage__isnull=False)
-        result_next = []
-        #use groupby.date.datetime.month ou qqch comme ça
+
+        sorted_event = groupby(next_events, key=lambda event: event.date.month)
+
+        for month, events in sorted_event:
+            month_list = []
+            for event in events:
+                city = event.city
+                url = event.eventpage.url
+                html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
+                month_list.append(html)
+            print(calendar.month_name[month] + ": " + ", ".join(month_list) + ".")
+
+
 
         click.echo("OPEN REGISTRATION")
-        open_events = Event.objects.all().filter(eventpage__form__open_from__lte=now, eventpage__form__open_until__gte=now)
+        open_events = Event.objects.all().filter(eventpage__form__open_from__lte=now, eventpage__form__open_until__gte=now, eventpage__isnull=False)
         result_open = []
 
         for event in open_events:
