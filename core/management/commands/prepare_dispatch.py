@@ -32,15 +32,9 @@ class Command(BaseCommand):
 
         click.echo(click.style("PREVIOUS EVENTS", bold=True))
 
-        def done_since_last_dispatch(event):
-            # Sadly, ApproximateDate won't let us do that in SQL :(
-            approx_date = event.date
-            if not approx_date.day:
-                return False  # No specific date, so ignore it
-            date = datetime.datetime(approx_date.year, approx_date.month, approx_date.day, tzinfo=datetime.timezone.utc)
-            return dispatch_date < date < now
-
-        previous_events = filter(done_since_last_dispatch, Event.objects.all().filter(eventpage__isnull=False))
+        previous_events = Event.objects.filter(date__gt=dispatch_date.strftime("%Y-%m-%d"),
+                                               date__lt=now.strftime("%Y-%m-%d"),
+                                               eventpage__isnull=False)
         result_previous = generate_html_content(previous_events)
 
         num_events = len(result_previous)
