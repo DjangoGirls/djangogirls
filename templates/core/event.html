@@ -11,6 +11,10 @@
 
 {% block content %}
 
+    {% if not page.is_live %}
+    <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/eventpage/{{ page.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
+    {% endif %}
+
     {% for item in content %}
 
         {% include 'includes/item.html' with item=item %}
