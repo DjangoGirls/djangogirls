@@ -27,6 +27,11 @@
         otherwise you won't be able to email them through our system. :sadpanda:
     </div>
     {% endif %}
+
+    {% if not form_obj.application_open %}
+        <div class="alert alert-info" role="alert">Hi there! If you can see this message, it means people can't register to your event. If you want to open registrations, go to <a href="/admin/applications/form/{{ form_obj.pk }}/change/">your form in the admin interface</a> and make sure "Application process" fields are correctly configured.</div>
+    {% endif %}
+
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }}">
         {{ message }}
