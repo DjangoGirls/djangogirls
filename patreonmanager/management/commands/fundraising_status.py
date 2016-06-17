@@ -1,9 +1,8 @@
 import logging
 import requests
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from slacker import Slacker
+from core.slack_client import slack
 
 from ...models import FundraisingStatus
 
@@ -12,8 +11,6 @@ from ...models import FundraisingStatus
 API_KEY = '1745177328c8a1d48100a9b14a1d38c1'
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = 'http://api.patreon.com/'
-
-slack = Slacker(settings.SLACK_API_KEY)
 
 
 class Command(BaseCommand):
@@ -29,10 +26,13 @@ class Command(BaseCommand):
 
         patron_count = data['linked'][0]['patron_count']
         pledge_sum = int(int(data['linked'][0]['pledge_sum'])/100)
-        message = "Daily Patreon update: {} patrons pledged ${} monthly!".format(patron_count, pledge_sum)
+        message = (
+            "Daily Patreon update: {} patrons pledged ${} monthly!".format(
+                patron_count, pledge_sum))
         logging.info(message)
 
-        stats = FundraisingStatus(number_of_patrons=patron_count, amount_raised=pledge_sum)
+        stats = FundraisingStatus(number_of_patrons=patron_count,
+                                  amount_raised=pledge_sum)
         stats.save()
         logging.info("Stats saved.")
 

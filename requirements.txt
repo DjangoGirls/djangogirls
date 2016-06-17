@@ -1,5 +1,4 @@
 -e git://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker
--e git://github.com/olasitarska/slacker.git#egg=slacker
 
 boto3==1.3.1
 click==6.6
@@ -28,7 +27,6 @@ lxml==3.6.0
 mandrill==1.0.57
 markdown2==2.3.1
 model-mommy==1.2.6
-nose-progressive==1.5.1
 nose==1.3.7
 opbeat==3.3.3
 Pillow==3.2.0
@@ -39,4 +37,5 @@ pytz==2016.4
 raven==5.21.0
 requests==2.10
 six==1.10.0
+slacker==0.9.16
 whitenoise==3.2

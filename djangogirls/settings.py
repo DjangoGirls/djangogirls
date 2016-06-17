@@ -184,11 +184,6 @@ SHOP_DISCOUNT = os.environ.get('STORE_CODE')
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = []
-# Don't run progressive plugin in CI environment as it messes up the output
-if os.environ.get('CI') != 'true':
-    NOSE_ARGS += [
-        '--with-progressive',
-    ]
 
 # Optionally enable coverage reporting
 if os.environ.get('COVERAGE') == 'TRUE':
