@@ -34,7 +34,6 @@ INSTALLED_APPS = (
     'storages',
     'markdown_deux',
     'djrill',
-    'django_nose',
     'easy_thumbnails',
     'captcha',
     'django_countries',
