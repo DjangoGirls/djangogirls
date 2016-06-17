@@ -29,7 +29,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 
-    'raven.contrib.django.raven_compat',
     'django_date_extensions',
     'storages',
     'markdown_deux',
