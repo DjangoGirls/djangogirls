@@ -187,6 +187,7 @@ class EventPageMenuAdmin(SortableModelAdmin):
 class SponsorAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'logo_display_for_admin', 'url')
     list_per_page = 50
+    search_fields = ('name', )
 
     def get_queryset(self, request):
         qs = super(SponsorAdmin, self).get_queryset(request)
