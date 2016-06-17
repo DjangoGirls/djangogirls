@@ -118,7 +118,7 @@ def applications_csv(request, city):
     writer = csv.writer(response)
     csv_header = ["Application Number", "Application State",
                   "RSVP Status", "Average Score"]
-    question_set = page.form_set.first().question_set
+    question_set = page.form.question_set
 
     question_titles = question_set.values_list('title', flat=True)
     csv_header.extend(map(striptags, question_titles))

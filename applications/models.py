@@ -38,7 +38,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 @python_2_unicode_compatible
 class Form(models.Model):
-    page = models.ForeignKey(EventPage, null=False, blank=False, unique=True)
+    page = models.OneToOneField(EventPage, null=False, blank=False)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
@@ -249,7 +249,7 @@ class Score(models.Model):
     application = models.ForeignKey(Application, related_name='scores')
     score = models.FloatField(
         help_text='5 being the most positive, 1 being the most negative.',
-        validators=[MaxValueValidator(5), MinValueValidator(0)], 
+        validators=[MaxValueValidator(5), MinValueValidator(0)],
         default=0
     )
     comment = models.TextField(

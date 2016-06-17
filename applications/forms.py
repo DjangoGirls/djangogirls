@@ -2,10 +2,8 @@ from django import forms
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
-from captcha.fields import ReCaptchaField
 import requests
 import hashlib
-
 
 from .models import Application, Answer, Question, Score, Email
 from .utils import generate_form_from_questions
@@ -23,7 +21,6 @@ class ApplicationForm(forms.Form):
         super(ApplicationForm, self).__init__(*args, **kwargs)
         self.fields = generate_form_from_questions(questions)
         self.fields['captcha'] = BetterReCaptchaField()
-
 
     def save(self, *args, **kwargs):
         form = kwargs.pop('form')
@@ -72,7 +69,8 @@ class ApplicationForm(forms.Form):
                     'intro': form.confirmation_mail,
                 }
             )
-            msg = EmailMessage(subject, body, form.page.event.email, [application.email,])
+            msg = EmailMessage(subject, body, form.page.event.email, [
+                               application.email, ])
             msg.content_subtype = "html"
             try:
                 msg.send()
@@ -84,12 +82,17 @@ class ApplicationForm(forms.Form):
         if application.newsletter_optin and application.email:
             emailb = application.email.encode()
             emailhash = hashlib.md5(emailb).hexdigest()
-            r = requests.get("https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/%s" %emailhash, auth=('user', settings.MAILCHIMP_API_KEY))
-            # Mailchimp will return a 404 if the email we want to add is not on the Dispatch subscriber list
+            r = requests.get("https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/%s" %
+                             emailhash, auth=('user', settings.MAILCHIMP_API_KEY))
+            # Mailchimp will return a 404 if the email we want to add is not on
+            # the Dispatch subscriber list
             if r.status_code == 404:
                 url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
-                payload = {"email_address" : application.email, "status": "pending"}
-                requests.post(url, auth=('user', settings.MAILCHIMP_API_KEY), json=payload)
+                payload = {"email_address": application.email,
+                           "status": "pending"}
+                requests.post(url, auth=(
+                    'user', settings.MAILCHIMP_API_KEY), json=payload)
+
 
 class ScoreForm(forms.ModelForm):
 
