@@ -7,7 +7,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
 
 from codemirror import CodeMirrorTextarea
-from suit.admin import SortableModelAdmin
+from suit.admin import SortableModelAdmin, SortableTabularInline
 
 
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
@@ -184,9 +184,9 @@ class EventPageMenuAdmin(SortableModelAdmin):
         return self.readonly_fields
 
 
-class SponsorAdmin(SortableModelAdmin):
-    list_display = ('id', 'name', 'logo_display_for_admin', 'url', 'position')
-    sortable = 'position'
+class SponsorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'logo_display_for_admin', 'url')
+    list_per_page = 50
 
     def get_queryset(self, request):
         qs = super(SponsorAdmin, self).get_queryset(request)

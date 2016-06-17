@@ -301,9 +301,6 @@ class Sponsor(models.Model):
     url = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
-    position = models.PositiveIntegerField(null=False, blank=False,
-                                           help_text="Position of the sponsor")
-
     def __str__(self):
         return self.name
 
