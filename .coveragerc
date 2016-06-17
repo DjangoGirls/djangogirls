@@ -1,6 +1,10 @@
 [run]
-source = 
-	applications/
-omit = 
+source =
+    applications/
+    core/
+    djangogirls/
+    jobs/
+    patreonmanager/
+
+omit =
     */migrations*
-    */admin.py

@@ -5,7 +5,8 @@ from django.test import TestCase
 from django.utils import timezone
 
 from core.models import Event, EventPage, User
-from applications.models import Form, Application, Question, Score, APPLICATION_STATES, Email
+from applications.models import (
+    Form, Application, Question, Score, APPLICATION_STATES, Email)
 from applications.utils import DEFAULT_QUESTIONS
 
 

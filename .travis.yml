@@ -1,7 +1,7 @@
 language: python
 python: 3.4
 cache: pip
-script: python manage.py test
+script: py.test --cov
 sudo: false
 notifications:
   slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
@@ -12,7 +12,5 @@ addons:
   postgresql: "9.3"
 services:
   - postgresql
-env:
-  - COVERAGE=TRUE
 before_script:
   - psql -c 'create database djangogirls;' -U postgres

@@ -7,12 +7,12 @@ from django.test import TestCase, RequestFactory
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django_date_extensions.fields import ApproximateDate
 
 from core.models import Event, EventPage, User
 from applications.models import Form, Application, Score, Question, Answer
 from applications.utils import DEFAULT_QUESTIONS
 from applications.views import applications
+
 
 class ApplyView(TestCase):
 
@@ -20,8 +20,10 @@ class ApplyView(TestCase):
         self.client = Client()
         self.factory = RequestFactory()
 
-        self.event = Event.objects.create(name='Test', city='Test', country='Test')
-        self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
+        self.event = Event.objects.create(
+            name='Test', city='Test', country='Test')
+        self.page = EventPage.objects.create(
+            event=self.event, is_live=True, url='test')
         self.form = Form.objects.create(page=self.page)
 
     def test_access_apply_view(self):
@@ -30,7 +32,8 @@ class ApplyView(TestCase):
         self.assertEqual(resp.context['form_obj'], self.form)
         # there is two more fields than default questions,
         # because we always add newsletter option at the end and a captcha
-        self.assertEqual(len(resp.context['form'].fields), len(DEFAULT_QUESTIONS)+2)
+        self.assertEqual(
+            len(resp.context['form'].fields), len(DEFAULT_QUESTIONS) + 2)
 
         # Redirect to event page because there is no form
         self.form.delete()
@@ -85,7 +88,8 @@ class ApplyView(TestCase):
         self.form.open_until = now + timedelta(days=2)
         self.form.save()
 
-        user = User.objects.create(email='test@user.com', is_active=True, is_staff=True, is_superuser=True)
+        user = User.objects.create(
+            email='test@user.com', is_active=True, is_staff=True, is_superuser=True)
         user.set_password('test')
         user.save()
         self.client.login(email='test@user.com', password='test')
@@ -101,20 +105,29 @@ class ApplicationsView(TestCase):
         self.client = Client()
         self.factory = RequestFactory()
 
-        self.event = Event.objects.create(name='Test', city='Test', country='Test')
-        self.event2 = Event.objects.create(name='Test 2', city='Test 2', country='Test 2')
-        self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
-        self.page2 = EventPage.objects.create(event=self.event2, is_live=True, url='test2')
+        self.event = Event.objects.create(
+            name='Test', city='Test', country='Test')
+        self.event2 = Event.objects.create(
+            name='Test 2', city='Test 2', country='Test 2')
+        self.page = EventPage.objects.create(
+            event=self.event, is_live=True, url='test')
+        self.page2 = EventPage.objects.create(
+            event=self.event2, is_live=True, url='test2')
         self.form = Form.objects.create(page=self.page)
         self.form_2 = Form.objects.create(page=self.page2)
-        self.user = User.objects.create(email='test@user.com', is_active=True, is_staff=True)
+        self.user = User.objects.create(
+            email='test@user.com', is_active=True, is_staff=True)
         self.user.set_password('test')
         self.user_2 = User.objects.create(email='test2@user.com')
 
-        self.application_1 = Application.objects.create(form=self.form, state='submitted')
-        self.application_2 = Application.objects.create(form=self.form, state='accepted')
-        self.application_3 = Application.objects.create(form=self.form, state='rejected')
-        self.application_4 = Application.objects.create(form=self.form, state='waitlisted')
+        self.application_1 = Application.objects.create(
+            form=self.form, state='submitted')
+        self.application_2 = Application.objects.create(
+            form=self.form, state='accepted')
+        self.application_3 = Application.objects.create(
+            form=self.form, state='rejected')
+        self.application_4 = Application.objects.create(
+            form=self.form, state='waitlisted')
 
         self.url = reverse('applications:applications', args=['test'])
 
@@ -190,25 +203,33 @@ class ApplicationsView(TestCase):
         self.client.login(email='test@user.com', password='test')
 
         # Add some scores:
-        Score.objects.create(application=self.application_1, user=self.user, score=2.0)
-        Score.objects.create(application=self.application_1, user=self.user_2, score=4.0)
-        Score.objects.create(application=self.application_2, user=self.user, score=3.0)
-        Score.objects.create(application=self.application_2, user=self.user_2, score=3.0)
-        Score.objects.create(application=self.application_3, user=self.user, score=3.0)
-        Score.objects.create(application=self.application_3, user=self.user_2, score=4.0)
+        Score.objects.create(application=self.application_1,
+                             user=self.user, score=2.0)
+        Score.objects.create(application=self.application_1,
+                             user=self.user_2, score=4.0)
+        Score.objects.create(application=self.application_2,
+                             user=self.user, score=3.0)
+        Score.objects.create(application=self.application_2,
+                             user=self.user_2, score=3.0)
+        Score.objects.create(application=self.application_3,
+                             user=self.user, score=3.0)
+        Score.objects.create(application=self.application_3,
+                             user=self.user_2, score=4.0)
 
         # Order by average_score
         resp = self.client.get('{}?order=average_score'.format(self.url))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 4)
-        self.assertEqual(resp.context['applications'], [self.application_4, self.application_1, self.application_2, self.application_3])
+        self.assertEqual(resp.context['applications'], [
+                         self.application_4, self.application_1, self.application_2, self.application_3])
         self.assertEqual(resp.context['order'], 'average_score')
 
         # Order by -average_score
         resp = self.client.get('{}?order=-average_score'.format(self.url))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 4)
-        self.assertEqual(resp.context['applications'], [self.application_3, self.application_2, self.application_1, self.application_4])
+        self.assertEqual(resp.context['applications'], [
+                         self.application_3, self.application_2, self.application_1, self.application_4])
         self.assertEqual(resp.context['order'], '-average_score')
 
     def get_filtered_applications_list(self):
@@ -329,7 +350,8 @@ class ApplicationsView(TestCase):
         self.assertEqual(self.application_3.state, 'rejected')
         resp = self.client.post(
             reverse('applications:change_state', args=['test']),
-            {'state': 'accepted', 'application': [self.application_1.id, self.application_3.id]}
+            {'state': 'accepted', 'application': [
+                self.application_1.id, self.application_3.id]}
         )
         self.assertEqual(resp.status_code, 200)
         self.application_1 = Application.objects.get(id=self.application_1.id)
@@ -337,26 +359,35 @@ class ApplicationsView(TestCase):
         self.assertEqual(self.application_1.state, 'accepted')
         self.assertEqual(self.application_3.state, 'accepted')
 
+
 class ApplicationsDownloadView(TestCase):
 
     def setUp(self):
         self.client = Client()
         self.factory = RequestFactory()
 
-        self.event = Event.objects.create(name='Test', city='Test', country='Test')
-        self.page = EventPage.objects.create(event=self.event, is_live=True, url='test')
+        self.event = Event.objects.create(
+            name='Test', city='Test', country='Test')
+        self.page = EventPage.objects.create(
+            event=self.event, is_live=True, url='test')
         self.form = Form.objects.create(page=self.page)
 
-        self.user = User.objects.create(email='test@user.com', is_active=True, is_staff=True)
+        self.user = User.objects.create(
+            email='test@user.com', is_active=True, is_staff=True)
         self.user.set_password('test')
 
-        self.application_1 = Application.objects.create(form=self.form, state='submitted')
-        self.application_2 = Application.objects.create(form=self.form, state='accepted')
-        self.application_3 = Application.objects.create(form=self.form, state='rejected')
-        self.application_4 = Application.objects.create(form=self.form, state='waitlisted')
+        self.application_1 = Application.objects.create(
+            form=self.form, state='submitted')
+        self.application_2 = Application.objects.create(
+            form=self.form, state='accepted')
+        self.application_3 = Application.objects.create(
+            form=self.form, state='rejected')
+        self.application_4 = Application.objects.create(
+            form=self.form, state='waitlisted')
 
         self.last_question = self.form.question_set.last()
-        self.application_1_last_answer = Answer.objects.create(application=self.application_1, question=self.last_question, answer='answer to last for app 1')
+        self.application_1_last_answer = Answer.objects.create(
+            application=self.application_1, question=self.last_question, answer='answer to last for app 1')
 
         self.url = reverse('applications:applications_csv', args=['test'])
 
@@ -397,18 +428,21 @@ class ApplicationsDownloadView(TestCase):
         csv_list = list(reader)
         self.assertEquals(len(csv_list), 3)
 
-
     def test_download_applications_list_with_question_added(self):
 
         # add new question x as next to last question
-        self.question_x = Question.objects.create(form=self.form, question_type='text', order=self.last_question.order, title='questionx')
+        self.question_x = Question.objects.create(
+            form=self.form, question_type='text', order=self.last_question.order, title='questionx')
         self.last_question.order = self.last_question.order + 1
         self.last_question.save()
 
         # now create a new application with answer to the new question
-        self.application_5 = Application.objects.create(form=self.form, state='submitted')
-        self.application_5_x_answer = Answer.objects.create(application=self.application_5, question=self.question_x, answer='answer to questionx for app 5')
-        self.application_5_last_answer = Answer.objects.create(application=self.application_5, question=self.last_question, answer='answer to last for app 5')
+        self.application_5 = Application.objects.create(
+            form=self.form, state='submitted')
+        self.application_5_x_answer = Answer.objects.create(
+            application=self.application_5, question=self.question_x, answer='answer to questionx for app 5')
+        self.application_5_last_answer = Answer.objects.create(
+            application=self.application_5, question=self.last_question, answer='answer to last for app 5')
 
         self.user.is_superuser = True
         self.user.save()
@@ -428,10 +462,12 @@ class ApplicationsDownloadView(TestCase):
         # question x should be in next to last column
         self.assertEquals(csv_list[0][17], "questionx")
 
-        # old application should have blank for question x in next-to-last column
+        # old application should have blank for question x in next-to-last
+        # column
         self.assertEquals(csv_list[1][17], "")
         self.assertEquals(csv_list[1][18], "answer to last for app 1")
 
-        # new application should have answer for question x in next-to-last column
+        # new application should have answer for question x in next-to-last
+        # column
         self.assertEquals(csv_list[5][17], "answer to questionx for app 5")
         self.assertEquals(csv_list[5][18], "answer to last for app 5")

@@ -181,8 +181,6 @@ NOCAPTCHA = True
 
 SHOP_DISCOUNT = os.environ.get('STORE_CODE')
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
 NOSE_ARGS = []
 
 # Optionally enable coverage reporting

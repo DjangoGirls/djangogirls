@@ -97,11 +97,11 @@ Load sample data to the database
 Create a user so you can login to the admin:
 
     ./manage.py createsuperuser
-    
+
 Install dependencies for static files:
 
     npm install
-    
+
 Compile CSS and JS files:
 
     gulp watch
@@ -117,11 +117,11 @@ Run your local server:
 
 You can run the tests like this:
 
-	./manage.py test
+	py.test
 
 Or if you want coverage reports:
 
-	COVERAGE=TRUE ./manage.py test
+	py.test --cov
 
 
 ### Static files
@@ -133,11 +133,11 @@ This means you shouldn't change any css files, but `.styl` files. They're in /st
 Autocompiling of `.styl` files to `.css`:
 
     gulp watch
-    
+
 We're also using gulp for our static files builds. To build static files for production, run this:
 
     gulp build
-    
+
 For local development:
 
     gulp local
