@@ -1,16 +1,20 @@
 language: python
 python: 3.4
-cache: pip
 script: py.test --cov
 sudo: false
 notifications:
   slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
 cache:
   directories:
-    - $HOME/virtualenv
+    - $HOME/.cache/pip
+install:
+  - pip install --upgrade pip setuptools wheel
+  - pip install -r requirements.txt
 addons:
   postgresql: "9.3"
 services:
   - postgresql
 before_script:
   - psql -c 'create database djangogirls;' -U postgres
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
