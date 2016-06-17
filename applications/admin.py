@@ -48,7 +48,8 @@ class FormAdmin(admin.ModelAdmin):
         })
 
     def get_submissions_url(self, obj):
-        return format_html('<a href="{}" target="_blank">See all submitted applications</a>',
+        return format_html(
+            '<a href="{}" target="_blank">See all submitted applications</a>',
             reverse('applications:applications', args=[obj.page.url]))
     get_submissions_url.short_description = "Applications"
 

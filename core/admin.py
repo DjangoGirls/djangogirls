@@ -7,7 +7,7 @@ from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
 
 from codemirror import CodeMirrorTextarea
-from suit.admin import SortableModelAdmin, SortableTabularInline
+from suit.admin import SortableModelAdmin
 
 
 from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm

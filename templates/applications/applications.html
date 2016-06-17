@@ -49,9 +49,9 @@
                   <tr>
                       <th><input type="checkbox" name="application" id="select-all-box" /></th>
                       <th>#</th>
-                      <th>E-mail</th>
-                      <th>Application status</th>
-                      <th>RSVP</th>
+                      <th>E-mail {% display_sorting_arrow 'email' order %}</th>
+                      <th>Application status {% display_sorting_arrow 'state' order %}</th>
+                      <th>RSVP {% display_sorting_arrow 'rsvp_status' order %}</th>
                       <th>Score {% display_sorting_arrow 'average_score' order %}</th>
                       <th>&nbsp;</th>
                   </tr>

@@ -3,12 +3,11 @@ import icalendar
 from django.conf import settings
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import Event, EventPage, Story, ContactEmail, User
+from .models import Event, EventPage, Story, User
 from .forms import ContactForm
 from patreonmanager.models import FundraisingStatus
 
@@ -123,7 +122,8 @@ def contact(request):
                     messages.ERROR,
                     "Ooops. We couldn't send your email :( Please try again later"
                 )
-            return render(request, 'core/contact.html', {'form': ContactForm()})
+            return render(request, 'core/contact.html',
+                          {'form': ContactForm()})
     else:
         form = ContactForm()
     return render(request, 'core/contact.html', {'form': form})
@@ -151,12 +151,14 @@ def year_2015(request):
         'mapbox_map_id': settings.MAPBOX_MAP_ID,
     })
 
+
 def terms_conditions(request):
     return render(request, 'core/terms_conditions.html', {})
 
+
 def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
-    
+
 
 def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
