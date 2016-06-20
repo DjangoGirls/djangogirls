@@ -7,8 +7,6 @@ from core.slack_client import slack
 from ...models import FundraisingStatus
 
 
-# https://github.com/oxguy3/patreon-api
-API_KEY = '1745177328c8a1d48100a9b14a1d38c1'
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = 'http://api.patreon.com/'
 
