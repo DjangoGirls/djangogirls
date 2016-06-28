@@ -4,6 +4,7 @@ import re
 import datetime
 from collections import namedtuple
 import time
+from django.conf import settings
 
 from trello import TrelloClient, ResourceUnavailable
 
@@ -42,10 +43,8 @@ def event_list():
 
 ADMIN_BASE_URL = 'https://djangogirls.org/admin/core/event/'
 
-TRELLO_KEY = '01ab0348ca020573e7f728ae7400928a'
-
 def sync(events, token):
-    trello = TrelloClient(api_key=TRELLO_KEY, token=token)
+    trello = TrelloClient(api_key=settings.TRELLO_API_KEY, token=token)
     board = trello.get_board('55f7167c46760fcb5d68b385')
 
     far_away, less_2_months, less_1_month, less_1_week, today, past = board.all_lists()

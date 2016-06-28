@@ -171,13 +171,14 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
+TRELLO_API_KEY = os.environ.get('TRELLO_API_KEY')
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
-SHOP_DISCOUNT = os.environ.get('STORE_CODE')
+SHOP_DISCOUNT = os.environ.get('STORE_DISCOUNT_CODE')
 
 NOSE_ARGS = []
 

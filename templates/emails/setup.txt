@@ -39,7 +39,7 @@ To help you reduce the cost of your event, we created a Workshop Box full of Dja
 
 5) Django Girls shop discount code
 
-Since we now have our own shop (https://store.djangogirls.org/), we can generate discount codes! Use {{ settings.SHOP_DISCOUNT }} to get a 15% discount on your order. You can share this code with your coaches and attendees ;) All proceeds will go to Django Girls Foundation to make the charity sustainable.
+Since we now have our own shop (https://store.djangogirls.org/), we can generate discount codes! Use {{ settings.STORE_DISCOUNT_CODE }} to get a 15% discount on your order. You can share this code with your coaches and attendees ;) All proceeds will go to Django Girls Foundation to make the charity sustainable.
 
 You can contact me again if you need assistance but it’s usually faster to check our FAQ (http://organize.djangogirls.org/faq/index.html) or to post questions to our Google Group of Django Girls Organizers or Slack channel - there are more people that can help you! :)
 
