@@ -26,10 +26,14 @@ APPLICATION_STATES = (
     ('declined', 'Applicant declined'),
 )
 
+RSVP_WAITING = 'waiting'
+RSVP_YES = 'yes'
+RSVP_NO = 'no'
+
 RSVP_STATUSES = (
-    ('waiting', 'RSVP: Waiting for response'),
-    ('yes', 'RSVP: Confirmed attendance'),
-    ('no', 'RSVP: Rejected invitation')
+    (RSVP_WAITING, 'RSVP: Waiting for response'),
+    (RSVP_YES, 'RSVP: Confirmed attendance'),
+    (RSVP_NO, 'RSVP: Rejected invitation')
 
 )
 
@@ -149,7 +153,7 @@ class Application(models.Model):
     rsvp_status = models.CharField(
         max_length=50,
         choices=RSVP_STATUSES, verbose_name="RSVP status",
-        default='waiting'
+        default=RSVP_WAITING
     )
     rsvp_yes_code = models.CharField(max_length=24, null=True)
     rsvp_no_code = models.CharField(max_length=24, null=True)
@@ -207,11 +211,11 @@ class Application(models.Model):
         """ Returns application and RSVP status or None """
         try:
             application = self.objects.get(rsvp_yes_code=code, form__page=page)
-            return application, 'yes'
+            return application, RSVP_YES
         except self.DoesNotExist:
             try:
                 application = self.objects.get(rsvp_no_code=code, form__page=page)
-                return application, 'no'
+                return application, RSVP_NO
             except self.DoesNotExist:
                 return None, None
         return None, None

@@ -4,15 +4,30 @@
 {% block title %}{{ page.title }}{% endblock %}
 {% block description %}{{ page.description }}{% endblock %}
 {% block custom_css %}
+{% if page.custom_css %}
     <style>
-        {{ page.custom_css|default_if_none:'' }}
+        {{ page.custom_css }}
     </style>
+{% endif %}
 {% endblock %}
 
 {% block content %}
 
-    {% if not page.is_live %}
-    <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/eventpage/{{ page.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
+    {% if messages or not page.is_live %}
+    <div class="container messages">
+        <div class="row">
+
+            {% if not page.is_live%}
+            <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/eventpage/{{ page.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
+            {% endif %}
+
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     {% endif %}
 
     {% for item in content %}

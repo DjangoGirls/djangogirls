@@ -1,0 +1,17 @@
+{% extends 'core/event.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container without-background">
+    <div class="row">
+        <div class="col-md-6 rsvp-left-column">
+            <h3>Your answer has been saved!</h3>
+            {{ message }}
+        </div>
+        <div class="col-md-6 rsvp-right-column">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

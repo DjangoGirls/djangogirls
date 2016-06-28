@@ -8,7 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 from core.utils import get_event_page
 from core.models import EventPageMenu
 from .decorators import organiser_only
-from .models import Application, Form, Score, Question, Email
+from .models import (
+    Application, Form, Score, Question, Email, RSVP_WAITING, RSVP_YES
+)
 from .forms import ApplicationForm, ScoreForm, EmailForm
 from .utils import (
     get_applications_for_page, get_organiser_menu, random_application
@@ -302,13 +304,21 @@ def rsvp(request, city, code):
     if not application:
         return redirect('/{}/'.format(page.url))
 
+    if application.rsvp_status != RSVP_WAITING:
+        messages.error(
+            request,
+            "Something went wrong with your RSVP link. Please contact us at "
+            "{} with your name.".format(page.event.email)
+        )
+        return redirect('/{}/'.format(page.url))
+
     application.rsvp_status = rsvp
     application.save()
 
-    if rsvp == 'yes':
+    if rsvp == RSVP_YES:
         message = (
-            "Your answer has been saved, your participation in the workshop "
-            "has been confirmed! We can't wait to meet you. We will be in "
+            "Your participation in the workshop has been confirmed! "
+            "We can't wait to meet you. We will be in "
             "touch with details soon."
         )
     else:
@@ -317,11 +327,10 @@ def rsvp(request, city, code):
             "spot will be assigned to another person on the waiting list."
         )
 
-    messages.success(request, message)
-
     menu = EventPageMenu.objects.filter(page=page)
 
-    return render(request, 'applications/apply.html', {
+    return render(request, 'applications/rsvp.html', {
         'page': page,
         'menu': menu,
+        'message': message
     })

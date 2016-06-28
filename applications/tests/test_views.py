@@ -9,7 +9,9 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 from core.models import Event, EventPage, User
-from applications.models import Form, Application, Score, Question, Answer
+from applications.models import (
+    Form, Application, Score, Question, Answer, RSVP_NO, RSVP_YES, RSVP_WAITING
+)
 from applications.utils import DEFAULT_QUESTIONS
 from applications.views import applications
 
@@ -164,7 +166,7 @@ class ApplicationsView(TestCase):
         request = self.factory.get('')
         request.user = self.user
         with self.assertRaises(ValueError):
-            resp = applications(request, city=None)
+            applications(request, city=None)
 
     def test_get_applications_list(self):
         self.user.is_superuser = True
@@ -220,16 +222,22 @@ class ApplicationsView(TestCase):
         resp = self.client.get('{}?order=average_score'.format(self.url))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 4)
-        self.assertEqual(resp.context['applications'], [
-                         self.application_4, self.application_1, self.application_2, self.application_3])
+        self.assertEqual(
+            resp.context['applications'],
+            [self.application_4, self.application_1, self.application_2,
+             self.application_3]
+        )
         self.assertEqual(resp.context['order'], 'average_score')
 
         # Order by -average_score
         resp = self.client.get('{}?order=-average_score'.format(self.url))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.context['applications']), 4)
-        self.assertEqual(resp.context['applications'], [
-                         self.application_3, self.application_2, self.application_1, self.application_4])
+        self.assertEqual(
+            resp.context['applications'],
+            [self.application_3, self.application_2, self.application_1,
+             self.application_4]
+        )
         self.assertEqual(resp.context['order'], '-average_score')
 
     def get_filtered_applications_list(self):
@@ -275,19 +283,63 @@ class ApplicationsView(TestCase):
         self.application_1 = Application.objects.get(id=self.application_1.id)
         self.assertEqual(self.application_1.state, 'accepted')
 
+    def test_yes_rsvp(self):
+        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        args = ['test', self.application_2.get_rsvp_yes_code()]
+        resp = self.client.get(
+            reverse('applications:rsvp', args=args)
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.application_2 = Application.objects.get(id=self.application_2.id)
+        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+
+    def test_repeated_rsvp(self):
+        self.application_2.rsvp_status = RSVP_YES
+        self.application_2.save()
+        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+        args = ['test', self.application_2.get_rsvp_no_code()]
+        resp = self.client.get(
+            reverse('applications:rsvp', args=args)
+        )
+        self.assertEqual(resp.status_code, 302)
+        self.application_2 = Application.objects.get(id=self.application_2.id)
+        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+
+    def test_no_rsvp(self):
+        self.application_2.rsvp_status = RSVP_WAITING
+        self.application_2.save()
+        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        args = ['test', self.application_2.get_rsvp_no_code()]
+        resp = self.client.get(
+            reverse('applications:rsvp', args=args)
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.application_2 = Application.objects.get(id=self.application_2.id)
+        self.assertEqual(self.application_2.rsvp_status, RSVP_NO)
+
+    def test_nonexistent_rsvp(self):
+        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        args = ['test', 'sssss']
+        resp = self.client.get(
+            reverse('applications:rsvp', args=args)
+        )
+        self.assertEqual(resp.status_code, 302)
+        self.application_2 = Application.objects.get(id=self.application_2.id)
+        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+
     def test_changing_application_rsvp(self):
         self.user.is_superuser = True
         self.user.save()
         self.client.login(email='test@user.com', password='test')
 
-        self.assertEqual(self.application_1.rsvp_status, 'waiting')
+        self.assertEqual(self.application_1.rsvp_status, RSVP_WAITING)
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': 'yes', 'application': self.application_1.id}
+            {'rsvp_status': RSVP_YES, 'application': self.application_1.id}
         )
         self.assertEqual(resp.status_code, 200)
         self.application_1 = Application.objects.get(id=self.application_1.id)
-        self.assertEqual(self.application_1.rsvp_status, 'yes')
+        self.assertEqual(self.application_1.rsvp_status, RSVP_YES)
 
     def test_changing_application_status_errors(self):
         # user without permissions:
@@ -319,7 +371,7 @@ class ApplicationsView(TestCase):
         # user without permissions:
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': 'yes', 'application': self.application_1.id}
+            {'rsvp_status': RSVP_YES, 'application': self.application_1.id}
         )
         self.assertEqual(resp.status_code, 302)
 
@@ -337,7 +389,7 @@ class ApplicationsView(TestCase):
         # lack of application parameter
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': 'yes'}
+            {'rsvp_status': RSVP_YES}
         )
         self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
