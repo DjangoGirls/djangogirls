@@ -15,17 +15,16 @@ django-recaptcha
 django-sslify>=0.2.0
 django-storages-redux==1.3.2
 django-suit-redactor==0.0.4
-django-suit==0.2.18
+django-suit==0.2.19
 Django==1.9.7
 djrill==2.1.0
 easy_thumbnails==2.3
-gunicorn==19.6.0
 icalendar==3.10
 lxml==3.6.0
 mandrill==1.0.57
 markdown2==2.3.1
 model-mommy==1.2.6
-opbeat==3.3.3
+opbeat==3.3.4
 Pillow==3.2.0
 psycopg2==2.6.1
 py-trello==0.5.0
@@ -35,5 +34,5 @@ pytest-django==2.9.1
 pytz==2016.4
 requests==2.10
 six==1.10.0
-slacker==0.9.16
+slacker==0.9.18
 whitenoise==3.2
