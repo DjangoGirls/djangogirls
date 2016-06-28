@@ -177,7 +177,7 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
-SHOP_DISCOUNT = os.environ.get('STORE_CODE')
+SHOP_DISCOUNT = os.environ.get('STORE_DISCOUNT_CODE')
 
 NOSE_ARGS = []
 
