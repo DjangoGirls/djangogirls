@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
-from django.db import models, migrations
-from django.contrib.auth.models import Group, Permission
+from django.db import migrations
 
 
 def create_reviewer_group(apps, schema_editor, with_create_permissions=True):

@@ -40,11 +40,11 @@ def apply(request, city):
     menu = EventPageMenu.objects.filter(page=page)
 
     form = ApplicationForm(
-        request.POST or None, questions=form_obj.question_set.all()
+        request.POST or None, form=form_obj
     )
 
     if form.is_valid():
-        form.save(form=form_obj)
+        form.save()
         messages.success(
             request,
             "Yay! Your application has been saved. You'll hear from us soon!"

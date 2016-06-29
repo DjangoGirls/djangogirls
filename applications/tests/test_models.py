@@ -1,6 +1,7 @@
 import random
 from datetime import timedelta
 
+from django.db import IntegrityError
 from django.test import TestCase
 from django.utils import timezone
 
@@ -37,6 +38,16 @@ class FormModel(TestCase):
     def test_no_application_dates(self):
         form = Form.objects.create(page=self.page)
         self.assertTrue(form.application_open)
+
+    def test_email_page_unique(self):
+        form = Form.objects.create(page=self.page)
+
+        Application.objects.create(form=form, email='test@test.pl')
+        self.assertEqual(form.application_set.count(), form.number_of_applications)
+        self.assertEqual(form.application_set.count(), 1)
+
+        with self.assertRaises(IntegrityError):
+            Application.objects.create(form=form, email='test@test.pl')
 
     def test_application_open(self):
         now = timezone.now()
