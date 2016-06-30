@@ -158,6 +158,9 @@ class Application(models.Model):
     rsvp_yes_code = models.CharField(max_length=24, null=True)
     rsvp_no_code = models.CharField(max_length=24, null=True)
 
+    class Meta:
+        unique_together = ("form", "email")
+
     def save(self, *args, **kwargs):
         if self.pk is None:
             current_max = Application.objects.filter(form=self.form).aggregate(models.Max('number'))['number__max']
