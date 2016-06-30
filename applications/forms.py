@@ -29,19 +29,14 @@ class ApplicationForm(forms.Form):
         email = None
         field_name = None
 
-        for name in self.cleaned_data:
-            question = None
-            pk = name.replace('question_', '')
-            value = self.cleaned_data[name]
-            try:
-                question = Question.objects.get(pk=pk, form=self.form)
-            except (Question.DoesNotExist, ValueError):
-                continue
+        question = Question.objects.filter(form=self.form,
+                                           question_type='email').first()
 
-            if question and question.question_type == 'email':
-                email = value
-                field_name = name
-                break
+        if not question:
+            return cleaned_data
+
+        field_name = 'question_{}'.format(question.pk)
+        email = self.cleaned_data.get(field_name)
 
         if email is not None:
             if (Application.objects

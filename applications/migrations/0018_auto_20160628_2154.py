@@ -14,7 +14,7 @@ def deduplicate_applications(apps, schema_editor):
             Application.objects
             .filter(form=form, email=email)
             .values_list('id', flat=True)
-            .order_by('created')[1:]
+            .order_by('state', 'created')[1:]
         )
         Application.objects.filter(id__in=list(duplicates)).delete()
 
