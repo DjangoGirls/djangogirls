@@ -12,13 +12,18 @@ CSV_FILENAME_FORMAT = '%Y-%m-Patreon.csv'
 
 
 BasePatron = namedtuple('BasePatron', [
-    'name',
+    'first_name',
+    'last_name',
     'email',
     'pledge_raw',
     'lifetime_raw',
     'status',
     'twitter',
-    'shipping',
+    'street',
+    'city',
+    'state',
+    'zip',
+    'country',
     'start_raw',
     'max_amount',
     'complete_raw',
@@ -45,6 +50,14 @@ class Patron(BasePatron):
     @property
     def completed(self):
         return self.complete_raw == '1'
+
+    @property
+    def name(self):
+        return '{first_name} {last_name}'.format(**self._asdict()).strip()
+
+    @property
+    def shipping(self):
+        return '{street}\n{zip} {state}\n{country}'.format(**self._asdict()).strip()
 
 
 class Reward(BaseReward):
