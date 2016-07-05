@@ -70,13 +70,14 @@ def get_applications_for_page(page, state=None, rsvp_status=None, order=None):
     Return a QuerySet of Application objects for a given page.
     Raises Form.DoesNotExist if Form for page does not yet exist.
     """
-    from applications.models import Form  # circular import
-    page_form = Form.objects.filter(page=page)
-    if not page_form.exists():
-        raise Form.DoesNotExist
-    page_form = page_form.first()
+    from applications.models import Application  # circular import
 
-    applications = page_form.application_set.all().order_by('id').prefetch_related('answer_set')
+    applications = (
+        Application.objects
+        .filter(form__page=page)
+        .order_by('id')
+        .prefetch_related('answer_set')
+    )
 
     if rsvp_status:
         applications = applications.filter(

@@ -8,8 +8,7 @@ from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
 from core.models import User, Event, EventPage, ContactEmail
-from core.views import event
-from core.forms import ContactForm
+from core.views import event as event_view
 
 
 class CoreViewsTestCase(TestCase):
@@ -38,11 +37,14 @@ class CoreViewsTestCase(TestCase):
         self.assertTrue('past_events' and 'future_events' in resp.context)
 
         # Is future event on future list?
-        self.assertEqual([event.pk for event in resp.context['future_events']], [1])
-        self.assertNotEqual([event.pk for event in resp.context['future_events']], [2])
+        self.assertEqual(
+            [event.pk for event in resp.context['future_events']], [1])
+        self.assertNotEqual(
+            [event.pk for event in resp.context['future_events']], [2])
 
         # Is hidden event on the list?
-        self.assertNotEqual([event.pk for event in resp.context['future_events']], [3])
+        self.assertNotEqual(
+            [event.pk for event in resp.context['future_events']], [3])
 
     def test_event_published(self):
         event_page_1 = EventPage.objects.get(event=self.event_1)
@@ -63,7 +65,8 @@ class CoreViewsTestCase(TestCase):
         self.assertTrue('page' and 'menu' and 'content' in resp_2.context)
 
         # Check if not public content is not available in context:
-        self.assertNotEqual([content.pk for content in resp_1.context['content']], [1])
+        self.assertNotEqual(
+            [content.pk for content in resp_1.context['content']], [1])
 
     def test_event_unpublished(self):
         event_page_3 = EventPage.objects.get(event=self.event_3)
@@ -92,7 +95,8 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
         # Check if website is returning correct content
-        self.assertIn('will be coming soon', str(resp.content), 'Incorrect content')
+        self.assertIn('will be coming soon', str(
+            resp.content), 'Incorrect content')
 
         # make the event date in the past
         self.event_4.date = ApproximateDate(
@@ -105,7 +109,8 @@ class CoreViewsTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
         # Check if website is returning correct content
-        self.assertIn('has already happened', str(resp.content), 'Incorrect content')
+        self.assertIn('has already happened', str(
+            resp.content), 'Incorrect content')
 
     def test_event_unpublished_with_authenticated_user(self):
         """ Test that an unpublished page can be accessed when the user is
@@ -119,7 +124,7 @@ class CoreViewsTestCase(TestCase):
         request.user = self.ola
 
         # Check if the unpublished page can be accessed
-        resp = event(request, event_page_3.url)
+        resp = event_view(request, event_page_3.url)
         self.assertEqual(resp.status_code, 200)
         # Check if website is returning correct data
         self.assertIn(event_page_3.title, resp.content.decode('utf-8'))
@@ -133,7 +138,6 @@ class ContactTestCase(TestCase):
 
     def tearDown(self):
         del os.environ['RECAPTCHA_TESTING']
-
 
     def test_contact_page_loads(self):
         url = reverse('core:contact')

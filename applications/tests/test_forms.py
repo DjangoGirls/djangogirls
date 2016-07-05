@@ -16,6 +16,8 @@ class MenuTest(TestCase):
                                              is_live=True, url='test')
         self.form = Form.objects.create(page=self.page)
 
+        os.environ['RECAPTCHA_TESTING'] = 'True'
+
     def test_application_form_prevent_duplicate_emails(self):
         form_questions = [
             {
@@ -35,6 +37,7 @@ class MenuTest(TestCase):
 
         form_data = {
             'newsletter_optin': 'yes',
+            'g-recaptcha-response': 'PASSED'
         }
         for question in questions:
             if question.title == "Your e-mail address:":
@@ -44,10 +47,12 @@ class MenuTest(TestCase):
                 continue
 
         form = ApplicationForm(form_data, form=self.form)
-        del form.fields['captcha']
 
         self.assertTrue(form.is_valid())
         form.save()
         self.assertEqual(Application.objects.count(), 1)
         form = ApplicationForm(form_data, form=self.form)
         self.assertFalse(form.is_valid())
+
+    def tearDown(self):
+        os.environ['RECAPTCHA_TESTING'] = 'False'
