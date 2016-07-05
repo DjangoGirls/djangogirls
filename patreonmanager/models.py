@@ -9,7 +9,8 @@ class Patron(models.Model):
     twitter = models.CharField(_("twitter"), max_length=50, blank=True)
     address = models.TextField(_("address"), blank=True)
     since = models.DateTimeField(_("patron since"), blank=True, null=True)
-    last_update = models.DateTimeField(_("last update"), default=timezone.now, editable=False)
+    last_update = models.DateTimeField(
+        _("last update"), default=timezone.now, editable=False)
 
     class Meta:
         verbose_name = _("patron")
@@ -33,30 +34,31 @@ class Reward(models.Model):
         return self.name
 
 
-class STATUS(object):
-    DECLINED = 'DECLINED'
-    PROCESSED = 'PROCESSED'
-
-    choices = [
-        (DECLINED, _("declined")),
-        (PROCESSED, _("processed")),
-    ]
-
-
 class PaymentQuerySet(models.QuerySet):
+
     def complete(self):
         return self.update(completed=True)
     complete.alters_data = True
 
 
 class Payment(models.Model):
-    STATUS = STATUS  # Just so that the class is available in the model's namespace
+    class STATUS(object):
+        DECLINED = 'DECLINED'
+        PROCESSED = 'PROCESSED'
 
-    patron = models.ForeignKey('Patron', verbose_name=_("patron"), related_name='payments')
+        choices = [
+            (DECLINED, _("declined")),
+            (PROCESSED, _("processed")),
+        ]
+
+    patron = models.ForeignKey('Patron', verbose_name=_(
+        "patron"), related_name='payments')
     month = models.DateField(_("month"))
-    reward = models.ForeignKey('Reward', verbose_name=_("reward"), related_name='+')
+    reward = models.ForeignKey(
+        'Reward', verbose_name=_("reward"), related_name='+')
     pledge = models.DecimalField(_("pledge"), max_digits=8, decimal_places=2)
-    status = models.CharField(_("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
+    status = models.CharField(
+        _("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
     completed = models.BooleanField(_("completed"), default=False)
 
     objects = PaymentQuerySet.as_manager()
@@ -84,4 +86,4 @@ class FundraisingStatus(models.Model):
 
     @property
     def percentage_of_goal(self):
-        return int(float(self.amount_raised)/float(self.GOAL)*100.0)
+        return int(float(self.amount_raised) / float(self.GOAL) * 100.0)

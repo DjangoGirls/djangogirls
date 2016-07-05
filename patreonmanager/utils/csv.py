@@ -1,5 +1,4 @@
 from collections import defaultdict, namedtuple
-import csv
 from datetime import datetime
 from decimal import Decimal
 from os import path

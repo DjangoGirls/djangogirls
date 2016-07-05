@@ -5,7 +5,6 @@ Requires requests and lxml.
 """
 from datetime import datetime
 import logging
-from os import path
 import re
 from urllib.parse import parse_qs, urlparse
 

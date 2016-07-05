@@ -1,11 +1,11 @@
-import json
-from io import StringIO
-import csv
 from datetime import timedelta
+from io import StringIO
+import json
+import csv
 
+from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from django.test.client import Client
-from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 from core.models import Event, EventPage, User

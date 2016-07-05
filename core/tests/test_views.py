@@ -1,9 +1,10 @@
-import os
 from datetime import timedelta
+import os
+
 from django.core import mail
+from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from django.test.client import Client
-from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
