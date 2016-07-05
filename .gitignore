@@ -21,3 +21,4 @@ static/build/
 static/local/
 static/rev-manifest.json
 temp/
+/djangogirls/secrets.json

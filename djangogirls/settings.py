@@ -1,7 +1,15 @@
 import os
 import dj_database_url
+import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+try:
+    secret_path = os.path.join(BASE_DIR, "djangogirls", "secrets.json")
+    with open(secret_path) as f:
+        SECRETS = json.load(f)
+except IOError:
+    SECRETS = {}
 
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
 
@@ -178,7 +186,8 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
-SHOP_DISCOUNT = os.environ.get('STORE_DISCOUNT_CODE')
+STORE_DISCOUNT_CODE = SECRETS.get('STORE_DISCOUNT_CODE', None)
+TRELLO_API_KEY = SECRETS.get('TRELLO_API_KEY', None)
 
 NOSE_ARGS = []
 
