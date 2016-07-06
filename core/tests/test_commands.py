@@ -1,11 +1,10 @@
-import click
-import pytest
+from click.testing import CliRunner
 
 from django.core.management import call_command
 from django.test import TestCase
 
 from core.models import Event
-from core.management.commands.add_organizer import Command
+from core.management.commands.add_organizer import command
 
 
 class CommandsTestCase(TestCase):
@@ -13,6 +12,7 @@ class CommandsTestCase(TestCase):
 
     def setUp(self):
         self.event_1 = Event.objects.get(pk=1)  # In the future
+        self.runner = CliRunner(echo_stdin=True)
 
     def test_update_coordinates(self):
         event_2 = Event.objects.get(pk=2)
@@ -28,27 +28,20 @@ class CommandsTestCase(TestCase):
         event_2 = Event.objects.get(pk=2)
         self.assertEqual(event_2.latlng, latlng)
 
+    def test_add_organizer(self):
+        event = Event.objects.get(pk=1)
+        assert event.team.count() == 2
 
-@pytest.mark.runner_setup(echo_stdin=True)
-@pytest.mark.django_db
-def test_cli(cli_runner):
-    call_command('loaddata', 'core_views_testdata.json')
+        command_input = (
+            "1\n"
+            "Jan Kowalski\n"
+            "jan@kowalski.example\n"
+            "N\n"
+        )
 
-    event = Event.objects.get(pk=1)
-    assert event.team.count() == 2
-
-    command_input = (
-        "1\n"
-        "Jan Kowalski\n"
-        "jan@kowalski.example\n"
-        "N\n"
-    )
-    command = Command()
-    result = cli_runner.invoke(
-        command.handle,
-        input=command_input
-    )
-    print(result)
-    event = Event.objects.get(pk=1)
-    print(event.team.all())
-    assert event.team.count() == 3
+        self.runner.invoke(
+            command,
+            input=command_input
+        )
+        event = Event.objects.get(pk=1)
+        assert event.team.count() == 3

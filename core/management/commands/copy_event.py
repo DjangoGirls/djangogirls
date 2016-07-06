@@ -110,7 +110,7 @@ class Command(BaseCommand):
             new_content.save()
 
             obj = EventPageContent.objects.get(id=obj_id)
-            
+
             new_content.coaches.add(*obj.coaches.all())
             new_content.sponsors.add(*obj.sponsors.all())
 
