@@ -1,19 +1,17 @@
-import builtins
-import mock
-
-from click.testing import CliRunner
+import click
+import pytest
 
 from django.core.management import call_command
 from django.test import TestCase
 
 from core.models import Event
+from core.management.commands.add_organizer import Command
 
 
 class CommandsTestCase(TestCase):
     fixtures = ['core_views_testdata.json']
 
     def setUp(self):
-        self.runner = CliRunner()
         self.event_1 = Event.objects.get(pk=1)  # In the future
 
     def test_update_coordinates(self):
@@ -30,21 +28,27 @@ class CommandsTestCase(TestCase):
         event_2 = Event.objects.get(pk=2)
         self.assertEqual(event_2.latlng, latlng)
 
-    # def test_add_organizer(self):
-    #     " Test adding organizers to events"
-    #     self.assertTrue(Event.objects.all(), 4)
 
-    #     command_input = (
-    #         "1\n",
-    #         "Jan Kowalski\n",
-    #         "jan@kowalski.example\n",
-    #         "no\n",
-    #     )
-    #     input_generator = (i for i in command_input)
-    #     with mock.patch.object(
-    #         builtins, 'input',
-    #         lambda prompt: next(input_generator)
-    #     ):
-    #         self.runner.invoke(
-    #             call_command('add_organizer')
-    #         )
+@pytest.mark.runner_setup(echo_stdin=True)
+@pytest.mark.django_db
+def test_cli(cli_runner):
+    call_command('loaddata', 'core_views_testdata.json')
+
+    event = Event.objects.get(pk=1)
+    assert event.team.count() == 2
+
+    command_input = (
+        "1\n"
+        "Jan Kowalski\n"
+        "jan@kowalski.example\n"
+        "N\n"
+    )
+    command = Command()
+    result = cli_runner.invoke(
+        command.handle,
+        input=command_input
+    )
+    print(result)
+    event = Event.objects.get(pk=1)
+    print(event.team.all())
+    assert event.team.count() == 3

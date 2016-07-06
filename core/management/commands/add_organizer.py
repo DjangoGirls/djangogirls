@@ -68,6 +68,7 @@ class Command(BaseCommand):
                 click.secho("!! {} not invited to Slack, because {}".format(
                     member.email, e), fg='red')
 
+    @click.command()
     def handle(self, *args, **options):
         event_id = click.prompt(
             click.style(
