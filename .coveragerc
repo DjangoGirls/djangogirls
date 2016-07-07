@@ -8,3 +8,4 @@ source =
 
 omit =
     */migrations*
+    djangogirls/wsgi.py

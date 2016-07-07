@@ -12,3 +12,4 @@ coverage:
 
   ignore:
     - "migrations/*"
+    - "djangogirls/wsgi.py"
