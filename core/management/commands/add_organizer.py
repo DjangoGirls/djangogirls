@@ -10,8 +10,7 @@ import string
 from core.models import User, Event
 from core.slack_client import user_invite
 
-
-help = 'Creates new Django Girls organizer'
+DELIMITER = "\n-------------------------------------------------------------\n"
 
 
 def get_organizer_data():
@@ -72,6 +71,7 @@ def invite_team_to_slack(team):
 
 @click.command()
 def command():
+    """Creates new Django Girls organizer"""
     event_id = click.prompt(
         click.style(
             "What's the event ID? NOT the event page ID. We want EVENT ID here",
@@ -105,16 +105,10 @@ def command():
                 "{} - email: {} already has account".format(
                     member['first_name'], member['email']))
 
-    click.echo("")
-    click.echo(
-        "---------------------------------------------------------------")
-    click.echo("")
+    click.echo(DELIMITER)
 
     invite_team_to_slack(members)
 
-    click.echo("")
-    click.echo(
-        "---------------------------------------------------------------")
-    click.echo("")
+    click.echo(DELIMITER)
 
     click.echo("You still need to invite people to Google Group!")
