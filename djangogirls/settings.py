@@ -1,6 +1,7 @@
 import os
 import dj_database_url
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
@@ -171,14 +172,15 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
-TRELLO_API_KEY = os.environ.get('TRELLO_API_KEY')
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
-SHOP_DISCOUNT = os.environ.get('STORE_DISCOUNT_CODE')
+STORE_DISCOUNT_CODE = os.environ.get('STORE_DISCOUNT_CODE')
+
+TRELLO_API_KEY = os.environ.get('TRELLO_API_KEY')
 
 NOSE_ARGS = []
 
