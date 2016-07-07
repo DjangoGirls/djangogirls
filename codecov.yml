@@ -1,0 +1,14 @@
+coverage:
+  precision: 2
+  round: down
+
+  notify:
+    slack:
+      default:
+        url: "https://hooks.slack.com/services/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"
+        branches: master
+        threshold: "0.5%"
+        attachments: "sunburst, diff"
+
+  ignore:          # files and folders that will be removed during processing
+    - "*/migrations*"
