@@ -10,5 +10,5 @@ coverage:
         threshold: "0.5%"
         attachments: "sunburst, diff"
 
-  ignore:          # files and folders that will be removed during processing
-    - "*/migrations*"
+  ignore:
+    - "migrations/*"
