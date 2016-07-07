@@ -47,5 +47,5 @@ def get_approximate_date(date_str):
             date_obj = datetime.strptime(date_str, '%m/%Y')
             return ApproximateDate(year=date_obj.year, month=date_obj.month)
         except ValueError:
-            return False
-    return False
+            return None
+    return None

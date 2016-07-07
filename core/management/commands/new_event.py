@@ -12,7 +12,8 @@ from core.slack_client import user_invite, slack
 from slacker import Error as SlackerError
 
 from core.models import User, EventPageContent, Event, EventPageMenu, EventPage
-from core.utils import get_coordinates_for_city, get_approximate_date
+from core.command_helpers import gather_event_date_from_prompt
+from core.utils import get_coordinates_for_city
 from core.default_eventpage_content import (
     get_default_eventpage_data, get_default_menu)
 
@@ -36,17 +37,8 @@ def get_basic_info():
         "What is the name of the city?", bold=True, fg='yellow'))
     country = click.prompt(click.style(
         "What is the name of the country?", bold=True, fg='yellow'))
-    date = click.prompt(
-        click.style(
-            "What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)",
-            bold=True, fg='yellow'))
-    date = get_approximate_date(date)
-    while not date:
-        date = click.prompt(
-            click.style(
-                "Wrong format! Provide a date in format: DD/MM/YYYY or MM/YYYY)",
-                bold=True, fg='yellow'))
-        date = get_approximate_date(date)
+
+    date = gather_event_date_from_prompt()
 
     url = click.prompt(click.style(
         "What should be the URL of website? djangogirls.org/xxxx", bold=True, fg='yellow'))
