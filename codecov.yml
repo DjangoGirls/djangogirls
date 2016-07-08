@@ -11,6 +11,6 @@ coverage:
         attachments: "sunburst, diff"
 
   ignore:
-    - */tests/*
-    - */migrations/*
+    - tests/*
+    - migrations/*
     - djangogirls/wsgi.py
