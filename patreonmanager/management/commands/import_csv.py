@@ -13,7 +13,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('csv_filenames', nargs='+')
         parser.add_argument(
-            '--create-rewards', help="create missing rewards if needed", action='store_true')
+            '--create-rewards', help="create missing rewards if needed",
+            action='store_true')
 
     def handle(self, *args, **options):
         if options['verbosity'] > 0:
@@ -51,15 +52,18 @@ class Command(BaseCommand):
                         email=patron_t.email, defaults=defaults)
                     if created:
                         logging.info(
-                            "Created patron object with email %r.", patron.email)
+                            "Created patron object with email %r.",
+                            patron.email)
                     else:
                         logging.info(
-                            "Updated patron object with email %r.", patron.email)
+                            "Updated patron object with email %r.",
+                            patron.email)
 
                     defaults = {
                         'reward': reward,
                         'pledge': patron_t.pledge,
-                        'status': getattr(Payment.STATUS, patron_t.status.upper()),
+                        'status': getattr(Payment.STATUS,
+                                          patron_t.status.upper()),
                         'completed': patron_t.completed,
                     }
                     payment, created = Payment.objects.get_or_create(

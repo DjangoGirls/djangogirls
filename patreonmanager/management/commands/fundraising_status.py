@@ -3,6 +3,7 @@ import requests
 
 from django.core.management.base import BaseCommand
 from core.slack_client import slack
+from slacker import Error as SlackerError
 
 from ...models import FundraisingStatus
 
@@ -34,9 +35,12 @@ class Command(BaseCommand):
         stats.save()
         logging.info("Stats saved.")
 
-        slack.chat.post_message(
-            channel='#notifications',
-            text=message,
-            username='Django Girls',
-            icon_emoji=':django_heart:'
-        )
+        try:
+            slack.chat.post_message(
+                channel='#notifications',
+                text=message,
+                username='Django Girls',
+                icon_emoji=':django_heart:'
+            )
+        except SlackerError:
+            logging.warning("Slack message not sent.")

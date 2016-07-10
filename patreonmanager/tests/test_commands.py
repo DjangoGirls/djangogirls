@@ -36,5 +36,7 @@ class CommandsTestCase(TestCase):
         self.assertEqual(payments.count(), 1)
         out = StringIO()
         call_command('listpatrons', stdout=out)
-        print(out.getvalue())
         self.assertIn('in a row', out.getvalue())
+
+    def test_fundraising_status(self):
+        call_command('fundraising_status')

@@ -72,10 +72,9 @@ def invite_team_to_slack(team):
 @click.command()
 def command():
     """Creates new Django Girls organizer"""
-    event_id = click.prompt(
-        click.style(
-            "What's the event ID? NOT the event page ID. We want EVENT ID here",
-            bold=True, fg='yellow'))
+    event_id = click.prompt(click.style(
+        "What's the event ID? NOT the event page ID. We want EVENT ID here",
+        bold=True, fg='yellow'))
     event = Event.objects.get(id=event_id)
     click.echo("Ok, we're adding to an event in {}, {}".format(
         event.city, event.country))

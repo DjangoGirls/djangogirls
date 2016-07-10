@@ -36,7 +36,8 @@ class Patron(BasePatron):
     def start(self):
         if not self.start_raw:
             return None
-        return datetime.strptime(self.start_raw, '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+        return (datetime.strptime(self.start_raw, '%Y-%m-%d %H:%M:%S')
+                        .replace(tzinfo=timezone.utc))
 
     @property
     def pledge(self):
@@ -56,14 +57,17 @@ class Patron(BasePatron):
 
     @property
     def shipping(self):
-        return '{street}\n{zip} {state}\n{country}'.format(**self._asdict()).strip()
+        return ('{street}\n{zip} {state}\n{country}'
+                .format(**self._asdict())
+                .strip())
 
 
 class Reward(BaseReward):
     @property
     def value(self):
         """
-        Convert the reward's name (like '5.00+ Reward') to its numerical value (5.00).
+        Convert the reward's name (like '5.00+ Reward') to its numerical value
+        (5.00).
         """
         match = re.search('^(?P<value>.+) Reward$', self.name)
         assert match is not None
@@ -76,7 +80,8 @@ class Reward(BaseReward):
 
     @property
     def description(self):
-        match = re.search('^Description: (?P<description>.+)$', self.description_raw)
+        match = re.search('^Description: (?P<description>.+)$',
+                          self.description_raw)
         assert match is not None
         return match.group('description')
 

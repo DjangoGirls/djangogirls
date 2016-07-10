@@ -15,7 +15,8 @@ class Command(BaseCommand):
             reward__value__gte=10,
         )
 
-        c = Counter(payment.patron for payment in payments.select_related('patron'))
+        c = Counter(payment.patron for payment
+                    in payments.select_related('patron'))
 
         for patron, count in c.most_common():
             self.stdout.write("%s: %d month%s in a row" % (
