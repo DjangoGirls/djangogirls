@@ -9,7 +9,7 @@ from django.core import mail
 from model_mommy import mommy
 
 from core.models import User
-from jobs.models import Job, Meetup
+from jobs.models import Job
 
 
 class JobAdminTest(TestCase):
@@ -17,7 +17,8 @@ class JobAdminTest(TestCase):
     the publish flow in admin"""
 
     def setUp(self):
-        self.admin_user = User.objects.create_superuser('myemail@test.com', 'example')
+        self.admin_user = User.objects.create_superuser(
+            'myemail@test.com', 'example')
         self.future_date = timezone.now().date() + timedelta(days=10)
         self.job_open = mommy.make(
             Job,
@@ -91,7 +92,8 @@ class JobAdminTest(TestCase):
         self.job_under_review.refresh_from_db()
         self.assertIn("Ready to publish", str(response.content))
         self.assertIn("myemail@test.com", str(response.content))
-        self.assertEqual(self.job_under_review.review_status, Job.READY_TO_PUBLISH)
+        self.assertEqual(self.job_under_review.review_status,
+                         Job.READY_TO_PUBLISH)
 
     def test_reject_job_for_under_review_post(self):
         reject_url = reverse(
@@ -155,7 +157,8 @@ class JobAdminTest(TestCase):
         self.job_ready_to_publish.refresh_from_db()
         self.assertIn("Published", str(response.content))
         self.assertNotIn("(None)", str(response.content))
-        self.assertEqual(self.job_ready_to_publish.review_status, Job.PUBLISHED)
+        self.assertEqual(self.job_ready_to_publish.review_status,
+                         Job.PUBLISHED)
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn("Published", mail.outbox[0].body)
         self.assertEqual("jobs@djangogirls.org", mail.outbox[0].from_email)

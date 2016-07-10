@@ -24,19 +24,22 @@ class PendingRewardsFilter(admin.SimpleListFilter):
                 completed=False,
                 reward__value__gte=10,
             )
-            c = Counter(payment.patron for payment in payments.select_related('patron'))
+            c = Counter(payment.patron for payment
+                        in payments.select_related('patron'))
             for patron, count in c.most_common():
-                # Gather pks of patrons who have at least 3 payments
+                # Gather pk-s of patrons who have at least 3 payments
                 if count >= 3:
                     patron_pks.append(patron.pk)
 
-            # Fetch all special payments for patrons who supported us in non-financial way
+            # Fetch all special payments for patrons who supported us
+            # in non-financial way
             payments = Payment.objects.filter(
                 status=Payment.STATUS.PROCESSED,
                 completed=False,
                 reward__name="Special Support Reward",
             )
-            c = Counter(payment.patron for payment in payments.select_related('patron'))
+            c = Counter(payment.patron for payment
+                        in payments.select_related('patron'))
             for patron, count in c.most_common():
                 patron_pks.append(patron.pk)
 
