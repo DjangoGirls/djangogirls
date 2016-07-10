@@ -1,17 +1,18 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals, print_function
 
-import requests
 try:
     from urllib.request import urlopen
 except ImportError:
     from urllib import urlopen
-from xml.etree import ElementTree
 from pyquery import PyQuery as pq
+import requests
+from xml.etree import ElementTree
 
-from django.core.management.base import BaseCommand
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.core.management.base import BaseCommand
+
 
 from core.models import Story
 
@@ -39,7 +40,8 @@ class Command(BaseCommand):
                 post_url = post.find('link').text
                 post = pq(post.find('description').text)
                 image_url = post('img').attr.src
-                story = Story(name=name, post_url=post_url, content=post, is_story=is_story)
+                story = Story(name=name, post_url=post_url, content=post,
+                              is_story=is_story)
 
                 if image_url:
                     img = NamedTemporaryFile(delete=True)

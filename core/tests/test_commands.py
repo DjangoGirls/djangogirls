@@ -7,8 +7,10 @@ from django.test import TestCase
 
 from core.models import Event
 from core.management.commands.add_organizer import command as add_organizer
-from core.management.commands.new_event import command as new_event
 from core.management.commands.copy_event import command as copy_event
+from core.management.commands.new_event import command as new_event
+from core.management.commands.prepare_dispatch import (
+    command as prepare_dispatch)
 
 
 class CommandsTestCase(TestCase):
@@ -139,3 +141,53 @@ class CommandsTestCase(TestCase):
         assert new_eventpage.main_color == old_eventpage.main_color
         assert new_eventpage.content.count() == old_eventpage.content.count()
         assert new_eventpage.menu.count() == old_eventpage.menu.count()
+
+    def test_prepare_dispatch_with_data(self):
+        today = date.today()
+        start_date = today.replace(year=today.year-20).toordinal()
+        end_date = today.toordinal()
+        random_past_day = date.fromordinal(
+            random.randint(start_date, end_date))
+
+        command_input = (
+            "{random_past_day}\n"
+        ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
+
+        result = self.runner.invoke(
+            prepare_dispatch,
+            input=command_input
+        )
+        assert result.exception is None
+        assert b'PREVIOUS EVENTS' in result.output_bytes
+
+    def test_prepare_dispatch_without_data(self):
+        start_date = date.today().toordinal()
+        random_past_day = date.fromordinal(
+            random.randint(start_date, start_date))
+
+        command_input = (
+            "{random_past_day}\n"
+        ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
+
+        result = self.runner.invoke(
+            prepare_dispatch,
+            input=command_input
+        )
+        assert result.exception is None
+        assert b'PREVIOUS EVENTS' in result.output_bytes
+
+    def test_prepare_dispatch_wrong_date(self):
+        start_date = date.today().toordinal()
+        random_past_day = date.fromordinal(
+            random.randint(start_date, start_date))
+
+        command_input = (
+            "{random_past_day}\n"
+        ).format(random_past_day=random_past_day.strftime("%Y/%m/%d"))
+
+        result = self.runner.invoke(
+            prepare_dispatch,
+            input=command_input
+        )
+        assert isinstance(result.exception, ValueError)
+        assert b'PREVIOUS EVENTS' not in result.output_bytes
