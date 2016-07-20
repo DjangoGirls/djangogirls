@@ -359,6 +359,10 @@ class Postmortem(models.Model):
     comments = models.TextField(null=True, blank=True,
                                 verbose_name="Anything else you want to share with us?")
 
+    class Meta:
+        verbose_name = "Statistics"
+        verbose_name_plural = "Statistics"
+
     def __str__(self):
         return self.event.city
 
