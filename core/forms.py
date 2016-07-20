@@ -22,6 +22,16 @@ class BetterReCaptchaField(ReCaptchaField):
 
 
 class AddOrganizerForm(forms.Form):
+    """
+    Custom form for adding new organizers to an existing event. 
+    
+    If user of given email already exists, they're added to the event and 
+    receive e-mail notification about it. 
+    
+    If user is new, they're created (randomly generated password), invited
+    to Slack and receive e-mail notification with instructions to login 
+    (including password).
+    """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
     name = forms.CharField(label="Organizer's full name")
     email = forms.CharField(label="E-mail address")

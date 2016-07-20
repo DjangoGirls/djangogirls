@@ -59,6 +59,9 @@ class EventAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def _get_future_events_for_user(self, request):
+        """
+        Retrieves a list of future events, ordered by name
+        """
         return self.get_queryset(request) \
             .filter(date__gte=datetime.now() \
             .strftime("%Y-%m-%d")).order_by('name')
@@ -77,6 +80,9 @@ class EventAdmin(admin.ModelAdmin):
             return all_events.first()
 
     def view_manage_organizers(self, request):
+        """
+        Custom admin view that allows user to remove organizers from an event
+        """
         all_events = self._get_future_events_for_user(request)
         event = self._get_event_from_get(request, all_events)
 
@@ -93,6 +99,9 @@ class EventAdmin(admin.ModelAdmin):
         })
 
     def view_add_organizers(self, request):
+        """
+        Custom admin view that allows user to add new organizer to an event
+        """
         all_events = self._get_future_events_for_user(request)
         event = self._get_event_from_get(request, all_events)
 
