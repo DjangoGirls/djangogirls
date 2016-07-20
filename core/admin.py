@@ -121,7 +121,7 @@ class CoachInline(admin.TabularInline):
 
 
 class EventPageContentAdmin(SortableModelAdmin):
-    list_display = ('name', 'page', 'content', 'position', 'is_public')
+    list_display = ('name', 'page', 'position', 'is_public')
     list_filter = ('page', 'is_public')
     search_fields = ('name', 'page__title', 'content', 'page__event__city',
                      'page__event__country', 'page__event__name')
