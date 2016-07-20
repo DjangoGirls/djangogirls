@@ -2,16 +2,14 @@
 from __future__ import unicode_literals
 
 import djclick as click
-import random
-import string
-
 
 from django.conf import settings
 from django.template.loader import render_to_string
-from core.slack_client import user_invite, slack
+from core.slack_client import slack
 from slacker import Error as SlackerError
 
-from core.models import User, EventPageContent, Event, EventPageMenu, EventPage
+from core.models import EventPageContent, Event, EventPageMenu, EventPage
+from core.forms import AddOrganizerForm
 from core.command_helpers import gather_event_date_from_prompt
 from core.utils import get_coordinates_for_city
 from core.default_eventpage_content import (
@@ -61,12 +59,9 @@ def get_main_organizer():
         "First and last name", bold=True, fg='yellow'))
     main_email = click.prompt(click.style(
         "E-mail address", bold=True, fg='yellow'))
-    try:
-        team.append({'first_name': main_name.split(' ')[
-                    0], 'last_name': main_name.split(' ')[1], 'email': main_email})
-    except IndexError:
-        team.append({'first_name': main_name,
-                     'last_name': '', 'email': main_email})
+    
+    team.append({'name': main_name, 'email': main_email})
+
     click.echo(u"All right, the main organizer is {0} ({1})".format(
         main_name, main_email))
 
@@ -88,12 +83,7 @@ def get_team(team):
         email = click.prompt(click.style(
             "E-mail address of #{0} member".format(i), bold=True, fg='yellow'))
         if len(name) > 0:
-            try:
-                team.append({'first_name': name.split(' ')[
-                            0], 'last_name': name.split(' ')[1], 'email': email})
-            except IndexError:
-                team.append(
-                    {'first_name': name, 'last_name': '', 'email': email})
+            team.append({'name': name, 'email': email})
             click.echo("All right, the #{0} team member of Django Girls is {1} ({2})".format(
                 i, name, email))
         add_team = click.confirm(click.style(
@@ -102,27 +92,17 @@ def get_team(team):
     return team
 
 
-def create_users(team):
+def create_users(team, event):
     """
         Create or get User objects based on team list
     """
     members = []
     for member in team:
-        if not User.objects.filter(email=member['email']).exists():
-            member['password'] = ''.join(random.choice(
-                string.ascii_lowercase + string.digits) for _ in range(8))
-            user = User.objects.create(email=member['email'],
-                                       first_name=member['first_name'],
-                                       last_name=member['last_name'],
-                                       is_active=True,
-                                       is_staff=True)
-            user.set_password(member['password'])
-            user.save()
-            user.groups.add(1)
-        else:
-            user = User.objects.get(email=member['email'])
+        member['event'] = event.pk
+        form = AddOrganizerForm(data=member)
+        user = form.save()
         members.append(user)
-    return members, team
+    return members
 
 
 def add_default_content(page):
@@ -155,20 +135,6 @@ def add_default_menu(page):
         i += 1
 
 
-def invite_team_to_slack(team):
-    """
-        This uses Slack API to invite organizers to our Slack channel
-    """
-    for member in team:
-        try:
-            user_invite(member.email, member.first_name)
-            click.secho("OK {} invited to Slack".format(
-                member.email), fg='green')
-        except SlackerError as e:
-            click.secho("!! {} not invited to Slack, because {}".format(
-                member.email, e), fg='red')
-
-
 def brag_on_slack_bang(city, country, team):
     """
         This is posting a message about Django Girls new event to #general channel on Slack!
@@ -197,23 +163,22 @@ def command():
     # Team
     team = get_team(main_organizer)
 
-    # Create users
     click.echo("OK! That's it. Now I'll create your event.")
-
-    members, members_as_list = create_users(team)
-
+    
     # Event and EventPage objects
     name = 'Django Girls ' + city
     latlng = get_coordinates_for_city(city, country)
     mail = event_mail + '@djangogirls.org'
     event = Event.objects.create(name=name, city=city, country=country,
-                                 latlng=latlng, email=mail,
-                                 main_organizer=members[0], date=date,
+                                 latlng=latlng, email=mail, date=date,
                                  is_on_homepage=False)
-    for member in members:
-        event.team.add(member)
 
     page = EventPage.objects.create(event=event, url=url, title=name)
+
+    # Create users
+    members = create_users(team, event)
+    event.main_organizer = members[0]
+    event.save()
 
     # Default content
     add_default_content(page)
@@ -222,10 +187,6 @@ def command():
     click.secho(
         "Website is ready here: http://djangogirls.org/{0}".format(url),
         fg='green')
-    click.echo(DELIMITER)
-
-    invite_team_to_slack(members)
-
     click.echo(DELIMITER)
 
     click.secho("Ok, now follow this:", fg='black', bg='green')
@@ -248,7 +209,6 @@ def command():
     click.echo("BODY:")
     click.echo(render_to_string('emails/setup.txt', {
         'event': event,
-        'members': members_as_list,
         'email_password': 'UNDEFINED',
         'settings': settings
     }))

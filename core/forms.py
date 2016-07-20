@@ -63,6 +63,7 @@ class AddOrganizerForm(forms.Form):
             [user.email], fail_silently=True)
 
     def save(self, *args, **kwargs):
+        assert self.is_valid()
         self._errors = []
         email = self.cleaned_data['email']
         event = self.cleaned_data['event']
