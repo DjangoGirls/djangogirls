@@ -7,13 +7,10 @@ from django.contrib.auth import forms as auth_forms
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from captcha.fields import ReCaptchaField
-from slacker import Slacker
 from slacker import Error as SlackerError
 
-from .models import User, ContactEmail, Event
-
-
-slack = Slacker(settings.SLACK_API_KEY)
+from core.models import User, ContactEmail, Event
+from core.slack_client import user_invite
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -29,16 +26,17 @@ class AddOrganizerForm(forms.Form):
     name = forms.CharField(label="Organizer's full name")
     email = forms.CharField(label="E-mail address")
 
-    def __init__(self, event_choices, *args, **kwargs):
+    def __init__(self, event_choices=None, *args, **kwargs):
         super(AddOrganizerForm, self).__init__(*args, **kwargs)
-        self.fields['event'].queryset = event_choices
+        if event_choices:
+            self.fields['event'].queryset = event_choices
 
     def generate_password(self):
         return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
 
     def invite_to_slack(self, email, name):
         try:
-            response = slack.users.invite(email, name)
+            user_invite(email, name)
         except (ConnectionError, SlackerError) as e:
             self._errors.append('Slack invite unsuccessful, reason: {}'.format(e))
 
