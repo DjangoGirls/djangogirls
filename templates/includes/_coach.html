@@ -1,4 +1,4 @@
-{% load thumbnail %}
+{% load thumbnail static %}
 
 {% if coach.url %}
 <a href="{{ coach.url }}" target="_blank">
@@ -6,9 +6,7 @@
 <span>
 {% endif %}
 
-{% if coach.photo %}
-    <img src="{{ coach.photo|thumbnail_url:'coach' }}" alt="{{ coach.name }}" class="coach" />
-{% endif %}
+<img src="{% if coach.photo %}{{ coach.photo|thumbnail_url:'coach' }}{% else %}{% static 'img/global/coach-empty.jpg' %}{% endif %}" alt="{{ coach.name }}" class="coach" />
 
 {% if coach.url %}
 </a>
