@@ -60,7 +60,9 @@ class EventAdmin(admin.ModelAdmin):
 
     def _get_future_events_for_user(self, request):
         """
-        Retrieves a list of future events, ordered by name
+        Retrieves a list of future events, ordered by name.
+        It's based on get_queryset, so superuser see all events, while 
+        is_staff users see events they're assigned to only.
         """
         return self.get_queryset(request) \
             .filter(date__gte=datetime.now() \
@@ -86,7 +88,7 @@ class EventAdmin(admin.ModelAdmin):
         all_events = self._get_future_events_for_user(request)
         event = self._get_event_from_get(request, all_events)
 
-        if 'remove' in request.GET:
+        if 'remove' in request.GET and event in all_events:
             user = User.objects.get(id=request.GET['remove'])
             event.team.remove(user)
             event.save()
