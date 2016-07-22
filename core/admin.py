@@ -52,9 +52,11 @@ class EventAdmin(admin.ModelAdmin):
         urls = super(EventAdmin, self).get_urls()
         my_urls = [
             url(r'manage_organizers/$',
-                self.admin_site.admin_view(self.view_manage_organizers)),
+                self.admin_site.admin_view(self.view_manage_organizers),
+                name='core_event_manage_organizers'),
             url(r'add_organizers/$',
-                self.admin_site.admin_view(self.view_add_organizers)),
+                self.admin_site.admin_view(self.view_add_organizers),
+                name='core_event_add_organizers'),
         ]
         return my_urls + urls
 
@@ -90,9 +92,10 @@ class EventAdmin(admin.ModelAdmin):
 
         if 'remove' in request.GET and event in all_events:
             user = User.objects.get(id=request.GET['remove'])
-            event.team.remove(user)
-            event.save()
-            messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
+            if user in event.team.all():
+                event.team.remove(user)
+                event.save()
+                messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
             return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
