@@ -72,10 +72,10 @@ class AddOrganizerForm(forms.Form):
         email = self.cleaned_data['email']
         event = self.cleaned_data['event']
 
-        user, created = User.objects.get_or_create(email)
+        user, created = User.objects.get_or_create(email=email)
         event.team.add(user)
         if created:
-            self._password = User.make_random_password()
+            self._password = User.objects.make_random_password()
             user.first_name = self.cleaned_data['name'].split(' ')[0]
             user.last_name = self.cleaned_data['name'].replace(user.first_name, '')
             user.is_staff = True
