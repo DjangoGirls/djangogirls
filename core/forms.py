@@ -1,6 +1,3 @@
-import random
-import string
-
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
@@ -23,13 +20,13 @@ class BetterReCaptchaField(ReCaptchaField):
 
 class AddOrganizerForm(forms.Form):
     """
-    Custom form for adding new organizers to an existing event. 
-    
-    If user of given email already exists, they're added to the event and 
-    receive e-mail notification about it. 
-    
+    Custom form for adding new organizers to an existing event.
+
+    If user of given email already exists, they're added to the event and
+    receive e-mail notification about it.
+
     If user is new, they're created (randomly generated password), invited
-    to Slack and receive e-mail notification with instructions to login 
+    to Slack and receive e-mail notification with instructions to login
     (including password).
     """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
@@ -40,9 +37,6 @@ class AddOrganizerForm(forms.Form):
         super(AddOrganizerForm, self).__init__(*args, **kwargs)
         if event_choices:
             self.fields['event'].queryset = event_choices
-
-    def generate_password(self):
-        return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
 
     def invite_to_slack(self, email, name):
         try:
@@ -55,7 +49,7 @@ class AddOrganizerForm(forms.Form):
             'user': user,
             'event': self.cleaned_data['event']
         })
-        subject = 'You have been granted to new Django Girls event'
+        subject = 'You have been granted access to new Django Girls event'
         self.send_email(content, subject, user)
 
     def notify_new_user(self, user):
@@ -70,36 +64,30 @@ class AddOrganizerForm(forms.Form):
 
     def send_email(self, content, subject, user):
         send_mail(subject, content, "Django Girls <hello@djangogirls.org>",
-            [user.email], fail_silently=True)
+                  [user.email], fail_silently=True)
 
     def save(self, *args, **kwargs):
         assert self.is_valid()
         self._errors = []
         email = self.cleaned_data['email']
         event = self.cleaned_data['event']
-        if not User.objects.filter(email=email).exists():
-            self._password = self.generate_password()
-            first_name = self.cleaned_data['name'].split(' ')[0]
-            last_name = self.cleaned_data['name'].replace(first_name, '')
-            user = User.objects.create(email=email,
-                                        first_name=first_name,
-                                        last_name=last_name,
-                                        is_active=True,
-                                        is_staff=True)
+
+        user, created = User.objects.get_or_create(email)
+        event.team.add(user)
+        if created:
+            self._password = User.make_random_password()
+            user.first_name = self.cleaned_data['name'].split(' ')[0]
+            user.last_name = self.cleaned_data['name'].replace(user.first_name, '')
+            user.is_staff = True
+            user.is_active = True
             user.set_password(self._password)
             user.save()
             user.groups.add(1)
-            event.team.add(user)
-            event.save()
-            self.invite_to_slack(email, first_name)
+            self.invite_to_slack(email, user.first_name)
             self.notify_new_user(user)
         else:
-            user = User.objects.get(email=email)
-            event.team.add(user)
-            event.save()
             self.notify_existing_user(user)
         return user
-
 
 
 class UserCreationForm(forms.ModelForm):

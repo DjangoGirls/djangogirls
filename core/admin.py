@@ -7,14 +7,15 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
-from django.http import Http404
 from django.conf.urls import url
 from django.shortcuts import render, redirect
 
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
 
-from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm, AddOrganizerForm
+from .forms import (
+    UserChangeForm, UserCreationForm, UserLimitedChangeForm, AddOrganizerForm
+)
 from .filters import OpenRegistrationFilter
 from .models import (
     Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
@@ -63,12 +64,12 @@ class EventAdmin(admin.ModelAdmin):
     def _get_future_events_for_user(self, request):
         """
         Retrieves a list of future events, ordered by name.
-        It's based on get_queryset, so superuser see all events, while 
+        It's based on get_queryset, so superuser see all events, while
         is_staff users see events they're assigned to only.
         """
         return self.get_queryset(request) \
-            .filter(date__gte=datetime.now() \
-            .strftime("%Y-%m-%d")).order_by('name')
+            .filter(date__gte=datetime.now()
+                    .strftime("%Y-%m-%d")).order_by('name')
 
     def _get_event_from_get(self, request, all_events):
         """
@@ -94,7 +95,6 @@ class EventAdmin(admin.ModelAdmin):
             user = User.objects.get(id=request.GET['remove'])
             if user in event.team.all():
                 event.team.remove(user)
-                event.save()
                 messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
             return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
 
