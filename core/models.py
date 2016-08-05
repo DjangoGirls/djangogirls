@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.core.mail import EmailMessage
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 
@@ -103,7 +104,7 @@ class Event(models.Model):
     latlng = models.CharField(max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
                               help_text="The best would be 356 x 210px")
-    photo_credit = models.CharField(max_length=200, null=True, blank=True)
+    photo_credit = models.CharField(max_length=200, null=True, blank=True, help_text=mark_safe("Only use pictures with a <a href='https://creativecommons.org/licenses/'>creative commons license</a>."))
     photo_link = models.URLField(null=True, blank=True)
     email = models.EmailField(max_length=75, null=True, blank=True)
     main_organizer = models.ForeignKey(
