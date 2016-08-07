@@ -30,7 +30,7 @@
     <tr class="row1">
       <td>{{ organizer.get_full_name }}</td>
       <td>{{ organizer.email }}</td>
-      <td>{% if organizer != request.user %}<a href="{% url 'admin:core_event_manage_organizers' %}?event_id={{ event.id }}&remove={{ organizer.id }}">Remove</a>{% endif %}</td>
+      <td>{% if organizer != request.user %}<a href="javascript:if(window.confirm('Are you sure that you want to remove organizer {{ organizer.email }} from event {{ event.name }}?'))window.location.href='{% url 'admin:core_event_manage_organizers' %}?event_id={{ event.id }}&remove={{ organizer.id }}';">Remove</a>{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
