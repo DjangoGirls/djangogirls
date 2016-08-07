@@ -129,7 +129,28 @@ class EventAdminTestCase(BaseCoreTestCase):
         self.client.login(username=self.peter.email, password='')
         data = {
             'event_id': self.event_1.pk,
+            'remove': self.tinker.pk,
+        }
+        assert self.event_1.team.count() == 2
+        resp = self.client.get(reverse('admin:core_event_manage_organizers'), data)
+        assert resp.status_code == 302
+        assert self.event_1.team.count() == 1
+        
+    def test_organizers_cannot_remove_themselves(self):
+        self.client.login(username=self.peter.email, password='')
+        data = {
+            'event_id': self.event_1.pk,
             'remove': self.peter.pk,
+        }
+        assert self.event_1.team.count() == 2
+        resp = self.client.get(reverse('admin:core_event_manage_organizers'), data)
+        assert resp.status_code == 200
+        assert self.event_1.team.count() == 2
+        
+        self.client.login(username=self.peter.email, password='')
+        data = {
+            'event_id': self.event_1.pk,
+            'remove': self.tinker.pk,
         }
         assert self.event_1.team.count() == 2
         resp = self.client.get(reverse('admin:core_event_manage_organizers'), data)

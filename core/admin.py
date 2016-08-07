@@ -95,11 +95,14 @@ class EventAdmin(admin.ModelAdmin):
 
         if 'remove' in request.GET and event in all_events:
             user = User.objects.get(id=request.GET['remove'])
-            if user in event.team.all():
-                event.team.remove(user)
-                messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
-            return HttpResponseRedirect(
-                reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
+            if user == request.user:
+                messages.error(request, 'You cannot remove yourself from a team.')
+            else:
+                if user in event.team.all():
+                    event.team.remove(user)
+                    messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
+                    return HttpResponseRedirect(
+                        reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,

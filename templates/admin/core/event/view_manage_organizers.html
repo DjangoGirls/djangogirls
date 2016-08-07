@@ -30,7 +30,7 @@
     <tr class="row1">
       <td>{{ organizer.get_full_name }}</td>
       <td>{{ organizer.email }}</td>
-      <td><a href="{% url 'admin:core_event_manage_organizers' %}?event_id={{ event.id }}&remove={{ organizer.id }}">Remove</a></td>
+      <td>{% if organizer != request.user %}<a href="{% url 'admin:core_event_manage_organizers' %}?event_id={{ event.id }}&remove={{ organizer.id }}">Remove</a>{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
