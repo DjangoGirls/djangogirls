@@ -104,6 +104,7 @@ class EventAdmin(admin.ModelAdmin):
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,
             'event': event,
+            'title': 'Remove organizers',
         })
 
     def view_add_organizers(self, request):
@@ -127,6 +128,7 @@ class EventAdmin(admin.ModelAdmin):
             'all_events': all_events,
             'event': event,
             'form': form,
+            'title': 'Add organizers',
         })
 
 
