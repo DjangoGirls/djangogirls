@@ -9,6 +9,8 @@ from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
 from django.conf.urls import url
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
@@ -96,7 +98,8 @@ class EventAdmin(admin.ModelAdmin):
             if user in event.team.all():
                 event.team.remove(user)
                 messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
-            return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
+            return HttpResponseRedirect(
+                reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,
@@ -116,7 +119,7 @@ class EventAdmin(admin.ModelAdmin):
                 user = form.save()
                 messages.success(request,
                     '{} has been added to your event, yay!'.format(user.get_full_name()))
-                return redirect('/admin/core/event/manage_organizers/?event_id={}'.format(event.id))
+                return redirect('admin:core_event_add_organizers')
         else:
             form = AddOrganizerForm(all_events)
 

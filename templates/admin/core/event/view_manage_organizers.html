@@ -8,7 +8,7 @@
 <p>To get started, choose an event:</p>
 {% for available_event in all_events %}
   <li>
-    {% if event.id != available_event.id %}<a href="/admin/core/event/manage_organizers/?event_id={{ available_event.id }}">{% endif %}
+    {% if event.id != available_event.id %}<a href="{% url 'admin:core_event_manage_organizers' %}?event_id={{ available_event.id }}">{% endif %}
       {{ available_event.name }}
     {% if event.id != available_event.id %}</a>{% endif %}
   </li>
@@ -30,7 +30,7 @@
     <tr class="row1">
       <td>{{ organizer.get_full_name }}</td>
       <td>{{ organizer.email }}</td>
-      <td><a href="/admin/core/event/manage_organizers/?event_id={{ event.id }}&remove={{ organizer.id }}">Remove</a></td>
+      <td><a href="{% url 'admin:core_event_manage_organizers' %}?event_id={{ event.id }}&remove={{ organizer.id }}">Remove</a></td>
     </tr>
     {% endfor %}
   </tbody>
