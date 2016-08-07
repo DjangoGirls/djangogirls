@@ -30,7 +30,7 @@ class AddOrganizerForm(forms.Form):
     (including password).
     """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
-    name = forms.CharField(label="Organizer's full name")
+    name = forms.CharField(label="Organizer's first and last name")
     email = forms.CharField(label="E-mail address")
 
     def __init__(self, event_choices=None, *args, **kwargs):
