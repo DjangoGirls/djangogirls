@@ -350,8 +350,8 @@ class UserAdmin(auth_admin.UserAdmin):
     limited_form = UserLimitedChangeForm
     add_form = UserCreationForm
     change_password_form = auth_admin.AdminPasswordChangeForm
-    list_display = ('email', 'first_name', 'last_name', 'is_superuser')
-    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups')
+    list_display = ('email', 'first_name', 'last_name', 'is_superuser', 'date_joined')
+    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups', 'date_joined')
     search_fields = ('first_name', 'last_name', 'email')
     ordering = ('email',)
     readonly_fields = ('last_login', 'date_joined',)
