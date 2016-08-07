@@ -119,7 +119,9 @@ class EventAdmin(admin.ModelAdmin):
             if form.is_valid():
                 user = form.save()
                 messages.success(request,
-                    '{} has been added to your event, yay!'.format(user.get_full_name()))
+                    "{} has been added to your event, yay! They've been also" \
+                    " invited to Slack and should receive credentials to login" \
+                    " in an e-mail.".format(user.get_full_name()))
                 return redirect('admin:core_event_add_organizers')
         else:
             form = AddOrganizerForm(all_events)
