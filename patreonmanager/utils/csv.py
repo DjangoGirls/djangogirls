@@ -53,12 +53,12 @@ class Patron(BasePatron):
 
     @property
     def name(self):
-        return '{first_name} {last_name}'.format(**self._asdict()).strip()
+        return '{p.first_name} {p.last_name}'.format(p=self).strip()
 
     @property
     def shipping(self):
-        return ('{street}\n{zip} {state}\n{country}'
-                .format(**self._asdict())
+        return ('{p.street}\n{p.zip} {p.state}\n{p.country}'
+                .format(p=self)
                 .strip())
 
 
