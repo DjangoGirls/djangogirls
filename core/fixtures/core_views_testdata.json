@@ -94,7 +94,7 @@
         ],
         "is_on_homepage": false,
         "main_organizer": 1,
-        "date": "2015-09-00"
+        "date": "2020-09-00"
     },
     "model": "core.event",
     "pk": 3

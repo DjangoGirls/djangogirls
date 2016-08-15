@@ -12,8 +12,7 @@ from core.models import User, Event, EventPage, ContactEmail
 from core.views import event as event_view
 
 
-class CoreViewsTestCase(TestCase):
-
+class BaseCoreTestCase(TestCase):
     fixtures = ['core_views_testdata.json']
 
     def setUp(self):
@@ -28,6 +27,10 @@ class CoreViewsTestCase(TestCase):
         self.event_2 = Event.objects.get(pk=2)  # In the past
         self.event_3 = Event.objects.get(pk=3)  # Hidden from homepage
         self.event_4 = Event.objects.get(pk=4)  # Not live, no date set
+        self.events = [self.event_1, self.event_2, self.event_3, self.event_4]
+
+
+class CoreViewsTestCase(BaseCoreTestCase):
 
     def test_index(self):
         # Access homepage

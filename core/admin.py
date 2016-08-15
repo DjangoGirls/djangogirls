@@ -1,16 +1,23 @@
-from django.contrib import admin
+from datetime import datetime
+
+from django.contrib import admin, messages
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.utils.safestring import mark_safe
+from django.conf.urls import url
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from codemirror import CodeMirrorTextarea
 from suit.admin import SortableModelAdmin
 
-
-from .forms import UserChangeForm, UserCreationForm, UserLimitedChangeForm
+from .forms import (
+    UserChangeForm, UserCreationForm, UserLimitedChangeForm, AddOrganizerForm
+)
 from .filters import OpenRegistrationFilter
 from .models import (
     Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
@@ -43,6 +50,91 @@ class EventAdmin(admin.ModelAdmin):
         if obj and not request.user.is_superuser:
             return ('email', 'team', 'is_deleted', 'is_on_homepage')
         return self.readonly_fields
+
+    def get_urls(self):
+        urls = super(EventAdmin, self).get_urls()
+        my_urls = [
+            url(r'manage_organizers/$',
+                self.admin_site.admin_view(self.view_manage_organizers),
+                name='core_event_manage_organizers'),
+            url(r'add_organizers/$',
+                self.admin_site.admin_view(self.view_add_organizers),
+                name='core_event_add_organizers'),
+        ]
+        return my_urls + urls
+
+    def _get_future_events_for_user(self, request):
+        """
+        Retrieves a list of future events, ordered by name.
+        It's based on get_queryset, so superuser see all events, while
+        is_staff users see events they're assigned to only.
+        """
+        return self.get_queryset(request) \
+            .filter(date__gte=datetime.now()
+                    .strftime("%Y-%m-%d")).order_by('name')
+
+    def _get_event_from_get(self, request, all_events):
+        """
+        Retrieves a particular event from request.GET['event_id'], or
+        returns the first one from all events available to the user.
+        """
+        if 'event_id' in request.GET:
+            try:
+                return all_events.get(id=request.GET['event_id'])
+            except Event.DoesNotExist:
+                pass
+        else:
+            return all_events.first()
+
+    def view_manage_organizers(self, request):
+        """
+        Custom admin view that allows user to remove organizers from an event
+        """
+        all_events = self._get_future_events_for_user(request)
+        event = self._get_event_from_get(request, all_events)
+
+        if 'remove' in request.GET and event in all_events:
+            user = User.objects.get(id=request.GET['remove'])
+            if user == request.user:
+                messages.error(request, 'You cannot remove yourself from a team.')
+            else:
+                if user in event.team.all():
+                    event.team.remove(user)
+                    messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
+                    return HttpResponseRedirect(
+                        reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
+
+        return render(request, 'admin/core/event/view_manage_organizers.html', {
+            'all_events': all_events,
+            'event': event,
+            'title': 'Remove organizers',
+        })
+
+    def view_add_organizers(self, request):
+        """
+        Custom admin view that allows user to add new organizer to an event
+        """
+        all_events = self._get_future_events_for_user(request)
+        event = self._get_event_from_get(request, all_events)
+
+        if request.method == 'POST':
+            form = AddOrganizerForm(all_events, request.POST)
+            if form.is_valid():
+                user = form.save()
+                messages.success(request,
+                    "{} has been added to your event, yay! They've been also" \
+                    " invited to Slack and should receive credentials to login" \
+                    " in an e-mail.".format(user.get_full_name()))
+                return redirect('admin:core_event_add_organizers')
+        else:
+            form = AddOrganizerForm(all_events)
+
+        return render(request, 'admin/core/event/view_add_organizers.html', {
+            'all_events': all_events,
+            'event': event,
+            'form': form,
+            'title': 'Add organizers',
+        })
 
 
 class EventPageAdmin(admin.ModelAdmin):
@@ -261,8 +353,8 @@ class UserAdmin(auth_admin.UserAdmin):
     limited_form = UserLimitedChangeForm
     add_form = UserCreationForm
     change_password_form = auth_admin.AdminPasswordChangeForm
-    list_display = ('email', 'first_name', 'last_name', 'is_superuser')
-    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups')
+    list_display = ('email', 'first_name', 'last_name', 'is_superuser', 'date_joined')
+    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups', 'date_joined')
     search_fields = ('first_name', 'last_name', 'email')
     ordering = ('email',)
     readonly_fields = ('last_login', 'date_joined',)

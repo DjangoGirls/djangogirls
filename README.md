@@ -127,6 +127,10 @@ Or if you want coverage reports:
 	py.test --cov
 
 
+For a coverage report with information about missing lines, run this:
+
+	py.test --cov-report term-missing --cov
+
 ### Static files
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).

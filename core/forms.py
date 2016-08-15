@@ -1,9 +1,13 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from captcha.fields import ReCaptchaField
+from slacker import Error as SlackerError
 
-from .models import User, ContactEmail, Event
+from core.models import User, ContactEmail, Event
+from core.slack_client import user_invite
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -12,6 +16,78 @@ class BetterReCaptchaField(ReCaptchaField):
         if settings.DEBUG:
             return values[0]
         return super(BetterReCaptchaField, self).clean(values)
+
+
+class AddOrganizerForm(forms.Form):
+    """
+    Custom form for adding new organizers to an existing event.
+
+    If user of given email already exists, they're added to the event and
+    receive e-mail notification about it.
+
+    If user is new, they're created (randomly generated password), invited
+    to Slack and receive e-mail notification with instructions to login
+    (including password).
+    """
+    event = forms.ModelChoiceField(queryset=Event.objects.all())
+    name = forms.CharField(label="Organizer's first and last name")
+    email = forms.CharField(label="E-mail address")
+
+    def __init__(self, event_choices=None, *args, **kwargs):
+        super(AddOrganizerForm, self).__init__(*args, **kwargs)
+        if event_choices:
+            self.fields['event'].queryset = event_choices
+
+    def invite_to_slack(self, email, name):
+        try:
+            user_invite(email, name)
+        except (ConnectionError, SlackerError) as e:
+            self._errors.append('Slack invite unsuccessful, reason: {}'.format(e))
+
+    def notify_existing_user(self, user):
+        content = render_to_string('emails/existing_user.html', {
+            'user': user,
+            'event': self.cleaned_data['event']
+        })
+        subject = 'You have been granted access to new Django Girls event'
+        self.send_email(content, subject, user)
+
+    def notify_new_user(self, user):
+        content = render_to_string('emails/new_user.html', {
+            'user': user,
+            'event': self.cleaned_data['event'],
+            'password': self._password,
+            'errors': self._errors,
+        })
+        subject = 'Access to Django Girls website'
+        self.send_email(content, subject, user)
+
+    def send_email(self, content, subject, user):
+        send_mail(subject, content, "Django Girls <hello@djangogirls.org>",
+                  [user.email], fail_silently=True)
+
+    def save(self, *args, **kwargs):
+        assert self.is_valid()
+        self._errors = []
+        email = self.cleaned_data['email']
+        event = self.cleaned_data['event']
+
+        user, created = User.objects.get_or_create(email=email)
+        event.team.add(user)
+        if created:
+            self._password = User.objects.make_random_password()
+            user.first_name = self.cleaned_data['name'].split(' ')[0]
+            user.last_name = self.cleaned_data['name'].replace(user.first_name, '')
+            user.is_staff = True
+            user.is_active = True
+            user.set_password(self._password)
+            user.save()
+            user.groups.add(1)
+            self.invite_to_slack(email, user.first_name)
+            self.notify_new_user(user)
+        else:
+            self.notify_existing_user(user)
+        return user
 
 
 class UserCreationForm(forms.ModelForm):
