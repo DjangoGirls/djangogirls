@@ -64,7 +64,7 @@ class AddOrganizerForm(forms.Form):
 
     def send_email(self, content, subject, user):
         send_mail(subject, content, "Django Girls <hello@djangogirls.org>",
-                  [user.email], fail_silently=True)
+                  [user.email])
 
     def save(self, *args, **kwargs):
         assert self.is_valid()
