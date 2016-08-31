@@ -109,6 +109,32 @@ class CommandsTestCase(TestCase):
         event = Event.objects.last()
         assert event.team.count() == 2
 
+    def test_new_event_short(self):
+        assert Event.objects.count() == 4
+
+        random_day = self._get_random_day()
+
+        command_input = (
+            "Oz\n"
+            "Neverland\n"
+            "{random_day}\n"
+            "oz\n"
+            "oz@djangogirs.org\n"
+            "Jan Kowalski\n"
+            "jan@kowalski.example\n"
+            "N\n"
+        ).format(random_day=random_day.strftime("%d/%m/%Y"))
+
+        result = self.runner.invoke(
+            new_event,
+            args=["--short"],
+            input=command_input
+        )
+        assert Event.objects.count() == 5
+        short_email_body = """Event e-mail is: oz@djangogirs.org@djangogirls.org
+Event website address is: http://djangogirls.org/oz"""
+        assert short_email_body in result.output
+
     def test_copy_event(self):
         assert Event.objects.count() == 4
 
