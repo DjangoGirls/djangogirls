@@ -152,7 +152,8 @@ def brag_on_slack_bang(city, country, team):
 
 
 @click.command()
-def command():
+@click.option('--short', '-s', is_flag=True, help="Shorter version of the setup email to use with a canned email.")
+def command(short):
     """Creates new Django Girls event"""
     # Basics
     (city, country, date, url, event_mail) = get_basic_info()
@@ -207,10 +208,16 @@ def command():
         event.email
     ))
     click.echo("BODY:")
-    click.echo(render_to_string('emails/setup.txt', {
-        'event': event,
-        'email_password': 'UNDEFINED',
-        'settings': settings
-    }))
+
+    if short:
+        click.echo(render_to_string('emails/setup-short.txt', {
+            'event': event,
+        }))
+    else:
+        click.echo(render_to_string('emails/setup.txt', {
+            'event': event,
+            'email_password': 'UNDEFINED',
+            'settings': settings
+        }))
 
     brag_on_slack_bang(city, country, members)
