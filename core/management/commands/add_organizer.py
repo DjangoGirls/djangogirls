@@ -61,7 +61,7 @@ def command():
 
     for member in members:
         click.echo(
-                "User {} has been added and notified".format(member['email']))
+                "User {} has been added and notified".format(member.email))
 
     click.echo(DELIMITER)
 
