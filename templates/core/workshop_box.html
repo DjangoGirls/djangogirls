@@ -2,14 +2,14 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
         <section id="resources">
             <div class="row clearfix">
                 <div class="col-md-12">
                   <h2>Order Django Girls Workshop Box for your event!</h2>
                   <p>Get a golden envelope full of Django Girls stickers, gold letter balloons,
                     stickers of our partners, buttons and nametags. <br /> Everything you need
-                    to make your workshop DjangoGirlsy!</p>
+                    to make your workshop DjangoGirlsy! 🌸✨</p>
                   <center>
                     <video style="width: 50%; margin-top: 30px;" autoplay>
                       <source src="https://s3-us-west-2.amazonaws.com/djangogirls/workshop_box.mp4" type="video/mp4">
@@ -22,20 +22,20 @@
                 <div class="col-md-6">
                   <h3>How it works?</h3>
                   <p>We purchased Django Girls goodies in bulk quantity, which 
-                    massively lowered their price. This means we can better use
-                    everyone's money and time spent on those kind of things. 
-                    Now we're gonna ship it from London to  Django Girls workshops from all 
-                    over the world to so you can all spend
-                    your sponsors money better! YAY!</p>
-                    <p>
-                      We calculated that one event would need to pay around $150 USD for all of those things, and sometimes
-                      they're hard to get. We're able to buy and ship them all for around $50. 
+                    massively lowered their price. It will save everyone time and
+                      money and you will be able to focus on more awesome things.
+                    The box can be sent to Django Girls workshops from all over the world:
+                      small goodies and swag won't drain your sponsor money anymore! YAY! ✨💰</p>
+
+                    <p>We calculated that one event of 30 people would need to pay
+                        around $150 USD for all of those things, and sometimes
+                        they're hard to get. We're able to buy and ship them all for around $50.
                     </p>
                 </div>
                 <div class="col-md-6">
                   <h3>What's in the box?</h3>
                   <p>
-                    The shiny beautiful envelope contains many awesome things:
+                    The shiny beautiful envelope contains many awesome things:</p>
                     <ul>
                       <li>Django Girls logo stickers</li>
                       <li>YAY! stickers</li>
@@ -44,41 +44,41 @@
                       <li>Sticky orange nametags</li>
                       <li>Gold letters DJANGOGIRLS balloons, 16 inches tall</li>
                       <li>Orange Django Girls logo buttons</li>
-                      <li>Little surprise, sometimes, maybe? ;-)</li>
+                      <li>Little surprise, sometimes, maybe? 😄</li>
                     </ul>
                   
                 </div>
                 <div class="col-md-6">          
                   <h3>How much is it?</h3>
-                  <p>Free! But. For our first trial period, we ordered enough goodies for
-                    about 3000 people attending our events. This purchase has been covered
-                    by donations made to Django Girls Foundation, and it means 
-                    we want to keep the boxes free for everyone. However going 
-                    forward we need to make it sustainable. That's why we ask
-                    for <a href="{% url 'core:donate' %}">an optional donation</a>. If your event can afford to cover 
-                    the costs of the box (~$50), we kindly ask you to <a href="{% url 'core:donate' %}">donate</a>.
-                    If you have money leftover from the workshop: <a href="{% url 'core:donate' %}">donate it</a> and 
-                    <i>pay it forward</i> to send boxes to those events that cannot yet afford it.</p>
+                  <p>The price will depend of your workshop's size. For example:</p>
+                      <ul>
+                    <li>$30 USD for 30 people</li>
+                    <li>$40 USD for 50 people</li>
+                    <li>$75 USD for 100 people</li>
+                    </ul>
+
+                      <p>You will also need to add shipping costs. 📮</p>
+
+                      <p>If your event is happening in a <a href="https://en.wikipedia.org/wiki/Developing_country#List_of_developing_economies">developing
+                      country</a> or if you tried but can't find sponsors, you'll be able
+                          to apply for a free box.</p>
                 </div>
                 <div class="col-md-6">
                     <h3>How to get one?</h3>
-                    <p>Yay, that's great! In order to receive it, <b>there are few requirements you need to meet</b>:
-                      <ul>
+                    <p>Yay, that's great that you want to order one! To do that, <a href="https://store.djangogirls.org/products/django-girls-workshop-box">go to our store</a>. <b>We strongly
+                         recommend you to buy it at least 6 weeks before your event</b>: if you don't do it,
+                        we can't guarantee that your box will be delivered on time for your event.</p>
+
+                    <h4>Requirements to apply for a free box:</h4>
+                    <ul>
+                        <li>Your event must happen in a developing country or you tried but can't find any sponsor.</li>
                         <li>You need to have a venue for your workshop</li>
-                        <li>Application process for your event needs to already be open</li>
+                        <li>Application process for your event needs to be open</li>
                         <li>You need to order it at least 6 weeks before workshop to allow for shipping time</li>
                       </ul>
-                      <p>
-                        One little thing: during the trial period, we can only send one free box per city. 
-                        If you want another one, we will ask you for a donation of $50. Thanks for understanding!
-                      </p>
+                    <p>If you check all those requirements, <a href="mailto:hello@djangogirls.org">send us an email</a> describing your situation: we will review your application and contact you soon. 💕</p>
                 </div>
-                <div class="col-md-12">
-                  <h3>Order your box now:</h3>
-                  <div class="typeform-widget" data-url="https://djangogirls1.typeform.com/to/M3VLKb" data-text="Order Workshop Box" style="width:100%;height:500px;"></div>
                 </div>
-            </div>
         </section>
     </div>
-    <script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()</script>
 {% endblock %}
