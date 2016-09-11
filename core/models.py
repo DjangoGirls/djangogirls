@@ -1,18 +1,23 @@
 from __future__ import unicode_literals
 
+from datetime import date, datetime, timedelta
 import icalendar
 from smtplib import SMTPException
-from datetime import date, datetime, timedelta
 
-from django.db import models
 from django.contrib.auth import models as auth_models
-from django.utils import timezone
-from django.core.mail import EmailMessage
-from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.core.urlresolvers import reverse
+from django.db import models
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
-
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
+from easy_thumbnails.files import get_thumbnailer
+from easy_thumbnails.exceptions import InvalidImageFormatError
+
+DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
 
 class UserManager(auth_models.BaseUserManager):
@@ -173,11 +178,13 @@ class EventPageManager(models.Manager):
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)
     title = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(null=True, blank=True,
-                                   default="Django Girls is a one-day workshop about programming "
-                                           "in Python and Django tailored for women.")
-    main_color = models.CharField(max_length=6, null=True, blank=True,
-                                  help_text="Main color of the chapter in HEX", default="FF9400")
+    description = models.TextField(
+        null=True, blank=True,
+        default="Django Girls is a one-day workshop about programming "
+                "in Python and Django tailored for women.")
+    main_color = models.CharField(
+        max_length=6, null=True, blank=True,
+        help_text="Main color of the chapter in HEX", default="FF9400")
     custom_css = models.TextField(null=True, blank=True)
     url = models.CharField(max_length=200, null=True, blank=True)
 
@@ -212,11 +219,13 @@ class ContactEmail(models.Model):
     sent_to = models.EmailField(max_length=128)
     message = models.TextField()
     event = models.ForeignKey(
-        'core.Event', help_text='required for contacting a chapter', null=True, blank=True
+        'core.Event', help_text='required for contacting a chapter',
+        null=True, blank=True
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False, default=CHAPTER
+        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False,
+        default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
     sent_successfully = models.BooleanField(default=True)
@@ -235,7 +244,8 @@ class ContactEmail(models.Model):
             "Django Girls Contact <hello@djangogirls.org>",
             [self.sent_to],
             reply_to=["{} <{}>".format(self.name, self.email)],
-            headers={'Reply-To': "{} <{}>".format(self.name, self.email)} # Seems like this is needed for Mandrill
+            headers={'Reply-To': "{} <{}>".format(self.name, self.email)}
+            # Seems like this is needed for Mandrill
         )
         try:
             email.send(fail_silently=False)
@@ -260,10 +270,12 @@ class EventPageContent(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     content = models.TextField(
         null=False, blank=False, help_text="HTML allowed")
-    background = models.ImageField(upload_to="event/backgrounds/", null=True, blank=True,
-                                   help_text="Optional background photo")
+    background = models.ImageField(
+        upload_to="event/backgrounds/", null=True, blank=True,
+        help_text="Optional background photo")
     position = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Position of the block on the website")
+        null=False, blank=False,
+        help_text="Position of the block on the website")
     is_public = models.BooleanField(null=False, blank=False, default=False)
     coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
@@ -281,8 +293,9 @@ class EventPageMenu(models.Model):
     page = models.ForeignKey(EventPage, null=False,
                              blank=False, related_name="menu")
     title = models.CharField(max_length=255, null=False, blank=False)
-    url = models.CharField(max_length=255, null=False, blank=False,
-                           help_text="http://djangogirls.org/city/<the value you enter here>")
+    url = models.CharField(
+        max_length=255, null=False, blank=False,
+        help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(
         null=False, blank=False, help_text="Order of menu")
 
@@ -297,8 +310,9 @@ class EventPageMenu(models.Model):
 @python_2_unicode_compatible
 class Sponsor(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
-    logo = models.ImageField(upload_to="event/sponsors/", null=True, blank=True,
-                             help_text="Make sure logo is not bigger than 200 pixels wide")
+    logo = models.ImageField(
+        upload_to="event/sponsors/", null=True, blank=True,
+        help_text="Make sure logo is not bigger than 200 pixels wide")
     url = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
@@ -320,10 +334,12 @@ class Sponsor(models.Model):
 @python_2_unicode_compatible
 class Coach(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    twitter_handle = models.CharField(max_length=200, null=True, blank=True,
-                                      help_text="No @, No http://, just username")
-    photo = models.ImageField(upload_to="event/coaches/", null=True, blank=True,
-                              help_text="For best display keep it square")
+    twitter_handle = models.CharField(
+        max_length=200, null=True, blank=True,
+        help_text="No @, No http://, just username")
+    photo = models.ImageField(
+        upload_to="event/coaches/", null=True, blank=True,
+        help_text="For best display keep it square")
     url = models.URLField(null=True, blank=True)
 
     def __str__(self):
@@ -334,12 +350,22 @@ class Coach(models.Model):
         verbose_name_plural = "Coaches"
 
     def photo_display_for_admin(self):
-        if self.photo:
-            return "<a href=\"{}\" target=\"_blank\"><img src=\"{}\" width=\"100\" /></a>".format(
-                self.photo.url, self.photo.url)
-        else:
-            return "No image"
+        coach_change_url = reverse("admin:core_coach_change", args=[self.id])
+        return """
+            <a href=\"{}\" target=\"_blank\">
+                <img src=\"{}\" width=\"100\" />
+            </a>""".format(coach_change_url, self.photo_url)
     photo_display_for_admin.allow_tags = True
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            try:
+                return get_thumbnailer(self.photo)['coach'].url
+            except InvalidImageFormatError:
+                return DEFAULT_COACH_PHOTO
+
+        return DEFAULT_COACH_PHOTO
 
 
 @python_2_unicode_compatible

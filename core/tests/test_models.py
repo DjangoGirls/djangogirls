@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from core.models import Event, EventPage
+from core.models import Event, EventPage, Coach, DEFAULT_COACH_PHOTO
 
 
 class TestEventModel(TestCase):
@@ -25,3 +25,11 @@ class TestEventPageModel(TestCase):
         self.assertTrue(EventPage.objects.all(), 3)
         event_page = EventPage.all_objects.get(pk=1)
         self.assertTrue(event_page.is_deleted)
+
+
+class TestCoachModel(TestCase):
+    def test_delete(self):
+        self.assertEquals(Coach.objects.count(), 0)
+        coach = Coach.objects.create(name="Test Test", twitter_handle="@test")
+        self.assertEquals(Coach.objects.count(), 1)
+        self.assertEqual(coach.photo_url, DEFAULT_COACH_PHOTO)
