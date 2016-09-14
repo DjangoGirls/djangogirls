@@ -54,7 +54,7 @@ def command():
 
     click.echo(click.style("NEXT EVENTS", bold=True))
     next_events = Event.objects.all().filter(
-        created_at__range=(dispatch_date, now), eventpage__isnull=False)
+        created_at__range=(dispatch_date, now), eventpage__isnull=False).order_by("date")
 
     sorted_event = groupby(next_events, key=lambda event: event.date.month)
 
