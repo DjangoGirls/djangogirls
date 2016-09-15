@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Request for GitHub sponsoring{% endblock %}
+{% block description %}Fill the form available on this page to apply for a GitHub grant.{% endblock %}
+
+{% block content %}
+
+        <section id="flatpage">
+            <div class="row clearfix">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <h1>Request for GitHub sponsoring</h1>
+
+                    <p>GitHub can sponsor one Django Girls workshop per city with a 500$ grant.</p>
+
+                    <p>Before applying, your website needs to be ready and online. Then, you need to
+                        <a href="https://djangogirls.org/events/">check if an event already happened in your city</a>
+                        and if they received money from GitHub (check their sponsors section).
+
+                    <p>If your event is the first in your city or if the previous ones didn't receive sponsoring
+                    from GitHub, you can apply.</p>
+
+                    <p>Note: Filling this form will be long. You'll have to download and edit some documents (invoice,
+                        bank information, etc).</p>
+
+                    <p>We send those requests bi-weekly to GitHub. <b>Next deadline: {{ deadline }}.</b></p>
+
+<div class="typeform-widget" data-url="https://djangogirls1.typeform.com/to/oS8ICn" data-text="Github Sponsoring request" style="width:100%;height:500px;"></div>
+<script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()</script>
+                </div>
+            </div>
+        </section>
+
+
+{% endblock %}

@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+
+import itertools
 import requests
 
 from django.utils import timezone
@@ -49,3 +51,12 @@ def get_approximate_date(date_str):
         except ValueError:
             return None
     return None
+
+def next_deadline():
+    """Return the next deadline for GitHub sponsoring so the organizers know when we will send their request."""
+    now = datetime.now()
+    start_date = datetime.strptime('04/09/16', '%d/%m/%y')
+
+    all_deadlines = (start_date + timedelta(days=14 * i) for i in itertools.count())
+
+    return next (d for d in all_deadlines if d > now)

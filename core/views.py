@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
+from core.utils import next_deadline
 
 from .models import Event, EventPage, Story, User
 from .forms import ContactForm
@@ -162,3 +163,11 @@ def privacy_cookies(request):
 
 def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
+
+def sponsor_request(request):
+    if not request.user.is_authenticated():
+        return render(request, 'not_logged.html', {})
+    else:
+        return render(request, 'event/sponsor-request.html', {
+            'deadline': next_deadline()
+        })

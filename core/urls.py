@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^workshop-box/$', views.workshop_box, name='workshop-box'),
 
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
+    url(r'^sponsor-request/$', views.sponsor_request, name='sponsor-request'),
     url(r'^$', views.index, name='index'),
 ]
