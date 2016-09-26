@@ -1,6 +1,5 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
-import itertools
 import requests
 
 from django.utils import timezone
@@ -52,11 +51,28 @@ def get_approximate_date(date_str):
             return None
     return None
 
+def next_sunday(day):
+    """
+    Return a date object corresponding to the next Sunday after the given date.
+    If the given date is a Sunday, return the Sunday next week.
+    """
+    if day.weekday() == 6:  # sunday
+        return day + timedelta(days=7)
+    else:
+        return day + timedelta(days=(6 - day.weekday()))
+
+
 def next_deadline():
-    """Return the next deadline for GitHub sponsoring so the organizers know when we will send their request."""
-    now = datetime.now()
-    start_date = datetime.strptime('04/09/16', '%d/%m/%y')
+    """
+    Return the next deadline when we need to send invoices to GitHub.
+    Deadlines are every second Sunday, starting from September 4th 2016.
+    """
 
-    all_deadlines = (start_date + timedelta(days=14 * i) for i in itertools.count())
+    today = date.today()
 
-    return next (d for d in all_deadlines if d > now)
+    days_since_starting_sunday = (today - date(2016, 9, 4)).days
+
+    if days_since_starting_sunday % 14 < 7:
+        return next_sunday(next_sunday(today))
+    else:
+        return next_sunday(today)

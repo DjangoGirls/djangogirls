@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -63,22 +63,22 @@ class NextDeadlineTest(TestCase):
     def test_a_week_before_deadline(self):
         result = next_deadline()
 
-        self.assertEqual(result, datetime.strptime('16/10/16', '%d/%m/%y'))
+        self.assertEqual(result, date(2016, 10, 16))
 
     @freeze_time('2016-10-15')
     def test_day_before_deadline(self):
         result = next_deadline()
 
-        self.assertEqual(result, datetime.strptime('16/10/16', '%d/%m/%y'))
+        self.assertEqual(result, date(2016, 10, 16))
 
     @freeze_time('2016-10-16')
     def test_day_before_deadline(self):
         result = next_deadline()
 
-        self.assertEqual(result, datetime.strptime('16/10/16', '%d/%m/%y'))
+        self.assertEqual(result, date(2016, 10, 16))
 
     @freeze_time('2016-10-17')
     def test_day_before_deadline(self):
         result = next_deadline()
 
-        self.assertEqual(result, datetime.strptime('30/10/16', '%d/%m/%y'))
+        self.assertEqual(result, date(2016, 10, 30))
