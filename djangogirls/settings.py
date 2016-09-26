@@ -156,6 +156,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 DJANGO_GULP_REV_PATH = os.path.join(BASE_DIR, 'static/rev-manifest.json')
+LOGIN_URL = 'admin:login'
 
 if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/local')]

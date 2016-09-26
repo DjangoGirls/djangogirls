@@ -1,7 +1,10 @@
+from datetime import date
 from unittest import TestCase
 from unittest.mock import patch
 
-from core.utils import get_coordinates_for_city, NOMINATIM_URL
+from freezegun import freeze_time
+
+from core.utils import get_coordinates_for_city, NOMINATIM_URL, next_deadline
 
 
 @patch('requests.get')
@@ -52,3 +55,30 @@ class GetCoordinatesForCityTest(TestCase):
             }
         )
         self.assertIsNone(result)
+
+
+
+class NextDeadlineTest(TestCase):
+    @freeze_time('2016-10-10')
+    def test_a_week_before_deadline(self):
+        result = next_deadline()
+
+        self.assertEqual(result, date(2016, 10, 16))
+
+    @freeze_time('2016-10-15')
+    def test_day_before_deadline(self):
+        result = next_deadline()
+
+        self.assertEqual(result, date(2016, 10, 16))
+
+    @freeze_time('2016-10-16')
+    def test_day_before_deadline(self):
+        result = next_deadline()
+
+        self.assertEqual(result, date(2016, 10, 16))
+
+    @freeze_time('2016-10-17')
+    def test_day_before_deadline(self):
+        result = next_deadline()
+
+        self.assertEqual(result, date(2016, 10, 30))

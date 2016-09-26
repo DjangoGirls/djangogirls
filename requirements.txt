@@ -20,6 +20,7 @@ django-suit==0.2.19
 Django==1.9.7
 djrill==2.1.0
 easy_thumbnails==2.3
+freezegun
 icalendar==3.10
 lxml==3.6.0
 mandrill==1.0.57
