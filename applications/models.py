@@ -144,10 +144,9 @@ class Application(models.Model):
     state = models.CharField(
         max_length=50,
         choices=APPLICATION_STATES, verbose_name="State of the application",
-        null=True,
         default='submitted'
     )
-    email = models.EmailField(null=True, blank=True)
+    email = models.EmailField(blank=True)
     newsletter_optin = models.BooleanField(default=False)
 
     rsvp_status = models.CharField(
@@ -155,8 +154,8 @@ class Application(models.Model):
         choices=RSVP_STATUSES, verbose_name="RSVP status",
         default=RSVP_WAITING
     )
-    rsvp_yes_code = models.CharField(max_length=24, null=True)
-    rsvp_no_code = models.CharField(max_length=24, null=True)
+    rsvp_yes_code = models.CharField(max_length=24)
+    rsvp_no_code = models.CharField(max_length=24)
 
     class Meta:
         unique_together = ("form", "email")
@@ -260,7 +259,7 @@ class Score(models.Model):
         default=0
     )
     comment = models.TextField(
-        null=True, blank=True, help_text='Any extra comments?')
+        blank=True, help_text='Any extra comments?')
 
     class Meta:
         unique_together = ('user', 'application',)
@@ -281,8 +280,8 @@ class Email(models.Model):
         help_text="Only people assigned to chosen group will receive this email."
     )
     number_of_recipients = models.IntegerField(default=0, null=True)
-    successfuly_sent = models.TextField(null=True, blank=True)
-    failed_to_sent = models.TextField(null=True, blank=True)
+    successfuly_sent = models.TextField(blank=True)
+    failed_to_sent = models.TextField(blank=True)
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)

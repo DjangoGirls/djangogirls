@@ -72,12 +72,10 @@ class PublishFlowModel(models.Model):
     review_status = models.CharField(max_length=3, choices=STATUSES, default=OPEN)
     message_to_organisation = models.TextField(
         blank=True,
-        null=True,
         help_text="Write your message to the company/organisation here."
     )
     internal_comment = models.TextField(
         blank=True,
-        null=True,
         help_text="Write your comments here. They won't be sent to "
                   "the company/organisation."
     )
@@ -206,8 +204,7 @@ class Job(PublishFlowModel):
     cities = models.CharField(max_length=255)
     state_province = models.CharField(max_length=255,
         help_text="If relevant, add the name of the state or province where the job is available.",
-        blank=True,
-        null=True,
+        blank=True
     )
     country = CountryField()
     description = models.TextField()
@@ -241,7 +238,6 @@ class Meetup(PublishFlowModel):
     organisation = models.CharField(
         max_length=255,
         blank=True,
-        null=True,
     )
     meetup_type = models.CharField(
         max_length=4,
@@ -257,9 +253,7 @@ class Meetup(PublishFlowModel):
     city = models.CharField(max_length=255)
     state_province = models.CharField(max_length=255,
         help_text="If relevant, add the name of the state or province where the meetup/event is happening.",
-        blank=True,
-        null=True
-    )
+        blank=True)
     country = CountryField()
     description = models.TextField()
     is_recurring = models.BooleanField(
@@ -269,7 +263,6 @@ class Meetup(PublishFlowModel):
     recurrence = models.CharField(
         max_length=255,
         blank=True,
-        null=True,
         help_text="Provide details of recurrence if applicable."
     )
     meetup_start_date = models.DateTimeField(
