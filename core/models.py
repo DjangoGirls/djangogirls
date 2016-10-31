@@ -188,7 +188,7 @@ class EventPage(models.Model):
     custom_css = models.TextField(blank=True)
     url = models.CharField(max_length=200, blank=True)
 
-    is_live = models.BooleanField(null=False, blank=False, default=False)
+    is_live = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
 
     objects = EventPageManager()
@@ -265,17 +265,15 @@ class ContactEmail(models.Model):
 
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="content")
+    page = models.ForeignKey(EventPage, related_name="content")
     name = models.CharField(max_length=100)
     content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
         upload_to="event/backgrounds/", blank=True,
         help_text="Optional background photo")
     position = models.PositiveIntegerField(
-        null=False, blank=False,
         help_text="Position of the block on the website")
-    is_public = models.BooleanField(null=False, blank=False, default=False)
+    is_public = models.BooleanField(default=False)
     coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
 
@@ -289,14 +287,13 @@ class EventPageContent(models.Model):
 
 @python_2_unicode_compatible
 class EventPageMenu(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="menu")
+    page = models.ForeignKey(EventPage, related_name="menu")
     title = models.CharField(max_length=255)
     url = models.CharField(
         max_length=255,
         help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Order of menu")
+        help_text="Order of menu")
 
     def __str__(self):
         return self.title
@@ -369,11 +366,9 @@ class Coach(models.Model):
 
 @python_2_unicode_compatible
 class Postmortem(models.Model):
-    event = models.ForeignKey(Event, null=False, blank=False)
-    attendees_count = models.IntegerField(null=False, blank=False,
-                                          verbose_name="Number of attendees")
-    applicants_count = models.IntegerField(null=False, blank=False,
-                                           verbose_name="Number of applicants")
+    event = models.ForeignKey(Event)
+    attendees_count = models.IntegerField(verbose_name="Number of attendees")
+    applicants_count = models.IntegerField(verbose_name="Number of applicants")
 
     discovery = models.TextField(blank=True,
                                  verbose_name="What was the most important thing you discovered during the workshop?")
@@ -397,9 +392,9 @@ class Postmortem(models.Model):
 class Story(models.Model):
     name = models.CharField(max_length=100)
     content = models.TextField()
-    post_url = models.URLField(null=False, blank=False)
+    post_url = models.URLField()
     image = models.ImageField(upload_to="stories/")
-    created = models.DateField(auto_now_add=True, null=False, blank=False)
+    created = models.DateField(auto_now_add=True)
     # False means a regular blogpost, not a story
     is_story = models.BooleanField(default=True)
 

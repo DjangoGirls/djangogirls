@@ -42,7 +42,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 @python_2_unicode_compatible
 class Form(models.Model):
-    page = models.OneToOneField(EventPage, null=False, blank=False)
+    page = models.OneToOneField(EventPage)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
@@ -102,7 +102,7 @@ class Form(models.Model):
 
 @python_2_unicode_compatible
 class Question(models.Model):
-    form = models.ForeignKey(Form, null=False, blank=False)
+    form = models.ForeignKey(Form)
     title = models.TextField(verbose_name="Question")
     help_text = models.TextField(
         blank=True, default='', verbose_name="Additional help text to the question?")
@@ -118,7 +118,7 @@ class Question(models.Model):
         default=False, verbose_name="Are there multiple choices allowed?",
         help_text="Used only with 'Choices' question type")
     order = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Position of the question")
+        help_text="Position of the question")
 
     class Meta:
         ordering = ['order']
@@ -138,7 +138,7 @@ class Question(models.Model):
 
 @python_2_unicode_compatible
 class Application(models.Model):
-    form = models.ForeignKey(Form, null=False, blank=False)
+    form = models.ForeignKey(Form)
     number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.CharField(
@@ -238,8 +238,8 @@ class Application(models.Model):
 
 
 class Answer(models.Model):
-    application = models.ForeignKey(Application, null=False, blank=False)
-    question = models.ForeignKey(Question, null=False, blank=False)
+    application = models.ForeignKey(Application)
+    question = models.ForeignKey(Question)
     answer = models.TextField()
 
     class Meta:
