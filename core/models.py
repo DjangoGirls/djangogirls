@@ -101,11 +101,11 @@ def validate_approximatedate(date):
 
 @python_2_unicode_compatible
 class Event(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     date = ApproximateDateField(null=True, blank=False, validators=[
                                 validate_approximatedate])
-    city = models.CharField(max_length=200, null=False, blank=False)
-    country = models.CharField(max_length=200, null=False, blank=False)
+    city = models.CharField(max_length=200)
+    country = models.CharField(max_length=200)
     latlng = models.CharField(max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
                               help_text="The best would be 356 x 210px")
@@ -224,7 +224,7 @@ class ContactEmail(models.Model):
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False,
+        max_length=20, choices=CONTACT_TYPE_CHOICES,
         default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -267,9 +267,8 @@ class ContactEmail(models.Model):
 class EventPageContent(models.Model):
     page = models.ForeignKey(EventPage, null=False,
                              blank=False, related_name="content")
-    name = models.CharField(null=False, blank=False, max_length=100)
-    content = models.TextField(
-        null=False, blank=False, help_text="HTML allowed")
+    name = models.CharField(max_length=100)
+    content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
         upload_to="event/backgrounds/", null=True, blank=True,
         help_text="Optional background photo")
@@ -292,9 +291,9 @@ class EventPageContent(models.Model):
 class EventPageMenu(models.Model):
     page = models.ForeignKey(EventPage, null=False,
                              blank=False, related_name="menu")
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255)
     url = models.CharField(
-        max_length=255, null=False, blank=False,
+        max_length=255,
         help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(
         null=False, blank=False, help_text="Order of menu")
@@ -333,7 +332,7 @@ class Sponsor(models.Model):
 
 @python_2_unicode_compatible
 class Coach(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     twitter_handle = models.CharField(
         max_length=200, null=True, blank=True,
         help_text="No @, No http://, just username")
@@ -396,7 +395,7 @@ class Postmortem(models.Model):
 
 @python_2_unicode_compatible
 class Story(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False)
+    name = models.CharField(max_length=100)
     content = models.TextField(null=True)
     post_url = models.URLField(null=False, blank=False)
     image = models.ImageField(upload_to="stories/", null=True)
