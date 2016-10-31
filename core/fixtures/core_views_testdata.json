@@ -88,7 +88,7 @@
         "city": "Hidden",
         "name": "Django Girls Hidden",
         "country": "Event",
-        "latlng": null,
+        "latlng": "",
         "team": [
             1
         ],
@@ -104,7 +104,7 @@
         "city": "Hidden_no_date",
         "name": "Django Girls Hidden",
         "country": "Event",
-        "latlng": null,
+        "latlng": "",
         "team": [
             1
         ],
@@ -117,7 +117,7 @@
 },
 {
     "fields": {
-        "custom_css": null,
+        "custom_css": "",
         "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
         "title": "Django Girls Kensington",
         "url": "neverland",
@@ -129,7 +129,7 @@
 },
 {
     "fields": {
-        "custom_css": null,
+        "custom_css": "",
         "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
         "title": "Django Girls \u0141\u00f3d\u017a",
         "url": "lodz",
@@ -141,7 +141,7 @@
 },
 {
     "fields": {
-        "custom_css": null,
+        "custom_css": "",
         "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
         "title": "Django Girls Hidden",
         "url": "hidden",
@@ -153,7 +153,7 @@
 },
 {
     "fields": {
-        "custom_css": null,
+        "custom_css": "",
         "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
         "title": "Django Girls Hidden",
         "url": "hidden_no_date",

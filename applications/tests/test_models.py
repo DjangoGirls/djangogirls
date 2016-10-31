@@ -110,7 +110,7 @@ class ApplicationModel(TestCase):
         self.assertEqual(len(self.application.generate_code()), 24)
 
     def test_get_rsvp_yes_code(self):
-        self.assertIsNone(self.application.rsvp_yes_code)
+        self.assertEqual(self.application.rsvp_yes_code, '')
         rsvp_code = self.application.get_rsvp_yes_code()
         self.assertEqual(len(rsvp_code), 24)
         self.assertEqual(self.application.rsvp_yes_code, rsvp_code)
@@ -119,7 +119,7 @@ class ApplicationModel(TestCase):
         self.assertEqual(self.application.get_rsvp_yes_code(), rsvp_code)
 
     def test_get_rsvp_no_code(self):
-        self.assertIsNone(self.application.rsvp_no_code)
+        self.assertEqual(self.application.rsvp_no_code, '')
         rsvp_code = self.application.get_rsvp_no_code()
         self.assertEqual(len(rsvp_code), 24)
         self.assertEqual(self.application.rsvp_no_code, rsvp_code)

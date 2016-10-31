@@ -39,7 +39,7 @@ class GetCoordinatesForCityTest(TestCase):
                 'q': 'PretendTown, UK',
             }
         )
-        self.assertIsNone(result)
+        self.assertEquals(result, '')
 
     def test_returns_none_when_invalid_results(self, mock_get):
         # Empty dict returned in results
@@ -54,7 +54,7 @@ class GetCoordinatesForCityTest(TestCase):
                 'q': 'PretendTown, UK',
             }
         )
-        self.assertIsNone(result)
+        self.assertEquals(result, '')
 
 
 
