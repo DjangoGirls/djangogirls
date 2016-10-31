@@ -107,7 +107,7 @@ class Event(models.Model):
     city = models.CharField(max_length=200)
     country = models.CharField(max_length=200)
     latlng = models.CharField(max_length=30, blank=True)
-    photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
+    photo = models.ImageField(upload_to="event/cities/", blank=True,
                               help_text="The best would be 356 x 210px")
     photo_credit = models.CharField(max_length=200, blank=True, help_text=mark_safe("Only use pictures with a <a href='https://creativecommons.org/licenses/'>creative commons license</a>."))
     photo_link = models.URLField(blank=True)
@@ -270,7 +270,7 @@ class EventPageContent(models.Model):
     name = models.CharField(max_length=100)
     content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
-        upload_to="event/backgrounds/", null=True, blank=True,
+        upload_to="event/backgrounds/", blank=True,
         help_text="Optional background photo")
     position = models.PositiveIntegerField(
         null=False, blank=False,
@@ -310,7 +310,7 @@ class EventPageMenu(models.Model):
 class Sponsor(models.Model):
     name = models.CharField(max_length=200, blank=True)
     logo = models.ImageField(
-        upload_to="event/sponsors/", null=True, blank=True,
+        upload_to="event/sponsors/", blank=True,
         help_text="Make sure logo is not bigger than 200 pixels wide")
     url = models.URLField(blank=True)
     description = models.TextField(blank=True)
@@ -337,7 +337,7 @@ class Coach(models.Model):
         max_length=200, blank=True,
         help_text="No @, No http://, just username")
     photo = models.ImageField(
-        upload_to="event/coaches/", null=True, blank=True,
+        upload_to="event/coaches/", blank=True,
         help_text="For best display keep it square")
     url = models.URLField(blank=True)
 
@@ -398,7 +398,7 @@ class Story(models.Model):
     name = models.CharField(max_length=100)
     content = models.TextField()
     post_url = models.URLField(null=False, blank=False)
-    image = models.ImageField(upload_to="stories/", null=True)
+    image = models.ImageField(upload_to="stories/")
     created = models.DateField(auto_now_add=True, null=False, blank=False)
     # False means a regular blogpost, not a story
     is_story = models.BooleanField(default=True)
