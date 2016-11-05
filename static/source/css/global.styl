@@ -150,13 +150,20 @@ form
 ------------------
 */
 
-nav
+.navbar
     margin: 20px 0
+    background: white
+    border: none
+    padding: 0 15px
 
     .logo
         float: left
 
-    ul
+    .navbar-collapse
+        padding: 0
+        border: none
+
+    .navbar-nav
         float: right
         list-style-type: none
         margin-bottom: 0
@@ -165,7 +172,6 @@ nav
         li
             float: left
             margin-left: 40px
-            line-height: 68px
 
             a
                 color: orange
@@ -174,6 +180,7 @@ nav
                 text-transform: uppercase
                 font-weight: 500
                 font-size: 15px
+                padding: 24px 0
 
                 &:hover
                     color: orange
@@ -754,9 +761,17 @@ footer
 
 
 @media (max-width: 725px)
-    nav
-        ul
-            display: none
+    .navbar
+        .navbar-nav
+            float: none
+            margin-left: 20px
+
+            li
+                float: none
+                margin-left: 0
+
+                a
+                    padding: 14px 0
 
     #box-with-picture
         height: auto
