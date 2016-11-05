@@ -222,7 +222,7 @@ def compose_email(request, city, email_id=None):
         obj.form = form_obj
         obj.save()
         if request.POST.get('send'):
-            obj.send()
+            obj.send(form.cleaned_data['email_all'])
         return redirect('applications:communication', city)
 
     return render(request, 'applications/compose_email.html', {

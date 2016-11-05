@@ -309,8 +309,14 @@ class Email(models.Model):
         else:
             return Application.objects.none()
 
-    def send(self):
+    def send(self, filter_already_sent=False):
         recipients = self.get_applications()
+
+        if filter_already_sent and self.successfuly_sent is not None:
+            # Perhaps there is a better way to do this?
+            already_sent = self.successfuly_sent.split(',')
+            recipients = recipients.exclude(email__in=already_sent)
+
         self.number_of_recipients = recipients.count()
         self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
         successfuly_sent = []
