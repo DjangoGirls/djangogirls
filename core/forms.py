@@ -63,7 +63,7 @@ class AddOrganizerForm(forms.Form):
         self.send_email(content, subject, user)
 
     def send_email(self, content, subject, user):
-        send_mail(subject, "Django Girls <hello@djangogirls.org>",
+        send_mail(subject, content, "Django Girls <hello@djangogirls.org>",
                   [user.email], html_message=content)
 
     def save(self, *args, **kwargs):
