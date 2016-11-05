@@ -18,7 +18,7 @@ class TestAddOrganizerForm(TestCase):
                                  'organizer': 'Test',
                                  'email': 'test@test.com'})
         if form.is_valid():
-            self.form.notify_new_user(self.user)
+            form.notify_new_user(self.user)
             self.assertEqual(len(mail.outbox), 1)
             self.assertEqual(mail.outbox[0].content_type, 'text/html')
 
@@ -27,6 +27,6 @@ class TestAddOrganizerForm(TestCase):
                                  'organizer': 'Test',
                                  'email': 'test@test.com'})
         if form.is_valid():
-            self.form.notify_existing_user(self.user)
+            form.notify_existing_user(self.user)
             self.assertEqual(len(mail.outbox), 1)
             self.assertEqual(mail.outbox[0].content_type, 'text/html')
