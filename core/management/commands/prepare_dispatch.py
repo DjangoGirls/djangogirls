@@ -1,10 +1,10 @@
 import calendar
 import datetime
-import djclick as click
 from itertools import groupby
 
-from django.utils import timezone
+import djclick as click
 from django.contrib.humanize.templatetags.humanize import apnumber
+from django.utils import timezone
 
 from core.models import Event
 

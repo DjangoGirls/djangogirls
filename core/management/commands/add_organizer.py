@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 import djclick as click
 
-from core.models import Event
 from core.forms import AddOrganizerForm
+from core.models import Event
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 

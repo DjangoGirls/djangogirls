@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
 from datetime import date, datetime, timedelta
-import icalendar
 from smtplib import SMTPException
 
+import icalendar
 from django.contrib.auth import models as auth_models
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.exceptions import ValidationError
@@ -14,8 +14,8 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
-from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from easy_thumbnails.files import get_thumbnailer
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 

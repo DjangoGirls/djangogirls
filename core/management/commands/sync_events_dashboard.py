@@ -1,12 +1,12 @@
-from collections import namedtuple
 import datetime
 import re
 import time
-from trello import TrelloClient, ResourceUnavailable
+from collections import namedtuple
 
-
-from django.core.management.base import BaseCommand
 from django.conf import settings
+from django.core.management.base import BaseCommand
+from trello import ResourceUnavailable, TrelloClient
+
 from core.models import Event
 
 

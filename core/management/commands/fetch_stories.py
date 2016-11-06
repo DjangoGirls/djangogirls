@@ -1,20 +1,23 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals, print_function
+from __future__ import print_function, unicode_literals
+
+from xml.etree import ElementTree
+
+import requests
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
+from django.core.management.base import BaseCommand
+from pyquery import PyQuery as pq
+
+from core.models import Story
 
 try:
     from urllib.request import urlopen
 except ImportError:
     from urllib import urlopen
-from pyquery import PyQuery as pq
-import requests
-from xml.etree import ElementTree
-
-from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
-from django.core.management.base import BaseCommand
 
 
-from core.models import Story
+
 
 
 class Command(BaseCommand):

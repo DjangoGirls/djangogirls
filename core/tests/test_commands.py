@@ -1,16 +1,16 @@
-from click.testing import CliRunner
-from datetime import date
 import random
+from datetime import date
 
+from click.testing import CliRunner
 from django.core.management import call_command
 from django.test import TestCase
 
-from core.models import Event
 from core.management.commands.add_organizer import command as add_organizer
 from core.management.commands.copy_event import command as copy_event
 from core.management.commands.new_event import command as new_event
-from core.management.commands.prepare_dispatch import (
-    command as prepare_dispatch)
+from core.management.commands.prepare_dispatch import \
+    command as prepare_dispatch
+from core.models import Event
 
 
 class CommandsTestCase(TestCase):
