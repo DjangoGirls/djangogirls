@@ -1,25 +1,30 @@
 {% load staticfiles %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <nav role="navigation" class="clearfix">
-                <div class="logo">
-                    <a href="/">
-                        <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
-                    </a>
-                </div>
-
-                <ul>
-                    <li><a href="{% url 'core:events' %}">Events</a></li>
-                    <li><a href="{% url 'core:resources' %}">Resources</a></li>
-                    <li><a href="{% url 'core:organize' %}">Organize</a></li>
-                    <li><a href="{% url 'core:newsletter' %}">Newsletter</a></li>
-                    <li><a href="http://blog.djangogirls.org/">Blog</a></li>
-                    <li><a href="{% url 'core:contribute' %}">Contribute</a></li>
-                    <li><a href="https://www.patreon.com/djangogirls">Support us</a></li>
-                </ul>
-            </nav>
+<div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="logo">
+                <a href="/">
+                    <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
+                </a>
+            </div>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'core:events' %}">Events</a></li>
+                <li><a href="{% url 'core:resources' %}">Resources</a></li>
+                <li><a href="{% url 'core:organize' %}">Organize</a></li>
+                <li><a href="{% url 'core:newsletter' %}">Newsletter</a></li>
+                <li><a href="http://blog.djangogirls.org/">Blog</a></li>
+                <li><a href="{% url 'core:contribute' %}">Contribute</a></li>
+                <li><a href="https://www.patreon.com/djangogirls">Support us</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
 </div>
