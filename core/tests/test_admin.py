@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission
+from django.core.urlresolvers import reverse
 
-from core.tests.test_views import BaseCoreTestCase
 from core.admin import EventAdmin
 from core.models import Event, User
+from core.tests.test_views import BaseCoreTestCase
 
 
 class EventAdminTestCase(BaseCoreTestCase):
@@ -156,4 +156,3 @@ class EventAdminTestCase(BaseCoreTestCase):
         resp = self.client.get(reverse('admin:core_event_manage_organizers'), data)
         assert resp.status_code == 302
         assert self.event_1.team.count() == 1
-        

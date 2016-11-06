@@ -1,14 +1,14 @@
-from datetime import timedelta
 import os
+from datetime import timedelta
 
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 from django.test.client import Client
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import User, Event, EventPage, ContactEmail
+from core.models import ContactEmail, Event, EventPage, User
 from core.views import event as event_view
 
 

@@ -1,28 +1,24 @@
 from datetime import datetime
 
-from django.contrib import admin, messages
-from django import forms
-from django.forms import ModelForm
-from django.contrib.auth import admin as auth_admin
-from django.contrib.flatpages.models import FlatPage
-from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
-from django.utils.safestring import mark_safe
-from django.conf.urls import url
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
-
 from codemirror import CodeMirrorTextarea
+from django import forms
+from django.conf.urls import url
+from django.contrib import admin, messages
+from django.contrib.auth import admin as auth_admin
+from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
+from django.contrib.flatpages.models import FlatPage
+from django.core.urlresolvers import reverse
+from django.forms import ModelForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.utils.safestring import mark_safe
 from suit.admin import SortableModelAdmin
 
-from .forms import (
-    UserChangeForm, UserCreationForm, UserLimitedChangeForm, AddOrganizerForm
-)
 from .filters import OpenRegistrationFilter
-from .models import (
-    Coach, Event, User, EventPage, EventPageContent, EventPageMenu, Postmortem,
-    Sponsor, Story
-)
+from .forms import (AddOrganizerForm, UserChangeForm, UserCreationForm,
+                    UserLimitedChangeForm)
+from .models import (Coach, Event, EventPage, EventPageContent, EventPageMenu,
+                     Postmortem, Sponsor, Story, User)
 
 
 class EventAdmin(admin.ModelAdmin):

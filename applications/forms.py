@@ -1,13 +1,15 @@
-from django import forms
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
-from django.conf import settings
-import requests
 import hashlib
 
-from .models import Application, Answer, Question, Score, Email
-from .utils import generate_form_from_questions
+import requests
+from django import forms
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
 from core.forms import BetterReCaptchaField
+
+from .models import Answer, Application, Email, Question, Score
+from .utils import generate_form_from_questions
 
 
 class ApplicationForm(forms.Form):

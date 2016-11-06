@@ -1,20 +1,20 @@
 import csv
-from django.http import Http404, JsonResponse, HttpResponse
+
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import striptags
 from django.views.decorators.csrf import csrf_exempt
 
-from core.utils import get_event_page
 from core.models import EventPageMenu
+from core.utils import get_event_page
+
 from .decorators import organiser_only
-from .models import (
-    Application, Form, Score, Question, Email, RSVP_WAITING, RSVP_YES
-)
-from .forms import ApplicationForm, ScoreForm, EmailForm
-from .utils import (
-    get_applications_for_page, get_organiser_menu, random_application
-)
+from .forms import ApplicationForm, EmailForm, ScoreForm
+from .models import (RSVP_WAITING, RSVP_YES, Application, Email, Form,
+                     Question, Score)
+from .utils import (get_applications_for_page, get_organiser_menu,
+                    random_application)
 
 
 def apply(request, city):

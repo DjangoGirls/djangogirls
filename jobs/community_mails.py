@@ -1,7 +1,7 @@
 from smtplib import SMTPException
-from django.core.mail import send_mail
 
 from django.conf import settings
+from django.core.mail import send_mail
 
 
 def send_job_mail(subject, message_plain, message_html, recipient):

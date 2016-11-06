@@ -3,7 +3,7 @@ import os
 from django.test import TestCase
 
 from applications.forms import ApplicationForm
-from applications.models import Form, Application, Question
+from applications.models import Application, Form, Question
 from core.models import Event, EventPage
 
 

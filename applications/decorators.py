@@ -1,10 +1,9 @@
 from functools import wraps
 
-from core.utils import get_event_page
-
 from django.http import HttpResponseNotFound
-
 from django.shortcuts import redirect
+
+from core.utils import get_event_page
 
 
 def organiser_only(function):

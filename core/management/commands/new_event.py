@@ -2,18 +2,17 @@
 from __future__ import unicode_literals
 
 import djclick as click
-
 from django.conf import settings
 from django.template.loader import render_to_string
-from core.slack_client import slack
 from slacker import Error as SlackerError
 
-from core.models import EventPageContent, Event, EventPageMenu, EventPage
-from core.forms import AddOrganizerForm
 from core.command_helpers import gather_event_date_from_prompt
+from core.default_eventpage_content import (get_default_eventpage_data,
+                                            get_default_menu)
+from core.forms import AddOrganizerForm
+from core.models import Event, EventPage, EventPageContent, EventPageMenu
+from core.slack_client import slack
 from core.utils import get_coordinates_for_city
-from core.default_eventpage_content import (
-    get_default_eventpage_data, get_default_menu)
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 

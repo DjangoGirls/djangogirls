@@ -3,14 +3,13 @@ Download your monthly patron reports from Patreon (CSV).
 
 Requires requests and lxml.
 """
-from datetime import datetime
 import logging
 import re
+from datetime import datetime
 from urllib.parse import parse_qs, urlparse
 
-from lxml import html
 import requests
-
+from lxml import html
 
 LOGIN_URL = 'https://api.patreon.com/login'
 

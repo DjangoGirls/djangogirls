@@ -1,13 +1,13 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.shortcuts import render, redirect
-from django.utils.html import format_html
 from django.core.urlresolvers import reverse
-
+from django.shortcuts import redirect, render
+from django.utils.html import format_html
 from suit.admin import SortableModelAdmin
 
-from .models import Form, Question, Application, Answer, Email
 from core.models import EventPage
+
+from .models import Answer, Application, Email, Form, Question
 
 
 class FormAdmin(admin.ModelAdmin):

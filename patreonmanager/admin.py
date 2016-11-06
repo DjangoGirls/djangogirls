@@ -1,11 +1,11 @@
-from django.contrib import admin
-from django.contrib import messages
+from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
-from django.utils.translation import ugettext_lazy as _, ungettext
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext
 
-from .models import Patron, Reward, Payment, FundraisingStatus
 from .filters import PendingRewardsFilter
+from .models import FundraisingStatus, Patron, Payment, Reward
 
 
 class InlinePaymentAdmin(admin.StackedInline):
