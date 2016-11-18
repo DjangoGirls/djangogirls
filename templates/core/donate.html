@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
+
     <div class="container">
 
         <section>
@@ -9,25 +10,19 @@
                 <div class="col-md-12">
                     <h2>Why give to the Django Girls Foundation?</h2>
                 </div>
-                </div>
+            </div>
 
             <div class="row clearfix">
                 <div class="col-md-6">
                     <h3>Our mission:</h3>
-                    <p>
-                    Django Girls is a volunteer run <a href="{% url 'core:foundation' %}">registered charity</a>.
-                    We use your generous donations to teach thousands women to build websites
-                    using Python and Django by providing resources and tools volunteer organizers all over the world.
-                    </p>
+                    <p>Django Girls is a volunteer-run <a href="{% url 'core:foundation' %}">registered charity</a>.
+                    We use your generous donations to teach thousands of women to build websites
+                    using Python and Django by providing resources and tools volunteer organizers all over the world.</p>
 
-                    <p>
-                    Since July 2014, our workshops have reached {{ attendees_sum|default_if_none:'0' }} women in {{ country_count|default_if_none:'0' }} countries and our <a href="">online tutorial</a> has been read by more than 500 000 people.
-                    </p>
+                    <p>Since July 2014, our workshops have reached {{ attendees_sum|default_if_none:'0' }} women in {{ country_count|default_if_none:'0' }} countries and our <a href="">online tutorial</a> has been read by more than 500 000 people.</p>
 
-                    <p>
-                    We're transparent about our financial. See our <a href="{% url 'core:year_2015' %}">Annual Report for 2015</a>
-                    to see how we spend donations and what impact they made.
-                    </p>
+                    <p>We're transparent about our financial. See our <a href="{% url 'core:year_2015' %}">Annual Report for 2015</a>
+                    to see how we spend donations and what impact they made.</p>
                 </div>
                 <div class="col-md-6">
                     <img class="img-responsive center-block" alt="A woman looking at her laptop during Django Girls Lagos 2016." src="{% static 'img/global/donate/lagos.jpg' %}">
@@ -35,92 +30,88 @@
             </div>
         </section>
 
-            <section id="support">
-                <div class="row clearfix">
-                    <div class="col-md-12">
+        <section id="support">
+            <div class="row clearfix">
+                <div class="col-md-12">
                     <h2>Start supporting Django Girls Foundation today 💕</h2>
-                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h3>Monthly donations</h3>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <p>If you would like to setup a recurring donation, we encourage you to do so via our <a href="https://www.patreon.com/djangogirls" target="_blank">Patreon page</a>. Our pledges start at 5 USD per month.</p>
+
+                    <p>Are you a company interested in sponsoring us? Our <a href="https://goo.gl/P9YbdI">corporate sponsorships</a> start at 100 USD per month. <a href="{% url 'core:contact' %}">Contact us!</a> 📨</p>
                 </div>
 
-                <div class="row clearfix">
-                    <div class="col-md-12">
-                        <h3>Monthly donations</h3>
-                    </div>
-                </div>
-
-                <div class="row clearfix">
-                        <div class="col-md-6">
-                            <p>If you would like to setup a recurring donation, we encourage you to do so via our
-                            <a href="https://www.patreon.com/djangogirls" target="_blank">Patreon page</a>. Our pledges start at 5 USD per month.</p>
-
-                            <p>Are you a company interested in sponsoring us? Our <a href="https://goo.gl/P9YbdI">corporate sponsorships</a> start at 100 USD per month. <a href="{% url 'core:contact' %}">Contact us!</a> 📨
-                            </p>
-                        </div>
-
-                        <div class="col-md-6">
-                            <p>
-                                <span class="highlighted-number">${{ patreon_stats.amount_raised }}</span> of <span class="highlighted-number">${{ patreon_stats.GOAL }}</span> monthly goal pledged
-                            </p>
+                <div class="col-md-6">
+                    <p><span class="highlighted-number">${{ patreon_stats.amount_raised }}</span> of <span class="highlighted-number">${{ patreon_stats.GOAL }}</span> monthly goal pledged</p>
                         <div class="support-bar">
-                            <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%</div></div>
-                            <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
+                            <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%
+                            </div>
                         </div>
+                        <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
                 </div>
+            </div>
 
-                <div class="row clearfix">
-                    <div class="col-md-12">
+            <div class="row clearfix">
+                <div class="col-md-12">
                     <h3>One-time donations</h3>
-                    </div>
                 </div>
+            </div>
 
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        <p>You can send us a one-time donation using your credit/debit card or your Paypal account. Your payment will be securely processed by DonorBox.</p>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <p>You can send us a one-time donation using your credit/debit card or your Paypal account. Your payment will be securely processed by DonorBox.</p>
 
-                        <p>If you would like to discuss a bigger partnership or a corporate sponsorship, <a href="{% url 'core:contact' %}">please get in touch.</a></p>
-                    </div>
-                    <div class="col-md-6">
-                        <script src="https://donorbox.org/widget.js" type="text/javascript"></script>
-                        <iframe src="https://donorbox.org/embed/django-girls-foundation" height="685px" width="100%" style="max-width:500px; min-width:310px" seamless="seamless" id="dbox-form-embed" name="donorbox" frameborder="0" scrolling="no"></iframe>
-                    </div>
+                    <p>If you would like to discuss a bigger partnership or a corporate sponsorship, <a href="{% url 'core:contact' %}">please get in touch.</a></p>
                 </div>
-
-                <div class="row clearfix">
-                    <div class="col-md-12">
-                        <h3>Other ways of supporting us</h3>
-                    </div>
+                <div class="col-md-6">
+                    <script src="https://donorbox.org/widget.js" type="text/javascript"></script>
+                    <iframe src="https://donorbox.org/embed/django-girls-foundation" height="685px" width="100%" style="max-width:500px; min-width:310px" seamless="seamless" id="dbox-form-embed" name="donorbox" frameborder="0" scrolling="no"></iframe>
                 </div>
+            </div>
 
-                <div class="row clearfix">
-                    <div class="col-md-6">
-                        <h4>Django Girls store</h4>
-                            <p>Do you like comfy tech t-shirts? We now have three awesome designs for <a href="https://store.djangogirls.org/collections/shirts">fitted and straight-cut t-shirts</a>: "This is what a programmer looks like", "Code like a girl" and Django Girls logo.</p>
-
-                            <p>We also have <a href="https://store.djangogirls.org/collections/socks">cool socks</a>, <a href="https://store.djangogirls.org/collections/frontpage/products/pack-of-django-girls-stickers">stickers</a> and <a href="https://store.djangogirls.org/collections/bag">tote-bags with golden ink</a>.</p>
-
-                            <p><a href="https://store.djangogirls.org">Visit our store</a> today! ✨</p>
-
-                        <h4>Humble Bundle Store</h4>
-                            <p>You can choose Django Girls as your designated charity in the <a href="https://www.humblebundle.com/">Humble Bundle Store</a>! 🎮</p>
-                    </div>
-                    <div class="col-md-6">
-                        <img class="img-responsive center-block" alt="A group of people wearing Django Girls t-shirts." src="{% static 'img/global/donate/tshirt.jpg' %}">
-                    </div>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h3>Other ways of supporting us</h3>
                 </div>
-            </section>
+            </div>
 
-            <section id="supporters">
-                <div class="row clearfix">
-                    <div class="col-md-12">
-                        <h2>They already support us:</h2>
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <h4>Django Girls store</h4>
+                    <p>Do you like comfy tech t-shirts? We now have three awesome designs for <a href="https://store.djangogirls.org/collections/shirts">fitted and straight-cut t-shirts</a>: "This is what a programmer looks like", "Code like a girl" and Django Girls logo.</p>
 
+                    <p>We also have <a href="https://store.djangogirls.org/collections/socks">cool socks</a>, <a href="https://store.djangogirls.org/collections/frontpage/products/pack-of-django-girls-stickers">stickers,</a> and <a href="https://store.djangogirls.org/collections/bag">tote bags with golden ink</a>.</p>
+
+                    <p><a href="https://store.djangogirls.org">Visit our store</a> today! ✨</p>
+
+                    <h4>Humble Bundle Store</h4>
+                    <p>If you like video games, you can choose Django Girls as your designated charity in the <a href="https://www.humblebundle.com/store/select-charity/charity/129929">Humble Bundle Store</a>! 🎮</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive center-block" alt="A group of people wearing Django Girls t-shirts." src="{% static 'img/global/donate/tshirt.jpg' %}">
+                </div>
+            </div>
+        </section>
+
+        <section id="supporters">
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h2>They already support us:</h2>
                         {% include 'includes/_main_sponsors.html' %}
-
-                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section>
+        <section>
             <div class="row clearfix">
                 <div class="col-md-12">
                     <h2>Our current projects that will benefit from your help</h2>
@@ -141,9 +132,9 @@
                     <p>Django Girls Summit is a two days unconference where organizers will meet and share their experiences about Django Girls workshops.</p>
 
                     <p>Your donations will help us organize this event and give financial assistance to conference's attendees who need it.</p>
+                </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 
 {% endblock %}
