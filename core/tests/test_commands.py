@@ -140,7 +140,8 @@ class CommandsTestCase(TestCase):
 
         assert new_eventpage.main_color == old_eventpage.main_color
         assert new_eventpage.content.count() == old_eventpage.content.count()
-        assert new_eventpage.menu.count() == old_eventpage.menu.count()
+        assert not new_eventpage.menu.count() == old_eventpage.menu.count()
+        assert new_eventpage.menu.count() == old_eventpage.menu.count() + 1
 
     def test_prepare_dispatch_with_data(self):
         today = date.today()

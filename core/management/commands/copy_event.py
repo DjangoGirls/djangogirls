@@ -45,6 +45,7 @@ def command():
     # Gather data
     (event, number, date) = gather_information()
     eventpage = event.eventpage
+    previous_url = "/{}".format(eventpage.url)
     organizers = event.team.all()
 
     # Print stuff
@@ -72,20 +73,22 @@ def command():
     # Change the title and url of previous event page
     eventpage.title = "{} #{}".format(name, number-1)
     url = eventpage.url
-    eventpage.url = "{}{}".format(url, number-1)
+    if number >= 2:
+        new_url = url.replace(str(number-1), str(number))
+    else:
+        new_url = "{}{}".format(url, number)
     eventpage.save()
 
     # Copy EventPage object
     new_eventpage = event.eventpage
     new_eventpage.pk = None
     new_eventpage.title = new_event.name
-    new_eventpage.url = url
+    new_eventpage.url = new_url
     new_eventpage.is_live = False
     new_eventpage.event = new_event
     new_eventpage.save()
 
     event = Event.objects.get(id=event_id)
-    eventpage = event.eventpage
     new_eventpage = EventPage.objects.get(event=new_event)
 
     # Copy all EventPageContent objects
@@ -105,5 +108,20 @@ def command():
         new_obj.page = new_eventpage
         new_obj.save()
 
-    click.echo("Website is ready here: http://djangogirls.org/{0}".format(url))
+    if number == 2:
+        # add link to the previous event in this city
+        new_eventpage.menu.create(
+            page=new_eventpage,
+            title="Last {} event".format(event.city),
+            url=previous_url,
+            position=int(new_eventpage.menu.latest('position').position)+1
+        )
+        new_eventpage.save()
+    elif number > 2:
+        # change link to the previous event
+        last_event_link = new_eventpage.menu.latest('position')
+        last_event_link.url = previous_url
+        last_event_link.save()
+
+    click.echo("Website is ready here: http://djangogirls.org/{0}".format(new_url))
     click.echo("Congrats on yet another event!")
