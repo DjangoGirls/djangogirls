@@ -144,7 +144,9 @@ def contribute(request):
 
 
 def donate(request):
-    return render(request, 'core/donate.html', {})
+    return render(request, 'core/donate.html', {
+        'patreon_stats': FundraisingStatus.objects.all().first(),
+    })
 
 
 def year_2015(request):
