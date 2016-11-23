@@ -145,7 +145,6 @@ def contribute(request):
 
 def donate(request):
     return render(request, 'core/donate.html', {
-        'country_count': Event.objects.values('country').distinct().count(),
         'patreon_stats': FundraisingStatus.objects.all().first(),
     })
 
