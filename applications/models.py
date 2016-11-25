@@ -155,8 +155,8 @@ class Application(models.Model):
         choices=RSVP_STATUSES, verbose_name="RSVP status",
         default=RSVP_WAITING
     )
-    rsvp_yes_code = models.CharField(max_length=24, null=True)
-    rsvp_no_code = models.CharField(max_length=24, null=True)
+    rsvp_yes_code = models.CharField(max_length=24, null=True, blank=True)
+    rsvp_no_code = models.CharField(max_length=24, null=True, blank=True)
 
     class Meta:
         unique_together = ("form", "email")
