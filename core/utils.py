@@ -20,7 +20,7 @@ def get_coordinates_for_city(city, country):
         data = req.json()[0]
         return '{0}, {1}'.format(data['lat'], data['lon'])
     except (IndexError, KeyError):
-        return None
+        return ''
 
 
 def get_event_page(city, is_user_authenticated, is_preview):

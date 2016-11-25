@@ -42,7 +42,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 @python_2_unicode_compatible
 class Form(models.Model):
-    page = models.OneToOneField(EventPage, null=False, blank=False)
+    page = models.OneToOneField(EventPage)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
@@ -102,7 +102,7 @@ class Form(models.Model):
 
 @python_2_unicode_compatible
 class Question(models.Model):
-    form = models.ForeignKey(Form, null=False, blank=False)
+    form = models.ForeignKey(Form)
     title = models.TextField(verbose_name="Question")
     help_text = models.TextField(
         blank=True, default='', verbose_name="Additional help text to the question?")
@@ -118,7 +118,7 @@ class Question(models.Model):
         default=False, verbose_name="Are there multiple choices allowed?",
         help_text="Used only with 'Choices' question type")
     order = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Position of the question")
+        help_text="Position of the question")
 
     class Meta:
         ordering = ['order']
@@ -138,16 +138,15 @@ class Question(models.Model):
 
 @python_2_unicode_compatible
 class Application(models.Model):
-    form = models.ForeignKey(Form, null=False, blank=False)
+    form = models.ForeignKey(Form)
     number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.CharField(
         max_length=50,
         choices=APPLICATION_STATES, verbose_name="State of the application",
-        null=True,
         default='submitted'
     )
-    email = models.EmailField(null=True, blank=True)
+    email = models.EmailField(blank=True)
     newsletter_optin = models.BooleanField(default=False)
 
     rsvp_status = models.CharField(
@@ -155,8 +154,8 @@ class Application(models.Model):
         choices=RSVP_STATUSES, verbose_name="RSVP status",
         default=RSVP_WAITING
     )
-    rsvp_yes_code = models.CharField(max_length=24, null=True)
-    rsvp_no_code = models.CharField(max_length=24, null=True)
+    rsvp_yes_code = models.CharField(max_length=24)
+    rsvp_no_code = models.CharField(max_length=24)
 
     class Meta:
         unique_together = ("form", "email")
@@ -239,8 +238,8 @@ class Application(models.Model):
 
 
 class Answer(models.Model):
-    application = models.ForeignKey(Application, null=False, blank=False)
-    question = models.ForeignKey(Question, null=False, blank=False)
+    application = models.ForeignKey(Application)
+    question = models.ForeignKey(Question)
     answer = models.TextField()
 
     class Meta:
@@ -260,7 +259,7 @@ class Score(models.Model):
         default=0
     )
     comment = models.TextField(
-        null=True, blank=True, help_text='Any extra comments?')
+        blank=True, help_text='Any extra comments?')
 
     class Meta:
         unique_together = ('user', 'application',)
@@ -281,8 +280,8 @@ class Email(models.Model):
         help_text="Only people assigned to chosen group will receive this email."
     )
     number_of_recipients = models.IntegerField(default=0, null=True)
-    successfuly_sent = models.TextField(null=True, blank=True)
-    failed_to_sent = models.TextField(null=True, blank=True)
+    successfuly_sent = models.TextField(blank=True)
+    failed_to_sent = models.TextField(blank=True)
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)

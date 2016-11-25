@@ -29,11 +29,11 @@ class CommandsTestCase(TestCase):
     def test_update_coordinates(self):
         event_2 = Event.objects.get(pk=2)
         latlng = event_2.latlng
-        event_2.latlng = None
+        event_2.latlng = ''
         event_2.save()
 
         event_2 = Event.objects.get(pk=2)
-        self.assertEqual(event_2.latlng, None)
+        self.assertEqual(event_2.latlng, '')
 
         call_command('update_coordinates')
 

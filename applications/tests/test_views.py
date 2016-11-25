@@ -122,13 +122,13 @@ class ApplicationsView(TestCase):
         self.user_2 = User.objects.create(email='test2@user.com')
 
         self.application_1 = Application.objects.create(
-            form=self.form, state='submitted')
+            form=self.form, state='submitted', email="test1@test.com")
         self.application_2 = Application.objects.create(
-            form=self.form, state='accepted')
+            form=self.form, state='accepted', email="test2@test.com")
         self.application_3 = Application.objects.create(
-            form=self.form, state='rejected')
+            form=self.form, state='rejected', email="test3@test.com")
         self.application_4 = Application.objects.create(
-            form=self.form, state='waitlisted')
+            form=self.form, state='waitlisted', email="test4@test.com")
 
         self.url = reverse('applications:applications', args=['test'])
 
@@ -428,13 +428,13 @@ class ApplicationsDownloadView(TestCase):
         self.user.set_password('test')
 
         self.application_1 = Application.objects.create(
-            form=self.form, state='submitted')
+            form=self.form, state='submitted', email="test1@test.com")
         self.application_2 = Application.objects.create(
-            form=self.form, state='accepted')
+            form=self.form, state='accepted', email="test2@test.com")
         self.application_3 = Application.objects.create(
-            form=self.form, state='rejected')
+            form=self.form, state='rejected', email="test3@test.com")
         self.application_4 = Application.objects.create(
-            form=self.form, state='waitlisted')
+            form=self.form, state='waitlisted', email="test4@test.com")
 
         self.last_question = self.form.question_set.last()
         self.application_1_last_answer = Answer.objects.create(

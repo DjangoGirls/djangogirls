@@ -101,17 +101,17 @@ def validate_approximatedate(date):
 
 @python_2_unicode_compatible
 class Event(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     date = ApproximateDateField(null=True, blank=False, validators=[
                                 validate_approximatedate])
-    city = models.CharField(max_length=200, null=False, blank=False)
-    country = models.CharField(max_length=200, null=False, blank=False)
-    latlng = models.CharField(max_length=30, null=True, blank=True)
-    photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
+    city = models.CharField(max_length=200)
+    country = models.CharField(max_length=200)
+    latlng = models.CharField(max_length=30, blank=True)
+    photo = models.ImageField(upload_to="event/cities/", blank=True,
                               help_text="The best would be 356 x 210px")
-    photo_credit = models.CharField(max_length=200, null=True, blank=True, help_text=mark_safe("Only use pictures with a <a href='https://creativecommons.org/licenses/'>creative commons license</a>."))
-    photo_link = models.URLField(null=True, blank=True)
-    email = models.EmailField(max_length=75, null=True, blank=True)
+    photo_credit = models.CharField(max_length=200, blank=True, help_text=mark_safe("Only use pictures with a <a href='https://creativecommons.org/licenses/'>creative commons license</a>."))
+    photo_link = models.URLField(blank=True)
+    email = models.EmailField(max_length=75, blank=True)
     main_organizer = models.ForeignKey(
         User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
@@ -177,18 +177,18 @@ class EventPageManager(models.Manager):
 @python_2_unicode_compatible
 class EventPage(models.Model):
     event = models.OneToOneField(Event, primary_key=True)
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200, blank=True)
     description = models.TextField(
-        null=True, blank=True,
+        blank=True,
         default="Django Girls is a one-day workshop about programming "
                 "in Python and Django tailored for women.")
     main_color = models.CharField(
-        max_length=6, null=True, blank=True,
+        max_length=6, blank=True,
         help_text="Main color of the chapter in HEX", default="FF9400")
-    custom_css = models.TextField(null=True, blank=True)
-    url = models.CharField(max_length=200, null=True, blank=True)
+    custom_css = models.TextField(blank=True)
+    url = models.CharField(max_length=200, blank=True)
 
-    is_live = models.BooleanField(null=False, blank=False, default=False)
+    is_live = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
 
     objects = EventPageManager()
@@ -224,7 +224,7 @@ class ContactEmail(models.Model):
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False,
+        max_length=20, choices=CONTACT_TYPE_CHOICES,
         default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -265,18 +265,15 @@ class ContactEmail(models.Model):
 
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="content")
-    name = models.CharField(null=False, blank=False, max_length=100)
-    content = models.TextField(
-        null=False, blank=False, help_text="HTML allowed")
+    page = models.ForeignKey(EventPage, related_name="content")
+    name = models.CharField(max_length=100)
+    content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
-        upload_to="event/backgrounds/", null=True, blank=True,
+        upload_to="event/backgrounds/", blank=True,
         help_text="Optional background photo")
     position = models.PositiveIntegerField(
-        null=False, blank=False,
         help_text="Position of the block on the website")
-    is_public = models.BooleanField(null=False, blank=False, default=False)
+    is_public = models.BooleanField(default=False)
     coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
 
@@ -290,14 +287,13 @@ class EventPageContent(models.Model):
 
 @python_2_unicode_compatible
 class EventPageMenu(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="menu")
-    title = models.CharField(max_length=255, null=False, blank=False)
+    page = models.ForeignKey(EventPage, related_name="menu")
+    title = models.CharField(max_length=255)
     url = models.CharField(
-        max_length=255, null=False, blank=False,
+        max_length=255,
         help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Order of menu")
+        help_text="Order of menu")
 
     def __str__(self):
         return self.title
@@ -309,12 +305,12 @@ class EventPageMenu(models.Model):
 
 @python_2_unicode_compatible
 class Sponsor(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, blank=True)
     logo = models.ImageField(
-        upload_to="event/sponsors/", null=True, blank=True,
+        upload_to="event/sponsors/", blank=True,
         help_text="Make sure logo is not bigger than 200 pixels wide")
-    url = models.URLField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    url = models.URLField(blank=True)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -333,14 +329,14 @@ class Sponsor(models.Model):
 
 @python_2_unicode_compatible
 class Coach(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     twitter_handle = models.CharField(
-        max_length=200, null=True, blank=True,
+        max_length=200, blank=True,
         help_text="No @, No http://, just username")
     photo = models.ImageField(
-        upload_to="event/coaches/", null=True, blank=True,
+        upload_to="event/coaches/", blank=True,
         help_text="For best display keep it square")
-    url = models.URLField(null=True, blank=True)
+    url = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
@@ -370,20 +366,18 @@ class Coach(models.Model):
 
 @python_2_unicode_compatible
 class Postmortem(models.Model):
-    event = models.ForeignKey(Event, null=False, blank=False)
-    attendees_count = models.IntegerField(null=False, blank=False,
-                                          verbose_name="Number of attendees")
-    applicants_count = models.IntegerField(null=False, blank=False,
-                                           verbose_name="Number of applicants")
+    event = models.ForeignKey(Event)
+    attendees_count = models.IntegerField(verbose_name="Number of attendees")
+    applicants_count = models.IntegerField(verbose_name="Number of applicants")
 
-    discovery = models.TextField(null=True, blank=True,
+    discovery = models.TextField(blank=True,
                                  verbose_name="What was the most important thing you discovered during the workshop?")
-    feedback = models.TextField(null=True, blank=True,
+    feedback = models.TextField(blank=True,
                                 verbose_name="How we can make DjangoGirls better?")
-    costs = models.TextField(null=True, blank=True,
+    costs = models.TextField(blank=True,
                              verbose_name="What are the total costs of the event?",
                              help_text="We only collect this information for statistics and advice for future organizers.")
-    comments = models.TextField(null=True, blank=True,
+    comments = models.TextField(blank=True,
                                 verbose_name="Anything else you want to share with us?")
 
     class Meta:
@@ -396,11 +390,11 @@ class Postmortem(models.Model):
 
 @python_2_unicode_compatible
 class Story(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False)
-    content = models.TextField(null=True)
-    post_url = models.URLField(null=False, blank=False)
-    image = models.ImageField(upload_to="stories/", null=True)
-    created = models.DateField(auto_now_add=True, null=False, blank=False)
+    name = models.CharField(max_length=100)
+    content = models.TextField()
+    post_url = models.URLField()
+    image = models.ImageField(upload_to="stories/")
+    created = models.DateField(auto_now_add=True)
     # False means a regular blogpost, not a story
     is_story = models.BooleanField(default=True)
 
