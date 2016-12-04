@@ -73,9 +73,17 @@ class QuestionAdmin(SortableModelAdmin):
         return form
 
 
+class AnswerInlineAdmin(admin.TabularInline):
+    model = Answer
+    can_delete = False
+    extra = 0
+    readonly_fields = ('question', 'answer')
+
+
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('number', 'form', 'newsletter_optin', 'email', 'created')
     list_filter = ('form',  'newsletter_optin')
+    inlines = [AnswerInlineAdmin]
 
 
 class AnswerAdmin(admin.ModelAdmin):
