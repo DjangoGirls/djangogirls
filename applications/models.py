@@ -232,7 +232,11 @@ class Application(models.Model):
         Returns true if the given user has scored this application
         or false if they have not, or there is a zero score.
         """
-        return self.scores.filter(user=user, score__gt=0).exists()
+        try:
+            self._prefetched_objects_cache['scores']  # check if scores prefetched
+            return any(map(lambda s: s.user_id == user.id, self.scores.all()))
+        except (AttributeError, KeyError):
+            return self.scores.filter(user=user, score__gt=0).exists()
 
     def __str__(self):
         return str(self.pk)
