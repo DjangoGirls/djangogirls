@@ -234,7 +234,7 @@ class Application(models.Model):
         """
         try:
             self._prefetched_objects_cache['scores']  # check if scores prefetched
-            return any(map(lambda s: s.user_id == user.id, self.scores.all()))
+            return any(map(lambda s: s.user_id == user.id and s.score and s.score > 0, self.scores.all()))
         except (AttributeError, KeyError):
             return self.scores.filter(user=user, score__gt=0).exists()
 
