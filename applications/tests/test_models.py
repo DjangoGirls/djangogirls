@@ -148,11 +148,39 @@ class ApplicationModel(TestCase):
     def test_is_scored_by_user(self):
         Score.objects.create(user=self.user_1, application=self.application, score=random.randint(1, 5))
 
-        self.assertTrue(self.application.is_scored_by_user(self.user_1))
-        self.assertFalse(self.application.is_scored_by_user(self.user_2))
+        with self.assertNumQueries(2):
+            self.assertTrue(self.application.is_scored_by_user(self.user_1))
+            self.assertFalse(self.application.is_scored_by_user(self.user_2))
 
         Score.objects.create(user=self.user_2, application=self.application, score=0)
-        self.assertFalse(self.application.is_scored_by_user(self.user_2))
+        with self.assertNumQueries(1):
+            self.assertFalse(self.application.is_scored_by_user(self.user_2))
+
+    def test_is_scored_by_user_prefetched(self):
+        Score.objects.create(user=self.user_1, application=self.application, score=random.randint(1, 5))
+
+        self.application = Application.objects.prefetch_related('scores').get(form=self.form)
+        with self.assertNumQueries(0):
+            self.assertTrue(self.application.is_scored_by_user(self.user_1))
+            self.assertFalse(self.application.is_scored_by_user(self.user_2))
+
+        self.application = Application.objects.prefetch_related('scores').get(form=self.form)
+        Score.objects.create(user=self.user_2, application=self.application, score=0)
+        with self.assertNumQueries(0):
+            self.assertFalse(self.application.is_scored_by_user(self.user_2))
+
+    def test_is_scored_by_user_dont_use_prefetched(self):
+        Score.objects.create(user=self.user_1, application=self.application, score=random.randint(1, 5))
+
+        self.application = Application.objects.prefetch_related('scores').get(form=self.form)
+        with self.assertNumQueries(2):
+            self.assertTrue(self.application.is_scored_by_user(self.user_1, False))
+            self.assertFalse(self.application.is_scored_by_user(self.user_2, False))
+
+        self.application = Application.objects.prefetch_related('scores').get(form=self.form)
+        Score.objects.create(user=self.user_2, application=self.application, score=0)
+        with self.assertNumQueries(1):
+            self.assertFalse(self.application.is_scored_by_user(self.user_2, False))
 
 
 class EmailModel(TestCase):

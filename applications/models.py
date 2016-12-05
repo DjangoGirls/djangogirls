@@ -227,15 +227,15 @@ class Application(models.Model):
     def is_accepted(self):
         return self.state == 'accepted'
 
-    def is_scored_by_user(self, user):
+    def is_scored_by_user(self, user, use_prefetched=True):
         """
         Returns true if the given user has scored this application
         or false if they have not, or there is a zero score.
         """
         try:
-            self._prefetched_objects_cache['scores']  # check if scores prefetched
+            assert self._prefetched_objects_cache['scores'] and use_prefetched # check if scores usable
             return any(map(lambda s: s.user_id == user.id and s.score and s.score > 0, self.scores.all()))
-        except (AttributeError, KeyError):
+        except (AssertionError, AttributeError, KeyError):
             return self.scores.filter(user=user, score__gt=0).exists()
 
     def __str__(self):
