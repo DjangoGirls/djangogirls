@@ -200,12 +200,14 @@ class SponsorInline(admin.TabularInline):
     model = EventPageContent.sponsors.through
     extra = 1
     verbose_name_plural = 'Sponsors'
+    raw_id_fields = ["sponsor"]
 
 
 class CoachInline(admin.TabularInline):
     model = EventPageContent.coaches.through
     extra = 1
     verbose_name_plural = 'Coaches'
+    raw_id_fields = ["coach"]
 
 
 class EventPageContentAdmin(SortableModelAdmin):
