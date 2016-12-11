@@ -2,9 +2,9 @@ from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
+from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from captcha.fields import ReCaptchaField
 from slacker import Error as SlackerError
 
 from core.models import ContactEmail, Event, User
@@ -33,7 +33,7 @@ class AddOrganizerForm(forms.Form):
     """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
     name = forms.CharField(label="Organizer's first and last name")
-    email = forms.CharField(label="E-mail address")
+    email = forms.CharField(label="E-mail address", validators=[validate_email])
 
     def __init__(self, event_choices=None, *args, **kwargs):
         super(AddOrganizerForm, self).__init__(*args, **kwargs)
