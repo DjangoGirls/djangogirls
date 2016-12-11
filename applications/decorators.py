@@ -14,14 +14,15 @@ def organiser_only(function):
 
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        if not kwargs.get('city'):
+        city = kwargs.get('city')
+
+        if not city:
             raise ValueError(
                 '"City" slug must be present to user this decorator.')
 
         if not request.user.is_authenticated():
-            return redirect('core:event', kwargs.get('city'))
+            return redirect('core:event', city)
 
-        city = kwargs.get('city')
         page = get_event_page(city, request.user.is_authenticated(), False)
         if page and (request.user in page.event.team.all() or request.user.is_superuser):
             return function(request, *args, **kwargs)

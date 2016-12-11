@@ -2,9 +2,9 @@ from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
-from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 from slacker import Error as SlackerError
 
 from core.models import ContactEmail, Event, User
@@ -13,6 +13,7 @@ from core.slack_client import user_invite
 
 class BetterReCaptchaField(ReCaptchaField):
     """A ReCaptchaField that always works in DEBUG mode"""
+
     def clean(self, values):
         if settings.DEBUG:
             return values[0]
@@ -43,7 +44,8 @@ class AddOrganizerForm(forms.Form):
         try:
             user_invite(email, name)
         except (ConnectionError, SlackerError) as e:
-            self._errors.append('Slack invite unsuccessful, reason: {}'.format(e))
+            self._errors.append(
+                'Slack invite unsuccessful, reason: {}'.format(e))
 
     def notify_existing_user(self, user):
         content = render_to_string('emails/existing_user.html', {
@@ -64,8 +66,12 @@ class AddOrganizerForm(forms.Form):
         self.send_email(content, subject, user)
 
     def send_email(self, content, subject, user):
-        send_mail(subject, content, "Django Girls <hello@djangogirls.org>",
-                  [user.email])
+        msg = EmailMessage(subject,
+                           content,
+                           "Django Girls <hello@djangogirls.org>",
+                           [user.email])
+        msg.content_subtype = "html"
+        msg.send()
 
     def save(self, *args, **kwargs):
         assert self.is_valid()
@@ -78,7 +84,8 @@ class AddOrganizerForm(forms.Form):
         if created:
             self._password = User.objects.make_random_password()
             user.first_name = self.cleaned_data['name'].split(' ')[0]
-            user.last_name = self.cleaned_data['name'].replace(user.first_name, '')
+            user.last_name = self.cleaned_data[
+                'name'].replace(user.first_name, '')
             user.is_staff = True
             user.is_active = True
             user.set_password(self._password)
@@ -153,6 +160,7 @@ class UserLimitedChangeForm(forms.ModelForm):
 
 
 class EventChoiceField(forms.ModelChoiceField):
+
     def label_from_instance(self, obj):
         return "{}, {}".format(obj.city, obj.country)
 
