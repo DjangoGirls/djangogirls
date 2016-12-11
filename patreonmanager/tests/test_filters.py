@@ -3,8 +3,8 @@ import datetime
 from django.test import TestCase
 
 from ..admin import PatronAdmin
-from ..models import Patron, Payment, Reward
 from ..filters import PendingRewardsFilter
+from ..models import Patron, Payment, Reward
 
 
 class FiltersTestCase(TestCase):

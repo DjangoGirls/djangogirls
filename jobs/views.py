@@ -1,15 +1,13 @@
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template import Context
+from django.template.loader import get_template
+from django.template.response import TemplateResponse
 from django.utils import timezone
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template.response import TemplateResponse
-from django.contrib import messages
-
-from django.template.loader import get_template
-from django.template import Context
-
-from jobs.models import Job, Meetup
-from jobs.forms import JobForm, MeetupForm
 from jobs.community_mails import send_job_mail, send_meetup_mail
+from jobs.forms import JobForm, MeetupForm
+from jobs.models import Job, Meetup
 
 
 def main(request):

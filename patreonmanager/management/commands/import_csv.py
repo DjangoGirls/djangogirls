@@ -3,7 +3,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from ...models import Patron, Reward, Payment
+from ...models import Patron, Payment, Reward
 from ...utils.csv import guess_month_from_filename, unflatten_csv
 
 

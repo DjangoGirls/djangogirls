@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from applications import views
+
 urlpatterns = [
     url(r'^(?P<city>[\w\d/]+)/apply/$', views.apply, name='apply'),
     url(r'^(?P<city>[\w\d/]+)/applications/$',

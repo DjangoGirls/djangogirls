@@ -1,12 +1,12 @@
 import logging
-import requests
 
+import requests
 from django.core.management.base import BaseCommand
-from core.slack_client import slack
 from slacker import Error as SlackerError
 
-from ...models import FundraisingStatus
+from core.slack_client import slack
 
+from ...models import FundraisingStatus
 
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = 'http://api.patreon.com/'

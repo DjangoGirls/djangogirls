@@ -1,17 +1,16 @@
+from django.conf.urls import url
+from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.contrib import admin, messages
-from django.template.loader import get_template
-from django.template import Context
-from django.conf.urls import url
-from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponseBadRequest
+from django.shortcuts import get_object_or_404, redirect
+from django.template import Context
+from django.template.loader import get_template
+from suit.widgets import (AutosizedTextarea, SuitDateWidget,
+                          SuitSplitDateTimeWidget)
 
-from suit.widgets import (
-    SuitDateWidget, SuitSplitDateTimeWidget, AutosizedTextarea)
-
-from jobs.models import PublishFlowModel, Job, Meetup
 from jobs.community_mails import send_job_mail
+from jobs.models import Job, Meetup, PublishFlowModel
 
 
 def make_published(modeladmin, request, queryset):

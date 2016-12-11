@@ -1,12 +1,12 @@
 from __future__ import print_function
 
-from getpass import getpass
 import logging
+from getpass import getpass
 from os import path
 
 from django.core.management.base import BaseCommand
 
-from ...utils.download import login, gen_monthly_report_links, _download
+from ...utils.download import _download, gen_monthly_report_links, login
 
 
 class Command(BaseCommand):

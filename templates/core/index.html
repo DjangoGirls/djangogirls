@@ -124,7 +124,7 @@
                     </div>
                     <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
                     <p class="partnership">
-                        You can also send us a one time donation with <a href="https://www.paypal.com/uk/webapps/mpp/search-cause?charityId=129929&s=3">Paypal Giving Funds</a>.
+                        You can also send us a one <a href="{% url 'core:donate' %}">time donation</a>.
                         If you would like to discuss a bigger partnership, <a href="{% url 'core:contact' %}">please get in touch</a>.
                     </p>
                 </div>
@@ -187,69 +187,7 @@
                 </div>
             </div>
 
-            <div class="row">
-              <div class="col-md-3">
-                  <a href="https://www.elastic.co/">
-                      <img src="{% static 'img/global/supporters/elastic.png' %}" alt="Elastic" />
-                  </a>
-              </div>
-              <div class="col-md-3">
-                  <a href="https://p.ota.to/jobs/">
-                      <img src="{% static 'img/global/supporters/potato.png' %}" alt="Potato" style="height: 120px;" />
-                  </a>
-              </div>
-              <div class="col-md-3">
-                  <a href="http://lincolnloop.com/">
-                      <img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" />
-                  </a>
-              </div>
-              <div class="col-md-3">
-                  <a href="http://djangostars.com/">
-                      <img src="{% static 'img/global/supporters/djangostars.png' %}" alt="Django Stars" />
-                  </a>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-3">
-                  <a href="http://micropyramid.com/">
-                      <img src="{% static 'img/global/supporters/micropyramid.png' %}" alt="Micropyramid" style="margin-top: 25px" />
-                  </a>
-              </div>
-                <div class="col-md-3">
-                  <a href="http://github.com/">
-                      <img src="{% static 'img/global/supporters/github.png' %}" alt="Github" style="margin-top: 25px" />
-                  </a>
-              </div>
-                <div class="col-md-3">
-                    <a href="https://www.python.org/psf/">
-                        <img src="{% static 'img/global/supporters/pythonsoftwarefoundation.png' %}" alt="Python Software Foundation" style="margin-top: 25px" />
-                    </a>
-                </div>
-              <div class="col-md-3">
-                  <a href="http://www.divio.ch/en/">
-                      <img src="{% static 'img/global/supporters/divio.png' %}" alt="Divio" style="margin-top: 25px" />
-                  </a>
-              </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-3">
-                  <a href="http://oddbird.net/">
-                      <img src="{% static 'img/global/supporters/oddlogo.png' %}" alt="OddBird" style="margin-top: 25px" />
-                  </a>
-              </div>
-              <div class="col-md-3">
-                  <a href="http://pythonanywhere.com/">
-                      <img src="{% static 'img/global/supporters/pythonanywhere.png' %}" alt="Python Anywhere" style="margin-top: 25px" />
-                  </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://www.mailchimp.com/">
-                        <img src="{% static 'img/global/supporters/mailchimp.png' %}" alt="Mailchimp" style="margin-top: 0px" />
-                    </a>
-                </div>
-            </div>
+            {% include 'includes/_main_sponsors.html' %}
 
         </section>
 

@@ -1,3 +1,4 @@
+from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
@@ -6,7 +7,7 @@ from django.core.mail import EmailMessage
 from captcha.fields import ReCaptchaField
 from slacker import Error as SlackerError
 
-from core.models import User, ContactEmail, Event
+from core.models import ContactEmail, Event, User
 from core.slack_client import user_invite
 
 

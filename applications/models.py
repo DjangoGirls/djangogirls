@@ -1,15 +1,15 @@
 import random
 import string
 
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.mail import EmailMessage
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 from core.models import EventPage, User
-from .utils import DEFAULT_QUESTIONS
 
+from .utils import DEFAULT_QUESTIONS
 
 QUESTION_TYPES = (
     ('paragraph', 'Paragraph'),
@@ -155,8 +155,8 @@ class Application(models.Model):
         choices=RSVP_STATUSES, verbose_name="RSVP status",
         default=RSVP_WAITING
     )
-    rsvp_yes_code = models.CharField(max_length=24, null=True)
-    rsvp_no_code = models.CharField(max_length=24, null=True)
+    rsvp_yes_code = models.CharField(max_length=24, null=True, blank=True)
+    rsvp_no_code = models.CharField(max_length=24, null=True, blank=True)
 
     class Meta:
         unique_together = ("form", "email")

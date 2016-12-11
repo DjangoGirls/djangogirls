@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from core.models import Event, EventPage, Coach, DEFAULT_COACH_PHOTO
+from core.models import DEFAULT_COACH_PHOTO, Coach, Event, EventPage
 
 
 class TestEventModel(TestCase):

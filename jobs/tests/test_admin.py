@@ -1,11 +1,9 @@
 from datetime import timedelta
 
+from django.core import mail
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import timezone
-from django.core.urlresolvers import reverse
-from django.core import mail
-
-
 from model_mommy import mommy
 
 from core.models import User

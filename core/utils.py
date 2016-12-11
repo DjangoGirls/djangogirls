@@ -1,7 +1,6 @@
-from datetime import datetime, timedelta, date
+from datetime import date, datetime, timedelta
 
 import requests
-
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
