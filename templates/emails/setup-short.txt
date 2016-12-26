@@ -1,0 +1,2 @@
+Event e-mail is: {{ event.email }}
+Event website address is: http://djangogirls.org/{{ event.eventpage.url }}
