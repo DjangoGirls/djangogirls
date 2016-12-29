@@ -3,7 +3,7 @@ from datetime import date
 
 from click.testing import CliRunner
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TransactionTestCase
 
 from core.management.commands.add_organizer import command as add_organizer
 from core.management.commands.copy_event import command as copy_event
@@ -13,7 +13,7 @@ from core.management.commands.prepare_dispatch import \
 from core.models import Event
 
 
-class CommandsTestCase(TestCase):
+class CommandsTestCase(TransactionTestCase):
     fixtures = ['core_views_testdata.json']
 
     def setUp(self):

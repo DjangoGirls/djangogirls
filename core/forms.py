@@ -2,6 +2,7 @@ from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
+from django.contrib.auth.models import Group
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -90,7 +91,8 @@ class AddOrganizerForm(forms.Form):
             user.is_active = True
             user.set_password(self._password)
             user.save()
-            user.groups.add(1)
+            if Group.objects.count() > 0:
+                user.groups.add(1)
             self.invite_to_slack(email, user.first_name)
             self.notify_new_user(user)
         else:
