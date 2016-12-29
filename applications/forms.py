@@ -1,7 +1,5 @@
 import hashlib
-
 import requests
-import hashlib
 
 from django import forms
 from django.conf import settings
