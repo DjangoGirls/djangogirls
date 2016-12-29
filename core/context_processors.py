@@ -1,7 +1,8 @@
 from django.db.models import Sum
 
-from .models import Event, Postmortem
 from jobs.models import Meetup
+
+from .models import Event, Postmortem
 
 
 def statistics(request):

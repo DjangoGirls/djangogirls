@@ -4,7 +4,6 @@ import random
 from django.conf import settings
 from django.core.files import File
 
-
 DEFAULT_BACKGROUND_PHOTOS = {
     'about': [
         settings.STATICFILES_DIRS[0]+'/img/photos/about1.jpg',

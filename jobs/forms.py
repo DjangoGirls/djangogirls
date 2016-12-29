@@ -1,7 +1,6 @@
-from django import forms
-
-from ckeditor.widgets import CKEditorWidget
 from bootstrap3_datetime.widgets import DateTimePicker
+from ckeditor.widgets import CKEditorWidget
+from django import forms
 
 from jobs.models import Job, Meetup
 

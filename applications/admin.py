@@ -1,13 +1,13 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.shortcuts import render, redirect
-from django.utils.html import format_html
 from django.core.urlresolvers import reverse
-
+from django.shortcuts import redirect, render
+from django.utils.html import format_html
 from suit.admin import SortableModelAdmin
 
-from .models import Form, Question, Application, Answer, Email
 from core.models import EventPage
+
+from .models import Answer, Application, Email, Form, Question
 
 
 class FormAdmin(admin.ModelAdmin):
@@ -73,9 +73,17 @@ class QuestionAdmin(SortableModelAdmin):
         return form
 
 
+class AnswerInlineAdmin(admin.TabularInline):
+    model = Answer
+    can_delete = False
+    extra = 0
+    readonly_fields = ('question', 'answer')
+
+
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('number', 'form', 'newsletter_optin', 'email', 'created')
     list_filter = ('form',  'newsletter_optin')
+    inlines = [AnswerInlineAdmin]
 
 
 class AnswerAdmin(admin.ModelAdmin):

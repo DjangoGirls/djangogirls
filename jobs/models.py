@@ -1,19 +1,18 @@
 from __future__ import unicode_literals
+
 from datetime import timedelta
 
 from django.db import models
-from django.db.models import Value, BooleanField
+from django.db.models import BooleanField, Value
 from django.db.models.expressions import CombinedExpression, F
 from django.db.models.functions import Coalesce, Now
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils import timezone
-from django.template.loader import get_template
 from django.template import Context
-
+from django.template.loader import get_template
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 from django_countries.fields import CountryField
 
 from core.models import User
-
 from jobs.community_mails import send_job_mail, send_meetup_mail
 
 

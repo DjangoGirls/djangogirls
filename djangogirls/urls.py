@@ -2,7 +2,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
-
 urlpatterns = [
     # Redirect old links:
     url(r'^pages/in-your-city/$', RedirectView.as_view(url='/organize/', permanent=True)),

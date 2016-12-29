@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from freezegun import freeze_time
 
-from core.utils import get_coordinates_for_city, NOMINATIM_URL, next_deadline
+from core.utils import NOMINATIM_URL, get_coordinates_for_city, next_deadline
 
 
 @patch('requests.get')

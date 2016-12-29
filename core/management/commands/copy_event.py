@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 import djclick as click
 
-from core.models import Event, EventPage
 from core.command_helpers import gather_event_date_from_prompt
+from core.models import Event, EventPage
 
 
 def get_event(id_str):

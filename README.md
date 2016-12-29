@@ -78,7 +78,7 @@ Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/st
 
     psql
 
-In the `psql` shell, create a database and a role with the nessesary permissions:
+In the `psql` shell, create a database and a role with the necessary permissions:
 
     CREATE DATABASE djangogirls;
     CREATE ROLE postgres;

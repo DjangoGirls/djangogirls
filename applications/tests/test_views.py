@@ -1,19 +1,18 @@
+import csv
+import json
 from datetime import timedelta
 from io import StringIO
-import json
-import csv
 
 from django.core.urlresolvers import reverse
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 from django.test.client import Client
 from django.utils import timezone
 
-from core.models import Event, EventPage, User
-from applications.models import (
-    Form, Application, Score, Question, Answer, RSVP_NO, RSVP_YES, RSVP_WAITING
-)
+from applications.models import (RSVP_NO, RSVP_WAITING, RSVP_YES, Answer,
+                                 Application, Form, Question, Score)
 from applications.utils import DEFAULT_QUESTIONS
 from applications.views import applications
+from core.models import Event, EventPage, User
 
 
 class ApplyView(TestCase):
