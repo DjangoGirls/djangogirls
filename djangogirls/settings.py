@@ -158,10 +158,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 DJANGO_GULP_REV_PATH = os.path.join(BASE_DIR, 'static/rev-manifest.json')
 LOGIN_URL = 'admin:login'
 
-if DEBUG:
+if 'TRAVIS' in os.environ:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/source')]
+elif DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/local')]
 else:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/build')]
+
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
