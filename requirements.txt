@@ -8,7 +8,7 @@ django-ckeditor==5.0.3
 django-click==1.2.0
 django-codemirror-widget
 django-countries==3.4.1
-django-date-extensions==1.1.0
+django-date-extensions==2.0.0
 django-gulp-rev==0.2
 django-leaflet==0.18.1
 django-markdown-deux==1.0.5
@@ -16,8 +16,8 @@ django-recaptcha
 django-sslify>=0.2.0
 django-storages-redux==1.3.2
 django-suit-redactor==0.0.4
-django-suit==0.2.19
-Django==1.9.7
+django-suit==0.2.23
+Django==1.10.4
 djrill==2.1.0
 easy_thumbnails==2.3
 freezegun
@@ -32,7 +32,7 @@ Pillow==3.3.0
 psycopg2==2.6.2
 py-trello==0.5.0
 pyquery==1.2.13
-pytest-cov==2.3.0
+pytest-cov==2.3.1
 pytest-django==2.9.1
 pytz==2016.4
 requests==2.10

@@ -130,6 +130,8 @@ class Event(models.Model):
         verbose_name_plural = "List of events"
 
     def is_upcoming(self):
+        if not self.date:
+            return True
         now = timezone.now()
         now = ApproximateDate(year=now.year, month=now.month, day=now.day)
         if now < self.date:

@@ -17,10 +17,10 @@ def create_reviewer_group(apps, schema_editor, with_create_permissions=True):
             # Manually run create_permissions
             from django.contrib.auth.management import create_permissions
 
-            assert not getattr(apps, 'models_module', None)
-            apps.models_module = True
-            create_permissions(apps, verbosity=0)
-            apps.models_module = None
+            for app_config in apps.get_app_configs():
+                app_config.models_module = True
+                create_permissions(app_config, apps=apps, verbosity=0)
+                app_config.models_module = None
             return create_reviewer_group(
                 apps, schema_editor, with_create_permissions=False)
         else:
