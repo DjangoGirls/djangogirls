@@ -2,7 +2,7 @@
 import random
 
 from django.conf import settings
-from django.core.files import File
+from django.core.files.uploadedfile import UploadedFile
 
 DEFAULT_BACKGROUND_PHOTOS = {
     'about': [
@@ -22,10 +22,12 @@ DEFAULT_BACKGROUND_PHOTOS = {
     ]
 }
 
+
 def get_random_photo(section):
     if section in DEFAULT_BACKGROUND_PHOTOS:
         photos = DEFAULT_BACKGROUND_PHOTOS[section]
-        return File(open(photos[random.randint(0, len(photos)-1)], 'rb'))
+        return UploadedFile(
+            open(photos[random.randint(0, len(photos)-1)], 'rb'))
     return None
 
 

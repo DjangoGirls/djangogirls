@@ -47,15 +47,14 @@ INSTALLED_APPS = (
     'patreonmanager.apps.PatreonManagerConfig',
 )
 
-MIDDLEWARE_CLASSES = (
-    'sslify.middleware.SSLifyMiddleware',
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 ROOT_URLCONF = 'djangogirls.urls'
 
@@ -218,7 +217,7 @@ MARKDOWN_DEUX_STYLES = {
 }
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SSLIFY_DISABLE = DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
 
 # Mapbox maps to use on the Events map
 MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
@@ -251,8 +250,8 @@ if 'OPBEAT_SECRET_TOKEN' in os.environ:
         'APP_ID': os.environ['OPBEAT_APP_ID'],
         'SECRET_TOKEN': os.environ['OPBEAT_SECRET_TOKEN'],
     }
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE = [
         'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-    ) + MIDDLEWARE_CLASSES
+    ] + MIDDLEWARE
 
 CODEMIRROR_PATH = "vendor/codemirror/"

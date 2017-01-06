@@ -58,7 +58,7 @@ def get_main_organizer():
         "First and last name", bold=True, fg='yellow'))
     main_email = click.prompt(click.style(
         "E-mail address", bold=True, fg='yellow'))
-    
+
     team.append({'name': main_name, 'email': main_email})
 
     click.echo(u"All right, the main organizer is {0} ({1})".format(
@@ -164,7 +164,7 @@ def command(short):
     team = get_team(main_organizer)
 
     click.echo("OK! That's it. Now I'll create your event.")
-    
+
     # Event and EventPage objects
     name = 'Django Girls ' + city
     latlng = get_coordinates_for_city(city, country)
