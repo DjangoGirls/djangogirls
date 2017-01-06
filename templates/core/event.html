@@ -17,7 +17,7 @@
     <div class="container messages">
         <div class="row">
 
-            {% if not event.is_page_live%}
+            {% if not event.is_page_live %}
             <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/event/{{ event.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
             {% endif %}
 

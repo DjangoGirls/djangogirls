@@ -64,7 +64,6 @@ def command():
     new_event.name = "{} #{}".format(name, number)
     new_event.date = date
     new_event.is_page_live = False
-    new_event.page_custom_css = ''
     new_event.save()
 
     # Move organizers

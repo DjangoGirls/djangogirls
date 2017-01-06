@@ -53,11 +53,12 @@ class EventAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         fields = set(self.readonly_fields) | {'full_url'}
         if obj and not request.user.is_superuser:
-            fields |= {
-                'city', 'country', 'date', 'email', 'is_on_homepage', 'name', 'page_url', 'team'}
+            fields.update({
+                'city', 'country', 'date', 'email', 'is_on_homepage', 'name',
+                'page_url', 'team'})
             # Don't let change objects for events that already happened
             if not obj.is_upcoming():
-                fields |= {x.name for x in self.model._meta.fields}
+                fields.update({x.name for x in self.model._meta.fields})
         return fields
 
     def get_fieldsets(self, request, obj=None):
@@ -98,6 +99,11 @@ class EventAdmin(admin.ModelAdmin):
                 'city',
                 'country',
                 'full_url'
+            ]}),
+            ('Home page', {'fields': [
+                'photo',
+                'photo_credit',
+                'photo_link',
             ]}),
             ('Event page', {'fields': [
                 'page_title',
