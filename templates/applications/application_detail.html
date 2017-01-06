@@ -1,15 +1,15 @@
 {% extends 'core/event.html' %}
 {% load static %}
 
-{% block title %}{{ page.title }}{% endblock %}
-{% block description %}{{ page.description }}{% endblock %}
+{% block title %}{{ event.page_title }}{% endblock %}
+{% block description %}{{ event.page_description }}{% endblock %}
 
 {% block content %}
 
 <div class="container without-background">
     <div class="row">
         <div class="col-md-12 applications">
-            <h3 class="page-header">Application #{{ application.number }} for {{ page.title }}</h3>
+            <h3 class="page-header">Application #{{ application.number }} for {{ event.page_title }}</h3>
         </div>
     </div>
 

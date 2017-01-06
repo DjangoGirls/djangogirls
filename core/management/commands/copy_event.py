@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
-from core.models import Event, EventPage
+from core.models import Event
 
 
 def get_event(id_str):
@@ -20,8 +20,8 @@ def gather_information():
     event = get_event(
         click.prompt(
             "First, give me the ID of the Event object we're gonna copy. "
-            "Don't mix it up with EventPage object. If there is more than "
-            "one event in this city already, give me ID of the latest one"
+            "If there is more than one event in this city already, give me "
+            "ID of the latest one"
         )
     )
 
@@ -44,7 +44,6 @@ def command():
 
     # Gather data
     (event, number, date) = gather_information()
-    eventpage = event.eventpage
     organizers = event.team.all()
 
     # Print stuff
@@ -64,46 +63,36 @@ def command():
     new_event.pk = None
     new_event.name = "{} #{}".format(name, number)
     new_event.date = date
+    new_event.is_page_live = False
+    new_event.page_custom_css = ''
     new_event.save()
 
     # Move organizers
     new_event.team = organizers
 
     # Change the title and url of previous event page
-    eventpage.title = "{} #{}".format(name, number-1)
-    url = eventpage.url
-    eventpage.url = "{}{}".format(url, number-1)
-    eventpage.save()
-
-    # Copy EventPage object
-    new_eventpage = event.eventpage
-    new_eventpage.pk = None
-    new_eventpage.title = new_event.name
-    new_eventpage.url = url
-    new_eventpage.is_live = False
-    new_eventpage.event = new_event
-    new_eventpage.save()
+    event.page_title = "{} #{}".format(name, number-1)
+    event.page_url = "{}{}".format(event.page_url, number-1)
+    event.save()
 
     event = Event.objects.get(id=event_id)
-    eventpage = event.eventpage
-    new_eventpage = EventPage.objects.get(event=new_event)
 
     # Copy all EventPageContent objects
-    for obj in event.eventpage.content.all():
+    for obj in event.content.all():
         new_content = obj
         new_content.id = None
-        new_content.page = new_eventpage
+        new_content.event = new_event
         new_content.save()
 
         new_content.coaches = obj.coaches.all()
         new_content.sponsors = obj.sponsors.all()
 
     # Copy all EventPageMenu objects
-    for obj in event.eventpage.menu.all():
+    for obj in event.menu.all():
         new_obj = obj
         new_obj.pk = None
-        new_obj.page = new_eventpage
+        new_obj.event = new_event
         new_obj.save()
 
-    click.echo("Website is ready here: http://djangogirls.org/{0}".format(url))
+    click.echo("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url))
     click.echo("Congrats on yet another event!")

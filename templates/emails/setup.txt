@@ -19,11 +19,11 @@ Or you can forward incoming mail to your private email account by following thes
 
 2) Website
 
-Your website address is http://djangogirls.org/{{ event.eventpage.url }}
+Your website address is http://djangogirls.org/{{ event.page_url }}
 
 You should receive a separate email with auto generated password and instructions to login in a moment.
 
-Your website is currently hidden for public, you can only see it if you’re logged in. If you want to make it available for everyone, go here: http://djangogirls.org/admin/core/eventpage/ and edit your website changing “is live” option.
+Your website is currently hidden for public, you can only see it if you’re logged in. If you want to make it available for everyone, go here: http://djangogirls.org/admin/core/event/ and edit your website changing its “published” option.
 
 Instructions on editing website: http://organize.djangogirls.org/website/
 

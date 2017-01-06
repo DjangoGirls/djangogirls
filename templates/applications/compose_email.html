@@ -3,15 +3,15 @@
 
 {% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
 
-{% block title %}{{ page.title }}{% endblock %}
-{% block description %}{{ page.description }}{% endblock %}
+{% block title %}{{ event.page_title }}{% endblock %}
+{% block description %}{{ event.page_description }}{% endblock %}
 
 {% block content %}
 <div class="container public-form">
   <div class="row">
     <div class="col-md-12" style="padding: 0px">
       <h3 class="page-header">
-        Edit email for {{ page.title }}
+        Edit email for {{ event.page_title }}
       </h3>
 
       <div class="col-md-7 stretch-form">

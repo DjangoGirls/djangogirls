@@ -3,16 +3,16 @@
 
 {% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
 
-{% block title %}{{ page.title }}{% endblock %}
-{% block description %}{{ page.description }}{% endblock %}
+{% block title %}{{ event.page_title }}{% endblock %}
+{% block description %}{{ event.page_description }}{% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12 applications">
       <h3 class="page-header">
-        Send email to applicants of {{ page.title }}
-        <a class="btn pull-right" href="{% url 'applications:compose_email' page.url %}">Create new e-mail</a>
+        Send email to applicants of {{ event.page_title }}
+        <a class="btn pull-right" href="{% url 'applications:compose_email' event.page_url %}">Create new e-mail</a>
       </h3>
 
       <table class="table">
@@ -29,16 +29,16 @@
               {% if emails %}
                 {% for email in emails %}
                 <tr>
-                    <td><a href="{% url 'applications:compose_email' page.url email.id %}">{{ email.subject }}</a></td>
+                    <td><a href="{% url 'applications:compose_email' event.page_url email.id %}">{{ email.subject }}</a></td>
                     <td>{{ email.get_recipients_group_display }}</td>
                     <td><span class="label label-{% if email.sent %}success">Sent{% else %}default">Draft{% endif %}</span></td>
                     <td>{{ email.sent|default:"−" }}</td>
-                    <td><a href="{% url 'applications:compose_email' page.url email.id %}" class="btn pull-right">View message</a></td>
+                    <td><a href="{% url 'applications:compose_email' event.page_url email.id %}" class="btn pull-right">View message</a></td>
                 </tr>
                 {% endfor %}
               {% else %}
                 <tr>
-                    <td colspan="6">No messages yet. <a href="{% url 'applications:compose_email' page.url %}">Create one!</a></td>
+                    <td colspan="6">No messages yet. <a href="{% url 'applications:compose_email' event.page_url %}">Create one!</a></td>
                 </tr>
               {% endif %}
           </tbody>

@@ -4,7 +4,7 @@ import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from .models import EventPage
+from .models import Event
 
 NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
 
@@ -23,19 +23,19 @@ def get_coordinates_for_city(city, country):
         return None
 
 
-def get_event_page(city, is_user_authenticated, is_preview):
+def get_event(city, is_user_authenticated, is_preview):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
     try:
-        page = EventPage.objects.get(url=city)
-    except EventPage.DoesNotExist:
+        event = Event.objects.get(page_url=city)
+    except Event.DoesNotExist:
         return None
 
-    if not (is_user_authenticated or is_preview) and not page.is_live:
-        past = page.event.date <= now_approx
+    if not (is_user_authenticated or is_preview) and not event.is_page_live:
+        past = event.event.date <= now_approx
         return (city, past)
 
-    return page
+    return event
 
 
 def get_approximate_date(date_str):

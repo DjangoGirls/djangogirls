@@ -8,7 +8,7 @@ from django.test.client import Client
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import ContactEmail, Event, EventPage, User
+from core.models import ContactEmail, Event, User
 from core.views import event as event_view
 
 
@@ -51,16 +51,13 @@ class CoreViewsTestCase(BaseCoreTestCase):
             [event.pk for event in resp.context['future_events']], [3])
 
     def test_event_published(self):
-        event_page_1 = EventPage.objects.get(event=self.event_1)
-        event_page_2 = EventPage.objects.get(event=self.event_2)
-
         # Check if it's possible to access the page
-        url1 = '/' + event_page_1.url + '/'
+        url1 = '/' + self.event_1.page_url + '/'
         resp_1 = self.client.get(url1)
         self.assertEqual(resp_1.status_code, 200)
 
         # Check if it's possible to access the page
-        url2 = '/' + event_page_2.url + '/'
+        url2 = '/' + self.event_2.page_url + '/'
         resp_2 = self.client.get(url2)
         self.assertEqual(resp_2.status_code, 200)
 
@@ -73,10 +70,8 @@ class CoreViewsTestCase(BaseCoreTestCase):
             [content.pk for content in resp_1.context['content']], [1])
 
     def test_event_unpublished(self):
-        event_page_3 = EventPage.objects.get(event=self.event_3)
-
         # Check if accessing unpublished page renders the event_not_live page
-        url = '/' + event_page_3.url + '/'
+        url = '/' + self.event_3.page_url + '/'
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
 
@@ -86,7 +81,6 @@ class CoreViewsTestCase(BaseCoreTestCase):
     def test_event_unpublished_with_future_and_past_dates(self):
         future_date = timezone.now() + timedelta(days=1)
         past_date = timezone.now() - timedelta(days=1)
-        event_page_4 = EventPage.objects.get(event=self.event_4)
 
         # make the event date in the future
         self.event_4.date = ApproximateDate(
@@ -94,7 +88,7 @@ class CoreViewsTestCase(BaseCoreTestCase):
         self.event_4.save()
 
         # Check if accessing unpublished page renders the event_not_live page
-        url = '/' + event_page_4.url + '/'
+        url = '/' + self.event_4.page_url + '/'
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
 
@@ -108,7 +102,7 @@ class CoreViewsTestCase(BaseCoreTestCase):
         self.event_4.save()
 
         # Check if accessing unpublished page renders the event_not_live page
-        url = '/' + event_page_4.url + '/'
+        url = '/' + self.event_4.page_url + '/'
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
 
@@ -120,18 +114,17 @@ class CoreViewsTestCase(BaseCoreTestCase):
         """ Test that an unpublished page can be accessed when the user is
         authenticated """
 
-        event_page_3 = EventPage.objects.get(event=self.event_3)
-        url = '/' + event_page_3.url + '/'
+        url = '/' + self.event_3.page_url + '/'
         request = self.factory.get(url)
 
         # Set the user on the request to an authenticated user
         request.user = self.ola
 
         # Check if the unpublished page can be accessed
-        resp = event_view(request, event_page_3.url)
+        resp = event_view(request, self.event_3.page_url)
         self.assertEqual(resp.status_code, 200)
         # Check if website is returning correct data
-        self.assertIn(event_page_3.title, resp.content.decode('utf-8'))
+        self.assertIn(self.event_3.page_title, resp.content.decode('utf-8'))
 
 
 class ContactTestCase(TestCase):

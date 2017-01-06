@@ -121,7 +121,7 @@ SUIT_CONFIG = {
             'permissions': ('auth.add_user', 'auth.add_group')
         },
         {'label': 'Events', 'icon':'icon-star', 'models': (
-            'core.event', 'core.eventpage', 'core.eventpagecontent',
+            'core.event', 'core.eventpagecontent',
             'core.eventpagemenu', 'core.postmortem',
         )},
         {'label': 'Organizers', 'icon':'icon-eye-open', 'models': (
