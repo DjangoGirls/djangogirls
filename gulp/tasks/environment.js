@@ -8,5 +8,5 @@ var production = environments.production;
 
 gulp.task('set-production', function(){
     gutil.log('Setting environment to production');
-    environments.current(development);
+    environments.current(production);
 });
