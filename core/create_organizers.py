@@ -1,7 +1,7 @@
 from .models import User
 
 
-def add_organizer(organizer, event):
+def add_organizer(event, email, first_name, last_name):
     """
         Add organizer to the event.
 
@@ -10,15 +10,16 @@ def add_organizer(organizer, event):
         the models.
     """
     defaults = {
-        "first_name": organizer.first_name,
-        "last_name": organizer.last_name,
+        "first_name": first_name,
+        "last_name": last_name,
         "is_staff": True,
         "is_active": True
     }
     user, created = User.objects.get_or_create(
-        email=organizer.email,
+        email=email,
         defaults=defaults
     )
+    password = None
     if created:
         password = user.generate_password()
         user.add_to_organizers_group()
@@ -32,7 +33,12 @@ def create_organizers(event, event_application, email_password):
     """
     organizers = []
     for organizer in event_application.coorganizers.all():
-        user = add_organizer(organizer, event)
+        user = add_organizer(
+            event,
+            organizer.email,
+            organizer.first_name,
+            organizer.last_name
+        )
         organizers.append(user)
 
     return organizers
