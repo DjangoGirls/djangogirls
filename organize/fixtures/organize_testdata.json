@@ -19,5 +19,15 @@
     },
     "model": "organize.eventapplication",
     "pk": 1
+},
+{
+  "fields": {
+      "event_application": 1,
+      "email": "robert@test.com",
+      "first_name": "Robert",
+      "last_name": "Sam"
+  },
+  "model": "organize.coorganizer",
+  "pk": 1
 }
 ]

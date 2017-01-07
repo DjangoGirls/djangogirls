@@ -1,7 +1,11 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.core.mail import EmailMessage
+from django.db import models, transaction
+from django.utils import timezone
+from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDateField
 
 from core.models import Event
@@ -47,7 +51,6 @@ class EventApplication(models.Model):
     )
     status_changed_at = models.DateTimeField(null=True, blank=True)
 
-    rejection_reason = models.TextField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
 
     class Meta:
@@ -72,10 +75,39 @@ class EventApplication(models.Model):
             raise ValidationError({
                 'comment': 'This field is required.'
             })
-        if self.status == REJECTED and not self.rejection_reason:
-            raise ValidationError({
-                'rejection_reason': 'This field is required.'
-            })
+
+    def get_all_recipients(self):
+        """
+        Returns a list of emails to all organizers in that application
+        """
+        emails = [coorganizer.email for coorganizer in self.coorganizers.all()]
+        emails.append(self.main_organizer_email)
+        return emails
+
+    @transaction.atomic
+    def reject(self):
+        """
+        Rejecting event in triaging. Performs following actions:
+        - changes status to REJECTED
+        - makes sure that rejection_reason is provided
+        - sends a rejection email
+        """
+        if not self.status == REJECTED:
+            self.status = REJECTED
+            self.status_changed_at = timezone.now()
+            self.save()
+            self.send_rejection_email()
+
+    def send_rejection_email(self):
+        """
+        Sends a rejection email to all organizars who created this application
+        """
+        subject = "Application to organize Django Girls {} has been reviewed".format(self.city)
+        content = render_to_string('emails/organize/rejection.html', {'application': self})
+        recipients = self.get_all_recipients()
+        msg = EmailMessage(subject, content, settings.DEFAULT_FROM_EMAIL, recipients)
+        msg.content_subtype = "html"
+        msg.send()
 
 
 class Coorganizer(models.Model):
