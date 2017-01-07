@@ -44,9 +44,9 @@ class ApplicationForm(forms.Form):
 
 
 class OrganizersForm(forms.Form):
-    main_organizer_email = forms.EmailField()
-    main_organizer_first_name = forms.CharField(max_length=30)
-    main_organizer_last_name = forms.CharField(max_length=30)
+    main_organizer_email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'compact-input'}))
+    main_organizer_first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    main_organizer_last_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'compact-input'}))
 
 
 class WorkshopForm(forms.Form):
