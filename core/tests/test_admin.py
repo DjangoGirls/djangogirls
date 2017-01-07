@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import vcr
 from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 
@@ -85,6 +86,7 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert User.objects.filter(is_staff=True).count() == (total_count + 1)
         assert self.event_2.team.count() == (team_count + 1)
 
+    @vcr.use_cassette('core/tests/vcr/organizer_can_only_add_to_their_event.yaml')
     def test_organizer_can_only_add_to_their_event(self):
         self.client.login(username=self.peter.email, password='')
         data = {

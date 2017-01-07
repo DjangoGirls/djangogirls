@@ -1,5 +1,6 @@
 import os
 
+import vcr
 from django.test import TestCase
 
 from applications.forms import ApplicationForm
@@ -17,6 +18,7 @@ class MenuTest(TestCase):
 
         os.environ['RECAPTCHA_TESTING'] = 'True'
 
+    @vcr.use_cassette('applications/tests/vcr/application_form_prevent_duplicate_emails.yaml')
     def test_application_form_prevent_duplicate_emails(self):
         form_questions = [
             {
