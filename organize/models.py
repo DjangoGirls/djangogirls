@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDateField
 
+from core.create_event import create_event_from_event_application
 from core.models import Event
 from core.validators import validate_approximatedate
 
@@ -18,7 +19,6 @@ from .constants import (
     ON_HOLD,
     REJECTED,
 )
-from .create_event import create_event_from_event_application
 
 
 class EventApplication(models.Model):
@@ -62,8 +62,8 @@ class EventApplication(models.Model):
     def accept(self):
         # create Event
         event = create_event_from_event_application(event_application=self)
+        add_organizers(team, event)
 
-        # copy data to Event
         # copy organizers and add them to Event
         # set status to ACCEPTED
         # create gmail account
