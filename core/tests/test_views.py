@@ -126,6 +126,15 @@ class CoreViewsTestCase(BaseCoreTestCase):
         # Check if website is returning correct data
         self.assertIn(self.event_3.page_title, resp.content.decode('utf-8'))
 
+    def test_coc(self):
+        AVAILABLE_LANG = ['en', 'fr', 'es', 'pt-br', 'ko']
+        for lang in AVAILABLE_LANG:
+            resp = self.client.get('/coc/{}/'.format(lang))
+            self.assertEqual(resp.status_code, 200)
+
+    def test_coc_invalid_lang(self):
+        resp = self.client.get('/coc/pl/')
+        self.assertEqual(resp.status_code, 404)
 
 class ContactTestCase(TestCase):
     fixtures = ['core_views_testdata.json']

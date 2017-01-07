@@ -2,8 +2,9 @@ import icalendar
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
@@ -170,5 +171,9 @@ def sponsor_request(request):
         'deadline': next_deadline()
     })
 
-def coc(request):
-    return render(request, 'core/coc/en.html', {})
+def coc(request, lang="en"):
+    template_name = "core/coc/{}.html".format(lang)
+    try:
+        return render(request, template_name)
+    except TemplateDoesNotExist:
+        raise Http404("No translation for language {}".format(lang))
