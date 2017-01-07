@@ -126,6 +126,35 @@ class CoreViewsTestCase(BaseCoreTestCase):
         # Check if website is returning correct data
         self.assertIn(self.event_3.page_title, resp.content.decode('utf-8'))
 
+    def test_coc(self):
+        AVAILABLE_LANG = {
+            'en': '<h1>Code of Conduct</h1>',
+            'es': '<h1>Código de Conducta</h1>',
+            'fr': '<h1>Code de Conduite</h1>',
+            'ko': '<h1>준수 사항</h1>',
+            'pt-br': '<h1>Código de Conduta</h1>'
+        }
+        for lang, title in AVAILABLE_LANG.items():
+            resp = self.client.get('/coc/{}/'.format(lang))
+            self.assertContains(resp, title, html=True)
+
+    def test_coc_invalid_lang(self):
+        resp = self.client.get('/coc/pl/')
+        self.assertEqual(resp.status_code, 404)
+
+    def test_coc_redirect(self):
+        REDIRECTS = {
+            'coc/': '/coc/',
+            'coc-es-la/': '/coc/es/',
+            'coc-fr/': '/coc/fr/',
+            'coc-kr/': '/coc/ko/',
+            'coc-pt-br/': '/coc/pt-br/',
+            'coc/rec/': '/coc/pt-br/',
+        }
+        for old_url_name, new_url in REDIRECTS.items():
+            old_url = reverse('django.contrib.flatpages.views.flatpage', args=[old_url_name])
+            resp = self.client.get(old_url)
+            self.assertRedirects(resp, new_url, status_code=301)
 
 class ContactTestCase(TestCase):
     fixtures = ['core_views_testdata.json']
