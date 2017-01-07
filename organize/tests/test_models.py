@@ -1,3 +1,4 @@
+from django.core import mail
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
@@ -20,14 +21,16 @@ class EventApplicationTest(TestCase):
         except ValidationError:
             self.fail("Event application should be valid.")
 
-    def test_rejection_reason_required_for_rejected_application(self):
+    def test_all_recipients(self):
         event_application = EventApplication.objects.get(pk=1)
-        event_application.status = REJECTED
-        with self.assertRaises(ValidationError):
-            event_application.clean()
+        assert len(event_application.get_all_recipients()) == \
+            event_application.coorganizers.count() + 1
 
-        event_application.rejection_reason = "Rejection reason"
-        try:
-            event_application.clean()
-        except ValidationError:
-            self.fail("Event application should be valid.")
+    def test_reject_method(self):
+        event_application = EventApplication.objects.get(pk=1)
+        event_application.reject()
+
+        event_application.status == REJECTED
+        assert len(mail.outbox) == 1
+        email = mail.outbox[0]
+        assert email.to == event_application.get_all_recipients()
