@@ -186,7 +186,7 @@ class Event(models.Model):
 
     @property
     def has_stats(self):
-        return self.applicants_count and self.attendees_count
+        return bool(self.applicants_count and self.attendees_count)
 
     def delete(self):
         self.is_deleted = True
