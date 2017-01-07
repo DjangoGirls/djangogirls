@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^privacy-cookies/$', views.privacy_cookies, name='privacy-cookies'),
     url(r'^workshop-box/$', views.workshop_box, name='workshop-box'),
     url(r'^coc/(?:(?P<lang>[a-z-]+)/)?$', views.coc, name='coc'),
+    url(r'^translators/invite/$', views.translator_invite, name='translator-invite'),
+    url(r'^translators/YAY/$', views.translator_invite_success, name='translator-invite-success'),
 
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
     url(r'^sponsor-request/$', views.sponsor_request, name='sponsor-request'),

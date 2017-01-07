@@ -5,13 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
+from django.urls import reverse_lazy
 from django.utils import timezone
+from django.views import generic
 from django_date_extensions.fields import ApproximateDate
 
 from core.utils import next_deadline
 from patreonmanager.models import FundraisingStatus
 
-from .forms import ContactForm
+from .forms import ContactForm, TranslatorSlackInviteForm
 from .models import Event, Story, User
 
 
@@ -179,3 +181,16 @@ def coc(request, lang=None):
         return render(request, template_name)
     except TemplateDoesNotExist:
         raise Http404("No translation for language {}".format(lang))
+
+
+class TranslatorInviteView(generic.FormView):
+    template_name = 'core/translator_invite.html'
+    form_class = TranslatorSlackInviteForm
+    success_url = reverse_lazy('core:translator-invite-success')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+translator_invite = TranslatorInviteView.as_view()
+translator_invite_success = generic.TemplateView.as_view(template_name='core/translator_invite_success.html')

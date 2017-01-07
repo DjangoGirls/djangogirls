@@ -235,3 +235,24 @@ class EventForm(forms.ModelForm):
             # create default content
             self.add_default_data(instance)
         return instance
+
+
+class TranslatorSlackInviteForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    email = forms.EmailField()
+    coc = forms.BooleanField()
+
+    def save(self):
+        # invite to slack
+        if settings.DEBUG:
+            return
+
+        conn = get_connection()
+        conn.users.invite(
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            email=self.cleaned_data['email'],
+            channels=['#translations', '#announcements'],
+            restricted=1,
+        )

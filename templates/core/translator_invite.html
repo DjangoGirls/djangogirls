@@ -1,0 +1,29 @@
+{% extends 'global/base.html' %}
+{% block title %}Join the Django Girls Translating Team{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Join the Django Girls translating team on Slack</h2>
+
+                {% include 'includes/_info_messages.html' %}
+
+                <p>Hello lorem ipsum</p>
+
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="row">
+                            <div class="col-md-12">
+                              {% include 'includes/_field.html' with field=field %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <input type="submit" value="Send" />
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
