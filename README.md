@@ -142,6 +142,10 @@ Then compile `requirements.in` into a new list of requirements:
 
     pip-compile
 
+To try and update a particular dependency:
+
+    pip-compile -P django
+
 You can also tell it to try and update all the dependency versions:
 
     pip-compile -U
