@@ -58,7 +58,7 @@
                     <h2>Bring Django Girls to your city!</h2>
                     <p>Is there no Django Girls event in your city? You can help make it happen!</p>
                     <p>We open sourced the <a href="http://organize.djangogirls.org/">Organizer Manual</a> that provides you with all information required to organize Django Girls workshop. By volunteering to organize, you're joining a vibrant and supportive community of {{ organizers_count|default_if_none:'0' }} organizers all over the world!</p>
-                    <p><a class="btn" href="{% url 'core:organize' %}">Apply to organize a workshop</a></p>
+                    <p><a class="btn" href="{% url 'organize:index' %}">Apply to organize a workshop</a></p>
                 </div>
             </div>
         </section>

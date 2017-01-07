@@ -47,10 +47,6 @@ def resources(request):
     return render(request, 'core/resources.html', {})
 
 
-def organize(request):
-    return render(request, 'core/organize.html', {})
-
-
 def stories(request):
 
     return render(request, 'core/stories.html', {
