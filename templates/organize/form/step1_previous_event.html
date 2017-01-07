@@ -36,6 +36,9 @@
                                     {% endif %}
                                 </li>
                             {% endfor %}
+                            {% for error in wizard.form.has_organized_before.errors %}
+                                {{ error }}
+                            {% endfor %}
                         </ul>
                     </fieldset>
 
