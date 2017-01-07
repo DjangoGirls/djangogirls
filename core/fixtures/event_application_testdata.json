@@ -39,16 +39,5 @@
   },
   "model": "organize.coorganizer",
   "pk": 2
-},
-{
-  "pk": 2,
-  "fields": {
-    "name": "Organizers",
-    "permissions": [
-      74,
-      77
-    ]
-  },
-  "model": "auth.group"
 }
 ]
