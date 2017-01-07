@@ -161,15 +161,22 @@ class Event(models.Model):
     def ical_uid(self):
         return "event%d@djangogirls.org" % self.pk
 
+    @property
+    def date_is_approximate(self):
+        if not self.date:
+            return True
+        if not all((self.date.year, self.date.month, self.date.day)):
+            return True
+        return False
+
     def as_ical(self):
         """
         Return a representation of the current event as an icalendar.Event.
         """
-        if not self.date:
+        if self.date_is_approximate:
             return None
+
         ymd = (self.date.year, self.date.month, self.date.day)
-        if not all(ymd):
-            return None
         event_date = date(*ymd)
         event = icalendar.Event()
         event.add("dtstart", event_date)
