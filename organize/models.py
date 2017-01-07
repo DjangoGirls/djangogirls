@@ -6,7 +6,7 @@ from django_date_extensions.fields import ApproximateDateField
 from core.models import Event
 from core.validators import validate_approximatedate
 
-involvement_choices = (
+INVOLVEMENT_CHOICES = (
     ("newcomer", "I’ve never been to a Django Girls event"),
     ("attendee", "I’m a former attendee"),
     ("coach", "I’m a former coach"),
@@ -30,10 +30,10 @@ class EventApplication(models.Model):
     # application fields
     about_you = models.TextField()
     why = models.TextField()
-    involvement = models.CharField(choices=involvement_choices, max_length=15)
+    involvement = models.CharField(choices=INVOLVEMENT_CHOICES, max_length=15)
     experience = models.TextField()
     venue = models.TextField()
-    sponsorhip = models.TextField()
+    sponsorship = models.TextField()
     coaches = models.TextField()
 
     class Meta:
