@@ -171,4 +171,4 @@ def sponsor_request(request):
     })
 
 def coc(request):
-    return render(request, 'core/coc.html', {})
+    return render(request, 'core/coc/en.html', {})
