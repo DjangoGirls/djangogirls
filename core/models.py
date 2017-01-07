@@ -15,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
+
 from .validators import validate_approximatedate
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
@@ -185,7 +186,7 @@ class Event(models.Model):
 
     @property
     def has_stats(self):
-        return self.applicants_count and self.attendees_count
+        return bool(self.applicants_count and self.attendees_count)
 
     def delete(self):
         self.is_deleted = True

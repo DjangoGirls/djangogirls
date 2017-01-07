@@ -12,6 +12,14 @@ urlpatterns = [
     url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
     url(r'^admin/core/eventpage/(\d+)/',
         RedirectView.as_view(pattern_name='admin:core_event_change')),
+    # Redirection for old CoC's flatpages:
+    url(r'^pages/coc/$', RedirectView.as_view(url='/coc/', permanent=True)),
+    url(r'^pages/coc-es-la/$', RedirectView.as_view(url='/coc/es/', permanent=True)),
+    url(r'^pages/coc-fr/$', RedirectView.as_view(url='/coc/fr/', permanent=True)),
+    url(r'^pages/coc-kr/$', RedirectView.as_view(url='/coc/ko/', permanent=True)),
+    url(r'^pages/coc-pt-br/$', RedirectView.as_view(url='/coc/pt-br/', permanent=True)),
+    url(r'^pages/coc/rec/$', RedirectView.as_view(url='/coc/pt-br/', permanent=True)),
+
 
     # Admin link for password reset
     # See: https://github.com/darklow/django-suit/blob/92a745d72935622220eca80edfce779419c30094/suit/templates/admin/login.html#L61
