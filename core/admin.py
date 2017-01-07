@@ -15,10 +15,10 @@ from django.utils.safestring import mark_safe
 from suit.admin import SortableModelAdmin
 
 from .filters import OpenRegistrationFilter
-from .forms import (AddOrganizerForm, UserChangeForm, UserCreationForm,
-                    UserLimitedChangeForm)
+from .forms import (AddOrganizerForm, EventForm, UserChangeForm,
+                    UserCreationForm, UserLimitedChangeForm)
 from .models import (Coach, Event, EventPageContent, EventPageMenu,
-                     Postmortem, Sponsor, Story, User)
+                     Sponsor, Story, User)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -27,6 +27,7 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
     filter_horizontal = ['team']
+    form = EventForm
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).get_queryset(request)
@@ -40,7 +41,7 @@ class EventAdmin(admin.ModelAdmin):
     is_past_event.short_description = 'past event?'
 
     def has_stats(self, obj):
-        return Postmortem.objects.filter(event=obj).exists()
+        return obj.has_stats
     has_stats.boolean = True
     has_stats.short_description = 'has stats?'
 
@@ -90,7 +91,11 @@ class EventAdmin(admin.ModelAdmin):
                     'page_main_color',
                     'page_custom_css',
                     'is_page_live'
-                ]})
+                ]}),
+                ('Statistics', {'fields': [
+                    'applicants_count',
+                    'attendees_count',
+                ]}),
             ]
         return [
             ('Event info', {'fields': [
@@ -111,9 +116,12 @@ class EventAdmin(admin.ModelAdmin):
                 'page_main_color',
                 'page_custom_css',
                 'is_page_live'
-            ]})
+            ]}),
+            ('Statistics', {'fields': [
+                'applicants_count',
+                'attendees_count',
+            ]}),
         ]
-
 
     def get_urls(self):
         urls = super(EventAdmin, self).get_urls()
@@ -199,6 +207,12 @@ class EventAdmin(admin.ModelAdmin):
             'form': form,
             'title': 'Add organizers',
         })
+    
+    def save_model(self, request, obj, form, change):
+        created = not obj.pk
+        super(EventAdmin, self).save_model(request, obj, form, change)
+        if created:
+            form.add_default_data(obj)
 
 
 class ResizableCodeMirror(CodeMirrorTextarea):
@@ -361,19 +375,6 @@ class CoachAdmin(admin.ModelAdmin):
         return form
 
 
-class PostmortemAdmin(admin.ModelAdmin):
-    list_display = ('event', 'attendees_count', 'applicants_count')
-    raw_id_fields = ('event',)
-
-    def get_changeform_initial_data(self, request):
-        initial = super(PostmortemAdmin,
-                        self).get_changeform_initial_data(request)
-        if "event" in request.GET:
-            event = Event.objects.get(pk=request.GET['event'])
-            initial['event'] = event
-        return initial
-
-
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -447,6 +448,5 @@ admin.site.register(EventPageContent, EventPageContentAdmin)
 admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
-admin.site.register(Postmortem, PostmortemAdmin)
 admin.site.register(Coach, CoachAdmin)
 admin.site.register(Story, StoryAdmin)

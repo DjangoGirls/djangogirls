@@ -130,7 +130,7 @@ SUIT_CONFIG = {
          'icon': 'icon-star',
          'models': (
              'core.event', 'core.eventpagecontent',
-             'core.eventpagemenu', 'core.postmortem')},
+             'core.eventpagemenu')},
         {'label': 'Organizers',
          'icon': 'icon-eye-open',
          'models': (
@@ -149,7 +149,6 @@ SUIT_CONFIG = {
          'icon': 'icon-comment',
          'models': ('core.Story',),
          'permissions': ('core.add_story',)},
-        {'app': 'jobs', 'icon': 'icon-briefcase'},
         {'app': 'patreonmanager',
          'icon': 'icon-gift',
          'models': ('patron', 'payment', 'reward')},
@@ -224,7 +223,7 @@ NOSE_ARGS = []
 if os.environ.get('COVERAGE') == 'TRUE':
     NOSE_ARGS += [
         '--with-coverage',
-        '--cover-package=core,applications,jobs,patreonmanager',
+        '--cover-package=core,applications,patreonmanager',
     ]
 
 MARKDOWN_DEUX_STYLES = {
