@@ -36,13 +36,14 @@ class EventApplication(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     # application fields
-    about_you = models.TextField()
-    why = models.TextField()
-    involvement = models.CharField(choices=INVOLVEMENT_CHOICES, max_length=15)
-    experience = models.TextField()
-    venue = models.TextField()
-    sponsorship = models.TextField()
-    coaches = models.TextField()
+    about_you = models.TextField("About organizer")
+    why = models.TextField("Motivations to organize")
+    involvement = models.CharField("Involvement in Django Girls",
+                                   choices=INVOLVEMENT_CHOICES, max_length=15)
+    experience = models.TextField("Experience with organizing other events")
+    venue = models.TextField("Information about your potential venue")
+    sponsorship = models.TextField("Information about your potential sponsorship")
+    coaches = models.TextField("Information about your potential coaches")
 
     # status reflecting state of the event in a triaging process.
     status = models.CharField(
@@ -60,6 +61,9 @@ class EventApplication(models.Model):
              "Can accept Organize Applications"),
         )
 
+    def __str__(self):
+        return "{}, {} ({})".format(self.city, self.country, self.get_status_display())
+    
     def deploy_event(self):
         """ Deploy Event based on the current EventApplication """
         # create Event

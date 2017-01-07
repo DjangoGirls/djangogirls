@@ -22,6 +22,9 @@ module.exports = {
           './node_modules/bootstrap/dist/css/bootstrap.min.css',
           './temp/event.css'
         ],
+        admin: [
+          './temp/admin.css'
+        ]
       }
     },
     js: {
