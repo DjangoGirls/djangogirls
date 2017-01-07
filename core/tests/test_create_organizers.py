@@ -8,7 +8,11 @@ from organize.models import EventApplication
 
 
 class CreateOrganizersTest(TestCase):
-    fixtures = ['organize_testdata.json', 'core_views_testdata.json']
+    fixtures = [
+        'event_application_testdata.json',
+        'core_views_testdata.json',
+        'groups_testdata.json',
+    ]
 
     @patch('core.models.user_invite')
     def test_create_organizers(self, mock_user_invite):
