@@ -1,4 +1,5 @@
 from datetime import datetime
+from unittest.mock import patch
 
 from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
@@ -61,7 +62,8 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert len(resp.context['all_events']) == expected_events.count()
         assert all([x.is_upcoming() for x in resp.context['all_events']])
 
-    def test_adding_organizer_as_superuser(self):
+    @patch('core.models.user_invite')
+    def test_adding_organizer_as_superuser(self, mock_user_invite):
         resp = self.client.get(reverse('admin:core_event_add_organizers'))
         total_count = User.objects.filter(is_staff=True).count()
         team_count = self.event_1.team.count()
@@ -85,7 +87,8 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert User.objects.filter(is_staff=True).count() == (total_count + 1)
         assert self.event_2.team.count() == (team_count + 1)
 
-    def test_organizer_can_only_add_to_their_event(self):
+    @patch('core.models.user_invite')
+    def test_organizer_can_only_add_to_their_event(self, mock_user_invite):
         self.client.login(username=self.peter.email, password='')
         data = {
             'event': self.event_3.pk,
