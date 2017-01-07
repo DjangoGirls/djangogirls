@@ -30,6 +30,6 @@ def create_event_from_event_application(event_application):
 
     # populate content & menu from the default event
     event.add_default_content()
-    event.adefault_menu()
+    event.add_default_menu()
 
     return event
