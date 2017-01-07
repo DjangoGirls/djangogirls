@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic dXNlcjpOb25l]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/e32bd13e2add097461cb96824b7a829c
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAz2OsW7DMAxEf4XQ0sW1GqCTt4xBlq4ZGYmwhUqiIFEuhCD/HhoBOt+7d/cwMgqZ
+        xWwiZbHW006RC9U5YYhuC6nMjpP17HqiLCiBs/3P7NqDp2apVq6fa+TWsA5rJiNB4uE9/1zgSgMu
+        eccYvCZNJb2Z5fvrNBlPoi7lbtwrHPCvwgkH3AnCuzMBVxjcP3YCFKFUhDwIAzpHrYFsBH+V8woe
+        BZ2+1Ps6FLJOZXe8MM8XoMmQIukAAAA=
+    headers:
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['194']
+      Content-Type: [application/problem+json; charset=utf-8]
+      Date: ['Sat, 07 Jan 2017 16:28:03 GMT']
+      Link: ['<https://us8.api.mailchimp.com/schema/3.0/ProblemDetailDocument.json>;
+          rel="describedBy"']
+      Server: [openresty]
+      Set-Cookie: [_AVESTA_ENVIRONMENT=prod; path=/]
+      Vary: [Accept-Encoding]
+      X-Request-Id: [c9fbaebd-4fa8-4b01-af47-491d1ef89c87]
+    status: {code: 401, message: Unauthorized}
+version: 1

@@ -1,0 +1,131 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://api.patreon.com/user/483065
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      Access-Control-Allow-Credentials: ['true']
+      Access-Control-Allow-Headers: ['Content-Type, X-File-Name, X-Requested-With,
+          X-CSRF-URI, X-CSRF-Signature, X-CSRF-Time, Cache-Control']
+      Access-Control-Allow-Methods: [None]
+      Access-Control-Allow-Origin: [patreon.com]
+      CF-RAY: [31d8bb9027ff2af7-WAW]
+      Cache-control: [private]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['3130']
+      Content-Type: [application/vnd.api+json]
+      Date: ['Sat, 07 Jan 2017 16:19:40 GMT']
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=d084cd8d36fdad3279190c89bebc266741483805980; expires=Sun,
+          07-Jan-18 16:19:40 GMT; path=/; domain=.patreon.com; HttpOnly', 'session_id=py733ea5d805c2ac74d892790fd8e38f664388a147eda51e5351bf5c72c3f831dc;
+          Domain=patreon.com; Expires=Mon, 06-Feb-2017 16:19:40 GMT; Max-Age=2592000;
+          Secure; HttpOnly; Path=/', 'amplitude_idpatreon.com=ewogICAgImRldmljZUlkIjogIjJkY2UzMzQ3LTMwOGItNGNmZi1hM2UzLTYzNTIyZDYzMDkzMCIsCiAgICAib3B0T3V0IjogZmFsc2UsCiAgICAidXNlcklkIjogMAp9;
+          Domain=patreon.com; Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000;
+          Path=/', 'patreon_device_id=2dce3347-308b-4cff-a3e3-63522d630930; Domain=patreon.com;
+          Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000; Path=/', 'group_id=4be0fbd86ef99b4fc539153d0fec8ecaf2774704084c1efaf65d808bafc22984;
+          Domain=patreon.com; Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000;
+          Secure; HttpOnly; Path=/']
+      Vary: [Accept-Encoding]
+      X-Content-Type-Options: [nosniff]
+      X-Patreon-UUID: [b09e7112-439c-43ca-a040-e50e52fa5167]
+    status: {code: 200, message: OK}
+- request:
+    body: channel=%23notifications&text=Daily+Patreon+update%3A+38+patrons+pledged+%24808+monthly%21&username=Django+Girls&icon_emoji=%3Adjango_heart%3A
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['142']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.12.4]
+    method: POST
+    uri: https://slack.com/api/chat.postMessage
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWys9WskpLzClO1VFKLSrKL1KyUsrLL4lPLC3JSE1RqgUA9xsXwyEAAAA=
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['53']
+      Content-Security-Policy: [referrer no-referrer;]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 07 Jan 2017 16:19:40 GMT']
+      Server: [Apache]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Vary: [Accept-Encoding]
+      Via: [1.1 4fafc89501d2c6922c11a87c6af1594c.cloudfront.net (CloudFront)]
+      X-Accepted-OAuth-Scopes: ['chat:write:user']
+      X-Amz-Cf-Id: [3Gskdo94butIbPEikQ26u0IOMgEpWDIKYWWkBduwAQbr2-CHSw6Ukg==]
+      X-Cache: [Miss from cloudfront]
+      X-Content-Type-Options: [nosniff]
+      X-Slack-Backend: [h]
+      X-Slack-Req-Id: [f009d0dd-1de3-46b9-be50-371b61ceef32]
+      X-XSS-Protection: ['0']
+    status: {code: 200, message: OK}
+version: 1
