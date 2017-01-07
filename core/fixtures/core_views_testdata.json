@@ -62,7 +62,13 @@
         ],
         "is_on_homepage": true,
         "main_organizer": 2,
-        "date": "2020-12-00"
+        "date": "2020-12-00",
+        "page_custom_css": "",
+        "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+        "page_title": "Django Girls Kensington",
+        "page_url": "neverland",
+        "is_page_live": true,
+        "page_main_color": "FF9400"
     },
     "model": "core.event",
     "pk": 1
@@ -72,13 +78,19 @@
         "city": "\u0141\u00f3d\u017a",
         "name": "Django Girls \u0141\u00f3d\u017a",
         "country": "Poland",
-        "latlng": "51.7687323, 19.4569911",
+        "latlng": "51.768749, 19.4569817",
         "team": [
             1
         ],
         "is_on_homepage": true,
         "main_organizer": 1,
-        "date": "2013-10-12"
+        "date": "2013-10-12",
+        "page_custom_css": "",
+        "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+        "page_title": "Django Girls \u0141\u00f3d\u017a",
+        "page_url": "lodz",
+        "is_page_live": true,
+        "page_main_color": "FF9400"
     },
     "model": "core.event",
     "pk": 2
@@ -94,7 +106,13 @@
         ],
         "is_on_homepage": false,
         "main_organizer": 1,
-        "date": "2020-09-00"
+        "date": "2020-09-00",
+        "page_custom_css": "",
+        "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+        "page_title": "Django Girls Hidden",
+        "page_url": "hidden",
+        "is_page_live": false,
+        "page_main_color": "FF9400"
     },
     "model": "core.event",
     "pk": 3
@@ -110,57 +128,15 @@
         ],
         "is_on_homepage": false,
         "main_organizer": 1,
-        "date": ""
+        "date": "",
+        "page_custom_css": "",
+        "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+        "page_title": "Django Girls Hidden",
+        "page_url": "hidden_no_date",
+        "is_page_live": false,
+        "page_main_color": "FF9400"
     },
     "model": "core.event",
-    "pk": 4
-},
-{
-    "fields": {
-        "custom_css": null,
-        "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-        "title": "Django Girls Kensington",
-        "url": "neverland",
-        "is_live": true,
-        "main_color": "FF9400"
-    },
-    "model": "core.eventpage",
-    "pk": 1
-},
-{
-    "fields": {
-        "custom_css": null,
-        "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-        "title": "Django Girls \u0141\u00f3d\u017a",
-        "url": "lodz",
-        "is_live": true,
-        "main_color": "FF9400"
-    },
-    "model": "core.eventpage",
-    "pk": 2
-},
-{
-    "fields": {
-        "custom_css": null,
-        "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-        "title": "Django Girls Hidden",
-        "url": "hidden",
-        "is_live": false,
-        "main_color": "FF9400"
-    },
-    "model": "core.eventpage",
-    "pk": 3
-},
-{
-    "fields": {
-        "custom_css": null,
-        "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-        "title": "Django Girls Hidden",
-        "url": "hidden_no_date",
-        "is_live": false,
-        "main_color": "FF9400"
-    },
-    "model": "core.eventpage",
     "pk": 4
 },
 {
@@ -170,7 +146,7 @@
         "background": "event/backgrounds/photo1_RWEzNsW.jpg",
         "is_public": false,
         "position": 1,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 1
@@ -182,7 +158,7 @@
         "background": "",
         "is_public": true,
         "position": 10,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 2
@@ -194,7 +170,7 @@
         "background": "event/backgrounds/photo5_rkgnazQ.jpg",
         "is_public": true,
         "position": 20,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 3
@@ -206,7 +182,7 @@
         "background": "",
         "is_public": true,
         "position": 30,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 4
@@ -218,7 +194,7 @@
         "background": "event/backgrounds/photo0_cBUZ8zp.jpg",
         "is_public": true,
         "position": 40,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 5
@@ -230,7 +206,7 @@
         "background": "",
         "is_public": true,
         "position": 50,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 6
@@ -242,7 +218,7 @@
         "background": "",
         "is_public": true,
         "position": 60,
-        "page": 1
+        "event": 1
     },
     "model": "core.eventpagecontent",
     "pk": 7
@@ -254,7 +230,7 @@
         "background": "event/backgrounds/photo1_MpeZxBg.jpg",
         "is_public": true,
         "position": 1,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 8
@@ -266,7 +242,7 @@
         "background": "",
         "is_public": true,
         "position": 10,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 9
@@ -278,7 +254,7 @@
         "background": "event/backgrounds/photo5_1xCMCaI.jpg",
         "is_public": true,
         "position": 20,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 10
@@ -290,7 +266,7 @@
         "background": "",
         "is_public": true,
         "position": 30,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 11
@@ -302,7 +278,7 @@
         "background": "event/backgrounds/photo0_89XYv7Y.jpg",
         "is_public": true,
         "position": 40,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 12
@@ -314,7 +290,7 @@
         "background": "",
         "is_public": true,
         "position": 50,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 13
@@ -326,7 +302,7 @@
         "background": "",
         "is_public": true,
         "position": 60,
-        "page": 2
+        "event": 2
     },
     "model": "core.eventpagecontent",
     "pk": 14
@@ -338,7 +314,7 @@
         "background": "event/backgrounds/photo1_6qwknef.jpg",
         "is_public": true,
         "position": 1,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 15
@@ -350,7 +326,7 @@
         "background": "",
         "is_public": true,
         "position": 10,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 16
@@ -362,7 +338,7 @@
         "background": "event/backgrounds/photo5_A1y9PlP.jpg",
         "is_public": true,
         "position": 20,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 17
@@ -374,7 +350,7 @@
         "background": "",
         "is_public": true,
         "position": 30,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 18
@@ -386,7 +362,7 @@
         "background": "event/backgrounds/photo0_swkgg2J.jpg",
         "is_public": true,
         "position": 40,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 19
@@ -398,7 +374,7 @@
         "background": "",
         "is_public": true,
         "position": 50,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 20
@@ -410,7 +386,7 @@
         "background": "",
         "is_public": true,
         "position": 60,
-        "page": 3
+        "event": 3
     },
     "model": "core.eventpagecontent",
     "pk": 21
@@ -419,7 +395,7 @@
     "fields": {
         "url": "#values",
         "position": 1,
-        "page": 1,
+        "event": 1,
         "title": "About"
     },
     "model": "core.eventpagemenu",
@@ -429,7 +405,7 @@
     "fields": {
         "url": "#apply",
         "position": 10,
-        "page": 1,
+        "event": 1,
         "title": "Apply for a pass!"
     },
     "model": "core.eventpagemenu",
@@ -439,7 +415,7 @@
     "fields": {
         "url": "#faq",
         "position": 20,
-        "page": 1,
+        "event": 1,
         "title": "FAQ"
     },
     "model": "core.eventpagemenu",
@@ -449,7 +425,7 @@
     "fields": {
         "url": "#coach",
         "position": 30,
-        "page": 1,
+        "event": 1,
         "title": "Become a coach"
     },
     "model": "core.eventpagemenu",
@@ -459,7 +435,7 @@
     "fields": {
         "url": "#partners",
         "position": 40,
-        "page": 1,
+        "event": 1,
         "title": "Partners"
     },
     "model": "core.eventpagemenu",
@@ -469,7 +445,7 @@
     "fields": {
         "url": "#values",
         "position": 1,
-        "page": 2,
+        "event": 2,
         "title": "About"
     },
     "model": "core.eventpagemenu",
@@ -479,7 +455,7 @@
     "fields": {
         "url": "#apply",
         "position": 10,
-        "page": 2,
+        "event": 2,
         "title": "Apply for a pass!"
     },
     "model": "core.eventpagemenu",
@@ -489,7 +465,7 @@
     "fields": {
         "url": "#faq",
         "position": 20,
-        "page": 2,
+        "event": 2,
         "title": "FAQ"
     },
     "model": "core.eventpagemenu",
@@ -499,7 +475,7 @@
     "fields": {
         "url": "#coach",
         "position": 30,
-        "page": 2,
+        "event": 2,
         "title": "Become a coach"
     },
     "model": "core.eventpagemenu",
@@ -509,7 +485,7 @@
     "fields": {
         "url": "#partners",
         "position": 40,
-        "page": 2,
+        "event": 2,
         "title": "Partners"
     },
     "model": "core.eventpagemenu",
@@ -519,7 +495,7 @@
     "fields": {
         "url": "#values",
         "position": 1,
-        "page": 3,
+        "event": 3,
         "title": "About"
     },
     "model": "core.eventpagemenu",
@@ -529,7 +505,7 @@
     "fields": {
         "url": "#apply",
         "position": 10,
-        "page": 3,
+        "event": 3,
         "title": "Apply for a pass!"
     },
     "model": "core.eventpagemenu",
@@ -539,7 +515,7 @@
     "fields": {
         "url": "#faq",
         "position": 20,
-        "page": 3,
+        "event": 3,
         "title": "FAQ"
     },
     "model": "core.eventpagemenu",
@@ -549,7 +525,7 @@
     "fields": {
         "url": "#coach",
         "position": 30,
-        "page": 3,
+        "event": 3,
         "title": "Become a coach"
     },
     "model": "core.eventpagemenu",
@@ -559,7 +535,7 @@
     "fields": {
         "url": "#partners",
         "position": 40,
-        "page": 3,
+        "event": 3,
         "title": "Partners"
     },
     "model": "core.eventpagemenu",

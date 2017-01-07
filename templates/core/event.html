@@ -1,24 +1,24 @@
 {% extends 'event/base.html' %}
 {% load thumbnail %}
 
-{% block title %}{{ page.title }}{% endblock %}
-{% block description %}{{ page.description }}{% endblock %}
+{% block title %}{{ event.page_title }}{% endblock %}
+{% block description %}{{ event.page_description }}{% endblock %}
 {% block custom_css %}
-{% if page.custom_css %}
+{% if event.page_custom_css %}
     <style>
-        {{ page.custom_css }}
+        {{ event.page_custom_css }}
     </style>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 
-    {% if messages or not page.is_live %}
+    {% if messages or not event.is_page_live %}
     <div class="container messages">
         <div class="row">
 
-            {% if not page.is_live%}
-            <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/eventpage/{{ page.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
+            {% if not event.is_page_live %}
+            <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/event/{{ event.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
             {% endif %}
 
             {% for message in messages %}

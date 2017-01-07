@@ -129,7 +129,7 @@ SUIT_CONFIG = {
         {'label': 'Events',
          'icon': 'icon-star',
          'models': (
-             'core.event', 'core.eventpage', 'core.eventpagecontent',
+             'core.event', 'core.eventpagecontent',
              'core.eventpagemenu', 'core.postmortem')},
         {'label': 'Organizers',
          'icon': 'icon-eye-open',

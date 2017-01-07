@@ -79,7 +79,7 @@ class CommandsTestCase(TestCase):
             input=command_input
         )
         assert Event.objects.count() == 5
-        event = Event.objects.last()
+        event = Event.objects.order_by('pk').last()
         assert event.team.count() == 1
 
     def test_new_event_with_two_organizers(self):
@@ -106,7 +106,7 @@ class CommandsTestCase(TestCase):
             input=command_input
         )
         assert Event.objects.count() == 5
-        event = Event.objects.last()
+        event = Event.objects.order_by('pk').last()
         assert event.team.count() == 2
 
     def test_new_event_short(self):
@@ -152,21 +152,19 @@ Event website address is: http://djangogirls.org/oz"""
             input=command_input
         )
         old_event = Event.objects.get(pk=2)
-        old_eventpage = old_event.eventpage
         name = old_event.name.split('#')[0].strip()
         new_name = "{} #{}".format(name, new_event_number)
         try:
             new_event = Event.objects.get(name=new_name)
-            new_eventpage = new_event.eventpage
         except Event.DoesNotExist:
             self.fail("Event not copied properly!")
 
         assert new_event.city == old_event.city
         assert new_event.team.count() == old_event.team.count()
 
-        assert new_eventpage.main_color == old_eventpage.main_color
-        assert new_eventpage.content.count() == old_eventpage.content.count()
-        assert new_eventpage.menu.count() == old_eventpage.menu.count()
+        assert new_event.page_main_color == old_event.page_main_color
+        assert new_event.content.count() == old_event.content.count()
+        assert new_event.menu.count() == old_event.menu.count()
 
     def test_prepare_dispatch_with_data(self):
         today = date.today()

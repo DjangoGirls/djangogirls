@@ -6,7 +6,7 @@
 <p>To see applications that have been submitted to your workshop, choose an event from the list below:</p>
 <ul>
   {% for form in forms %}
-    <li><a href="{% url 'applications:applications' form.page.url %}">{{ form.page.event.name }}</a></li>
+    <li><a href="{% url 'applications:applications' form.event.page_url %}">{{ form.event.name }}</a></li>
   {% endfor %}
 </ul>
 {% else %}

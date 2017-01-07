@@ -14,5 +14,5 @@ class OpenRegistrationFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == 'open':
             now = timezone.now()
-            return queryset.filter(eventpage__form__open_from__lte=now,
-                                   eventpage__form__open_until__gte=now)
+            return queryset.filter(form__open_from__lte=now,
+                                   form__open_until__gte=now)

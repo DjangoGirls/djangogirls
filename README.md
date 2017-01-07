@@ -24,9 +24,9 @@ And then follow the instructions.
 
 ## How to manage your website?
 
-### EventPage
+### Event
 
-http://djangogirls.org/admin/core/eventpage/
+http://djangogirls.org/admin/core/event/
 
 Here you can change:
 - Meta tags - title and description of the website

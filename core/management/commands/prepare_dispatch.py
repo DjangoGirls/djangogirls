@@ -13,7 +13,7 @@ def generate_html_content(event_list):
     result = []
     for event in event_list:
         city = event.city
-        url = event.eventpage.url
+        url = event.page_url
         html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
         result.append(html)
     return result
@@ -36,8 +36,7 @@ def command():
 
     previous_events = Event.objects.filter(
         date__gt=dispatch_date.strftime("%Y-%m-%d"),
-        date__lt=now.strftime("%Y-%m-%d"),
-        eventpage__isnull=False)
+        date__lt=now.strftime("%Y-%m-%d"))
     result_previous = generate_html_content(previous_events)
 
     num_events = len(result_previous)
@@ -54,7 +53,7 @@ def command():
 
     click.echo(click.style("NEXT EVENTS", bold=True))
     next_events = Event.objects.all().filter(
-        created_at__range=(dispatch_date, now), eventpage__isnull=False).order_by("date")
+        created_at__range=(dispatch_date, now)).order_by("date")
 
     sorted_event = groupby(next_events, key=lambda event: event.date.month)
 
@@ -73,9 +72,8 @@ def command():
 
     click.echo("OPEN REGISTRATION")
     open_events = Event.objects.all().filter(
-        eventpage__form__open_from__lte=now,
-        eventpage__form__open_until__gte=now,
-        eventpage__isnull=False)
+        form__open_from__lte=now,
+        form__open_until__gte=now)
     result_open = generate_html_content(open_events)
 
     if result_open:

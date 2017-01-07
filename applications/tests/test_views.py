@@ -11,8 +11,8 @@ from django.utils import timezone
 from applications.models import (RSVP_NO, RSVP_WAITING, RSVP_YES, Answer,
                                  Application, Form, Question, Score)
 from applications.utils import DEFAULT_QUESTIONS
-from applications.views import applications
-from core.models import Event, EventPage, User
+from applications.views import application_list
+from core.models import Event, User
 
 
 class ApplyView(TestCase):
@@ -22,10 +22,9 @@ class ApplyView(TestCase):
         self.factory = RequestFactory()
 
         self.event = Event.objects.create(
-            name='Test', city='Test', country='Test')
-        self.page = EventPage.objects.create(
-            event=self.event, is_live=True, url='test')
-        self.form = Form.objects.create(page=self.page)
+            name='Test', city='Test', country='Test',
+            is_page_live=True, page_url='test')
+        self.form = Form.objects.create(event=self.event)
 
     def test_access_apply_view(self):
         resp = self.client.get(reverse('applications:apply', args=['test']))
@@ -42,7 +41,7 @@ class ApplyView(TestCase):
         self.assertEqual(resp.status_code, 302)
 
         # Show 404 because there is no event page
-        self.page.delete()
+        self.event.delete()
         resp = self.client.get(reverse('applications:apply', args=['test']))
         self.assertEqual(resp.status_code, 404)
 
@@ -107,15 +106,13 @@ class ApplicationsView(TestCase):
         self.factory = RequestFactory()
 
         self.event = Event.objects.create(
-            name='Test', city='Test', country='Test')
+            name='Test', city='Test', country='Test',
+            is_page_live=True, page_url='test')
         self.event2 = Event.objects.create(
-            name='Test 2', city='Test 2', country='Test 2')
-        self.page = EventPage.objects.create(
-            event=self.event, is_live=True, url='test')
-        self.page2 = EventPage.objects.create(
-            event=self.event2, is_live=True, url='test2')
-        self.form = Form.objects.create(page=self.page)
-        self.form_2 = Form.objects.create(page=self.page2)
+            name='Test 2', city='Test 2', country='Test 2',
+            is_page_live=True, page_url='test2')
+        self.form = Form.objects.create(event=self.event)
+        self.form_2 = Form.objects.create(event=self.event2)
         self.user = User.objects.create(
             email='test@user.com', is_active=True, is_staff=True)
         self.user.set_password('test')
@@ -140,7 +137,7 @@ class ApplicationsView(TestCase):
         # as logged in user, but not orgarniser of given event
         request = self.factory.get(self.url)
         request.user = self.user
-        resp = applications(request, city='test')
+        resp = application_list(request, city='test')
         self.assertEqual(resp.status_code, 404)
 
         # as superuser
@@ -148,7 +145,7 @@ class ApplicationsView(TestCase):
         self.user.save()
         request = self.factory.get(self.url)
         request.user = self.user
-        resp = applications(request, city='test')
+        resp = application_list(request, city='test')
         self.assertEqual(resp.status_code, 200)
 
         # as organiser of given event
@@ -158,14 +155,14 @@ class ApplicationsView(TestCase):
         self.event.save()
         request = self.factory.get(self.url)
         request.user = self.user
-        resp = applications(request, city='test')
+        resp = application_list(request, city='test')
         self.assertEqual(resp.status_code, 200)
 
     def test_organiser_only_decorator_without_city(self):
         request = self.factory.get('')
         request.user = self.user
         with self.assertRaises(ValueError):
-            applications(request, city=None)
+            application_list(request, city=None)
 
     def test_get_applications_list(self):
         self.user.is_superuser = True
@@ -418,10 +415,9 @@ class ApplicationsDownloadView(TestCase):
         self.factory = RequestFactory()
 
         self.event = Event.objects.create(
-            name='Test', city='Test', country='Test')
-        self.page = EventPage.objects.create(
-            event=self.event, is_live=True, url='test')
-        self.form = Form.objects.create(page=self.page)
+            name='Test', city='Test', country='Test',
+            is_page_live=True, page_url='test')
+        self.form = Form.objects.create(event=self.event)
 
         self.user = User.objects.create(
             email='test@user.com', is_active=True, is_staff=True)

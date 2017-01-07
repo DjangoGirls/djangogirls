@@ -10,7 +10,7 @@ from core.command_helpers import gather_event_date_from_prompt
 from core.default_eventpage_content import (get_default_eventpage_data,
                                             get_default_menu)
 from core.forms import AddOrganizerForm
-from core.models import Event, EventPage, EventPageContent, EventPageMenu
+from core.models import Event, EventPageContent, EventPageMenu
 from core.slack_client import slack
 from core.utils import get_coordinates_for_city
 
@@ -104,7 +104,7 @@ def create_users(team, event):
     return members
 
 
-def add_default_content(page):
+def add_default_content(event):
     """
         Populate EventPageContent with default layout
     """
@@ -112,7 +112,7 @@ def add_default_content(page):
 
     i = 0
     for section in data:
-        section['page'] = page
+        section['event'] = event
         section['position'] = i
         section['content'] = render_to_string(section['template'])
         del section['template']
@@ -120,7 +120,7 @@ def add_default_content(page):
         i += 1
 
 
-def add_default_menu(page):
+def add_default_menu(event):
     """
         Populate EventPageMenu with default links
     """
@@ -128,7 +128,7 @@ def add_default_menu(page):
 
     i = 0
     for link in data:
-        link['page'] = page
+        link['event'] = event
         link['position'] = i
         EventPageMenu.objects.create(**link)
         i += 1
@@ -169,11 +169,10 @@ def command(short):
     name = 'Django Girls ' + city
     latlng = get_coordinates_for_city(city, country)
     mail = event_mail + '@djangogirls.org'
-    event = Event.objects.create(name=name, city=city, country=country,
-                                 latlng=latlng, email=mail, date=date,
-                                 is_on_homepage=False)
-
-    page = EventPage.objects.create(event=event, url=url, title=name)
+    event = Event.objects.create(
+        name=name, city=city, country=country,
+        latlng=latlng, email=mail, date=date,
+        is_on_homepage=False, page_url=url, page_title=name)
 
     # Create users
     members = create_users(team, event)
@@ -181,8 +180,8 @@ def command(short):
     event.save()
 
     # Default content
-    add_default_content(page)
-    add_default_menu(page)
+    add_default_content(event)
+    add_default_menu(event)
 
     click.secho(
         "Website is ready here: http://djangogirls.org/{0}".format(url),

@@ -11,13 +11,13 @@ from core.utils import next_deadline
 from patreonmanager.models import FundraisingStatus
 
 from .forms import ContactForm
-from .models import Event, EventPage, Story, User
+from .models import Event, Story, User
 
 
 def index(request):
 
     return render(request, 'core/index.html', {
-        'future_events': Event.objects.future().select_related('eventpage'),
+        'future_events': Event.objects.future(),
         'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
         'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
         'patreon_stats': FundraisingStatus.objects.all().first(),
@@ -30,8 +30,8 @@ def index(request):
 def events(request):
 
     return render(request, 'core/events.html', {
-        'future_events': Event.objects.future().select_related('eventpage'),
-        'past_events': Event.objects.past().select_related('eventpage'),
+        'future_events': Event.objects.future(),
+        'past_events': Event.objects.past(),
     })
 
 
@@ -61,26 +61,23 @@ def stories(request):
 def event(request, city):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    page = get_object_or_404(
-        EventPage.objects.select_related('event'),
-        url=city.lower()
-    )
+    event = get_object_or_404(Event, page_url=city.lower())
 
-    if page.url != city:
-        return redirect('core:event', city=page.url, permanent=True)
+    if event.page_url != city:
+        return redirect('core:event', city=event.page_url, permanent=True)
 
     can_show = request.user.is_authenticated() or 'preview' in request.GET
-    if not page.is_live and not can_show:
+    if not event.is_page_live and not can_show:
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': city, 'past': page.event.date <= now_approx}
+            {'city': city, 'past': event.date <= now_approx}
         )
 
     return render(request, "core/event.html", {
-        'page': page,
-        'menu': page.menu.all(),
-        'content': page.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
+        'event': event,
+        'menu': event.menu.all(),
+        'content': event.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
     })
 
 
