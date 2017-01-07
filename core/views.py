@@ -171,7 +171,9 @@ def sponsor_request(request):
         'deadline': next_deadline()
     })
 
-def coc(request, lang="en"):
+def coc(request, lang=None):
+    if lang is None:
+        lang = 'en'
     template_name = "core/coc/{}.html".format(lang)
     try:
         return render(request, template_name)
