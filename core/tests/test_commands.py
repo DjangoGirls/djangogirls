@@ -1,5 +1,6 @@
 import random
 from datetime import date
+from unittest.mock import patch
 
 from click.testing import CliRunner
 from django.core.management import call_command
@@ -14,7 +15,7 @@ from core.models import Event
 
 
 class CommandsTestCase(TestCase):
-    fixtures = ['core_views_testdata.json']
+    fixtures = ['core_views_testdata.json', 'groups_testdata.json']
 
     def setUp(self):
         self.event_1 = Event.objects.get(pk=1)  # In the future
@@ -40,7 +41,8 @@ class CommandsTestCase(TestCase):
         event_2 = Event.objects.get(pk=2)
         self.assertEqual(event_2.latlng, latlng)
 
-    def test_add_organizer(self):
+    @patch('core.models.user_invite')
+    def test_add_organizer(self, mock_user_invite):
         event = Event.objects.get(pk=1)
         assert event.team.count() == 2
 
@@ -58,7 +60,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.get(pk=1)
         assert event.team.count() == 3
 
-    def test_new_event_with_one_organizer(self):
+    @patch('core.models.user_invite')
+    def test_new_event_with_one_organizer(self, mock_user_invite):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()
@@ -82,7 +85,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 1
 
-    def test_new_event_with_two_organizers(self):
+    @patch('core.models.user_invite')
+    def test_new_event_with_two_organizers(self, mock_user_invite):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()
@@ -109,7 +113,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 2
 
-    def test_new_event_short(self):
+    @patch('core.models.user_invite')
+    def test_new_event_short(self, mock_user_invite):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()
