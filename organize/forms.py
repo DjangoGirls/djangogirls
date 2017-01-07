@@ -35,9 +35,11 @@ class ApplicationForm(forms.Form):
     experience = forms.CharField(widget=forms.Textarea)
 
 
-class WorkshopForm(forms.Form):
-    pass
-
-
 class OrganizersForm(forms.Form):
+    main_organizer_email = forms.EmailField()
+    main_organizer_first_name = forms.CharField(max_length=30)
+    main_organizer_last_name = forms.CharField(max_length=30)
+
+
+class WorkshopForm(forms.Form):
     pass

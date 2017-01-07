@@ -6,13 +6,13 @@ from .forms import (
 
 FORMS = [("previous_event", PreviousEventForm),
          ("application", ApplicationForm),
-         ("workshop", WorkshopForm),
-         ("organizers", OrganizersForm)]
+         ("organizers", OrganizersForm)
+         ("workshop", WorkshopForm)]
 
 TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
              "application": "organize/form/step2_application.html",
-             "workshop": "organize/form/step3_workshop.html",
-             "organizers": "organize/form/step4_organizers.html"}
+             "organizers": "organize/form/step4_organizers.html",
+             "workshop": "organize/form/step3_workshop.html"}
 
 
 class OrganizeFormWizard(SessionWizardView):
