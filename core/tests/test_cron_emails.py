@@ -210,23 +210,20 @@ class HandleEmailTestCase(TestCase):
 
         # Event with a start date in the past shouldn't trigger an email
         event.date = now - timezone.timedelta(days=1)
+        event.offer_help_email_sent = None
         event.save()
         self.assertFalse(_would_send_email(event))
 
         # Nor should an event with an uncertain date in the current month.
         event.date = ApproximateDate(year=now.year, month=now.month)
+        event.offer_help_email_sent = None
         event.save()
         self.assertFalse(_would_send_email(event))
 
-        # Event now has a form that is still open, which should trigger an email
+        # Event now has a form, no email should be sent.
         event.date = in_six_weeks
         event.save()
-        Form.objects.create(event=event, open_until=now + timezone.timedelta(days=1))
-        self.assertTrue(_would_send_email(event))
-
-        # The form is now closed, no email should be sent.
-        event.form.open_until = now - timezone.timedelta(days=1)
-        event.form.save()
+        Form.objects.create(event=event)
         self.assertFalse(_would_send_email(event))
 
         # Set page to not live, email should be sent again
@@ -236,5 +233,6 @@ class HandleEmailTestCase(TestCase):
 
         # Remove from homepage, no email should be sent.
         event.is_on_homepage = False
+        event.offer_help_email_sent = None
         event.save()
         self.assertFalse(_would_send_email(event))

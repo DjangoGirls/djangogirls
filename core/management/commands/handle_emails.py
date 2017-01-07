@@ -106,7 +106,7 @@ def send_offer_help_emails():
         date__lte=timezone.now() + timezone.timedelta(weeks=6),
         offer_help_email_sent__isnull=True
     ).filter(
-        Q(is_page_live=False) | Q(form=None) | Q(form__open_until__gt=timezone.now())
+        Q(is_page_live=False) | Q(form=None)
     )
 
     send_event_emails(
