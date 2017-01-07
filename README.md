@@ -58,7 +58,7 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 
 The website is hosted on PythonAnywhere and is available here: http://djangogirls.org/
 
-We have an auto-deploy thing going on, so everything commited to master is automatically deployed to our Heroku.
+Please note that we use Python 3 only, so make sure that you use correct version when running commands below.
 
 ## Setting up a development environment
 
