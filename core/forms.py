@@ -206,23 +206,19 @@ class EventForm(forms.ModelForm):
         """Populate EventPageContent with default layout"""
         data = get_default_eventpage_data()
 
-        i = 0
-        for section in data:
+        for i, section in enumerate(data):
             section['position'] = i
             section['content'] = render_to_string(section['template'])
             del section['template']
             event.content.create(**section)
-            i += 1
 
     def add_default_menu(self, event):
         """Populate EventPageMenu with default links"""
         data = get_default_menu()
 
-        i = 0
-        for link in data:
+        for i, link in enumerate(data):
             link['position'] = i
             event.menu.create(**link)
-            i += 1
 
     def add_default_data(self, event):
         self.add_default_content(event)
