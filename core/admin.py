@@ -15,8 +15,8 @@ from django.utils.safestring import mark_safe
 from suit.admin import SortableModelAdmin
 
 from .filters import OpenRegistrationFilter
-from .forms import (AddOrganizerForm, UserChangeForm, UserCreationForm,
-                    UserLimitedChangeForm)
+from .forms import (AddOrganizerForm, EventForm, UserChangeForm,
+                    UserCreationForm, UserLimitedChangeForm)
 from .models import (Coach, Event, EventPageContent, EventPageMenu,
                      Postmortem, Sponsor, Story, User)
 
@@ -27,6 +27,7 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
     filter_horizontal = ['team']
+    form = EventForm
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).get_queryset(request)
@@ -199,6 +200,12 @@ class EventAdmin(admin.ModelAdmin):
             'form': form,
             'title': 'Add organizers',
         })
+    
+    def save_model(self, request, obj, form, change):
+        created = not obj.pk
+        super(EventAdmin, self).save_model(request, obj, form, change)
+        if created:
+            form.add_default_data(obj)
 
 
 class ResizableCodeMirror(CodeMirrorTextarea):

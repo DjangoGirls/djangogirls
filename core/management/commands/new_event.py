@@ -6,13 +6,11 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from slacker import Error as SlackerError
 
-from core.command_helpers import gather_event_date_from_prompt
-from core.default_eventpage_content import (get_default_eventpage_data,
-                                            get_default_menu)
-from core.forms import AddOrganizerForm
-from core.models import Event, EventPageContent, EventPageMenu
-from core.slack_client import slack
-from core.utils import get_coordinates_for_city
+from ...command_helpers import gather_event_date_from_prompt
+from ...forms import AddOrganizerForm, EventForm
+from ...models import Event
+from ...slack_client import slack
+from ...utils import get_coordinates_for_city
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -104,36 +102,6 @@ def create_users(team, event):
     return members
 
 
-def add_default_content(event):
-    """
-        Populate EventPageContent with default layout
-    """
-    data = get_default_eventpage_data()
-
-    i = 0
-    for section in data:
-        section['event'] = event
-        section['position'] = i
-        section['content'] = render_to_string(section['template'])
-        del section['template']
-        EventPageContent.objects.create(**section)
-        i += 1
-
-
-def add_default_menu(event):
-    """
-        Populate EventPageMenu with default links
-    """
-    data = get_default_menu()
-
-    i = 0
-    for link in data:
-        link['event'] = event
-        link['position'] = i
-        EventPageMenu.objects.create(**link)
-        i += 1
-
-
 def brag_on_slack_bang(city, country, team):
     """
         This is posting a message about Django Girls new event to #general channel on Slack!
@@ -155,7 +123,7 @@ def brag_on_slack_bang(city, country, team):
 def command(short):
     """Creates new Django Girls event"""
     # Basics
-    (city, country, date, url, event_mail) = get_basic_info()
+    (city, country, date, url, event_email) = get_basic_info()
 
     # Main organizer
     main_organizer = get_main_organizer()
@@ -168,20 +136,23 @@ def command(short):
     # Event and EventPage objects
     name = 'Django Girls ' + city
     latlng = get_coordinates_for_city(city, country)
-    mail = event_mail + '@djangogirls.org'
-    event = Event.objects.create(
-        name=name, city=city, country=country,
-        latlng=latlng, email=mail, date=date,
-        is_on_homepage=False, page_url=url, page_title=name)
+    email = event_email + '@djangogirls.org'
+    form = EventForm({
+        'city': city,
+        'country': country,
+        'date': date,
+        'email': email,
+        'latlng': latlng,
+        'name': name,
+        'page_title': name,
+        'page_url': url})
+    form.full_clean()
+    event = form.save()
 
     # Create users
     members = create_users(team, event)
     event.main_organizer = members[0]
     event.save()
-
-    # Default content
-    add_default_content(event)
-    add_default_menu(event)
 
     click.secho(
         "Website is ready here: http://djangogirls.org/{0}".format(url),
