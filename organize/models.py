@@ -44,7 +44,9 @@ class EventApplication(models.Model):
 
 
 class Coorganizer(models.Model):
-    event_request = models.ForeignKey(EventApplication, related_name="team")
+    event_application = models.ForeignKey(
+        EventApplication,
+        related_name="coorganizers")
     email = models.EmailField()
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
