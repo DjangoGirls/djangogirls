@@ -2,32 +2,61 @@
 {
   "pk": 1,
   "fields": {
-    "custom_css": null,
-    "main_color": "FF9400",
-    "title": "Django Girls Berlin",
-    "is_live": false,
-    "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-    "url": "berlin1"
+    "email": "berlin@djangogirls.org",
+    "country": "Germany",
+    "photo_credit": "",
+    "team": [
+      2,
+      3
+    ],
+    "is_on_homepage": true,
+    "main_organizer": 2,
+    "photo": "",
+    "date": "2014-07-21",
+    "city": "Berlin",
+    "name": "Django Girls Berlin",
+    "latlng": "52.5170365, 13.3888599",
+    "photo_link": "",
+    "page_custom_css": "",
+    "page_main_color": "FF9400",
+    "page_title": "Django Girls Berlin",
+    "is_page_live": false,
+    "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+    "page_url": "berlin1"
   },
-  "model": "core.eventpage"
+  "model": "core.event"
 },
 {
   "pk": 2,
   "fields": {
-    "custom_css": null,
-    "main_color": "FF9400",
-    "title": "Django Girls Amsterdam",
-    "is_live": false,
-    "description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
-    "url": "amsterdam"
+    "email": "amsterdam@djangogirls.org",
+    "country": "Netherlands",
+    "photo_credit": "",
+    "team": [
+      4
+    ],
+    "is_on_homepage": true,
+    "main_organizer": 4,
+    "photo": "",
+    "date": "2020-03-12",
+    "city": "Amsterdam",
+    "name": "Django Girls Amsterdam",
+    "latlng": "52.374436, 4.8979956033677",
+    "photo_link": "",
+    "page_custom_css": "",
+    "page_main_color": "FF9400",
+    "page_title": "Django Girls Amsterdam",
+    "is_page_live": false,
+    "page_description": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+    "page_url": "amsterdam"
   },
-  "model": "core.eventpage"
+  "model": "core.event"
 },
 {
   "pk": 1,
   "fields": {
     "position": 0,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "about",
     "content": "<div style=\"text-align: center;\">\n\n\t<h1>Free programming workshop for women</h1>\n\t<h2>Build your first website at EuroPython 2014 in Berlin!</h2>\n\t<a class=\"btn\" href=\"#values\">Learn more \u00bb</a>\n\n</div>\n",
@@ -39,7 +68,7 @@
   "pk": 2,
   "fields": {
     "position": 1,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "values",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-6\">\n\t\t<h3>Django Girls</h3>\n\t\t<p>\n\t\t\tIf you are a female and you want to learn how to make websites, \n\t\t\twe have good news for you! We are holding a one-day workshop for beginners!\n\t    </p>\n\n\t\t<p>\n\t\t\tIt will take place on <strong>21st of July</strong> in <strong>Berlin</strong>,\n\t\t\ton the first day of a big IT conference: <a href=\"http://europython.eu/\">EuroPython</a>, \n\t\t\twhich gathers a lot of talented programmers from all over the world.\n\t\t</p>\n\n\t\t<p>\n\t\t\tWe believe that IT industry will greatly benefit from bringing more women\n\t\t\tinto technology. We want to give you an opportunity to learn how to program\n\t\t\tand become one of us - female programmers!\n\t\t</p>\n\n\t\t<p>\n\t\t\tWorkshops are free of charge and if you can\u2019t afford coming to Berlin,\n\t\t\tbut you are very motivated to learn and then share your knowledge with others,\n\t\t\twe have some funds to help you out with your travel costs and accommodation. \n\t\t\tDon\u2019t wait too long - you can apply for a pass only until <strong>30th of June</strong>!\n\t \t</p>      \n\t </div>      \n\n\t <div class=\"col-md-6\">\n\t \t<h3>Apply for a pass!</h3>\n\t \t<p>\n\t \t\tIf you are a woman, you know English and have a laptop - you can apply\n\t \t\tfor a pass! You don\u2019t need to know any technical stuff - workshops\n\t \t\tare for people who are new to programming.\n\t \t</p>\n\n\t \t<p>\n\t \t\tAs a workshop attendee you will:\n\t \t\t<ul>\n\t \t\t\t<li>attend one-day Django workshops during which you will create your first website</li>\n\t \t\t\t<li>get a free EuroPython ticket (which normally costs 400 \u20ac!), where you can meet people from the industry and learn more about programming</li>\n\t \t\t\t<li>be fed by us - during workshops and EuroPython food is provided</li>\n\t \t\t</ul>\n\t \t</p>\n\n\t \t<p>We have space only for 40 people, so make sure to fill the form very carefully!</p>\n\t </div>\n</div>",
@@ -51,7 +80,7 @@
   "pk": 3,
   "fields": {
     "position": 2,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "apply",
     "content": "<div class=\"row\">\n\n\t<div class=\"col-md-7 col-md-offset-5\">\n\n\t\t<h2>Applications are now open!</h2>\n\n\t\t<p>\n\t\t\tApplication process closes on July 23rd and you\\'ll be informedabout acceptance or rejection by July 28th (or sooner)!\n\t\t</p>\n\n\t\t<a class=\"btn\" href=\"apply\">Register</a>\n\n\t</div>\n</div>",
@@ -63,7 +92,7 @@
   "pk": 4,
   "fields": {
     "position": 3,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "faq",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Do I need to know anything about websites or programming?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tNo! Workshops are for beginners. You don\u2019t need to know anything about it. \n\t\t\tHowever, if you have a little bit of technical knowledge (i.e. you know what HTML or CSS are) you still can apply!\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>I am not living in Germany, can I attend?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tOf course! Workshops will be in English, so if you have no troubles with speaking \n\t\t\tand understanding English - you should apply. If you need financial aid to get to \n\t\t\tBerlin or you need assistance with booking flights or hotel in Berlin - let us know. \n\t\t\tWe are willing to help you!\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Should I bring my own laptop?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tYes. We have no hardware, so we expect you to bring your computer with you. \n\t\t\tIt is also important for us that you will take home everything you\u2019ll write and create during workshops. \n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"row\" style=\"margin-top: 30px\">\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Do I need to have something installed on my laptop? </b>\n\t\t</p>\n\t\t<p>\n\t\t\tIt would be helpful to have Django installed before workshops, but wouldn't\n\t\t\texpect you to install anything on your own.We will make sure that one of our\n\t\t\tcoaches will help you out with this task. \n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Is EuroPython conference good for a total beginner?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tAs a workshop attendee you will get a free ticket to EuroPython - conference for Python programmers. \n\t\t\tEven though you are new to programming,conference is a good place to meet many interesting people \n\t\t\tin the industry and find inspiration.\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p><b>Is food provided? </b></p>\n\t\t<p>Yes. Thanks to EuroPython, snacks and lunch will be served during workshops. </p>\n\t</div>\n</div>",
@@ -75,7 +104,7 @@
   "pk": 5,
   "fields": {
     "position": 4,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "coach",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-6\">\n\t\t<h2>Be a Mentor!</h2>\n\t\t<p>\n\t\t\tWe would be delighted if you would like to join us as a mentor! \n\t\t\tFill in the form  <a href=\"http://t.co/YvvAFiUvKN\">here</a>, but \n\t\t\tselect the option to be a mentor.\n\t\t</p>\n\t\t<p>\n\t\t\tWe will contact you :)\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-6\">\n\t\t<h2>Django Girls</h2>\n\t\t<p>\n\t\t\tDjango Girls Australia is a part of bigger initiative: <a href=\"http://djangogirls.org/\">Django Girls</a>.  \n\t\t\tIt is a non-profit organization and events are organized by volunteers in different places of the world.  \n\t\t</p>\n\t\t<p>\n\t\t\tTo see the source for the program find us on Github: \n\t\t\t<a href=\"https://github.com/DjangoGirls/\">github.com/DjangoGirls</a>.\n\t\t</p>\n\t\t<p>\n\t\t\tIf you want to bring Django Girls to your city, drop us a line: \n\t\t\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a>.\n\t\t</p>\n\t</div>\n</div>",
@@ -87,7 +116,7 @@
   "pk": 6,
   "fields": {
     "position": 5,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "partners",
     "content": "<h3>Sponsors</h3>\n\n<p>\n\tWe couldn't be here without the support from amazing people and organizations \n\twho donated money, knowledge and time to help us make this a reality. \n\tIf you want to contribute and support our goal, please get in touch: \n\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a>\n</p>",
@@ -99,7 +128,7 @@
   "pk": 7,
   "fields": {
     "position": 6,
-    "page": 1,
+    "event": 1,
     "is_public": true,
     "name": "footer",
     "content": "<div class=\"row social\">\n\n\t<div class=\"col-md-4\">\n\t\t<div class=\"facebook\">\n\t\t\t<div class=\"fb-page\" \n\t\t\t     data-href=\"https://www.facebook.com/djangogirls\" \n\t\t\t     data-small-header=\"true\" \n\t\t\t     data-adapt-container-width=\"true\" \n\t\t\t     data-hide-cover=\"true\" \n\t\t\t     data-show-facepile=\"false\" \n\t\t\t     data-show-posts=\"false\"\n\t\t\t>\n\t\t\t\t<div class=\"fb-xfbml-parse-ignore\">\n\t\t\t\t\t<blockquote cite=\"https://www.facebook.com/djangogirls\">\n\t\t\t\t\t\t<a href=\"https://www.facebook.com/djangogirls\">Django Girls</a>\n\t\t\t\t\t</blockquote>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<div class=\"twitter\">\n\t\t\t<a href=\"https://twitter.com/djangogirls\" \n\t\t\t   class=\"twitter-follow-button\" \n\t\t\t   data-show-count=\"false\" \n\t\t\t   data-size=\"large\"\n\t\t\t>\n\t\t\t\tFollow @djangogirls\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\tGet in touch:<br> \n\t\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a><br><br>\n\t</div>\n</div>\n\n<div class=\"row credits\">\n\t<div class=\"col-md-12\">\n\t\t\u2665 Django Girls Europe is organized by <a href=\"http://twitter.com/olasitarska\">Ola Sitarska</a> a\n\t\tnd <a href=\"http://twitter.com/asednecka\">Ola Sendecka</a> with the support from \n\t\t<a href=\"http://europython.eu/\">EuroPython 2014</a>.<br>\n\n\t\tDjango Girls Europe is a part of <a href=\"/\">Django Girls</a>.\n\t\t<br>Every participant needs to follow the <a href=\"/pages/coc/\">Code of Conduct</a>.\n\t</div>\n</div>",
@@ -111,7 +140,7 @@
   "pk": 8,
   "fields": {
     "position": 0,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "about",
     "content": "<div style=\"text-align: center;\">\n\n\t<h1>Free programming workshop for women</h1>\n\t<h2>Build your first website at EuroPython 2014 in Berlin!</h2>\n\t<a class=\"btn\" href=\"#values\">Learn more \u00bb</a>\n\n</div>\n",
@@ -123,7 +152,7 @@
   "pk": 9,
   "fields": {
     "position": 1,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "values",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-6\">\n\t\t<h3>Django Girls</h3>\n\t\t<p>\n\t\t\tIf you are a female and you want to learn how to make websites, \n\t\t\twe have good news for you! We are holding a one-day workshop for beginners!\n\t    </p>\n\n\t\t<p>\n\t\t\tIt will take place on <strong>21st of July</strong> in <strong>Berlin</strong>,\n\t\t\ton the first day of a big IT conference: <a href=\"http://europython.eu/\">EuroPython</a>, \n\t\t\twhich gathers a lot of talented programmers from all over the world.\n\t\t</p>\n\n\t\t<p>\n\t\t\tWe believe that IT industry will greatly benefit from bringing more women\n\t\t\tinto technology. We want to give you an opportunity to learn how to program\n\t\t\tand become one of us - female programmers!\n\t\t</p>\n\n\t\t<p>\n\t\t\tWorkshops are free of charge and if you can\u2019t afford coming to Berlin,\n\t\t\tbut you are very motivated to learn and then share your knowledge with others,\n\t\t\twe have some funds to help you out with your travel costs and accommodation. \n\t\t\tDon\u2019t wait too long - you can apply for a pass only until <strong>30th of June</strong>!\n\t \t</p>      \n\t </div>      \n\n\t <div class=\"col-md-6\">\n\t \t<h3>Apply for a pass!</h3>\n\t \t<p>\n\t \t\tIf you are a woman, you know English and have a laptop - you can apply\n\t \t\tfor a pass! You don\u2019t need to know any technical stuff - workshops\n\t \t\tare for people who are new to programming.\n\t \t</p>\n\n\t \t<p>\n\t \t\tAs a workshop attendee you will:\n\t \t\t<ul>\n\t \t\t\t<li>attend one-day Django workshops during which you will create your first website</li>\n\t \t\t\t<li>get a free EuroPython ticket (which normally costs 400 \u20ac!), where you can meet people from the industry and learn more about programming</li>\n\t \t\t\t<li>be fed by us - during workshops and EuroPython food is provided</li>\n\t \t\t</ul>\n\t \t</p>\n\n\t \t<p>We have space only for 40 people, so make sure to fill the form very carefully!</p>\n\t </div>\n</div>",
@@ -135,7 +164,7 @@
   "pk": 10,
   "fields": {
     "position": 2,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "apply",
     "content": "<div class=\"row\">\n\n\t<div class=\"col-md-7 col-md-offset-5\">\n\n\t\t<h2>Applications are now open!</h2>\n\n\t\t<p>\n\t\t\tApplication process closes on July 23rd and you\\'ll be informedabout acceptance or rejection by July 28th (or sooner)!\n\t\t</p>\n\n\t\t<a class=\"btn\" href=\"apply\">Register</a>\n\n\t</div>\n</div>",
@@ -147,7 +176,7 @@
   "pk": 11,
   "fields": {
     "position": 3,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "faq",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Do I need to know anything about websites or programming?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tNo! Workshops are for beginners. You don\u2019t need to know anything about it. \n\t\t\tHowever, if you have a little bit of technical knowledge (i.e. you know what HTML or CSS are) you still can apply!\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>I am not living in Germany, can I attend?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tOf course! Workshops will be in English, so if you have no troubles with speaking \n\t\t\tand understanding English - you should apply. If you need financial aid to get to \n\t\t\tBerlin or you need assistance with booking flights or hotel in Berlin - let us know. \n\t\t\tWe are willing to help you!\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Should I bring my own laptop?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tYes. We have no hardware, so we expect you to bring your computer with you. \n\t\t\tIt is also important for us that you will take home everything you\u2019ll write and create during workshops. \n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"row\" style=\"margin-top: 30px\">\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Do I need to have something installed on my laptop? </b>\n\t\t</p>\n\t\t<p>\n\t\t\tIt would be helpful to have Django installed before workshops, but wouldn't\n\t\t\texpect you to install anything on your own.We will make sure that one of our\n\t\t\tcoaches will help you out with this task. \n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p>\n\t\t\t<b>Is EuroPython conference good for a total beginner?</b>\n\t\t</p>\n\t\t<p>\n\t\t\tAs a workshop attendee you will get a free ticket to EuroPython - conference for Python programmers. \n\t\t\tEven though you are new to programming,conference is a good place to meet many interesting people \n\t\t\tin the industry and find inspiration.\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<p><b>Is food provided? </b></p>\n\t\t<p>Yes. Thanks to EuroPython, snacks and lunch will be served during workshops. </p>\n\t</div>\n</div>",
@@ -159,7 +188,7 @@
   "pk": 12,
   "fields": {
     "position": 4,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "coach",
     "content": "<div class=\"row\">\n\t<div class=\"col-md-6\">\n\t\t<h2>Be a Mentor!</h2>\n\t\t<p>\n\t\t\tWe would be delighted if you would like to join us as a mentor! \n\t\t\tFill in the form  <a href=\"http://t.co/YvvAFiUvKN\">here</a>, but \n\t\t\tselect the option to be a mentor.\n\t\t</p>\n\t\t<p>\n\t\t\tWe will contact you :)\n\t\t</p>\n\t</div>\n\n\t<div class=\"col-md-6\">\n\t\t<h2>Django Girls</h2>\n\t\t<p>\n\t\t\tDjango Girls Australia is a part of bigger initiative: <a href=\"http://djangogirls.org/\">Django Girls</a>.  \n\t\t\tIt is a non-profit organization and events are organized by volunteers in different places of the world.  \n\t\t</p>\n\t\t<p>\n\t\t\tTo see the source for the program find us on Github: \n\t\t\t<a href=\"https://github.com/DjangoGirls/\">github.com/DjangoGirls</a>.\n\t\t</p>\n\t\t<p>\n\t\t\tIf you want to bring Django Girls to your city, drop us a line: \n\t\t\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a>.\n\t\t</p>\n\t</div>\n</div>",
@@ -171,7 +200,7 @@
   "pk": 13,
   "fields": {
     "position": 5,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "partners",
     "content": "<h3>Sponsors</h3>\n\n<p>\n\tWe couldn't be here without the support from amazing people and organizations \n\twho donated money, knowledge and time to help us make this a reality. \n\tIf you want to contribute and support our goal, please get in touch: \n\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a>\n</p>",
@@ -183,7 +212,7 @@
   "pk": 14,
   "fields": {
     "position": 6,
-    "page": 2,
+    "event": 2,
     "is_public": true,
     "name": "footer",
     "content": "<div class=\"row social\">\n\n\t<div class=\"col-md-4\">\n\t\t<div class=\"facebook\">\n\t\t\t<div class=\"fb-page\" \n\t\t\t     data-href=\"https://www.facebook.com/djangogirls\" \n\t\t\t     data-small-header=\"true\" \n\t\t\t     data-adapt-container-width=\"true\" \n\t\t\t     data-hide-cover=\"true\" \n\t\t\t     data-show-facepile=\"false\" \n\t\t\t     data-show-posts=\"false\"\n\t\t\t>\n\t\t\t\t<div class=\"fb-xfbml-parse-ignore\">\n\t\t\t\t\t<blockquote cite=\"https://www.facebook.com/djangogirls\">\n\t\t\t\t\t\t<a href=\"https://www.facebook.com/djangogirls\">Django Girls</a>\n\t\t\t\t\t</blockquote>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\t<div class=\"twitter\">\n\t\t\t<a href=\"https://twitter.com/djangogirls\" \n\t\t\t   class=\"twitter-follow-button\" \n\t\t\t   data-show-count=\"false\" \n\t\t\t   data-size=\"large\"\n\t\t\t>\n\t\t\t\tFollow @djangogirls\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"col-md-4\">\n\t\tGet in touch:<br> \n\t\t<a href=\"mailto:hello@djangogirls.org\">hello@djangogirls.org</a><br><br>\n\t</div>\n</div>\n\n<div class=\"row credits\">\n\t<div class=\"col-md-12\">\n\t\t\u2665 Django Girls Europe is organized by <a href=\"http://twitter.com/olasitarska\">Ola Sitarska</a> a\n\t\tnd <a href=\"http://twitter.com/asednecka\">Ola Sendecka</a> with the support from \n\t\t<a href=\"http://europython.eu/\">EuroPython 2014</a>.<br>\n\n\t\tDjango Girls Europe is a part of <a href=\"/\">Django Girls</a>.\n\t\t<br>Every participant needs to follow the <a href=\"/pages/coc/\">Code of Conduct</a>.\n\t</div>\n</div>",
@@ -196,7 +225,7 @@
   "fields": {
     "position": 0,
     "title": "About",
-    "page": 1,
+    "event": 1,
     "url": "#values"
   },
   "model": "core.eventpagemenu"
@@ -206,7 +235,7 @@
   "fields": {
     "position": 1,
     "title": "Apply for a pass!",
-    "page": 1,
+    "event": 1,
     "url": "#apply"
   },
   "model": "core.eventpagemenu"
@@ -216,7 +245,7 @@
   "fields": {
     "position": 2,
     "title": "FAQ",
-    "page": 1,
+    "event": 1,
     "url": "#faq"
   },
   "model": "core.eventpagemenu"
@@ -226,7 +255,7 @@
   "fields": {
     "position": 3,
     "title": "Become a coach",
-    "page": 1,
+    "event": 1,
     "url": "#coach"
   },
   "model": "core.eventpagemenu"
@@ -236,7 +265,7 @@
   "fields": {
     "position": 4,
     "title": "Partners",
-    "page": 1,
+    "event": 1,
     "url": "#partners"
   },
   "model": "core.eventpagemenu"
@@ -246,7 +275,7 @@
   "fields": {
     "position": 0,
     "title": "About",
-    "page": 2,
+    "event": 2,
     "url": "#values"
   },
   "model": "core.eventpagemenu"
@@ -256,7 +285,7 @@
   "fields": {
     "position": 1,
     "title": "Apply for a pass!",
-    "page": 2,
+    "event": 2,
     "url": "#apply"
   },
   "model": "core.eventpagemenu"
@@ -266,7 +295,7 @@
   "fields": {
     "position": 2,
     "title": "FAQ",
-    "page": 2,
+    "event": 2,
     "url": "#faq"
   },
   "model": "core.eventpagemenu"
@@ -276,7 +305,7 @@
   "fields": {
     "position": 3,
     "title": "Become a coach",
-    "page": 2,
+    "event": 2,
     "url": "#coach"
   },
   "model": "core.eventpagemenu"
@@ -286,7 +315,7 @@
   "fields": {
     "position": 4,
     "title": "Partners",
-    "page": 2,
+    "event": 2,
     "url": "#partners"
   },
   "model": "core.eventpagemenu"
@@ -294,7 +323,7 @@
 {
   "pk": 1,
   "fields": {
-    "page": 2,
+    "event": 2,
     "text_header": "Apply for a spot at Django Girls [City]!",
     "open_from": "2015-11-07T12:58:24Z",
     "confirmation_mail": "Hi there!This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. Yay! That's a huge step already, we're proud of you!\r\n\r\nMind that this is not a confirmation of participation in the event, but a confirmation that we received your application.\r\n\r\nYou'll receive an email from the team that organizes Django Girls {CITY} soon. You can always reach them by answering to this email or by writing to {your event mail}.\r\nFor your reference, we're attaching your answers below.\r\n\r\nHugs, cupcakes and high-fives!\r\nDjango Girls",
@@ -1511,96 +1540,5 @@
     "user_permissions": []
   },
   "model": "core.user"
-},
-{
-  "pk": 1,
-  "fields": {
-    "email": "berlin@djangogirls.org",
-    "country": "Germany",
-    "photo_credit": "",
-    "team": [
-      2,
-      3
-    ],
-    "is_on_homepage": true,
-    "main_organizer": 2,
-    "photo": "",
-    "date": "2014-07-21",
-    "city": "Berlin",
-    "name": "Django Girls Berlin",
-    "latlng": "52.5170365, 13.3888599",
-    "photo_link": ""
-  },
-  "model": "core.event"
-},
-{
-  "pk": 2,
-  "fields": {
-    "email": "amsterdam@djangogirls.org",
-    "country": "Netherlands",
-    "photo_credit": "",
-    "team": [
-      4
-    ],
-    "is_on_homepage": true,
-    "main_organizer": 4,
-    "photo": "",
-    "date": "2020-03-12",
-    "city": "Amsterdam",
-    "name": "Django Girls Amsterdam",
-    "latlng": "52.374436, 4.8979956033677",
-    "photo_link": ""
-  },
-  "model": "core.event"
-},
-{
-  "pk": 1,
-  "fields": {
-    "organisation": "",
-    "internal_comment": "",
-    "message_to_organisation": "",
-    "meetup_start_date": "2015-11-07T13:02:50Z",
-    "reviewer": 1,
-    "city": "Paris",
-    "meetup_type": "MEET",
-    "recurrence": "Every first thursday of the month",
-    "published_date": "2015-11-07T12:05:12.391Z",
-    "is_recurring": true,
-    "contact_email": "paris@pythonmeetup.com",
-    "review_status": "PUB",
-    "created": "2015-11-07T12:03:03.794Z",
-    "title": "Paris Python Meetup",
-    "description": "Sample description for a meetup.",
-    "website": "",
-    "country": "FR",
-    "expiration_date": "2016-01-06",
-    "meetup_end_date": null
-  },
-  "model": "jobs.meetup"
-},
-{
-  "pk": 2,
-  "fields": {
-    "organisation": "Barcelona Python Organisation",
-    "internal_comment": "",
-    "message_to_organisation": "",
-    "meetup_start_date": "2015-11-24T00:00:00Z",
-    "reviewer": 1,
-    "city": "Barcelon",
-    "meetup_type": "MEET",
-    "recurrence": "",
-    "published_date": "2015-11-07T13:37:16.138Z",
-    "is_recurring": false,
-    "contact_email": "barcelona@pythonbarcelona.org",
-    "review_status": "PUB",
-    "created": "2015-11-07T13:37:06.688Z",
-    "title": "Barcelona monthly",
-    "description": "We are hosting a meetup in Barcelona!",
-    "website": "",
-    "country": "ES",
-    "expiration_date": "2016-01-06",
-    "meetup_end_date": "2015-11-24T12:00:00Z"
-  },
-  "model": "jobs.meetup"
 }
 ]
