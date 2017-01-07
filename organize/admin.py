@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.utils import timezone
 
 from .models import EventApplication, Coorganizer
+from .constants import ON_HOLD, IN_REVIEW
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -9,9 +11,23 @@ class InlineCoorganizerAdmin(admin.TabularInline):
     extra = 1
 
 
+def change_status_to_on_hold(modeladmin, request, queryset):
+    queryset.update(status=ON_HOLD, status_changed_at=timezone.now())
+change_status_to_on_hold.short_description = "Move selected application to on hold"
+
+
+def change_status_to_in_review(modeladmin, request, queryset):
+    queryset.update(status=IN_REVIEW, status_changed_at=timezone.now())
+change_status_to_in_review.short_description = "Move selected application to in review"
+
+
 @admin.register(EventApplication)
 class EventApplicationAdmin(admin.ModelAdmin):
     raw_id_fields = ('previous_event', )
+    actions = [change_status_to_on_hold, change_status_to_in_review]
+    actions_on_top = True
+    actions_on_bottom = False
+
     list_display = (
         'city',
         'country',
