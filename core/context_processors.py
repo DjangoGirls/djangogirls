@@ -1,13 +1,13 @@
 from django.db.models import Sum
 
-from .models import Event, Postmortem
+from .models import Event
 
 
 def statistics(request):
     future_events = Event.objects.future()
     past_events = Event.objects.past()
     countries = Event.objects.values('country').distinct()
-    attendees = Postmortem.objects.all().aggregate(
+    attendees = Event.objects.all().aggregate(
         attendees=Sum('attendees_count'), applicants=Sum('applicants_count'))
 
     return {
