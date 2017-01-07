@@ -10,80 +10,11 @@
 
         <div class="row">
             <div class="col-md-12">
-                {% include 'includes/_organize-progress.html' with active_step=1 %}
-            </div>
-        </div>
+                <h1>Organize Django Girls workshop</h1>
 
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel">
-                    <h1>Prerequisities to organize a Django Girls workshop</h1>
-
-                    <p class="intro">Yay! You want to organize a Django Girls workshop! That’s wonderful. Before we can get you started, there are few things requirements that we’d like to confirm with you to make sure your workshop is going to be planned as smoothly as possible:</p>
-
-                    <form data-required-form action="/organize/commitment/">
-                        <fieldset>
-                            <legend>Confirm that you’ve read the following chapters of our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>:</legend>
-
-                            <ul class="unstyled">
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="step-by-step" name="step-by-step" required />
-                                    <label for="step-by-step">
-                                        <a href="#">Organizing Django Girls workshop step by step</a>
-                                    </label>
-                                </li>
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="environment" name="environment" required />
-                                    <label for="environment">
-                                        <a href="#">Enviornment at Django Girls workshop</a>
-                                    </label>
-                                </li>
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="introduction" name="introduction" required />
-                                    <label for="introduction">
-                                        <a href="#">Introduction to Organizer’s Manual</a>
-                                    </label>
-                                </li>
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="faq" name="faq" required />
-                                    <label for="faq">
-                                        <a href="#">Frequently Asked Questions</a>
-                                    </label>
-                                </li>
-                            </ul>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Confirm that you meet following requirements to organize a workshop:</legend>
-                            <ul class="unstyled">
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="eighteen" name="eighteen" required />
-                                    <label for="eighteen">
-                                        You’re at least 18 years old
-                                    </label>
-                                </li>
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="free" name="free" required />
-                                    <label for="free">
-                                        Your workshop will be free for participants, and women will have preference in attending
-                                    </label>
-                                </li>
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="non-profit" name="non-profit" required />
-                                    <label for="non-profit">
-                                        The event you’re organizing will be non-profit
-                                    </label>
-                                </li>
-                            </ul>
-                        </fieldset>
-
-                        <div class="cta-wrapper">
-                            <button type="submit" class="cta">Get started!</button>
-                        <div class="cta-wrapper">
-                    </form>
+                <div class="cta-wrapper">
+                    <a href="/organize/prerequisites/">Apply to organize a workshop »</a>
                 </div>
-
             </div>
         </div>
 
