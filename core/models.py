@@ -132,6 +132,11 @@ class Event(models.Model):
         help_text="Will be used as part of the event URL (djangogirls.org/______/)")
     is_page_live = models.BooleanField("page published?", default=False)
 
+    attendees_count = models.IntegerField(
+        null=True, blank=True, verbose_name="Number of attendees")
+    applicants_count = models.IntegerField(
+        null=True, blank=True, verbose_name="Number of applicants")
+
     objects = EventManager()
     all_objects = models.Manager()  # This includes deleted objects
 
@@ -177,6 +182,10 @@ class Event(models.Model):
         members = ["{} <{}>".format(x.get_full_name(), x.email)
                    for x in self.team.all()]
         return ", ".join(members)
+
+    @property
+    def has_stats(self):
+        return self.applicants_count and self.attendees_count
 
     def delete(self):
         self.is_deleted = True
@@ -343,32 +352,6 @@ class Coach(models.Model):
                 return DEFAULT_COACH_PHOTO
 
         return DEFAULT_COACH_PHOTO
-
-
-@python_2_unicode_compatible
-class Postmortem(models.Model):
-    event = models.ForeignKey(Event, null=False, blank=False)
-    attendees_count = models.IntegerField(null=False, blank=False,
-                                          verbose_name="Number of attendees")
-    applicants_count = models.IntegerField(null=False, blank=False,
-                                           verbose_name="Number of applicants")
-
-    discovery = models.TextField(null=True, blank=True,
-                                 verbose_name="What was the most important thing you discovered during the workshop?")
-    feedback = models.TextField(null=True, blank=True,
-                                verbose_name="How we can make DjangoGirls better?")
-    costs = models.TextField(null=True, blank=True,
-                             verbose_name="What are the total costs of the event?",
-                             help_text="We only collect this information for statistics and advice for future organizers.")
-    comments = models.TextField(null=True, blank=True,
-                                verbose_name="Anything else you want to share with us?")
-
-    class Meta:
-        verbose_name = "Statistics"
-        verbose_name_plural = "Statistics"
-
-    def __str__(self):
-        return self.event.city
 
 
 @python_2_unicode_compatible

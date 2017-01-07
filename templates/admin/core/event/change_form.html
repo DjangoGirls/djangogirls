@@ -4,9 +4,4 @@
 
 {% block object-tools-items %}
     {{ block.super }}
-    <li>
-        <a href="{% url 'admin:core_postmortem_add' %}?event={{ original.pk }}">
-            {% trans 'Add postmortem' %}
-        </a>
-    </li>
 {% endblock %}
