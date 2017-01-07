@@ -6,12 +6,11 @@ from django_date_extensions.fields import ApproximateDateField
 from core.models import Event
 from core.validators import validate_approximatedate
 
-INVOLVEMENT_CHOICES = (
-    ("newcomer", "I’ve never been to a Django Girls event"),
-    ("attendee", "I’m a former attendee"),
-    ("coach", "I’m a former coach"),
-    ("organizer", "I’m a former organizer"),
-    ("contributor", "I contributed to the tutorial or translations"))
+from .constants import (
+    APPLICATION_STATUS,
+    INVOLVEMENT_CHOICES,
+    NEW,
+)
 
 
 class EventApplication(models.Model):
@@ -35,6 +34,14 @@ class EventApplication(models.Model):
     venue = models.TextField()
     sponsorship = models.TextField()
     coaches = models.TextField()
+
+    # status reflecting state of the event in a triaging process.
+    status = models.CharField(
+        choices=APPLICATION_STATUS,
+        default=NEW,
+        max_length=10,
+    )
+    status_changed_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         permissions = (
