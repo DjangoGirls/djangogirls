@@ -27,7 +27,7 @@ def notify_new_user(user, event, password):
     send_email(content, subject, user)
 
 
-def send_email(user, content, subject):
+def send_email(content, subject, user):
     msg = EmailMessage(subject,
                        content,
                        "Django Girls <hello@djangogirls.org>",
