@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDateField
 
 from core.create_event import create_event_from_event_application
+from core.create_organizers import create_organizers
 from core.models import Event
 from core.validators import validate_approximatedate
 
@@ -59,13 +60,15 @@ class EventApplication(models.Model):
              "Can accept Organize Applications"),
         )
 
-    def accept(self):
+    def deploy_event(self):
+        """ Deploy Event based on the current EventApplication """
         # create Event
         event = create_event_from_event_application(event_application=self)
-        add_organizers(team, event)
 
-        # copy organizers and add them to Event
-        # set status to ACCEPTED
+        # TODO: use method created in separate branch to create gmail accoout
+        # and get password from it.
+        create_organizers(event, event_application=self, email_password="PASS")
+
         # create gmail account
         # send email to organizers with gmail password
         # add organizers to slack
