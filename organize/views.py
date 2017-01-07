@@ -6,7 +6,7 @@ from .forms import (
 
 FORMS = [("previous_event", PreviousEventForm),
          ("application", ApplicationForm),
-         ("organizers", OrganizersForm)
+         ("organizers", OrganizersForm),
          ("workshop", WorkshopForm)]
 
 TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
