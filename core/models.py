@@ -141,6 +141,11 @@ class Event(models.Model):
     objects = EventManager()
     all_objects = models.Manager()  # This includes deleted objects
 
+    # Flags for email states
+    thank_you_email_sent = models.DateTimeField(null=True, blank=True)
+    submit_information_email_sent = models.DateTimeField(null=True, blank=True)
+    offer_help_email_sent = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return self.name
 
