@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools %}
+
+    <h4 class="italic-title">Triaging</h4>
+    <div class="box save-box">
+      <button class="btn btn-high btn-info">Accept application</button>
+      <button class="btn btn-high">Move to In Review</button>
+      <button class="btn btn-high">Move to Hold</button>
+      <button class="btn btn-high">Reject application</button>
+    </div>
+
+    {{ block.super }}
+
+{% endblock %}
