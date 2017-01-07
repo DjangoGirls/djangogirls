@@ -202,28 +202,6 @@ class EventForm(forms.ModelForm):
             'city', 'country', 'date', 'email', 'latlng', 'name',
             'page_title', 'page_url']
 
-    def add_default_content(self, event):
-        """Populate EventPageContent with default layout"""
-        data = get_default_eventpage_data()
-
-        for i, section in enumerate(data):
-            section['position'] = i
-            section['content'] = render_to_string(section['template'])
-            del section['template']
-            event.content.create(**section)
-
-    def add_default_menu(self, event):
-        """Populate EventPageMenu with default links"""
-        data = get_default_menu()
-
-        for i, link in enumerate(data):
-            link['position'] = i
-            event.menu.create(**link)
-
-    def add_default_data(self, event):
-        self.add_default_content(event)
-        self.add_default_menu(event)
-
     @transaction.atomic
     def save(self, commit=True):
         """Save the event and create default content in case of new instances"""
@@ -231,5 +209,7 @@ class EventForm(forms.ModelForm):
         instance = super(EventForm, self).save(commit=commit)
         if commit and created:
             # create default content
-            self.add_default_data(instance)
+            instance.add_default_content()
+            instance.add_default_menu()
+
         return instance

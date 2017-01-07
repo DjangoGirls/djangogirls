@@ -12,11 +12,16 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 
 from .validators import validate_approximatedate
+from .default_eventpage_content import (
+    get_default_eventpage_data,
+    get_default_menu,
+)
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
@@ -191,6 +196,24 @@ class Event(models.Model):
     def delete(self):
         self.is_deleted = True
         self.save()
+
+    def add_default_content(self):
+        """Populate EventPageContent with default layout"""
+        data = get_default_eventpage_data()
+
+        for i, section in enumerate(data):
+            section['position'] = i
+            section['content'] = render_to_string(section['template'])
+            del section['template']
+            self.content.create(**section)
+
+    def add_default_menu(self):
+        """Populate EventPageMenu with default links"""
+        data = get_default_menu()
+
+        for i, link in enumerate(data):
+            link['position'] = i
+            self.menu.create(**link)
 
 
 @python_2_unicode_compatible
