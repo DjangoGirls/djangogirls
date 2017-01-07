@@ -14,7 +14,7 @@ def notify_existing_user(user, event):
     send_email(content, subject, user)
 
 
-def notify_new_user(user, event, password):
+def notify_new_user(user, event, password, errors=None):
     """ Sends e-mail to newly created organizer that their account was created
         and that they were added to the Event.
     """
@@ -22,6 +22,7 @@ def notify_new_user(user, event, password):
         'user': user,
         'event': event,
         'password': password,
+        'errors': errors
     })
     subject = 'Access to Django Girls website'
     send_email(content, subject, user)
