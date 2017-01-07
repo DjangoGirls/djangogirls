@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django_date_extensions.fields import ApproximateDateField
 
@@ -10,6 +11,8 @@ from .constants import (
     APPLICATION_STATUS,
     INVOLVEMENT_CHOICES,
     NEW,
+    ON_HOLD,
+    REJECTED,
 )
 
 
@@ -51,6 +54,16 @@ class EventApplication(models.Model):
             ("can_accept_organize_application",
              "Can accept Organize Applications"),
         )
+
+    def clean(self):
+        if self.status == ON_HOLD and not self.comment:
+            raise ValidationError({
+                'comment': 'This field is required.'
+            })
+        if self.status == REJECTED and not self.rejection_reason:
+            raise ValidationError({
+                'rejection_reason': 'This field is required.'
+            })
 
 
 class Coorganizer(models.Model):

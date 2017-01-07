@@ -1,0 +1,23 @@
+[
+{
+    "fields": {
+        "date": "2080-10-10",
+        "city": "London",
+        "country": "Country",
+        "website_slug": "london",
+        "main_organizer_email": "test@test.com",
+        "main_organizer_first_name": "Anna",
+        "main_organizer_last_name": "Smith",
+        "about_you": "",
+        "why": "",
+        "involvement": "",
+        "experience": "",
+        "venue": "",
+        "sponsorship": "",
+        "coaches": "",
+        "created_at": "2014-09-03T13:38:13.794Z"
+    },
+    "model": "organize.eventapplication",
+    "pk": 1
+}
+]
