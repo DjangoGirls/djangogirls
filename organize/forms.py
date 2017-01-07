@@ -50,10 +50,10 @@ class OrganizersForm(forms.Form):
 
 
 class WorkshopForm(forms.Form):
-    date = ApproximateDateFormField()
-    city = forms.CharField(max_length=200)
+    date = ApproximateDateFormField(widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    city = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'compact-input'}))
     country = LazyTypedChoiceField(choices=countries)
-    website_slug = forms.SlugField()
+    website_slug = forms.SlugField(widget=forms.TextInput(attrs={'class': 'compact-input'}))
 
     def clean_date(self):
         date = self.cleaned_data.get('date')

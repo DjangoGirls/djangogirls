@@ -1,1 +1,37 @@
-Thank you!
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+<div class="container organize">
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'includes/_organize-progress.html' with active_step=6 %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <h1>🎉 You rock! 🎉</h1>
+
+                <p>Thank you so much for taking the time to submit your application to organize the Django Girls workshop in your city. We’re now going to review your application and will get back to you shortly.</p>
+
+                <p class="tight-bottom">In the meantime, you can spend time already preparing to organizing your workshop! Here are few things that can help to get you started:</p>
+
+                <ul class="bulleted">
+                    <li>
+                        <span>Read our <a href="#">Organizer’s Manual</a></span>
+                    </li>
+                    <li>
+                        <span>Read experiences of our organizers in <a href="#">Seoul</a>, <a href="#">Wrocław</a>, <a href="#">Windhoek</a> and <a href="#">Budapest</a></span>
+                    </li>
+                    <li>
+                        <span>Get to know our <a href="#">Coaching Guide</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

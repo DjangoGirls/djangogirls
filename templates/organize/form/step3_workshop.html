@@ -6,19 +6,103 @@
 {% endblock %}
 
 {% block content %}
-<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-<form action="" method="post">{% csrf_token %}
-<table>
-{{ wizard.management_form }}
-{% if wizard.form.forms %}
-    {{ wizard.form.management_form }}
-    {% for form in wizard.form.forms %}
-        {{ form }}
-    {% endfor %}
-{% else %}
-    {{ wizard.form }}
-{% endif %}
-</table>
-<input type="submit" value="{% trans "submit" %}"/>
-</form>
+
+<div class="container organize">
+
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'includes/_organize-progress.html' with active_step=5 %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <h1>Tell us all about your Django Girls event!</h1>
+
+                <form action="" method="post">{% csrf_token %}
+                    {{ wizard.management_form }}
+
+                    <fieldset class="form-section">
+                        <legend class="form-section-heading">Where?</legend>
+                        <p class="form-section-subhead">Provide a city in which the workshop is going to take place</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-4">
+                                <label for="{{ wizard.form.city.id_for_label }}" class="compact-label">City</label>
+                                {{ wizard.form.city }}
+                            </li>
+                            <li class="col-sm-12 col-md-4">
+                                <label for="{{ wizard.form.country.id_for_label }}" class="compact-label">Country</label>
+                                {{ wizard.form.country }}
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend class="form-section-heading">When?</legend>
+                        <p class="form-section-subhead">The date of your event should be at least in 1.5 months in the future, but we recommend 3 months for easier planning</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-4">
+                                <label for="{{ wizard.form.date.id_for_label }}" class="compact-label">Date (or month) of the event</label>
+                                {{ wizard.form.date }}
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="form-section">
+                        <legend class="form-section-heading">Your event website</legend>
+                        <p class="form-section-subhead">All Django Girls event pages have address http://djangogirls.org/cityname. If you need a different one, enter it here:</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-4">
+                                <label for="{{ wizard.form.website_slug.id_for_label }}" class="compact-label">http://djangogirls.org/</label>
+                                {{ wizard.form.website_slug }}
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <section class="form-section">
+                        <label class="form-section-heading">Do you have a venue in mind?</label>
+                        <p class="form-section-subhead">Tell us about your ideas on where to host the event in your city.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                <textarea class="compact-input" cols="40" id="" name="" rows="10"></textarea>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="form-section">
+                        <label class="form-section-heading">Do you have a plan which companies will you approach for sponsorship?</label>
+                        <p class="form-section-subhead">Doesn’t need to be very specific yet, but we would love to see your ideas.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                <textarea class="compact-input" cols="40" id="" name="" rows="10"></textarea>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="form-section">
+                        <label class="form-section-heading">Do you have potential coaches in mind?</label>
+                        <p class="form-section-subhead">Have you approched them to ask if they would be interested in helping out?</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                <textarea class="compact-input" cols="40" id="" name="" rows="10"></textarea>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <div class="cta-wrapper">
+                        <button type="submit" class="cta">Go to next step</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
