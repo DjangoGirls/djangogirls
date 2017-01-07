@@ -17,7 +17,6 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'main_organizer',
         'status',
         'comment',
-        'rejection_reason',
     )
     inlines = (InlineCoorganizerAdmin,)
 
