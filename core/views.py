@@ -169,3 +169,6 @@ def sponsor_request(request):
     return render(request, 'event/sponsor-request.html', {
         'deadline': next_deadline()
     })
+
+def coc(request):
+    return render(request, 'core/coc.html', {})

@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
     url(r'^privacy-cookies/$', views.privacy_cookies, name='privacy-cookies'),
     url(r'^workshop-box/$', views.workshop_box, name='workshop-box'),
+    url(r'^coc/$', views.coc, name='coc'),
 
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
     url(r'^sponsor-request/$', views.sponsor_request, name='sponsor-request'),
