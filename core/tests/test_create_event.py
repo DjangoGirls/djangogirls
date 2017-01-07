@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from organize.models import EventApplication
-from organize.create_event import create_event_from_event_application
+from core.create_event import create_event_from_event_application
 
 
 EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
