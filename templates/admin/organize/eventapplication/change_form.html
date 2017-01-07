@@ -2,15 +2,25 @@
 {% load i18n %}
 
 {% block object-tools %}
-
     <h4 class="italic-title">Triaging</h4>
     <div class="box save-box">
-      <button class="btn btn-high btn-info">Accept application</button>
-      <button class="btn btn-high">Move to In Review</button>
-      <button class="btn btn-high">Move to Hold</button>
-      <button class="btn btn-high">Reject application</button>
+      {% if original.status != 'rejected' and original.status != 'accepted' %}
+        <a class="btn btn-high btn-info" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'accepted' %}">
+          Accept application
+        </a>
+        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'in_review' %}">
+          Move to In Review
+        </a>
+        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'on_hold' %}">
+          Move to Hold
+        </a>
+        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'rejected' %}">
+          Reject application
+        </a>
+      {% else %}
+        Application closed.
+      {% endif %}
     </div>
 
     {{ block.super }}
-
 {% endblock %}
