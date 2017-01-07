@@ -234,9 +234,9 @@ class Event(models.Model):
         self.team.add(user)
         if is_new_user:
             user.invite_to_slack()
-            notify_new_user(user, password)
+            notify_new_user(user, event=self, password=password)
         else:
-            notify_existing_user(user)
+            notify_existing_user(user, event=self)
 
 
 @python_2_unicode_compatible
