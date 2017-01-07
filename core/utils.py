@@ -32,7 +32,7 @@ def get_event(city, is_user_authenticated, is_preview):
         return None
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
-        past = event.event.date <= now_approx
+        past = event.date <= now_approx
         return (city, past)
 
     return event
