@@ -18,11 +18,13 @@ class PreviousEventForm(forms.Form):
         widget=forms.Select(
             attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
 
-    def clean_has_organized_before(self):
+    def clean(self):
         data = self.cleaned_data
+        print(self.cleaned_data)
         if (data.get('has_organized_before') == 'True' and
                 not data.get('previous_event')):
-            raise forms.ValidationError('You have to choose an event.')
+            raise forms.ValidationError({
+                'has_organized_before': ['You have to choose an event.']})
 
         return data
 
