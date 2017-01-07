@@ -2,13 +2,16 @@ from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
-from django.core.validators import validate_email
-from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
+from django.core.validators import validate_email
+from django.db import transaction
+from django.template.loader import render_to_string
 from slacker import Error as SlackerError
 
-from core.models import ContactEmail, Event, User
-from core.slack_client import user_invite
+from .default_eventpage_content import (get_default_eventpage_data,
+                                        get_default_menu)
+from .models import ContactEmail, Event, User
+from .slack_client import user_invite
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -190,3 +193,47 @@ class ContactForm(forms.ModelForm):
             if not event:
                 raise forms.ValidationError('Please select the event')
         return event
+
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = [
+            'city', 'country', 'date', 'email', 'latlng', 'name',
+            'page_title', 'page_url']
+
+    def add_default_content(self, event):
+        """Populate EventPageContent with default layout"""
+        data = get_default_eventpage_data()
+
+        i = 0
+        for section in data:
+            section['position'] = i
+            section['content'] = render_to_string(section['template'])
+            del section['template']
+            event.content.create(**section)
+            i += 1
+
+    def add_default_menu(self, event):
+        """Populate EventPageMenu with default links"""
+        data = get_default_menu()
+
+        i = 0
+        for link in data:
+            link['position'] = i
+            event.menu.create(**link)
+            i += 1
+
+    def add_default_data(self, event):
+        self.add_default_content(event)
+        self.add_default_menu(event)
+
+    @transaction.atomic
+    def save(self, commit=True):
+        """Save the event and create default content in case of new instances"""
+        created = not self.instance.pk
+        instance = super(EventForm, self).save(commit=commit)
+        if commit and created:
+            # create default content
+            self.add_default_data(instance)
+        return instance

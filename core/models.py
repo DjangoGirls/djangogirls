@@ -15,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
+
 from .validators import validate_approximatedate
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
