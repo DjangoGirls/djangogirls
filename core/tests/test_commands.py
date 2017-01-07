@@ -47,7 +47,7 @@ class CommandsTestCase(TestCase):
         command_input = (
             "1\n"
             "Jan Kowalski\n"
-            "jan@kowalski.example\n"
+            "jan@kowalski.example.org\n"
             "N\n"
         )
 
@@ -68,9 +68,9 @@ class CommandsTestCase(TestCase):
             "Neverland\n"
             "{random_day}\n"
             "oz\n"
-            "oz@djangogirs.org\n"
+            "oz\n"
             "Jan Kowalski\n"
-            "jan@kowalski.example\n"
+            "jan@kowalski.example.org\n"
             "N\n"
         ).format(random_day=random_day.strftime("%d/%m/%Y"))
 
@@ -92,12 +92,12 @@ class CommandsTestCase(TestCase):
             "Neverland\n"
             "{random_day}\n"
             "oz\n"
-            "oz@djangogirs.org\n"
+            "oz\n"
             "Jan Kowalski\n"
-            "jan@kowalski.example\n"
+            "jan@kowalski.example.org\n"
             "Y\n"
             "Eleanor Organizer\n"
-            "ealenor@organizer.extra\n"
+            "ealenor@organizer.example.org\n"
             "N"
         ).format(random_day=random_day.strftime("%d/%m/%Y"))
 
@@ -119,9 +119,9 @@ class CommandsTestCase(TestCase):
             "Neverland\n"
             "{random_day}\n"
             "oz\n"
-            "oz@djangogirs.org\n"
+            "oz\n"
             "Jan Kowalski\n"
-            "jan@kowalski.example\n"
+            "jan@kowalski.example.org\n"
             "N\n"
         ).format(random_day=random_day.strftime("%d/%m/%Y"))
 
@@ -131,7 +131,7 @@ class CommandsTestCase(TestCase):
             input=command_input
         )
         assert Event.objects.count() == 5
-        short_email_body = """Event e-mail is: oz@djangogirs.org@djangogirls.org
+        short_email_body = """Event e-mail is: oz@djangogirls.org
 Event website address is: http://djangogirls.org/oz"""
         assert short_email_body in result.output
 
