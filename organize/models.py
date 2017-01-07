@@ -115,6 +115,21 @@ class EventApplication(models.Model):
         msg.content_subtype = "html"
         msg.send()
 
+    def send_event_deployed_email(self, event, email_password):
+        """
+        Sends a event deployed email to all organizers who created this application
+        """
+        subject = "Congrats! Your application to organize Django Girls {} has been accepted!".format(self.city)
+        content = render_to_string('emails/organize/event_deployed.html', {
+            'event': event,
+            'password': email_password,
+        })
+        recipients = self.get_all_recipients()
+        recipients.append(event.email)  # add event's djangogirls.org email
+        msg = EmailMessage(subject, content, settings.DEFAULT_FROM_EMAIL, recipients)
+        msg.content_subtype = "html"
+        msg.send()
+
 
 class Coorganizer(models.Model):
     event_application = models.ForeignKey(
