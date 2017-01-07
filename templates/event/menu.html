@@ -16,7 +16,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         {% for item in menu %}
-        <li><a href="{% build_menu_item_url item.url page.url %}">{{ item.title }}</a></li>
+        <li><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>
     </div><!--/.nav-collapse -->

@@ -102,22 +102,41 @@ def validate_approximatedate(date):
 @python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    date = ApproximateDateField(null=True, blank=False, validators=[
-                                validate_approximatedate])
+    date = ApproximateDateField(
+        null=True, blank=False, validators=[validate_approximatedate])
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
-    latlng = models.CharField(max_length=30, null=True, blank=True)
+    latlng = models.CharField("latitude and longitude", max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
                               help_text="The best would be 356 x 210px")
-    photo_credit = models.CharField(max_length=200, null=True, blank=True, help_text=mark_safe("Only use pictures with a <a href='https://creativecommons.org/licenses/'>creative commons license</a>."))
-    photo_link = models.URLField(null=True, blank=True)
-    email = models.EmailField(max_length=75, null=True, blank=True)
+    photo_credit = models.CharField(
+        max_length=200, null=True, blank=True,
+        help_text=mark_safe(
+            "Only use pictures with a "
+            "<a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."))
+    photo_link = models.URLField("photo URL", null=True, blank=True)
+    email = models.EmailField(
+        "event email", max_length=75, null=True, blank=True)
     main_organizer = models.ForeignKey(
         User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
-    is_on_homepage = models.BooleanField(default=False)
-    is_deleted = models.BooleanField(default=False)
+    is_on_homepage = models.BooleanField("visible on homepage?", default=False)
+    is_deleted = models.BooleanField("deleted?", default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+    page_title = models.CharField("title", max_length=200, blank=True)
+    page_description = models.TextField(
+        "description", blank=True,
+        default="Django Girls is a one-day workshop about programming "
+                "in Python and Django tailored for women.")
+    page_main_color = models.CharField(
+        "main color", max_length=6, blank=True,
+        help_text="Main color of the chapter in HEX", default="FF9400")
+    page_custom_css = models.TextField("custom CSS rules", blank=True)
+    page_url = models.CharField(
+        "URL slug", max_length=200, blank=True,
+        help_text="Will be used as part of the event URL (djangogirls.org/______/)")
+    is_page_live = models.BooleanField("page published?", default=False)
 
     objects = EventManager()
     all_objects = models.Manager()  # This includes deleted objects
@@ -126,7 +145,7 @@ class Event(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('pk', )
+        ordering = ('-date', )
         verbose_name_plural = "List of events"
 
     def is_upcoming(self):
@@ -164,44 +183,6 @@ class Event(models.Model):
         members = ["{} <{}>".format(x.get_full_name(), x.email)
                    for x in self.team.all()]
         return ", ".join(members)
-
-    def delete(self):
-        self.is_deleted = True
-        self.save()
-
-
-class EventPageManager(models.Manager):
-
-    def get_queryset(self):
-        return super(EventPageManager, self).get_queryset().filter(is_deleted=False)
-
-
-@python_2_unicode_compatible
-class EventPage(models.Model):
-    event = models.OneToOneField(Event, primary_key=True)
-    title = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(
-        null=True, blank=True,
-        default="Django Girls is a one-day workshop about programming "
-                "in Python and Django tailored for women.")
-    main_color = models.CharField(
-        max_length=6, null=True, blank=True,
-        help_text="Main color of the chapter in HEX", default="FF9400")
-    custom_css = models.TextField(null=True, blank=True)
-    url = models.CharField(max_length=200, null=True, blank=True)
-
-    is_live = models.BooleanField(null=False, blank=False, default=False)
-    is_deleted = models.BooleanField(default=False)
-
-    objects = EventPageManager()
-    all_objects = models.Manager()  # This includes deleted objects
-
-    def __str__(self):
-        return "Website for %s" % self.event.name
-
-    class Meta:
-        ordering = ('title', )
-        verbose_name = "Website"
 
     def delete(self):
         self.is_deleted = True
@@ -267,8 +248,8 @@ class ContactEmail(models.Model):
 
 @python_2_unicode_compatible
 class EventPageContent(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="content")
+    event = models.ForeignKey(Event, null=False,
+                              blank=False, related_name="content")
     name = models.CharField(null=False, blank=False, max_length=100)
     content = models.TextField(
         null=False, blank=False, help_text="HTML allowed")
@@ -283,7 +264,7 @@ class EventPageContent(models.Model):
     sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
 
     def __str__(self):
-        return "%s at %s" % (self.name, self.page.event)
+        return "%s at %s" % (self.name, self.event)
 
     class Meta:
         ordering = ("position", )
@@ -292,8 +273,8 @@ class EventPageContent(models.Model):
 
 @python_2_unicode_compatible
 class EventPageMenu(models.Model):
-    page = models.ForeignKey(EventPage, null=False,
-                             blank=False, related_name="menu")
+    event = models.ForeignKey(Event, null=False,
+                              blank=False, related_name="menu")
     title = models.CharField(max_length=255, null=False, blank=False)
     url = models.CharField(
         max_length=255, null=False, blank=False,

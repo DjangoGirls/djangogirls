@@ -9,6 +9,8 @@ urlpatterns = [
     # Redirect old links:
     url(r'^pages/in-your-city/$', RedirectView.as_view(url='/organize/', permanent=True)),
     url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
+    url(r'^admin/core/eventpage/(\d+)/',
+        RedirectView.as_view(pattern_name='admin:core_event_change')),
 
     # Admin link for password reset
     # See: https://github.com/darklow/django-suit/blob/92a745d72935622220eca80edfce779419c30094/suit/templates/admin/login.html#L61

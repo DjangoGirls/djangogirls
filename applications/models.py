@@ -7,7 +7,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
-from core.models import EventPage, User
+from core.models import Event, User
 
 from .utils import DEFAULT_QUESTIONS
 
@@ -42,7 +42,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 @python_2_unicode_compatible
 class Form(models.Model):
-    page = models.OneToOneField(EventPage, null=False, blank=False)
+    event = models.OneToOneField(Event, null=False)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
@@ -72,7 +72,7 @@ class Form(models.Model):
         null=True, verbose_name="Application process is open until")
 
     def __str__(self):
-        return 'Application form for {}'.format(self.page.event.name)
+        return 'Application form for {}'.format(self.event.name)
 
     def save(self, *args, **kwargs):
         is_form_new = False if self.pk else True
@@ -210,14 +210,14 @@ class Application(models.Model):
         return self.rsvp_no_code
 
     @classmethod
-    def get_by_rsvp_code(self, code, page):
+    def get_by_rsvp_code(self, code, event):
         """ Returns application and RSVP status or None """
         try:
-            application = self.objects.get(rsvp_yes_code=code, form__page=page)
+            application = self.objects.get(rsvp_yes_code=code, form__event=event)
             return application, RSVP_YES
         except self.DoesNotExist:
             try:
-                application = self.objects.get(rsvp_no_code=code, form__page=page)
+                application = self.objects.get(rsvp_no_code=code, form__event=event)
                 return application, RSVP_NO
             except self.DoesNotExist:
                 return None, None
@@ -291,7 +291,7 @@ class Email(models.Model):
         return self.subject
 
     def get_rsvp_link(self, code):
-        return 'http://djangogirls.org/{}/rsvp/{}'.format(self.form.page.url, code)
+        return 'http://djangogirls.org/{}/rsvp/{}'.format(self.form.event.page_url, code)
 
     def add_rsvp_links(self, body, application):
         body = body.replace('[rsvp-url-yes]', self.get_rsvp_link(application.get_rsvp_yes_code()))
@@ -312,7 +312,9 @@ class Email(models.Model):
     def send(self):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
-        self.sent_from = self.form.page.event.email or '{}@djangogirls.org'.format(self.form.page.url)
+        self.sent_from = (
+            self.form.event.email or
+            '{}@djangogirls.org'.format(self.form.event.page_url))
         successfuly_sent = []
         failed_to_sent = []
 

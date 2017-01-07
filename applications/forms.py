@@ -80,17 +80,17 @@ class ApplicationForm(forms.Form):
                     application.email = value
                     application.save()
 
-        if not self.form.page.event.email:
+        if not self.form.event.email:
             # If event doesn't have an email (legacy events), create
             # it just by taking the url. In 99% cases, it is correct.
-            self.form.page.event.email = "{}@djangogirls.org".format(
-                self.form.page.url)
-            self.form.page.event.save()
+            self.form.event.email = "{}@djangogirls.org".format(
+                self.form.event.page_url)
+            self.form.event.save()
 
         if application.email:
             # Send confirmation email
             subject = "Confirmation of your application for {}".format(
-                self.form.page.title)
+                self.form.event.page_title)
             body = render_to_string(
                 'emails/application_confirmation.html',
                 {
@@ -98,7 +98,7 @@ class ApplicationForm(forms.Form):
                     'intro': self.form.confirmation_mail,
                 }
             )
-            msg = EmailMessage(subject, body, self.form.page.event.email, [
+            msg = EmailMessage(subject, body, self.form.event.email, [
                                application.email, ])
             msg.content_subtype = "html"
             try:

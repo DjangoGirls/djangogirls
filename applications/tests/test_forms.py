@@ -4,17 +4,16 @@ from django.test import TestCase
 
 from applications.forms import ApplicationForm
 from applications.models import Application, Form, Question
-from core.models import Event, EventPage
+from core.models import Event
 
 
 class MenuTest(TestCase):
 
     def setUp(self):
-        self.event = Event.objects.create(name='Test', city='Test',
-                                          country='Test')
-        self.page = EventPage.objects.create(event=self.event,
-                                             is_live=True, url='test')
-        self.form = Form.objects.create(page=self.page)
+        self.event = Event.objects.create(
+            name='Test', city='Test', country='Test',
+            is_page_live=True, page_url='test')
+        self.form = Form.objects.create(event=self.event)
 
         os.environ['RECAPTCHA_TESTING'] = 'True'
 
