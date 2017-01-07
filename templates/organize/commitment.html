@@ -1,1 +1,48 @@
-✨ Django Girls Organizer Commitement ✨
+{% extends 'global/base.html' %}
+{% load staticfiles rev %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container organize">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'includes/_organize-progress.html' with active_step=2 %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <h1>✨ Django Girls Organizer Commitement ✨</h1>
+
+                    <p>Django Girls is an initiative aimed at introducing women who have never coded before to the world of technology and increasing the diversity within the tech industry. We do that by organizing workshops and inviting women to join us to learn how to build the internet using HTML, CSS, Python and Django <strong>in a safe, friendly and inclusive environment.</strong>  </p>
+
+                    <p class="tight-bottom">As a Django Girls Organizer, you make a commitement to foster and advance Django Girls values:</p>
+
+                    <ul class="bulleted">
+                        <li>
+                            <span>The workshop you organize will strive to provide safe, inclusive, friendly and positive experience for everyone attending and coaching</span>
+                        </li>
+                        <li>
+                            <span>You will require everyone involved with the workshop to comply with <a href="#">Django Girls Code of Conduct</a></span>
+                        </li>
+                        <li>
+                            <span>You’ll strive to have tons of fun while organizing your amazing workshop! 🙌</span>
+                        </li>
+                    </ul>
+
+                    <div class="cta-wrapper">
+                        <a href="/organize/application/" class="cta">Sign the commitement</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
