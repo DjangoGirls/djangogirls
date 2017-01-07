@@ -1,6 +1,12 @@
+from dateutil.parser import parse
 from django import forms
+from django_countries import countries
+from django_countries.fields import LazyTypedChoiceField
+from django_date_extensions.fields import ApproximateDateFormField
+
 
 from core.models import Event
+from core.validators import validate_approximatedate
 from .models import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
@@ -19,14 +25,13 @@ class PreviousEventForm(forms.Form):
             attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
 
     def clean(self):
-        data = self.cleaned_data
-        print(self.cleaned_data)
-        if (data.get('has_organized_before') == 'True' and
-                not data.get('previous_event')):
+        has_organized_before = self.cleaned_data.get('has_organized_before')
+        previous_event = self.cleaned_data.get('previous_event')
+        if (has_organized_before == 'True' and not previous_event):
             raise forms.ValidationError({
                 'has_organized_before': ['You have to choose an event.']})
 
-        return data
+        return self.cleaned_data
 
 
 class ApplicationForm(forms.Form):
@@ -46,4 +51,12 @@ class OrganizersForm(forms.Form):
 
 
 class WorkshopForm(forms.Form):
-    pass
+    date = ApproximateDateFormField()
+    city = forms.CharField(max_length=200)
+    country = LazyTypedChoiceField(choices=countries)
+    website_slug = forms.SlugField()
+
+    def clean_date(self):
+        date = self.cleaned_data.get('date')
+        validate_approximatedate(date)
+        return self.clean_date

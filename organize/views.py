@@ -22,7 +22,8 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
-        # do_something_with_the_form_data(form_list)
+        print("FINISHED")
+        print(form_list)
         return redirect('organize:form_thank_you')
 
 
