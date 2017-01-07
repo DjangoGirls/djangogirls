@@ -5,6 +5,7 @@ from smtplib import SMTPException
 
 import icalendar
 from django.contrib.auth import models as auth_models
+from django.contrib.auth.models import Group
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
@@ -17,6 +18,7 @@ from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 
+from .slack_client import user_invite
 from .validators import validate_approximatedate
 from .default_eventpage_content import (
     get_default_eventpage_data,
@@ -60,6 +62,18 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     class Meta:
         verbose_name = "Organizer"
         verbose_name_plural = "Organizers"
+
+    def invite_to_slack(self):
+        user_invite(self.email, self.first_name)
+
+    def generate_password(self):
+        password = User.objects.make_random_password()
+        self.set_password(password)
+        return password
+
+    def add_to_organizers_group(self):
+        group = Group.objects.get(name="Organizers")
+        self.groups.add(group)
 
     def __str__(self):
         if self.first_name == '' and self.last_name == '':
