@@ -19,4 +19,3 @@ APPLICATION_STATUS = (
     (ACCEPTED, "Accepted"),
     (REJECTED, "Rejected"),
 )
-

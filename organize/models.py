@@ -14,6 +14,7 @@ from .constants import (
     ON_HOLD,
     REJECTED,
 )
+from .create_event import create_event_from_event_application
 
 
 class EventApplication(models.Model):
@@ -54,6 +55,17 @@ class EventApplication(models.Model):
             ("can_accept_organize_application",
              "Can accept Organize Applications"),
         )
+
+    def accept(self):
+        # create Event
+        event = create_event_from_event_application(event_application=self)
+
+        # copy data to Event
+        # copy organizers and add them to Event
+        # set status to ACCEPTED
+        # create gmail account
+        # send email to organizers with gmail password
+        # add organizers to slack
 
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
