@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from django.utils import timezone
 from django.conf.urls import url
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 
 from .models import EventApplication, Coorganizer
 from .constants import ON_HOLD, IN_REVIEW, REJECTED, ACCEPTED
@@ -132,10 +132,17 @@ class EventApplicationAdmin(admin.ModelAdmin):
             application.status = new_status
             application.status_changed_at = timezone.now()
             application.save()
-        elif new_status == REJECTED:
-            application.reject()
-        elif new_status == ACCEPTED:
-            application.accept()
+        elif new_status in [REJECTED, ACCEPTED]:
+            if request.method == 'GET':
+                return render(request, 'admin/organize/eventapplication/view_change_status.html', {
+                    'application': application,
+                    'new_status': new_status
+                })
+            elif request.method == 'POST':
+                if new_status == REJECTED:
+                    application.reject()
+                else:
+                    application.accept()
         else:
             messages.error(request, 'Invalid status provided for application')
             return redirect('admin:organize_eventapplication_change', application.id)
