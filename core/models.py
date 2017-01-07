@@ -24,6 +24,7 @@ from .default_eventpage_content import (
     get_default_eventpage_data,
     get_default_menu,
 )
+from .emails import notify_existing_user, notify_new_user
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
@@ -228,6 +229,14 @@ class Event(models.Model):
         for i, link in enumerate(data):
             link['position'] = i
             self.menu.create(**link)
+
+    def invite_organizer_to_team(self, user, is_new_user, password):
+        self.team.add(user)
+        if is_new_user:
+            user.invite_to_slack()
+            notify_new_user(user, password)
+        else:
+            notify_existing_user(user)
 
 
 @python_2_unicode_compatible
