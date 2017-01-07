@@ -7,6 +7,10 @@ from core.default_eventpage_content import (
 from core.models import Event
 
 
+# TODO: Probably this is not the best place for these two functions.
+# Make sure to rethink it once again and refactor core.forms to use
+# them, so we do not repeat the code and we preserve ability to create
+# Event through Django admin
 def _add_default_content(event):
     """Populate EventPageContent with default layout"""
     data = get_default_eventpage_data()
