@@ -1,13 +1,13 @@
-from formtools.wizard.views import SessionWizardView
+from formtools.wizard.views import NamedUrlSessionWizardView
 from django.shortcuts import redirect, render
 
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersForm)
 
-FORMS = [("previous_event", PreviousEventForm),
+FORMS = (("previous_event", PreviousEventForm),
          ("application", ApplicationForm),
          ("organizers", OrganizersForm),
-         ("workshop", WorkshopForm)]
+         ("workshop", WorkshopForm))
 
 TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
              "application": "organize/form/step2_application.html",
@@ -15,7 +15,7 @@ TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
              "workshop": "organize/form/step3_workshop.html"}
 
 
-class OrganizeFormWizard(SessionWizardView):
+class OrganizeFormWizard(NamedUrlSessionWizardView):
     form_list = FORMS
 
     def get_template_names(self):
