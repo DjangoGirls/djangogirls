@@ -1,9 +1,3 @@
-from django.template.loader import render_to_string
-
-from core.default_eventpage_content import (
-    get_default_eventpage_data,
-    get_default_menu,
-)
 from core.models import Event
 
 
