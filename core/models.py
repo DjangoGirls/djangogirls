@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from datetime import date, datetime, timedelta
 from smtplib import SMTPException
+from slacker import Error as SlackerError
 
 import icalendar
 from django.contrib.auth import models as auth_models
@@ -233,8 +234,14 @@ class Event(models.Model):
     def invite_organizer_to_team(self, user, is_new_user, password):
         self.team.add(user)
         if is_new_user:
-            user.invite_to_slack()
-            notify_new_user(user, event=self, password=password)
+            errors = []
+            try:
+                user.invite_to_slack()
+            except (ConnectionError, SlackerError) as e:
+                errors.append(
+                    'Slack invite unsuccessful, reason: {}'.format(e)
+                )
+            notify_new_user(user, event=self, password=password, errors=errors)
         else:
             notify_existing_user(user, event=self)
 
