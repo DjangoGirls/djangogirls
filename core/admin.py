@@ -8,6 +8,7 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
@@ -30,6 +31,8 @@ class EventAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super(EventAdmin, self).get_queryset(request)
+        qs = qs.annotate(postmortem_count=Count('postmortem'))
+        qs = qs.prefetch_related('team')
         if request.user.is_superuser:
             return qs
         return qs.filter(team=request.user)
@@ -40,7 +43,7 @@ class EventAdmin(admin.ModelAdmin):
     is_past_event.short_description = 'past event?'
 
     def has_stats(self, obj):
-        return Postmortem.objects.filter(event=obj).exists()
+        return obj.postmortem_count > 0
     has_stats.boolean = True
     has_stats.short_description = 'has stats?'
 
