@@ -22,7 +22,7 @@ def notify_new_user(user, event, password, errors=None):
         'user': user,
         'event': event,
         'password': password,
-        'errors': errors
+        'errors': errors,
     })
     subject = 'Access to Django Girls website'
     send_email(content, subject, user)

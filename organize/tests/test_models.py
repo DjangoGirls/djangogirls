@@ -7,7 +7,7 @@ from organize.models import EventApplication
 
 
 class EventApplicationTest(TestCase):
-    fixtures = ['organize_testdata.json']
+    fixtures = ['event_application_testdata.json']
 
     def test_comment_required_for_on_hold_application(self):
         event_application = EventApplication.objects.get(pk=1)
