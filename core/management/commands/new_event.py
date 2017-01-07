@@ -36,9 +36,10 @@ def get_basic_info():
     date = gather_event_date_from_prompt()
 
     url = click.prompt(click.style(
-        "What should be the URL of website? djangogirls.org/xxxx", bold=True, fg='yellow'))
+        "What should be the URL of website? djangogirls.org/______", bold=True, fg='yellow'))
     event_mail = click.prompt(click.style(
-        "What is the mail adress of the event? xxxx@djangogirls.org", bold=True, fg='yellow'))
+        "What is the email prefix of the event? ______@djangogirls.org", bold=True, fg='yellow'),
+        default=url)
     click.echo("Ok, got that! Your new event will happen in {0}, {1} on {2}".format(
         city, country, date))
 
@@ -146,7 +147,15 @@ def command(short):
         'name': name,
         'page_title': name,
         'page_url': url})
-    form.full_clean()
+    if not form.is_valid():
+        click.secho(
+            "OOPS! Something went wrong!", fg='red')
+        for field, errors in form.errors.items():
+            for error in errors:
+                click.secho(
+                    "    {field:10} {error}".format(error=error, field=field),
+                    fg='red')
+        return
     event = form.save()
 
     # Create users
