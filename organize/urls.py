@@ -4,8 +4,7 @@ from . import views
 
 organize_form_wizard = views.OrganizeFormWizard.as_view(
     views.FORMS,
-    url_name='organize:form_step',
-    done_step_name='finished')
+    url_name='organize:form_step')
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

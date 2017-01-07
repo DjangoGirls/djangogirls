@@ -14,11 +14,13 @@ class PreviousEventForm(forms.Form):
         choices=PREVIOUS_ORGANIZER_CHOICES)
     previous_event = forms.ModelChoiceField(
         queryset=Event.objects.past(), empty_label="Choose event",
-        required=False, widget=forms.Select(attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
+        required=False,
+        widget=forms.Select(
+            attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
 
     def clean(self):
         data = self.cleaned_data
-        if (data.get('has_organized_before') is True and
+        if (data.get('has_organized_before') == 'True' and
                 not data.get('previous_event')):
             raise forms.ValidationError('You have to choose an event.')
 
