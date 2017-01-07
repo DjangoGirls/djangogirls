@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'jobs',
     'organize',
     'patreonmanager',
+
+    'slack_client.apps.MonkeyPatchingConfig',
 )
 
 MIDDLEWARE = [

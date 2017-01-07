@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 import djclick as click
 from django.conf import settings
 from django.template.loader import render_to_string
-from slacker import Error as SlackerError
 
 from ...command_helpers import gather_event_date_from_prompt
 from ...forms import AddOrganizerForm, EventForm
 from ...models import Event
-from ...slack_client import slack
 from ...utils import get_coordinates_for_city
+
+from slack_client.utils import get_connection as get_slack_connection
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -111,7 +111,8 @@ def brag_on_slack_bang(city, country, team):
         city=city, country=country, team=', '.join(
             ['{} {}'.format(x.first_name, x.last_name) for x in team])
     )
-    slack.chat.post_message(
+    conn = get_slack_connection()
+    conn.chat.post_message(
         channel='#general',
         text=text,
         username='Django Girls',

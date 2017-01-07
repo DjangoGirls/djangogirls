@@ -11,7 +11,8 @@ from slacker import Error as SlackerError
 from .default_eventpage_content import (get_default_eventpage_data,
                                         get_default_menu)
 from .models import ContactEmail, Event, User
-from .slack_client import user_invite
+
+from slack_client.utils import get_connection as get_slack_connection
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -45,7 +46,8 @@ class AddOrganizerForm(forms.Form):
 
     def invite_to_slack(self, email, name):
         try:
-            user_invite(email, name)
+            conn = get_slack_connection()
+            conn.users.invite(first_name=name, email=email, set_active=True)
         except (ConnectionError, SlackerError) as e:
             self._errors.append(
                 'Slack invite unsuccessful, reason: {}'.format(e))

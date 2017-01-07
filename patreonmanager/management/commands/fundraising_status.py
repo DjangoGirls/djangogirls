@@ -4,7 +4,7 @@ import requests
 from django.core.management.base import BaseCommand
 from slacker import Error as SlackerError
 
-from core.slack_client import slack
+from slack_client.utils import get_connection as get_slack_connection
 
 from ...models import FundraisingStatus
 
@@ -36,7 +36,8 @@ class Command(BaseCommand):
         logging.info("Stats saved.")
 
         try:
-            slack.chat.post_message(
+            conn = get_slack_connection()
+            conn.chat.post_message(
                 channel='#notifications',
                 text=message,
                 username='Django Girls',
