@@ -43,6 +43,9 @@ class EventApplication(models.Model):
     )
     status_changed_at = models.DateTimeField(null=True, blank=True)
 
+    rejection_reason = models.TextField(null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+
     class Meta:
         permissions = (
             ("can_accept_organize_application",
