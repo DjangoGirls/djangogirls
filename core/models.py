@@ -6,7 +6,6 @@ from smtplib import SMTPException
 import icalendar
 from django.contrib.auth import models as auth_models
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -16,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
+from .validators import validate_approximatedate
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
@@ -91,12 +91,6 @@ class EventManager(models.Manager):
         ).order_by("-date")
 
 # Event date can't be a year only
-
-
-def validate_approximatedate(date):
-    if date.month == 0:
-        raise ValidationError(
-            'Event date can\'t be a year only. Please, provide at least a month and a year.')
 
 
 @python_2_unicode_compatible
