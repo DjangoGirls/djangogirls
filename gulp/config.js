@@ -18,10 +18,6 @@ module.exports = {
           './static/source/vendor/css/mapbox.min.css',
           './temp/global.css'
         ],
-        community: [
-          './node_modules/bootstrap/dist/css/bootstrap.min.css',
-          './temp/community.css'
-        ],
         event: [
           './node_modules/bootstrap/dist/css/bootstrap.min.css',
           './temp/event.css'
