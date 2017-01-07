@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django_date_extensions.fields import ApproximateDateField
 
+from core.models import Event
 from core.validators import validate_approximatedate
 
 involvement_choices = (
@@ -14,7 +15,7 @@ involvement_choices = (
 
 
 class EventApplication(models.Model):
-    is_first_event = models.BooleanField(default=True)
+    previous_event = models.ForeignKey(Event, null=True, blank=True)
     # workshop fields
     date = ApproximateDateField(validators=[validate_approximatedate])
     city = models.CharField(max_length=200)
