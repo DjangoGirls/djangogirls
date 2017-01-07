@@ -89,7 +89,6 @@ class EventApplication(models.Model):
         """
         Rejecting event in triaging. Performs following actions:
         - changes status to REJECTED
-        - makes sure that rejection_reason is provided
         - sends a rejection email
         """
         if not self.status == REJECTED:
