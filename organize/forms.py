@@ -14,7 +14,7 @@ class PreviousEventForm(forms.Form):
         choices=PREVIOUS_ORGANIZER_CHOICES)
     previous_event = forms.ModelChoiceField(
         queryset=Event.objects.past(), empty_label="Choose event",
-        required=False)
+        required=False, widget=forms.Select(attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
 
     def clean(self):
         data = self.cleaned_data
