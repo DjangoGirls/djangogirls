@@ -1,4 +1,3 @@
-from dateutil.parser import parse
 from django import forms
 from django_countries import countries
 from django_countries.fields import LazyTypedChoiceField
