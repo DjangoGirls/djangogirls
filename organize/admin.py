@@ -1,8 +1,10 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils import timezone
+from django.conf.urls import url
+from django.shortcuts import redirect, get_object_or_404
 
 from .models import EventApplication, Coorganizer
-from .constants import ON_HOLD, IN_REVIEW
+from .constants import ON_HOLD, IN_REVIEW, REJECTED, ACCEPTED
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -110,3 +112,37 @@ class EventApplicationAdmin(admin.ModelAdmin):
             obj.main_organizer_last_name,
             obj.main_organizer_email
         )
+
+    def get_urls(self):
+        urls = super(EventApplicationAdmin, self).get_urls()
+        my_urls = [
+            url(r'(?P<application_id>\d+)/triage/(?P<new_status>[\w\d/]+)/$',
+                self.admin_site.admin_view(self.view_change_application_status),
+                name='organize_eventapplication_change_application_status'),
+        ]
+        return my_urls + urls
+
+    def view_change_application_status(self, request, application_id, new_status):
+        """
+        Custom EventApplication admin view for handling triaging
+        """
+        application = get_object_or_404(EventApplication, id=application_id)
+
+        if new_status in [IN_REVIEW, ON_HOLD]:
+            application.status = new_status
+            application.status_changed_at = timezone.now()
+            application.save()
+        elif new_status == REJECTED:
+            application.reject()
+        elif new_status == ACCEPTED:
+            application.accept()
+        else:
+            messages.error(request, 'Invalid status provided for application')
+            return redirect('admin:organize_eventapplication_change', application.id)
+
+        messages.success(request, 'Application for {city}, {country} has been moved to {status}'.format(
+            city=application.city,
+            country=application.country,
+            status=application.get_status_display()
+        ))
+        return redirect('admin:organize_eventapplication_changelist')

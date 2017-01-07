@@ -61,7 +61,7 @@ class EventApplication(models.Model):
         )
 
     def __str__(self):
-        return "{}, {} ({})".format(self.city, self.country, self.status.title())
+        return "{}, {} ({})".format(self.city, self.country, self.get_status_display())
 
     def accept(self):
         # create Event
