@@ -212,7 +212,8 @@ class EventAdmin(admin.ModelAdmin):
         created = not obj.pk
         super(EventAdmin, self).save_model(request, obj, form, change)
         if created:
-            form.add_default_data(obj)
+            obj.add_default_content()
+            obj.add_default_menu()
 
 
 class ResizableCodeMirror(CodeMirrorTextarea):
