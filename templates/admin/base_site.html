@@ -1,0 +1,7 @@
+{% extends 'admin/base.html' %}
+{% load staticfiles rev %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static_rev 'css/admin.css' %}">
+{% endblock %}

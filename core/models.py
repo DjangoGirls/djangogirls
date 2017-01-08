@@ -2,9 +2,11 @@ from __future__ import unicode_literals
 
 from datetime import date, datetime, timedelta
 from smtplib import SMTPException
+from slacker import Error as SlackerError
 
 import icalendar
 from django.contrib.auth import models as auth_models
+from django.contrib.auth.models import Group
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
@@ -12,11 +14,18 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 
+from .slack_client import user_invite
 from .validators import validate_approximatedate
+from .default_eventpage_content import (
+    get_default_eventpage_data,
+    get_default_menu,
+)
+from .emails import notify_existing_user, notify_new_user
 
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
@@ -55,6 +64,22 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     class Meta:
         verbose_name = "Organizer"
         verbose_name_plural = "Organizers"
+
+    def invite_to_slack(self):
+        user_invite(self.email, self.first_name)
+
+    def generate_password(self):
+        password = User.objects.make_random_password()
+        self.set_password(password)
+        return password
+
+    def add_to_organizers_group(self):
+        try:
+            group = Group.objects.get(name="Organizers")
+        except Group.DoesNotExist:
+            return
+
+        self.groups.add(group)
 
     def __str__(self):
         if self.first_name == '' and self.last_name == '':
@@ -203,6 +228,64 @@ class Event(models.Model):
     def delete(self):
         self.is_deleted = True
         self.save()
+
+    def add_default_content(self):
+        """Populate EventPageContent with default layout"""
+        data = get_default_eventpage_data()
+
+        for i, section in enumerate(data):
+            section['position'] = i
+            section['content'] = render_to_string(section['template'])
+            del section['template']
+            self.content.create(**section)
+
+    def add_default_menu(self):
+        """Populate EventPageMenu with default links"""
+        data = get_default_menu()
+
+        for i, link in enumerate(data):
+            link['position'] = i
+            self.menu.create(**link)
+
+    def invite_organizer_to_team(self, user, is_new_user, password):
+        self.team.add(user)
+        if is_new_user:
+            errors = []
+            try:
+                user.invite_to_slack()
+            except (ConnectionError, SlackerError) as e:
+                errors.append(
+                    'Slack invite unsuccessful, reason: {}'.format(e)
+                )
+            notify_new_user(user, event=self, password=password, errors=errors)
+        else:
+            notify_existing_user(user, event=self)
+
+    def add_organizer(self, email, first_name, last_name):
+        """
+            Add organizer to the event.
+
+            TODO: we need to think if create_organizers and create_events
+            are the best place for these logic. Maybe we should move it back to
+            the models.
+        """
+        defaults = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "is_staff": True,
+            "is_active": True
+        }
+        user, created = User.objects.get_or_create(
+            email=email,
+            defaults=defaults
+        )
+        password = None
+        if created:
+            password = user.generate_password()
+            user.add_to_organizers_group()
+
+        self.invite_organizer_to_team(user, created, password)
+        return user
 
 
 @python_2_unicode_compatible
