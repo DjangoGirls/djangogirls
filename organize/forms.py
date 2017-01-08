@@ -34,13 +34,13 @@ class PreviousEventForm(forms.Form):
 
 
 class ApplicationForm(forms.Form):
-    about_you = forms.CharField(widget=forms.Textarea)
-    why = forms.CharField(widget=forms.Textarea)
+    about_you = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    why = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
     involvement = forms.MultipleChoiceField(
         choices=INVOLVEMENT_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple)
-    experience = forms.CharField(widget=forms.Textarea)
+    experience = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
 
 
 class OrganizersForm(forms.Form):
