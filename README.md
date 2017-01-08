@@ -9,8 +9,7 @@ This repository contains sources of Django application that powers [DjangoGirls.
 
 It's a simple CMS that contains 4 models:
 
-- __Event__ - a list of events
-- __EventPage__ - configuration of website
+- __Event__ - a list of events and their website configuration
 - __EventPageContent__ - blocks of content that are visible on the website
 - __EventPageMenu__ - items of menu of every website
 
