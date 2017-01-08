@@ -4,10 +4,8 @@ from django.conf import settings
 from django.contrib.auth import forms as auth_forms
 from django.core.validators import validate_email
 from django.db import transaction
-from slacker import Error as SlackerError
 
 from .models import ContactEmail, Event, User
-from .create_organizers import add_organizer
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -46,7 +44,7 @@ class AddOrganizerForm(forms.Form):
         event = self.cleaned_data['event']
         first_name = self.cleaned_data['name'].split(' ')[0]
         last_name = self.cleaned_data['name'].replace(first_name, '')
-        user = add_organizer(event, email, first_name, last_name)
+        user = event.add_organizer(email, first_name, last_name)
         return user
 
 

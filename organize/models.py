@@ -8,8 +8,6 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDateField
 
-from core.create_event import create_event_from_event_application
-from core.create_organizers import create_organizers
 from core.models import Event
 from core.validators import validate_approximatedate
 
@@ -64,6 +62,29 @@ class EventApplication(models.Model):
     def __str__(self):
         return "{}, {} ({})".format(self.city, self.country, self.get_status_display())
 
+    def create_event(self):
+        """ Creates event based on the data from the EventApplication.
+        """
+        name = 'Django Girls {}'.format(self.city)
+        email = '{}@djangogirls.org'.format(self.website_slug)
+
+        event = Event.objects.create(
+            date=self.date,
+            city=self.city,
+            country=self.country,
+            latlng=self.latlng,
+            page_url=self.website_slug,
+            name=name,
+            page_title=name,
+            email=email,
+        )
+
+        # populate content & menu from the default event
+        event.add_default_content()
+        event.add_default_menu()
+
+        return event
+
     @transaction.atomic
     def deploy_event(self):
         """ Deploy Event based on the current EventApplication 
@@ -80,7 +101,10 @@ class EventApplication(models.Model):
         password = "FAKE_PASS"
 
         # TODO: remove organizers, who are no longer in org team if cloned
-        create_organizers(event, event_application=self, email_password=password)
+        event.create_organizers(
+            team=self.coorganizers.all(),
+            email_password=password
+        )
         self.send_event_deployed_email(event, email_password=password)
 
     def clean(self):
