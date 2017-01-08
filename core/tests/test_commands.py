@@ -62,9 +62,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.get(pk=1)
         assert event.team.count() == 3
 
-    @patch('core.models.user_invite')
     @vcr.use_cassette('core/tests/vcr/new_event_with_one_organizer.yaml')
-    def test_new_event_with_one_organizer(self, mock_user_invite):
+    def test_new_event_with_one_organizer(self):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()
@@ -88,9 +87,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 1
 
-    @patch('core.models.user_invite')
     @vcr.use_cassette('core/tests/vcr/new_event_with_two_organizers.yaml')
-    def test_new_event_with_two_organizers(self, mock_user_invite):
+    def test_new_event_with_two_organizers(self):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()
@@ -117,9 +115,8 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 2
 
-    @patch('core.models.user_invite')
     @vcr.use_cassette('core/tests/vcr/new_event_short.yaml')
-    def test_new_event_short(self, mock_user_invite):
+    def test_new_event_short(self):
         assert Event.objects.count() == 4
 
         random_day = self._get_random_day()

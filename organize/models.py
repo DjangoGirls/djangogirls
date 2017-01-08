@@ -87,7 +87,7 @@ class EventApplication(models.Model):
         return event
 
     @transaction.atomic
-    def deploy_event(self):
+    def deploy(self):
         """ Deploy Event based on the current EventApplication
             - change status to DEPLOYED
             - creates or copies event
