@@ -20,8 +20,16 @@
             <div class="panel">
                 <h1>Tell us all about your Django Girls event!</h1>
 
-                <form action="" method="post">{% csrf_token %}
+                <form novalidate action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
+
+                    {% if wizard.form.non_field_errors %}
+                        <ul class="error-list">
+                            {% for error in wizard.form.non_field_errors %}
+                                <li class="error">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">Where?</legend>
@@ -31,10 +39,24 @@
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.city.id_for_label }}" class="compact-label">City</label>
                                 {{ wizard.form.city }}
+                                {% if wizard.form.city.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.city.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.country.id_for_label }}" class="compact-label">Country</label>
                                 {{ wizard.form.country }}
+                                {% if wizard.form.country.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.country.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </fieldset>
@@ -47,6 +69,13 @@
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.date.id_for_label }}" class="compact-label">Date (or month) of the event</label>
                                 {{ wizard.form.date }}
+                                {% if wizard.form.date.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.date.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </fieldset>
@@ -59,6 +88,13 @@
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.website_slug.id_for_label }}" class="compact-label">http://djangogirls.org/</label>
                                 {{ wizard.form.website_slug }}
+                                {% if wizard.form.website_slug.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.website_slug.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </fieldset>
@@ -70,6 +106,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.venue }}
+                                {% if wizard.form.venue.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.venue.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>
@@ -81,6 +124,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.sponsorship }}
+                                {% if wizard.form.sponsorship.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.sponsorship.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>
@@ -92,6 +142,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.coaches }}
+                                {% if wizard.form.coaches.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.coaches.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>

@@ -20,8 +20,16 @@
             <div class="panel">
                 <h1>Who is going to organize this workshop?</h1>
 
-                <form action="" method="post">{% csrf_token %}
+                <form novalidate action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
+
+                    {% if wizard.form.non_field_errors %}
+                        <ul class="error-list">
+                            {% for error in wizard.form.non_field_errors %}
+                                <li class="error">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">Lead organizer</legend>
@@ -31,14 +39,35 @@
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.main_organizer_first_name.id_for_label }}" class="compact-label">First name</label>
                                 {{ wizard.form.main_organizer_first_name }}
+                                {% if wizard.form.main_organizer_first_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.main_organizer_first_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.main_organizer_last_name.id_for_label }}" class="compact-label">Last name</label>
                                 {{ wizard.form.main_organizer_last_name }}
+                                {% if wizard.form.main_organizer_last_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.main_organizer_last_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
                                 <label for="{{ wizard.form.main_organizer_email.id_for_label }}" class="compact-label">Email address</label>
                                 {{ wizard.form.main_organizer_email }}
+                                {% if wizard.form.main_organizer_email.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.main_organizer_email.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </fieldset>
