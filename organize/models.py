@@ -63,19 +63,25 @@ class EventApplication(models.Model):
 
     def __str__(self):
         return "{}, {} ({})".format(self.city, self.country, self.get_status_display())
-    
+
+    @transaction.atomic
     def deploy_event(self):
-        """ Deploy Event based on the current EventApplication """
-        # create Event
+        """ Deploy Event based on the current EventApplication 
+            - creates or copies event
+            - add/remove organizers 
+            - send email about deployment
+        """
+        # TODO: we should recognize here if we should create a new event,
+        # copy old one or copy old and change organizaers.
         event = create_event_from_event_application(event_application=self)
 
-        # TODO: use method created in separate branch to create gmail accoout
+        # TODO: use method created in separate branch to create gmail acconut
         # and get password from it.
-        create_organizers(event, event_application=self, email_password="PASS")
+        password = "FAKE_PASS"
 
-        # create gmail account
-        # send email to organizers with gmail password
-        # add organizers to slack
+        # TODO: remove organizers, who are no longer in org team if cloned
+        create_organizers(event, event_application=self, email_password=password)
+        self.send_event_deployed_email(event, email_password=password)
 
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
