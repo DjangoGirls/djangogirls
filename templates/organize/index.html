@@ -14,8 +14,7 @@
             <section class="col-xs-12 col-md-8">
                 <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world. Events are always non-profit and free for participants. We do not pay coaches, speakers or organizers. Attendees don’t need any previous knowledge about programming and there are no age limitations. All attendees need is a laptop and some curiosity!</p>
 
-                {# @TODO: Make these numbers dynamic #}
-                <p>Until today, <span>504</span> volunteers organized <span>312</span> Django Girls workshops. Join them and bring Django Girls to your city!</p>
+                <p>Until today, <span>{{ organizers_count }}</span> volunteers organized <span>{{ all_events_count }}</span> Django Girls workshops. Join them and bring Django Girls to your city!</p>
 
                 <h2>The Value of Organizing Django Girls</h2>
 
@@ -40,19 +39,19 @@
 
                     <ul class="bulleted narrow">
                         <li>
-                            <a href="#">Django Girls Organizer’s Manual</a>
+                            <a href="https://organize.djangogirls.org/">Django Girls Organizer’s Manual</a>
                         </li>
                         <li>
-                            <a href="#">Django Girls Coaching Guide</a>
+                            <a href="https://coach.djangogirls.org/">Django Girls Coaching Guide</a>
                         </li>
                         <li>
-                            <a href="#">Media resources</a>
+                            <a href="https://github.com/djangogirls/resources">Media resources</a>
                         </li>
                         <li>
-                            <a href="#">Workshop Kit</a>
+                            <a href="{% url 'core:workshop-box' %}">Workshop Kit</a>
                         </li>
                         <li>
-                            <a href="#">Django Girls Workshop Tutorial</a>
+                            <a href="https://tutorial.djangogirls.org/">Django Girls Workshop Tutorial</a>
                         </li>
                         <li>
                             <span>Private mailing list &amp; Slack</span>
@@ -64,7 +63,7 @@
 
         <blockquote class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-md-offset-1">
-                <img src="http://placehold.it/170x170" alt="Agata Grdal, organizer of Django Girls Wrocław" />
+                <img src="{% static_rev 'img/report-2015/agata.jpg' %}" alt="Agata Grdal, organizer of Django Girls Wrocław" />
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8">
                 <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve created my own blog and then prepared workshops and taught other women to code. Nothing is impossible with this bunch of crazy, positive people!</div>
@@ -81,16 +80,16 @@
 
             <ul class="row">
                 <li class="col-xs-12 col-md-4">
-                    <img src="{% static 'img/photos/organize-1.jpg' %}" alt="Some alt text needed" />
-                    <p>Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in Africa. <a href="#">Read more&nbsp;»</a></p>
+                    <img src="{% static 'img/photos/organize-1.jpg' %}" alt="Organizers of Django Girls Windhoek" />
+                    <p>Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in Africa. <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Read more&nbsp;»</a></p>
                 </li>
                 <li class="col-xs-12 col-md-4">
-                    <img src="{% static 'img/photos/organize-2.jpg' %}" alt="Some alt text needed" />
-                    <p>A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary. <a href="#">Read more&nbsp;»</a></p>
+                    <img src="{% static 'img/photos/organize-2.jpg' %}" alt="Organizers of Django Girls Budapest" />
+                    <p>A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary. <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Read more&nbsp;»</a></p>
                 </li>
                 <li class="col-xs-12 col-md-4">
-                    <img src="{% static 'img/photos/organize-3.jpg' %}" alt="Some alt text needed" />
-                    <p>Learn how Django Girls Seoul built a local tech community using events as their main tool. <a href="#">Read more&nbsp;»</a></p>
+                    <img src="{% static 'img/photos/organize-3.jpg' %}" alt="Django Girls Seoul" />
+                    <p>Learn how Django Girls Seoul built a local tech community using events as their main tool. <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Read more&nbsp;»</a></p>
                 </li>
             </ul>
         </section>
