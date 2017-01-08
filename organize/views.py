@@ -24,13 +24,15 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
+        # Process the date from the forms
         data_dict = {}
         for form in form_list:
             data_dict.update(form.cleaned_data)
         del data_dict['has_organized_before']
         data_dict['involvement'] = ", ".join(data_dict.get('involvement'))
-        print(data_dict)
+
         EventApplication.objects.create(**data_dict)
+
         return redirect('organize:form_thank_you')
 
 
