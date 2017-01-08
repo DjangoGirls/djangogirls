@@ -39,4 +39,5 @@ pytz==2016.10
 requests==2.12.4
 six==1.10.0
 slacker==0.9.30
+vcrpy==1.10.4
 whitenoise==3.2.3
