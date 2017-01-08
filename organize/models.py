@@ -148,7 +148,7 @@ class EventApplication(models.Model):
         """
         self.status = REJECTED
         self.status_changed_at = timezone.now()
-        self.save()
+        self.save(update_fields=['status', 'status_changed_at'])
 
     @transaction.atomic
     def reject(self):
