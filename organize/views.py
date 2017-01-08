@@ -11,8 +11,8 @@ FORMS = (("previous_event", PreviousEventForm),
 
 TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
              "application": "organize/form/step2_application.html",
-             "organizers": "organize/form/step4_organizers.html",
-             "workshop": "organize/form/step3_workshop.html"}
+             "organizers": "organize/form/step3_organizers.html",
+             "workshop": "organize/form/step4_workshop.html"}
 
 
 class OrganizeFormWizard(NamedUrlSessionWizardView):

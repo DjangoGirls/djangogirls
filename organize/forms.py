@@ -34,13 +34,16 @@ class PreviousEventForm(forms.Form):
 
 
 class ApplicationForm(forms.Form):
-    about_you = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
-    why = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    about_you = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    why = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
     involvement = forms.MultipleChoiceField(
         choices=INVOLVEMENT_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple)
-    experience = forms.CharField(widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    experience = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
 
 
 class OrganizersForm(forms.Form):
@@ -55,12 +58,22 @@ class OrganizersForm(forms.Form):
 
 
 class WorkshopForm(forms.Form):
-    date = ApproximateDateFormField(widget=forms.TextInput(attrs={'class': 'compact-input'}))
-    city = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    date = ApproximateDateFormField(
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    city = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
     country = LazyTypedChoiceField(choices=countries)
-    website_slug = forms.SlugField(widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    website_slug = forms.SlugField(
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    venue = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    sponsorship = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    coaches = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
 
     def clean_date(self):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
-        return self.clean_data
+        return self.cleaned_data
