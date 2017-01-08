@@ -19,8 +19,16 @@
         <div class="col-md-12">
             <div class="panel">
                 <h1>Application to organize a workshop</h1>
-                <form action="" method="post">{% csrf_token %}
+                <form novalidate action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
+
+                    {% if wizard.form.non_field_errors %}
+                        <ul class="error-list">
+                            {% for error in wizard.form.non_field_errors %}
+                                <li class="error">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">Have you organized a Django Girls workshop before?</legend>
@@ -36,10 +44,14 @@
                                     {% endif %}
                                 </li>
                             {% endfor %}
-                            {% for error in wizard.form.has_organized_before.errors %}
-                                {{ error }}
-                            {% endfor %}
                         </ul>
+                        {% if wizard.form.has_organized_before.errors %}
+                            <ul class="error-list narrow-options">
+                                {% for error in wizard.form.has_organized_before.errors %}
+                                    <li class="error">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </fieldset>
 
                     <div class="cta-wrapper">
