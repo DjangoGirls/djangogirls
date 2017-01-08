@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersForm)
 
+# ORGANIZE FORM #
+
 FORMS = (("previous_event", PreviousEventForm),
          ("application", ApplicationForm),
          ("organizers", OrganizersForm),
@@ -16,7 +18,6 @@ TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",
 
 
 class OrganizeFormWizard(NamedUrlSessionWizardView):
-    form_list = FORMS
 
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
@@ -25,6 +26,19 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         print("FINISHED")
         print(form_list)
         return redirect('organize:form_thank_you')
+
+
+def skip_application_if_organizer(wizard):
+    cleaned_data = wizard.get_cleaned_data_for_step('previous_event') or {}
+    return cleaned_data.get('has_organized_before') != 'True'
+
+
+organize_form_wizard = OrganizeFormWizard.as_view(
+    FORMS,
+    condition_dict={'application': skip_application_if_organizer},
+    url_name='organize:form_step')
+
+# ORGANIZE FORM #
 
 
 def form_thank_you(request):
