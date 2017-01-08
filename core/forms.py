@@ -32,9 +32,10 @@ class AddOrganizerForm(forms.Form):
     name = forms.CharField(label="Organizer's first and last name")
     email = forms.CharField(label="E-mail address", validators=[validate_email])
 
-    def __init__(self, event_choices=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        event_choices = kwargs.pop('event_choices', None)
         super(AddOrganizerForm, self).__init__(*args, **kwargs)
-        if event_choices:
+        if event_choices is not None:
             self.fields['event'].queryset = event_choices
 
     def save(self, *args, **kwargs):
