@@ -33,7 +33,7 @@ def create_users(team, event):
     members = []
     for member in team:
         member['event'] = event.pk
-        form = AddOrganizerForm(data=member)
+        form = AddOrganizerForm(member)
         user = form.save()
         members.append(user)
     return members
