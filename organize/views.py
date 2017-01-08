@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersForm)
+from .models import EventApplication
 
 # ORGANIZE FORM #
 
@@ -23,14 +24,19 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
-        print("FINISHED")
-        print(form_list)
+        data_dict = {}
+        for form in form_list:
+            data_dict.update(form.cleaned_data)
+        del data_dict['has_organized_before']
+        data_dict['involvement'] = ", ".join(data_dict.get('involvement'))
+        print(data_dict)
+        EventApplication.objects.create(**data_dict)
         return redirect('organize:form_thank_you')
 
 
 def skip_application_if_organizer(wizard):
     cleaned_data = wizard.get_cleaned_data_for_step('previous_event') or {}
-    return cleaned_data.get('has_organized_before') != 'True'
+    return not cleaned_data.get('has_organized_before')
 
 
 organize_form_wizard = OrganizeFormWizard.as_view(
