@@ -19,6 +19,7 @@ from .constants import (
     ON_HOLD,
     REJECTED,
 )
+from .managers import EventApplicationQuerySet
 
 
 class EventApplication(models.Model):
@@ -53,6 +54,8 @@ class EventApplication(models.Model):
     status_changed_at = models.DateTimeField(null=True, blank=True)
 
     comment = models.TextField(null=True, blank=True)
+
+    objects = EventApplicationQuerySet.as_manager()
 
     class Meta:
         permissions = (
