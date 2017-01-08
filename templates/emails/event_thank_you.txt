@@ -27,7 +27,7 @@ Discount in our store
 Use the code "SPARKLES" to get a 15% discount on your order in our store at https://store.djangogirls.org. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
 
 
-If you want to plan another event someday, don't hesitate to fill out the organizing form at {% url 'core:organize' %} again.
+If you want to plan another event someday, don't hesitate to fill out the organizing form at {% url 'organize:index' %} again.
 
 
 Thanks and congrats yet again, you're awesome!
