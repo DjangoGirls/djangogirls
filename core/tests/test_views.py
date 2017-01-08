@@ -13,7 +13,7 @@ from core.views import event as event_view
 
 
 class BaseCoreTestCase(TestCase):
-    fixtures = ['core_views_testdata.json']
+    fixtures = ['core_views_testdata.json', 'groups_testdata.json']
 
     def setUp(self):
         self.client = Client()
