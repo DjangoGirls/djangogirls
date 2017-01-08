@@ -22,7 +22,7 @@ from core.models import Event
 
 def send_event_emails(events, subject, plain_template, html_template, timestamp_field, email_type,
                       ignore_approximate_events=False):
-    """Send out any thank you emails that need sending."""
+    """Send out any that need sending (thank yous, information request, ...)."""
 
     for event in events:
         # Some emails can only be sent if the event has a proper date set, ignore approximate dates in those cases.
