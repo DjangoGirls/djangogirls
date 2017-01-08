@@ -8,7 +8,7 @@ class AddOrganizerFormTestCase(TestCase):
 
     def test_name_splitting(self):
         event = Event.objects.first()
-        form = AddOrganizerForm(event_choices=None, data={
+        form = AddOrganizerForm({
             'event': event.pk,
             'email': 'olaf@djangogirls.org',
             'name': 'Olaf Olaffson'
