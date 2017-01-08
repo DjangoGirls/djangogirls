@@ -2,6 +2,7 @@ import random
 from datetime import date
 from unittest.mock import patch
 
+import vcr
 from click.testing import CliRunner
 from django.core.management import call_command
 from django.test import TestCase
@@ -27,6 +28,7 @@ class CommandsTestCase(TestCase):
     def _get_random_day(self):
         return date.fromordinal(random.randint(self.start_date, self.end_date))
 
+    @vcr.use_cassette('core/tests/vcr/update_coordinates.yaml')
     def test_update_coordinates(self):
         event_2 = Event.objects.get(pk=2)
         latlng = event_2.latlng
@@ -61,6 +63,7 @@ class CommandsTestCase(TestCase):
         assert event.team.count() == 3
 
     @patch('core.models.user_invite')
+    @vcr.use_cassette('core/tests/vcr/new_event_with_one_organizer.yaml')
     def test_new_event_with_one_organizer(self, mock_user_invite):
         assert Event.objects.count() == 4
 
@@ -86,6 +89,7 @@ class CommandsTestCase(TestCase):
         assert event.team.count() == 1
 
     @patch('core.models.user_invite')
+    @vcr.use_cassette('core/tests/vcr/new_event_with_two_organizers.yaml')
     def test_new_event_with_two_organizers(self, mock_user_invite):
         assert Event.objects.count() == 4
 
@@ -114,6 +118,7 @@ class CommandsTestCase(TestCase):
         assert event.team.count() == 2
 
     @patch('core.models.user_invite')
+    @vcr.use_cassette('core/tests/vcr/new_event_short.yaml')
     def test_new_event_short(self, mock_user_invite):
         assert Event.objects.count() == 4
 

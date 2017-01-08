@@ -3,40 +3,43 @@ import datetime
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils.six import StringIO
+import vcr
+import pytest
 
 from ..models import Patron, Payment, Reward
 
 
-class CommandsTestCase(TestCase):
-    def setUp(self):
-        self.patron_1 = Patron.objects.create(
-            name="Jan Kowalski",
-            email="jan@kowalski.extra",
-            since=datetime.datetime(2016, 1, 20)
-        )
-        self.reward_1 = Reward.objects.create(
-            name="gte_10",
-            value=11
-        )
-        self.payment_1 = Payment.objects.create(
-            status=Payment.STATUS.PROCESSED,
-            completed=False,
-            reward=self.reward_1,
-            patron=self.patron_1,
-            pledge="20.00",
-            month=datetime.date(2016, 1, 20),
-        )
+@pytest.fixture
+def patron(db):
+    patron = Patron.objects.create(
+        name="Jan Kowalski",
+        email="jan@kowalski.extra",
+        since=datetime.datetime(2016, 1, 20))
+    reward = Reward.objects.create(
+        name="gte_10",
+        value=11)
+    payment = Payment.objects.create(
+        status=Payment.STATUS.PROCESSED,
+        completed=False,
+        reward=reward,
+        patron=patron,
+        pledge="20.00",
+        month=datetime.date(2016, 1, 20))
+    return patron
 
-    def test_listpatrons(self):
-        payments = Payment.objects.filter(
-            status=Payment.STATUS.PROCESSED,
-            completed=False,
-            reward__value__gte=10,
-        )
-        self.assertEqual(payments.count(), 1)
-        out = StringIO()
-        call_command('listpatrons', stdout=out)
-        self.assertIn('in a row', out.getvalue())
 
-    def test_fundraising_status(self):
-        call_command('fundraising_status')
+def test_listpatrons(patron):
+    payments = Payment.objects.filter(
+        status=Payment.STATUS.PROCESSED,
+        completed=False,
+        reward__value__gte=10,
+    )
+    assert payments.count() == 1
+    out = StringIO()
+    call_command('listpatrons', stdout=out)
+    assert 'in a row' in out.getvalue()
+
+
+@vcr.use_cassette('patreonmanager/tests/vcr/patreon.yaml')
+def test_fundraising_status(patron):
+    call_command('fundraising_status')

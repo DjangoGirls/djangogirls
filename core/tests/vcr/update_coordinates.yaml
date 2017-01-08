@@ -1,0 +1,97 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=Kensington%2C+the+Neverlands
+  response:
+    body: {string: '[]'}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Sat, 07 Jan 2017 16:24:33 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=Hidden%2C+Event
+  response:
+    body: {string: '[]'}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Sat, 07 Jan 2017 16:24:33 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=%C5%81%C3%B3d%C5%BA%2C+Poland
+  response:
+    body: {string: "[{\"place_id\":\"159283843\",\"licence\":\"Data \xA9 OpenStreetMap
+        contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"1582777\",\"boundingbox\":[\"51.6861438\",\"51.8598252\",\"19.3208635\",\"19.6399426\"],\"lat\":\"51.7687323\",\"lon\":\"19.4569911\",\"display_name\":\"\u0141\xF3d\u017A,
+        \u0142\xF3dzkie, Polska\",\"class\":\"place\",\"type\":\"city\",\"importance\":0.77475365685755,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_place_city.p.20.png\"},{\"place_id\":\"159636105\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"2907537\",\"boundingbox\":[\"51.6861438\",\"51.8598252\",\"19.3208635\",\"19.6399426\"],\"lat\":\"51.77305755\",\"lon\":\"19.4783822195225\",\"display_name\":\"\u0141\xF3d\u017A,
+        \u0142\xF3dzkie, Polska\",\"class\":\"boundary\",\"type\":\"administrative\",\"importance\":0.77475365685755,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_boundary_administrative.p.20.png\"},{\"place_id\":\"159467805\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"2413295\",\"boundingbox\":[\"51.6861438\",\"51.8598252\",\"19.3208635\",\"19.6399426\"],\"lat\":\"51.77305755\",\"lon\":\"19.4783822195225\",\"display_name\":\"\u0141\xF3d\u017A,
+        \u0142\xF3dzkie, Polska\",\"class\":\"boundary\",\"type\":\"administrative\",\"importance\":0.77475365685755,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_boundary_administrative.p.20.png\"},{\"place_id\":\"158303184\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"224458\",\"boundingbox\":[\"50.8432775\",\"52.3940809\",\"18.0745958\",\"20.6592584\"],\"lat\":\"51.4721678\",\"lon\":\"19.3460637\",\"display_name\":\"\u0142\xF3dzkie,
+        Polska\",\"class\":\"boundary\",\"type\":\"administrative\",\"importance\":0.60649466580505,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_boundary_administrative.p.20.png\"},{\"place_id\":\"1449402\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"node\",\"osm_id\":\"320834823\",\"boundingbox\":[\"52.2384701\",\"52.2784701\",\"16.7240265\",\"16.7640265\"],\"lat\":\"52.2584701\",\"lon\":\"16.7440265\",\"display_name\":\"\u0141\xF3d\u017A,
+        gmina St\u0119szew, powiat pozna\u0144ski, wielkopolskie, 62-061, Polska\",\"class\":\"place\",\"type\":\"village\",\"importance\":0.3523836653823,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_place_village.p.20.png\"},{\"place_id\":\"40704139\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"node\",\"osm_id\":\"2951946543\",\"boundingbox\":[\"51.8379806\",\"51.8380806\",\"17.1028813\",\"17.1029813\"],\"lat\":\"51.8380306\",\"lon\":\"17.1029313\",\"display_name\":\"\u0141\xF3d\u017A,
+        Bodzewko Drugie, gmina Piaski, powiat gosty\u0144ski, wielkopolskie, 63-820,
+        Polska\",\"class\":\"place\",\"type\":\"isolated_dwelling\",\"importance\":0.34470384519613},{\"place_id\":\"92393126\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"way\",\"osm_id\":\"122359279\",\"boundingbox\":[\"51.7719051\",\"51.7722177\",\"19.4802822\",\"19.4805172\"],\"lat\":\"51.77206145\",\"lon\":\"19.4803997197362\",\"display_name\":\"\u0141\xF3d\u017A,
+        42A, Wierzbowa, \u015Ar\xF3dmie\u015Bcie-Wsch\xF3d, \u0141\xF3d\u017A-\u015Ar\xF3dmie\u015Bcie,
+        \u0141\xF3d\u017A, \u0142\xF3dzkie, 90-133, Polska\",\"class\":\"building\",\"type\":\"yes\",\"importance\":0.111},{\"place_id\":\"159910123\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"boundingbox\":[\"51.733590755134\",\"51.733690755134\",\"19.544234116322\",\"19.544334116322\"],\"lat\":\"51.7336407551343\",\"lon\":\"19.5442841163224\",\"display_name\":\"\u0141\xF3d\u017A,
+        Olechowska, Nr 33, \u0141\xF3d\u017A-Widzew, \u0141\xF3d\u017A, \u0142\xF3dzkie,
+        \u0141\xF3d\u017A, Polska\",\"class\":\"place\",\"type\":\"postcode\",\"importance\":0.111}]"}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Sat, 07 Jan 2017 16:24:34 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=Hidden_no_date%2C+Event
+  response:
+    body: {string: '[]'}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Sat, 07 Jan 2017 16:24:34 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+version: 1

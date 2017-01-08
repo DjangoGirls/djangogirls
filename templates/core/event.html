@@ -36,4 +36,19 @@
 
     {% endfor %}
 
+    <div class="container event-static-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                  Participants need to follow the <a href="{% url 'core:coc'%}">Django Girls Code of Conduct</a>.
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p>
+                  Contact organizers: <a href="mailto:{{ event.email }}">{{ event.email }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

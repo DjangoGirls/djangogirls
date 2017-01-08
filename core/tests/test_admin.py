@@ -1,6 +1,7 @@
 from datetime import datetime
 from unittest.mock import patch
 
+import vcr
 from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 
@@ -88,6 +89,7 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert self.event_2.team.count() == (team_count + 1)
 
     @patch('core.models.user_invite')
+    @vcr.use_cassette('core/tests/vcr/organizer_can_only_add_to_their_event.yaml')
     def test_organizer_can_only_add_to_their_event(self, mock_user_invite):
         self.client.login(username=self.peter.email, password='')
         data = {

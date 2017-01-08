@@ -213,7 +213,7 @@ DEFAULT_QUESTIONS = [
     },
     {
         "title": "It is important that all attendees comply with the "
-        "<a href='/pages/coc/'>Django Girls Code of Conduct</a>",
+        "<a href='/coc/'>Django Girls Code of Conduct</a>",
         "question_type": "choices",
         "choices": "I've read and understood the Django Girls Code of Conduct",
         "is_required": True,
