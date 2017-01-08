@@ -131,7 +131,11 @@ class EventApplication(models.Model):
             )
 
         # TODO: remove organizers, who are no longer in org team if cloned
-        send_application_deployed_email(self, event, email_password=password)
+        send_application_deployed_email(
+            event_application=self,
+            event=event,
+            email_password=password
+        )
 
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
@@ -164,7 +168,7 @@ class EventApplication(models.Model):
         """
         if not self.status == REJECTED:
             self.change_status_to(REJECTED)
-            send_application_rejection_email(self)
+            send_application_rejection_email(event_application=self)
 
 
 class Coorganizer(models.Model):
