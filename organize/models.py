@@ -94,7 +94,7 @@ class EventApplication(models.Model):
         """
         # TODO: we should recognize here if we should create a new event,
         # copy old one or copy old and change organizaers.
-        event = create_event_from_event_application(event_application=self)
+        event = self.create_event()
 
         # TODO: use method created in separate branch to create gmail acconut
         # and get password from it.
