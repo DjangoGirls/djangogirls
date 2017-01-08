@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.12.4]
+    method: POST
+    uri: https://slack.com/api/users.admin.invite?email=new%40organizer.com&first_name=New&set_active=True
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWys9WskpLzClO1VFKLSrKL1KyUsrLL4lPLC3JSE1RqgUA9xsXwyEAAAA=
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['53']
+      Content-Security-Policy: [referrer no-referrer;]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 08 Jan 2017 13:53:13 GMT']
+      Server: [Apache]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Vary: [Accept-Encoding]
+      Via: [1.1 9d4411b8984e97d164bcbb67d74df96e.cloudfront.net (CloudFront)]
+      X-Accepted-OAuth-Scopes: [client]
+      X-Amz-Cf-Id: [AN3nnMSOYZ1O_LysDDyJ_4kaffqCztsBLBhzFAju0j-hvWyd8_ExoA==]
+      X-Cache: [Miss from cloudfront]
+      X-Content-Type-Options: [nosniff]
+      X-Slack-Backend: [h]
+      X-Slack-Req-Id: [9c44cbe9-b1ff-4d24-aed3-ba8460d834d2]
+      X-XSS-Protection: ['0']
+    status: {code: 200, message: OK}
+version: 1
