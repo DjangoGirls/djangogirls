@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.test import TestCase
 
 from core.models import DEFAULT_COACH_PHOTO, Coach, Event, User
@@ -60,3 +61,18 @@ class TestCoachModel(TestCase):
         coach = Coach.objects.create(name="Test Test", twitter_handle="@test")
         self.assertEquals(Coach.objects.count(), 1)
         self.assertEqual(coach.photo_url, DEFAULT_COACH_PHOTO)
+
+
+class UserModel(TestCase):
+    fixtures = ['core_views_testdata.json']
+
+    def test_add_to_organizers_group(self):
+        user = User.objects.get(pk=1)
+        self.assertEquals(user.groups.count(), 0)
+        user.add_to_organizers_group()
+        # we don't have Group "Oragnizers", so no group is added
+        self.assertEquals(user.groups.count(), 0)
+
+        Group.objects.create(name="Organizers")
+        user.add_to_organizers_group()
+        self.assertEquals(user.groups.count(), 1)
