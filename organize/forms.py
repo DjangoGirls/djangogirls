@@ -44,9 +44,14 @@ class ApplicationForm(forms.Form):
 
 
 class OrganizersForm(forms.Form):
-    main_organizer_email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'compact-input'}))
-    main_organizer_first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'compact-input'}))
-    main_organizer_last_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    main_organizer_email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'compact-input'}))
+    main_organizer_first_name = forms.CharField(
+        max_length=30,
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    main_organizer_last_name = forms.CharField(
+        max_length=30,
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
 
 
 class WorkshopForm(forms.Form):
@@ -58,4 +63,4 @@ class WorkshopForm(forms.Form):
     def clean_date(self):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
-        return self.clean_date
+        return self.clean_data
