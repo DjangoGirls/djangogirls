@@ -151,7 +151,7 @@ class EventApplication(models.Model):
         """ Changes status to the status provided
             - sets proper status_changed_at datetime
         """
-        self.status = REJECTED
+        self.status = status
         self.status_changed_at = timezone.now()
         self.save(update_fields=['status', 'status_changed_at'])
 
