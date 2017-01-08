@@ -1,5 +1,4 @@
 from django.contrib import admin, messages
-from django.utils import timezone
 from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404, render
 
@@ -14,12 +13,12 @@ class InlineCoorganizerAdmin(admin.TabularInline):
 
 
 def change_status_to_on_hold(modeladmin, request, queryset):
-    queryset.update(status=ON_HOLD, status_changed_at=timezone.now())
+    queryset.change_status_to(ON_HOLD)
 change_status_to_on_hold.short_description = "Move selected application to on hold"
 
 
 def change_status_to_in_review(modeladmin, request, queryset):
-    queryset.update(status=IN_REVIEW, status_changed_at=timezone.now())
+    queryset.change_status_to(IN_REVIEW)
 change_status_to_in_review.short_description = "Move selected application to in review"
 
 
@@ -129,9 +128,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         application = get_object_or_404(EventApplication, id=application_id)
 
         if new_status in [IN_REVIEW, ON_HOLD]:
-            application.status = new_status
-            application.status_changed_at = timezone.now()
-            application.save()
+            application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
             if request.method == 'GET':
                 return render(request, 'admin/organize/eventapplication/view_change_status.html', {
