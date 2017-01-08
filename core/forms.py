@@ -42,8 +42,7 @@ class AddOrganizerForm(forms.Form):
         self._errors = []
         email = self.cleaned_data['email']
         event = self.cleaned_data['event']
-        first_name = self.cleaned_data['name'].split(' ')[0]
-        last_name = self.cleaned_data['name'].replace(first_name, '')
+        first_name, _, last_name = self.cleaned_data['name'].partition(' ')
         user = event.add_organizer(email, first_name, last_name)
         return user
 
