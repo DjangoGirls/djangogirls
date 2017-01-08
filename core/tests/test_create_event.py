@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from organize.models import EventApplication
-from core.create_event import create_event_from_event_application
 
 
 EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
@@ -12,7 +11,7 @@ class EventApplicationTest(TestCase):
 
     def test_create_event(self):
         event_application = EventApplication.objects.get(pk=1)
-        event = create_event_from_event_application(event_application)
+        event = event_application.create_event()
 
         # we explicitly list the name of fields below, instead of using
         # getattr, to make the tests more beginners-friendly

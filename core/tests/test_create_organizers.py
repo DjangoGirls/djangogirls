@@ -2,7 +2,6 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from core.create_organizers import create_organizers
 from core.models import Event
 from organize.models import EventApplication
 
@@ -19,7 +18,10 @@ class CreateOrganizersTest(TestCase):
         event_application = EventApplication.objects.get(pk=1)
         event = Event.objects.get(pk=1)
         self.assertEquals(event.team.count(), 2)
-        create_organizers(event, event_application, "fake_password")
+        event.create_organizers(
+            event_application.coorganizers.all(),
+            "fake_password"
+        )
 
         self.assertEquals(event.team.count(), 4)
         expected_emails = [
