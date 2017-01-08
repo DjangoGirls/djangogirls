@@ -1,0 +1,152 @@
+[
+    {
+        "photo": "picture01.jpg",
+        "photo_credit": "Django Girls Kansas City",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/28069141552/in/album-72157670788290175/",
+    },
+    {
+        "photo": "picture02.jpg",
+        "photo_credit": "Django Girls Kansas City",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/28094984141/in/album-72157670788290175/",
+    },
+    {
+        "photo": "picture03.jpg",
+        "photo_credit": "Django Girls Kansas City",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/27557870413/in/album-72157670788290175/",
+    },
+    {
+        "photo": "picture04.jpg",
+        "photo_credit": "Django Girls Kansas City",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/27557728833/in/album-72157670788290175/",
+    },
+    {
+        "photo": "picture05.jpg",
+        "photo_credit": "Django Girls London",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/26554515482/in/album-72157665271701233/",
+    },
+    {
+        "photo": "picture06.jpg",
+        "photo_credit": "Django Girls London",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/26044002463/in/album-72157665271701233/",
+    },
+    {
+        "photo": "picture07.jpg",
+        "photo_credit": "Django Girls Lagos",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25449324412/in/album-72157663207417834/",
+    },
+    {
+        "photo": "picture08.jpg",
+        "photo_credit": "Django Girls New York",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25469216065/in/album-72157664694309879/",
+    },
+    {
+        "photo": "picture09.jpg",
+        "photo_credit": "Django Girls Oxford",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25124276732/in/album-72157665070326785/",
+    },
+    {
+        "photo": "picture10.jpg",
+        "photo_credit": "Django Girls Budapest",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25031741111/in/album-72157664790713036/",
+    },
+    {
+        "photo": "picture11.jpg",
+        "photo_credit": "Django Girls Budapest",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25006831762/in/album-72157664790713036/",
+    },
+    {
+        "photo": "picture12.jpg",
+        "photo_credit": "Django Girls Warsaw",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/23727092046/in/album-72157662270159211/",
+    },
+    {
+        "photo": "picture13.jpg",
+        "photo_credit": "Django Girls Kampala",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/22814116114/in/album-72157661898691455/",
+    },
+    {
+        "photo": "picture14.jpg",
+        "photo_credit": "Django Girls São José dos Campos",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/22551176858/in/album-72157660352353598/",
+    },
+    {
+        "photo": "picture15.jpg",
+        "photo_credit": "Django Girls Seoul",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/22746675356/in/album-72157659575610992/",
+    },
+    {
+        "photo": "picture16.jpg",
+        "photo_credit": "Django Girls Paris",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/18648650441/in/album-72157651984551213/",
+    },
+    {
+        "photo": "picture17.jpg",
+        "photo_credit": "Django Girls Wrocław",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/16478567386/in/album-72157650355669760/",
+    },
+    {
+        "photo": "picture18.jpg",
+        "photo_credit": "Django Girls Wrocław",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/16503665842/in/album-72157650355669760/",
+    },
+    {
+        "photo": "picture19.jpg",
+        "photo_credit": "Django Girls Wrocław",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25936241053/in/album-72157667360931465/",
+    },
+    {
+        "photo": "picture20.jpg",
+        "photo_credit": "Django Girls Kraków",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/15643374408/in/album-72157649308746176/",
+    },
+    {
+        "photo": "picture21.jpg",
+        "photo_credit": "Django Girls Kraków",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/15643649397/in/album-72157649308746176/",
+    },
+    {
+        "photo": "picture22.jpg",
+        "photo_credit": "Django Girls Warsaw",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/15811716832/in/album-72157649335413325/",
+    },
+    {
+        "photo": "picture23.jpg",
+        "photo_credit": "Django Girls Harare",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/29304355981/in/album-72157673170966566/",
+    },
+    {
+        "photo": "picture24.jpg",
+        "photo_credit": "Django Girls Lagos",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25449275112/in/album-72157663207417834/",
+    },
+    {
+        "photo": "picture25.jpg",
+        "photo_credit": "Django Girls Florianopolis",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/30378769971/in/album-72157675491564395/",
+    },
+    {
+        "photo": "picture26.jpg",
+        "photo_credit": "Django Girls Florianopolis",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/30167314850/in/album-72157675491564395/",
+    },
+    {
+        "photo": "picture27.jpg",
+        "photo_credit": "Django Girls London",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/26554338532/in/album-72157665271701233/",
+    },
+    {
+        "photo": "picture28.jpg",
+        "photo_credit": "Django Girls Budapest",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25031756061/in/album-72157664790713036/",
+    },
+    {
+        "photo": "picture29.jpg",
+        "photo_credit": "Django Girls Budapest",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25125164745/in/album-72157664790713036/",
+    },
+    {
+        "photo": "picture30.jpg",
+        "photo_credit": "Django Girls Budapest",
+        "photo_link": "https://www.flickr.com/photos/djangogirls/25031918481/in/album-72157664790713036/",
+    },
+]
