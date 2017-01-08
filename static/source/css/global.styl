@@ -564,6 +564,12 @@ span.highlighted-number
         background-color: #f9f7f7
         padding: 6% 8.6%
 
+        > :first-child
+            margin-top: 0
+
+        &.narrow
+            padding: 20px
+
     h1
         font-family: serif_font
         font-size: 36px
@@ -622,6 +628,9 @@ span.highlighted-number
 
     .bulleted
         list-style-type: none
+
+        &.narrow
+            padding: 0
 
         li
             align-items: baseline
@@ -700,6 +709,7 @@ span.highlighted-number
         font-size: 24px;
         margin: 0
         padding: 10px 20px
+        text-align: center
         text-decoration: none
 
         &:disabled
@@ -707,6 +717,57 @@ span.highlighted-number
 
     .tight-bottom
         margin-bottom: 15px
+
+    .tight-top
+        margin-top: 15px
+
+.organize-landing
+    h1
+        font-family: sans_font
+        font-size: 36px
+        font-style: normal
+        text-align: left
+
+    h2
+        font-size: 30px
+
+    .narrow h2
+        font-size: 26px
+
+    p
+        margin: 25px 0
+
+    .cta
+        margin: 25px 0
+
+        @media screen and (min-width: 1000px)
+            font-size: 23px
+            padding-left: 10px
+            padding-right: 10px
+            width: 100%
+
+    blockquote
+        border: 0 none
+        margin-bottom: 55px
+        margin-top: 35px
+        padding: 0
+
+        img
+            border-radius: 50%;
+            display: block
+            margin: 0 auto
+            max-width: 100%
+
+        cite
+            display: block
+            margin-top: 18px
+
+    .media-blocks
+        h2
+            margin-bottom: 18px
+
+        p
+            margin: 15px 0
 
 /*
 --------------------
