@@ -106,6 +106,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.venue }}
+                                {% if wizard.form.venue.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.venue.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>
@@ -117,6 +124,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.sponsorship }}
+                                {% if wizard.form.sponsorship.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.sponsorship.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>
@@ -128,6 +142,13 @@
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
                                 {{ wizard.form.coaches }}
+                                {% if wizard.form.coaches.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.coaches.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
                     </section>
