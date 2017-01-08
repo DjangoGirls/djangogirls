@@ -6,7 +6,7 @@ from django_date_extensions.fields import ApproximateDateFormField
 
 from core.models import Event
 from core.validators import validate_approximatedate
-from .models import INVOLVEMENT_CHOICES
+from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
     (True, "Yes, I organized Django Girls"),
@@ -14,11 +14,13 @@ PREVIOUS_ORGANIZER_CHOICES = (
 
 
 class PreviousEventForm(forms.Form):
-    has_organized_before = forms.ChoiceField(
+    has_organized_before = forms.TypedChoiceField(
+        coerce=lambda x: x in ['True', True],
         widget=forms.RadioSelect,
         choices=PREVIOUS_ORGANIZER_CHOICES)
     previous_event = forms.ModelChoiceField(
-        queryset=Event.objects.past(), empty_label="Choose event",
+        queryset=Event.objects.past(),
+        empty_label="Choose event",
         required=False,
         widget=forms.Select(
             attrs={'aria-label': 'Choose event', 'class': 'linked-select'}))
@@ -26,9 +28,10 @@ class PreviousEventForm(forms.Form):
     def clean(self):
         has_organized_before = self.cleaned_data.get('has_organized_before')
         previous_event = self.cleaned_data.get('previous_event')
-        if (has_organized_before == 'True' and not previous_event):
-            raise forms.ValidationError({
-                'has_organized_before': ['You have to choose an event.']})
+        if has_organized_before is True and not previous_event:
+            self.add_error(
+                'has_organized_before',
+                'You have to choose an event.')
 
         return self.cleaned_data
 
@@ -76,4 +79,5 @@ class WorkshopForm(forms.Form):
     def clean_date(self):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
-        return self.cleaned_data
+        # TODO: add checking if the event is in the future
+        return date

@@ -1,10 +1,8 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ValidationError
-from django.core.mail import EmailMessage
 from django.db import models, transaction
 from django.utils import timezone
-from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDateField
 
 from core.models import Event
@@ -13,7 +11,6 @@ from core.validators import validate_approximatedate
 from .constants import (
     APPLICATION_STATUS,
     DEPLOYED,
-    INVOLVEMENT_CHOICES,
     NEW,
     ON_HOLD,
     REJECTED,
@@ -42,10 +39,11 @@ class EventApplication(models.Model):
     about_you = models.TextField("About organizer")
     why = models.TextField("Motivations to organize")
     involvement = models.CharField("Involvement in Django Girls",
-                                   choices=INVOLVEMENT_CHOICES, max_length=15)
+                                   max_length=100)
     experience = models.TextField("Experience with organizing other events")
     venue = models.TextField("Information about your potential venue")
-    sponsorship = models.TextField("Information about your potential sponsorship")
+    sponsorship = models.TextField(
+        "Information about your potential sponsorship")
     coaches = models.TextField("Information about your potential coaches")
 
     # status reflecting state of the event in a triaging process.
@@ -67,7 +65,8 @@ class EventApplication(models.Model):
         )
 
     def __str__(self):
-        return "{}, {} ({})".format(self.city, self.country, self.get_status_display())
+        return "{}, {} ({})".format(
+            self.city, self.country, self.get_status_display())
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
