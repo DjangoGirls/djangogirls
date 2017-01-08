@@ -13,6 +13,7 @@ from core.validators import validate_approximatedate
 
 from .constants import (
     APPLICATION_STATUS,
+    DEPLOYED,
     INVOLVEMENT_CHOICES,
     NEW,
     ON_HOLD,
@@ -87,11 +88,17 @@ class EventApplication(models.Model):
 
     @transaction.atomic
     def deploy_event(self):
-        """ Deploy Event based on the current EventApplication 
+        """ Deploy Event based on the current EventApplication
+            - change status to DEPLOYED
             - creates or copies event
-            - add/remove organizers 
+            - add/remove organizers
             - send email about deployment
         """
+        if self.status == DEPLOYED:  # we don't want to deploy twice
+            return
+
+        self.change_status_to(DEPLOYED)
+
         # TODO: we should recognize here if we should create a new event,
         # copy old one or copy old and change organizaers.
         event = self.create_event()
@@ -121,6 +128,14 @@ class EventApplication(models.Model):
         emails.append(self.main_organizer_email)
         return emails
 
+    def change_status_to(self, status):
+        """ Changes status to the status provided
+            - sets proper status_changed_at datetime
+        """
+        self.status = REJECTED
+        self.status_changed_at = timezone.now()
+        self.save()
+
     @transaction.atomic
     def reject(self):
         """
@@ -129,9 +144,7 @@ class EventApplication(models.Model):
         - sends a rejection email
         """
         if not self.status == REJECTED:
-            self.status = REJECTED
-            self.status_changed_at = timezone.now()
-            self.save()
+            self.change_status_to(REJECTED)
             self.send_rejection_email()
 
     def send_rejection_email(self):

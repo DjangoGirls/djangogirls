@@ -11,6 +11,7 @@ IN_REVIEW = "in_review"  # admin started triaging the event
 ON_HOLD = "on_hold"  # event is temporarily on hold (i.e. date is not definite)
 ACCEPTED = "accepted"
 REJECTED = "rejected"
+DEPLOYED = "deployed"
 
 APPLICATION_STATUS = (
     (NEW, "New"),
@@ -18,4 +19,5 @@ APPLICATION_STATUS = (
     (ON_HOLD, "On hold"),
     (ACCEPTED, "Accepted"),
     (REJECTED, "Rejected"),
+    (DEPLOYED, "Deployed"),
 )
