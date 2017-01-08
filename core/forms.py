@@ -2,16 +2,10 @@ from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as auth_forms
-from django.core.mail import EmailMessage
 from django.core.validators import validate_email
 from django.db import transaction
-from django.template.loader import render_to_string
-from slacker import Error as SlackerError
 
-from .default_eventpage_content import (get_default_eventpage_data,
-                                        get_default_menu)
 from .models import ContactEmail, Event, User
-from .slack_client import user_invite
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -38,66 +32,19 @@ class AddOrganizerForm(forms.Form):
     name = forms.CharField(label="Organizer's first and last name")
     email = forms.CharField(label="E-mail address", validators=[validate_email])
 
-    def __init__(self, event_choices=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        event_choices = kwargs.pop('event_choices', None)
         super(AddOrganizerForm, self).__init__(*args, **kwargs)
-        if event_choices:
+        if event_choices is not None:
             self.fields['event'].queryset = event_choices
-
-    def invite_to_slack(self, email, name):
-        try:
-            user_invite(email, name)
-        except (ConnectionError, SlackerError) as e:
-            self._errors.append(
-                'Slack invite unsuccessful, reason: {}'.format(e))
-
-    def notify_existing_user(self, user):
-        content = render_to_string('emails/existing_user.html', {
-            'user': user,
-            'event': self.cleaned_data['event']
-        })
-        subject = 'You have been granted access to new Django Girls event'
-        self.send_email(content, subject, user)
-
-    def notify_new_user(self, user):
-        content = render_to_string('emails/new_user.html', {
-            'user': user,
-            'event': self.cleaned_data['event'],
-            'password': self._password,
-            'errors': self._errors,
-        })
-        subject = 'Access to Django Girls website'
-        self.send_email(content, subject, user)
-
-    def send_email(self, content, subject, user):
-        msg = EmailMessage(subject,
-                           content,
-                           "Django Girls <hello@djangogirls.org>",
-                           [user.email])
-        msg.content_subtype = "html"
-        msg.send()
 
     def save(self, *args, **kwargs):
         assert self.is_valid()
         self._errors = []
         email = self.cleaned_data['email']
         event = self.cleaned_data['event']
-
-        user, created = User.objects.get_or_create(email=email)
-        event.team.add(user)
-        if created:
-            self._password = User.objects.make_random_password()
-            user.first_name = self.cleaned_data['name'].split(' ')[0]
-            user.last_name = self.cleaned_data[
-                'name'].replace(user.first_name, '')
-            user.is_staff = True
-            user.is_active = True
-            user.set_password(self._password)
-            user.save()
-            user.groups.add(1)
-            self.invite_to_slack(email, user.first_name)
-            self.notify_new_user(user)
-        else:
-            self.notify_existing_user(user)
+        first_name, _, last_name = self.cleaned_data['name'].partition(' ')
+        user = event.add_organizer(email, first_name, last_name)
         return user
 
 
@@ -202,28 +149,6 @@ class EventForm(forms.ModelForm):
             'city', 'country', 'date', 'email', 'latlng', 'name',
             'page_title', 'page_url']
 
-    def add_default_content(self, event):
-        """Populate EventPageContent with default layout"""
-        data = get_default_eventpage_data()
-
-        for i, section in enumerate(data):
-            section['position'] = i
-            section['content'] = render_to_string(section['template'])
-            del section['template']
-            event.content.create(**section)
-
-    def add_default_menu(self, event):
-        """Populate EventPageMenu with default links"""
-        data = get_default_menu()
-
-        for i, link in enumerate(data):
-            link['position'] = i
-            event.menu.create(**link)
-
-    def add_default_data(self, event):
-        self.add_default_content(event)
-        self.add_default_menu(event)
-
     @transaction.atomic
     def save(self, commit=True):
         """Save the event and create default content in case of new instances"""
@@ -231,5 +156,7 @@ class EventForm(forms.ModelForm):
         instance = super(EventForm, self).save(commit=commit)
         if commit and created:
             # create default content
-            self.add_default_data(instance)
+            instance.add_default_content()
+            instance.add_default_menu()
+
         return instance
