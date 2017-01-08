@@ -1,5 +1,4 @@
 from django.contrib import admin, messages
-from django.utils import timezone
 from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404, render
 
