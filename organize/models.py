@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.db import models, transaction
@@ -18,6 +17,11 @@ from .constants import (
     NEW,
     ON_HOLD,
     REJECTED,
+)
+from .managers import EventApplicationQuerySet
+from core.emails import (
+    send_application_rejection_email,
+    send_application_deployed_email
 )
 
 
@@ -53,6 +57,8 @@ class EventApplication(models.Model):
     status_changed_at = models.DateTimeField(null=True, blank=True)
 
     comment = models.TextField(null=True, blank=True)
+
+    objects = EventApplicationQuerySet.as_manager()
 
     class Meta:
         permissions = (
@@ -125,8 +131,7 @@ class EventApplication(models.Model):
             )
 
         # TODO: remove organizers, who are no longer in org team if cloned
-
-        self.send_event_deployed_email(event, email_password=password)
+        send_application_deployed_email(self, event, email_password=password)
 
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
@@ -146,9 +151,9 @@ class EventApplication(models.Model):
         """ Changes status to the status provided
             - sets proper status_changed_at datetime
         """
-        self.status = REJECTED
+        self.status = status
         self.status_changed_at = timezone.now()
-        self.save()
+        self.save(update_fields=['status', 'status_changed_at'])
 
     @transaction.atomic
     def reject(self):
@@ -159,33 +164,7 @@ class EventApplication(models.Model):
         """
         if not self.status == REJECTED:
             self.change_status_to(REJECTED)
-            self.send_rejection_email()
-
-    def send_rejection_email(self):
-        """
-        Sends a rejection email to all organizars who created this application
-        """
-        subject = "Application to organize Django Girls {} has been reviewed".format(self.city)
-        content = render_to_string('emails/organize/rejection.html', {'application': self})
-        recipients = self.get_all_recipients()
-        msg = EmailMessage(subject, content, settings.DEFAULT_FROM_EMAIL, recipients)
-        msg.content_subtype = "html"
-        msg.send()
-
-    def send_event_deployed_email(self, event, email_password):
-        """
-        Sends a event deployed email to all organizers who created this application
-        """
-        subject = "Congrats! Your application to organize Django Girls {} has been accepted!".format(self.city)
-        content = render_to_string('emails/organize/event_deployed.html', {
-            'event': event,
-            'password': email_password,
-        })
-        recipients = self.get_all_recipients()
-        recipients.append(event.email)  # add event's djangogirls.org email
-        msg = EmailMessage(subject, content, settings.DEFAULT_FROM_EMAIL, recipients)
-        msg.content_subtype = "html"
-        msg.send()
+            send_application_rejection_email(self)
 
 
 class Coorganizer(models.Model):
