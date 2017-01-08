@@ -74,7 +74,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         return password
 
     def add_to_organizers_group(self):
-        group = Group.objects.get(name="Organizers")
+        try:
+            group = Group.objects.get(name="Organizers")
+        except Group.DoesNotExist:
+            return
+
         self.groups.add(group)
 
     def __str__(self):
