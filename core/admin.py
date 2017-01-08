@@ -207,7 +207,7 @@ class EventAdmin(admin.ModelAdmin):
             'form': form,
             'title': 'Add organizers',
         })
-    
+
     def save_model(self, request, obj, form, change):
         created = not obj.pk
         super(EventAdmin, self).save_model(request, obj, form, change)
