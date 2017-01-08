@@ -42,5 +42,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(set_default_email_flags),
+        migrations.RunPython(set_default_email_flags, migrations.RunPython.noop),
     ]
