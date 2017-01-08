@@ -271,20 +271,6 @@ class Event(models.Model):
         self.invite_organizer_to_team(user, created, password)
         return user
 
-    def create_organizers(self, team, email_password):
-        """ Create or get User objects based on EventApplication's Coorganizers
-        """
-        organizers = []
-        for organizer in team:
-            user = self.add_organizer(
-                organizer.email,
-                organizer.first_name,
-                organizer.last_name
-            )
-            organizers.append(user)
-
-        return organizers
-
 
 @python_2_unicode_compatible
 class ContactEmail(models.Model):

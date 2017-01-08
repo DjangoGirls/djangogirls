@@ -107,11 +107,25 @@ class EventApplication(models.Model):
         # and get password from it.
         password = "FAKE_PASS"
 
-        # TODO: remove organizers, who are no longer in org team if cloned
-        event.create_organizers(
-            team=self.coorganizers.all(),
-            email_password=password
+        # add main organizer of the Event
+        main_organizer = event.add_organizer(
+            self.main_organizer_email,
+            self.first_name,
+            self.last_name,
         )
+        event.main_organizer = main_organizer
+        event.save()
+
+        # add all co-organizers
+        for organizer in self.coorganizers.all():
+            event.add_organizer(
+                organizer.email,
+                organizer.first_name,
+                organizer.last_name
+            )
+
+        # TODO: remove organizers, who are no longer in org team if cloned
+
         self.send_event_deployed_email(event, email_password=password)
 
     def clean(self):
