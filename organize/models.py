@@ -18,6 +18,7 @@ from .constants import (
     ON_HOLD,
     REJECTED,
 )
+from .managers import EventApplicationQuerySet
 from core.emails import (
     send_application_rejection_email,
     send_application_deployed_email
@@ -56,6 +57,8 @@ class EventApplication(models.Model):
     status_changed_at = models.DateTimeField(null=True, blank=True)
 
     comment = models.TextField(null=True, blank=True)
+
+    objects = EventApplicationQuerySet.as_manager()
 
     class Meta:
         permissions = (
