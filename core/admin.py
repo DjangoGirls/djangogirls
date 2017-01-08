@@ -190,7 +190,7 @@ class EventAdmin(admin.ModelAdmin):
         event = self._get_event_from_get(request, all_events)
 
         if request.method == 'POST':
-            form = AddOrganizerForm(all_events, request.POST)
+            form = AddOrganizerForm(request.POST, event_choices=all_events)
             if form.is_valid():
                 user = form.save()
                 messages.success(request,
@@ -199,7 +199,7 @@ class EventAdmin(admin.ModelAdmin):
                     " in an e-mail.".format(user.get_full_name()))
                 return redirect('admin:core_event_add_organizers')
         else:
-            form = AddOrganizerForm(all_events)
+            form = AddOrganizerForm(event_choices=all_events)
 
         return render(request, 'admin/core/event/view_add_organizers.html', {
             'all_events': all_events,
@@ -212,7 +212,8 @@ class EventAdmin(admin.ModelAdmin):
         created = not obj.pk
         super(EventAdmin, self).save_model(request, obj, form, change)
         if created:
-            form.add_default_data(obj)
+            obj.add_default_content()
+            obj.add_default_menu()
 
 
 class ResizableCodeMirror(CodeMirrorTextarea):

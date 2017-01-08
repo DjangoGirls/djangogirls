@@ -1,5 +1,6 @@
 import random
 from datetime import date
+from unittest.mock import patch
 
 import vcr
 from click.testing import CliRunner
@@ -15,7 +16,7 @@ from core.models import Event
 
 
 class CommandsTestCase(TestCase):
-    fixtures = ['core_views_testdata.json']
+    fixtures = ['core_views_testdata.json', 'groups_testdata.json']
 
     def setUp(self):
         self.event_1 = Event.objects.get(pk=1)  # In the future
@@ -42,7 +43,8 @@ class CommandsTestCase(TestCase):
         event_2 = Event.objects.get(pk=2)
         self.assertEqual(event_2.latlng, latlng)
 
-    def test_add_organizer(self):
+    @patch('core.models.user_invite')
+    def test_add_organizer(self, mock_user_invite):
         event = Event.objects.get(pk=1)
         assert event.team.count() == 2
 
