@@ -1,5 +1,4 @@
 from datetime import datetime
-from unittest.mock import patch
 
 import vcr
 from django.contrib.auth.models import Permission
@@ -63,9 +62,8 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert len(resp.context['all_events']) == expected_events.count()
         assert all([x.is_upcoming() for x in resp.context['all_events']])
 
-    # TODO: mock should be replaced when #346 is completely finished
-    @patch('core.models.user_invite')
-    def test_adding_organizer_as_superuser(self, mock_user_invite):
+    @vcr.use_cassette('core/tests/vcr/test_adding_organizer_as_superuser.yaml')
+    def test_adding_organizer_as_superuser(self):
         resp = self.client.get(reverse('admin:core_event_add_organizers'))
         total_count = User.objects.filter(is_staff=True).count()
         team_count = self.event_1.team.count()
