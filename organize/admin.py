@@ -129,9 +129,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         application = get_object_or_404(EventApplication, id=application_id)
 
         if new_status in [IN_REVIEW, ON_HOLD]:
-            application.status = new_status
-            application.status_changed_at = timezone.now()
-            application.save()
+            application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
             if request.method == 'GET':
                 return render(request, 'admin/organize/eventapplication/view_change_status.html', {
