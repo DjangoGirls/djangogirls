@@ -1,7 +1,9 @@
+from datetime import date
 from django.test import TestCase
 
 from core.deploy_event import (
     copy_content_from_previous_event,
+    copy_event,
     copy_menu_from_previous_event,
 )
 from core.models import Coach, Event, Sponsor
@@ -9,9 +11,6 @@ from core.models import Coach, Event, Sponsor
 
 class CopyEventTest(TestCase):
     fixtures = ['core_views_testdata.json', 'groups_testdata.json']
-
-    def test_copy_event(self):
-        pass
 
     def test_copy_content_from_previous_event(self):
         previous_event = Event.objects.get(pk=1)
@@ -31,3 +30,17 @@ class CopyEventTest(TestCase):
         self.assertEquals(new_event.menu.count(), 0)
         copy_menu_from_previous_event(previous_event, new_event)
         self.assertEquals(new_event.menu.count(), 5)
+
+    def test_copy_event(self):
+        previous_event = Event.objects.get(pk=1)
+        previous_name = previous_event.name
+        new_date = date(2020, 10, 20)
+
+        new_event = copy_event(previous_event, new_date)
+
+        # we need to refetch the event as we changed id of the object
+        # inside copy_event method
+        previous_event = Event.objects.get(pk=1)
+
+        self.assertEquals(previous_event.name, "{} #1".format(previous_name))
+        self.assertEquals(new_event.name, "{} #2".format(previous_name))

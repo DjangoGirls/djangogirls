@@ -11,13 +11,14 @@ def copy_event(previous_event, event_date):
     """
     number = Event.objects.filter(city=previous_event.city).count()
 
+    previous_event_name = "{} #{}".format(previous_event.name, number)
+    event_name = "{} #{}".format(previous_event.name, number+1)
+
     # Change the name of previous event to {name} #{number-1}
-    previous_event_name = "{} #{}".format(previous_event.name, number-1)
     previous_event.name = previous_event_name
     previous_event.save()
 
     # Copy event with a name {name} #{number} and new date
-    event_name = "{} #{}".format(previous_event.name, number)
     new_event = previous_event
     new_event.pk = None
     new_event.name = event_name
