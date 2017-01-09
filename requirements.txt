@@ -10,6 +10,7 @@ django-codemirror-widget
 django-countries==4.0
 django-date-extensions==2.0
 django-gulp-rev==0.2
+django-formtools==1.0
 django-leaflet==0.19.0
 django-markdown-deux==1.0.5
 django-recaptcha

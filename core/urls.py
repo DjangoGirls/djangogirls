@@ -8,7 +8,6 @@ urlpatterns = [
     url(r'^events/map/$', views.events_map, name='events_map'),
     url(r'^events/calendar.ics$', views.events_ical, name='icalendar'),
     url(r'^resources/$', views.resources, name='resources'),
-    url(r'^organize/$', views.organize, name='organize'),
     url(r'^story/$', views.stories, name='stories'),
     url(r'^newsletter/$', views.newsletter, name='newsletter'),
     url(r'^faq/$', views.faq, name='faq'),

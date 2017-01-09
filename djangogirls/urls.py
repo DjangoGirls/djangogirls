@@ -7,7 +7,8 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     # Redirect old links:
-    url(r'^pages/in-your-city/$', RedirectView.as_view(url='/organize/', permanent=True)),
+    url(r'^pages/in-your-city/$',
+        RedirectView.as_view(url='/organize/', permanent=True)),
     url(r'^admin$', RedirectView.as_view(url='/admin/', permanent=True)),
     url(r'^admin/core/eventpage/(\d+)/',
         RedirectView.as_view(pattern_name='admin:core_event_change')),
@@ -30,10 +31,13 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
+    url(r'^organize/', include('organize.urls', namespace='organize')),
     url(r'', include('applications.urls', namespace='applications')),
     url(r'', include('core.urls', namespace='core')),
 ]
 
 if settings.DEBUG:
-   urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

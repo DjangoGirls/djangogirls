@@ -172,7 +172,7 @@ class Event(models.Model):
     offer_help_email_sent = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return '{}, {}'.format(self.name, self.date)
 
     class Meta:
         ordering = ('-date', )

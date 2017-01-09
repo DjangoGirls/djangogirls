@@ -1,0 +1,117 @@
+{% extends 'global/base.html' %}
+{% load i18n rev static %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container organize">
+
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'includes/_organize-progress.html' with active_step=3 %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <h1>Application to organize a workshop</h1>
+                <form  novalidate data-required-form action="" method="post">{% csrf_token %}
+                    {{ wizard.management_form }}
+
+                    {% if wizard.form.non_field_errors %}
+                        <ul class="error-list">
+                            {% for error in wizard.form.non_field_errors %}
+                                <li class="error">{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <section class="form-section">
+                        <label for="{{ wizard.form.about_you.id_for_label }}" class="form-section-heading">Who are you?</label>
+                        <p class="form-section-subhead">Tell us a little bit about yourself. What’s your background and daily occupation?</p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9">
+                                {{ wizard.form.about_you }}
+                                {% if wizard.form.about_you.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.about_you.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="form-section">
+                        <label for="{{ wizard.form.why.id_for_label }}" class="form-section-heading">Why do you want to organize a Django Girls workshop?</label>
+                        <p class="form-section-subhead">What motivated or inspired you to do it? What is your goal in organizing an event?</p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9">
+                                {{ wizard.form.why }}
+                                {% if wizard.form.why.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.why.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+
+                    <fieldset class="form-section">
+                        <legend class="form-section-heading">Have you been involved in Django Girls before?</legend>
+                        <p class="form-section-subhead">Check boxes next to all the things that describe you</p>
+                        <ul>
+                            {% for input in wizard.form.involvement %}
+                                <li>
+                                    {{ input.tag }}
+                                    <label for="{{ input.id_for_label }}">{{ input.choice_label }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% if wizard.form.involvement.errors %}
+                            <ul class="error-list">
+                                {% for error in wizard.form.involvement.errors %}
+                                    <li class="error">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </fieldset>
+
+                    <section class="form-section">
+                        <label for="{{ wizard.form.experience.id_for_label }}" class="form-section-heading">Have you organized any other event before?</label>
+                        <p class="form-section-subhead">If you helped organize a different workshop or event before, or are involved in your local community, we’d love to hear about it!</p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9">
+                                {{ wizard.form.experience }}
+                                {% if wizard.form.experience.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.experience.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="cta-wrapper">
+                        <button type="submit" class="cta">Go to next step</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

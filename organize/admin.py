@@ -14,12 +14,14 @@ class InlineCoorganizerAdmin(admin.TabularInline):
 
 def change_status_to_on_hold(modeladmin, request, queryset):
     queryset.change_status_to(ON_HOLD)
-change_status_to_on_hold.short_description = "Move selected application to on hold"
+change_status_to_on_hold.short_description = (
+    "Move selected application to on hold")
 
 
 def change_status_to_in_review(modeladmin, request, queryset):
     queryset.change_status_to(IN_REVIEW)
-change_status_to_in_review.short_description = "Move selected application to in review"
+change_status_to_in_review.short_description = (
+    "Move selected application to in review")
 
 
 @admin.register(EventApplication)
@@ -116,12 +118,14 @@ class EventApplicationAdmin(admin.ModelAdmin):
         urls = super(EventApplicationAdmin, self).get_urls()
         my_urls = [
             url(r'(?P<application_id>\d+)/triage/(?P<new_status>[\w\d/]+)/$',
-                self.admin_site.admin_view(self.view_change_application_status),
+                self.admin_site.admin_view(
+                    self.view_change_application_status),
                 name='organize_eventapplication_change_application_status'),
         ]
         return my_urls + urls
 
-    def view_change_application_status(self, request, application_id, new_status):
+    def view_change_application_status(
+            self, request, application_id, new_status):
         """
         Custom EventApplication admin view for handling triaging
         """
@@ -131,10 +135,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
             application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
             if request.method == 'GET':
-                return render(request, 'admin/organize/eventapplication/view_change_status.html', {
-                    'application': application,
-                    'new_status': new_status
-                })
+                return render(
+                    request,
+                    'admin/organize/eventapplication/view_change_status.html',
+                    {'application': application,
+                     'new_status': new_status})
             elif request.method == 'POST':
                 if new_status == REJECTED:
                     application.reject()
@@ -142,11 +147,14 @@ class EventApplicationAdmin(admin.ModelAdmin):
                     application.accept()
         else:
             messages.error(request, 'Invalid status provided for application')
-            return redirect('admin:organize_eventapplication_change', application.id)
+            return redirect(
+                'admin:organize_eventapplication_change',
+                application.id)
 
-        messages.success(request, 'Application for {city}, {country} has been moved to {status}'.format(
-            city=application.city,
-            country=application.country,
-            status=application.get_status_display()
-        ))
+        messages.success(
+            request,
+            'Application for {city}, {country} has been moved to {status}'.format(
+                city=application.city,
+                country=application.country,
+                status=application.get_status_display()))
         return redirect('admin:organize_eventapplication_changelist')

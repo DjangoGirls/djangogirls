@@ -486,13 +486,288 @@ span.highlighted-number
     Organize-full
 --------------------
 */
-#organize-full
-    .row
-        margin-top: 10px
+.organize-progress
+    margin: 0 auto
+    max-width: 1036px
+    padding: 40px 0
 
-    iframe #header
-        display: none;
+    .steps
+        display: flex
+        list-style-type: none
+        margin: 0
+        padding: 0
+        position: relative
 
+    .step
+        color: rgba(247, 146, 29, .5)
+        flex: 1
+        font-family: sans_font
+        font-size: 16px
+        padding-bottom: 30px
+        text-align: center
+        text-transform: uppercase
+
+        @media screen and (min-width: 767px)
+            position: relative
+
+        &::before,
+        &::after
+            content: ''
+            display: block
+            position: relative
+
+        // Line
+        &::before
+            background-color: rgba(247, 146, 29, .5)
+            height: 2px
+            left: -50%
+            margin: 0 0 -2px
+            top: 7.5px
+            width: 100%
+
+        &:first-child::before
+            display: none
+
+        // Circle
+        &::after
+            background: white
+            border: 2px solid rgba(247, 146, 29, .5)
+            border-radius(50%)
+            height: 17px
+            margin: 0 auto 15px
+            top: 0
+            width: 17px
+            z-index: 2
+
+        .text
+            display: block
+            left: 0
+            position: absolute
+            right: 0
+            bottom: 0%
+
+        &.active,
+        &.complete
+            color: orange
+
+            &::before,
+            &::after
+                background-color: orange
+                border-color: orange
+
+        @media screen and (max-width: 766px)
+            &:not(.active) .text
+                display: none
+
+.organize
+    .panel
+        background-color: #f9f7f7
+        padding: 6% 8.6%
+
+        > :first-child
+            margin-top: 0
+
+        &.narrow
+            padding: 20px
+
+    h1
+        font-family: serif_font
+        font-size: 36px
+        line-height: 1.94
+        margin: 0
+        text-align: center
+
+    a
+        color: orange
+
+    p
+        line-height: 1.94
+        margin: 36px 0
+
+    fieldset
+        margin-bottom: 50px
+
+    legend
+        border: 0 none
+        display: block
+        font-size: inherit
+        margin-bottom: 10px
+
+    .form-section
+        margin-top: 40px
+
+    .form-section-heading
+        font-size: 20px
+        margin: 0
+        padding: 0
+
+    .form-section-subhead
+        color: #646464
+        font-size: 14px
+        margin: 0 0 20px
+
+    .linked-select
+        margin-left: .8em
+
+    .narrow-options
+        margin-left: auto
+        margin-right: auto
+        max-width: 800px
+        padding: 0
+
+    ul
+        list-style-type: none
+        margin-bottom: 0
+
+        &.row
+            padding: 0
+
+    li
+        line-height: 35px
+        margin-bottom: 15px
+
+    .bulleted
+        list-style-type: none
+
+        &.narrow
+            padding: 0
+
+        li
+            align-items: baseline
+            display: flex
+
+            &::before
+                content: ''
+                background: orange
+                border-radius: 50%
+                display: block
+                flex-shrink: 0
+                height: 9px
+                width: 9px
+
+            > :first-child
+                padding-left: .8em
+
+    .checkbox-wrapper
+        align-items: baseline
+        display: flex
+
+    label
+        font-weight: normal
+        line-height: 35px
+        margin: 0
+        padding-left: .8em
+
+    .compact-label
+        color: #646464
+        display: block
+        font-family: sans_font
+        font-size: 12px
+        padding: 0
+        text-transform: uppercase
+
+    .compact-input
+        border-color: #cdcbcb
+        display: block
+        font-size: 14px
+        line-height: 1.71
+        padding: 7px 12px
+        width: 100%
+
+    .add-organizer
+        margin: 20px 0 0
+        text-align: center
+
+    .icon-button
+        background: transparent
+        border: 0 none
+        padding: 0
+
+        svg
+            display: block
+
+    .error-list
+        padding: 0
+
+        li
+            margin: 10px 0 0
+
+    .error
+        color: #ef4836
+
+    .cta-wrapper
+        margin-top: 75px
+        text-align: center
+
+    .cta
+        background: orange
+        border: 0 none
+        border-radius(3px)
+        color: #ffffff;
+        display: inline-block
+        font-family: sans_font;
+        font-size: 24px;
+        margin: 0
+        padding: 10px 20px
+        text-align: center
+        text-decoration: none
+
+        &:disabled
+            background: rgba(247, 146, 29, 0.4)
+
+    .tight-bottom
+        margin-bottom: 15px
+
+    .tight-top
+        margin-top: 15px
+
+.organize-landing
+    h1
+        font-family: sans_font
+        font-size: 36px
+        font-style: normal
+        text-align: left
+
+    h2
+        font-size: 30px
+
+    .narrow h2
+        font-size: 26px
+
+    p
+        margin: 25px 0
+
+    .cta
+        margin: 25px 0
+
+        @media screen and (min-width: 1000px)
+            font-size: 23px
+            padding-left: 10px
+            padding-right: 10px
+            width: 100%
+
+    blockquote
+        border: 0 none
+        margin-bottom: 55px
+        margin-top: 35px
+        padding: 0
+
+        img
+            border-radius: 50%;
+            display: block
+            margin: 0 auto
+            max-width: 100%
+
+        cite
+            display: block
+            margin-top: 18px
+
+    .media-blocks
+        h2
+            margin-bottom: 18px
+
+        p
+            margin: 15px 0
 
 /*
 --------------------
