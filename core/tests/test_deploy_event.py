@@ -19,10 +19,11 @@ class CopyEventTest(TestCase):
         copy_content_from_previous_event(previous_event, new_event)
         self.assertEquals(new_event.content.count(), 7)
 
+        # coaches and sponsors shouldn't carry over
         coaches = Coach.objects.filter(eventpagecontent__event=new_event)
         sponsors = Sponsor.objects.filter(eventpagecontent__event=new_event)
-        self.assertEquals(coaches.count(), 1)
-        self.assertEquals(sponsors.count(), 1)
+        self.assertEquals(coaches.count(), 0)
+        self.assertEquals(sponsors.count(), 0)
 
     def test_copy_menu_from_previous_event(self):
         previous_event = Event.objects.get(pk=1)
