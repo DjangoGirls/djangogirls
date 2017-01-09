@@ -21,6 +21,9 @@ def copy_event(previous_event, event_date):
     previous_event_name = "{} #{}".format(generic_event_name, number)
     event_name = "{} #{}".format(generic_event_name, number+1)
 
+    previous_event_name = "{} #{}".format(previous_event.name, number)
+    event_name = "{} #{}".format(previous_event.name, number+1)
+
     # Change the name of previous event to {name} #{number-1}
     previous_event.name = previous_event_name
     previous_event.save()
