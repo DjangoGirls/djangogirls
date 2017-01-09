@@ -2,14 +2,14 @@ from formtools.wizard.views import NamedUrlSessionWizardView
 from django.shortcuts import redirect, render
 
 from .forms import (
-    PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersForm)
+    PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet)
 from .models import EventApplication
 
 # ORGANIZE FORM #
 
 FORMS = (("previous_event", PreviousEventForm),
          ("application", ApplicationForm),
-         ("organizers", OrganizersForm),
+         ("organizers", OrganizersFormSet),
          ("workshop", WorkshopForm))
 
 TEMPLATES = {"previous_event": "organize/form/step1_previous_event.html",

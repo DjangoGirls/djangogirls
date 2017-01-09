@@ -49,15 +49,19 @@ class ApplicationForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
 
 
-class OrganizersForm(forms.Form):
-    main_organizer_email = forms.EmailField(
+class OrganizerForm(forms.Form):
+    email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'compact-input'}))
-    main_organizer_first_name = forms.CharField(
+    first_name = forms.CharField(
         max_length=30,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
-    main_organizer_last_name = forms.CharField(
+    last_name = forms.CharField(
         max_length=30,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
+
+
+OrganizersFormSet = forms.formset_factory(
+    OrganizerForm, extra=1, max_num=10, min_num=1, validate_min=True)
 
 
 class WorkshopForm(forms.Form):
