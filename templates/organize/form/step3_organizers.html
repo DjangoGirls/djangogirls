@@ -22,6 +22,7 @@
 
                 <form novalidate action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
+                    {{ wizard.form.management_form }}
 
                     {% if wizard.form.non_field_errors %}
                         <ul class="error-list">
@@ -36,98 +37,159 @@
                         <p class="form-section-subhead">This is probably about yourself! :)</p>
 
                         <ul class="row">
+                            {% with form=wizard.form.0 %}
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.main_organizer_first_name.id_for_label }}" class="compact-label">First name</label>
-                                {{ wizard.form.main_organizer_first_name }}
-                                {% if wizard.form.main_organizer_first_name.errors %}
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
                                     <ul class="error-list">
-                                        {% for error in wizard.form.main_organizer_first_name.errors %}
+                                        {% for error in form.first_name.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.main_organizer_last_name.id_for_label }}" class="compact-label">Last name</label>
-                                {{ wizard.form.main_organizer_last_name }}
-                                {% if wizard.form.main_organizer_last_name.errors %}
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
                                     <ul class="error-list">
-                                        {% for error in wizard.form.main_organizer_last_name.errors %}
+                                        {% for error in form.last_name.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.main_organizer_email.id_for_label }}" class="compact-label">Email address</label>
-                                {{ wizard.form.main_organizer_email }}
-                                {% if wizard.form.main_organizer_email.errors %}
+                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
                                     <ul class="error-list">
-                                        {% for error in wizard.form.main_organizer_email.errors %}
+                                        {% for error in form.email.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                             </li>
+                            {% endwith %}
                         </ul>
                     </fieldset>
 
-                    <!--
                     {# Static mock up of HTML used for this section #}
-                    <fieldset class="form-section">
+                    <fieldset id="coorganizers" class="form-section">
                         <legend class="form-section-heading">Your organizing team</legend>
                         <p class="form-section-subhead">Who is going to organize this event with you? Please confirm with your co-organizers that they agreed for you to provide their information here. They will receive access to see your event’s emails or edit your event’s website.</p>
 
+                        {% for form in wizard.form %}
+                        {% if not forloop.first %}
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">First name</label>
-                                <input class="compact-input" id="" maxlength="30" name="" type="text">
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.first_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">Last name</label>
-                                <input class="compact-input" id="" maxlength="30" name="" type="text">
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.last_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">Email address</label>
-                                <input class="compact-input" id="" name="" type="email">
+                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.email.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
-
+                        {% endif %}
+                        {% endfor %}
+                    </fieldset>
+                    <template id="new-organizer-form">
+                        {% with form=wizard.form.empty_form %}
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">First name</label>
-                                <input class="compact-input" id="" maxlength="30" name="" type="text">
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.first_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">Last name</label>
-                                <input class="compact-input" id="" maxlength="30" name="" type="text">
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.last_name.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="" class="compact-label">Email address</label>
-                                <input class="compact-input" id="" name="" type="email">
+                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <ul class="error-list">
+                                        {% for error in form.email.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         </ul>
-
-                        <div class="add-organizer">
-                            <button type="button" class="icon-button">
-                                <svg width="39px" height="39px" viewBox="0 0 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g id="Application" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Organizers" transform="translate(-706.000000, -866.000000)">
-                                            <g id="Card" transform="translate(147.000000, 247.000000)">
-                                                <g id="Plus-button" transform="translate(559.000000, 619.000000)">
-                                                    <circle id="Oval-2" fill="#CDCBCB" cx="19.5" cy="19.5" r="19.5"></circle>
-                                                    <path d="M19.5,12.5 L19.5,26.5" id="Line" stroke="#F9F7F7" stroke-width="3" stroke-linecap="square"></path>
-                                                    <path d="M12.5,19.5 L26.5,19.5" id="Line" stroke="#F9F7F7" stroke-width="3" stroke-linecap="square"></path>
-                                                </g>
+                        {% endwith %}
+                    </template>
+                    <div class="add-organizer">
+                        <button id="add-form" type="button" class="icon-button">
+                            <svg width="39px" height="39px" viewBox="0 0 39 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Application" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Organizers" transform="translate(-706.000000, -866.000000)">
+                                        <g id="Card" transform="translate(147.000000, 247.000000)">
+                                            <g id="Plus-button" transform="translate(559.000000, 619.000000)">
+                                                <circle id="Oval-2" fill="#CDCBCB" cx="19.5" cy="19.5" r="19.5"></circle>
+                                                <path d="M19.5,12.5 L19.5,26.5" id="Line" stroke="#F9F7F7" stroke-width="3" stroke-linecap="square"></path>
+                                                <path d="M12.5,19.5 L26.5,19.5" id="Line" stroke="#F9F7F7" stroke-width="3" stroke-linecap="square"></path>
                                             </g>
                                         </g>
                                     </g>
-                                </svg>
-                            </button>
-                        </div>
-                    </fieldset>
-                    //-->
-
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <script>
+                        var formCount = {{ wizard.form.total_form_count }};
+                        $('#add-form').click(function() {
+                            var formTemplate = document.getElementById('new-organizer-form');
+                            var inputs = formTemplate.content.querySelectorAll("input");
+                            inputs.forEach(function(element) {
+                                element.name = element.name.replace('__prefix__', formCount);
+                            })
+                            var form = document.importNode(formTemplate.content, true);
+                            $('#coorganizers').append(form);
+                            formCount++;
+                            $('#id_organizers-TOTAL_FORMS').val(formCount);
+                        });
+                    </script>
                     <div class="cta-wrapper">
                         <button type="submit" class="cta">Go to next step</button>
                     </div>
