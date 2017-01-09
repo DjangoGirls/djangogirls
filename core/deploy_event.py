@@ -9,10 +9,17 @@ def copy_event(previous_event, event_date):
         - create new event based on previous event
         - copy content and menu from previous event
     """
-    number = Event.objects.filter(city=previous_event.city).count()
+    number = Event.objects.filter(city=previous_event.city,
+                                  country=previous_event.country).count()
 
-    previous_event_name = "{} #{}".format(previous_event.name, number)
-    event_name = "{} #{}".format(previous_event.name, number+1)
+    # If event is already Django Girls City #2, remove #2 from it
+    if '#' in previous_event.name:
+        generic_event_name = previous_event.name.split(' #')[0]
+    else:
+        generic_event_name = previous_event.name
+
+    previous_event_name = "{} #{}".format(generic_event_name, number)
+    event_name = "{} #{}".format(generic_event_name, number+1)
 
     # Change the name of previous event to {name} #{number-1}
     previous_event.name = previous_event_name
@@ -44,17 +51,9 @@ def copy_content_from_previous_event(previous_event, new_event):
     """
     previous_event.refresh_from_db()
     for obj in previous_event.content.all():
-        # fetch related objects before we change pk of the event
-        coaches = obj.coaches.all()
-        sponsors = obj.sponsors.all()
-
         new_content = obj
         new_content.id = None
         new_content.event = new_event
-        new_content.save()
-
-        new_content.coaches = coaches
-        new_content.sponsors = sponsors
         new_content.save()
 
 
