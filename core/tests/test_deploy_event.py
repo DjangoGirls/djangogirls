@@ -44,3 +44,13 @@ class CopyEventTest(TestCase):
 
         self.assertEquals(previous_event.name, "{} #1".format(previous_name))
         self.assertEquals(new_event.name, "{} #2".format(previous_name))
+        self.assertTrue(previous_event.date != new_event.date)
+
+        self.assertEquals(previous_event.city, new_event.city)
+        self.assertEquals(previous_event.country, new_event.country)
+        self.assertEquals(previous_event.latlng, new_event.latlng)
+        self.assertEquals(previous_event.photo, new_event.photo)
+        self.assertEquals(
+            previous_event.main_organizer,
+            new_event.main_organizer
+        )
