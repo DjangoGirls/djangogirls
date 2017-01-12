@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'jobs',
     'organize',
     'patreonmanager',
+    'story.apps.StoryConfig',
 )
 
 MIDDLEWARE = [
@@ -147,8 +148,8 @@ SUIT_CONFIG = {
         {'app': 'flatpages', 'icon': 'icon-file'},
         {'label': 'Blog & Django Stories',
          'icon': 'icon-comment',
-         'models': ('core.Story',),
-         'permissions': ('core.add_story',)},
+         'models': ('story.Story',),
+         'permissions': ('story.add_story',)},
         {'app': 'patreonmanager',
          'icon': 'icon-gift',
          'models': ('patron', 'payment', 'reward')},
