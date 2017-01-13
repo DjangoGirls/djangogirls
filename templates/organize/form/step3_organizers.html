@@ -1,8 +1,12 @@
 {% extends 'global/base.html' %}
-{% load i18n %}
+{% load i18n rev static %}
 
 {% block head %}
 {{ wizard.form.media }}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -24,6 +28,9 @@
                     {{ wizard.management_form }}
                     {{ wizard.form.management_form }}
 
+                    <script>
+                        var formCount = {{ wizard.form.total_form_count }};
+                    </script>
                     {% if wizard.form.non_field_errors %}
                         <ul class="error-list">
                             {% for error in wizard.form.non_field_errors %}
@@ -176,20 +183,6 @@
                             </svg>
                         </button>
                     </div>
-                    <script>
-                        var formCount = {{ wizard.form.total_form_count }};
-                        $('#add-form').click(function() {
-                            var formTemplate = document.getElementById('new-organizer-form');
-                            var inputs = formTemplate.content.querySelectorAll("input");
-                            inputs.forEach(function(element) {
-                                element.name = element.name.replace('__prefix__', formCount);
-                            })
-                            var form = document.importNode(formTemplate.content, true);
-                            $('#coorganizers').append(form);
-                            formCount++;
-                            $('#id_organizers-TOTAL_FORMS').val(formCount);
-                        });
-                    </script>
                     <div class="cta-wrapper">
                         <button type="submit" class="cta">Go to next step</button>
                     </div>

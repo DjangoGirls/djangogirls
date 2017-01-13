@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet)
-from .models import EventApplication
+from .models import Coorganizer, EventApplication
 
 # ORGANIZE FORM #
 
@@ -23,15 +23,32 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
-    def done(self, form_list, **kwargs):
+    def done(self, form_list, form_dict, **kwargs):
         # Process the date from the forms
         data_dict = {}
-        for form in form_list:
-            data_dict.update(form.cleaned_data)
-        del data_dict['has_organized_before']
-        data_dict['involvement'] = ", ".join(data_dict.get('involvement'))
+        for key, form in form_dict.items():
+            if key == "previous_event":
+                del form.cleaned_data['has_organized_before']
 
-        EventApplication.objects.create(**data_dict)
+            if key == "application":
+                form.cleaned_data["involvement"] = (
+                    ", ".form.cleaned_data.get('involvement'))
+
+            if key == "organizers":
+                organizers = [form.cleaned_data
+                              for form in form.forms if form.has_changed()]
+                main_organizer = organizers.pop(0)
+                form.cleaned_data = {
+                    'main_organizer_email': main_organizer['email'],
+                    'main_organizer_first_name': main_organizer['first_name'],
+                    'main_organizer_last_name': main_organizer['last_name']
+                }
+
+            data_dict.update(form.cleaned_data)
+
+        application = EventApplication.objects.create(**data_dict)
+        for organizer in organizers:
+            application.coorganizers.create(**organizer)
 
         return redirect('organize:form_thank_you')
 
