@@ -1,10 +1,9 @@
 -e git+https://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker
 
 boto3==1.4.3
-click==6.6
-cssselect==1.0.0
+click==6.7
 dj-database-url==0.4.2
-django-ckeditor==5.1.1
+django-ckeditor==5.2.1
 django-click==1.2.0
 django-codemirror-widget
 django-countries==4.0
@@ -21,8 +20,8 @@ Django==1.10.5
 djrill==2.1.0
 easy_thumbnails==2.3
 freezegun
-icalendar==3.11.1
-lxml==3.7.1
+icalendar==3.11.2
+lxml==3.7.2
 mandrill==1.0.57
 markdown2==2.3.2
 model-mommy==1.3.1
@@ -39,5 +38,5 @@ pytz==2016.10
 requests==2.12.4
 six==1.10.0
 slacker==0.9.30
-vcrpy==1.10.4
+vcrpy==1.10.5
 whitenoise==3.2.3
