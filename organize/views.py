@@ -1,9 +1,10 @@
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.shortcuts import redirect, render
 
+from .emails import send_application_confirmation
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet)
-from .models import Coorganizer, EventApplication
+from .models import EventApplication
 
 # ORGANIZE FORM #
 
@@ -26,30 +27,14 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
     def done(self, form_list, form_dict, **kwargs):
         # Process the date from the forms
         data_dict = {}
-        for key, form in form_dict.items():
-            if key == "previous_event":
-                del form.cleaned_data['has_organized_before']
+        for form in form_list:
+            data_dict.update(form.get_data())
 
-            if key == "application":
-                form.cleaned_data["involvement"] = (
-                    ", ".form.cleaned_data.get('involvement'))
-
-            if key == "organizers":
-                organizers = [form.cleaned_data
-                              for form in form.forms if form.has_changed()]
-                main_organizer = organizers.pop(0)
-                form.cleaned_data = {
-                    'main_organizer_email': main_organizer['email'],
-                    'main_organizer_first_name': main_organizer['first_name'],
-                    'main_organizer_last_name': main_organizer['last_name']
-                }
-
-            data_dict.update(form.cleaned_data)
-
+        organizers_data = data_dict.pop('coorganizers', [])
         application = EventApplication.objects.create(**data_dict)
-        for organizer in organizers:
+        for organizer in organizers_data:
             application.coorganizers.create(**organizer)
-
+        send_application_confirmation(application)
         return redirect('organize:form_thank_you')
 
 

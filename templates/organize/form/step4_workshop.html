@@ -25,7 +25,7 @@
             <div class="panel">
                 <h1>Tell us all about your Django Girls event!</h1>
 
-                <form novalidate action="" method="post">{% csrf_token %}
+                <form novalidate data-required-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
 
                     {% if wizard.form.non_field_errors %}
@@ -159,7 +159,7 @@
                     </section>
 
                     <div class="cta-wrapper">
-                        <button type="submit" class="cta">Go to next step</button>
+                        <button type="submit" class="cta">Finish!</button>
                     </div>
                 </form>
             </div>

@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <div class="panel">
                 <h1>Application to organize a workshop</h1>
-                <form novalidate action="" method="post">{% csrf_token %}
+                <form novalidate previous-event-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
 
                     {% if wizard.form.non_field_errors %}

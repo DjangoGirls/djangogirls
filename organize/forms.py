@@ -17,7 +17,8 @@ class PreviousEventForm(forms.Form):
     has_organized_before = forms.TypedChoiceField(
         coerce=lambda x: x in ['True', True],
         widget=forms.RadioSelect,
-        choices=PREVIOUS_ORGANIZER_CHOICES)
+        choices=PREVIOUS_ORGANIZER_CHOICES,
+        required=True)
     previous_event = forms.ModelChoiceField(
         queryset=Event.objects.past(),
         empty_label="Choose event",
@@ -35,6 +36,11 @@ class PreviousEventForm(forms.Form):
 
         return self.cleaned_data
 
+    def get_data(self):
+        data = self.cleaned_data
+        del data['has_organized_before']
+        return data
+
 
 class ApplicationForm(forms.Form):
     about_you = forms.CharField(
@@ -47,6 +53,25 @@ class ApplicationForm(forms.Form):
         widget=forms.CheckboxSelectMultiple)
     experience = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
+
+    def get_data(self):
+        data = self.cleaned_data
+        data["involvement"] = ", ".data.get('involvement')
+        return data
+
+
+class BaseOrganizerFormSet(forms.BaseFormSet):
+    def get_data(self):
+        organizers = [form.cleaned_data
+                      for form in self.forms if form.has_changed()]
+        main_organizer = organizers.pop(0)
+        data = {
+            'main_organizer_email': main_organizer['email'],
+            'main_organizer_first_name': main_organizer['first_name'],
+            'main_organizer_last_name': main_organizer['last_name'],
+            'coorganizers': organizers
+        }
+        return data
 
 
 class OrganizerForm(forms.Form):
@@ -61,7 +86,8 @@ class OrganizerForm(forms.Form):
 
 
 OrganizersFormSet = forms.formset_factory(
-    OrganizerForm, extra=1, max_num=10, min_num=1, validate_min=True)
+    OrganizerForm, formset=BaseOrganizerFormSet, extra=1, max_num=10,
+    min_num=1, validate_min=True)
 
 
 class WorkshopForm(forms.Form):
@@ -85,3 +111,6 @@ class WorkshopForm(forms.Form):
         validate_approximatedate(date)
         # TODO: add checking if the event is in the future
         return date
+
+    def get_data(self):
+        return self.cleaned_data

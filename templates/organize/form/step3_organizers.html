@@ -24,7 +24,7 @@
             <div class="panel">
                 <h1>Who is going to organize this workshop?</h1>
 
-                <form novalidate action="" method="post">{% csrf_token %}
+                <form novalidate data-required-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
                     {{ wizard.form.management_form }}
 

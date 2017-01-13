@@ -1,8 +1,9 @@
 $(function() {
     $('[data-required-form]').each(function() {
         var $this = $(this);
-        var $checkboxes = $this.find('input[type="checkbox"][required]');
-        var $textareas = $this.find('textarea[required]')
+        var $checkboxes = $this.find(':checkbox[required]');
+        var $textareas = $this.find('textarea[required]');
+        var $inputs = $this.find('input[type="text"][required]');
         var $submit = $this.find('[type="submit"]');
 
         var validate = function() {
@@ -13,6 +14,9 @@ $(function() {
             $textareas.each(function() {
                 allChecked = allChecked && $(this).val().length > 0
             });
+            $inputs.each(function() {
+                allChecked = allChecked && $(this).val().length > 0
+            });
             if (allChecked) {
                 $submit.removeAttr('disabled');
             } else {
@@ -20,6 +24,22 @@ $(function() {
             }
         }
 
+        $this.attr('novalidate', 'novalidate');
+        $this.on('input, change', '[required]', validate);
+        validate();
+    });
+
+    $('[previous-event-form]').each(function() {
+        var $this = $(this);
+        var $submit = $this.find('[type="submit"]');
+        var $radio = $this.find('input[name=previous_event-has_organized_before]');
+        var validate = function() {
+            if ($radio.is(':checked')) {
+                $submit.removeAttr('disabled');
+            } else {
+                $submit.attr('disabled', 'disabled');
+            }
+        }
         $this.attr('novalidate', 'novalidate');
         $this.on('input, change', '[required]', validate);
         validate();

@@ -17,7 +17,7 @@ from .constants import (
     REJECTED,
 )
 from .managers import EventApplicationQuerySet
-from core.emails import (
+from .emails import (
     send_application_rejection_email,
     send_application_deployed_email
 )
@@ -150,6 +150,11 @@ class EventApplication(models.Model):
         emails = [coorganizer.email for coorganizer in self.coorganizers.all()]
         emails.append(self.main_organizer_email)
         return emails
+
+    def get_main_organizer_name(self):
+        return '{} {}'.format(
+            self.main_organizer_first_name,
+            self.main_organizer_last_name)
 
     def change_status_to(self, status):
         """ Changes status to the status provided
