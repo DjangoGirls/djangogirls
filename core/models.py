@@ -71,6 +71,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     def generate_password(self):
         password = User.objects.make_random_password()
         self.set_password(password)
+        self.save()
         return password
 
     def add_to_organizers_group(self):
