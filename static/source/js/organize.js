@@ -24,4 +24,16 @@ $(function() {
         $this.on('input, change', '[required]', validate);
         validate();
     });
+
+    $('#add-form').click(function() {
+        var formTemplate = document.getElementById('new-organizer-form');
+        var inputs = formTemplate.content.querySelectorAll("input");
+        inputs.forEach(function(element) {
+            element.name = element.name.replace('__prefix__', formCount);
+        })
+        var form = document.importNode(formTemplate.content, true);
+        $('#coorganizers').append(form);
+        formCount++;
+        $('#id_organizers-TOTAL_FORMS').val(formCount);
+    });
 });

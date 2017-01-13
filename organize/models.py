@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ValidationError
+from django_countries import countries
 from django.db import models, transaction
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDateField
@@ -27,7 +28,7 @@ class EventApplication(models.Model):
     # workshop fields
     date = ApproximateDateField(validators=[validate_approximatedate])
     city = models.CharField(max_length=200)
-    country = models.CharField(max_length=200)
+    country = models.CharField(max_length=200, choices=countries)
     latlng = models.CharField(max_length=30, null=True, blank=True)
     website_slug = models.SlugField()
     main_organizer_email = models.EmailField()
@@ -66,7 +67,7 @@ class EventApplication(models.Model):
 
     def __str__(self):
         return "{}, {} ({})".format(
-            self.city, self.country, self.get_status_display())
+            self.city, self.get_country_display(), self.get_status_display())
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
