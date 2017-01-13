@@ -86,7 +86,7 @@ class UserChangeForm(forms.ModelForm):
         label="Password",
         help_text="Raw passwords are not stored, so there is no way to see "
                   "this user's password, but you can change the password "
-                  "using <a href=\"password/\">this form</a>.")
+                  "using <a href=\"../password/\">this form</a>.")
 
     class Meta:
         model = User
