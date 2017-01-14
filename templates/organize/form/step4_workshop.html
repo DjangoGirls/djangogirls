@@ -7,7 +7,7 @@
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 {% endblock %}
 
 {% block content %}
@@ -158,6 +158,13 @@
                         </ul>
                     </section>
 
+                   <section class="form-section">
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                <div class="g-recaptcha" data-sitekey="6LfGqhEUAAAAAL5PxSosc3VCjvDkCakk9y7xorc7"></div>
+                            </li>
+                        </ul>
+                    </section>
                     <div class="cta-wrapper">
                         <button type="submit" class="cta">Finish!</button>
                     </div>
