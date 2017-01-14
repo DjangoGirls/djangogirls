@@ -3,7 +3,6 @@ from django_countries import countries
 from django_countries.fields import LazyTypedChoiceField
 from django_date_extensions.fields import ApproximateDateFormField
 
-
 from core.models import Event
 from core.validators import validate_approximatedate
 from .constants import INVOLVEMENT_CHOICES
