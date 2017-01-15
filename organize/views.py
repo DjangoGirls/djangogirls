@@ -24,7 +24,7 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 
-    def done(self, form_list, form_dict, **kwargs):
+    def done(self, form_list, **kwargs):
         # Process the date from the forms
         data_dict = {}
         for form in form_list:
