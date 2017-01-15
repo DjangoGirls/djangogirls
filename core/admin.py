@@ -19,7 +19,7 @@ from .filters import OpenRegistrationFilter
 from .forms import (AddOrganizerForm, EventForm,
                     UserCreationForm, UserLimitedChangeForm)
 from .models import (Coach, Event, EventPageContent, EventPageMenu,
-                     Sponsor, Story, User)
+                     Sponsor, User)
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -428,12 +428,6 @@ class UserAdmin(auth_admin.UserAdmin):
         return super(UserAdmin, self).get_fieldsets(request, obj)
 
 
-class StoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_story', 'created')
-    search_fields = ('name', 'content')
-    list_filter = ('is_story',)
-
-
 class MyFlatPageAdmin(FlatPageAdmin):
 
     class MyFlatpageForm(FlatpageForm):
@@ -451,4 +445,3 @@ admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Coach, CoachAdmin)
-admin.site.register(Story, StoryAdmin)

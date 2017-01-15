@@ -12,7 +12,8 @@ from core.utils import next_deadline
 from patreonmanager.models import FundraisingStatus
 
 from .forms import ContactForm
-from .models import Event, Story, User
+from .models import Event, User
+from story.models import Story
 
 
 def index(request):
@@ -46,13 +47,6 @@ def events_map(request):
 
 def resources(request):
     return render(request, 'core/resources.html', {})
-
-
-def stories(request):
-
-    return render(request, 'core/stories.html', {
-        'stories': Story.objects.filter(is_story=True).order_by('-created'),
-    })
 
 
 def event(request, city):

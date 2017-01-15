@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^organize/', include('organize.urls', namespace='organize')),
+    url(r'^story/', include('story.urls', namespace='story')),
     url(r'', include('applications.urls', namespace='applications')),
     url(r'', include('core.urls', namespace='core')),
 ]
