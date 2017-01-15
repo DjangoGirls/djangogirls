@@ -21,6 +21,8 @@ Django==1.10.5
 djrill==2.1.0
 easy_thumbnails==2.3
 freezegun
+google-api-python-client==1.6.0
+httplib2==0.9.2
 icalendar==3.11.1
 lxml==3.7.1
 mandrill==1.0.57
