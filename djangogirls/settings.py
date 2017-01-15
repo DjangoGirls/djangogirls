@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'jobs',
     'organize',
     'patreonmanager',
-    'story.apps.StoryConfig',
+    'story',
 )
 
 MIDDLEWARE = [

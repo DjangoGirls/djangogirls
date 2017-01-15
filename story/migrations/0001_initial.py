@@ -26,7 +26,6 @@ class Migration(migrations.Migration):
                 ('is_story', models.BooleanField(default=True)),
             ],
             options={
-                'db_table': 'core_story',
                 'verbose_name': 'story',
                 'verbose_name_plural': 'stories',
             },

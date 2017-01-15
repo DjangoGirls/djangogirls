@@ -6,7 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class Story(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False)
+    name = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=True)
     post_url = models.URLField(null=False, blank=False)
     image = models.ImageField(upload_to="stories/", null=True)
