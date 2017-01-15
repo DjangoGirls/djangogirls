@@ -119,7 +119,8 @@ class EventApplication(models.Model):
 
         self.change_status_to(DEPLOYED)
 
-        if self.previous_event:
+        if Event.objects.filter(city=self.city,
+                                country=self.get_country_display()).exists():
             event = copy_event(self.previous_event, self.date)
         else:
             event = self.create_event()
