@@ -7,15 +7,30 @@ from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name(
-    settings.GOOGLE_APPS_ADMIN_SDK_CREDENTIALS,
-    scopes=settings.GOOGLE_APPS_ADMIN_SDK_SCOPES
-)
+GAPPS_JSON_CREDENTIALS = {
+  "type": "service_account",
+  "project_id": "djangogirls-website",
+  "private_key_id": settings.GAPPS_PRIVATE_KEY_ID,
+  "private_key": settings.GAPPS_PRIVATE_KEY,
+  "client_email": "django-girls-website@djangogirls-website.iam.gserviceaccount.com",
+  "client_id": "114585708723701029855",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/django-girls-website%40djangogirls-website.iam.gserviceaccount.com"
+}
 
-delegated_credentials = credentials.create_delegated('hello@djangogirls.org')
-http_auth = delegated_credentials.authorize(Http())
 
-service = build('admin', 'directory_v1', http=http_auth)
+def get_gapps_client():
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+        GAPPS_JSON_CREDENTIALS,
+        scopes=settings.GAPPS_ADMIN_SDK_SCOPES
+    )
+
+    delegated_credentials = credentials.create_delegated('hello@djangogirls.org')
+    http_auth = delegated_credentials.authorize(Http())
+
+    return build('admin', 'directory_v1', http=http_auth)
 
 
 def make_email(slug):
@@ -23,15 +38,13 @@ def make_email(slug):
     return '%s@djangogirls.org' % slug
 
 
-def create_account(event):
+def create_gmail_account(event):
     """
     Create a new account
-
-    e.g. create_account('testcity', 'Test City')
     """
     email = event.email
     password = get_random_string(length=10)
-    service.users().insert(body={
+    get_gapps_client().users().insert(body={
         "primaryEmail": email,
         "name": {
             "fullName": event.name,
@@ -44,13 +57,14 @@ def create_account(event):
     return (email, password)
 
 
-def change_name(old_slug, new_slug):
+def change_gmail_account_name(old_slug, new_slug):
     """
     Change the name of an account
     e.g. change_name('testcity', 'testcity1')
     """
     old_email = make_email(old_slug)
     new_email = make_email(new_slug)
+    service = get_gapps_client()
 
     service.users().patch(
         userKey=old_email,
@@ -63,11 +77,13 @@ def change_name(old_slug, new_slug):
     service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
 
 
-def get_account(slug):
+def get_gmail_account(slug):
     """
     Return the details of the given account - just pass in the slug
     e.g. get_account('testcity')
     """
+    service = get_gapps_client()
+
     try:
         return service.users().get(userKey=make_email(slug)).execute()
     except HttpError:

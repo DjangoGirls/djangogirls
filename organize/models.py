@@ -113,7 +113,7 @@ class EventApplication(models.Model):
         event = self.create_event()
 
         # create Gmail account
-        (email, email_password) = gmail_accounts.add_account(event)
+        (email, email_password) = gmail_accounts.create_gmail_account(event)
 
         # add main organizer of the Event
         main_organizer = event.add_organizer(

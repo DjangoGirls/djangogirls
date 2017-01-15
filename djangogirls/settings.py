@@ -283,5 +283,7 @@ if 'OPBEAT_SECRET_TOKEN' in os.environ:
 
 CODEMIRROR_PATH = "vendor/codemirror/"
 
-GOOGLE_APPS_ADMIN_SDK_CREDENTIALS = os.path.join(BASE_DIR, '..', 'djangogirls_website-93134565f52d.json')
-GOOGLE_APPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
+
+GAPPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
+GAPPS_PRIVATE_KEY_ID = os.environ.get('GAPPS_PRIVATE_KEY_ID', '')
+GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
