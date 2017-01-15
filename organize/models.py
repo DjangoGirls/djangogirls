@@ -95,6 +95,20 @@ class EventApplication(models.Model):
 
         return event
 
+    def has_past_team_members(self):
+        """ For repeated events, check whether there are any common
+        team members who applied to organize again
+        """
+        previous_events = Event.objects.filter(city=self.city,
+                                               country=self.get_country_display())
+        organizers = []
+        for event in previous_events:
+            for organizer in event.team.all():
+                organizers.append(organizer.email)
+
+        applicants = self.get_all_recipients()
+        return len(list(set(organizers).intersection(applicants))) > 0
+
     @transaction.atomic
     def deploy(self):
         """ Deploy Event based on the current EventApplication
@@ -112,8 +126,20 @@ class EventApplication(models.Model):
         # copy old one or copy old and change organizaers.
         event = self.create_event()
 
-        # create Gmail account
-        (email, email_password) = gmail_accounts.create_gmail_account(event)
+        # sort out Gmail accounts
+        if gmail_accounts.get_gmail_account(self.website_slug):
+            # account exists, do we need to migrate?
+            if self.has_past_team_members():
+                # has old organizers, so no need to do anything
+                email_password = None
+            else:
+                # migrate old email
+                gmail_accounts.migrate_gmail_account(self.website_slug)
+                # create new account
+                (email, email_password) = gmail_accounts.create_gmail_account(event)
+        else:
+            # create a new account
+            (email, email_password) = gmail_accounts.create_gmail_account(event)
 
         # add main organizer of the Event
         main_organizer = event.add_organizer(

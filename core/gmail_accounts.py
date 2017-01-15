@@ -6,6 +6,8 @@ from apiclient.errors import HttpError
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
+from core.models import Event
+
 
 GAPPS_JSON_CREDENTIALS = {
   "type": "service_account",
@@ -57,13 +59,13 @@ def create_gmail_account(event):
     return (email, password)
 
 
-def change_gmail_account_name(old_slug, new_slug):
+def migrate_gmail_account(slug):
     """
     Change the name of an account
-    e.g. change_name('testcity', 'testcity1')
     """
-    old_email = make_email(old_slug)
-    new_email = make_email(new_slug)
+    old_email = make_email(slug)
+    old_event = Event.objects.filter(email=old_email).order_by('-id').first()
+    new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
     service = get_gapps_client()
 
     service.users().patch(
@@ -76,6 +78,9 @@ def change_gmail_account_name(old_slug, new_slug):
     # The old email address is kept as an alias to the new one, but we don't want this.
     service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
 
+    old_event.email = new_email
+    old_event.save()
+
 
 def get_gmail_account(slug):
     """
@@ -87,4 +92,4 @@ def get_gmail_account(slug):
     try:
         return service.users().get(userKey=make_email(slug)).execute()
     except HttpError:
-        pass
+        return None

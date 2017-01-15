@@ -14,7 +14,11 @@
 <p>
     You can login here: <a href="https://mail.djangogirls.org/">https://mail.djangogirls.org/</a><br/>
     Username: {{ event.email }} (@djangogirls.com works too!)<br/>
-    Password: {{ password }}<br/>
+    {% if password %}
+      Password: {{ password }}<br/>
+    {% else %}
+      Previous organizers should have password to this account. Let us know if you need to reset it. 
+    {% endif %}
 </p>
 
 <p>
@@ -35,60 +39,60 @@
 </p>
 
 <p>
-    You should receive a separate email with auto generated password and 
+    You should receive a separate email with auto generated password and
     instructions to login.
 </p>
 
 <p>
     Your website is currently hidden for public, you can only see it if you’re
-    logged in. If you want to make it available for everyone, go here and 
+    logged in. If you want to make it available for everyone, go here and
     edit your website changing the “is live” option.
 </p>
 
-<p> 
-    More instructions on editing your website: 
+<p>
+    More instructions on editing your website:
     <a href="https://organize.djangogirls.org/website/">https://organize.djangogirls.org/website/</a>
 </p>
 
 <h3>3) Organizers community</h3>
 <p>
     Django Girls has a growing community of more than 300 organizers.
-    You should receive an invitation to join a private group on Google Groups and 
-    Slack -- this is where you can chat with other organisers, ask for their 
+    You should receive an invitation to join a private group on Google Groups and
+    Slack -- this is where you can chat with other organisers, ask for their
     help or advice. Use it wisely and plenty!
 </p>
 
 <h3>4) Postponing or canceling</h3>
 
 <p>
-    If you need to cancel or postpone your event, it’s not a problem at all! 
+    If you need to cancel or postpone your event, it’s not a problem at all!
     Please let us know by sending an email and we’ll help.
 </p>
 
 <h3>5) Workshop Box</h3>
 
 <p>
-    To help you reduce the cost of your event, we created a Workshop Box 
-    full of Django Girls stickers, name tags, badges and golden letter balloons. 
-    You can order it through our store. To be sure it arrives on time, order 
+    To help you reduce the cost of your event, we created a Workshop Box
+    full of Django Girls stickers, name tags, badges and golden letter balloons.
+    You can order it through our store. To be sure it arrives on time, order
     it at least 6 weeks before your event.
 </p>
 
 <h3>6) Django Girls shop discount code</h3>
 
 <p>
-    Django Girls has a t-shirt and socks online store! Use 
-    {{ settings.STORE_DISCOUNT_CODE }} to get a 15% discount on your order. 
-    You can share this code with your coaches and attendees as well. 
-    All proceeds will go to Django Girls Foundation to make the charity 
+    Django Girls has a t-shirt and socks online store! Use
+    {{ settings.STORE_DISCOUNT_CODE }} to get a 15% discount on your order.
+    You can share this code with your coaches and attendees as well.
+    All proceeds will go to Django Girls Foundation to make the charity
     sustainable.
 </p>
 
 <h3>7) Need more help?</h3>
 
 <p>
-    Don’t forget about Organiser’s FAQ, Manual or to post questions 
-    to our Google Group of Django Girls Organizers or Slack channel 
+    Don’t forget about Organiser’s FAQ, Manual or to post questions
+    to our Google Group of Django Girls Organizers or Slack channel
     - there are always more people there that can help you! :)
 </p>
 
