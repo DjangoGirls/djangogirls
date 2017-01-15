@@ -9,15 +9,12 @@ from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
 from pyquery import PyQuery as pq
 
-from core.models import Story
+from story.models import Story
 
 try:
     from urllib.request import urlopen
 except ImportError:
     from urllib import urlopen
-
-
-
 
 
 class Command(BaseCommand):
