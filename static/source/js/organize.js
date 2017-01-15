@@ -17,12 +17,22 @@ $(function() {
             $inputs.each(function() {
                 allChecked = allChecked && $(this).val().length > 0
             });
+            if (typeof grecaptcha !== 'undefined') {
+                allChecked = allChecked && grecaptcha.getResponse().length > 0;
+            }
             if (allChecked) {
                 $submit.removeAttr('disabled');
             } else {
                 $submit.attr('disabled', 'disabled');
             }
-        }
+        };
+        onCaptchaLoadCallback = function() {
+            grecaptcha.render('g-recaptcha',
+            {
+             callback: validate,
+             sitekey: '6LfGqhEUAAAAAL5PxSosc3VCjvDkCakk9y7xorc7'
+            });
+        };
 
         $this.attr('novalidate', 'novalidate');
         $this.on('input, change', '[required]', validate);
