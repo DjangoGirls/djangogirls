@@ -28,7 +28,7 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         # Process the date from the forms
         data_dict = {}
         for form in form_list:
-            data_dict.update(form.get_data())
+            data_dict.update(form.get_data_for_saving())
 
         organizers_data = data_dict.pop('coorganizers', [])
         application = EventApplication.objects.create(**data_dict)

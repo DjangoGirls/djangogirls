@@ -35,8 +35,12 @@ class PreviousEventForm(forms.Form):
 
         return self.cleaned_data
 
-    def get_data(self):
+    def get_data_for_saving(self):
         data = self.cleaned_data
+        # Clean the previous event if someone filled it
+        # and marked themselves as first-time organizers
+        if not data['has_organized_before']:
+            data['previous_event'] = None
         del data['has_organized_before']
         return data
 
@@ -53,14 +57,14 @@ class ApplicationForm(forms.Form):
     experience = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
 
-    def get_data(self):
+    def get_data_for_saving(self):
         data = self.cleaned_data
-        data["involvement"] = ", ".data.get('involvement')
+        data["involvement"] = ", ".join(data.get('involvement'))
         return data
 
 
 class BaseOrganizerFormSet(forms.BaseFormSet):
-    def get_data(self):
+    def get_data_for_saving(self):
         organizers = [form.cleaned_data
                       for form in self.forms if form.has_changed()]
         main_organizer = organizers.pop(0)
@@ -111,5 +115,5 @@ class WorkshopForm(forms.Form):
         # TODO: add checking if the event is in the future
         return date
 
-    def get_data(self):
+    def get_data_for_saving(self):
         return self.cleaned_data
