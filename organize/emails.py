@@ -16,6 +16,24 @@ def send_application_confirmation(event_application):
     send_email(content, subject, event_application.get_all_recipients())
 
 
+def send_application_notification(event_application):
+    """
+    Triggered when user submits application to organize new Django Girls event
+    Sent to hello@djangogirls.org as a notification with reply-to to organizers
+    who applied
+    """
+    subject = (
+        "New request to organise Django Girls {}, {}"
+        .format(event_application.city, event_application.country)
+    )
+    content = render_to_string(
+        'emails/organize/application_notification.html', {
+            'application': event_application,
+        })
+    send_email(content, subject, ['hello@djangogirls.org'],
+               reply_to=event_application.get_all_recipients())
+
+
 def send_application_deployed_email(event_application, event, email_password):
     subject = (
         "Congrats! Your application to organize Django Girls {} "

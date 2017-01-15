@@ -29,10 +29,11 @@ def notify_new_user(user, event, password, errors=None):
     send_email(content, subject, [user.email])
 
 
-def send_email(content, subject, recipients):
+def send_email(content, subject, recipients, reply_to=None):
     msg = EmailMessage(subject,
                        content,
                        settings.DEFAULT_FROM_EMAIL,
-                       recipients)
+                       recipients,
+                       reply_to=reply_to)
     msg.content_subtype = "html"
     msg.send()

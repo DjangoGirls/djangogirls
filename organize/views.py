@@ -1,7 +1,8 @@
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.shortcuts import redirect, render
 
-from .emails import send_application_confirmation
+from .emails import (
+    send_application_confirmation, send_application_notification)
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet)
 from .models import EventApplication
@@ -35,6 +36,7 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         for organizer in organizers_data:
             application.coorganizers.create(**organizer)
         send_application_confirmation(application)
+        send_application_notification(application)
         return redirect('organize:form_thank_you')
 
 
