@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block extra_js %}
+    <script src='https://www.google.com/recaptcha/api.js?onload=onCaptchaLoadCallback&render=explicit'></script>
     <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 {% endblock %}
 
 {% block content %}
@@ -161,7 +161,7 @@
                    <section class="form-section">
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
-                                <div class="g-recaptcha" data-sitekey="6LfGqhEUAAAAAL5PxSosc3VCjvDkCakk9y7xorc7"></div>
+                                <div id="g-recaptcha"></div>
                             </li>
                         </ul>
                     </section>
