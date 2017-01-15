@@ -1,7 +1,6 @@
 from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
-from django.contrib.auth import forms as auth_forms
 from django.core.validators import validate_email
 from django.db import transaction
 
@@ -30,7 +29,8 @@ class AddOrganizerForm(forms.Form):
     """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
     name = forms.CharField(label="Organizer's first and last name")
-    email = forms.CharField(label="E-mail address", validators=[validate_email])
+    email = forms.CharField(label="E-mail address",
+                            validators=[validate_email])
 
     def __init__(self, *args, **kwargs):
         event_choices = kwargs.pop('event_choices', None)
@@ -79,27 +79,6 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-
-class UserChangeForm(forms.ModelForm):
-    password = auth_forms.ReadOnlyPasswordHashField(
-        label="Password",
-        help_text="Raw passwords are not stored, so there is no way to see "
-                  "this user's password, but you can change the password "
-                  "using <a href=\"../password/\">this form</a>.")
-
-    class Meta:
-        model = User
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
-        f = self.fields.get('user_permissions', None)
-        if f is not None:
-            f.queryset = f.queryset.select_related('content_type')
-
-    def clean_password(self):
-        return self.initial["password"]
 
 
 class UserLimitedChangeForm(forms.ModelForm):

@@ -5,6 +5,7 @@ from django import forms
 from django.conf.urls import url
 from django.contrib import admin, messages
 from django.contrib.auth import admin as auth_admin
+from django.contrib.auth.forms import UserChangeForm
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
@@ -15,7 +16,7 @@ from django.utils.safestring import mark_safe
 from suit.admin import SortableModelAdmin
 
 from .filters import OpenRegistrationFilter
-from .forms import (AddOrganizerForm, EventForm, UserChangeForm,
+from .forms import (AddOrganizerForm, EventForm,
                     UserCreationForm, UserLimitedChangeForm)
 from .models import (Coach, Event, EventPageContent, EventPageMenu,
                      Sponsor, Story, User)
