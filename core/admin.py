@@ -61,6 +61,7 @@ class EventAdmin(admin.ModelAdmin):
             # Don't let change objects for events that already happened
             if not obj.is_upcoming():
                 fields.update({x.name for x in self.model._meta.fields})
+                fields.difference_update({'attendees_count', 'applicants_count'})
         return fields
 
     def get_fieldsets(self, request, obj=None):
