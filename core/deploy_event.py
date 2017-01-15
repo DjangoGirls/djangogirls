@@ -11,7 +11,6 @@ def copy_event(previous_event, event_date):
     """
     number = Event.objects.filter(city=previous_event.city,
                                   country=previous_event.country).count()
-
     # If event is already Django Girls City #2, remove #2 from it
     if '#' in previous_event.name:
         generic_event_name = previous_event.name.split(' #')[0]
@@ -20,9 +19,6 @@ def copy_event(previous_event, event_date):
 
     previous_event_name = "{} #{}".format(generic_event_name, number)
     event_name = "{} #{}".format(generic_event_name, number+1)
-
-    previous_event_name = "{} #{}".format(previous_event.name, number)
-    event_name = "{} #{}".format(previous_event.name, number+1)
 
     # Change the name of previous event to {name} #{number-1}
     previous_event.name = previous_event_name
