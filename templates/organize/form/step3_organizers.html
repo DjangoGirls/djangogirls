@@ -41,7 +41,7 @@
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading, required">Lead organizer</legend>
-                        <p class="form-section-subhead">This is probably about yourself! :)</p>
+                        <p class="form-section-subhead">This is probably you! :)</p>
 
                         <ul class="row">
                             {% with form=wizard.form.0 %}
@@ -83,7 +83,7 @@
                     </fieldset>
                     <fieldset id="coorganizers" class="form-section">
                         <legend class="form-section-heading">Your organizing team</legend>
-                        <p class="form-section-subhead">Who is going to organize this event with you? Please confirm with your co-organizers that they agreed for you to provide their information here. They will receive access to see your event’s emails or edit your event’s website.</p>
+                        <p class="form-section-subhead">Who is going to organize this event with you? Please confirm with your co-organizers that they agreed for you to provide their information here. They will be able to access your event’s emails and edit your event’s website.</p>
 
                         {% for form in wizard.form %}
                         {% if not forloop.first %}
