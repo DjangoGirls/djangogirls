@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django_countries import countries
 from django.db import models, transaction
@@ -30,7 +31,7 @@ class EventApplication(models.Model):
     city = models.CharField(max_length=200)
     country = models.CharField(max_length=200, choices=countries)
     latlng = models.CharField(max_length=30, null=True, blank=True)
-    website_slug = models.SlugField()
+    website_slug = AutoSlugField(populate_from='city', unique=True, editable=True)
     main_organizer_email = models.EmailField()
     main_organizer_first_name = models.CharField(max_length=30)
     main_organizer_last_name = models.CharField(max_length=30)

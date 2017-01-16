@@ -85,25 +85,6 @@
                         </ul>
                     </fieldset>
 
-                    <fieldset class="form-section">
-                        <legend class="form-section-heading">Your event website</legend>
-                        <p class="form-section-subhead">All Django Girls event pages have address http://djangogirls.org/cityname. If you need a different one, enter it here:</p>
-
-                        <ul class="row">
-                            <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.website_slug.id_for_label }}" class="compact-label">http://djangogirls.org/</label>
-                                {{ wizard.form.website_slug }}
-                                {% if wizard.form.website_slug.errors %}
-                                    <ul class="error-list">
-                                        {% for error in wizard.form.website_slug.errors %}
-                                            <li class="error">{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </fieldset>
-
                     <section class="form-section">
                         <legend class="form-section-heading, required">Do you have a venue in mind?</legend>
                         <p class="form-section-subhead">Tell us about your ideas on where to host the event in your city.</p>
