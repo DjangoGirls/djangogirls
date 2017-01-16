@@ -85,6 +85,7 @@ class OrganizerForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
     last_name = forms.CharField(
         max_length=30,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
 
 
