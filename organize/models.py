@@ -31,7 +31,7 @@ class EventApplication(models.Model):
     city = models.CharField(max_length=200)
     country = models.CharField(max_length=200, choices=countries)
     latlng = models.CharField(max_length=30, null=True, blank=True)
-    website_slug = AutoSlugField(populate_from='city', unique=True, editable=True)
+    website_slug = AutoSlugField(populate_from='city', editable=True)
     main_organizer_email = models.EmailField()
     main_organizer_first_name = models.CharField(max_length=30)
     main_organizer_last_name = models.CharField(max_length=30)
