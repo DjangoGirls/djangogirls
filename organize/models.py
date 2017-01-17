@@ -34,7 +34,7 @@ class EventApplication(models.Model):
     website_slug = AutoSlugField(populate_from='city', editable=True)
     main_organizer_email = models.EmailField()
     main_organizer_first_name = models.CharField(max_length=30)
-    main_organizer_last_name = models.CharField(max_length=30)
+    main_organizer_last_name = models.CharField(max_length=30, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     # application fields
@@ -183,7 +183,7 @@ class Coorganizer(models.Model):
         related_name="coorganizers")
     email = models.EmailField()
     first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30, blank=True)
 
     class Meta:
         verbose_name = "Co-organizer"
