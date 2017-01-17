@@ -14,7 +14,7 @@
             <section class="col-xs-12 col-md-8">
                 <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world. Events are always non-profit and free for participants. We do not pay coaches, speakers or organizers. Attendees don’t need any previous knowledge about programming and there are no age limitations. All attendees need is a laptop and some curiosity!</p>
 
-                <p>Until today, <span>{{ organizers_count }}</span> volunteers organized <span>{{ all_events_count }}</span> Django Girls workshops. Join them and bring Django Girls to your city!</p>
+                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span> Django Girls workshops. Join them and <a href="{% url "organize:prerequisites" %}">bring Django Girls to your city!</a></p>
 
                 <h2>The Value of Organizing Django Girls</h2>
 
@@ -32,7 +32,7 @@
             </section>
 
             <section class="col-xs-12 col-md-4 sidebar">
-                <a href="/organize/prerequisites/" class="cta">Apply to organize a workshop&nbsp;»</a>
+                <a href="{% url "organize:prerequisites" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
 
                 <div class="panel narrow">
                     <h2>Resources for organizers</h2>
@@ -48,7 +48,7 @@
                             <a href="https://github.com/djangogirls/resources">Media resources</a>
                         </li>
                         <li>
-                            <a href="{% url 'core:workshop-box' %}">Workshop Kit</a>
+                            <a href="{% url 'core:workshop-box' %}">Workshop Box</a>
                         </li>
                         <li>
                             <a href="https://tutorial.djangogirls.org/">Django Girls Workshop Tutorial</a>
@@ -66,7 +66,7 @@
                 <img src="{% static_rev 'img/report-2015/agata.jpg' %}" alt="Agata Grdal, organizer of Django Girls Wrocław" />
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8">
-                <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve created my own blog and then prepared workshops and taught other women to code. Nothing is impossible with this bunch of crazy, positive people!</div>
+                <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve created my own blog and then prepared workshops and taught other women to code. Nothing is impossible with this bunch of positive people!</div>
                 <cite>— Agata Grdal, organizer of Django Girls Wrocław</cite>
             </div>
         </blockquote>

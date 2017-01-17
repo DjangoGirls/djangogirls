@@ -85,6 +85,7 @@ class OrganizerForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
     last_name = forms.CharField(
         max_length=30,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
 
 
@@ -100,8 +101,6 @@ class WorkshopForm(forms.Form):
         max_length=200,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
     country = LazyTypedChoiceField(choices=countries)
-    website_slug = forms.SlugField(
-        widget=forms.TextInput(attrs={'class': 'compact-input'}))
     venue = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     sponsorship = forms.CharField(

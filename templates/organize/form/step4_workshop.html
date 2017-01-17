@@ -38,7 +38,7 @@
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">Where?</legend>
-                        <p class="form-section-subhead">Provide a city in which the workshop is going to take place</p>
+                        <p class="form-section-subhead">In which city do you want to organize a workshop?</p>
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
@@ -68,34 +68,15 @@
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">When?</legend>
-                        <p class="form-section-subhead">The date of your event should be at least in 1.5 months in the future, but we recommend 3 months for easier planning</p>
+                        <p class="form-section-subhead">There should be <b>at least 1.5 months</b> between now and your event's date, but we recommend 3 months for easier planning. If you don't have a precise date for now, you can enter a month and a year.</p>
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.date.id_for_label }}" class="compact-label">Date (or month) of the event</label>
+                                <label for="{{ wizard.form.date.id_for_label }}" class="compact-label">Date of your event</label>
                                 {{ wizard.form.date }}
                                 {% if wizard.form.date.errors %}
                                     <ul class="error-list">
                                         {% for error in wizard.form.date.errors %}
-                                            <li class="error">{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </fieldset>
-
-                    <fieldset class="form-section">
-                        <legend class="form-section-heading">Your event website</legend>
-                        <p class="form-section-subhead">All Django Girls event pages have address http://djangogirls.org/cityname. If you need a different one, enter it here:</p>
-
-                        <ul class="row">
-                            <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.website_slug.id_for_label }}" class="compact-label">http://djangogirls.org/</label>
-                                {{ wizard.form.website_slug }}
-                                {% if wizard.form.website_slug.errors %}
-                                    <ul class="error-list">
-                                        {% for error in wizard.form.website_slug.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
@@ -123,8 +104,8 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading">Do you have a plan which companies will you approach for sponsorship?</label>
-                        <p class="form-section-subhead">Doesn’t need to be very specific yet, but we would love to see your ideas.</p>
+                        <label class="form-section-heading">Do you already know which companies you will approach for sponsorship?</label>
+                        <p class="form-section-subhead">It doesn’t need to be very specific yet, but we would love to see your ideas.</p>
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
@@ -142,7 +123,7 @@
 
                     <section class="form-section">
                         <label class="form-section-heading">Do you have potential coaches in mind?</label>
-                        <p class="form-section-subhead">Have you approched them to ask if they would be interested in helping out?</p>
+                        <p class="form-section-subhead">Have you approached them to ask if they would be interested in helping out?</p>
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
