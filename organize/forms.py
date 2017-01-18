@@ -52,7 +52,6 @@ class ApplicationForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     involvement = forms.MultipleChoiceField(
         choices=INVOLVEMENT_CHOICES,
-        required=False,
         widget=forms.CheckboxSelectMultiple)
     experience = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
@@ -98,6 +97,7 @@ class WorkshopForm(forms.Form):
     date = ApproximateDateFormField(
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
     city = forms.CharField(
+        required=True,
         max_length=200,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
     country = LazyTypedChoiceField(choices=countries)

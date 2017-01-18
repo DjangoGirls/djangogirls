@@ -40,13 +40,13 @@
                     {% endif %}
 
                     <fieldset class="form-section">
-                        <legend class="form-section-heading">Lead organizer</legend>
+                        <legend class="form-section-heading required">Lead organizer</legend>
                         <p class="form-section-subhead">This is probably you! :)</p>
 
                         <ul class="row">
                             {% with form=wizard.form.0 %}
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label{% if form.first_name.field.required %} required{% endif %}">First name</label>
                                 {{ form.first_name }}
                                 {% if form.first_name.errors %}
                                     <ul class="error-list">
@@ -57,7 +57,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label{% if form.last_name.field.required %} required{% endif %}">Last name</label>
                                 {{ form.last_name }}
                                 {% if form.last_name.errors %}
                                     <ul class="error-list">
@@ -68,7 +68,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                <label for="{{ form.email.id_for_label }}" class="compact-label{% if form.email.field.required %} required{% endif %}">Email address</label>
                                 {{ form.email }}
                                 {% if form.email.errors %}
                                     <ul class="error-list">

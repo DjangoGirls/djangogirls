@@ -42,7 +42,8 @@
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.city.id_for_label }}" class="compact-label">City</label>
+                                <label for="{{ wizard.form.city.id_for_label }}"
+                                       class="compact-label{% if form.city.field.required %} required{% endif %}">City</label>
                                 {{ wizard.form.city }}
                                 {% if wizard.form.city.errors %}
                                     <ul class="error-list">
@@ -53,7 +54,8 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.country.id_for_label }}" class="compact-label">Country</label>
+                                <label for="{{ wizard.form.country.id_for_label }}"
+                                       class="compact-label{% if form.country.field.required %} required{% endif %}">Country</label>
                                 {{ wizard.form.country }}
                                 {% if wizard.form.country.errors %}
                                     <ul class="error-list">
@@ -72,7 +74,7 @@
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ wizard.form.date.id_for_label }}" class="compact-label">Date of your event</label>
+                                <label for="{{ wizard.form.date.id_for_label }}" class="compact-label{% if form.date.field.required %} required{% endif %}">Date of your event</label>
                                 {{ wizard.form.date }}
                                 {% if wizard.form.date.errors %}
                                     <ul class="error-list">
@@ -86,7 +88,7 @@
                     </fieldset>
 
                     <section class="form-section">
-                        <label class="form-section-heading">Do you have a venue in mind?</label>
+                        <label class="form-section-heading{% if form.venue.field.required %} required{% endif %}">Do you have a venue in mind?</label>
                         <p class="form-section-subhead">Tell us about your ideas on where to host the event in your city.</p>
 
                         <ul class="row">
@@ -104,7 +106,7 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading">Do you already know which companies you will approach for sponsorship?</label>
+                        <label class="form-section-heading{% if form.sponsorship.field.required %} required{% endif %}">Do you already know which companies you will approach for sponsorship?</label>
                         <p class="form-section-subhead">It doesn’t need to be very specific yet, but we would love to see your ideas.</p>
 
                         <ul class="row">
@@ -122,7 +124,7 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading">Do you have potential coaches in mind?</label>
+                        <label class="form-section-heading{% if form.coaches.field.required %} required{% endif %}">Do you have potential coaches in mind?</label>
                         <p class="form-section-subhead">Have you approached them to ask if they would be interested in helping out?</p>
 
                         <ul class="row">

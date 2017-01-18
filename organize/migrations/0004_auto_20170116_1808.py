@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='eventapplication',
             name='website_slug',
-            field=autoslug.fields.AutoSlugField(editable=True, populate_from='city', unique=True),
+            field=autoslug.fields.AutoSlugField(editable=True, populate_from='city'),
         ),
     ]
