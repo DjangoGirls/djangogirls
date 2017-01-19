@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from django import forms
 from django.core.urlresolvers import reverse
+from django.db.models import Prefetch
 
 
 def get_organiser_menu(city):
@@ -70,13 +71,17 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None):
     Return a QuerySet of Application objects for a given event.
     Raises Form.DoesNotExist if Form for event does not yet exist.
     """
-    from applications.models import Application  # circular import
+    from applications.models import Application, Score  # circular import
 
     applications = (
         Application.objects
         .filter(form__event=event)
         .order_by('id')
-        .prefetch_related('answer_set')
+        .select_related('form')
+        .prefetch_related(
+            Prefetch('answer_set'),
+            Prefetch('scores', queryset=Score.objects.select_related('user'))
+        )
     )
 
     if rsvp_status:
