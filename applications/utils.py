@@ -76,7 +76,9 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None):
         Application.objects
         .filter(form__event=event)
         .order_by('id')
-        .prefetch_related('answer_set')
+        .select_related('form')
+        .prefetch_related('answer_set', 'scores', 'scores__user',
+                          'form__event', 'scores__application')
     )
 
     if rsvp_status:
