@@ -15,6 +15,7 @@ __pycache__
 .venv
 static/media
 .idea/*
+.vscode
 .cache/
 node_modules/
 static/build/

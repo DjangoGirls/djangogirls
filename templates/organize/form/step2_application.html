@@ -35,7 +35,7 @@
                     {% endif %}
 
                     <section class="form-section">
-                        <label for="{{ wizard.form.about_you.id_for_label }}" class="form-section-heading">Who are you?</label>
+                        <label for="{{ wizard.form.about_you.id_for_label }}" class="form-section-heading{% if wizard.form.about_you.field.required %} required{% endif %}">Who are you?</label>
                         <p class="form-section-subhead">Tell us a little bit about yourself. What’s your background and daily occupation?</p>
                         <div class="row">
                             <div class="col-sm-12 col-md-9">
@@ -52,7 +52,7 @@
                     </section>
 
                     <section class="form-section">
-                        <label for="{{ wizard.form.why.id_for_label }}" class="form-section-heading">Why do you want to organize a Django Girls workshop?</label>
+                        <label for="{{ wizard.form.why.id_for_label }}" class="form-section-heading{% if wizard.form.why.field.required %} required{% endif %}">Why do you want to organize a Django Girls workshop?</label>
                         <p class="form-section-subhead">What motivated or inspired you to do it? What is your goal in organizing an event?</p>
                         <div class="row">
                             <div class="col-sm-12 col-md-9">
@@ -69,7 +69,7 @@
                     </section>
 
                     <fieldset class="form-section">
-                        <legend class="form-section-heading">Have you been involved in Django Girls before?</legend>
+                        <legend class="form-section-heading{% if wizard.form.involvement.field.required %} required{% endif %}">Have you been involved in Django Girls before?</legend>
                         <p class="form-section-subhead">Check boxes next to all the things that describe you</p>
                         <ul>
                             {% for input in wizard.form.involvement %}
@@ -89,7 +89,7 @@
                     </fieldset>
 
                     <section class="form-section">
-                        <label for="{{ wizard.form.experience.id_for_label }}" class="form-section-heading">Have you organized any other event before?</label>
+                        <label for="{{ wizard.form.experience.id_for_label }}" class="form-section-heading{% if wizard.form.experience.field.required %} required{% endif %}">Have you organized any other event before?</label>
                         <p class="form-section-subhead">If you helped organize a different workshop or event before, or are involved in your local community, we’d love to hear about it!</p>
                         <div class="row">
                             <div class="col-sm-12 col-md-9">

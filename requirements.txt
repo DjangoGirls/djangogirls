@@ -1,5 +1,6 @@
 -e git+https://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker
 
+django-autoslug
 boto3==1.4.3
 click==6.7
 dj-database-url==0.4.2
