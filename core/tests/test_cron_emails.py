@@ -189,10 +189,10 @@ class HandleEmailTestCase(TestCase):
             if mock_send_mail.call_count == 0:
                 return False
 
-            _, send_kwargs = mock_send_mail.call_args
+            calls = mock_send_mail.call_args_list
             mock_send_mail.reset_mock()
 
-            return event.city in send_kwargs['subject']
+            return any(event.city in send_kwargs['subject'] for _, send_kwargs in calls)
 
         # Test one event with no form, should send an email
         event = Event.objects.create(
@@ -236,3 +236,26 @@ class HandleEmailTestCase(TestCase):
         event.offer_help_email_sent = None
         event.save()
         self.assertFalse(_would_send_email(event))
+
+    @mock.patch('core.management.commands.handle_emails.send_mail')
+    def test_send_summary_checkin_to_hello(self, mock_send_mail):
+        """ If emails are sent to event because they're late, an email to hello should be sent to hello@djangogirls """
+        handle_emails.send_offer_help_emails()
+
+        # Don't send email if no events are late
+        assert not mock_send_mail.called
+
+        # Event without a form will trigger check-in email. An email containing city names should be sent to hello.
+        now = timezone.now()
+        in_six_weeks = now + timezone.timedelta(weeks=6)
+        event = Event.objects.create(
+            city="Test City",
+            is_on_homepage=True,
+            date=in_six_weeks,
+            is_page_live=True
+        )
+        handle_emails.send_offer_help_emails()
+        self.assertTrue(mock_send_mail.called)
+        _, kwargs = mock_send_mail.call_args
+        self.assertEqual(kwargs["recipient_list"], ["hello@djangogirls.org"])
+        self.assertIn("Test City", kwargs["message"])
