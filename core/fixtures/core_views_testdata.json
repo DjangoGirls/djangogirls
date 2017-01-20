@@ -198,7 +198,7 @@
     "fields": {
         "name": "Company name"
     },
-    "model": "core.sponsor",
+    "model": "sponsor.sponsor",
     "pk": 1
 },
 {

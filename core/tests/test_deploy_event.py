@@ -1,12 +1,13 @@
 from datetime import date
 from django.test import TestCase
 
-from core.deploy_event import (
+from ..deploy_event import (
     copy_content_from_previous_event,
     copy_event,
     copy_menu_from_previous_event,
 )
-from core.models import Coach, Event, Sponsor
+from ..models import Coach, Event
+from sponsor.models import Sponsor
 
 
 class CopyEventTest(TestCase):
