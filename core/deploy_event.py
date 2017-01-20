@@ -20,10 +20,6 @@ def copy_event(previous_event, event_date):
     previous_event_name = "{} #{}".format(generic_event_name, number)
     event_name = "{} #{}".format(generic_event_name, number+1)
 
-    # Change the name of previous event to {name} #{number-1}
-    previous_event.name = previous_event_name
-    previous_event.save()
-
     # Copy event with a name {name} #{number} and new date
     new_event = previous_event
     new_event.pk = None
@@ -32,7 +28,8 @@ def copy_event(previous_event, event_date):
     new_event.is_page_live = False
     new_event.save()
 
-    # Change the title and url of previous event page
+    # Change url, title and name of previous event to {name} #{number-1}
+    previous_event.name = previous_event_name
     previous_event.page_title = previous_event_name
     previous_event.page_url = "{}{}".format(previous_event.page_url, number-1)
     previous_event.save()
