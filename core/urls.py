@@ -23,6 +23,5 @@ urlpatterns = [
     url(r'^coc/(?:(?P<lang>[a-z-]+)/)?$', views.coc, name='coc'),
 
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
-    url(r'^sponsor-request/$', views.sponsor_request, name='sponsor-request'),
     url(r'^$', views.index, name='index'),
 ]
