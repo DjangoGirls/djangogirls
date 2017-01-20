@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^account/', include('django.contrib.auth.urls')),
     url(r'^organize/', include('organize.urls', namespace='organize')),
     url(r'^story/', include('story.urls', namespace='story')),
-    url(r'^sponsor/', include('sponsor.urls', namespace='sponsor')),
+    url(r'', include('sponsor.urls', namespace='sponsor')),
     url(r'', include('applications.urls', namespace='applications')),
     url(r'', include('core.urls', namespace='core')),
 ]
