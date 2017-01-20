@@ -1,14 +1,12 @@
 import icalendar
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.utils import next_deadline
 from patreonmanager.models import FundraisingStatus
 
 from .forms import ContactForm
@@ -155,11 +153,6 @@ def privacy_cookies(request):
 def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
 
-@login_required
-def sponsor_request(request):
-    return render(request, 'event/sponsor-request.html', {
-        'deadline': next_deadline()
-    })
 
 def coc(request, lang=None):
     if lang is None:

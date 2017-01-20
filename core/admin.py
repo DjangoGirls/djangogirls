@@ -18,8 +18,8 @@ from suit.admin import SortableModelAdmin
 from .filters import OpenRegistrationFilter
 from .forms import (AddOrganizerForm, EventForm,
                     UserCreationForm, UserLimitedChangeForm)
-from .models import (Coach, Event, EventPageContent, EventPageMenu,
-                     Sponsor, User)
+from .models import (Coach, Event, EventPageContent, EventPageMenu, User)
+from sponsor.admin import SponsorInline
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -261,12 +261,6 @@ class EventPageContentForm(ModelForm):
         )
 
 
-class SponsorInline(admin.TabularInline):
-    model = EventPageContent.sponsors.through
-    extra = 1
-    verbose_name_plural = 'Sponsors'
-
-
 class CoachInline(admin.TabularInline):
     model = EventPageContent.coaches.through
     extra = 1
@@ -335,27 +329,6 @@ class EventPageMenuAdmin(SortableModelAdmin):
             if not obj.event.is_upcoming():
                 return set([x.name for x in self.model._meta.fields])
         return self.readonly_fields
-
-
-class SponsorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'logo_display_for_admin', 'url')
-    list_per_page = 50
-    search_fields = ('name', )
-
-    def get_queryset(self, request):
-        qs = super(SponsorAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(eventpagecontent__event__team=request.user).distinct()
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super(SponsorAdmin, self).get_form(request, obj, **kwargs)
-        if not request.user.is_superuser:
-            if 'eventpagecontent' in form.base_fields:
-                qs = EventPageContent.objects.filter(
-                    event__team=request.user)
-                form.base_fields['eventpagecontent'].queryset = qs
-        return form
 
 
 class CoachAdmin(admin.ModelAdmin):
@@ -444,5 +417,4 @@ admin.site.register(Event, EventAdmin)
 admin.site.register(EventPageContent, EventPageContentAdmin)
 admin.site.register(EventPageMenu, EventPageMenuAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Coach, CoachAdmin)

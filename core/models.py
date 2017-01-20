@@ -361,7 +361,7 @@ class EventPageContent(models.Model):
         help_text="Position of the block on the website")
     is_public = models.BooleanField(null=False, blank=False, default=False)
     coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
-    sponsors = models.ManyToManyField("core.Sponsor", verbose_name='Sponsors')
+    sponsors = models.ManyToManyField("sponsor.Sponsor", verbose_name='Sponsors')
 
     def __str__(self):
         return "%s at %s" % (self.name, self.event)
@@ -388,30 +388,6 @@ class EventPageMenu(models.Model):
     class Meta:
         ordering = ("position", )
         verbose_name = "Website Menu"
-
-
-@python_2_unicode_compatible
-class Sponsor(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
-    logo = models.ImageField(
-        upload_to="event/sponsors/", null=True, blank=True,
-        help_text="Make sure logo is not bigger than 200 pixels wide")
-    url = models.URLField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ("name", )
-
-    def logo_display_for_admin(self):
-        if self.logo:
-            return "<a href=\"{}\" target=\"_blank\"><img src=\"{}\" width=\"100\" /></a>".format(
-                self.logo.url, self.logo.url)
-        else:
-            return "No logo"
-    logo_display_for_admin.allow_tags = True
 
 
 @python_2_unicode_compatible
