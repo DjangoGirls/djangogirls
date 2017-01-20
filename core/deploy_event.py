@@ -4,7 +4,7 @@ from core.models import Event
 def copy_event(previous_event, event_date):
     """
         Copy event from the previous one. This does the following steps:
-        - change name of previous event to {name} #{number}, i.e.
+        - change title of previous event to {title} #{number}, i.e.
           Django Girls London #1
         - create new event based on previous event
         - copy content and menu from previous event
@@ -12,20 +12,12 @@ def copy_event(previous_event, event_date):
     number = Event.objects.filter(city=previous_event.city,
                                   country=previous_event.country).count()
     previous_event_id = previous_event.pk
-    # If event is already Django Girls City #2, remove #2 from it
-    if '#' in previous_event.name:
-        generic_event_name = previous_event.name.split(' #')[0]
-    else:
-        generic_event_name = previous_event.name
-
-    previous_event_name = "{} #{}".format(generic_event_name, number)
-    event_name = "{} #{}".format(generic_event_name, number+1)
 
     # Copy event with a name {name} #{number}, new date and empty stats
     new_event = previous_event
     new_event.pk = None
-    new_event.name = event_name
     new_event.date = event_date
+    new_event.number += 1
     new_event.is_page_live = False
     new_event.attendees_count = None
     new_event.applicants_count = None
@@ -33,9 +25,11 @@ def copy_event(previous_event, event_date):
 
     # Change url, title and name of previous event to {name} #{number}
     previous_event = Event.objects.get(pk=previous_event_id)
-    previous_event.name = previous_event_name
-    previous_event.page_title = previous_event_name
-    previous_event.page_url = "{}{}".format(previous_event.page_url, number)
+    previous_event.page_title = "{} #{}".format(
+        previous_event.page_title.split("#")[0],
+        previous_event.number
+    )
+    previous_event.page_url += str(previous_event.number)
     previous_event.save()
 
     # populate content & menu from the default event

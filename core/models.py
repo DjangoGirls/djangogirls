@@ -110,10 +110,12 @@ class EventManager(models.Manager):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=200)
-    date = ApproximateDateField(blank=True, validators=[validate_approximatedate])
-    city = models.CharField(max_length=200)
-    country = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=False, blank=False)
+    date = ApproximateDateField(
+        null=True, blank=False, validators=[validate_approximatedate])
+    city = models.CharField(max_length=200, null=False, blank=False)
+    country = models.CharField(max_length=200, null=False, blank=False)
+    number = models.IntegerField(default=1)
     latlng = models.CharField("latitude and longitude", max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
                               help_text="The best would be 356 x 210px")
@@ -162,6 +164,10 @@ class Event(models.Model):
 
     def __str__(self):
         return '{}, {}'.format(self.name, self.date)
+
+    @property
+    def ordinal_name(self):
+        return '{} #{}'.format(self.name, self.number)
 
     class Meta:
         ordering = ('-date', )

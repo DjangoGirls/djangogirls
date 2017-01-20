@@ -24,7 +24,7 @@ from sponsor.admin import SponsorInline
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
+    list_display = ('ordinal_name', 'organizers', 'email', 'date', 'city', 'country',
                     'is_on_homepage', 'is_past_event', 'has_stats')
     list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
@@ -58,7 +58,7 @@ class EventAdmin(admin.ModelAdmin):
         if obj and not request.user.is_superuser:
             fields.update({
                 'city', 'country', 'email', 'is_on_homepage', 'name',
-                'page_url', 'team'})
+                'page_url', 'team', 'number'})
             # Don't let change objects for events that already happened
             if not obj.is_upcoming():
                 fields.update({x.name for x in self.model._meta.fields})
