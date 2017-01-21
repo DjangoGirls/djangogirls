@@ -31,7 +31,7 @@ def send_application_notification(event_application):
             'application': event_application,
         })
     send_email(content, subject, ['hello@djangogirls.org'],
-               reply_to=event_application.get_all_recipients())
+               reply_to=event_application.get_organizers_emails())
 
 
 def send_application_deployed_email(event_application, event, email_password):
@@ -42,7 +42,7 @@ def send_application_deployed_email(event_application, event, email_password):
         'event': event,
         'password': email_password,
     })
-    recipients = event_application.get_all_recipients()
+    recipients = event_application.get_organizers_emails()
     recipients.append(event.email)  # add event's djangogirls.org email
     send_email(content, subject, recipients)
 
@@ -56,4 +56,4 @@ def send_application_rejection_email(event_application):
     content = render_to_string('emails/organize/rejection.html', {
         'application': event_application
     })
-    send_email(content, subject, event_application.get_all_recipients())
+    send_email(content, subject, event_application.get_organizers_emails())

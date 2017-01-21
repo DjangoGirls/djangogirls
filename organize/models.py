@@ -171,7 +171,7 @@ class EventApplication(models.Model):
                 'comment': 'This field is required.'
             })
 
-    def get_all_recipients(self):
+    def get_organizers_emails(self):
         """
         Returns a list of emails to all organizers in that application
         """

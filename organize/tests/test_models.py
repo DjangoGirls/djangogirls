@@ -23,7 +23,7 @@ class EventApplicationTest(TestCase):
 
     def test_all_recipients(self):
         event_application = EventApplication.objects.get(pk=1)
-        assert len(event_application.get_all_recipients()) == \
+        assert len(event_application.get_organizers_emails()) == \
             event_application.coorganizers.count() + 1
 
     def test_reject_method(self):
@@ -33,4 +33,4 @@ class EventApplicationTest(TestCase):
         event_application.status == REJECTED
         assert len(mail.outbox) == 1
         email = mail.outbox[0]
-        assert email.to == event_application.get_all_recipients()
+        assert email.to == event_application.get_organizers_emails()
