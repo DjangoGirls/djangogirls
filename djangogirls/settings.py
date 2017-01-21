@@ -36,8 +36,6 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'captcha',
     'django_countries',
-    'bootstrap3_datetime',
-    'ckeditor',
     'gulp_rev',
 
     'core',
@@ -250,17 +248,6 @@ SECURE_SSL_REDIRECT = not DEBUG
 MAPBOX_MAP_ID = 'olasitarska.m8nged0f'
 
 APPEND_SLASH = True
-
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': [
-    		 ['-', 'Bold', 'Italic', 'Underline'],
-             ['-', 'Link', 'Unlink'],
-             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-'],
-        ],
-    },
-}
 
 JOBS_EMAIL_USER = os.environ.get('JOBS_EMAIL_USER')
 JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')

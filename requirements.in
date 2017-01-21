@@ -1,11 +1,8 @@
--e git+https://github.com/olasitarska/django-bootstrap3-datetimepicker#egg=django-bootstrap3-datetimepicker
-
 boto3
 click
 django-autoslug
 django-click
 dj-database-url
-django-ckeditor
 django-codemirror-widget
 django-countries
 django-date-extensions
@@ -20,9 +17,10 @@ django-suit
 Django
 djrill
 easy_thumbnails
+google-api-python-client
+httplib2
 icalendar
 lxml
-mandrill
 mock
 opbeat
 Pillow
