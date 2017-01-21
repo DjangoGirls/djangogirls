@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
+    <script src="{% static_rev 'js/organize.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -71,14 +71,16 @@
                     <fieldset class="form-section">
                         <legend class="form-section-heading{% if wizard.form.involvement.field.required %} required{% endif %}">Have you been involved in Django Girls before?</legend>
                         <p class="form-section-subhead">Check boxes next to all the things that describe you</p>
-                        <ul>
-                            {% for input in wizard.form.involvement %}
-                                <li>
-                                    {{ input.tag }}
-                                    <label for="{{ input.id_for_label }}">{{ input.choice_label }}</label>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="checkbox-wrapper">
+                            <ul>
+                                {% for input in wizard.form.involvement %}
+                                    <li>
+                                        {{ input.tag }}
+                                        <label for="{{ input.id_for_label }}">{{ input.choice_label }}</label>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                         {% if wizard.form.involvement.errors %}
                             <ul class="error-list">
                                 {% for error in wizard.form.involvement.errors %}

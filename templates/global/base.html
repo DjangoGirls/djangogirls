@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Lora:400,700,400i,700i/Roboto:300,400,300i,400i">
   {% block main_stylesheet %}<link rel="stylesheet" type="text/css" href="{% static_rev 'css/global.css' %}" media="screen">{% endblock %}
+  {% block extra_css %}{% endblock %}
 
   <script type="text/javascript" src="{% static 'vendor/js/jquery.min.js' %}"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>

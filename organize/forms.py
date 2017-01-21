@@ -100,7 +100,8 @@ class WorkshopForm(forms.Form):
         required=True,
         max_length=200,
         widget=forms.TextInput(attrs={'class': 'compact-input'}))
-    country = LazyTypedChoiceField(choices=countries)
+    country = LazyTypedChoiceField(
+        choices=[(None, 'Choose country')] + list(countries))
     venue = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     sponsorship = forms.CharField(

@@ -15,7 +15,7 @@ border-radius(n)
 */
 
 html, body
-    height: 100%;
+    height: 100%
 
 body
     font: 18px serif_font
@@ -648,15 +648,38 @@ span.highlighted-number
             > :first-child
                 padding-left: .8em
 
-    .checkbox-wrapper
-        align-items: baseline
-        display: flex
-
     label
         font-weight: normal
         line-height: 35px
         margin: 0
         padding-left: .8em
+
+    .checkbox-wrapper, .radio-wrapper
+        align-items: baseline
+        display: flex
+
+        input[type="checkbox"], input[type="radio"]
+            flex-shrink: 0
+            flex-grow: 0
+        label
+            vertical-align: top
+            max-width: 90%
+
+    .radio-wrapper
+        label
+            vertical-align: top
+            max-width: 60%
+
+    .radio-wrapper
+        .select2-container--bootstrap
+            display: inline-block
+            max-width: 60%
+            font-size: 14px
+
+      .workshop
+        .select2-container--bootstrap
+            max-width: 100%
+
 
     .required
         &::after
@@ -708,10 +731,10 @@ span.highlighted-number
         background: orange
         border: 0 none
         border-radius(3px)
-        color: #ffffff;
+        color: #ffffff
         display: inline-block
-        font-family: sans_font;
-        font-size: 24px;
+        font-family: sans_font
+        font-size: 24px
         margin: 0
         padding: 10px 20px
         text-align: center
@@ -725,6 +748,11 @@ span.highlighted-number
 
     .tight-top
         margin-top: 15px
+
+.select2-results__option
+    font-size: 14px
+    line-height: 17px
+
 
 .organize-landing
     h1
@@ -758,7 +786,7 @@ span.highlighted-number
         padding: 0
 
         img
-            border-radius: 50%;
+            border-radius: 50%
             display: block
             margin: 0 auto
             max-width: 100%

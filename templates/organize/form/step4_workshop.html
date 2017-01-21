@@ -5,9 +5,15 @@
 {{ wizard.form.media }}
 {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static_rev 'vendor/select2/css/select2.min.css' %}">
+<link rel="stylesheet" href="{% static_rev 'vendor/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+{% endblock %}
+
 {% block extra_js %}
-    <script src='https://www.google.com/recaptcha/api.js?onload=onCaptchaLoadCallback&render=explicit'></script>
-    <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
+<script src='https://www.google.com/recaptcha/api.js?onload=onCaptchaLoadCallback&render=explicit'></script>
+<script src="{% static_rev 'js/organize.js' %}"></script>
+<script src="{% static_rev 'vendor/select2/js/select2.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,7 +26,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row workshop">
         <div class="col-md-12">
             <div class="panel">
                 <h1>Tell us all about your Django Girls event!</h1>
@@ -67,6 +73,12 @@
                             </li>
                         </ul>
                     </fieldset>
+                    <script type="text/javascript">
+                        $('#{{ wizard.form.country.id_for_label }}').select2({
+                            theme: "bootstrap",
+                            placeholder: 'Choose country'
+                        });
+                    </script>
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">When?</legend>
