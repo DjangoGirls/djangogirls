@@ -184,3 +184,16 @@ Key bits of config and secrets are stored in environment variables in two places
 
 * in the WSGI file (linked from the Web Tab)
 * in the virtualenv postactivate at ~/.virtualenvs/djangogirls.com/bin/postactivate
+
+
+### Google Apps API integration
+
+We're using Google Apps Admin SDK for creating email accounts in djangogirls.org domain automatically.
+
+Several things were needed to get this working:
+
+1. Create an app in Developer Console
+2. Create a service account to enable 2 legged oauth (https://developers.google.com/identity/protocols/OAuth2ServiceAccount)
+3. Enable delegation of domain-wide authority for the service account.
+4. Enable Admin SDK for the domain.
+5. Give the service account permission to access admin.directory.users service (https://admin.google.com/AdminHome?chromeless=1#OGX:ManageOauthClients).

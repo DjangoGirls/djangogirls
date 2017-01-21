@@ -7,6 +7,7 @@ from django.db import models, transaction
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDateField
 
+from core import gmail_accounts
 from core.models import Event
 from core.validators import validate_approximatedate
 
@@ -94,6 +95,16 @@ class EventApplication(models.Model):
 
         return event
 
+    def has_past_team_members(self):
+        """ For repeated events, check whether there are any common
+        team members who applied to organize again
+        """
+        previous_event = Event.objects.filter(city=self.city,
+                                              country=self.country).order_by('-id').first()
+        organizers = previous_event.team.all().values_list('email', flat=True)
+        applicants = self.get_organizers_emails()
+        return len(set(organizers).intersection(applicants)) > 0
+
     @transaction.atomic
     def deploy(self):
         """ Deploy Event based on the current EventApplication
@@ -111,9 +122,11 @@ class EventApplication(models.Model):
         # copy old one or copy old and change organizaers.
         event = self.create_event()
 
-        # TODO: use method created in separate branch to create gmail acconut
-        # and get password from it.
-        password = "FAKE_PASS"
+        # sort out Gmail accounts
+        email, email_password = gmail_accounts.get_or_create_gmail(
+            event_application=self,
+            event=event
+        )
 
         # add main organizer of the Event
         main_organizer = event.add_organizer(
@@ -136,7 +149,7 @@ class EventApplication(models.Model):
         send_application_deployed_email(
             event_application=self,
             event=event,
-            email_password=password
+            email_password=email_password
         )
 
     def clean(self):
@@ -145,7 +158,7 @@ class EventApplication(models.Model):
                 'comment': 'This field is required.'
             })
 
-    def get_all_recipients(self):
+    def get_organizers_emails(self):
         """
         Returns a list of emails to all organizers in that application
         """
