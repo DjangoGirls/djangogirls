@@ -54,6 +54,7 @@ def create_gmail_account(event):
             "familyName": event.city,
         },
         "password": password,
+        "changePasswordAtNextLogin": True,
     }).execute()
 
     return (email, password)
@@ -93,3 +94,23 @@ def get_gmail_account(slug):
         return service.users().get(userKey=make_email(slug)).execute()
     except HttpError:
         return None
+
+
+def get_or_create_gmail(event_application, event):
+    """
+    Function that decides whether Gmail account should be migrated,
+    or created. Returns a tuple of email address and password.
+    """
+    if get_gmail_account(event_application.website_slug):
+        # account exists, do we need to migrate?
+        if event_application.has_past_team_members():
+            # has old organizers, so no need to do anything
+            return (make_email(event_application.website_slug), None)
+        else:
+            # migrate old email
+            migrate_gmail_account(event_application.website_slug)
+            # create new account
+            return create_gmail_account(event)
+    else:
+        # create a new account
+        return create_gmail_account(event)

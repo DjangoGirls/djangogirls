@@ -13,7 +13,7 @@ def send_application_confirmation(event_application):
             'city': event_application.city,
             'main_organizer_name': event_application.get_main_organizer_name()
         })
-    send_email(content, subject, event_application.get_all_recipients())
+    send_email(content, subject, event_application.get_organizers_emails())
 
 
 def send_application_notification(event_application):
