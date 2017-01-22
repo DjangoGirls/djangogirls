@@ -122,15 +122,12 @@ class EventApplication(models.Model):
         self.change_status_to(DEPLOYED)
 
         event = None
-        if self.previous_event:
-            previous_event = self.previous_event
-        else:
-            previous_event = (
-                Event.objects
-                .filter(city=self.city, country=self.country)
-                .order_by("-date")
-                .first()
-            )
+        previous_event = (
+            Event.objects
+            .filter(city=self.city, country=self.country)
+            .order_by("-date")
+            .first()
+        )
 
         if previous_event:
             event = copy_event(previous_event, self.date)

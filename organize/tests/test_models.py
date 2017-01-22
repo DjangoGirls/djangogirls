@@ -5,10 +5,11 @@ from django.test import TestCase
 
 from organize.constants import DEPLOYED, ON_HOLD, REJECTED
 from organize.models import EventApplication
+from core.models import Event
 
 
 class EventApplicationTest(TestCase):
-    fixtures = ['event_application_testdata.json', "core_views_testdata.json"]
+    fixtures = ['event_application_testdata.json']
 
     def test_comment_required_for_on_hold_application(self):
         event_application = EventApplication.objects.get(pk=1)
@@ -39,8 +40,10 @@ class EventApplicationTest(TestCase):
     @vcr.use_cassette('organize/tests/vcr/deploy_from_previous_event.yaml')
     def test_deploy_event_from_previous_event(self):
         event_application = EventApplication.objects.get(pk=1)
-        event_application.previous_event_id = 1
-        event_application.save()
+        Event.objects.create(
+            city=event_application.city,
+            country=event_application.country
+        )
 
         event_application.deploy()
 
