@@ -13,7 +13,7 @@ GAPPS_JSON_CREDENTIALS = {
   "type": "service_account",
   "project_id": "djangogirls-website",
   "private_key_id": settings.GAPPS_PRIVATE_KEY_ID,
-  "private_key": settings.GAPPS_PRIVATE_KEY,
+  "private_key": settings.GAPPS_PRIVATE_KEY.replace('\\n', '\n'),
   "client_email": "django-girls-website@djangogirls-website.iam.gserviceaccount.com",
   "client_id": "114585708723701029855",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
