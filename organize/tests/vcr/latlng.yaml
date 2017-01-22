@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.12.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=London%2C+Country
+  response:
+    body: {string: "[{\"place_id\":\"26541444\",\"licence\":\"Data \xA9 OpenStreetMap\
+        \ contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"\
+        osm_type\":\"node\",\"osm_id\":\"2511882281\",\"boundingbox\":[\"39.4746612\"\
+        ,\"39.4747612\",\"-0.3798573\",\"-0.3797573\"],\"lat\":\"39.4747112\",\"lon\"\
+        :\"-0.3798073\",\"display_name\":\"London, 20, Carrer de la Boatella, Ciutat\
+        \ Vella, vall\xB4de ebo, Comarca de Val\xE8ncia, Valencia\\/Val\xE8ncia, Comunitat\
+        \ Valenciana, 46001, Espa\xF1a\",\"class\":\"amenity\",\"type\":\"pub\",\"\
+        importance\":0.111,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\\
+        /mapicons\\/food_pub.p.20.png\"},{\"place_id\":\"5105025\",\"licence\":\"\
+        Data \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\\
+        /copyright\",\"osm_type\":\"node\",\"osm_id\":\"573808540\",\"boundingbox\"\
+        :[\"42.8462825\",\"42.8463825\",\"-2.6646839\",\"-2.6645839\"],\"lat\":\"\
+        42.8463325\",\"lon\":\"-2.6646339\",\"display_name\":\"London, Joan II.aren\
+        \ kalea, Judimendi, Vitoria-Gasteiz, Vitoria-Gasteizko Eskualdea \\/ Cuadrilla\
+        \ de Vitoria, Araba\\/\xC1lava, Euskadi, 01004, Espa\xF1a\",\"class\":\"amenity\"\
+        ,\"type\":\"cafe\",\"importance\":0.111,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\\
+        /images\\/mapicons\\/food_cafe.p.20.png\"}]"}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Sun, 22 Jan 2017 20:51:21 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+version: 1

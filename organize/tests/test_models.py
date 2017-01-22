@@ -52,3 +52,11 @@ class EventApplicationTest(TestCase):
         email_subjects = [e.subject for e in mail.outbox]
         self.assertTrue("Access to Django Girls website" in email_subjects)
         self.assertTrue("Congrats! Your application to organize Django Girls London has been accepted!" in email_subjects)
+
+    @vcr.use_cassette('organize/tests/vcr/latlng.yaml')
+    def test_latlng_is_fetched_when_creating_application(self):
+        event_application = EventApplication.objects.get(pk=1)
+        assert event_application.latlng == '0.0,0.0'
+        event_application.latlng = ''
+        event_application.save()
+        assert event_application.latlng == '39.4747112, -0.3798073'
