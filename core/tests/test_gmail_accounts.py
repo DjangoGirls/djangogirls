@@ -32,6 +32,7 @@ class GmaillAccountsTestCase(TestCase):
         assert response is not None
 
     @vcr.use_cassette('core/test/vcr/gmail_accounts_migrate.yaml')
+    @vcr.use_cassette('core/tests/vcr/gmail_accounts_migrate.yaml')
     def test_migrate_gmail_account(self):
         old_email = self.event.email
         gmail_accounts.migrate_gmail_account('veryrandom')
