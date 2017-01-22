@@ -24,6 +24,9 @@ GAPPS_JSON_CREDENTIALS = {
 
 
 def get_gapps_client():
+    if not settings.GAPPS_PRIVATE_KEY or not settings.GAPPS_PRIVATE_KEY_ID:
+        return None
+
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(
         GAPPS_JSON_CREDENTIALS,
         scopes=settings.GAPPS_ADMIN_SDK_SCOPES
@@ -46,7 +49,11 @@ def create_gmail_account(event):
     """
     email = event.email
     password = get_random_string(length=10)
-    get_gapps_client().users().insert(body={
+    service = get_gapps_client()
+    if not service:
+        return (None, None)
+
+    service.users().insert(body={
         "primaryEmail": email,
         "name": {
             "fullName": event.name,
@@ -68,6 +75,8 @@ def migrate_gmail_account(slug):
     old_event = Event.objects.filter(email=old_email).order_by('-id').first()
     new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
     service = get_gapps_client()
+    if not service:
+        return None
 
     service.users().patch(
         userKey=old_email,
@@ -89,6 +98,8 @@ def get_gmail_account(slug):
     e.g. get_account('testcity')
     """
     service = get_gapps_client()
+    if not service:
+        return None
 
     try:
         return service.users().get(userKey=make_email(slug)).execute()
