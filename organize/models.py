@@ -102,9 +102,11 @@ class EventApplication(models.Model):
         """
         previous_event = Event.objects.filter(city=self.city,
                                               country=self.country).order_by('-id').first()
-        organizers = previous_event.team.all().values_list('email', flat=True)
-        applicants = self.get_organizers_emails()
-        return len(set(organizers).intersection(applicants)) > 0
+        if previous_event:
+            organizers = previous_event.team.all().values_list('email', flat=True)
+            applicants = self.get_organizers_emails()
+            return len(set(organizers).intersection(applicants)) > 0
+        return False
 
     @transaction.atomic
     def deploy(self):
