@@ -8,6 +8,7 @@ from django.utils import timezone
 from django_date_extensions.fields import ApproximateDateField
 
 from core import gmail_accounts
+from core.deploy_event import copy_event
 from core.models import Event
 from core.validators import validate_approximatedate
 
@@ -101,9 +102,11 @@ class EventApplication(models.Model):
         """
         previous_event = Event.objects.filter(city=self.city,
                                               country=self.country).order_by('-id').first()
-        organizers = previous_event.team.all().values_list('email', flat=True)
-        applicants = self.get_organizers_emails()
-        return len(set(organizers).intersection(applicants)) > 0
+        if previous_event:
+            organizers = previous_event.team.all().values_list('email', flat=True)
+            applicants = self.get_organizers_emails()
+            return len(set(organizers).intersection(applicants)) > 0
+        return False
 
     @transaction.atomic
     def deploy(self):
@@ -118,9 +121,18 @@ class EventApplication(models.Model):
 
         self.change_status_to(DEPLOYED)
 
-        # TODO: we should recognize here if we should create a new event,
-        # copy old one or copy old and change organizaers.
-        event = self.create_event()
+        event = None
+        previous_event = (
+            Event.objects
+            .filter(city=self.city, country=self.country)
+            .order_by("-date")
+            .first()
+        )
+
+        if previous_event:
+            event = copy_event(previous_event, self.date)
+        else:
+            event = self.create_event()
 
         # sort out Gmail accounts
         email, email_password = gmail_accounts.get_or_create_gmail(
@@ -131,8 +143,8 @@ class EventApplication(models.Model):
         # add main organizer of the Event
         main_organizer = event.add_organizer(
             self.main_organizer_email,
-            self.first_name,
-            self.last_name,
+            self.main_organizer_first_name,
+            self.main_organizer_last_name,
         )
         event.main_organizer = main_organizer
         event.save()

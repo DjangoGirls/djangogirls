@@ -2,6 +2,7 @@ from httplib2 import Http
 
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.utils import timezone
 from apiclient.errors import HttpError
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
@@ -66,7 +67,10 @@ def migrate_gmail_account(slug):
     """
     old_email = make_email(slug)
     old_event = Event.objects.filter(email=old_email).order_by('-id').first()
-    new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
+    if old_event:
+        new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
+    else:
+        new_email = make_email(slug+str(timezone.now().month)+str(timezone.now().year))
     service = get_gapps_client()
 
     service.users().patch(
@@ -79,8 +83,9 @@ def migrate_gmail_account(slug):
     # The old email address is kept as an alias to the new one, but we don't want this.
     service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
 
-    old_event.email = new_email
-    old_event.save()
+    if old_event:
+        old_event.email = new_email
+        old_event.save()
 
 
 def get_gmail_account(slug):
