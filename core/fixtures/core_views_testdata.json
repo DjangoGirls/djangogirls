@@ -52,6 +52,7 @@
 },
 {
     "fields": {
+        "email": "kensinton@djangogirls.org",
         "city": "Kensington",
         "name": "Django Girls Kensington",
         "country": "the Neverlands",

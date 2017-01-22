@@ -1,3 +1,4 @@
+import vcr
 from django.core import mail
 from django.core.exceptions import ValidationError
 from django.test import TestCase
@@ -35,6 +36,7 @@ class EventApplicationTest(TestCase):
         email = mail.outbox[0]
         assert email.to == event_application.get_organizers_emails()
 
+    @vcr.use_cassette('organize/tests/vcr/deploy_from_previous_event.yaml')
     def test_deploy_event_from_previous_event(self):
         event_application = EventApplication.objects.get(pk=1)
         event_application.previous_event_id = 1
