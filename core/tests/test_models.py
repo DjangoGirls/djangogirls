@@ -1,7 +1,8 @@
 from django.contrib.auth.models import Group
 from django.test import TestCase
 
-from core.models import DEFAULT_COACH_PHOTO, Coach, Event, User
+from coach.models import Coach, DEFAULT_COACH_PHOTO
+from core.models import Event, User
 
 
 class TestEventModel(TestCase):

@@ -27,8 +27,6 @@ from .default_eventpage_content import (
 )
 from .emails import notify_existing_user, notify_new_user
 
-DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
-
 
 class UserManager(auth_models.BaseUserManager):
 
@@ -360,7 +358,7 @@ class EventPageContent(models.Model):
         null=False, blank=False,
         help_text="Position of the block on the website")
     is_public = models.BooleanField(null=False, blank=False, default=False)
-    coaches = models.ManyToManyField("core.Coach", verbose_name='Coaches')
+    coaches = models.ManyToManyField("coach.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("sponsor.Sponsor", verbose_name='Sponsors')
 
     def __str__(self):
@@ -388,40 +386,3 @@ class EventPageMenu(models.Model):
     class Meta:
         ordering = ("position", )
         verbose_name = "Website Menu"
-
-
-@python_2_unicode_compatible
-class Coach(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
-    twitter_handle = models.CharField(
-        max_length=200, null=True, blank=True,
-        help_text="No @, No http://, just username")
-    photo = models.ImageField(
-        upload_to="event/coaches/", null=True, blank=True,
-        help_text="For best display keep it square")
-    url = models.URLField(null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ("name",)
-        verbose_name_plural = "Coaches"
-
-    def photo_display_for_admin(self):
-        coach_change_url = reverse("admin:core_coach_change", args=[self.id])
-        return """
-            <a href=\"{}\" target=\"_blank\">
-                <img src=\"{}\" width=\"100\" />
-            </a>""".format(coach_change_url, self.photo_url)
-    photo_display_for_admin.allow_tags = True
-
-    @property
-    def photo_url(self):
-        if self.photo:
-            try:
-                return get_thumbnailer(self.photo)['coach'].url
-            except InvalidImageFormatError:
-                return DEFAULT_COACH_PHOTO
-
-        return DEFAULT_COACH_PHOTO

@@ -192,7 +192,7 @@
     "fields": {
         "name": "Anna Smith"
     },
-    "model": "core.coach",
+    "model": "coach.coach",
     "pk": 1
 },
 {
