@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^account/', include('django.contrib.auth.urls')),
+    url(r'^coach/', include('coach.urls', namespace='coach')),
     url(r'^organize/', include('organize.urls', namespace='organize')),
     url(r'^story/', include('story.urls', namespace='story')),
     url(r'', include('sponsor.urls', namespace='sponsor')),

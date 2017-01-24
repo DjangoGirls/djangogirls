@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'patreonmanager',
     'story',
     'sponsor',
+    'coach',
 )
 
 MIDDLEWARE = [
