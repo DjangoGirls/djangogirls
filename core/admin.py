@@ -56,7 +56,7 @@ class EventAdmin(admin.ModelAdmin):
         fields = set(self.readonly_fields) | {'full_url'}
         if obj and not request.user.is_superuser:
             fields.update({
-                'city', 'country', 'date', 'email', 'is_on_homepage', 'name',
+                'city', 'country', 'email', 'is_on_homepage', 'name',
                 'page_url', 'team'})
             # Don't let change objects for events that already happened
             if not obj.is_upcoming():
