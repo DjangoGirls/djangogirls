@@ -6,7 +6,8 @@ from ..deploy_event import (
     copy_event,
     copy_menu_from_previous_event,
 )
-from ..models import Coach, Event
+from ..models import Event
+from coach.models import Coach
 from sponsor.models import Sponsor
 
 
