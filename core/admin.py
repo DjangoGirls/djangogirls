@@ -77,7 +77,7 @@ class EventAdmin(admin.ModelAdmin):
                     'page_url',
                     'is_deleted'
                 ]}),
-                ('Home page', {'fields': [
+                ('Event main picture', {'fields': [
                     'photo',
                     'photo_credit',
                     'photo_link',
@@ -87,7 +87,7 @@ class EventAdmin(admin.ModelAdmin):
                     'main_organizer',
                     'team'
                 ]}),
-                ('Event page', {'fields': [
+                ('Event website', {'fields': [
                     'page_title',
                     'page_description',
                     'page_main_color',
@@ -107,12 +107,12 @@ class EventAdmin(admin.ModelAdmin):
                 'country',
                 'full_url'
             ]}),
-            ('Home page', {'fields': [
+            ('Event main picture', {'fields': [
                 'photo',
                 'photo_credit',
                 'photo_link',
             ]}),
-            ('Event page', {'fields': [
+            ('Event website', {'fields': [
                 'page_title',
                 'page_description',
                 'page_main_color',

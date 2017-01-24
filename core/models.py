@@ -157,7 +157,7 @@ class Event(models.Model):
     page_url = models.CharField(
         "URL slug", max_length=200, blank=True,
         help_text="Will be used as part of the event URL (djangogirls.org/______/)")
-    is_page_live = models.BooleanField("page published?", default=False)
+    is_page_live = models.BooleanField("Website is ready", default=False)
 
     attendees_count = models.IntegerField(
         null=True, blank=True, verbose_name="Number of attendees")
