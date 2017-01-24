@@ -5,6 +5,7 @@
         "city": "London",
         "country": "Country",
         "website_slug": "london",
+        "latlng": "0.0,0.0",
         "main_organizer_email": "test@test.com",
         "main_organizer_first_name": "Anna",
         "main_organizer_last_name": "Smith",

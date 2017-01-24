@@ -11,6 +11,7 @@ from core import gmail_accounts
 from core.deploy_event import copy_event
 from core.models import Event
 from core.validators import validate_approximatedate
+from core.utils import get_coordinates_for_city
 
 from .constants import (
     APPLICATION_STATUS,
@@ -72,6 +73,11 @@ class EventApplication(models.Model):
     def __str__(self):
         return "{}, {} ({})".format(
             self.city, self.get_country_display(), self.get_status_display())
+
+    def save(self, *args, **kwargs):
+        if not self.latlng:
+            self.latlng = get_coordinates_for_city(self.city, self.country)
+        super(EventApplication, self).save(*args, **kwargs)
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
