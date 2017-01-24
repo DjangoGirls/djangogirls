@@ -56,7 +56,7 @@ class EventAdmin(admin.ModelAdmin):
         fields = set(self.readonly_fields) | {'full_url'}
         if obj and not request.user.is_superuser:
             fields.update({
-                'city', 'country', 'date', 'email', 'is_on_homepage', 'name',
+                'city', 'country', 'email', 'is_on_homepage', 'name',
                 'page_url', 'team'})
             # Don't let change objects for events that already happened
             if not obj.is_upcoming():
@@ -77,7 +77,7 @@ class EventAdmin(admin.ModelAdmin):
                     'page_url',
                     'is_deleted'
                 ]}),
-                ('Home page', {'fields': [
+                ('Event main picture', {'fields': [
                     'photo',
                     'photo_credit',
                     'photo_link',
@@ -87,7 +87,7 @@ class EventAdmin(admin.ModelAdmin):
                     'main_organizer',
                     'team'
                 ]}),
-                ('Event page', {'fields': [
+                ('Event website', {'fields': [
                     'page_title',
                     'page_description',
                     'page_main_color',
@@ -107,12 +107,12 @@ class EventAdmin(admin.ModelAdmin):
                 'country',
                 'full_url'
             ]}),
-            ('Home page', {'fields': [
+            ('Event main picture', {'fields': [
                 'photo',
                 'photo_credit',
                 'photo_link',
             ]}),
-            ('Event page', {'fields': [
+            ('Event website', {'fields': [
                 'page_title',
                 'page_description',
                 'page_main_color',
