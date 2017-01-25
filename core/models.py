@@ -1,23 +1,17 @@
 from __future__ import unicode_literals
 
 from datetime import date, datetime, timedelta
-from smtplib import SMTPException
 from slacker import Error as SlackerError
 
 import icalendar
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import Group
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.mail import EmailMessage
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
-from easy_thumbnails.exceptions import InvalidImageFormatError
-from easy_thumbnails.files import get_thumbnailer
 
 from .slack_client import user_invite
 from .validators import validate_approximatedate

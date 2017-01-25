@@ -1,6 +1,5 @@
 import icalendar
 from django.conf import settings
-from django.contrib import messages
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
