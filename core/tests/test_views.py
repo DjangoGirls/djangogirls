@@ -7,8 +7,8 @@ from django.test import RequestFactory, TestCase
 from django.test.client import Client
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
-from contact.models import ContactEmail
 
+from contact.models import ContactEmail
 from core.models import Event, User
 from core.views import event as event_view
 
@@ -182,7 +182,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
 
@@ -205,7 +205,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
 
@@ -241,7 +241,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(1, ContactEmail.objects.all().count())
 
