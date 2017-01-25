@@ -9,7 +9,6 @@ from django_date_extensions.fields import ApproximateDate
 
 from patreonmanager.models import FundraisingStatus
 
-from .forms import ContactForm
 from .models import Event, User
 from story.models import Story
 
@@ -90,31 +89,6 @@ def newsletter(request):
 
 def faq(request):
     return render(request, 'core/faq.html', {})
-
-
-def contact(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-
-        if form.is_valid():
-            contact_email = form.save()
-            if contact_email.sent_successfully:
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    "Thank you for your email. We will be in touch shortly."
-                )
-            else:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    "Ooops. We couldn't send your email :( Please try again later"
-                )
-            return render(request, 'core/contact.html',
-                          {'form': ContactForm()})
-    else:
-        form = ContactForm()
-    return render(request, 'core/contact.html', {'form': form})
 
 
 def foundation(request):
