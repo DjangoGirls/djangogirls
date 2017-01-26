@@ -24,7 +24,7 @@ def send_application_notification(event_application):
     """
     subject = (
         "New request to organise Django Girls {}, {}"
-        .format(event_application.city, event_application.country)
+        .format(event_application.city, event_application.get_country_display())
     )
     content = render_to_string(
         'emails/organize/application_notification.html', {
