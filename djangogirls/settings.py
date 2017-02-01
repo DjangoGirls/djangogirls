@@ -3,6 +3,7 @@ import os
 import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_URL = 'https://djangogirls.org'
 
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
 

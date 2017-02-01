@@ -2,7 +2,7 @@ Hello team {{event.city}}!
 
 Hope you’re all doing fantastic and took some well deserved rest after organizing your Django Girls workshop :)
 
-Just a friendly reminder to fill out the form at {% url 'admin:core_event_change' event.id %} to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+Just a friendly reminder to fill out the form at {{ settings.BASE_URL }}{% url 'admin:core_event_change' event.id %} to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
 
 Hugs, rainbows and sunshines!
 Django Girls

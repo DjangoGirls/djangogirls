@@ -4,7 +4,7 @@
 
 <p>
 <strong>Numbers</strong><br/>
-Whenever you have a little bit of time, we would be super grateful if you could <a href="{% url 'admin:core_event_change' event.id %}">fill out this form</a> to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+Whenever you have a little bit of time, we would be super grateful if you could <a href="{{ settings.BASE_URL }}{% url 'admin:core_event_change' event.id %}">fill out this form</a> to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
 </p>
 
 <p>
@@ -24,15 +24,15 @@ If you would like to add photos from your event to our <a href="https://www.flic
 
 <p>
 <strong>Donation</strong><br/>
-If you have any money leftover from your workshop, consider <a href="{% url 'core:donate' %}">donating it to Django Girls Foundation</a>, a non-profit that supports organizers all over the world.
+If you have any money leftover from your workshop, consider <a href="{{ settings.BASE_URL }}{% url 'core:donate' %}">donating it to Django Girls Foundation</a>, a non-profit that supports organizers all over the world.
 </p>
 
 <p>
 <strong>Discount in our store</strong><br/>
-Use the code "SPARKLES" to get a 15% discount on your order <a href="https://store.djangogirls.org">in our store</a>. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
+Use the code "{{ settings.STORE_DISCOUNT_CODE }}" to get a 15% discount on your order <a href="https://store.djangogirls.org">in our store</a>. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
 </p>
 
-<p>If you want to plan another event someday, don't hesitate to fill out the <a href="{% url 'organize:index' %}">organizing form again</a>.</p>
+<p>If you want to plan another event someday, don't hesitate to fill out the <a href="{{ settings.BASE_URL }}{% url 'organize:index' %}">organizing form again</a>.</p>
 
 <p><strong>Thanks and congrats yet again, you're awesome!</strong></p>
 
