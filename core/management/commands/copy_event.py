@@ -58,12 +58,14 @@ def command():
     event.name = "{} #{}".format(name, number-1)
     event.save()
 
-    # Copy event with a name {name} #{number} and new date
+    # Copy event with a name {name} #{number}, new date and empty stats
     new_event = event
     new_event.pk = None
     new_event.name = "{} #{}".format(name, number)
     new_event.date = date
     new_event.is_page_live = False
+    new_event.attendees_count = None
+    new_event.applicants_count = None
     new_event.save()
 
     # Move organizers

@@ -21,12 +21,14 @@ def copy_event(previous_event, event_date):
     previous_event_name = "{} #{}".format(generic_event_name, number)
     event_name = "{} #{}".format(generic_event_name, number+1)
 
-    # Copy event with a name {name} #{number} and new date
+    # Copy event with a name {name} #{number}, new date and empty stats
     new_event = previous_event
     new_event.pk = None
     new_event.name = event_name
     new_event.date = event_date
     new_event.is_page_live = False
+    new_event.attendees_count = None
+    new_event.applicants_count = None
     new_event.save()
 
     # Change url, title and name of previous event to {name} #{number-1}
