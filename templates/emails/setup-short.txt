@@ -1,2 +1,2 @@
 Event e-mail is: {{ event.email }}
-Event website address is: http://djangogirls.org/{{ event.page_url }}
+Event website address is: https://djangogirls.org/{{ event.page_url }}

@@ -4,7 +4,7 @@ Congratulations on running your own Django Girls event! We're super proud and so
 
 
 Numbers
-Whenever you have a little bit of time, we would be super grateful if you could fill out the form at {% url 'admin:core_event_change' event.id %} to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+Whenever you have a little bit of time, we would be super grateful if you could fill out the form at {{ settings.BASE_URL }}{% url 'admin:core_event_change' event.id %} to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
 
 
 Tell us how it went!
@@ -20,14 +20,14 @@ If you would like to add photos from your event to our Flickr account at https:/
 
 
 Donation
-If you have any money leftover from your workshop, consider donating it to Django Girls Foundation at {% url 'core:donate' %}, a non-profit that supports organizers all over the world.
+If you have any money leftover from your workshop, consider donating it to Django Girls Foundation at {{ settings.BASE_URL }}{% url 'core:donate' %}, a non-profit that supports organizers all over the world.
 
 
 Discount in our store
-Use the code "SPARKLES" to get a 15% discount on your order in our store at https://store.djangogirls.org. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
+Use the code "{{ settings.STORE_DISCOUNT_CODE }}" to get a 15% discount on your order in our store at https://store.djangogirls.org. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
 
 
-If you want to plan another event someday, don't hesitate to fill out the organizing form at {% url 'organize:index' %} again.
+If you want to plan another event someday, don't hesitate to fill out the organizing form at {{ settings.BASE_URL }}{% url 'organize:index' %} again.
 
 
 Thanks and congrats yet again, you're awesome!
@@ -35,4 +35,3 @@ Thanks and congrats yet again, you're awesome!
 
 Hugs, rainbows and sunshines!
 Django Girls
-

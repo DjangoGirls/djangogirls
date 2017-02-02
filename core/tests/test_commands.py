@@ -139,7 +139,7 @@ class CommandsTestCase(TestCase):
         )
         assert Event.objects.count() == 5
         short_email_body = """Event e-mail is: oz@djangogirls.org
-Event website address is: http://djangogirls.org/oz"""
+Event website address is: https://djangogirls.org/oz"""
         assert short_email_body in result.output
 
     def test_copy_event(self):
