@@ -14,4 +14,3 @@ coverage:
     - tests/*
     - migrations/*
     - djangogirls/wsgi.py
-    - core/gmail_accounts.py
