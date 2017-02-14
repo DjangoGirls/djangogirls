@@ -5,7 +5,7 @@
 
 This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).
 
-## What's in it?
+## What's  in it?
 
 It's a simple CMS that contains 4 models:
 
