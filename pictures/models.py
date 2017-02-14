@@ -1,6 +1,6 @@
 import random
 
-from django.db import models
+from django.db import models, DataError
 from django.utils.safestring import mark_safe
 
 class StockPicture(models.Model):
@@ -29,7 +29,10 @@ class StockPicture(models.Model):
     @staticmethod
     def get_random(kind):
         pictures = StockPicture.objects.filter(kind=kind)
-        i = random.randrange(pictures.count())
+        count = pictures.count()
+        if count == 0:
+            raise DataError('No stock pictures with the kind "{}" in database'.format(kind))
+        i = random.randrange(count)
         return pictures[i]
 
     def add_to(self, other):
