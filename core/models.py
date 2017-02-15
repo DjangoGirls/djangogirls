@@ -139,7 +139,7 @@ class Event(models.Model):
     main_organizer = models.ForeignKey(
         User, null=True, blank=True, related_name="main_organizer")
     team = models.ManyToManyField(User, blank=True)
-    is_on_homepage = models.BooleanField("visible on homepage?", default=False)
+    is_on_homepage = models.BooleanField("visible on homepage?", default=True)
     is_deleted = models.BooleanField("deleted?", default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
