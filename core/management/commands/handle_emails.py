@@ -104,6 +104,7 @@ def send_offer_help_emails():
         is_on_homepage=True,
         date__gt=timezone.now(),
         date__lte=timezone.now() + timezone.timedelta(weeks=6),
+        created_at__lte=timezone.now() - timezone.timedelta(weeks=2),
         offer_help_email_sent__isnull=True
     ).filter(
         Q(is_page_live=False) | Q(form=None)
