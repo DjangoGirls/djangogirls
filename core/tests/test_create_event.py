@@ -45,3 +45,8 @@ class EventApplicationTest(TestCase):
             set([e.title for e in event.menu.all()]),
             set(expected_menu_items)
         )
+
+        # check that we add a cover pictures
+        self.assertTrue(event.photo)
+        self.assertTrue(event.photo_credit)
+        self.assertTrue(event.photo_link)
