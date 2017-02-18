@@ -194,13 +194,18 @@ class HandleEmailTestCase(TestCase):
 
             return any(event.city in send_kwargs['subject'] for _, send_kwargs in calls)
 
-        # Test one event with no form, should send an email
+        # Test one event with no form, created a few seconds ago, should not send an email
         event = Event.objects.create(
             city="Test City",
             is_on_homepage=True,
             date=in_six_weeks,
             is_page_live=True
         )
+        self.assertFalse(_would_send_email(event))
+
+        # Event was created more than a week ago, should send an event
+        event.created_at = timezone.now() - timezone.timedelta(weeks=3)
+        event.save()
         self.assertTrue(_would_send_email(event))
 
         # Event with a rough date at least a month in the future should also send an email
@@ -252,8 +257,10 @@ class HandleEmailTestCase(TestCase):
             city="Test City",
             is_on_homepage=True,
             date=in_six_weeks,
-            is_page_live=True
+            is_page_live=True,
         )
+        event.created_at = now - timezone.timedelta(weeks=3)
+        event.save()
         handle_emails.send_offer_help_emails()
         self.assertTrue(mock_send_mail.called)
         _, kwargs = mock_send_mail.call_args
