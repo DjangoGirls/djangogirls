@@ -7,7 +7,7 @@ EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
 
 
 class EventApplicationTest(TestCase):
-    fixtures = ['event_application_testdata.json']
+    fixtures = ['event_application_testdata.json', 'pictures_testdata.json']
 
     def test_create_event(self):
         event_application = EventApplication.objects.get(pk=1)
@@ -45,3 +45,8 @@ class EventApplicationTest(TestCase):
             set([e.title for e in event.menu.all()]),
             set(expected_menu_items)
         )
+
+        # check that we add a cover pictures
+        self.assertTrue(event.photo)
+        self.assertTrue(event.photo_credit)
+        self.assertTrue(event.photo_link)

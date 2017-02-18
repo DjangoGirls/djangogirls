@@ -16,7 +16,7 @@ from core.models import Event
 
 
 class CommandsTestCase(TestCase):
-    fixtures = ['core_views_testdata.json', 'groups_testdata.json']
+    fixtures = ['core_views_testdata.json', 'groups_testdata.json', 'pictures_testdata.json']
 
     def setUp(self):
         self.event_1 = Event.objects.get(pk=1)  # In the future

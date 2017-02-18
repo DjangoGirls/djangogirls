@@ -9,6 +9,7 @@ from slacker import Error as SlackerError
 from ...command_helpers import gather_event_date_from_prompt
 from ...forms import AddOrganizerForm, EventForm
 from ...models import Event
+from pictures.models import StockPicture
 from ...slack_client import slack
 from ...utils import get_coordinates_for_city
 
@@ -161,6 +162,11 @@ def command(short):
     # Create users
     members = create_users(team, event)
     event.main_organizer = members[0]
+    event.save()
+
+    # Add random cover picture
+    picture = StockPicture.get_random(StockPicture.COVER)
+    picture.add_to(event)
     event.save()
 
     click.secho(
