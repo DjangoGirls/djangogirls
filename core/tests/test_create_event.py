@@ -7,7 +7,7 @@ EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
 
 
 class EventApplicationTest(TestCase):
-    fixtures = ['event_application_testdata.json']
+    fixtures = ['event_application_testdata.json', 'pictures_testdata.json']
 
     def test_create_event(self):
         event_application = EventApplication.objects.get(pk=1)
