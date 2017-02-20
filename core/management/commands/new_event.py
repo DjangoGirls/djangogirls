@@ -175,13 +175,8 @@ def command(short):
     click.echo(DELIMITER)
 
     click.secho("Ok, now follow this:", fg='black', bg='green')
-    click.echo(
-        "1. Find a photo of a city with CC license on Flickr. Download it.")
-    click.echo(
-        "2. Go here: http://djangogirls.org/admin/core/event/{0}/".format(event.id))
-    click.echo(
-        "3. Upload a photo of city, add credits and tick 'is on homepage' checkbox. Save.")
-    click.echo("4. Send e-mail with instructions to a team!")
+    click.echo("1. Create an email account for the event.")
+    click.echo("2. Send e-mail with instructions to a team!")
     click.echo(DELIMITER)
     click.secho(
         "This is a ready, filled out mail to sent to organizers:", fg='green')
