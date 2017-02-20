@@ -1,5 +1,9 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import Group
 from django.test import TestCase
+from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from coach.models import Coach, DEFAULT_COACH_PHOTO
 from core.models import Event, User
@@ -54,6 +58,21 @@ class TestEventModel(TestCase):
         )
         event.invite_organizer_to_team(user, is_new_user=True, password="pass")
         self.assertEquals(event.team.count(), 3)
+
+    def test_is_upcoming(self):
+        now = timezone.now()
+        now_event = Event(date=ApproximateDate(now.year, now.month, now.day))
+        yesterday = now - timedelta(days=1)
+        yesterday_event = Event(date=ApproximateDate(
+            yesterday.year, yesterday.month, yesterday.day
+        ))
+        tomorrow = now + timedelta(days=1)
+        tomorrow_event = Event(date=ApproximateDate(
+            tomorrow.year, tomorrow.month, tomorrow.day
+        ))
+        assert now_event.is_upcoming()
+        assert not yesterday_event.is_upcoming()
+        assert tomorrow_event.is_upcoming()
 
 
 class TestCoachModel(TestCase):
