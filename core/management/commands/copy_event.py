@@ -5,6 +5,7 @@ import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
 from core.models import Event
+from core.management.commands.new_event import get_main_organizer, get_team, create_users
 
 
 def get_event(id_str):
@@ -35,7 +36,11 @@ def gather_information():
 
     date = gather_event_date_from_prompt()
 
-    return (event, number, date)
+    new_team = click.prompt(
+        "Do you need to change the whole team? [y, N]", default=False
+    )
+
+    return (event, number, date, new_team)
 
 
 @click.command()
@@ -43,7 +48,7 @@ def command():
     """Duplicates Django Girls event with a new date"""
 
     # Gather data
-    (event, number, date) = gather_information()
+    (event, number, date, new_team) = gather_information()
     organizers = event.team.all()
 
     # Print stuff
@@ -68,8 +73,14 @@ def command():
     new_event.applicants_count = None
     new_event.save()
 
-    # Move organizers
-    new_event.team = organizers
+    # Copy or change the organizers
+    if new_team == "y":
+        main_organizer = get_main_organizer()
+        team = get_team(main_organizer)
+        members = create_users(team, new_event)
+        new_event.main_organizer = members[0]
+    else:
+        new_event.team = organizers
 
     # Change the title and url of previous event page
     event.page_title = "{} #{}".format(name, number-1)
