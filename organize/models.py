@@ -108,12 +108,15 @@ class EventApplication(models.Model):
 
         return event
 
-    def has_past_team_members(self):
+    def has_past_team_members(self, event):
         """ For repeated events, check whether there are any common
         team members who applied to organize again
         """
-        previous_event = Event.objects.filter(city=self.city,
-                                              country=self.get_country_display()).order_by('-id').first()
+        previous_event = Event.objects.filter(
+            city=self.city,
+            country=self.get_country_display()
+        ).exclude(pk=event.pk).order_by('-id').first()
+
         if previous_event:
             organizers = previous_event.team.all().values_list('email', flat=True)
             applicants = self.get_organizers_emails()
