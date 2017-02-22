@@ -77,7 +77,7 @@ class EventApplication(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.latlng:
-            self.latlng = get_coordinates_for_city(self.city, self.country)
+            self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
         super(EventApplication, self).save(*args, **kwargs)
 
     def create_event(self):
@@ -89,7 +89,7 @@ class EventApplication(models.Model):
         event = Event.objects.create(
             date=self.date,
             city=self.city,
-            country=self.country,
+            country=self.get_country_display(),
             latlng=self.latlng,
             page_url=self.website_slug,
             name=name,
@@ -114,8 +114,9 @@ class EventApplication(models.Model):
         """
         previous_event = Event.objects.filter(
             city=self.city,
-            country=self.country
+            country=self.get_country_display()
         ).exclude(pk=event.pk).order_by('-id').first()
+
         if previous_event:
             organizers = previous_event.team.all().values_list('email', flat=True)
             applicants = self.get_organizers_emails()
@@ -138,7 +139,7 @@ class EventApplication(models.Model):
         event = None
         previous_event = (
             Event.objects
-            .filter(city=self.city, country=self.country)
+            .filter(city=self.city, country=self.get_country_display())
             .order_by("-date")
             .first()
         )
