@@ -11,7 +11,6 @@ def send_application_confirmation(event_application):
         'emails/organize/application_confirmation.html',
         {
             'city': event_application.city,
-            'main_organizer_name': event_application.get_main_organizer_name()
         })
     send_email(content, subject, event_application.get_organizers_emails())
 
