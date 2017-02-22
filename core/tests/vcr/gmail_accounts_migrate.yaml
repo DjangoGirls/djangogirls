@@ -355,7 +355,7 @@ interactions:
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 - request:
-    body: '{"primaryEmail": "veryrandom122020@djangogirls.org"}'
+    body: '{"primaryEmail": "veryrandom12017@djangogirls.org"}'
     headers:
       accept: [application/json]
       accept-encoding: ['gzip, deflate']
@@ -401,7 +401,7 @@ interactions:
       content-length: ['0']
       user-agent: [google-api-python-client/1.6.0 (gzip)]
     method: DELETE
-    uri: https://www.googleapis.com/admin/directory/v1/users/veryrandom122020%40djangogirls.org/aliases/veryrandom%40djangogirls.org
+    uri: https://www.googleapis.com/admin/directory/v1/users/veryrandom12017%40djangogirls.org/aliases/veryrandom%40djangogirls.org
   response:
     body: {string: ''}
     headers:
