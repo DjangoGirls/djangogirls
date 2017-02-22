@@ -31,12 +31,12 @@ def copy_event(previous_event, event_date):
     new_event.applicants_count = None
     new_event.save()
 
-    # Change url, title and name of previous event to {name} #{number-1}
+    # Change url, title and name of previous event to {name} #{number}
     previous_event = Event.objects.get(pk=previous_event_id)
     previous_event.name = previous_event_name
     previous_event.save()
     previous_event.page_title = previous_event_name
-    previous_event.page_url = "{}{}".format(previous_event.page_url, number-1)
+    previous_event.page_url = "{}{}".format(previous_event.page_url, number)
     previous_event.save()
 
     # populate content & menu from the default event
