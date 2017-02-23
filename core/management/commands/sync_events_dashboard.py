@@ -6,6 +6,7 @@ from collections import namedtuple
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from trello import ResourceUnavailable, TrelloClient
+import opbeat
 
 from core.models import Event
 
@@ -23,10 +24,13 @@ class Command(BaseCommand):
         parser.add_argument('trello_token', type=str)
 
     def handle(self, *args, **options):
-        token = options['trello_token']
-        events = event_list()
-        sync(events, token)
-
+        try:
+            token = options['trello_token']
+            events = event_list()
+            sync(events, token)
+        except:
+            opbeat.Client().capture_exception()
+            raise
 
 # Get data
 
