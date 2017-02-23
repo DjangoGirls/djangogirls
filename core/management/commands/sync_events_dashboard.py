@@ -119,12 +119,12 @@ def create_checklist(card):
 
 def ensure_checklist_in_card(card):
     if not card.checklists:
-        print("Adding checklist to {} card.".format(card.name.decode("utf8")))
+        print("Adding checklist to {} card.".format(card.name))
         create_checklist(card)
 
 
 def ensure_card_in_list(card, list):
     if card.list_id != list.id:
         print('Moving {} to {}'.format(
-            card.name.decode("utf8"), list.name.decode("utf8")))
+            card.name, list.name))
         card.change_list(list.id)
