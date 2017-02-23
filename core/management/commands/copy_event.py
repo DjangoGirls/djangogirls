@@ -73,7 +73,7 @@ def command():
     new_event.applicants_count = None
     new_event.save()
 
-    # Copy or change the organizers
+    # Copy or change organizers
     if new_team == "y":
         main_organizer = get_main_organizer()
         team = get_team(main_organizer)
