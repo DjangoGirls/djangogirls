@@ -44,7 +44,7 @@ opbeat==3.5.2
 pbr==1.10.0               # via mock
 pillow==4.0.0
 psycopg2==2.6.2
-py-trello==0.8.0
+py-trello==0.9.0
 py==1.4.32                # via pytest
 pyasn1-modules==0.0.8     # via oauth2client
 pyasn1==0.1.9             # via oauth2client, pyasn1-modules, rsa
