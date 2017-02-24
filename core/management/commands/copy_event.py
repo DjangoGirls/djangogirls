@@ -5,7 +5,7 @@ import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
 from core.models import Event
-from core.utils import get_main_organizer, get_team, create_users
+from core.utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
 
 
 def get_event(id_str):
@@ -98,6 +98,9 @@ def command():
         new_obj.pk = None
         new_obj.event = new_event
         new_obj.save()
+
+    # Brag on Slack
+    brag_on_slack_bang(new_event.city, new_event.country, [member for member in new_event.team.all()])
 
     click.echo(click.style("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url),
     bold=True, fg="green"))

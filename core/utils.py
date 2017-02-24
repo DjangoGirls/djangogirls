@@ -4,9 +4,11 @@ import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 import djclick as click
+from slacker import Error as SlackerError
 
 from .models import Event
 from .forms import AddOrganizerForm
+from .slack_client import slack
 
 NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
 
@@ -134,3 +136,18 @@ def create_users(team, event):
         user = form.save()
         members.append(user)
     return members
+
+def brag_on_slack_bang(city, country, team):
+    """
+        This is posting a message about Django Girls new event to #general channel on Slack!
+    """
+    text = ':django_pony: :zap: Woohoo! :tada: New Django Girls alert! Welcome Django Girls {city}, {country}. Congrats {team}!'.format(
+        city=city, country=country, team=', '.join(
+            ['{} {}'.format(x.first_name, x.last_name) for x in team])
+    )
+    slack.chat.post_message(
+        channel='#general',
+        text=text,
+        username='Django Girls',
+        icon_emoji=':django_heart:'
+    )

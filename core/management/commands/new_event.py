@@ -4,14 +4,12 @@ from __future__ import unicode_literals
 import djclick as click
 from django.conf import settings
 from django.template.loader import render_to_string
-from slacker import Error as SlackerError
 
 from ...command_helpers import gather_event_date_from_prompt
 from ...forms import EventForm
 from ...models import Event
 from pictures.models import StockPicture
-from ...slack_client import slack
-from ...utils import get_coordinates_for_city, get_main_organizer, get_team, create_users
+from ...utils import get_coordinates_for_city, get_main_organizer, get_team, create_users, brag_on_slack_bang
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -45,22 +43,6 @@ def get_basic_info():
         city, country, date))
 
     return (city, country, date, url, event_mail)
-
-
-def brag_on_slack_bang(city, country, team):
-    """
-        This is posting a message about Django Girls new event to #general channel on Slack!
-    """
-    text = ':django_pony: :zap: Woohoo! :tada: New Django Girls alert! Welcome Django Girls {city}, {country}. Congrats {team}!'.format(
-        city=city, country=country, team=', '.join(
-            ['{} {}'.format(x.first_name, x.last_name) for x in team])
-    )
-    slack.chat.post_message(
-        channel='#general',
-        text=text,
-        username='Django Girls',
-        icon_emoji=':django_heart:'
-    )
 
 
 @click.command()
