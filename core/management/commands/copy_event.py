@@ -5,7 +5,7 @@ import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
 from core.models import Event
-from core.management.commands.new_event import get_main_organizer, get_team, create_users
+from core.utils import get_main_organizer, get_team, create_users
 
 
 def get_event(id_str):
@@ -19,25 +19,21 @@ def gather_information():
     click.echo("Hello there sunshine! We're gonna copy an event website now.")
 
     event = get_event(
-        click.prompt(
-            "First, give me the ID of the Event object we're gonna copy. "
-            "If there is more than one event in this city already, give me "
-            "ID of the latest one"
-        )
+        click.prompt(click.style("First, give me the latest ID of the Event "
+        "object you want to copy", bold=True, fg='yellow'))
     )
 
     while not event:
         event = get_event(click.prompt("Wrong ID! Try again"))
 
-    number = click.prompt(
-        "What is the number of the event in this city? "
-        "If this is a second event, write 2. If third, then 3. You got it"
+    number = click.prompt(click.style("What is the number of the event in this city? "
+        "If this is a second event, write 2. If third, then 3. You got it", bold=True, fg='yellow')
     )
 
     date = gather_event_date_from_prompt()
 
-    new_team = click.prompt(
-        "Do you need to change the whole team? [y, N]", default=False
+    new_team = click.confirm(click.style(
+        "Do you need to change the whole team?", bold=True, fg='yellow'), default=False
     )
 
     return (event, number, date, new_team)
@@ -50,9 +46,6 @@ def command():
     # Gather data
     (event, number, date, new_team) = gather_information()
     organizers = event.team.all()
-
-    # Print stuff
-    click.echo("OK! That's it. Now I'll copy your event.")
 
     # Remove #{no} from name:
     name = event.name.split('#')[0].strip()
@@ -74,7 +67,7 @@ def command():
     new_event.save()
 
     # Copy or change organizers
-    if new_team == "y":
+    if new_team:
         main_organizer = get_main_organizer()
         team = get_team(main_organizer)
         members = create_users(team, new_event)
@@ -106,5 +99,6 @@ def command():
         new_obj.event = new_event
         new_obj.save()
 
-    click.echo("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url))
+    click.echo(click.style("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url),
+    bold=True, fg="green"))
     click.echo("Congrats on yet another event!")
