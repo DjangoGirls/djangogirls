@@ -72,6 +72,8 @@ def command():
         team = get_team(main_organizer)
         members = create_users(team, new_event)
         new_event.main_organizer = members[0]
+        # Edit previous email account
+        event.email = "{}{:02d}{}@djangogirls.org".format(event.email.split('@')[0], event.date.month, event.date.year)
     else:
         new_event.team = organizers
 
