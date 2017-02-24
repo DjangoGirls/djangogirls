@@ -50,14 +50,13 @@ def command():
     # Remove #{no} from name:
     name = event.name.split('#')[0].strip()
     number = int(number)
-    event_id = event.id
 
     # Change the name of previous event to {name} #{number-1}
     event.name = "{} #{}".format(name, number-1)
     event.save()
 
     # Copy event with a name {name} #{number}, new date and empty stats
-    new_event = event
+    new_event = Event.objects.get(id=event.id)
     new_event.pk = None
     new_event.name = "{} #{}".format(name, number)
     new_event.date = date
@@ -66,8 +65,9 @@ def command():
     new_event.applicants_count = None
     new_event.save()
 
-    # Copy or change organizers
+    # Edit team and previous email or keep them
     if new_team:
+        # Create a new team with a new main organizer
         main_organizer = get_main_organizer()
         team = get_team(main_organizer)
         members = create_users(team, new_event)
@@ -79,8 +79,6 @@ def command():
     event.page_title = "{} #{}".format(name, number-1)
     event.page_url = "{}{}".format(event.page_url, number-1)
     event.save()
-
-    event = Event.objects.get(id=event_id)
 
     # Copy all EventPageContent objects
     for obj in event.content.all():
@@ -100,7 +98,7 @@ def command():
         new_obj.save()
 
     # Brag on Slack
-    brag_on_slack_bang(new_event.city, new_event.country, [member for member in new_event.team.all()])
+    brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
     click.echo(click.style("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url),
     bold=True, fg="green"))
