@@ -8,10 +8,13 @@ from boto3.session import Session
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from core.utils import opbeat_logging
+
 
 class Command(BaseCommand):
     help = 'Backs up PostgreSQL database to AWS S3'
 
+    @opbeat_logging()
     def handle(self, *args, **options):
         AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SECRET_ACCESS_KEY')

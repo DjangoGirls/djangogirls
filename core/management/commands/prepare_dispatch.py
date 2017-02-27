@@ -7,6 +7,7 @@ from django.contrib.humanize.templatetags.humanize import apnumber
 from django.utils import timezone
 
 from core.models import Event
+from core.utils import opbeat_logging
 
 
 def generate_html_content(event_list):
@@ -20,9 +21,9 @@ def generate_html_content(event_list):
 
 
 @click.command()
+@opbeat_logging()
 def command():
     """Generate "Next events" section for the Dispatch."""
-
     now = timezone.now()
     raw_dispatch_date = click.prompt(click.style(
         "What is the date of the previous Dispatch? (Format: YYYY-MM-DD)",

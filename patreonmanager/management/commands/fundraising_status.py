@@ -7,6 +7,7 @@ from slacker import Error as SlackerError
 from core.slack_client import slack
 
 from ...models import FundraisingStatus
+from core.utils import opbeat_logging
 
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = 'http://api.patreon.com/'
@@ -15,6 +16,7 @@ BASE_API_URL = 'http://api.patreon.com/'
 class Command(BaseCommand):
     help = 'Fetch current amount of money raised on our Patreon'
 
+    @opbeat_logging()
     def handle(self, *args, **options):
         logging.basicConfig(level=logging.INFO)
 
