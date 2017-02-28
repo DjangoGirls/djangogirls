@@ -61,6 +61,7 @@ def command():
     new_event = Event.objects.get(id=event.id)
     new_event.pk = None
     new_event.name = "{} #{}".format(name, number)
+    new_event.page_title = "{} #{}".format(name, number)
     new_event.date = date
     new_event.is_page_live = False
     new_event.attendees_count = None
@@ -104,6 +105,6 @@ def command():
     # Brag on Slack
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
-    click.echo(click.style("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url),
+    click.echo(click.style("Website is ready here: https://djangogirls.org/{0}".format(new_event.page_url),
     bold=True, fg="green"))
     click.echo("Congrats on yet another event!")
