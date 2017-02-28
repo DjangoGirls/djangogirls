@@ -5,11 +5,13 @@ import logging
 import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
+import djclick as click
 
 import opbeat
 from opbeat.handlers.logging import OpbeatHandler
 
 from .models import Event
+
 
 NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
 
