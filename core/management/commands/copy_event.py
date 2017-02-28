@@ -27,11 +27,17 @@ def gather_information():
     while not event:
         event = get_event(click.prompt("Wrong ID! Try again"))
 
+    click.echo("Ok, we're copying {}, {}".format(
+        event.city, event.country))
+
     number = click.prompt(click.style("What is the number of the event in this city? "
         "If this is a second event, write 2. If third, then 3. You got it", bold=True, fg='yellow')
     )
 
     date = gather_event_date_from_prompt()
+
+    click.echo("The current team is: " + ", ".join(
+        str(organizer) for organizer in event.team.all()))
 
     new_team = click.confirm(click.style(
         "Do you need to change the whole team?", bold=True, fg='yellow'), default=False
@@ -61,6 +67,7 @@ def command():
     new_event = Event.objects.get(id=event.id)
     new_event.pk = None
     new_event.name = "{} #{}".format(name, number)
+    new_event.page_title = "{} #{}".format(name, number)
     new_event.date = date
     new_event.is_page_live = False
     new_event.attendees_count = None
@@ -104,6 +111,6 @@ def command():
     # Brag on Slack
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
-    click.echo(click.style("Website is ready here: http://djangogirls.org/{0}".format(new_event.page_url),
+    click.echo(click.style("Website is ready here: https://djangogirls.org/{0}".format(new_event.page_url),
     bold=True, fg="green"))
     click.echo("Congrats on yet another event!")
