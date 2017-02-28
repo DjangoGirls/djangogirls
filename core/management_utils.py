@@ -6,7 +6,7 @@ from .forms import AddOrganizerForm
 from .models import Event
 from .slack_client import slack
 
-# Get organizers info functions used in 'new_event' and 'copy_event' management commands.
+# "Get organizers info" functions used in 'new_event' and 'copy_event' management commands.
 
 def get_main_organizer():
     """

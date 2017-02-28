@@ -27,11 +27,17 @@ def gather_information():
     while not event:
         event = get_event(click.prompt("Wrong ID! Try again"))
 
+    click.echo("Ok, we're copying {}, {}".format(
+        event.city, event.country))
+
     number = click.prompt(click.style("What is the number of the event in this city? "
         "If this is a second event, write 2. If third, then 3. You got it", bold=True, fg='yellow')
     )
 
     date = gather_event_date_from_prompt()
+
+    click.echo("The current team is: " + ", ".join(
+        str(organizer) for organizer in event.team.all()))
 
     new_team = click.confirm(click.style(
         "Do you need to change the whole team?", bold=True, fg='yellow'), default=False
