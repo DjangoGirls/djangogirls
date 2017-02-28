@@ -5,11 +5,11 @@ from django.test import TestCase
 
 from organize.constants import DEPLOYED, ON_HOLD, REJECTED
 from organize.models import EventApplication
-from core.models import Event
+from core.models import Event, User
 
 
 class EventApplicationTest(TestCase):
-    fixtures = ['event_application_testdata.json']
+    fixtures = ['event_application_testdata.json', 'users_testdata.json',]
 
     def test_comment_required_for_on_hold_application(self):
         event_application = EventApplication.objects.get(pk=1)
@@ -60,3 +60,30 @@ class EventApplicationTest(TestCase):
         event_application.latlng = ''
         event_application.save()
         assert event_application.latlng == '39.4747112, -0.3798073'
+
+    def test_has_past_team_members(self):
+        user = User.objects.get(pk=1)
+        event_application = EventApplication.objects.get(pk=1)
+        event_application.main_organizer_email = user.email
+        event_application.save()
+
+        event = Event.objects.create(
+            city=event_application.city,
+            country=event_application.country,
+        )
+
+        # first event in city has nothing to compare so we return False
+        self.assertFalse(event_application.has_past_team_members(event))
+
+        next_event = Event.objects.create(
+            city=event.city,
+            country=event.country
+        )
+
+        # if there are no same organizers we return False
+        self.assertFalse(event_application.has_past_team_members(next_event))
+
+        event.team.add(user)
+
+        # if there is a common organizer, return True
+        self.assertTrue(event_application.has_past_team_members(next_event))

@@ -5,6 +5,7 @@ import djclick as click
 
 from core.forms import AddOrganizerForm
 from core.models import Event
+from core.utils import opbeat_logging
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -17,12 +18,12 @@ def get_organizer_data():
         "First and last name", bold=True, fg='yellow'))
     main_email = click.prompt(click.style(
         "E-mail address", bold=True, fg='yellow'))
-    
+
     data = {
         'name': main_name,
         'email': main_email
     }
-    
+
     return data
 
 
@@ -40,6 +41,7 @@ def create_users(team, event):
 
 
 @click.command()
+@opbeat_logging()
 def command():
     """Creates new Django Girls organizer"""
     event_id = click.prompt(click.style(

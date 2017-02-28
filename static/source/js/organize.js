@@ -1,3 +1,12 @@
+window.captchaConf = {
+ callback: function() { },
+ sitekey: '6LfGqhEUAAAAAL5PxSosc3VCjvDkCakk9y7xorc7'
+};
+
+window.onCaptchaLoadCallback = function() {
+  grecaptcha.render('g-recaptcha', window.captchaConf);
+};
+
 $(function() {
     $('[data-required-form]').each(function() {
         var $this = $(this);
@@ -26,13 +35,7 @@ $(function() {
                 $submit.attr('disabled', 'disabled');
             }
         };
-        onCaptchaLoadCallback = function() {
-            grecaptcha.render('g-recaptcha',
-            {
-             callback: validate,
-             sitekey: '6LfGqhEUAAAAAL5PxSosc3VCjvDkCakk9y7xorc7'
-            });
-        };
+        window.captchaConf.callback = validate;
 
         $this.attr('novalidate', 'novalidate');
         $this.on('input, change', '[required]', validate);

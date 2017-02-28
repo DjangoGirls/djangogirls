@@ -18,7 +18,7 @@ from django.template.loader import get_template
 from django.utils import timezone
 
 from core.models import Event
-
+from core.utils import opbeat_logging
 
 def send_event_emails(events, subject, plain_template, html_template, timestamp_field, email_type,
                       ignore_approximate_events=False):
@@ -130,9 +130,9 @@ def send_offer_help_emails():
         )
 
 @click.command()
+@opbeat_logging()
 def command():
     """Find and send out scheduled emails that need sending."""
-
     send_thank_you_emails()
     send_submit_information_emails()
     send_offer_help_emails()

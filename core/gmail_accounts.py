@@ -68,12 +68,12 @@ def create_gmail_account(event):
     return (email, password)
 
 
-def migrate_gmail_account(slug):
+def migrate_gmail_account(new_event, slug):
     """
     Change the name of an account
     """
     old_email = make_email(slug)
-    old_event = Event.objects.filter(email=old_email).order_by('-id').first()
+    old_event = Event.objects.exclude(id=new_event.id).filter(email=old_email).order_by('-id').first()
     if old_event:
         new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
     else:
@@ -119,12 +119,12 @@ def get_or_create_gmail(event_application, event):
     """
     if get_gmail_account(event_application.website_slug):
         # account exists, do we need to migrate?
-        if event_application.has_past_team_members():
+        if event_application.has_past_team_members(event):
             # has old organizers, so no need to do anything
             return (make_email(event_application.website_slug), None)
         else:
             # migrate old email
-            migrate_gmail_account(event_application.website_slug)
+            migrate_gmail_account(event, event_application.website_slug)
             # create new account
             return create_gmail_account(event)
     else:
