@@ -9,7 +9,8 @@ from ...command_helpers import gather_event_date_from_prompt
 from ...forms import EventForm
 from ...models import Event
 from pictures.models import StockPicture
-from ...utils import get_coordinates_for_city, get_main_organizer, get_team, create_users, brag_on_slack_bang
+from ...utils import get_coordinates_for_city
+from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
