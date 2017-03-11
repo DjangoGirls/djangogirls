@@ -262,9 +262,16 @@ class EventPageContentForm(ModelForm):
         )
 
 
+class EventFilter(admin.SimpleListFilter):
+    def queryset(self, request, queryset):
+        if request.user.is_superuser:
+            return queryset
+        return queryset.filter(team__in=[request.user])
+
+
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'event', 'position', 'is_public')
-    list_filter = ('event', 'is_public')
+    list_filter = (EventFilter, 'is_public')
     search_fields = ('name', 'event__page_title', 'content', 'event__city',
                      'event__country', 'event__name')
     form = EventPageContentForm
@@ -300,7 +307,7 @@ class EventPageContentAdmin(SortableModelAdmin):
 
 class EventPageMenuAdmin(SortableModelAdmin):
     list_display = ('title', 'event', 'url', 'position')
-    list_filter = ('event',)
+    list_filter = (EventFilter,)
     sortable = 'position'
 
     def get_queryset(self, request):

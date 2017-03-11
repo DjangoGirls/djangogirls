@@ -54,10 +54,17 @@ class FormAdmin(admin.ModelAdmin):
     get_submissions_url.short_description = "Applications"
 
 
+class FormFilter(admin.SimpleListFilter):
+    def queryset(self, request, queryset):
+        if request.user.is_superuser:
+            return queryset
+        return queryset.filter(event__team__in=[request.user])
+
+
 class QuestionAdmin(SortableModelAdmin):
     list_display = ('form', 'title', 'question_type', 'is_required', 'order')
     sortable = 'order'
-    list_filter = ('form',)
+    list_filter = (FormFilter,)
 
     def get_queryset(self, request):
         qs = super(QuestionAdmin, self).get_queryset(request)
