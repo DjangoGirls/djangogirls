@@ -178,13 +178,9 @@ class Event(models.Model):
         verbose_name_plural = "List of events"
 
     def is_upcoming(self):
-        if not self.date:
-            return False
         now = timezone.now()
         now = ApproximateDate(year=now.year, month=now.month, day=now.day)
-        if now < self.date:
-            return True
-        return False
+        return self.date and now <= self.date
 
     @property
     def ical_uid(self):
