@@ -55,10 +55,20 @@ class FormAdmin(admin.ModelAdmin):
 
 
 class FormFilter(admin.SimpleListFilter):
+    title = "Form"
+    parameter_name = "form"
+
+    def lookups(self, request, queryset):
+        qs = Form.objects.all()
+        if not request.user.is_superuser:
+            qs = qs.filter(event__team__in=[request.user])
+        return map(lambda x: (x.id, str(x)), qs)
+
     def queryset(self, request, queryset):
-        if request.user.is_superuser:
-            return queryset
-        return queryset.filter(event__team__in=[request.user])
+        if self.value():
+            return queryset.filter(form=self.value())
+
+        return queryset
 
 
 class QuestionAdmin(SortableModelAdmin):
