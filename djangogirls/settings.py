@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'story',
     'sponsor',
     'coach',
+    'contact',
     'pictures',
 )
 

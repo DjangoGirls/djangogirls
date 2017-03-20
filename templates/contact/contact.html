@@ -1,0 +1,53 @@
+{% extends 'global/base.html' %}
+{% block title %}Django Girls Contact{% endblock %}
+
+{% block content %}
+  <div class="container without-background public-form" id="flatpage">
+    <div id="value" class="row">
+      <div class="col-md-12">
+        <h2>Contact Django Girls</h2>
+
+        {% include 'includes/_info_messages.html' %}
+
+        <p>Hi! We would love to hear from you!</p>
+
+        <p>To be sure your email reach the right person, check this FAQ first!</p>
+
+        {% include 'includes/_faq.html' %}
+
+        <p>
+          If you didn't find what you wanted, please check our extended <a href="{% url 'core:faq' %}">FAQ section</a>
+          or use the form below. :)
+        </p>
+
+        <form action="" method="post" style="margin-top: 30px;">
+          {% csrf_token %}
+
+          <div class="row">
+            <div class="col-md-6">
+              {% include 'includes/_field.html' with field=form.name %}
+            </div>
+            <div class="col-md-6">
+              {% include 'includes/_field.html' with field=form.email %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {% include 'includes/_field.html' with field=form.contact_type %}
+            </div>
+            <div class="col-md-6">
+              {% include 'includes/_field.html' with field=form.event %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {% include 'includes/_field.html' with field=form.message %} {% include 'includes/_field.html' with field=form.captcha %}
+            </div>
+          </div>
+
+          <input type="submit" value="Send"/>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

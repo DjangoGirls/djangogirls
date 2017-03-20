@@ -8,7 +8,8 @@ from django.test.client import Client
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import ContactEmail, Event, User
+from contact.models import ContactEmail
+from core.models import Event, User
 from core.views import event as event_view
 
 
@@ -156,6 +157,7 @@ class CoreViewsTestCase(BaseCoreTestCase):
             resp = self.client.get(old_url)
             self.assertRedirects(resp, new_url, status_code=301)
 
+
 class ContactTestCase(TestCase):
     fixtures = ['core_views_testdata.json']
 
@@ -166,12 +168,12 @@ class ContactTestCase(TestCase):
         del os.environ['RECAPTCHA_TESTING']
 
     def test_contact_page_loads(self):
-        url = reverse('core:contact')
+        url = reverse('contact:contact')
         resp = self.client.get(url)
         self.assertEqual(200, resp.status_code)
 
     def test_form_sends_email_to_support(self):
-        url = reverse('core:contact')
+        url = reverse('contact:contact')
         post_data = {
             'name': 'test name',
             'message': 'nice message',
@@ -180,7 +182,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
 
@@ -193,7 +195,7 @@ class ContactTestCase(TestCase):
         event.email = 'test@test.com'
         event.save()
 
-        url = reverse('core:contact')
+        url = reverse('contact:contact')
         post_data = {
             'name': 'test name',
             'message': 'nice message',
@@ -203,7 +205,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         email = mail.outbox[0]
 
@@ -212,7 +214,7 @@ class ContactTestCase(TestCase):
         self.assertEqual(email.body, 'nice message')
 
     def test_chapter_contact_requires_event(self):
-        url = reverse('core:contact')
+        url = reverse('contact:contact')
         post_data = {
             'name': 'test name',
             'message': 'nice message',
@@ -229,7 +231,7 @@ class ContactTestCase(TestCase):
     def test_email_is_saved_into_database(self):
         event = Event.objects.get(pk=1)
         self.assertFalse(ContactEmail.objects.all())
-        url = reverse('core:contact')
+        url = reverse('contact:contact')
         post_data = {
             'name': 'test name',
             'message': 'nice message',
@@ -239,7 +241,7 @@ class ContactTestCase(TestCase):
             'g-recaptcha-response': 'PASSED',
         }
         resp = self.client.post(url, data=post_data)
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(1, ContactEmail.objects.all().count())
 

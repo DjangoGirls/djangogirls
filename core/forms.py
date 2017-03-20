@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.validators import validate_email
 from django.db import transaction
 
-from .models import ContactEmail, Event, User
+from .models import Event, User
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -92,33 +92,6 @@ class EventChoiceField(forms.ModelChoiceField):
 
     def label_from_instance(self, obj):
         return "{}, {}".format(obj.city, obj.country)
-
-
-class ContactForm(forms.ModelForm):
-    event = EventChoiceField(
-        queryset=Event.objects.public().distinct('city', 'country').order_by('city'),
-        required=False, label="Django Girls workshop in..."
-    )
-    captcha = BetterReCaptchaField()
-
-    class Meta:
-        model = ContactEmail
-        fields = (
-            'name',
-            'email',
-            'contact_type',
-            'event',
-            'message',
-        )
-        widgets = {'contact_type': forms.RadioSelect}
-
-    def clean_event(self):
-        contact_type = self.cleaned_data.get('contact_type')
-        event = self.cleaned_data.get('event')
-        if contact_type == ContactEmail.CHAPTER:
-            if not event:
-                raise forms.ValidationError('Please select the event')
-        return event
 
 
 class EventForm(forms.ModelForm):
