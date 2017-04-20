@@ -1,13 +1,13 @@
 import hashlib
-
 import requests
+
 from django import forms
 from django.conf import settings
+from django.utils.translation import ugettext as _
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 from core.forms import BetterReCaptchaField
-
 from .models import Answer, Application, Email, Question, Score
 from .utils import generate_form_from_questions
 
@@ -141,6 +141,11 @@ class EmailForm(forms.ModelForm):
             # email was sent, let's disable all fields:
             for field in self.fields:
                 self.fields[field].widget.attrs['disabled'] = True
+
+    email_all = forms.BooleanField(label=_('Include All Recipients?'),
+                                   help_text=_('By default, the system will not send emails to people who have '
+                                               'already received an email. Check this box to disable this, and have '
+                                               'your message sent to everyone.'), initial=False, required=False)
 
     class Meta:
         model = Email
