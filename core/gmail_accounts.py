@@ -117,7 +117,8 @@ def get_or_create_gmail(event_application, event):
     Function that decides whether Gmail account should be migrated,
     or created. Returns a tuple of email address and password.
     """
-    if get_gmail_account(event_application.website_slug):
+    if (get_gmail_account(event_application.website_slug) or
+            get_gmail_account(event.page_url)):
         # account exists, do we need to migrate?
         if event_application.has_past_team_members(event):
             # has old organizers, so no need to do anything
