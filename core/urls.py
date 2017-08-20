@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^contribute/$', views.contribute, name='contribute'),
     url(r'^donate/$', views.donate, name='donate'),
     url(r'^2015/$', views.year_2015, name='year_2015'),
+    url(r'^2016-2017/$', views.year_2016_2017, name='year_2016_2017'),
     url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
     url(r'^privacy-cookies/$', views.privacy_cookies, name='privacy-cookies'),
     url(r'^workshop-box/$', views.workshop_box, name='workshop-box'),

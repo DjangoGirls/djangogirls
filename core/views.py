@@ -115,6 +115,14 @@ def year_2015(request):
     })
 
 
+def year_2016_2017(request):
+    return render(request, 'core/2016-2017.html', {
+        'events_2015': Event.objects.public().filter(date__lt='2016-01-01').order_by('date'),
+        'events_20162017': Event.objects.public().filter(date__lt='2017-08-01', date__gte='2016-01-01').order_by('date'),
+        'mapbox_map_id': settings.MAPBOX_MAP_ID,
+    })
+
+
 def terms_conditions(request):
     return render(request, 'core/terms_conditions.html', {})
 
