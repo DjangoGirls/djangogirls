@@ -37,16 +37,16 @@
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                       <h2>✨ Highlights ✨</h2>
                       <p>👭👫👬 Django Girls community grew to <span>1069 volunteers</span> who have organised <span>377 free workshops</span> with <span>102 more</span> being currently planned. That's more than 3000 hours of happy coding!</p>
-                      <p>👩‍💻 <span>21%</span> of participants in our survey <span>started working in tech</span> after attending Django Girls workshop. <a href="">👉</a></p>
-                      <p>💯 In the last 2 years we improved our tools to support the growth of the organisation, maintended our free online resources (our tutorial is now in <span>14 languages!</span>), started Django Girls Store as a fundraising effort, shipped <span>X organizer kits</span> and more.  <a href="">👉</a></p>
-                      <p>📈🎉 In July 2017, on our 3rd birthday, we also celebrated our <span>10,000th workshop attendee</span> <a href="">👉</a></p>
-                      <p>🎓 We learned that <span>79%</span> of Django Girls alumnis are <span>still learning programming</span> after the workshop. <a href="">👉</a></p>
+                      <p>👩‍💻 <span>21%</span> of participants in our survey <span>started working in tech</span> after attending Django Girls workshop. <a href="#employment-stats">👉</a></p>
+                      <p>💯 In the last 2 years we improved our tools to support the growth of the organisation, maintended our free online resources (our tutorial is now in <span>14 languages!</span>), started Django Girls Store as a fundraising effort, shipped <span>146 organizer kits</span> and more.  <a href="#tutorial">👉</a></p>
+                      <p>📈🎉 In July 2017, on our 3rd birthday, we also celebrated our <span>10,000th workshop attendee</span> <a href="#growth">👉</a></p>
+                      <p>🎓 We learned that <span>79%</span> of Django Girls alumnis are <span>still learning programming</span> after the workshop. <a href="#learning-stats">👉</a></p>
                       <p>📚 <span>693,524 people</span> used our free online <a href="https://tutorial.djangogirls.org">tutorial</a> in the last year</p>
                     </div>
                 </div>
             </div>
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div id="growth" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                   <h2>Growth 📈</h2>
                   <div id="map"></div>
                   <small>Map of Django Girls event from July 2014 to July 2017</small>
@@ -79,7 +79,7 @@
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                     <h2>Foundation's Activities 👩‍💻👩‍💻👩‍💻</h2>
 
-                    <div class="row">
+                    <div class="row" id="tutorial">
                         <div class="col-md-12"><h3>🌎 Maintenance & translation of our free online resources</h3></div>
                         <div class="col-md-10">
                             <p>
@@ -199,7 +199,7 @@
                     </div>
                 </div>
 
-                <h3>
+                <h3 id="learning-stats">
                     Participants’ learning to code after the workshop
                 </h3>
                 <div class="row">
@@ -225,7 +225,7 @@
                 </div>
 
 
-                <h3>
+                <h3 id="employment-stats">
                     Participants’ Employment in Tech after attending workshops
                 </h3>
                 <div class="row">
@@ -436,7 +436,7 @@
             new Chart(ctx, {
                 type: 'pie',
                 data: {
-                  labels: ["79.2% still learning to code", "6.6% planning to learn", "1.5% tired but gave up", "12.7% not learning"],
+                  labels: ["79.2% still learning to code", "6.6% planning to learn", "1.5% tried but gave up", "12.7% not learning"],
                   datasets: [{
                       data: [79.2, 6.6, 1.5, 12.7],
                       backgroundColor: ["rgb(247,146,29)","rgba(247,146,29, 0.7)","rgba(247,146,29,0.4)", "rgba(247,146,29,0.1)"]
