@@ -3,6 +3,8 @@ import datetime
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils.six import StringIO
+from django.utils.timezone import make_aware
+
 import vcr
 import pytest
 
@@ -14,7 +16,7 @@ def patron(db):
     patron = Patron.objects.create(
         name="Jan Kowalski",
         email="jan@kowalski.extra",
-        since=datetime.datetime(2016, 1, 20))
+        since=make_aware(datetime.datetime(2016, 1, 20)))
     reward = Reward.objects.create(
         name="gte_10",
         value=11)

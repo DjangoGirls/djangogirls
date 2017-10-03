@@ -2,6 +2,7 @@ import csv
 import logging
 
 from django.core.management.base import BaseCommand
+from django.utils.timezone import make_aware
 
 from ...models import Patron, Payment, Reward
 from ...utils.csv import guess_month_from_filename, unflatten_csv
@@ -48,7 +49,7 @@ class Command(BaseCommand):
                         'name': patron_t.name,
                         'twitter': patron_t.twitter,
                         'address': patron_t.shipping,
-                        'since': patron_t.start,
+                        'since': make_aware(patron_t.start),
                     }
                     patron, created = Patron.objects.update_or_create(
                         email=patron_t.email, defaults=defaults)

@@ -1,0 +1,1 @@
+Congratulations for organizing Django Girls {{event.city}}!
