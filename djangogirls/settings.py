@@ -41,7 +41,6 @@ INSTALLED_APPS = (
 
     'core',
     'applications',
-    'jobs',
     'organize',
     'patreonmanager',
     'story',

@@ -11,7 +11,7 @@ django-gulp-rev
 django-leaflet
 django-markdown-deux
 django-recaptcha
-django-storages-redux
+django-storages
 django-suit-redactor
 django-suit
 Django
