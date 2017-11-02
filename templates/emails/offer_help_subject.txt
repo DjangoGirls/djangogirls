@@ -1,0 +1,1 @@
+Need any help with your Django Girls {{event.city}} event?

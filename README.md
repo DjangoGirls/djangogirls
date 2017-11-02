@@ -119,16 +119,16 @@ Run your local server:
 
 You can run the tests like this:
 
-	py.test
+	python -m pytest
 
 Or if you want coverage reports:
 
-	py.test --cov
+	python -m pytest --cov
 
 
 For a coverage report with information about missing lines, run this:
 
-	py.test --cov-report term-missing --cov
+	python -m pytest --cov-report term-missing --cov
 
 
 ## Update requirements.txt

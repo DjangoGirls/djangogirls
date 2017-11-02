@@ -115,8 +115,7 @@ class EventManager(models.Manager):
 @python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
-    date = ApproximateDateField(
-        null=True, blank=False, validators=[validate_approximatedate])
+    date = ApproximateDateField(blank=True, validators=[validate_approximatedate])
     city = models.CharField(max_length=200, null=False, blank=False)
     country = models.CharField(max_length=200, null=False, blank=False)
     latlng = models.CharField("latitude and longitude", max_length=30, null=True, blank=True)

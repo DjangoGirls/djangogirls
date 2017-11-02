@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import logging
 from getpass import getpass
 from os import path

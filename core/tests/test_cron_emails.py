@@ -20,7 +20,7 @@ class HandleEmailTestCase(TestCase):
         self.runner = CliRunner(echo_stdin=True)
 
         self.sending_args = {
-            'subject': 'dontcare',
+            'subject_template':  "emails/submit_information_subject.txt",
             'plain_template': "emails/submit_information_email.txt",
             'html_template': "emails/submit_information_email.html",
             'timestamp_field': 'submit_information_email_sent',
@@ -89,8 +89,6 @@ class HandleEmailTestCase(TestCase):
         event = Event.objects.create(city=city_name, email='user-1@example.com')
         self.sending_args['events'] = [event]
 
-        self.sending_args['subject'] = "testing {{event.city}} {{event.email}}"
-
         with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
             handle_emails.send_event_emails(
                 **self.sending_args
@@ -100,7 +98,6 @@ class HandleEmailTestCase(TestCase):
             self.assertEqual(mock_send_mail.call_count, 1)
             self.assertIn("<p>", send_kwargs['html_message'])
             self.assertNotIn("<p>", send_kwargs['message'])
-            self.assertEqual("testing {} {}".format(event.city, event.email), send_kwargs['subject'])
             self.assertTrue(event.city in send_kwargs['html_message'])
 
     def test_thank_you_email_logic(self):

@@ -10,18 +10,16 @@ import djclick as click
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.template import (
-    Context,
-    Template
-)
-from django.template.loader import get_template
+from django.template.loader import render_to_string
+
 from django.utils import timezone
 
 from core.models import Event
 from core.utils import opbeat_logging
 
-def send_event_emails(events, subject, plain_template, html_template, timestamp_field, email_type,
-                      ignore_approximate_events=False):
+def send_event_emails(
+    events, subject_template, plain_template, html_template, timestamp_field, email_type,
+    ignore_approximate_events=False):
     """Send out any that need sending (thank yous, information request, ...)."""
 
     for event in events:
@@ -31,14 +29,13 @@ def send_event_emails(events, subject, plain_template, html_template, timestamp_
 
         recipients = list(set([event.email] + list(event.team.all().values_list('email', flat=True))))
 
-        subject_template = Template(subject)
-        context = Context({
+        context = {
             'event': event,
             'settings': settings,
-        })
-        html_content = get_template(html_template).render(context)
-        plain_content = get_template(plain_template).render(context)
-        subject_content = subject_template.render(context)
+        }
+        html_content = render_to_string(html_template, context)
+        plain_content = render_to_string(plain_template, context)
+        subject_content = render_to_string(subject_template, context)
 
         try:
             send_mail(
@@ -63,7 +60,7 @@ def send_thank_you_emails():
             date__lte=timezone.now() - timezone.timedelta(days=1),
             thank_you_email_sent__isnull=True
         ),
-        subject="Congratulations for organizing Django Girls {{event.city}}!",
+        subject_template="emails/event_thank_you_subject.txt",
         plain_template="emails/event_thank_you.txt",
         html_template="emails/event_thank_you.html",
         timestamp_field='thank_you_email_sent',
@@ -84,7 +81,7 @@ def send_submit_information_emails():
             submit_information_email_sent__isnull=True,
             attendees_count__isnull=True
         ),
-        subject="Reminder to submit information from Django Girls {{event.city}}",
+        subject_template="emails/submit_information_subject.txt",
         plain_template="emails/submit_information_email.txt",
         html_template="emails/submit_information_email.html",
         timestamp_field='submit_information_email_sent',
@@ -112,7 +109,7 @@ def send_offer_help_emails():
 
     send_event_emails(
         events=events,
-        subject="Need any help with your Django Girls {{event.city}} event?",
+        subject_template="emails/offer_help_subject.txt",
         plain_template="emails/offer_help_email.txt",
         html_template="emails/offer_help_email.html",
         timestamp_field='offer_help_email_sent',

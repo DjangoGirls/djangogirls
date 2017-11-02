@@ -41,7 +41,6 @@ INSTALLED_APPS = (
 
     'core',
     'applications',
-    'jobs',
     'organize',
     'patreonmanager',
     'story',
@@ -88,7 +87,6 @@ USE_TZ = True
 
 
 # Templates
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

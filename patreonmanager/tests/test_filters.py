@@ -1,6 +1,7 @@
 import datetime
 
 from django.test import TestCase
+from django.utils.timezone import make_aware
 
 from ..admin import PatronAdmin
 from ..filters import PendingRewardsFilter
@@ -12,7 +13,7 @@ class FiltersTestCase(TestCase):
         self.patron_1 = Patron.objects.create(
             name="Jan Kowalski",
             email="jan@kowalski.extra",
-            since=datetime.datetime(2016, 1, 20)
+            since=make_aware(datetime.datetime(2016, 1, 20))
         )
         self.reward_1 = Reward.objects.create(
             name="gte_10",

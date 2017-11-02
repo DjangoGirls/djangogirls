@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import EventPageContent
-from sponsor.models import Sponsor
+from .models import Sponsor
 
 
 class SponsorInline(admin.TabularInline):
