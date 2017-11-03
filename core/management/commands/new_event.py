@@ -5,12 +5,13 @@ import djclick as click
 from django.conf import settings
 from django.template.loader import render_to_string
 
+from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
+
+from pictures.models import StockPicture
 from ...command_helpers import gather_event_date_from_prompt
 from ...forms import EventForm
 from ...models import Event
-from pictures.models import StockPicture
 from ...utils import get_coordinates_for_city
-from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -88,11 +89,10 @@ def command(short):
     # Create users
     members = create_users(team, event)
     event.main_organizer = members[0]
-    event.save()
 
     # Add random cover picture
-    picture = StockPicture.get_random(StockPicture.COVER)
-    picture.add_to(event)
+    event.set_random_cover()
+
     event.save()
 
     click.secho(

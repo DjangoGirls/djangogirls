@@ -102,8 +102,7 @@ class EventApplication(models.Model):
         event.add_default_menu()
 
         # Add a random cover picture to the event
-        picture = StockPicture.get_random(StockPicture.COVER)
-        picture.add_to(event)
+        event.set_random_cover()
         event.save()
 
         return event

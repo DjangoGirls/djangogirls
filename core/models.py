@@ -13,6 +13,7 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
 
+from pictures.models import StockPicture
 from .slack_client import user_invite
 from .validators import validate_approximatedate
 from .default_eventpage_content import (
@@ -274,6 +275,12 @@ class Event(models.Model):
 
         self.invite_organizer_to_team(user, created, password)
         return user
+
+    def set_random_cover(self):
+        event_picture = StockPicture.objects.random_cover()
+        self.photo = event_picture.photo
+        self.photo_credit = event_picture.photo_credit
+        self.photo_link = event_picture.photo_link
 
 
 @python_2_unicode_compatible
