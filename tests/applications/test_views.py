@@ -8,9 +8,8 @@ from django.test import RequestFactory, TestCase
 from django.test.client import Client
 from django.utils import timezone
 
-from applications.models import (RSVP_NO, RSVP_WAITING, RSVP_YES, Answer,
-                                 Application, Form, Question, Score)
-from applications.utils import DEFAULT_QUESTIONS
+from applications.models import Answer, Application, Form, Question, Score
+from applications.questions import DEFAULT_QUESTIONS
 from applications.views import application_list
 from core.models import Event, User
 
@@ -280,62 +279,62 @@ class ApplicationsView(TestCase):
         self.assertEqual(self.application_1.state, 'accepted')
 
     def test_yes_rsvp(self):
-        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_WAITING)
         args = ['test', self.application_2.get_rsvp_yes_code()]
         resp = self.client.get(
             reverse('applications:rsvp', args=args)
         )
         self.assertEqual(resp.status_code, 200)
         self.application_2 = Application.objects.get(id=self.application_2.id)
-        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_YES)
 
     def test_repeated_rsvp(self):
-        self.application_2.rsvp_status = RSVP_YES
+        self.application_2.rsvp_status = Application.RSVP_YES
         self.application_2.save()
-        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_YES)
         args = ['test', self.application_2.get_rsvp_no_code()]
         resp = self.client.get(
             reverse('applications:rsvp', args=args)
         )
         self.assertEqual(resp.status_code, 302)
         self.application_2 = Application.objects.get(id=self.application_2.id)
-        self.assertEqual(self.application_2.rsvp_status, RSVP_YES)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_YES)
 
     def test_no_rsvp(self):
-        self.application_2.rsvp_status = RSVP_WAITING
+        self.application_2.rsvp_status = Application.RSVP_WAITING
         self.application_2.save()
-        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_WAITING)
         args = ['test', self.application_2.get_rsvp_no_code()]
         resp = self.client.get(
             reverse('applications:rsvp', args=args)
         )
         self.assertEqual(resp.status_code, 200)
         self.application_2 = Application.objects.get(id=self.application_2.id)
-        self.assertEqual(self.application_2.rsvp_status, RSVP_NO)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_NO)
 
     def test_nonexistent_rsvp(self):
-        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_WAITING)
         args = ['test', 'sssss']
         resp = self.client.get(
             reverse('applications:rsvp', args=args)
         )
         self.assertEqual(resp.status_code, 302)
         self.application_2 = Application.objects.get(id=self.application_2.id)
-        self.assertEqual(self.application_2.rsvp_status, RSVP_WAITING)
+        self.assertEqual(self.application_2.rsvp_status, Application.RSVP_WAITING)
 
     def test_changing_application_rsvp(self):
         self.user.is_superuser = True
         self.user.save()
         self.client.login(email='test@user.com', password='test')
 
-        self.assertEqual(self.application_1.rsvp_status, RSVP_WAITING)
+        self.assertEqual(self.application_1.rsvp_status, Application.RSVP_WAITING)
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': RSVP_YES, 'application': self.application_1.id}
+            {'rsvp_status': Application.RSVP_YES, 'application': self.application_1.id}
         )
         self.assertEqual(resp.status_code, 200)
         self.application_1 = Application.objects.get(id=self.application_1.id)
-        self.assertEqual(self.application_1.rsvp_status, RSVP_YES)
+        self.assertEqual(self.application_1.rsvp_status, Application.RSVP_YES)
 
     def test_changing_application_status_errors(self):
         # user without permissions:
@@ -367,7 +366,7 @@ class ApplicationsView(TestCase):
         # user without permissions:
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': RSVP_YES, 'application': self.application_1.id}
+            {'rsvp_status': Application.RSVP_YES, 'application': self.application_1.id}
         )
         self.assertEqual(resp.status_code, 302)
 
@@ -385,7 +384,7 @@ class ApplicationsView(TestCase):
         # lack of application parameter
         resp = self.client.post(
             reverse('applications:change_rsvp', args=['test']),
-            {'rsvp_status': RSVP_YES}
+            {'rsvp_status': Application.RSVP_YES}
         )
         self.assertTrue('error' in json.loads(resp.content.decode('utf-8')))
 
