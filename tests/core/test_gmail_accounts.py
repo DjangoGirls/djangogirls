@@ -27,14 +27,14 @@ class GmaillAccountsTestCase(TestCase):
     def test_make_email(self):
         assert gmail_accounts.make_email('test') == 'test@djangogirls.org'
 
-    @vcr.use_cassette('core/tests/vcr/gmail_accounts_create.yaml')
+    @vcr.use_cassette('tests/core/vcr/gmail_accounts_create.yaml')
     @pytest.mark.skipif(settings.GAPPS_PRIVATE_KEY == '', reason="No Gapps keys")
     def test_create_gmail_account(self):
         email, password = gmail_accounts.create_gmail_account(self.event)
         assert email == self.event.email
         assert password is not None
 
-    @vcr.use_cassette('core/tests/vcr/gmail_accounts_get.yaml')
+    @vcr.use_cassette('tests/core/vcr/gmail_accounts_get.yaml')
     @pytest.mark.skipif(settings.GAPPS_PRIVATE_KEY == '', reason="No Gapps keys")
     def test_get_gmail_account(self):
         response = gmail_accounts.get_gmail_account('veryrandom')
@@ -43,7 +43,7 @@ class GmaillAccountsTestCase(TestCase):
         response = gmail_accounts.get_gmail_account('olasitarska')
         assert response is not None
 
-    @vcr.use_cassette('core/tests/vcr/gmail_accounts_migrate.yaml')
+    @vcr.use_cassette('tests/core/vcr/gmail_accounts_migrate.yaml')
     @pytest.mark.skipif(settings.GAPPS_PRIVATE_KEY == '', reason="No Gapps keys")
     def test_migrate_gmail_account(self):
         old_email = self.event.email

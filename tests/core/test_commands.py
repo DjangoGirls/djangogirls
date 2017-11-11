@@ -28,7 +28,7 @@ class CommandsTestCase(TestCase):
     def _get_random_day(self):
         return date.fromordinal(random.randint(self.start_date, self.end_date))
 
-    @vcr.use_cassette('core/tests/vcr/update_coordinates.yaml')
+    @vcr.use_cassette('tests/core/vcr/update_coordinates.yaml')
     def test_update_coordinates(self):
         event_2 = Event.objects.get(pk=2)
         latlng = event_2.latlng
@@ -62,7 +62,7 @@ class CommandsTestCase(TestCase):
         event = Event.objects.get(pk=1)
         assert event.team.count() == 3
 
-    @vcr.use_cassette('core/tests/vcr/new_event_with_one_organizer.yaml')
+    @vcr.use_cassette('tests/core/vcr/new_event_with_one_organizer.yaml')
     def test_new_event_with_one_organizer(self):
         assert Event.objects.count() == 4
 
@@ -87,7 +87,7 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 1
 
-    @vcr.use_cassette('core/tests/vcr/new_event_with_two_organizers.yaml')
+    @vcr.use_cassette('tests/core/vcr/new_event_with_two_organizers.yaml')
     def test_new_event_with_two_organizers(self):
         assert Event.objects.count() == 4
 
@@ -115,7 +115,7 @@ class CommandsTestCase(TestCase):
         event = Event.objects.order_by('pk').last()
         assert event.team.count() == 2
 
-    @vcr.use_cassette('core/tests/vcr/new_event_short.yaml')
+    @vcr.use_cassette('tests/core/vcr/new_event_short.yaml')
     def test_new_event_short(self):
         assert Event.objects.count() == 4
 
@@ -138,8 +138,9 @@ class CommandsTestCase(TestCase):
             input=command_input
         )
         assert Event.objects.count() == 5
-        short_email_body = """Event e-mail is: oz@djangogirls.org
-Event website address is: https://djangogirls.org/oz"""
+        short_email_body = (
+            "Event e-mail is: oz@djangogirls.org\n"
+            "Event website address is: https://djangogirls.org/oz")
         assert short_email_body in result.output
 
     def test_copy_event(self):

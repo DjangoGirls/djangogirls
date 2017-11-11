@@ -36,4 +36,5 @@ whitenoise
 freezegun
 pytest
 pytest-cov
+pytest-env
 pytest-django

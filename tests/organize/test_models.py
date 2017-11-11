@@ -40,7 +40,7 @@ class EventApplicationTest(TestCase):
         email = mail.outbox[0]
         assert email.to == event_application.get_organizers_emails()
 
-    @vcr.use_cassette('organize/tests/vcr/deploy_from_previous_event.yaml')
+    @vcr.use_cassette('tests/organize/vcr/deploy_from_previous_event.yaml')
     def test_deploy_event_from_previous_event(self):
         event_application = EventApplication.objects.get(pk=1)
         event_application.create_event()
@@ -52,7 +52,7 @@ class EventApplicationTest(TestCase):
         self.assertTrue("Access to Django Girls website" in email_subjects)
         self.assertTrue("Congrats! Your application to organize Django Girls London has been accepted!" in email_subjects)
 
-    @vcr.use_cassette('organize/tests/vcr/latlng.yaml')
+    @vcr.use_cassette('tests/organize/vcr/latlng.yaml')
     def test_latlng_is_fetched_when_creating_application(self):
         event_application = EventApplication.objects.get(pk=1)
         assert event_application.latlng == '0.0,0.0'

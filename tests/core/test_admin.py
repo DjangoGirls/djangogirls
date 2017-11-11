@@ -5,7 +5,7 @@ from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 
 from core.models import Event, User
-from core.tests.test_views import BaseCoreTestCase
+from .test_views import BaseCoreTestCase
 
 
 class EventAdminTestCase(BaseCoreTestCase):
@@ -62,7 +62,7 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert len(resp.context['all_events']) == expected_events.count()
         assert all([x.is_upcoming() for x in resp.context['all_events']])
 
-    @vcr.use_cassette('core/tests/vcr/test_adding_organizer_as_superuser.yaml')
+    @vcr.use_cassette('tests/core/vcr/test_adding_organizer_as_superuser.yaml')
     def test_adding_organizer_as_superuser(self):
         resp = self.client.get(reverse('admin:core_event_add_organizers'))
         total_count = User.objects.filter(is_staff=True).count()
@@ -87,7 +87,7 @@ class EventAdminTestCase(BaseCoreTestCase):
         assert User.objects.filter(is_staff=True).count() == (total_count + 1)
         assert self.event_2.team.count() == (team_count + 1)
 
-    @vcr.use_cassette('core/tests/vcr/organizer_can_only_add_to_their_event.yaml')
+    @vcr.use_cassette('tests/core/vcr/organizer_can_only_add_to_their_event.yaml')
     def test_organizer_can_only_add_to_their_event(self):
         self.client.login(username=self.peter.email, password='')
         data = {
