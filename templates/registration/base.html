@@ -5,7 +5,7 @@
     <div class="row centered">
         <div class="col-md-6 col-md-offset-4">
             <h2>{% block title %}{% endblock title %}</h2>
-            <p>{% block description %}{% endblock description %}</p>
+            <p>{% block registration_message %}{% endblock registration_message %}</p>
             <form action="" method="post">
                 {% csrf_token %}
                 {% for field in form %}
