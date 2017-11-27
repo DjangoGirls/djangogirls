@@ -1,7 +1,5 @@
-import os
 import pytest
 import vcr
-from django.test import TestCase
 
 from applications.forms import ApplicationForm
 from applications.models import Application, Form, Question

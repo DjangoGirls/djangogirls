@@ -41,7 +41,7 @@ def get_gapps_client():
 
 def make_email(slug):
     """Get the email address for the given slug"""
-    return '%s@djangogirls.org' % slug
+    return '{}@djangogirls.org'.format(slug)
 
 
 def create_gmail_account(event):

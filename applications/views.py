@@ -12,7 +12,7 @@ from core.utils import get_event
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
 from .models import Application, Email, Form, Question, Score
-from .utils import (get_applications_for_event, get_organiser_menu,
+from .questions import (get_applications_for_event, get_organiser_menu,
                     random_application)
 
 
