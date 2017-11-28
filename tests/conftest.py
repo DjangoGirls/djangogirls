@@ -186,7 +186,7 @@ def events(future_event, past_event, hidden_event, no_date_event):
     return [future_event, past_event, hidden_event, no_date_event]
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 def stock_pictures():
     StockPicture.objects.bulk_create([
         StockPicture(
