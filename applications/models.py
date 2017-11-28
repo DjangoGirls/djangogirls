@@ -73,9 +73,10 @@ class Form(models.Model):
 
 
 class Question(models.Model):
+    TEXT = 'text'
     QUESTION_TYPES = (
         ('paragraph', 'Paragraph'),
-        ('text', 'Long text'),
+        (TEXT, 'Long text'),
         ('choices', 'Choices'),
         ('email', 'Email')
     )

@@ -12,6 +12,25 @@ def enable_db_access_for_all_tests(db):
 
 
 @pytest.fixture()
+def user(db, django_user_model, django_username_field):
+    """A Django admin user.
+
+    This uses an existing user with username "admin", or creates a new one with
+    password "password".
+    """
+    UserModel = django_user_model
+    username_field = django_username_field
+
+    try:
+        user = UserModel._default_manager.get(**{username_field: 'user@example.com'})
+    except UserModel.DoesNotExist:
+        extra_fields = {}
+        user = UserModel._default_manager.create_user(
+            'user@example.com', 'password', **extra_fields)
+    return user
+
+
+@pytest.fixture()
 def admin_user(db, django_user_model, django_username_field):
     """A Django admin user.
 
@@ -36,7 +55,17 @@ def admin_client(db, admin_user):
     from django.test.client import Client
 
     client = Client()
-    client.login(email=admin_user.email, password='password')
+    client.force_login(admin_user)
+    return client
+
+
+@pytest.fixture()
+def user_client(db, user):
+    """A Django test client logged in as an user."""
+    from django.test.client import Client
+
+    client = Client()
+    client.force_login(user)
     return client
 
 
