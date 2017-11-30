@@ -28,7 +28,6 @@ def send_event_emails(
             continue
 
         recipients = list(set([event.email] + list(event.team.all().values_list('email', flat=True))))
-
         context = {
             'event': event,
             'settings': settings,
@@ -74,13 +73,13 @@ def send_submit_information_emails():
 
         Happens if an event happened more than two weeks ago and has no statistics numbers yet.
     """
+    events = Event.objects.filter(
+        is_on_homepage=True,
+        date__lte=timezone.now() - timezone.timedelta(weeks=2),
+        submit_information_email_sent__isnull=True,
+        attendees_count__isnull=True)
     send_event_emails(
-        events=Event.objects.filter(
-            is_on_homepage=True,
-            date__lte=timezone.now() - timezone.timedelta(weeks=2),
-            submit_information_email_sent__isnull=True,
-            attendees_count__isnull=True
-        ),
+        events=events,
         subject_template="emails/submit_information_subject.txt",
         plain_template="emails/submit_information_email.txt",
         html_template="emails/submit_information_email.html",
@@ -106,7 +105,6 @@ def send_offer_help_emails():
     ).filter(
         Q(is_page_live=False) | Q(form=None)
     )
-
     send_event_emails(
         events=events,
         subject_template="emails/offer_help_subject.txt",
