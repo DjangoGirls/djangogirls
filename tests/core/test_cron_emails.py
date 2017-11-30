@@ -1,265 +1,248 @@
 """Tests for cron-emails sent out by the handle_emails management command."""
-import mock
-
+import pytest
 from click.testing import CliRunner
 from django_date_extensions.fields import ApproximateDate
 
-from django.test import TestCase
 from django.utils import timezone
 
 from applications.models import Form
-from core.models import (
-    Event,
-    User,
-)
+from core.models import Event
 from core.management.commands import handle_emails
 
 
-class HandleEmailTestCase(TestCase):
-    def setUp(self):
-        self.runner = CliRunner(echo_stdin=True)
+@pytest.fixture
+def click_runner():
+    return CliRunner(echo_stdin=True)
 
-        self.sending_args = {
-            'subject_template':  "emails/submit_information_subject.txt",
-            'plain_template': "emails/submit_information_email.txt",
-            'html_template': "emails/submit_information_email.html",
-            'timestamp_field': 'submit_information_email_sent',
-            'email_type': "submit information email",
-        }
 
-    def test_approximate_date_behaviour(self):
-        """ Test logic for the behaviour of skipping events with approximate dates.
+@pytest.fixture
+def send_kwargs():
+    return {
+        'subject_template':  "emails/submit_information_subject.txt",
+        'plain_template': "emails/submit_information_email.txt",
+        'html_template': "emails/submit_information_email.html",
+        'timestamp_field': 'submit_information_email_sent',
+        'email_type': "submit information email"}
 
-            Events with approximate dates should be skipped if ignore_approximate_dates is True
-        """
 
-        # Create an event with an approximate date
-        event = Event.objects.create(date=ApproximateDate(year=2017, month=1))
-        self.sending_args['events'] = [event]
+def test_approximate_date_behaviour(mailoutbox, send_kwargs):
+    """ Test logic for the behaviour of skipping events with approximate dates.
 
-        with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
-            # We're ignoring approximate dates, so no email should be sent
-            self.sending_args['ignore_approximate_events'] = True
-            handle_emails.send_event_emails(
-                **self.sending_args
-            )
+        Events with approximate dates should be skipped if ignore_approximate_dates is True
+    """
 
-            self.assertEqual(mock_send_mail.call_count, 0)
-            mock_send_mail.reset_mock()
+    # Create an event with an approximate date
+    event = Event.objects.create(date=ApproximateDate(year=2017, month=1))
+    send_kwargs['events'] = [event]
 
-            # Now we're not ignoring approximate dates, so a mail should be sent.
-            self.sending_args['ignore_approximate_events'] = False
+    # We're ignoring approximate dates, so no email should be sent
+    send_kwargs['ignore_approximate_events'] = True
+    handle_emails.send_event_emails(**send_kwargs)
+    assert len(mailoutbox) == 0
 
-            handle_emails.send_event_emails(
-                **self.sending_args
-            )
-            self.assertEqual(mock_send_mail.call_count, 1)
-            mock_send_mail.reset_mock()
+    # Now we're not ignoring approximate dates, so a mail should be sent.
+    send_kwargs['ignore_approximate_events'] = False
+    handle_emails.send_event_emails(**send_kwargs)
+    assert len(mailoutbox) == 1
 
-            # Still ignoring approximate dates, but now the event date is fixed, so a mail should be sent.
-            event.date = timezone.datetime.now()
-            event.save()
+    # Still ignoring approximate dates, but now the event date is fixed,
+    # so a mail should be sent.
+    event.date = timezone.datetime.now()
+    event.save()
+    handle_emails.send_event_emails(**send_kwargs)
+    assert len(mailoutbox) == 2
 
-            handle_emails.send_event_emails(
-                **self.sending_args
-            )
-            self.assertEqual(mock_send_mail.call_count, 1)
-            mock_send_mail.reset_mock()
 
-    def test_email_recipients(self):
-        """ All emails should go to event.email and all team members, but only once. """
-        event = Event.objects.create(email='user-1@example.com')
-        self.sending_args['events'] = [event]
+def test_email_recipients(mailoutbox, send_kwargs, future_event, organizer_peter, organizer_julia):
+    """ All emails should go to event.email and all team members, but only once. """
+    send_kwargs['events'] = [future_event]
+    future_event.email = organizer_peter.email
+    future_event.save()
+    future_event.team.add(organizer_julia)
 
-        for x in range(2):
-            user = User.objects.create(email='user-{}@example.com'.format(x))
-            event.team.add(user)
+    handle_emails.send_event_emails(**send_kwargs)
+    assert len(mailoutbox) == 1
+    assert set(mailoutbox[0].to) == set([organizer_peter.email, organizer_julia.email])
 
-        with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
-            handle_emails.send_event_emails(
-                **self.sending_args
-            )
-            _, send_kwargs = mock_send_mail.call_args
 
-            self.assertCountEqual(send_kwargs['recipient_list'], ['user-0@example.com', 'user-1@example.com'])
+def test_email_template_rendering(mailoutbox, send_kwargs):
+    """ Test basic email rendering for templates and content. """
+    city_name = "definitely not a city that will actually show up in a template"
+    event = Event.objects.create(city=city_name, email='user-1@example.com')
+    send_kwargs['events'] = [event]
 
-    def test_email_template_rendering(self):
-        """ Test basic email rendering for templates and content. """
-        city_name = "definitely not a city that will actually show up in a template"
-        event = Event.objects.create(city=city_name, email='user-1@example.com')
-        self.sending_args['events'] = [event]
+    handle_emails.send_event_emails(**send_kwargs)
 
-        with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
-            handle_emails.send_event_emails(
-                **self.sending_args
-            )
-            _, send_kwargs = mock_send_mail.call_args
+    assert len(mailoutbox) == 1
+    mail = mailoutbox[0]
+    html_content, _ = mail.alternatives[0]
+    assert "<p>" in html_content
+    assert "<p>" not in mail.body
+    assert event.city in html_content
 
-            self.assertEqual(mock_send_mail.call_count, 1)
-            self.assertIn("<p>", send_kwargs['html_message'])
-            self.assertNotIn("<p>", send_kwargs['message'])
-            self.assertTrue(event.city in send_kwargs['html_message'])
 
-    def test_thank_you_email_logic(self):
-        """ Test event filtering logic for thank you emails. """
-        should_be_included = Event.objects.create(
-            city="should be included",
-            is_on_homepage=True,
-            date=timezone.now() - timezone.timedelta(days=1),
-        )
-        Event.objects.create(
-            city="not on homepage",
-            is_on_homepage=False,
-            date=timezone.now() - timezone.timedelta(days=1),
-        )
-        Event.objects.create(
-            city="in future",
-            is_on_homepage=True,
-            date=timezone.now() + timezone.timedelta(days=1),
-        )
-        Event.objects.create(
-            city="already sent",
-            is_on_homepage=True,
-            date=timezone.now() - timezone.timedelta(days=1),
-            thank_you_email_sent=timezone.now()
-        )
+def test_thank_you_email_logic(mailoutbox):
+    """ Test event filtering logic for thank you emails. """
+    should_be_included = Event.objects.create(
+        city="should be included",
+        is_on_homepage=True,
+        date=timezone.now() - timezone.timedelta(days=1),
+    )
+    Event.objects.create(
+        city="not on homepage",
+        is_on_homepage=False,
+        date=timezone.now() - timezone.timedelta(days=1),
+    )
+    Event.objects.create(
+        city="in future",
+        is_on_homepage=True,
+        date=timezone.now() + timezone.timedelta(days=1),
+    )
+    Event.objects.create(
+        city="already sent",
+        is_on_homepage=True,
+        date=timezone.now() - timezone.timedelta(days=1),
+        thank_you_email_sent=timezone.now()
+    )
 
-        with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
-            handle_emails.send_thank_you_emails()
+    handle_emails.send_thank_you_emails()
 
-            # Only a single event should have been picked up
-            self.assertEqual(mock_send_mail.call_count, 1)
-            _, send_kwargs = mock_send_mail.call_args
-            self.assertIn(should_be_included.city, send_kwargs['subject'])
+    # Only a single event should have been picked up
+    assert len(mailoutbox) == 1
+    assert should_be_included.city in mailoutbox[0].subject
 
-    def test_submit_information_email_logic(self):
-        """ Test event filtering logic for thank you emails. """
-        eight_weeks_ago = timezone.now() - timezone.timedelta(weeks=8)
 
-        should_be_included = Event.objects.create(
-            city="should be included",
-            is_on_homepage=True,
-            date=eight_weeks_ago
-        )
-        Event.objects.create(
-            city="not on homepage",
-            is_on_homepage=False,
-            date=eight_weeks_ago
-        )
-        Event.objects.create(
-            city="uncertain date",
-            is_on_homepage=True,
-            date=ApproximateDate(year=eight_weeks_ago.year, month=eight_weeks_ago.month)
-        )
-        Event.objects.create(
-            city="data already provided",
-            is_on_homepage=True,
-            date=eight_weeks_ago,
-            applicants_count=1,
-            attendees_count=1
-        )
-        Event.objects.create(
-            city="already sent",
-            is_on_homepage=True,
-            date=eight_weeks_ago,
-            submit_information_email_sent=timezone.now()
-        )
+def test_submit_information_email_logic(mailoutbox):
+    """ Test event filtering logic for thank you emails. """
+    eight_weeks_ago = timezone.now() - timezone.timedelta(weeks=8)
 
-        with mock.patch('core.management.commands.handle_emails.send_mail') as mock_send_mail:
-            handle_emails.send_submit_information_emails()
+    should_be_included = Event.objects.create(
+        city="should be included",
+        is_on_homepage=True,
+        date=eight_weeks_ago
+    )
+    Event.objects.create(
+        city="not on homepage",
+        is_on_homepage=False,
+        date=eight_weeks_ago
+    )
+    Event.objects.create(
+        city="uncertain date",
+        is_on_homepage=True,
+        date=ApproximateDate(year=eight_weeks_ago.year, month=eight_weeks_ago.month)
+    )
+    Event.objects.create(
+        city="data already provided",
+        is_on_homepage=True,
+        date=eight_weeks_ago,
+        applicants_count=1,
+        attendees_count=1
+    )
+    Event.objects.create(
+        city="already sent",
+        is_on_homepage=True,
+        date=eight_weeks_ago,
+        submit_information_email_sent=timezone.now()
+    )
 
-            # Only a single event should have been picked up
-            self.assertEqual(mock_send_mail.call_count, 1)
-            _, send_kwargs = mock_send_mail.call_args
-            self.assertIn(should_be_included.city, send_kwargs['subject'])
+    handle_emails.send_submit_information_emails()
 
-    def test_offer_help_email_form_logic(self):
-        """ Test event filtering logic for thank you emails depending on their application form. """
-        now = timezone.now()
-        in_six_weeks = now + timezone.timedelta(weeks=6)
+    # Only a single event should have been picked up
+    assert len(mailoutbox) == 1
+    assert should_be_included.city in mailoutbox[0].subject
 
-        @mock.patch('core.management.commands.handle_emails.send_mail')
-        def _would_send_email(event, mock_send_mail):
-            """ Return true if given event would currently trigger an "offer help" email. """
-            handle_emails.send_offer_help_emails()
 
-            if mock_send_mail.call_count == 0:
-                return False
+def test_offer_help_email_form_logic(mailoutbox):
+    """ Test event filtering logic for thank you emails depending on their application form. """
+    now = timezone.now()
+    in_six_weeks = now + timezone.timedelta(weeks=6)
 
-            calls = mock_send_mail.call_args_list
-            mock_send_mail.reset_mock()
+    # Test one event with no form, created a few seconds ago, should not send an email
+    event = Event.objects.create(
+        city="Test City",
+        is_on_homepage=True,
+        date=in_six_weeks,
+        is_page_live=True)
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 0
 
-            return any(event.city in send_kwargs['subject'] for _, send_kwargs in calls)
+    # Event was created more than a week ago, should send an event
+    mailoutbox = []
+    event.created_at = timezone.now() - timezone.timedelta(weeks=3)
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 1
+    assert event.city in mailoutbox[0].subject
 
-        # Test one event with no form, created a few seconds ago, should not send an email
-        event = Event.objects.create(
-            city="Test City",
-            is_on_homepage=True,
-            date=in_six_weeks,
-            is_page_live=True
-        )
-        self.assertFalse(_would_send_email(event))
+    # Event with a rough date at least a month in the future should also send an email
+    mailoutbox = []
+    event.date = ApproximateDate(year=in_six_weeks.year, month=in_six_weeks.month)
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 1
+    assert event.city in mailoutbox[0].subject
 
-        # Event was created more than a week ago, should send an event
-        event.created_at = timezone.now() - timezone.timedelta(weeks=3)
-        event.save()
-        self.assertTrue(_would_send_email(event))
+    # Event with a start date in the past shouldn't trigger an email
+    mailoutbox = []
+    event.date = now - timezone.timedelta(days=1)
+    event.offer_help_email_sent = None
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 0
 
-        # Event with a rough date at least a month in the future should also send an email
-        event.date = ApproximateDate(year=in_six_weeks.year, month=in_six_weeks.month)
-        event.save()
-        self.assertTrue(_would_send_email(event))
+    # Nor should an event with an uncertain date in the current month.
+    mailoutbox = []
+    event.date = ApproximateDate(year=now.year, month=now.month)
+    event.offer_help_email_sent = None
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 0
 
-        # Event with a start date in the past shouldn't trigger an email
-        event.date = now - timezone.timedelta(days=1)
-        event.offer_help_email_sent = None
-        event.save()
-        self.assertFalse(_would_send_email(event))
+    # Event now has a form, no email should be sent.
+    mailoutbox = []
+    event.date = in_six_weeks
+    event.save()
+    Form.objects.create(event=event)
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 0
 
-        # Nor should an event with an uncertain date in the current month.
-        event.date = ApproximateDate(year=now.year, month=now.month)
-        event.offer_help_email_sent = None
-        event.save()
-        self.assertFalse(_would_send_email(event))
+    # Set page to not live, email should be sent again
+    mailoutbox = []
+    event.is_page_live = False
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 1
+    assert event.city in mailoutbox[0].subject
 
-        # Event now has a form, no email should be sent.
-        event.date = in_six_weeks
-        event.save()
-        Form.objects.create(event=event)
-        self.assertFalse(_would_send_email(event))
+    # Remove from homepage, no email should be sent.
+    mailoutbox = []
+    event.is_on_homepage = False
+    event.offer_help_email_sent = None
+    event.save()
+    handle_emails.send_offer_help_emails()
+    assert len(mailoutbox) == 0
 
-        # Set page to not live, email should be sent again
-        event.is_page_live = False
-        event.save()
-        self.assertTrue(_would_send_email(event))
 
-        # Remove from homepage, no email should be sent.
-        event.is_on_homepage = False
-        event.offer_help_email_sent = None
-        event.save()
-        self.assertFalse(_would_send_email(event))
+def test_send_summary_checkin_to_hello(mailoutbox):
+    """ If emails are sent to event because they're late, an email to hello should be sent to hello@djangogirls """
+    handle_emails.send_offer_help_emails()
 
-    @mock.patch('core.management.commands.handle_emails.send_mail')
-    def test_send_summary_checkin_to_hello(self, mock_send_mail):
-        """ If emails are sent to event because they're late, an email to hello should be sent to hello@djangogirls """
-        handle_emails.send_offer_help_emails()
+    # Don't send email if no events are late
+    assert len(mailoutbox) == 0
 
-        # Don't send email if no events are late
-        assert not mock_send_mail.called
+    # Event without a form will trigger check-in email. An email containing city names should be sent to hello.
+    now = timezone.now()
+    in_six_weeks = now + timezone.timedelta(weeks=6)
+    event = Event.objects.create(
+        city="Test City",
+        is_on_homepage=True,
+        date=in_six_weeks,
+        is_page_live=True,
+    )
+    event.created_at = now - timezone.timedelta(weeks=3)
+    event.save()
+    handle_emails.send_offer_help_emails()
 
-        # Event without a form will trigger check-in email. An email containing city names should be sent to hello.
-        now = timezone.now()
-        in_six_weeks = now + timezone.timedelta(weeks=6)
-        event = Event.objects.create(
-            city="Test City",
-            is_on_homepage=True,
-            date=in_six_weeks,
-            is_page_live=True,
-        )
-        event.created_at = now - timezone.timedelta(weeks=3)
-        event.save()
-        handle_emails.send_offer_help_emails()
-        self.assertTrue(mock_send_mail.called)
-        _, kwargs = mock_send_mail.call_args
-        self.assertEqual(kwargs["recipient_list"], ["hello@djangogirls.org"])
-        self.assertIn("Test City", kwargs["message"])
+    assert len(mailoutbox) == 1
+    assert mailoutbox[0].to == ["hello@djangogirls.org"]
+    assert event.city in mailoutbox[0].body

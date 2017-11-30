@@ -141,6 +141,7 @@ def past_event(organizer_peter):
         city="Rome",
         name="Django Girls Rome",
         country="Italy",
+        latlng="41.8933203, 12.4829321",
         is_on_homepage=True,
         main_organizer=organizer_peter,
         date="2013-10-12",
