@@ -4,73 +4,69 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-boto3==1.4.7
-botocore==1.7.22          # via boto3, s3transfer
-certifi==2017.7.27.1      # via opbeat, requests
+attrs==17.3.0             # via pytest
+boto3==1.4.8
+botocore==1.8.6           # via boto3, s3transfer
+certifi==2017.11.5        # via opbeat, requests
 chardet==3.0.4            # via requests
 click==6.7
-contextlib2==0.5.5        # via vcrpy
-coverage==4.4.1           # via pytest-cov
+coverage==4.4.2           # via pytest-cov
 cssselect==1.0.1          # via pyquery
 dj-database-url==0.4.2
 django-autoslug==1.9.3
 django-click==2.0.0
 django-codemirror-widget==0.4.1
-django-countries==4.6.2
+django-countries==5.0
 django-date-extensions==2.0
-django-formtools==2.0
+django-formtools==2.1
 django-gulp-rev==0.2
-django-leaflet==0.22.0
+django-leaflet==0.23.0
 django-markdown-deux==1.0.5
 django-recaptcha==1.3.1
 django-storages==1.6.5
 django-suit-redactor==0.0.4
 django-suit==0.2.25
-django==1.11.5
+django==1.11.7
 djrill==2.1.0
 docutils==0.14            # via botocore
 easy-thumbnails==2.5
 freezegun==0.3.9
-funcsigs==1.0.2           # via mock
-futures==3.1.1            # via s3transfer
 google-api-python-client==1.6.4
 httplib2==0.10.3
-icalendar==3.11.7
+icalendar==4.0.0
 idna==2.6                 # via requests
 jmespath==0.9.3           # via boto3, botocore
-lxml==4.0.0
-markdown2==2.3.4          # via django-markdown-deux
-mock==2.0.0
+lxml==4.1.1
+markdown2==2.3.5          # via django-markdown-deux
+multidict==3.3.2          # via yarl
 oauth2client==4.1.2       # via google-api-python-client
-oauthlib==2.0.4           # via requests-oauthlib
+oauthlib==2.0.6           # via requests-oauthlib
 olefile==0.44             # via pillow
-opbeat==3.5.2
-pbr==3.1.1                # via mock
+opbeat==3.5.3
 pillow==4.3.0
-psycopg2==2.7.3.1
+pluggy==0.6.0             # via pytest
+psycopg2==2.7.3.2
 py-trello==0.9.0
-py==1.4.34                # via pytest
-pyasn1-modules==0.1.4     # via oauth2client
-pyasn1==0.3.6             # via oauth2client, pyasn1-modules, rsa
-pyquery==1.2.17
+py==1.5.2                 # via pytest
+pyasn1-modules==0.2.1     # via oauth2client
+pyasn1==0.4.2             # via oauth2client, pyasn1-modules, rsa
+pyquery==1.3.0
 pytest-cov==2.5.1
 pytest-django==3.1.2
 pytest-env==0.6.2
-pytest==3.2.2
+pytest==3.3.0
 python-dateutil==2.6.1    # via botocore, freezegun, icalendar, py-trello
-pytz==2017.2              # via django, icalendar, py-trello
+pytz==2017.3              # via django, icalendar, py-trello
 pyyaml==3.12              # via vcrpy
 requests-oauthlib==0.8.0  # via py-trello
 requests==2.18.4
 rsa==3.4.2                # via oauth2client
-s3transfer==0.1.11        # via boto3
-six==1.11.0               # via django-click, freezegun, google-api-python-client, mock, oauth2client, python-dateutil, vcrpy
+s3transfer==0.1.12        # via boto3
+six==1.11.0               # via django-click, freezegun, google-api-python-client, oauth2client, pytest, python-dateutil, vcrpy
 slacker==0.9.60
 uritemplate==3.0.0        # via google-api-python-client
 urllib3==1.22             # via opbeat, requests
 vcrpy==1.11.1
 whitenoise==3.3.1
 wrapt==1.10.11            # via vcrpy
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools                # via django-codemirror-widget, pytest
+yarl==0.15.0              # via vcrpy

@@ -1,7 +1,7 @@
 import pytest
 import vcr
 from django.core.exceptions import ValidationError
-import mock
+from unittest import mock
 
 from organize.constants import DEPLOYED, ON_HOLD, REJECTED
 from core.models import Event

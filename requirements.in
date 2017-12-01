@@ -21,7 +21,6 @@ google-api-python-client
 httplib2
 icalendar
 lxml
-mock
 opbeat
 Pillow
 psycopg2
