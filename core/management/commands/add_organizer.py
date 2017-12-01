@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 import djclick as click
 
 from core.forms import AddOrganizerForm

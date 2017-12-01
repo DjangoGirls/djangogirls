@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import django.utils.timezone
 import django_date_extensions.fields
 from django.conf import settings

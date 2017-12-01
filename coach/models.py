@@ -1,9 +1,6 @@
-from __future__ import unicode_literals
-
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
@@ -12,7 +9,6 @@ from easy_thumbnails.files import get_thumbnailer
 DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
 
-@python_2_unicode_compatible
 class Coach(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
     twitter_handle = models.CharField(

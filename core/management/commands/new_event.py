@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 import djclick as click
 from django.conf import settings
 from django.template.loader import render_to_string

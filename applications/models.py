@@ -5,7 +5,6 @@ from django.core.mail import EmailMessage
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 
 from core.models import Event, User
 
@@ -40,7 +39,6 @@ RSVP_STATUSES = (
 RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 
-@python_2_unicode_compatible
 class Form(models.Model):
     event = models.OneToOneField(Event, null=False)
     text_header = models.CharField(
@@ -100,7 +98,6 @@ class Form(models.Model):
         return True
 
 
-@python_2_unicode_compatible
 class Question(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     title = models.TextField(verbose_name="Question")
@@ -136,7 +133,6 @@ class Question(models.Model):
         return self.choices.split(';')
 
 
-@python_2_unicode_compatible
 class Application(models.Model):
     form = models.ForeignKey(Form, null=False, blank=False)
     number = models.PositiveIntegerField(default=1, blank=True)
@@ -266,7 +262,6 @@ class Score(models.Model):
         unique_together = ('user', 'application',)
 
 
-@python_2_unicode_compatible
 class Email(models.Model):
     form = models.ForeignKey(Form)
     author = models.ForeignKey(User, related_name="author")

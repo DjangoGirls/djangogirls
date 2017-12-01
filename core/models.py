@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from datetime import date, datetime, timedelta
 from slacker import Error as SlackerError
 
@@ -8,7 +6,6 @@ from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import Group
 from django.db import models
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
@@ -40,7 +37,6 @@ class UserManager(auth_models.BaseUserManager):
         return user
 
 
-@python_2_unicode_compatible
 class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30, blank=True)
@@ -113,7 +109,6 @@ class EventManager(models.Manager):
 # Event date can't be a year only
 
 
-@python_2_unicode_compatible
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
     date = ApproximateDateField(blank=True, validators=[validate_approximatedate])
@@ -283,7 +278,6 @@ class Event(models.Model):
         self.photo_link = event_picture.photo_link
 
 
-@python_2_unicode_compatible
 class EventPageContent(models.Model):
     event = models.ForeignKey(Event, null=False,
                               blank=False, related_name="content")
@@ -308,7 +302,6 @@ class EventPageContent(models.Model):
         verbose_name = "Website Content"
 
 
-@python_2_unicode_compatible
 class EventPageMenu(models.Model):
     event = models.ForeignKey(Event, null=False,
                               blank=False, related_name="menu")
