@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-
 import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt

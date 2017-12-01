@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django_countries import countries

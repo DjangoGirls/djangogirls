@@ -1,13 +1,9 @@
-from __future__ import unicode_literals
-
 from smtplib import SMTPException
 
 from django.core.mail import EmailMessage
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = 'chapter', 'support'
     CONTACT_TYPE_CHOICES = (
