@@ -6,6 +6,7 @@ django-click==2.1.0
 django-codemirror-widget==0.4.1
 django-countries==5.3.2
 django-date-extensions==2.0
+django-extensions==1.9.8
 django-formtools==2.1
 django-gulp-rev==0.2
 django-leaflet==0.24.0

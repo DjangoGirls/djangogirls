@@ -51,11 +51,13 @@ class Payment(models.Model):
             (PROCESSED, _("processed")),
         ]
 
-    patron = models.ForeignKey('Patron', verbose_name=_(
-        "patron"), related_name='payments')
+    patron = models.ForeignKey(
+        'Patron', verbose_name=_("patron"), related_name='payments',
+        on_delete=models.deletion.PROTECT)
     month = models.DateField(_("month"))
     reward = models.ForeignKey(
-        'Reward', verbose_name=_("reward"), related_name='+')
+        'Reward', verbose_name=_("reward"), related_name='+',
+        on_delete=models.deletion.PROTECT)
     pledge = models.DecimalField(_("pledge"), max_digits=8, decimal_places=2)
     status = models.CharField(
         _("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)

@@ -8,10 +8,10 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
-from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from suit.admin import SortableModelAdmin
 

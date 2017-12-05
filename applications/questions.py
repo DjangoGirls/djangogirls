@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 def get_organiser_menu(city):

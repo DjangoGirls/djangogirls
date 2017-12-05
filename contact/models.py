@@ -17,7 +17,7 @@ class ContactEmail(models.Model):
     message = models.TextField()
     event = models.ForeignKey(
         'core.Event', help_text='required for contacting a chapter',
-        null=True, blank=True
+        null=True, blank=True, on_delete=models.deletion.SET_NULL
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
