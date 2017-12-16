@@ -7,9 +7,6 @@ import django_date_extensions.fields
 
 
 class Migration(migrations.Migration):
-
-    replaces = [('organize', '0001_initial'), ('organize', '0002_auto_20170107_1348'), ('organize', '0003_auto_20170107_1453'), ('organize', '0004_remove_eventapplication_rejection_reason')]
-
     initial = True
 
     dependencies = [
