@@ -257,7 +257,6 @@ JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
 MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')
 
-
 if 'OPBEAT_SECRET_TOKEN' in os.environ:
     INSTALLED_APPS += (
         'opbeat.contrib.django',

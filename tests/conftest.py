@@ -13,10 +13,8 @@ def enable_db_access_for_all_tests(db):
 
 @pytest.fixture()
 def user(db, django_user_model, django_username_field):
-    """A Django admin user.
-
-    This uses an existing user with username "admin", or creates a new one with
-    password "password".
+    """This is a copy from pytest-django prepared for usage with e-mail instead
+    of username.
     """
     UserModel = django_user_model
     username_field = django_username_field
@@ -32,10 +30,8 @@ def user(db, django_user_model, django_username_field):
 
 @pytest.fixture()
 def admin_user(db, django_user_model, django_username_field):
-    """A Django admin user.
-
-    This uses an existing user with username "admin", or creates a new one with
-    password "password".
+    """This is a copy from pytest-django prepared for usage with e-mail instead
+    of username.
     """
     UserModel = django_user_model
     username_field = django_username_field
@@ -73,8 +69,7 @@ def user_client(db, user):
 def organizers_group():
     add_event_permission = Permission.objects.get(codename='add_event')
     change_event_permission = Permission.objects.get(codename='change_event')
-    group = Group.objects.create(
-        name="Organizers")
+    group = Group.objects.create(name="Organizers")
     group.permissions.set([add_event_permission, change_event_permission])
     return group
 

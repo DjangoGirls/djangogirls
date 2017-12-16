@@ -44,10 +44,10 @@ def test_organiser_menu_in_applications_list(admin_client, future_event):
         'applications:communication',
         kwargs={'city': future_event.page_url})
     assert (
-        '<li><a href="{}">Applications</a></li>'.format(applications_url)
+        '<a href="{}">Applications</a>'.format(applications_url)
         in str(resp.content.decode('utf-8')))
     assert (
-        '<li><a href="{}">Messaging</a></li>'.format(messaging_url)
+        '<a href="{}">Messaging</a>'.format(messaging_url)
         in str(resp.content.decode('utf-8')))
 
 

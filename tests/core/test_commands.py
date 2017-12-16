@@ -1,6 +1,6 @@
 import random
 from datetime import date
-from unittest.mock import patch
+from unittest import mock
 
 import pytest
 import vcr
@@ -43,7 +43,7 @@ def test_update_coordinates(click_runner, past_event):
     assert past_event.latlng == latlng
 
 
-@patch('core.models.user_invite')
+@mock.patch('core.models.user_invite')
 def test_add_organizer(_, click_runner, future_event):
     assert future_event.team.count() == 1
 
@@ -173,7 +173,7 @@ def test_prepare_dispatch_with_data(click_runner):
         input=command_input
     )
     assert result.exception is None
-    assert b'PREVIOUS EVENTS' in result.output_bytes
+    assert 'PREVIOUS EVENTS' in result.output
 
 
 def test_prepare_dispatch_without_data(click_runner):
@@ -186,7 +186,7 @@ def test_prepare_dispatch_without_data(click_runner):
 
     result = click_runner.invoke(prepare_dispatch, input=command_input)
     assert result.exception is None
-    assert b'PREVIOUS EVENTS' in result.output_bytes
+    assert 'PREVIOUS EVENTS' in result.output
 
 
 def test_prepare_dispatch_wrong_date(click_runner):
@@ -199,4 +199,4 @@ def test_prepare_dispatch_wrong_date(click_runner):
 
     result = click_runner.invoke(prepare_dispatch, input=command_input)
     assert isinstance(result.exception, ValueError)
-    assert b'PREVIOUS EVENTS' not in result.output_bytes
+    assert 'PREVIOUS EVENTS' not in result.output

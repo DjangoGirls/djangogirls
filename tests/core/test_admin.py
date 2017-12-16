@@ -17,6 +17,7 @@ def test_get_queryset_for_organizer(client, organizer_peter, future_event, past_
     resp = client.get(reverse('admin:core_event_changelist'))
     assert len(resp.context['results']) == 2
     # flattens the list of lists
+    # FIXME
     results = ''.join(sum(resp.context['results'], []))
     assert all([x.name in results for x in [future_event, past_event]])
 

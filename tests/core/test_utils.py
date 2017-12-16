@@ -1,12 +1,12 @@
 from datetime import date
-from unittest.mock import patch
+from unittest import mock
 
 from freezegun import freeze_time
 
 from core.utils import NOMINATIM_URL, get_coordinates_for_city, next_deadline
 
 
-@patch('requests.get')
+@mock.patch('requests.get')
 def test_get_coordinates_for_city(mock_get):
     mock_get.return_value.json.return_value = [{
         'lat': '1.23',
@@ -25,7 +25,7 @@ def test_get_coordinates_for_city(mock_get):
     assert result == '1.23, 4.56'
 
 
-@patch('requests.get')
+@mock.patch('requests.get')
 def test_returns_none_when_no_results(mock_get):
     # Results are an empty list
     mock_get.return_value.json.return_value = []
@@ -42,7 +42,7 @@ def test_returns_none_when_no_results(mock_get):
     assert result is None
 
 
-@patch('requests.get')
+@mock.patch('requests.get')
 def test_returns_none_when_invalid_results(mock_get):
     # Empty dict returned in results
     mock_get.return_value.json.return_value = [{}]

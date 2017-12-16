@@ -14,8 +14,8 @@ def test_index(client, future_event, past_event):
     assert 'past_events' and 'future_events' in resp.context
 
     # Only the future event is on the list
-    event_ids = [event.pk for event in resp.context['future_events']]
-    assert event_ids == [future_event.pk]
+    event_ids = set(event.pk for event in resp.context['future_events'])
+    assert event_ids == {future_event.pk}
 
 
 def test_event_published(client, future_event, past_event):
@@ -34,7 +34,7 @@ def test_event_published(client, future_event, past_event):
     assert 'page' and 'menu' and 'content' in resp_2.context
 
     # Check if not public content is not available in context:
-    assert future_event.pk not in [content.pk for content in resp_1.context['content']]
+    assert future_event.pk not in {content.pk for content in resp_1.context['content']}
 
 
 def test_event_unpublished(client, hidden_event):
@@ -62,7 +62,7 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     assert resp.status_code == 200
 
     # Check if website is returning correct content
-    assert 'will be coming soon' in str(resp.content), 'Incorrect content'
+    assert 'will be coming soon' in str(resp.content)
 
     # make the event date in the past
     no_date_event.date = ApproximateDate(
@@ -75,7 +75,7 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     assert resp.status_code == 200
 
     # Check if website is returning correct content
-    assert 'has already happened' in str(resp.content), 'Incorrect content'
+    assert 'has already happened' in str(resp.content)
 
 
 def test_event_unpublished_with_authenticated_user(admin_client, hidden_event):

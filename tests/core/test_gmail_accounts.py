@@ -7,7 +7,7 @@ from core.models import Event
 
 
 @pytest.fixture()
-def veryrandom_event(future_event): #new_event
+def veryrandom_event(future_event):
     return Event.objects.create(
         city=future_event.city,
         country=future_event.country,
@@ -16,7 +16,7 @@ def veryrandom_event(future_event): #new_event
 
 
 @pytest.fixture()
-def second_veryrandom_event(future_event): #second_veryrandom_event
+def second_veryrandom_event(future_event):
     future_event.email = "veryrandom@djangogirls.org"
     future_event.page_url = "veryrandom1"
     future_event.date = "2017-01-01"

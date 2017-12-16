@@ -131,7 +131,6 @@ class Application(models.Model):
         (RSVP_WAITING, 'RSVP: Waiting for response'),
         (RSVP_YES, 'RSVP: Confirmed attendance'),
         (RSVP_NO, 'RSVP: Rejected invitation')
-
     )
 
     form = models.ForeignKey(Form, null=False, blank=False)

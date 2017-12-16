@@ -10,18 +10,19 @@ def event(db):
         name='Test', city='Test', country='Test',
         is_page_live=True, page_url='test')
 
+
 @pytest.fixture
 def form(db, event):
     return Form.objects.create(event=event)
 
 
 @pytest.fixture
-def first_user(db):
+def user(db):
     return User.objects.create(email='test@test.com')
 
 
 @pytest.fixture
-def second_user(db):
+def another_user(db):
     return User.objects.create(email='test2@test.com')
 
 
@@ -36,10 +37,10 @@ def accepted_application(db, form):
         email='recipient@email.com', form=form, state='accepted')
 
 @pytest.fixture
-def email(db, form, first_user):
+def email(db, form, user):
     return Email.objects.create(
         form=form,
-        author=first_user,
+        author=user,
         subject='Test',
         text='Hey! [rsvp-url-yes] [rsvp-url-no] Bye',
         recipients_group='accepted'

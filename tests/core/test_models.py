@@ -12,7 +12,7 @@ def test_delete(events):
     event = events[0]
     event.delete()
     assert Event.objects.count() == 3
-    event = Event.all_objects.get(pk=event.id)
+    event = Event.all_objects.get(pk=event.pk)
     assert event.is_deleted is True
 
 
@@ -73,9 +73,10 @@ def test_is_upcoming():
 
 
 def test_add_to_organizers_group(user):
+    assert not Group.objects.filter(name="Organizers").exists()
     assert user.groups.count() == 0
     user.add_to_organizers_group()
-    # we don't have Group "Oragnizers", so no group is added
+    # we don't have Group "Organizers", so no group is added
     assert user.groups.count() == 0
 
     Group.objects.create(name="Organizers")

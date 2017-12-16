@@ -1,5 +1,4 @@
 import pytest
-import random
 
 from django.db import IntegrityError
 
@@ -9,7 +8,7 @@ from applications.models import Application, Score
 def test_email_page_unique(form):
     Application.objects.create(form=form, email='test@test.pl')
     assert form.application_set.count() == form.number_of_applications
-    assert form.application_set.count() == 1
+    assert form.number_of_applications == 1
 
     with pytest.raises(IntegrityError):
         Application.objects.create(form=form, email='test@test.pl')
@@ -20,19 +19,17 @@ def test_number_of_applications(form):
 
     Application.objects.create(form=form)
     assert form.application_set.count() == form.number_of_applications
-    assert form.application_set.count() == 1
+    assert form.number_of_applications == 1
 
 
-def test_average_score(application, first_user, second_user):
-    assert application.average_score == 0
+def test_average_score(application, user, another_user):
+    assert application.average_score != 4
 
-    score_1 = Score.objects.create(
-        user=first_user, application=application, score=random.randint(1, 5))
+    score_1 = Score.objects.create(user=user, application=application, score=3)
     score_2 = Score.objects.create(
-        user=second_user, application=application, score=random.randint(1, 5))
-    average = sum([score_1.score, score_2.score]) / 2.0
+        user=another_user, application=application, score=5)
 
-    assert application.average_score == average
+    assert application.average_score == 4
 
 
 def test_generating_code(application):
@@ -83,12 +80,12 @@ def test_is_accepted(application):
         assert application.is_accepted == is_accepted
 
 
-def test_is_scored_by_user(application, first_user, second_user):
+def test_is_scored_by_user(application, user, another_user):
     Score.objects.create(
-        user=first_user, application=application, score=random.randint(1, 5))
+        user=user, application=application, score=3)
 
-    assert application.is_scored_by_user(first_user) is True
-    assert application.is_scored_by_user(second_user) is False
+    assert application.is_scored_by_user(user) is True
+    assert application.is_scored_by_user(another_user) is False
 
-    Score.objects.create(user=second_user, application=application, score=0)
-    assert application.is_scored_by_user(second_user) is False
+    Score.objects.create(user=another_user, application=application, score=0)
+    assert application.is_scored_by_user(another_user) is False

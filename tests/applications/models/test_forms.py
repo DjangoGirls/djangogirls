@@ -25,7 +25,7 @@ def test_no_application_dates(event):
 def test_application_open(event):
     now = timezone.now()
     form = Form.objects.create(event=event, open_from=now - timedelta(days=1),
-                                open_until=now + timedelta(days=1))
+                               open_until=now + timedelta(days=1))
     assert form.application_open is True
 
 
