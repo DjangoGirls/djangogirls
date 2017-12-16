@@ -21,7 +21,6 @@ google-api-python-client
 httplib2
 icalendar
 lxml
-mock
 opbeat
 Pillow
 psycopg2
@@ -36,4 +35,5 @@ whitenoise
 freezegun
 pytest
 pytest-cov
+pytest-env
 pytest-django

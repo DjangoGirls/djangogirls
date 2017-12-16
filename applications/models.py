@@ -8,33 +8,7 @@ from django.utils import timezone
 
 from core.models import Event, User
 
-from .utils import DEFAULT_QUESTIONS
-
-QUESTION_TYPES = (
-    ('paragraph', 'Paragraph'),
-    ('text', 'Long text'),
-    ('choices', 'Choices'),
-    ('email', 'Email')
-)
-
-APPLICATION_STATES = (
-    ('submitted', 'Application submitted'),
-    ('accepted', 'Application accepted'),
-    ('rejected', 'Application rejected'),
-    ('waitlisted', 'Application on waiting list'),
-    ('declined', 'Applicant declined'),
-)
-
-RSVP_WAITING = 'waiting'
-RSVP_YES = 'yes'
-RSVP_NO = 'no'
-
-RSVP_STATUSES = (
-    (RSVP_WAITING, 'RSVP: Waiting for response'),
-    (RSVP_YES, 'RSVP: Confirmed attendance'),
-    (RSVP_NO, 'RSVP: Rejected invitation')
-
-)
+from .questions import DEFAULT_QUESTIONS
 
 RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
@@ -99,6 +73,14 @@ class Form(models.Model):
 
 
 class Question(models.Model):
+    TEXT = 'text'
+    QUESTION_TYPES = (
+        ('paragraph', 'Paragraph'),
+        (TEXT, 'Long text'),
+        ('choices', 'Choices'),
+        ('email', 'Email')
+    )
+
     form = models.ForeignKey(Form, null=False, blank=False)
     title = models.TextField(verbose_name="Question")
     help_text = models.TextField(
@@ -134,6 +116,23 @@ class Question(models.Model):
 
 
 class Application(models.Model):
+    APPLICATION_STATES = (
+        ('submitted', 'Application submitted'),
+        ('accepted', 'Application accepted'),
+        ('rejected', 'Application rejected'),
+        ('waitlisted', 'Application on waiting list'),
+        ('declined', 'Applicant declined'),
+    )
+    RSVP_WAITING = 'waiting'
+    RSVP_YES = 'yes'
+    RSVP_NO = 'no'
+
+    RSVP_STATUSES = (
+        (RSVP_WAITING, 'RSVP: Waiting for response'),
+        (RSVP_YES, 'RSVP: Confirmed attendance'),
+        (RSVP_NO, 'RSVP: Rejected invitation')
+    )
+
     form = models.ForeignKey(Form, null=False, blank=False)
     number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -210,11 +209,11 @@ class Application(models.Model):
         """ Returns application and RSVP status or None """
         try:
             application = self.objects.get(rsvp_yes_code=code, form__event=event)
-            return application, RSVP_YES
+            return application, Application.RSVP_YES
         except self.DoesNotExist:
             try:
                 application = self.objects.get(rsvp_no_code=code, form__event=event)
-                return application, RSVP_NO
+                return application, Application.RSVP_NO
             except self.DoesNotExist:
                 return None, None
         return None, None
@@ -271,7 +270,8 @@ class Email(models.Model):
         help_text="You can use HTML syntax in this message. Preview on the right."
     )
     recipients_group = models.CharField(
-        max_length=50, choices=APPLICATION_STATES+RSVP_STATUSES,
+        max_length=50,
+        choices=Application.APPLICATION_STATES+Application.RSVP_STATUSES,
         verbose_name="Recipients",
         help_text="Only people assigned to chosen group will receive this email."
     )
@@ -294,8 +294,8 @@ class Email(models.Model):
         return body
 
     def get_applications(self):
-        application_states = [x[0] for x in APPLICATION_STATES]
-        rsvp_statuses = [x[0] for x in RSVP_STATUSES]
+        application_states = [x[0] for x in Application.APPLICATION_STATES]
+        rsvp_statuses = [x[0] for x in Application.RSVP_STATUSES]
 
         if self.recipients_group in application_states:
             return Application.objects.filter(form=self.form, state=self.recipients_group)

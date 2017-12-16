@@ -147,7 +147,7 @@ class EventApplication(models.Model):
             event = self.create_event()
 
         # sort out Gmail accounts
-        email, email_password = gmail_accounts.get_or_create_gmail(
+        dummy_email, email_password = gmail_accounts.get_or_create_gmail(
             event_application=self,
             event=event
         )

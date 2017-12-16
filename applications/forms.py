@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from core.forms import BetterReCaptchaField
 
 from .models import Answer, Application, Email, Question, Score
-from .utils import generate_form_from_questions
+from .questions import generate_form_from_questions
 
 
 class ApplicationForm(forms.Form):

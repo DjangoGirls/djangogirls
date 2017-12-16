@@ -11,9 +11,8 @@ from core.utils import get_event
 
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
-from .models import (RSVP_WAITING, RSVP_YES, Application, Email, Form,
-                     Question, Score)
-from .utils import (get_applications_for_event, get_organiser_menu,
+from .models import Application, Email, Form, Question, Score
+from .questions import (get_applications_for_event, get_organiser_menu,
                     random_application)
 
 
@@ -304,7 +303,7 @@ def rsvp(request, city, code):
     if not application:
         return redirect('/{}/'.format(event.page_url))
 
-    if application.rsvp_status != RSVP_WAITING:
+    if application.rsvp_status != Application.RSVP_WAITING:
         messages.error(
             request,
             "Something went wrong with your RSVP link. Please contact us at "
@@ -315,7 +314,7 @@ def rsvp(request, city, code):
     application.rsvp_status = rsvp
     application.save()
 
-    if rsvp == RSVP_YES:
+    if rsvp == Application.RSVP_YES:
         message = (
             "Your participation in the workshop has been confirmed! "
             "We can't wait to meet you. We will be in "

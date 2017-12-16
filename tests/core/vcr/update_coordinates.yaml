@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.18.4]
+    method: GET
+    uri: http://nominatim.openstreetmap.org/search?format=json&q=Rome%2C+Italy
+  response:
+    body: {string: "[{\"place_id\":\"178104436\",\"licence\":\"Data \xA9 OpenStreetMap
+        contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"41485\",\"boundingbox\":[\"41.6556417\",\"42.1410285\",\"12.2344669\",\"12.8557603\"],\"lat\":\"41.8933203\",\"lon\":\"12.4829321\",\"display_name\":\"Roma,
+        RM, LAZ, Italia\",\"class\":\"place\",\"type\":\"city\",\"importance\":0.20671592172166,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_place_city.p.20.png\"},{\"place_id\":\"178486693\",\"licence\":\"Data
+        \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"relation\",\"osm_id\":\"41313\",\"boundingbox\":[\"41.4075808\",\"42.2969953\",\"11.7337425\",\"13.2962768\"],\"lat\":\"41.85233365\",\"lon\":\"12.6308541512038\",\"display_name\":\"RM,
+        LAZ, Italia\",\"class\":\"boundary\",\"type\":\"administrative\",\"importance\":0.1125,\"icon\":\"http:\\/\\/nominatim.openstreetmap.org\\/images\\/mapicons\\/poi_boundary_administrative.p.20.png\"}]"}
+    headers:
+      Access-Control-Allow-Methods: ['OPTIONS,GET']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [close]
+      Content-Type: [application/json; charset=UTF-8]
+      Date: ['Wed, 29 Nov 2017 22:50:11 GMT']
+      Server: [Apache/2.4.18 (Ubuntu)]
+    status: {code: 200, message: OK}
+version: 1
