@@ -5,11 +5,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
+from sponsor.models import Donor
 
 
 def index(request):
@@ -143,3 +145,20 @@ def coc(request, lang=None):
         return render(request, template_name)
     except TemplateDoesNotExist:
         raise Http404("No translation for language {}".format(lang))
+
+
+def crowdfunding_donors(request):
+    donor_list = Donor.objects.filter(visible=True).order_by('amount')
+    paginator = Paginator(donor_list, 60)  # Show 60 donors per page
+    page = request.GET.get('page')
+    try:
+        donors = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        donors = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        donors = paginator.page(paginator.num_pages)
+    return render(request, 'core/crowdfunding_donors.html', {
+        'donors': donors,
+    })
