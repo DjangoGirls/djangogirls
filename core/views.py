@@ -11,7 +11,7 @@ from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
-from sponsor.models import Donor
+from sponsor.models import Donor, Quote
 
 
 def index(request):
@@ -148,17 +148,8 @@ def coc(request, lang=None):
 
 
 def crowdfunding_donors(request):
-    donor_list = Donor.objects.filter(visible=True).order_by('amount')
-    paginator = Paginator(donor_list, 60)  # Show 60 donors per page
-    page = request.GET.get('page')
-    try:
-        donors = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        donors = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        donors = paginator.page(paginator.num_pages)
+    donor_list = Donor.objects.filter(visible=True).order_by('-amount', 'name')
+    quotes = Quote.objects.all()
     return render(request, 'core/crowdfunding_donors.html', {
-        'donors': donors,
+        'donor_list': donor_list, 'quotes': quotes,
     })

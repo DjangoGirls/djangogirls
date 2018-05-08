@@ -37,3 +37,16 @@ class Donor(models.Model):
 
     class Meta:
         ordering = ("amount",)
+
+
+class Quote(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    quote = models.TextField()
+    picture = models.FileField()
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ("name",)
