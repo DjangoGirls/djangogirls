@@ -122,3 +122,21 @@ def test_coc_redirect(client):
         resp = client.get(old_url)
         assert resp.status_code == 301
         assert resp['Location'] == new_url
+
+
+def test_crowdfunding_donors(client, visible_donors, hidden_donors):
+    # Access crowdfunding donors page
+    resp = client.get(reverse('core:crowdfunding-donors'))
+    assert resp.status_code == 200
+
+    # Check if it returns list of donors in response
+    assert donors in resp.context
+
+    # Only the visible donors
+    donor_ids = set(donor.pk for donor in resp.context['donors'])
+    visible_donors = set(visible_donor.pk for visible_donor in visible_donors)
+    assert donor_ids == visible_donors
+
+
+
+

@@ -21,25 +21,23 @@
             {% for donor in donor_list %}
                  {% if forloop.first %}<div class="row">{% endif %}
                 <div class="col-md-4">
-                    <h4 class="donor-text">
-                        <img src="{% static 'img/global/donate/pixel-heart.png' %}"> {{ donor.name }}</h4>
+                    <h4 class="donor-text">{{ donor.name }}</h4>
                 </div>
                 {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}
-                {% if forloop.counter|divisibleby:6 %}</div><div class="row"><br />
-                    <div class="col-md-9">
-                     <blockquote>{% for quote in quotes %}{{ quote.quote }} <p>{{ quote.name }}</p>
-                    {% endfor %}</blockquote>
-                    </div>
-                    <div class="col-md-3"><img src="{% static_rev 'img/global/donate/' %}{{ quote.picture }}"></div>
-                   <br />
+                {% if forloop.counter|divisibleby:6 %}
+                    {% for quote in quotes %}
+                        {% if forloop.parentloop.counter|divisibleby:6 %}
+                        <blockquote cite="{{ quote.name }}">{{ quote.quote }} </blockquote>
+                        {% endif %}
+                    {% endfor %}
+                    <br />
                 {% endif %}
-                {% if forloop.last %}</div>{% endif %}
+
             {% endfor %}
 
-         </div>
+        </div>
     </div>
     <div class="col-md-1"></div>
 </div>
 {% endblock %}
-

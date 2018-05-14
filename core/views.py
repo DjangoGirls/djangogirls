@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from patreonmanager.models import FundraisingStatus
 
