@@ -3,13 +3,11 @@ from collections import Counter
 from django.core.management.base import BaseCommand
 
 from ...models import Payment
-from core.utils import opbeat_logging
 
 
 class Command(BaseCommand):
     help = 'List Patrons who need a reward to be sent to them'
 
-    @opbeat_logging()
     def handle(self, *args, **options):
         payments = Payment.objects.filter(
             status=Payment.STATUS.PROCESSED,

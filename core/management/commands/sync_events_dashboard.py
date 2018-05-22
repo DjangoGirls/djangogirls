@@ -8,7 +8,6 @@ from django.core.management.base import BaseCommand
 from trello import ResourceUnavailable, TrelloClient
 
 from core.models import Event
-from core.utils import opbeat_logging
 
 
 # Create new command
@@ -23,7 +22,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('trello_token', type=str)
 
-    @opbeat_logging()
     def handle(self, *args, **options):
         token = options['trello_token']
         events = event_list()
