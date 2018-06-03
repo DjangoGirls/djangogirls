@@ -201,7 +201,7 @@ DEFAULT_QUESTIONS = [
         "is_multiple_choice": True,
     },
     {
-        "title": "I acknowledge that some of my data will be used on Third Party Sites and Service.",
+        "title": "I acknowledge that some of my data will be used on Third Party Sites and Services.",
         "help_text": "Data collected through this form is used only for the "
         "purpose of Django Girls events. We're using Third Party Sites "
         "and Services to make it happen: for example, we're using "
