@@ -223,9 +223,9 @@ def hidden_donors():
 @pytest.fixture()
 def quotes():
     quotes = Quote.objects.bulk_create(
-        Quote(name="", quote=""),
-        Quote(name="", quote=""),
-        Quote(name="", quote=""),
-        Quote(name="", quote=""),
-        Quote(name="", quote="")
+        Quote(name="Unknown", quote="I came for the language but stayed for the community."),
+        Quote(name="Zen of Python", quote="Simple is better than complex."),
+        Quote(name="Zen of Python", quote="Explicit is better than implicit."),
+        Quote(name="Zen of Python", quote="Beautiful is better than ugly.")
     )
+    return quotes
