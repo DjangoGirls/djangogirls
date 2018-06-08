@@ -10,7 +10,7 @@ from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
-from sponsor.models import Donor, Quote
+from sponsor.models import Donor
 
 
 def index(request):
@@ -148,7 +148,6 @@ def coc(request, lang=None):
 
 def crowdfunding_donors(request):
     donor_list = Donor.objects.filter(visible=True).order_by('-amount', 'name')
-    quotes = Quote.objects.all()
     return render(request, 'core/crowdfunding_donors.html', {
-        'donor_list': donor_list, 'quotes': quotes,
+        'donor_list': donor_list,
     })

@@ -25,12 +25,7 @@
                 </div>
                 {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}
-                {% if forloop.counter|divisibleby:6 %}
-                    {% for quote in quotes %}
-                        {% if forloop.parentloop.counter|divisibleby:6 %}
-                        <blockquote cite="{{ quote.name }}">{{ quote.quote }} </blockquote>
-                        {% endif %}
-                    {% endfor %}
+                {% if forloop.counter|divisibleby:42 %}
                     <br />
                 {% endif %}
 
