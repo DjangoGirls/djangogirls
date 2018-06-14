@@ -9,6 +9,7 @@ from django_date_extensions.fields import ApproximateDate
 from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
+from .quotes import DONORS_QUOTES
 from story.models import Story
 from sponsor.models import Donor
 
@@ -150,4 +151,5 @@ def crowdfunding_donors(request):
     donor_list = Donor.objects.filter(visible=True).order_by('-amount', 'name')
     return render(request, 'core/crowdfunding_donors.html', {
         'donor_list': donor_list,
+        'quotes': DONORS_QUOTES,
     })

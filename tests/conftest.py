@@ -4,7 +4,7 @@ from django.contrib.auth.models import Permission, Group
 
 from core.models import Event, User
 from pictures.models import StockPicture
-from sponsor.models import Donor, Quote
+from sponsor.models import Donor
 
 
 @pytest.fixture(autouse=True)
