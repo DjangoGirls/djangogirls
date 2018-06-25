@@ -131,7 +131,7 @@ def test_crowdfunding_donors(client, visible_donors, hidden_donors):
 
     # Check if it returns list of donors in response
     donor_list = visible_donors
-    assert donor_list in resp.context
+    assert set(donor_list) == set(resp.context['donor_list'])
 
     # Only the visible donors
     donor_ids = set(donor.pk for donor in resp.context['donor_list'])
