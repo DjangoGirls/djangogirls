@@ -276,15 +276,3 @@ CODEMIRROR_PATH = "vendor/codemirror/"
 GAPPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
 GAPPS_PRIVATE_KEY_ID = os.environ.get('GAPPS_PRIVATE_KEY_ID', '')
 GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangogirls',
-        'USER': 'postgres',
-        'PASSWORD': 'T@wana03',
-        'OPTIONS': {},
-        'HOST': '',
-        'PORT': '',
-    }
-}
