@@ -4,6 +4,7 @@ from django.contrib.auth.models import Permission, Group
 
 from core.models import Event, User
 from pictures.models import StockPicture
+from sponsor.models import Donor
 
 
 @pytest.fixture(autouse=True)
@@ -195,3 +196,25 @@ def stock_pictures():
             photo_credit="Someone Else",
             photo_link="https://djangogirls.org",
             kind=StockPicture.COVER)])
+
+
+@pytest.fixture()
+def visible_donors():
+    donors = Donor.objects.bulk_create([
+        Donor(name="Ola", amount=50, visible=True),
+        Donor(name="Aisha", amount=50, visible=True),
+        Donor(name="Claire", amount=20, visible=True),
+        Donor(name="Rachel", amount=100, visible=True)
+    ])
+    return donors
+
+
+@pytest.fixture()
+def hidden_donors():
+    hidden_donors = Donor.objects.bulk_create([
+        Donor(name="Gift", amount=20, visible=False),
+        Donor(name="Anna", amount=10, visible=False),
+        Donor(name="Matthew", amount=50, visible=False),
+        Donor(name="Tanaka", amount=100, visible=False)
+    ])
+    return hidden_donors

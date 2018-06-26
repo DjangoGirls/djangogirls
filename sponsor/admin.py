@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import EventPageContent
-from .models import Sponsor
+from .models import Sponsor, Donor
 
 
 class SponsorInline(admin.TabularInline):
@@ -31,3 +31,4 @@ class SponsorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Sponsor, SponsorAdmin)
+admin.site.register(Donor)

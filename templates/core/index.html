@@ -45,31 +45,24 @@
             <!-- Crowdfunding Campaign -->
             <div class="row">
                 <div class="col-md-6">
-                    <h2>We are fundraising!</h2>
+                    <h2>We reached our goal! </h2>
                     <p>
-                         Help Django Girls to grow in 2018!
+                         Thanks to our awesome supporters!
                     </p>
                     <p>
-                        We are running a crowdfunding campaign to help us raise the funds we need to continue
-                        our work on <a href="https://www.generosity.com/community-fundraising/django-girls-fundraising-campaign/x/17493288"
-                                        target="_blank">Indiegogo's Generosity website.</a>
+                        This year (2018) we ran a crowdfunding campaign on Indiegogo's generosity website from the
+                        29th January to the 29th of March with the aim of raising US $10,000. We are truly grateful to all
+                        our awesome <a href="{% url 'core:crowdfunding-donors' %}">supporters </a>who helped reach
+                        our target goal. We managed to raise a total of $13,314 - 133% of our goal!
                     </p>
+
                     <p>
-                        We have been to 386 countries in 86 countries so far and we don't want to
-                        stop here. We would like to empower more women to organize workshops and continue to support our
-                        volunteers.
-                    </p>
-                    <p>
-                        Help us to scale in 2018. Please support <a href="https://www.generosity.com/community-fundraising/django-girls-fundraising-campaign/x/17493288"
-                                                                    target="_blank">our campaign</a>.
+                        See them all <a href="{% url 'core:crowdfunding-donors' %}">here</a>.
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <a href="https://www.generosity.com/community-fundraising/django-girls-fundraising-campaign/x/17493288"
-                       target="_blank"><h2>Django Girls Fundraising Campaign </h2>
-                    <img src="https://c1.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,f_auto,h_440,w_704/v1512071903/g1gct4awp2llvhjtcgma.png"
-                            alt="Django Girls Campaign"
-                            width="500" height="300"></a>
+                    <a href="{% url 'core:crowdfunding-donors' %}"><h2>Meet our Awesome Supporters!</h2>
+                    <img src="{% static 'img/global/donate/ghana.png' %}"></a>
                 </div>
             </div>
             
