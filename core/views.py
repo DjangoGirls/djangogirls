@@ -10,6 +10,8 @@ from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
+from sponsor.models import Donor
+from .quotes import DONOR_QUOTES
 
 
 def index(request):
@@ -143,3 +145,11 @@ def coc(request, lang=None):
         return render(request, template_name)
     except TemplateDoesNotExist:
         raise Http404("No translation for language {}".format(lang))
+
+
+def crowdfunding_donors(request):
+    donor_list = Donor.objects.filter(visible=True).order_by('amount')
+    return render(request, 'core/crowdfunding_donors.html', {
+        'donor_list': donor_list,
+        'quotes': DONOR_QUOTES,
+    })

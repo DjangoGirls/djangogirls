@@ -24,3 +24,16 @@ class Sponsor(models.Model):
             return "No logo"
 
     logo_display_for_admin.allow_tags = True
+
+
+class Donor(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    amount = models.FloatField()
+    visible = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ("amount",)
