@@ -3,7 +3,7 @@ register = template.Library()
 
 @register.simple_tag
 def element_by_counter(data, counter, divider):
-    if counter == 0:
+    if divider == 0:
         return ''
     else:
         index = int(counter / divider)
