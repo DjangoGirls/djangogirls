@@ -148,7 +148,7 @@ def coc(request, lang=None):
 
 
 def crowdfunding_donors(request):
-    donor_list = Donor.objects.filter(visible=True).order_by('amount')
+    donor_list = Donor.objects.filter(visible=True).order_by('-amount')
     return render(request, 'core/crowdfunding_donors.html', {
         'donor_list': donor_list,
         'quotes': DONOR_QUOTES,
