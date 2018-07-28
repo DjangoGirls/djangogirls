@@ -35,9 +35,9 @@
                 </div>
                 {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                 {% if forloop.last %}</div>{% endif %}
-                {% if forloop.counter|divisibleby:30 %}
+                {% if forloop.counter|divisibleby:15 %}
                     <br />
-                    {% element_by_counter quotes forloop.counter0 30 as quote %}
+                    {% element_by_counter quotes forloop.counter0 15 as quote %}
                         <blockquote cite="{{ quote.name }}">{{ quote.text }} -
                         <a href="{{ quote.name }}">{{ quote.name }} </a></blockquote>
                     <br />
