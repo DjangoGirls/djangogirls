@@ -29,7 +29,7 @@ class StockPicture(models.Model):
             "Only use pictures with a "
             "<a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."))
     photo_link = models.URLField("photo URL")
-    kind = models.CharField(max_length=2, choices=KIND_CHOICES, blank=False)
+    kind = models.CharField(max_length=2, choices=KIND_CHOICES)
 
     objects = EventPictureManager()
 
