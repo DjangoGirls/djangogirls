@@ -21,7 +21,7 @@ class ContactEmail(models.Model):
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False,
+        max_length=20, choices=CONTACT_TYPE_CHOICES,
         default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
