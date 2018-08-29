@@ -43,3 +43,6 @@ class Coach(models.Model):
                 return DEFAULT_COACH_PHOTO
 
         return DEFAULT_COACH_PHOTO
+    
+    # Adding new coaches currently results is "saved" confirmation, but no entry in the database
+    self.save()
