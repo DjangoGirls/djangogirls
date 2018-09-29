@@ -144,7 +144,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
                 if new_status == REJECTED:
                     application.reject()
                 else:
-                    application.deploy()
+                    event = application.deploy()
+                    application.send_deployed_email(event)
         else:
             messages.error(request, 'Invalid status provided for application')
             return redirect(
