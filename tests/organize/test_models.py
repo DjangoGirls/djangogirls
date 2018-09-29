@@ -37,10 +37,7 @@ def test_deploy_event_from_previous_event(
         get_or_create_gmail, base_application, mailoutbox, stock_pictures):
     base_application.create_event()
     base_application.deploy()
-
     assert base_application.status == DEPLOYED
-    assert "Access to Django Girls website" in email_subjects
-    assert "Congrats! Your application to organize Django Girls London has been accepted!" in email_subjects
 
 
 @mock.patch('organize.models.gmail_accounts.get_or_create_gmail')
@@ -56,6 +53,8 @@ def test_send_deployed_email(
 
     email_subjects = [e.subject for e in mailoutbox]
     assert len(mailoutbox) == 2
+    assert "Access to Django Girls website" in email_subjects
+    assert "Congrats! Your application to organize Django Girls London has been accepted!" in email_subjects
 
 
 @vcr.use_cassette('tests/organize/vcr/latlng.yaml')
