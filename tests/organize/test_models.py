@@ -35,18 +35,27 @@ def test_reject_method(base_application, mailoutbox):
 @mock.patch('organize.models.gmail_accounts.get_or_create_gmail')
 def test_deploy_event_from_previous_event(
         get_or_create_gmail, base_application, mailoutbox, stock_pictures):
-    get_or_create_gmail.return_value = (
-        '{}@djangogirls.org'.format(base_application.city),
-        'asd123ASD')
     base_application.create_event()
     base_application.deploy()
 
     assert base_application.status == DEPLOYED
-    email_subjects = [e.subject for e in mailoutbox]
-    assert len(mailoutbox) == 2
-
     assert "Access to Django Girls website" in email_subjects
     assert "Congrats! Your application to organize Django Girls London has been accepted!" in email_subjects
+
+
+@mock.patch('organize.models.gmail_accounts.get_or_create_gmail')
+def test_send_deployed_email(
+        get_or_create_gmail, base_application, mailoutbox, stock_pictures):
+    get_or_create_gmail.return_value = (
+            '{}@djangogirls.org'.format(base_application.city),
+            'asd123ASD')
+
+    base_application.create_event()
+    event = base_application.deploy()
+    base_application.send_deployed_email(event)
+
+    email_subjects = [e.subject for e in mailoutbox]
+    assert len(mailoutbox) == 2
 
 
 @vcr.use_cassette('tests/organize/vcr/latlng.yaml')
