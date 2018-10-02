@@ -44,8 +44,8 @@ def test_deploy_event_from_previous_event(
 def test_send_deployed_email(
         get_or_create_gmail, base_application, mailoutbox, stock_pictures):
     get_or_create_gmail.return_value = (
-            '{}@djangogirls.org'.format(base_application.city),
-            'asd123ASD')
+        '{}@djangogirls.org'.format(base_application.city),
+        'asd123ASD')
 
     base_application.create_event()
     event = base_application.deploy()
