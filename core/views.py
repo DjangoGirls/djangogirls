@@ -57,7 +57,8 @@ def event(request, city):
 
     user = request.user
     user_is_organizer = user.is_authenticated() and event.has_organizer(user)
-    previewable = user_is_organizer or 'preview' in request.GET
+    is_preview = 'preview' in request.GET
+    previewable = user.is_superuser or user_is_organizer or is_preview
 
     if not (event.is_page_live or previewable):
         return render(
