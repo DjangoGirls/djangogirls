@@ -78,15 +78,49 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     assert 'has already happened' in str(resp.content)
 
 
-def test_event_unpublished_with_authenticated_user(admin_client, hidden_event):
+def test_event_unpublished_with_auth_superuser(admin_client, hidden_event):
     """ Test that an unpublished page can be accessed when the user is
-    authenticated """
+    authenticated and a superuser"""
 
     url = '/' + hidden_event.page_url + '/'
     resp = admin_client.get(url)
 
     assert resp.status_code == 200
     # Check if website is returning correct data
+    assert hidden_event.page_title in resp.content.decode('utf-8')
+
+
+def test_event_unpublished_with_auth_not_organizer(user, client, hidden_event):
+    """ Test that an unpublished page can be accessed when the user is
+    authenticated and a superuser"""
+
+    url = '/' + hidden_event.page_url + '/'
+    client.force_login(user)
+    resp = client.get(url)
+
+    assert resp.status_code == 200
+    assert 'city' and 'past' in resp.context
+
+
+def test_event_unpublished_with_auth_in_team(user, client, hidden_event):
+    hidden_event.team.add(user)
+
+    url = '/' + hidden_event.page_url + '/'
+    client.force_login(user)
+    resp = client.get(url)
+
+    assert resp.status_code == 200
+    assert hidden_event.page_title in resp.content.decode('utf-8')
+
+
+def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
+    hidden_event.main_organizer = user
+
+    url = '/' + hidden_event.page_url + '/'
+    client.force_login(user)
+    resp = client.get(url)
+
+    assert resp.status_code == 200
     assert hidden_event.page_title in resp.content.decode('utf-8')
 
 
