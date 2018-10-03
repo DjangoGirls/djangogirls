@@ -205,6 +205,13 @@ class Event(models.Model):
                    for x in self.team.all()]
         return ", ".join(members)
 
+    def has_organizer(self, user):
+        """
+        Return whether a specific user is an organizer of the event
+        """
+        return self.main_organizer == user or self.team.filter(
+            id=user.id).exists()
+
     @property
     def has_stats(self):
         return bool(self.applicants_count and self.attendees_count)

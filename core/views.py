@@ -55,8 +55,11 @@ def event(request, city):
     if event.page_url != city:
         return redirect('core:event', city=event.page_url, permanent=True)
 
-    can_show = request.user.is_authenticated() or 'preview' in request.GET
-    if not event.is_page_live and not can_show:
+    user = request.user
+    user_is_organizer = user.is_authenticated() and event.has_organizer(user)
+    previewable = user_is_organizer or 'preview' in request.GET
+
+    if not (event.is_page_live or previewable):
         return render(
             request,
             'applications/event_not_live.html',
