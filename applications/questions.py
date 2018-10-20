@@ -189,12 +189,6 @@ DEFAULT_QUESTIONS = [
     },
     {
         "title": "How did you hear about Django Girls?",
-        "help_text": "Django Girls is a volunteer-run organisation and we "
-        "look for people who are active and can help us help more women get "
-        "into the field. We want you to share what you learn at the workshop "
-        "with others in different ways: by organising a Django Girls event "
-        "in your city, talking about Django Girls on your local meetups, "
-        "writing a blog or simply teaching your friends.",
         "question_type": "choices",
         "choices": "Facebook; Twitter; From a friend; PyLadies",
         "is_required": False,
