@@ -34,7 +34,7 @@ class Reward(models.Model):
         return self.name
 
 
-class PaymentQuerySet(models.QuerySet):
+class PaymentManager(models.Manager):
 
     def complete(self):
         return self.update(completed=True)
@@ -61,7 +61,7 @@ class Payment(models.Model):
         _("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
     completed = models.BooleanField(_("completed"), default=False)
 
-    objects = PaymentQuerySet.as_manager()
+    objects = PaymentManager()
 
     class Meta:
         verbose_name = _("payment")
