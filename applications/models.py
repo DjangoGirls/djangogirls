@@ -14,7 +14,7 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 
 
 class Form(models.Model):
-    event = models.OneToOneField(Event, null=False)
+    event = models.OneToOneField(Event)
     text_header = models.CharField(
         max_length=255, default="Apply for a spot at Django Girls [City]!")
     text_description = models.TextField(
@@ -96,8 +96,7 @@ class Question(models.Model):
     is_multiple_choice = models.BooleanField(
         default=False, verbose_name="Are there multiple choices allowed?",
         help_text="Used only with 'Choices' question type")
-    order = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Position of the question")
+    order = models.PositiveIntegerField(help_text="Position of the question")
 
     class Meta:
         ordering = ['order']

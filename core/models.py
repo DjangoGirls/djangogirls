@@ -110,10 +110,10 @@ class EventManager(models.Manager):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     date = ApproximateDateField(blank=True, validators=[validate_approximatedate])
-    city = models.CharField(max_length=200, null=False, blank=False)
-    country = models.CharField(max_length=200, null=False, blank=False)
+    city = models.CharField(max_length=200)
+    country = models.CharField(max_length=200)
     latlng = models.CharField("latitude and longitude", max_length=30, null=True, blank=True)
     photo = models.ImageField(upload_to="event/cities/", null=True, blank=True,
                               help_text="The best would be 356 x 210px")
@@ -288,16 +288,14 @@ class Event(models.Model):
 class EventPageContent(models.Model):
     event = models.ForeignKey(Event, null=False,
                               blank=False, related_name="content")
-    name = models.CharField(null=False, blank=False, max_length=100)
-    content = models.TextField(
-        null=False, blank=False, help_text="HTML allowed")
+    name = models.CharField(max_length=100)
+    content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
         upload_to="event/backgrounds/", null=True, blank=True,
         help_text="Optional background photo")
     position = models.PositiveIntegerField(
-        null=False, blank=False,
         help_text="Position of the block on the website")
-    is_public = models.BooleanField(null=False, blank=False, default=False)
+    is_public = models.BooleanField(default=False)
     coaches = models.ManyToManyField("coach.Coach", verbose_name='Coaches')
     sponsors = models.ManyToManyField("sponsor.Sponsor", verbose_name='Sponsors')
 
@@ -312,12 +310,12 @@ class EventPageContent(models.Model):
 class EventPageMenu(models.Model):
     event = models.ForeignKey(Event, null=False,
                               blank=False, related_name="menu")
-    title = models.CharField(max_length=255, null=False, blank=False)
+    title = models.CharField(max_length=255)
     url = models.CharField(
-        max_length=255, null=False, blank=False,
+        max_length=255,
         help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(
-        null=False, blank=False, help_text="Order of menu")
+        help_text="Order of menu")
 
     def __str__(self):
         return self.title

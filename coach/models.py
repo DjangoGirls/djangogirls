@@ -10,7 +10,7 @@ DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
 
 class Coach(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     twitter_handle = models.CharField(
         max_length=200, null=True, blank=True,
         help_text="No @, No http://, just username")
