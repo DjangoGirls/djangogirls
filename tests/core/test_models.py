@@ -82,3 +82,24 @@ def test_add_to_organizers_group(user):
     Group.objects.create(name="Organizers")
     user.add_to_organizers_group()
     assert user.groups.count() == 1
+
+
+def test_has_organizer_no_organizer(user, future_event):
+    future_event.main_organizer = None
+    future_event.team.clear()
+
+    assert not future_event.has_organizer(user)
+
+
+def test_has_organizer_in_team(user, future_event):
+    future_event.main_organizer = None
+    future_event.team.add(user)
+
+    assert future_event.has_organizer(user)
+
+
+def test_has_organizer_main_organizer(user, future_event):
+    future_event.main_organizer = user
+    future_event.team.clear()
+
+    assert future_event.has_organizer(user)
