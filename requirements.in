@@ -21,7 +21,6 @@ google-api-python-client
 httplib2
 icalendar
 lxml
-opbeat
 Pillow
 psycopg2
 py-trello

@@ -5,7 +5,6 @@ from os import path
 from django.core.management.base import BaseCommand
 
 from ...utils.download import _download, gen_monthly_report_links, login
-from core.utils import opbeat_logging
 
 
 class Command(BaseCommand):
@@ -16,7 +15,6 @@ class Command(BaseCommand):
         parser.add_argument('-p', '--password', help="Patreon password")
         parser.add_argument('-d', '--directory', help="save CSV reports to DIRECTORY", default='.')
 
-    @opbeat_logging()
     def handle(self, *args, **options):
         if not options['username']:
             options['username'] = input("Patreon username: ")

@@ -6,7 +6,6 @@ from django.utils.timezone import make_aware
 
 from ...models import Patron, Payment, Reward
 from ...utils.csv import guess_month_from_filename, unflatten_csv
-from core.utils import opbeat_logging
 
 
 class Command(BaseCommand):
@@ -18,7 +17,6 @@ class Command(BaseCommand):
             '--create-rewards', help="create missing rewards if needed",
             action='store_true')
 
-    @opbeat_logging()
     def handle(self, *args, **options):
         if options['verbosity'] > 0:
             logging.basicConfig(level=logging.INFO)

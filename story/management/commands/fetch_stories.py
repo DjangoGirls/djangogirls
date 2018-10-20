@@ -7,7 +7,6 @@ from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
 from pyquery import PyQuery as pq
 
-from core.utils import opbeat_logging
 from story.models import Story
 
 try:
@@ -19,7 +18,6 @@ except ImportError:
 class Command(BaseCommand):
     help = 'Fetch Django Girls stories from our blog'
 
-    @opbeat_logging()
     def handle(self, *args, **options):
 
         rss_url = 'http://blog.djangogirls.org/rss'

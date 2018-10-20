@@ -7,7 +7,7 @@
 attrs==17.3.0             # via pytest
 boto3==1.4.8
 botocore==1.8.6           # via boto3, s3transfer
-certifi==2017.11.5        # via opbeat, requests
+certifi==2017.11.5        # via requests
 chardet==3.0.4            # via requests
 click==6.7
 coverage==4.4.2           # via pytest-cov
@@ -42,7 +42,6 @@ multidict==3.3.2          # via yarl
 oauth2client==4.1.2       # via google-api-python-client
 oauthlib==2.0.6           # via requests-oauthlib
 olefile==0.44             # via pillow
-opbeat==3.5.3
 pillow==4.3.0
 pluggy==0.6.0             # via pytest
 psycopg2==2.7.3.2
@@ -65,7 +64,7 @@ s3transfer==0.1.12        # via boto3
 six==1.11.0               # via django-click, freezegun, google-api-python-client, oauth2client, pytest, python-dateutil, vcrpy
 slacker==0.9.60
 uritemplate==3.0.0        # via google-api-python-client
-urllib3==1.22             # via opbeat, requests
+urllib3==1.22             # via requests
 vcrpy==1.11.1
 whitenoise==3.3.1
 wrapt==1.10.11            # via vcrpy
