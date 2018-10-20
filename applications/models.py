@@ -28,7 +28,7 @@ class Form(models.Model):
         "djangogirls-how-we-scored-applications'>Django Girls "
         "blog</a>. Good luck!")
     confirmation_mail = models.TextField(
-        default="Hi there!"
+        default="Hi there!\n\n"
         "This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. "
         "Yay! That's a huge step already, we're proud of you!\n\n"
         "Mind that this is not a confirmation of participation in the event, but a confirmation that we received your application.\n\n"
