@@ -1,6 +1,6 @@
-boto3==1.4.8
-click==6.7
-dj-database-url==0.4.2
+boto3==1.9.28
+click==7.0
+dj-database-url==0.5.0
 django-autoslug==1.9.3
 django-click==2.1.0
 django-codemirror-widget==0.4.1
@@ -18,9 +18,9 @@ django==1.11.7
 djrill==2.1.0
 easy-thumbnails==2.5
 freezegun==0.3.9
-google-api-python-client==1.6.4
+google-api-python-client==1.7.4
 httplib2==0.10.3
-icalendar==4.0.0
+icalendar==4.0.3
 lxml==4.1.1
 pillow==4.3.0
 psycopg2==2.7.3.2
@@ -32,6 +32,6 @@ pytest-env==0.6.2
 pytest==3.3.0
 requests==2.18.4
 sentry-sdk==0.4.3
-slacker==0.9.60
+slacker==0.9.65
 vcrpy==1.11.1
 whitenoise==3.3.1
