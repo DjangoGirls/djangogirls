@@ -56,7 +56,7 @@ def event(request, city):
         return redirect('core:event', city=event.page_url, permanent=True)
 
     user = request.user
-    user_is_organizer = user.is_authenticated() and event.has_organizer(user)
+    user_is_organizer = user.is_authenticated and event.has_organizer(user)
     is_preview = 'preview' in request.GET
     previewable = user.is_superuser or user_is_organizer or is_preview
 

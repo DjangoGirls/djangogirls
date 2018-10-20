@@ -80,7 +80,7 @@ def command():
         # Edit previous email account
         event.email = "{}{:02d}{}@djangogirls.org".format(event.email.split('@')[0], event.date.month, event.date.year)
     else:
-        new_event.team = organizers
+        new_event.team.set(organizers)
 
     # Change the title and url of previous event page
     event.page_title = "{} #{}".format(name, number-1)

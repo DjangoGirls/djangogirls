@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = "core"
 urlpatterns = [
     # url(r'^test-404/$', 'core.views.error404'),
     url(r'^events/$', views.events, name='events'),
