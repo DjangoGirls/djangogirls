@@ -131,34 +131,6 @@ For a coverage report with information about missing lines, run this:
 	python -m pytest --cov-report term-missing --cov
 
 
-## Update requirements.txt
-
-You will need to install `pip-tools`:
-
-    pip install pip-tools
-
-Then compile `requirements.in` into a new list of requirements:
-
-    pip-compile
-
-To try and update a particular dependency:
-
-    pip-compile -P django
-
-You can also tell it to try and update all the dependency versions:
-
-    pip-compile -U
-
-Please note that `pip-compile` will not install or upgrade any packages. You
-still need to install them separately.
-
-`pip-tools` also provides a tool that will install all required packages and
-uninstall all packages that are not explicitly required. This can prove useful
-when removing dependencies to make sure no code tries to import them:
-
-    pip-sync
-
-
 ### Static files
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).

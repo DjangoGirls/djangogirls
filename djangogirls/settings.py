@@ -1,6 +1,7 @@
 import os
-
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
@@ -197,9 +198,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_DSN')
-}
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
 

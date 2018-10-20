@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^workshop-box/$', views.workshop_box, name='workshop-box'),
     url(r'^coc/(?:(?P<lang>[a-z-]+)/)?$', views.coc, name='coc'),
     url(r'^crowdfunding-donors/$', views.crowdfunding_donors, name='crowdfunding-donors'),
+    url(r'^server-error/$', views.server_error, name='server_error'),
     url(r'^(?P<city>[\w\d/]+)/$', views.event, name='event'),
     url(r'^$', views.index, name='index'),
 ]

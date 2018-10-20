@@ -141,6 +141,10 @@ def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
 
 
+def server_error(request):
+    return HttpResponse(status=500)
+
+
 def coc(request, lang=None):
     if lang is None:
         lang = 'en'
