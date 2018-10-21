@@ -2,7 +2,7 @@ from datetime import datetime
 from unittest import mock
 
 import vcr
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from core.models import Event
 

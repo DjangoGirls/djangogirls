@@ -1,6 +1,6 @@
-from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django_countries import countries
+from django_extensions.db.fields import AutoSlugField
 from django.db import models, transaction
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDateField
@@ -27,7 +27,8 @@ from .emails import (
 
 
 class EventApplication(models.Model):
-    previous_event = models.ForeignKey(Event, null=True, blank=True)
+    previous_event = models.ForeignKey(Event, null=True, blank=True,
+                                      on_delete=models.deletion.SET_NULL)
     # workshop fields
     date = ApproximateDateField(validators=[validate_approximatedate])
     city = models.CharField(max_length=200)
@@ -218,7 +219,8 @@ class EventApplication(models.Model):
 class Coorganizer(models.Model):
     event_application = models.ForeignKey(
         EventApplication,
-        related_name="coorganizers")
+        related_name="coorganizers",
+        on_delete=models.deletion.CASCADE)
     email = models.EmailField()
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30, blank=True, default="")

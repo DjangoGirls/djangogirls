@@ -1,26 +1,25 @@
-from django.conf.urls import url
+from django.urls import path
 
 from applications import views
 
-app_name = "applications"
+app_name = 'applications'
 urlpatterns = [
-    url(r'^(?P<city>[\w\d/]+)/apply/$', views.apply, name='apply'),
-    url(r'^(?P<city>[\w\d/]+)/applications/$',
-        views.application_list, name='applications'),
-    url(r'^(?P<city>[\w\d/]+)/applications/(?P<app_number>\d+)$',
-        views.application_detail, name='application_detail'),
-    url(r'^(?P<city>[\w\d/]+)/applications/change_state/$',
-        views.change_state, name='change_state'),
-    url(r'^(?P<city>[\w\d/]+)/applications/change_rsvp/$',
-        views.change_rsvp, name='change_rsvp'),
-    url(r'^(?P<city>[\w\d/]+)/applications/download/$',
-        views.applications_csv, name='applications_csv'),
-    url(r'^(?P<city>[\w\d/]+)/communication/$',
-        views.communication, name='communication'),
-    url(r'^(?P<city>[\w\d/]+)/communication/compose/$',
-        views.compose_email, name='compose_email'),
-    url(r'^(?P<city>[\w\d/]+)/communication/compose/(?P<email_id>\d+)$',
-        views.compose_email, name='compose_email'),
-    url(r'^(?P<city>[\w\d/]+)/rsvp/(?P<code>[\w\d/]+)$',
-        views.rsvp, name='rsvp'),
+    path('<slug:city>/apply/', views.apply, name='apply'),
+    path('<slug:city>/applications/',
+         views.application_list, name='applications'),
+    path('<slug:city>/applications/<int:app_number>',
+         views.application_detail, name='application_detail'),
+    path('<slug:city>/applications/change_state/',
+         views.change_state, name='change_state'),
+    path('<slug:city>/applications/change_rsvp/',
+         views.change_rsvp, name='change_rsvp'),
+    path('<slug:city>/applications/download/',
+         views.applications_csv, name='applications_csv'),
+    path('<slug:city>/communication/',
+         views.communication, name='communication'),
+    path('<slug:city>/communication/compose/',
+         views.compose_email, name='compose_email'),
+    path('<slug:city>/communication/compose/<int:email_id>',
+         views.compose_email, name='compose_email'),
+    path('<slug:city>/rsvp/<slug:code>', views.rsvp, name='rsvp'),
 ]

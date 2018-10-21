@@ -1,5 +1,5 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 from easy_thumbnails.exceptions import InvalidImageFormatError
