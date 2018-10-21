@@ -15,7 +15,7 @@ django-recaptcha==1.4.0
 django-storages==1.7.1
 django-suit-redactor==0.0.4
 django-suit==0.2.26
-django==2.1.2
+django==2.0.9
 djrill==2.1.0
 easy-thumbnails==2.5
 freezegun==0.3.11
