@@ -27,7 +27,7 @@ urlpatterns = [
         name='admin_password_reset'),
 
     # Regular links:
-    path(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('account/', include('django.contrib.auth.urls')),
     path('coach/', include('coach.urls')),
