@@ -1,4 +1,4 @@
-boto3==1.9.28
+boto3==1.9.34
 click==7.0
 dj-database-url==0.5.0
 django-autoslug==1.9.3
@@ -15,7 +15,7 @@ django-recaptcha==1.4.0
 django-storages==1.7.1
 django-suit-redactor==0.0.4
 django-suit==0.2.26
-django==2.0.9
+Django==2.1.2
 djrill==2.1.0
 easy-thumbnails==2.5
 freezegun==0.3.11
@@ -31,8 +31,8 @@ pyquery==1.4.0
 pytest-cov==2.6.0
 pytest-django==3.4.3
 pytest-env==0.6.2
-pytest==3.9.1
+pytest==3.9.3
 requests==2.20.0
-sentry-sdk==0.4.3
+sentry-sdk==0.5.2
 slacker==0.9.65
 vcrpy==2.0.1
