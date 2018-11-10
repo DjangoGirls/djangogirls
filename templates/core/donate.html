@@ -51,9 +51,9 @@
                 </div>
 
                 <div class="col-md-6">
-                    <p><span class="highlighted-number">$1,162</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged</p>
+                    <p><span class="highlighted-number">${{ patreon_stats.amount_raised }}</span> of <span class="highlighted-number">${{ patreon_stats.GOAL }}</span> monthly goal pledged</p>
                         <div class="support-bar">
-                            <div class="pledge" style="width: 77%">77%
+                            <div class="pledge" style="width: {{ patreon_stats.percentage_of_goal }}%">{{ patreon_stats.percentage_of_goal }}%
                             </div>
                         </div>
                         <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
