@@ -36,6 +36,7 @@ def login(email, password):
     response = session.post(
         LOGIN_URL,
         json={"data": {"email": email, "password": password}})
+
     assert response.status_code == 200
     logging.info("Login successful!")
     # TODO: handle bad username/password

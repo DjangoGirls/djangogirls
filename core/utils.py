@@ -57,6 +57,7 @@ def get_approximate_date(date_str):
             return None
     return None
 
+
 def next_sunday(day):
     """
     Return a date object corresponding to the next Sunday after the given date.
@@ -82,6 +83,7 @@ def next_deadline():
         return next_sunday(next_sunday(today))
     else:
         return next_sunday(today)
+
 
 @contextmanager
 def opbeat_logging():
