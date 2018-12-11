@@ -1,7 +1,13 @@
 import os
 import dj_database_url
+import dotenv
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+LOCAL_DEVELOPMENT = os.getenv("LOCAL_DEVELOPMENT", False)
+
+if LOCAL_DEVELOPMENT:
+    dotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'

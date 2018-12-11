@@ -12,6 +12,7 @@ __pycache__
 /src
 /include
 .coverage
+.env
 .venv
 static/media
 .idea/*
