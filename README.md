@@ -73,10 +73,9 @@ Create a new virtual environment if needed. Then, install all the required depen
 
     pip install -r requirements.txt
 
-Create a environmental variable file for storing local secrets and enable loading of it by enabling the `LOCAL_DEVELOPMENT` flag:
+Create a environmental variable file for storing local secrets:
 
     cp .env.example .env
-    export LOCAL_DEVELPOMENT="true"
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 
