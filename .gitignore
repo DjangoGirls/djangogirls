@@ -1,6 +1,7 @@
 .DS_Store
 *.sqlite3
 *.pyc
+.python-version
 staticfiles/
 uploads/
 local_settings.py

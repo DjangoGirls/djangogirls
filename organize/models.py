@@ -147,12 +147,6 @@ class EventApplication(models.Model):
         else:
             event = self.create_event()
 
-        # sort out Gmail accounts
-        dummy_email, email_password = gmail_accounts.get_or_create_gmail(
-            event_application=self,
-            event=event
-        )
-
         # add main organizer of the Event
         main_organizer = event.add_organizer(
             self.main_organizer_email,
@@ -169,6 +163,14 @@ class EventApplication(models.Model):
                 organizer.first_name,
                 organizer.last_name
             )
+        return event
+
+    def send_deployed_email(self, event):
+        # sort out Gmail accounts
+        dummy_email, email_password = gmail_accounts.get_or_create_gmail(
+            event_application=self,
+            event=event
+        )
 
         # TODO: remove organizers, who are no longer in org team if cloned
         send_application_deployed_email(
