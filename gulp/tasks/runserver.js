@@ -13,12 +13,15 @@ gulp.task("runserver", ["watch"], function() {
     process.env["VIRTUAL_ENV"] + pythonPath,
     ["manage.py", "runserver"],
     { stdio: "inherit" }
-  ).on("error", function(error) {
+  );
+
+  runserver.on("error", function(error) {
     console.log(
       `${chalk.red(
         "Something went wrong."
-      )} You probably haven't activated the virtual environment.`
+      )} You probably haven't activated the virtual environment. Check the stack trace below.\n`
     );
+    console.error(error);
     process.exit();
   });
 
