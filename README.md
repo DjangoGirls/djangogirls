@@ -104,13 +104,9 @@ Install dependencies for static files:
 
     npm install
 
-Compile CSS and JS files:
+Compile CSS and JS files and run local Django server:
 
-    gulp watch
-
-Run your local server:
-
-     ./manage.py runserver
+    gulp runserver
 
 :tada: You're done.
 
