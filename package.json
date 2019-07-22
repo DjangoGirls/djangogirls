@@ -10,10 +10,9 @@
     "url": "https://github.com/DjangoGirls/djangogirls/issues"
   },
   "homepage": "https://github.com/DjangoGirls/djangogirls#readme",
-  "dependencies": {
-    "chalk": "^2.4.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "chalk": "^2.4.2",
     "bootstrap": "^3.3.6",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
