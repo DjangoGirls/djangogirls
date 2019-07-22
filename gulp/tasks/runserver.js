@@ -21,8 +21,7 @@ gulp.task("runserver", ["watch"], function() {
         "Something went wrong."
       )} You probably haven't activated the virtual environment. Check the stack trace below.\n`
     );
-    console.error(error);
-    process.exit();
+    throw error;
   });
 
   runserver.on("close", function(code) {
