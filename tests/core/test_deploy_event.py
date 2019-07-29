@@ -47,7 +47,7 @@ def test_copy_event(past_event):
     past_event = Event.objects.get(pk=previous_event_id)
 
     assert past_event.name == "{} #1".format(previous_name)
-    assert new_event.name == "{} #2".format(previous_name)
+    assert new_event.name == previous_name
     assert past_event.date != new_event.date
 
     assert past_event.city == new_event.city

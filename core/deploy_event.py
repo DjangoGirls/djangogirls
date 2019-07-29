@@ -12,6 +12,10 @@ def copy_event(previous_event, event_date):
     number = Event.objects.filter(city=previous_event.city,
                                   country=previous_event.country).count()
     previous_event_id = previous_event.pk
+    previous_event_name = "{} #{}".format(
+        previous_event.name.split("#")[0],
+        previous_event.number
+    )
 
     # Copy event with a name {name} #{number}, new date and empty stats
     new_event = previous_event
@@ -25,10 +29,9 @@ def copy_event(previous_event, event_date):
 
     # Change url, title and name of previous event to {name} #{number}
     previous_event = Event.objects.get(pk=previous_event_id)
-    previous_event.page_title = "{} #{}".format(
-        previous_event.page_title.split("#")[0],
-        previous_event.number
-    )
+
+    previous_event.name = previous_event_name
+    previous_event.page_title = previous_event_name
     previous_event.page_url += str(previous_event.number)
     previous_event.save()
 
