@@ -268,7 +268,7 @@ class Event(models.Model):
             "is_active": True
         }
         user, created = User.objects.get_or_create(
-            email=email,
+            email__iexact=email,  # case insensitive match
             defaults=defaults
         )
         password = None
