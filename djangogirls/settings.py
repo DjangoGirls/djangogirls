@@ -36,7 +36,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'storages',
     'markdown_deux',
-    'djrill',
     'easy_thumbnails',
     'captcha',
     'django_countries',
@@ -209,7 +208,7 @@ if SENTRY_DSN:
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
 
-MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
                                "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
