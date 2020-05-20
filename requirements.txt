@@ -23,7 +23,7 @@ django-sendgrid-v5==0.8.1
 easy-thumbnails==2.6
 freezegun==0.3.11
 google-api-python-client==1.7.10
-httplib2==0.11.3
+httplib2==0.18.0
 icalendar==4.0.3
 lxml==4.4.0
 oauth2client==4.1.3
