@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block content %}
 
@@ -21,7 +21,7 @@
 
                     <p>Since July 2014, our workshops have reached {{ attendees_sum|default_if_none:'0' }} women in {{ countries_count|default_if_none:'0' }} countries and our <a href="https://tutorial.djangogirls.org/">online tutorial</a> has been read by more than 500 000 people.</p>
 
-                    <p>We're transparent about our finances. See our <a href="{% url 'core:year_2015' %}">Annual Report for 2015</a>
+                    <p>We're transparent about our finances. See our <a href="{% url 'core:year_2016_2017' %}">Annual Report for 2016-2017</a>
                     to see how we spend donations and what impact they made.</p>
                 </div>
                 <div class="col-md-6">
@@ -68,7 +68,7 @@
 
             <div class="row clearfix">
                 <div class="col-md-6">
-                    <p>You can send us a one-time donation using your credit/debit card or your Paypal account. Your payment will be securely processed by DonorBox.</p>
+                    <p>You can send us a one-time donation via PayPal to hello@djangogirls.org</p>
 
                     <p>If you would like to discuss a bigger partnership or a corporate sponsorship, <a href="{% url 'contact:contact' %}">please get in touch.</a></p>
                 </div>
@@ -94,7 +94,7 @@
                     <p><a href="https://store.djangogirls.org">Visit our store</a> today! ✨</p>
 
                     <h4>Humble Bundle Store</h4>
-                    <p>If you like video games, you can choose Django Girls as your designated charity in the <a href="https://www.humblebundle.com/store/select-charity/charity/129929">Humble Bundle Store</a>! 🎮</p>
+                    <p>If you like video games, you can choose Django Girls as your designated charity in the <a href="https://www.humblebundle.com/store?charity=129929">Humble Bundle Store</a>! 🎮</p>
                 </div>
                 <div class="col-md-6">
                     <img class="img-responsive center-block" alt="A group of people wearing Django Girls t-shirts." src="{% static 'img/global/donate/tshirt.jpg' %}">

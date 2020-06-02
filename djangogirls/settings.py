@@ -1,6 +1,7 @@
 import os
-
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
@@ -31,9 +32,10 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     'django_date_extensions',
+    'django_unused_media',
+    'django_extensions',
     'storages',
     'markdown_deux',
-    'djrill',
     'easy_thumbnails',
     'captcha',
     'django_countries',
@@ -197,21 +199,24 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_DSN')
-}
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
 
-MANDRILL_API_KEY = os.environ.get('MANDRILL_APIKEY')
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
                                "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
@@ -256,19 +261,6 @@ JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 
 MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
 MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')
-
-if 'OPBEAT_SECRET_TOKEN' in os.environ:
-    INSTALLED_APPS += (
-        'opbeat.contrib.django',
-    )
-    OPBEAT = {
-        'ORGANIZATION_ID': os.environ['OPBEAT_ORGANIZATION_ID'],
-        'APP_ID': os.environ['OPBEAT_APP_ID'],
-        'SECRET_TOKEN': os.environ['OPBEAT_SECRET_TOKEN'],
-    }
-    MIDDLEWARE = [
-        'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-    ] + MIDDLEWARE
 
 CODEMIRROR_PATH = "vendor/codemirror/"
 

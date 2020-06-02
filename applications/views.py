@@ -17,7 +17,7 @@ from .questions import (get_applications_for_event, get_organiser_menu,
 
 
 def apply(request, city):
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     if not event:
         raise Http404
     elif isinstance(event, tuple):
@@ -77,7 +77,7 @@ def application_list(request, city):
     """
     state = request.GET.getlist('state', None)
     rsvp_status = request.GET.getlist('rsvp_status', None)
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     order = request.GET.get('order', None)
     active_query_string = '?' + request.META.get('QUERY_STRING', '')
 
@@ -105,7 +105,7 @@ def applications_csv(request, city):
     """
     state = request.GET.getlist('state', None)
     rsvp_status = request.GET.getlist('rsvp_status', None)
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     order = request.GET.get('order', None)
     try:
         applications = get_applications_for_event(
@@ -155,7 +155,7 @@ def application_detail(request, city, app_number):
     except Score.DoesNotExist:
         score = None
     score_form = ScoreForm(instance=score)
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     all_scores = Score.objects.filter(application=application)
 
     if request.POST:
@@ -191,7 +191,7 @@ def communication(request, city):
     """
     Send emails to applicants and attendees
     """
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
 
     emails = Email.objects.filter(form__event=event).order_by('-created')
 
@@ -207,7 +207,7 @@ def compose_email(request, city, email_id=None):
     """
     Create new email or update email to applicants and attendees
     """
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     form_obj = get_object_or_404(Form, event=event)
     emailmsg = None if not email_id else get_object_or_404(
         Email, form__event=event, id=email_id)
@@ -241,7 +241,7 @@ def change_state(request, city):
     """
     state = request.POST.get('state', None)
     applications = request.POST.getlist('application', None)
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
 
     if not state or not applications:
         return JsonResponse({'error': 'Missing parameters'})
@@ -271,7 +271,7 @@ def change_rsvp(request, city):
     """
     rsvp_status = request.POST.get('rsvp_status', None)
     applications = request.POST.getlist('application', None)
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
 
     if not rsvp_status or not applications:
         return JsonResponse({'error': 'Missing parameters'})
@@ -290,7 +290,7 @@ def change_rsvp(request, city):
 
 
 def rsvp(request, city, code):
-    event = get_event(city, request.user.is_authenticated(), False)
+    event = get_event(city, request.user.is_authenticated, False)
     if not event:
         raise Http404
     elif isinstance(event, tuple):

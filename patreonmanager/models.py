@@ -34,7 +34,7 @@ class Reward(models.Model):
         return self.name
 
 
-class PaymentQuerySet(models.QuerySet):
+class PaymentManager(models.Manager):
 
     def complete(self):
         return self.update(completed=True)
@@ -51,17 +51,19 @@ class Payment(models.Model):
             (PROCESSED, _("processed")),
         ]
 
-    patron = models.ForeignKey('Patron', verbose_name=_(
-        "patron"), related_name='payments')
+    patron = models.ForeignKey(
+        'Patron', verbose_name=_("patron"), related_name='payments',
+        on_delete=models.deletion.PROTECT)
     month = models.DateField(_("month"))
     reward = models.ForeignKey(
-        'Reward', verbose_name=_("reward"), related_name='+')
+        'Reward', verbose_name=_("reward"), related_name='+',
+        on_delete=models.deletion.PROTECT)
     pledge = models.DecimalField(_("pledge"), max_digits=8, decimal_places=2)
     status = models.CharField(
         _("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
     completed = models.BooleanField(_("completed"), default=False)
 
-    objects = PaymentQuerySet.as_manager()
+    objects = PaymentManager()
 
     class Meta:
         verbose_name = _("payment")

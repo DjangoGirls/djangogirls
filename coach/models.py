@@ -1,5 +1,5 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -10,7 +10,7 @@ DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 
 
 class Coach(models.Model):
-    name = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200)
     twitter_handle = models.CharField(
         max_length=200, null=True, blank=True,
         help_text="No @, No http://, just username")

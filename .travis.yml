@@ -1,5 +1,5 @@
 language: python
-python: 3.4
+python: 3.5
 script: py.test --cov
 sudo: false
 notifications:
@@ -10,8 +10,6 @@ cache:
 install:
   - pip install --upgrade pip setuptools wheel
   - pip install -r requirements.txt
-addons:
-  postgresql: "9.3"
 services:
   - postgresql
 before_script:

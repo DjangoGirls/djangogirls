@@ -2,18 +2,17 @@
 
 {% if coach.url %}
 <a href="{{ coach.url }}" target="_blank">
+    <img src="{{ coach.photo_url }}" class="coach" />
+</a>
+<br />
+<a href="{{ coach.url }}" target="_blank">{{ coach.name }}</a>
 {% else %}
 <span>
-{% endif %}
-
-<img src="{{ coach.photo_url }}" class="coach" />
-
-{% if coach.url %}
-</a>
-{% else %}
+    <img src="{{ coach.photo_url }}" class="coach" />
 </span>
+<br />
+{{ coach.name }}
 {% endif %}
 
 <br />
-<a href="{{ coach.url }}" target="_blank">{{ coach.name }}</a><br />
 {% if coach.twitter_handle %}<a href="https://twitter.com/{{ coach.twitter_handle }}" target="_blank">@{{ coach.twitter_handle }}</a><br />{% endif %}

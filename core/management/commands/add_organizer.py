@@ -3,7 +3,6 @@ import djclick as click
 
 from core.forms import AddOrganizerForm
 from core.models import Event
-from core.utils import opbeat_logging
 
 DELIMITER = "\n-------------------------------------------------------------\n"
 
@@ -39,7 +38,6 @@ def create_users(team, event):
 
 
 @click.command()
-@opbeat_logging()
 def command():
     """Creates new Django Girls organizer"""
     event_id = click.prompt(click.style(

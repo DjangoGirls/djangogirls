@@ -1,14 +1,10 @@
-from contextlib import contextmanager
 from datetime import date, datetime, timedelta
-import logging
 
 import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 import djclick as click
 
-import opbeat
-from opbeat.handlers.logging import OpbeatHandler
 
 from .models import Event
 
@@ -57,7 +53,6 @@ def get_approximate_date(date_str):
             return None
     return None
 
-
 def next_sunday(day):
     """
     Return a date object corresponding to the next Sunday after the given date.
@@ -83,19 +78,3 @@ def next_deadline():
         return next_sunday(next_sunday(today))
     else:
         return next_sunday(today)
-
-
-@contextmanager
-def opbeat_logging():
-    client = opbeat.Client()
-
-    handler = OpbeatHandler(client)
-
-    logger = logging.getLogger()
-    logger.addHandler(handler)
-
-    try:
-        yield
-    except Exception:
-        client.capture_exception()
-        raise

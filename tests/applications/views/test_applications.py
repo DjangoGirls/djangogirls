@@ -1,6 +1,6 @@
 import pytest
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from applications.models import Score, Application
 from applications.views import application_list

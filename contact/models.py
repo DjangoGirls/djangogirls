@@ -17,11 +17,11 @@ class ContactEmail(models.Model):
     message = models.TextField()
     event = models.ForeignKey(
         'core.Event', help_text='required for contacting a chapter',
-        null=True, blank=True
+        null=True, blank=True, on_delete=models.deletion.SET_NULL
     )
     contact_type = models.CharField(
         verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES, blank=False,
+        max_length=20, choices=CONTACT_TYPE_CHOICES,
         default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)

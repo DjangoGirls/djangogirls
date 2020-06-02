@@ -1,7 +1,7 @@
 import csv
 from io import StringIO
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from applications.models import Application, Question, Answer
 

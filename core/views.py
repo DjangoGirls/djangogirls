@@ -55,8 +55,12 @@ def event(request, city):
     if event.page_url != city:
         return redirect('core:event', city=event.page_url, permanent=True)
 
-    can_show = request.user.is_authenticated() or 'preview' in request.GET
-    if not event.is_page_live and not can_show:
+    user = request.user
+    user_is_organizer = user.is_authenticated and event.has_organizer(user)
+    is_preview = 'preview' in request.GET
+    previewable = user.is_superuser or user_is_organizer or is_preview
+
+    if not (event.is_page_live or previewable):
         return render(
             request,
             'applications/event_not_live.html',
@@ -135,6 +139,10 @@ def privacy_cookies(request):
 
 def workshop_box(request):
     return render(request, 'core/workshop_box.html', {})
+
+
+def server_error(request):
+    return HttpResponse(status=500)
 
 
 def coc(request, lang=None):

@@ -4,7 +4,6 @@ import djclick as click
 from core.command_helpers import gather_event_date_from_prompt
 from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
 from core.models import Event
-from core.utils import opbeat_logging
 
 
 def get_event(id_str):
@@ -45,7 +44,6 @@ def gather_information():
 
 
 @click.command()
-@opbeat_logging()
 def command():
     """Duplicates Django Girls event with a new date"""
 
@@ -82,7 +80,7 @@ def command():
         # Edit previous email account
         event.email = "{}{:02d}{}@djangogirls.org".format(event.email.split('@')[0], event.date.month, event.date.year)
     else:
-        new_event.team = organizers
+        new_event.team.set(organizers)
 
     # Change the title and url of previous event page
     event.page_title = "{} #{}".format(name, number-1)
