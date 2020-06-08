@@ -14,7 +14,7 @@
             <section class="col-xs-12 col-md-8">
                 <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world. Events are always non-profit and free for participants. We do not pay coaches, speakers or organizers. Attendees don’t need any previous knowledge about programming and there are no age limitations. All attendees need is a laptop and some curiosity!</p>
 
-                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span> Django Girls workshops. Join them and <a href="{% url "organize:prerequisites" %}">bring Django Girls to your city!</a></p>
+                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span> Django Girls workshops. Join them and <a href="{% url "organize:suspend" %}">bring Django Girls to your city!</a></p>
 
                 <h2>The Value of Organizing Django Girls</h2>
 
@@ -32,7 +32,7 @@
             </section>
 
             <section class="col-xs-12 col-md-4 sidebar">
-                <a href="{% url "organize:prerequisites" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
+                <a href="{% url "organize:suspend" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
 
                 <div class="panel narrow">
                     <h2>Resources for organizers</h2>

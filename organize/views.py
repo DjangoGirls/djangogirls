@@ -67,3 +67,7 @@ def commitment(request):
 
 def prerequisites(request):
     return render(request, 'organize/prerequisites.html', {})
+
+
+def suspend(request):
+    return render(request, 'organize/suspend.html', {})
