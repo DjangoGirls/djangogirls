@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from .emails import (
     send_application_confirmation, send_application_notification)
 from .forms import (
-    PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet)
+    PreviousEventForm, ApplicationForm, WorkshopForm, OrganizersFormSet, RemoteInPersonForm)
 from .models import EventApplication
 
 # ORGANIZE FORM #
@@ -71,3 +71,17 @@ def prerequisites(request):
 
 def suspend(request):
     return render(request, 'organize/suspend.html', {})
+
+
+def remote_or_in_person(request):
+    if request.method == 'POST':
+        form = RemoteInPersonForm(request.POST)
+        if form.is_valid():
+            remote = form.cleaned_data['remote_or_in_person_workshop']
+            if remote:
+                return redirect('organize:prerequisites')
+            else:
+                return redirect('organize:suspend')
+    else:
+        form = RemoteInPersonForm()
+    return render(request, 'organize/remote_or_in_person.html', {'form': form})

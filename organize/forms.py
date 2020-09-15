@@ -4,12 +4,16 @@ from django_countries.fields import LazyTypedChoiceField
 from django_date_extensions.fields import ApproximateDateFormField
 
 from core.models import Event
-from core.validators import validate_approximatedate
+from core.validators import validate_approximatedate, validate_event_date
 from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
     (True, "Yes, I organized Django Girls"),
     (False, "No, it’s my first time organizing Django Girls"))
+
+WORKSHOP_CHOICES = (
+    (True, "Yes, I want to organize a Remote Django Girls Workshop"),
+    (False, "No, I want to organise an In-Person Django Girls Workshop"))
 
 
 class PreviousEventForm(forms.Form):
@@ -113,7 +117,16 @@ class WorkshopForm(forms.Form):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
         # TODO: add checking if the event is in the future
+        validate_event_date(date)
         return date
 
     def get_data_for_saving(self):
         return self.cleaned_data
+
+
+class RemoteInPersonForm(forms.Form):
+    remote_or_in_person_workshop = forms.TypedChoiceField(
+        coerce=lambda x: x in ['True', True],
+        widget=forms.RadioSelect,
+        choices=WORKSHOP_CHOICES,
+        required=True)
