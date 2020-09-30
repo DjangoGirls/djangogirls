@@ -88,6 +88,10 @@ Exit the `psql` shell:
 
     \q
 
+Make the migration to create database schema:
+
+    ./manage.py makemigrations
+
 Run the migration to create database schema:
 
     ./manage.py migrate
