@@ -27,7 +27,7 @@ Your website is currently hidden for public, you can only see it if you’re log
 
 Instructions on editing website: https://organize.djangogirls.org/website/
 
-3) Postponing or canceling
+3) Postponing or cancelling
 
 If you need to cancel or postpone your event, please, send us an email. It can happen and we won't be mad at you ;) Also, if you're stuck on something, we can try to help you!
 
