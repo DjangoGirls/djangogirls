@@ -9,9 +9,9 @@ This repository contains sources of Django application that powers [DjangoGirls.
 
 It's a simple CMS that contains 4 models:
 
-- __Event__ - a list of events and their website configuration
-- __EventPageContent__ - blocks of content that are visible on the website
-- __EventPageMenu__ - items of menu of every website
+- __Event__ - A list of events and their website configuration
+- __EventPageContent__ - Blocks of content that are visible on the website
+- __EventPageMenu__ - Items of menu of every website
 
 ## How to create new event?
 
@@ -61,7 +61,7 @@ Please note that we use Python 3 only, so make sure that you use correct version
 
 ## Setting up a development environment
 
-First, clone the repository:
+First step, clone the repository:
 
     git clone git@github.com:DjangoGirls/djangogirls.git
 
