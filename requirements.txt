@@ -1,3 +1,4 @@
+//FANTASTIC PROJECT
 boto3==1.9.28
 click==7.0
 dj-database-url==0.5.0
