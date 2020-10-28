@@ -1,0 +1,173 @@
+{% extends 'global/base.html' %}
+{% load i18n rev static %}
+
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static_rev 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static_rev 'vendor/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src='https://www.google.com/recaptcha/api.js?onload=onCaptchaLoadCallback&render=explicit'></script>
+    <script src="{% static_rev 'js/organize.js' %}"></script>
+    <script src="{% static_rev 'vendor/select2/js/select2.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container organize">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'includes/_organize-progress.html' with active_step=6 %}
+            </div>
+        </div>
+
+        <div class="row workshop">
+            <div class="col-md-12">
+                <div class="panel">
+                    <h1>Tell us all about your Django Girls event!</h1>
+
+                    <form novalidate data-required-form action="" method="post">{% csrf_token %}
+                        {{ wizard.management_form }}
+
+                        {% if wizard.form.non_field_errors %}
+                            <ul class="error-list">
+                                {% for error in wizard.form.non_field_errors %}
+                                    <li class="error">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <fieldset class="form-section">
+                            <legend class="form-section-heading">Where?</legend>
+                            <p class="form-section-subhead">In which city do you want to organize a workshop?</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-4">
+                                    <label for="{{ wizard.form.city.id_for_label }}"
+                                           class="compact-label{% if form.city.field.required %} required{% endif %}">City</label>
+                                    {{ wizard.form.city }}
+                                    {% if wizard.form.city.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.city.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                                <li class="col-sm-12 col-md-4">
+                                    <label for="{{ wizard.form.country.id_for_label }}"
+                                           class="compact-label{% if form.country.field.required %} required{% endif %}">Country</label>
+                                    {{ wizard.form.country }}
+                                    {% if wizard.form.country.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.country.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </fieldset>
+                        <script type="text/javascript">
+                            $('#{{ wizard.form.country.id_for_label }}').select2({
+                                theme: "bootstrap",
+                                placeholder: 'Choose country'
+                            });
+                        </script>
+
+                        <fieldset class="form-section">
+                            <legend class="form-section-heading">When?</legend>
+                            <p class="form-section-subhead">There should be <b>at least 3 months</b> between now and your event's date, and <b>6 months</b> after the previous workshop in that region. If you don't have a precise date for now, you can enter a month and a year.</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-4">
+                                    <label for="{{ wizard.form.date.id_for_label }}" class="compact-label{% if form.date.field.required %} required{% endif %}">Date of your event</label>
+                                    {{ wizard.form.date }}
+                                    {% if wizard.form.date.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.date.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </fieldset>
+
+                        <section class="form-section">
+                            <label class="form-section-heading{% if form.sponsorship.field.required %} required{% endif %}">Do you already know which companies you will approach for sponsorship?</label>
+                            <p class="form-section-subhead">It doesn’t need to be very specific yet, but we would love to see your ideas.</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-9">
+                                    {{ wizard.form.sponsorship }}
+                                    {% if wizard.form.sponsorship.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.sponsorship.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="form-section">
+                            <label class="form-section-heading{% if form.coaches.field.required %} required{% endif %}">Do you have potential coaches in mind?</label>
+                            <p class="form-section-subhead">Have you approached them to ask if they would be interested in helping out?</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-9">
+                                    {{ wizard.form.coaches }}
+                                    {% if wizard.form.coaches.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.coaches.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="form-section">
+                            <label class="form-section-heading{% if form.tools.field.required %} required{% endif %}">How will you host your workshop remotely?</label>
+                            <p class="form-section-subhead">Please provide information on how you plan to host your workshop remotely, that is, what tools will you use.</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-9">
+                                    {{ wizard.form.tools }}
+                                    {% if wizard.form.tools.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.tools.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="form-section">
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-9">
+                                    <div id="g-recaptcha"></div>
+                                </li>
+                            </ul>
+                        </section>
+                        <div class="cta-wrapper">
+                            <button type="submit" class="cta">Finish!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

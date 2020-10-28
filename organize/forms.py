@@ -12,8 +12,8 @@ PREVIOUS_ORGANIZER_CHOICES = (
     (False, "No, it’s my first time organizing Django Girls"))
 
 WORKSHOP_CHOICES = (
-    (True, "Yes, I want to organize a Remote Django Girls Workshop"),
-    (False, "No, I want to organise an In-Person Django Girls Workshop"))
+    (True, "Remote"),
+    (False, "In-Person"))
 
 
 class PreviousEventForm(forms.Form):
@@ -112,11 +112,14 @@ class WorkshopForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     coaches = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    safety = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
 
     def clean_date(self):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
-        # TODO: add checking if the event is in the future
+        # Check if the event is in the future
         validate_event_date(date)
         return date
 
@@ -124,9 +127,40 @@ class WorkshopForm(forms.Form):
         return self.cleaned_data
 
 
-class RemoteInPersonForm(forms.Form):
-    remote_or_in_person_workshop = forms.TypedChoiceField(
+class RemoteWorkshopForm(forms.Form):
+    date = ApproximateDateFormField(
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    city = forms.CharField(
+        required=True,
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    country = LazyTypedChoiceField(
+        choices=[(None, 'Choose country')] + list(countries))
+    sponsorship = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    coaches = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    tools = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+
+    def clean_date(self):
+        date = self.cleaned_data.get('date')
+        validate_approximatedate(date)
+        # Check if the event is in the future
+        validate_event_date(date)
+        return date
+
+    def get_data_for_saving(self):
+        return self.cleaned_data
+
+
+class WorkshopTypeForm(forms.Form):
+    remote = forms.TypedChoiceField(
         coerce=lambda x: x in ['True', True],
         widget=forms.RadioSelect,
         choices=WORKSHOP_CHOICES,
         required=True)
+
+    def get_data_for_saving(self):
+        return self.cleaned_data

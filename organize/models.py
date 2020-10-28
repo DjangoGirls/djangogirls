@@ -17,7 +17,7 @@ from .constants import (
     DEPLOYED,
     NEW,
     ON_HOLD,
-    REJECTED,
+    REJECTED
 )
 from .managers import EventApplicationQuerySet
 from .emails import (
@@ -28,7 +28,7 @@ from .emails import (
 
 class EventApplication(models.Model):
     previous_event = models.ForeignKey(Event, null=True, blank=True,
-                                      on_delete=models.deletion.SET_NULL)
+                                       on_delete=models.deletion.SET_NULL)
     # workshop fields
     date = ApproximateDateField(validators=[validate_approximatedate])
     city = models.CharField(max_length=200)
@@ -47,10 +47,16 @@ class EventApplication(models.Model):
     involvement = models.CharField("Involvement in Django Girls",
                                    max_length=100)
     experience = models.TextField("Experience with organizing other events")
-    venue = models.TextField("Information about your potential venue")
+    venue = models.TextField("Information about your potential venue", blank=True)
     sponsorship = models.TextField(
         "Information about your potential sponsorship")
     coaches = models.TextField("Information about your potential coaches")
+    remote = models.BooleanField(default=False)
+    tools = models.TextField("Information about how you will host your remote workshop",
+                             blank=True)
+    safety = models.TextField("Information about how you will ensure participants' and coaches' "
+                              "safety during the Covid-19 pandemic",
+                              blank=True)
 
     # status reflecting state of the event in a triaging process.
     status = models.CharField(

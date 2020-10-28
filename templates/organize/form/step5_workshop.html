@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {% include 'includes/_organize-progress.html' with active_step=5 %}
+            {% include 'includes/_organize-progress.html' with active_step=6 %}
         </div>
     </div>
 
@@ -99,7 +99,7 @@
                         </ul>
                     </fieldset>
 
-                    <section class="form-section">
+                    <section class="form-section" id="venue_details">
                         <label class="form-section-heading{% if form.venue.field.required %} required{% endif %}">Do you have a venue in mind?</label>
                         <p class="form-section-subhead">Tell us about your ideas on where to host the event in your city.</p>
 
@@ -145,6 +145,24 @@
                                 {% if wizard.form.coaches.errors %}
                                     <ul class="error-list">
                                         {% for error in wizard.form.coaches.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="form-section">
+                        <label class="form-section-heading{% if form.safety.field.required %} required{% endif %}">How will you host your in-person workshop during the Covid-19 pandemic?</label>
+                        <p class="form-section-subhead">Please provide information on how you plan to ensure safety for attendees and coaches for your in-person workshop during the Covid-19 pandemic.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                {{ wizard.form.safety }}
+                                {% if wizard.form.safety.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.safety.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
