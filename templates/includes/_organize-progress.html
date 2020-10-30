@@ -1,7 +1,7 @@
 <div class="organize-progress">
     <ul class="steps">
     {# List of organize steps, space delimited #}
-    {% with 'Prerequisites Commitment Application Organizers Remote Workshop 🎉' as steps %}
+    {% with 'Prerequisites Commitment Application Organizers How Workshop 🎉' as steps %}
         {% for step in steps.split %}
             <li class="step {% if forloop.counter < active_step %}complete{% elif forloop.counter == active_step %}active{% endif %}">
                 <span class="text">{{ step }}</span>
