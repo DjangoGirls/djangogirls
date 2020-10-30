@@ -57,6 +57,8 @@ class EventApplication(models.Model):
     safety = models.TextField("Information about how you will ensure participants' and coaches' "
                               "safety during the Covid-19 pandemic",
                               blank=True)
+    additional = models.TextField("Any additional information you think may help your application",
+                                  blank=True)
 
     # status reflecting state of the event in a triaging process.
     status = models.CharField(

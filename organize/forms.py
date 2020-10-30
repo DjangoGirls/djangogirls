@@ -115,6 +115,9 @@ class WorkshopForm(forms.Form):
     safety = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
+    additional = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
 
     def clean_date(self):
         date = self.cleaned_data.get('date')
@@ -141,6 +144,9 @@ class RemoteWorkshopForm(forms.Form):
     coaches = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     tools = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+    additional = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
 

@@ -171,6 +171,24 @@
                         </ul>
                     </section>
 
+                    <section class="form-section">
+                        <label class="form-section-heading{% if form.additional.field %} {% endif %}">Any additional you may want to share with us?</label>
+                        <p class="form-section-subhead">Please provide any additional information you may want to share with us and may think may help your application.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                {{ wizard.form.additional }}
+                                {% if wizard.form.additional.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.additional.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </section>
+
                    <section class="form-section">
                         <ul class="row">
                             <li class="col-sm-12 col-md-9">
