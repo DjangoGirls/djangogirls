@@ -60,7 +60,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'coaches',
         'remote',
         'tools',
-        'safety'
+        'safety',
+        'additional'
     )
     inlines = (InlineCoorganizerAdmin,)
     suit_form_tabs = (
@@ -99,7 +100,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
                 'coaches',
                 'remote',
                 'tools',
-                'safety'
+                'safety',
+                'additional'
             ],
             'classes': ('suit-tab', 'suit-tab-application',)
         }),
