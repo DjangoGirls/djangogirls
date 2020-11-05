@@ -1,12 +1,20 @@
 {% extends "global/base.html" %}
+{% load i18n rev static %}
 
 {% block content %}
-    <div class="container organize organize-landing">
-        <h1>Apply to Organize Django Girls workshop</h1>
-        <h2>Suspension of Workshop Applications</h2>
-        <p>Please note that due to the Global Covid-19 Pandemic, we have suspended all workshop applications.  We are
-            working on updating our Organiser Manual to support remote workshops as a potential alternative. </p>
+    <div class="container organize">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <h1>Suspension of In-Person Workshop Applications</h1>
+                    <p>Please note that due to the Global Covid-19 Pandemic, we have suspended all in-person workshop applications.
+                        We have updated our Organiser Manual to support remote workshops as a potential alternative. Please
+                        consider applying for a remote workshop instead. </p>
 
-        <p>Any inconveniences caused are sincerely regretted.</p>
+                    <p>Any inconveniences caused are sincerely regretted.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

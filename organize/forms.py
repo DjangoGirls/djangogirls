@@ -4,12 +4,16 @@ from django_countries.fields import LazyTypedChoiceField
 from django_date_extensions.fields import ApproximateDateFormField
 
 from core.models import Event
-from core.validators import validate_approximatedate
+from core.validators import validate_approximatedate, validate_event_date
 from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
     (True, "Yes, I organized Django Girls"),
     (False, "No, it’s my first time organizing Django Girls"))
+
+WORKSHOP_CHOICES = (
+    (True, "Remote"),
+    (False, "In-Person"))
 
 
 class PreviousEventForm(forms.Form):
@@ -108,12 +112,61 @@ class WorkshopForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     coaches = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    safety = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+    additional = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
 
     def clean_date(self):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
-        # TODO: add checking if the event is in the future
+        # Check if the event is in the future
+        validate_event_date(date)
         return date
+
+    def get_data_for_saving(self):
+        return self.cleaned_data
+
+
+class RemoteWorkshopForm(forms.Form):
+    date = ApproximateDateFormField(
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    city = forms.CharField(
+        required=True,
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+    country = LazyTypedChoiceField(
+        choices=[(None, 'Choose country')] + list(countries))
+    sponsorship = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    coaches = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+    tools = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+    additional = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+
+    def clean_date(self):
+        date = self.cleaned_data.get('date')
+        validate_approximatedate(date)
+        # Check if the event is in the future
+        validate_event_date(date)
+        return date
+
+    def get_data_for_saving(self):
+        return self.cleaned_data
+
+
+class WorkshopTypeForm(forms.Form):
+    remote = forms.TypedChoiceField(
+        coerce=lambda x: x in ['True', True],
+        widget=forms.RadioSelect,
+        choices=WORKSHOP_CHOICES,
+        required=True)
 
     def get_data_for_saving(self):
         return self.cleaned_data

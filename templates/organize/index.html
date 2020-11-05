@@ -12,9 +12,39 @@
 
         <div class="row">
             <section class="col-xs-12 col-md-8">
-                <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world. Events are always non-profit and free for participants. We do not pay coaches, speakers or organizers. Attendees don’t need any previous knowledge about programming and there are no age limitations. All attendees need is a laptop and some curiosity!</p>
+                <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world.
+                    Events are always non-profit and free for participants. We do not pay coaches, speakers or organizers.
+                    Attendees don’t need any previous knowledge about programming and there are no age limitations.
+                    All attendees need is a laptop and some curiosity!</p>
 
-                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span> Django Girls workshops. Join them and <a href="{% url "organize:suspend" %}">bring Django Girls to your city!</a></p>
+                <p>As of Summer 2020, Django Girls workshops can also be held entirely remotely. This option is most
+                    suitable for people in areas affected by COVID 19 where it would not be safe to run the workshop
+                    in-person, or in places where finding a venue and sponsorship to cover in-person costs would be
+                    a barrier to running the workshop.</p>
+
+                <h3>In-Person Workshops</h3>
+
+                <p>An in-person workshop is any workshop where participants, coaches, and organisers, all meet in the
+                    same physical location. Participants can work together in teams and support from coaches is done face-to-face.</p>
+
+                <p>Due to this, in-person workshops should only be conducted when it is safe to do so, and you may be
+                    asked in your application to provide evidence of why you feel this type of worshops is safe, and
+                    what, if any, safety measures you will be putting in place.</p>
+
+                <p>If you are not sure if it is safe to hold an in-person workshop, you might prefer to organise a remote workshop instead.</p>
+
+                <h3>Remote Workshops</h3>
+
+                <p>A remote workshop is a workshop conducted online, where participants, coaches and organisers are in
+                    different physical locations.</p>
+
+                <p>This type of workshop may be more suitable in situations where it might not be safe, affordable, or
+                    logistically possible to host a workshop in-person. Remote workshops also allow for more flexibility
+                    with the location of your attendees and coaches.</p>
+
+                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span>
+                    Django Girls workshops. Join them and <a href="{% url "organize:prerequisites" %}">bring Django
+                        Girls to your city!</a></p>
 
                 <h2>The Value of Organizing Django Girls</h2>
 
@@ -32,7 +62,7 @@
             </section>
 
             <section class="col-xs-12 col-md-4 sidebar">
-                <a href="{% url "organize:suspend" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
+                <a href="{% url "organize:prerequisites" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
 
                 <div class="panel narrow">
                     <h2>Resources for organizers</h2>
@@ -63,7 +93,9 @@
                 <img src="{% static_rev 'img/report-2015/agata.jpg' %}" alt="Agata Grdal, organizer of Django Girls Wrocław" />
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8">
-                <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve created my own blog and then prepared workshops and taught other women to code. Nothing is impossible with this bunch of positive people!</div>
+                <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve
+                    created my own blog and then prepared workshops and taught other women to code. Nothing is
+                    impossible with this bunch of positive people!</div>
                 <cite>— Agata Grdal, organizer of Django Girls Wrocław</cite>
             </div>
         </blockquote>
@@ -78,15 +110,18 @@
             <ul class="row">
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-1.jpg' %}" alt="Organizers of Django Girls Windhoek" />
-                    <p>Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in Africa. <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Read more&nbsp;»</a></p>
+                    <p>Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in
+                        Africa. <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Read more&nbsp;»</a></p>
                 </li>
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-2.jpg' %}" alt="Organizers of Django Girls Budapest" />
-                    <p>A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary. <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Read more&nbsp;»</a></p>
+                    <p>A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary.
+                        <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Read more&nbsp;»</a></p>
                 </li>
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-3.jpg' %}" alt="Django Girls Seoul" />
-                    <p>Learn how Django Girls Seoul built a local tech community using events as their main tool. <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Read more&nbsp;»</a></p>
+                    <p>Learn how Django Girls Seoul built a local tech community using events as their main tool.
+                        <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Read more&nbsp;»</a></p>
                 </li>
             </ul>
         </section>
