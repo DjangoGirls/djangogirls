@@ -24,6 +24,19 @@
 
                     <form data-required-form action="{% url 'organize:commitment' %}">
                         <fieldset>
+                            <legend>
+                                Confirm that you understand that we are only accepting applications for remote workshops at this time:
+                            </legend>
+                            <ul class="unstyled">
+                                <li class="checkbox-wrapper">
+                                    <input type="checkbox" id="remote-workshop" name="remote-workshop" required />
+                                    <label for="remote-workshop">
+                                       The event you're organizing will be remote
+                                    </label>
+                                </li>
+                            </ul>
+                        </fieldset>
+                        <fieldset>
                             <legend>Confirm that you’ve read the following chapters of our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>:</legend>
 
                             <ul class="unstyled">
@@ -36,7 +49,7 @@
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="step-by-step" name="step-by-step" required />
                                     <label for="step-by-step">
-                                        <a href="https://organize.djangogirls.org/step_by_step/">Organizing Django Girls workshop step by step</a>
+                                        <a href="https://organize.djangogirls.org/remote_workshops/">Organizing Django Girls workshop step by step</a>
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
@@ -80,7 +93,7 @@
 
                         <div class="cta-wrapper">
                             <button type="submit" class="cta">Get started!</button>
-                        <div class="cta-wrapper">
+                        </div>
                     </form>
                 </div>
 

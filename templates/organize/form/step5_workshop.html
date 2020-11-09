@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {% include 'includes/_organize-progress.html' with active_step=5 %}
+            {% include 'includes/_organize-progress.html' with active_step=6 %}
         </div>
     </div>
 
@@ -30,6 +30,8 @@
         <div class="col-md-12">
             <div class="panel">
                 <h1>Tell us all about your Django Girls event!</h1>
+
+                <h4 class="error">Please know that we are only accepting applications for remote workshops at this time.</h4>
 
                 <form novalidate data-required-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
@@ -82,7 +84,7 @@
 
                     <fieldset class="form-section">
                         <legend class="form-section-heading">When?</legend>
-                        <p class="form-section-subhead">There should be <b>at least 3 months</b> between now and your event's date, and <b>6 months</b> after the previous workshop in that region. If you don't have a precise date for now, you can enter a month and a year.</p>
+                        <p class="form-section-subhead">There should be <b>at least 3 months</b> between now and your event's date, and <b>6 months</b> after the previous workshop in that region. Please enter your date in dd/mm/yyyy format.</p>
 
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
@@ -99,7 +101,7 @@
                         </ul>
                     </fieldset>
 
-                    <section class="form-section">
+                    <section class="form-section" id="venue_details">
                         <label class="form-section-heading{% if form.venue.field.required %} required{% endif %}">Do you have a venue in mind?</label>
                         <p class="form-section-subhead">Tell us about your ideas on where to host the event in your city.</p>
 
@@ -145,6 +147,42 @@
                                 {% if wizard.form.coaches.errors %}
                                     <ul class="error-list">
                                         {% for error in wizard.form.coaches.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="form-section">
+                        <label class="form-section-heading{% if form.safety.field.required %} required{% endif %}">How will you host your in-person workshop during the Covid-19 pandemic?</label>
+                        <p class="form-section-subhead">Please provide information on how you plan to ensure safety for attendees and coaches for your in-person workshop during the Covid-19 pandemic.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                {{ wizard.form.safety }}
+                                {% if wizard.form.safety.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.safety.errors %}
+                                            <li class="error">{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="form-section">
+                        <label class="form-section-heading{% if form.additional.field %} {% endif %}">Any additional you may want to share with us?</label>
+                        <p class="form-section-subhead">Please provide any additional information you may want to share with us and may think may help your application.</p>
+
+                        <ul class="row">
+                            <li class="col-sm-12 col-md-9">
+                                {{ wizard.form.additional }}
+                                {% if wizard.form.additional.errors %}
+                                    <ul class="error-list">
+                                        {% for error in wizard.form.additional.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>

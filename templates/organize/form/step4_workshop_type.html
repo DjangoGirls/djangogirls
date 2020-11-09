@@ -1,0 +1,57 @@
+{% extends 'global/base.html' %}
+{% load i18n rev static %}
+
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static_rev 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static_rev 'vendor/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container organize">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'includes/_organize-progress.html' with active_step=5 %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <h1>Remote or In-Person Workshop?</h1>
+
+                    <form novalidate data-required-form action="" method="post">
+                        {% csrf_token %}
+                        {{ wizard.management_form }}
+                        <fieldset class="form-section">
+                            <legend class="form-section-heading{% if wizard.form.remote.field.required %} required{% endif %}">Remote or In-Person?</legend>
+                            <p class="form-section-subhead">Will your workshop be Remote or In-Person?</p>
+
+                            <ul class="row">
+                                <li class="col-sm-12 col-md-4">
+                                    <label for="{{ wizard.form.remote.id_for_label }}" class="compact-label{% if form.remote.field.required %} required{% endif %}">Workshop Type</label>
+                                    {{ wizard.form.remote }}
+                                    {% if wizard.form.remote.errors %}
+                                        <ul class="error-list">
+                                            {% for error in wizard.form.remote.errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </fieldset>
+                        <div class="cta-wrapper">
+                            <button type="submit" class="cta" id="Submit">Proceed!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
