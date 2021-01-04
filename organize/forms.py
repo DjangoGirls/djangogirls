@@ -4,7 +4,7 @@ from django_countries.fields import LazyTypedChoiceField
 from django_date_extensions.fields import ApproximateDateFormField
 
 from core.models import Event
-from core.validators import validate_approximatedate, validate_event_date
+from core.validators import validate_approximatedate, validate_event_date, validate_future_date
 from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
@@ -123,6 +123,8 @@ class WorkshopForm(forms.Form):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
         # Check if the event is in the future
+        validate_future_date(date)
+        # Check if date is 3 months away
         validate_event_date(date)
         return date
 
@@ -154,6 +156,8 @@ class RemoteWorkshopForm(forms.Form):
         date = self.cleaned_data.get('date')
         validate_approximatedate(date)
         # Check if the event is in the future
+        validate_future_date(date)
+        # Check if date is 3 months away
         validate_event_date(date)
         return date
 

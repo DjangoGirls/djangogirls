@@ -1,11 +1,16 @@
+from datetime import date, timedelta
+
 from formtools.wizard.views import NamedUrlSessionWizardView
 from django.shortcuts import redirect, render
+from django.contrib import messages
 
+from core.models import Event
 from .emails import (
     send_application_confirmation, send_application_notification)
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm,  WorkshopTypeForm, RemoteWorkshopForm, OrganizersFormSet)
 from .models import EventApplication
+from.constants import NEW
 
 # ORGANIZE FORM #
 
@@ -30,12 +35,42 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
-        # Process the date from the forms
+        # Process the data from the forms
         data_dict = {}
         for form in form_list:
             data_dict.update(form.get_data_for_saving())
-
         organizers_data = data_dict.pop('coorganizers', [])
+
+        # Check of main organizer has already applied to organise another event less than 6 months ago
+        # or has hosted another workshop less than 6 month before
+        # To solve problems of organizers submitting the form more than once.
+        main_organizer_email = data_dict.get('main_organizer_email')
+        today = date.today()
+        event_date = data_dict.get('date')
+
+        previous_application = EventApplication.objects.filter(main_organizer_email=main_organizer_email) \
+            .filter(status=NEW).order_by('-created_at').first()
+
+        previous_event = Event.objects.filter(main_organizer__email=main_organizer_email)\
+            .order_by('-date').first()
+
+        if previous_application:
+            if today - date(previous_application.created_at.year,
+                            previous_application.created_at.month,
+                            previous_application.created_at.day) < timedelta(days=180):
+                messages.error(self.request, 'You cannot apply to organize an event when you '
+                                             'have another open application.')
+                return redirect('organize:prerequisites')
+        if previous_event:
+            if date(event_date.year,
+                    event_date.month,
+                    event_date.day) - date(previous_event.date.year,
+                                           previous_event.date.month,
+                                           previous_event.date.day) < timedelta(days=180):
+                messages.error(self.request, 'Your workshops should be 6 months apart. '
+                                             'Please read our Organizer Manual')
+                return redirect('organize:prerequisites')
+
         application = EventApplication.objects.create(**data_dict)
         for organizer in organizers_data:
             application.coorganizers.create(**organizer)
