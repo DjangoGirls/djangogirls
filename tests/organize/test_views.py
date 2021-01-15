@@ -42,6 +42,9 @@ def test_organize_form_wizard_remote_previous_organizer(client, previous_organiz
     # Test form submission for remote workshop with previous organizer
     for step, data_step in previous_organizer_remote:
         url = '/organize/form/' + step + '/'
+        resp = client.get(url)
+        assert resp.status_code == 200
+        
         response = client.post(url, data_step)
 
         if step == len(previous_organizer_remote):
