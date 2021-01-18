@@ -36,7 +36,6 @@ def test_suspend(client):
     assert resp.status_code == 200
 
 
-"""
 def test_organize_form_wizard_remote_previous_organizer(client, previous_organizer_remote,
                                                         previous_application_more_than_6_months):
     # Test form submission for remote workshop with previous organizer
@@ -44,14 +43,17 @@ def test_organize_form_wizard_remote_previous_organizer(client, previous_organiz
         url = '/organize/form/' + step + '/'
         resp = client.get(url)
         assert resp.status_code == 200
-        
+        wizard = resp.context['wizard']
+        current_step = wizard['steps'].current
+        data_step['{}-current_step'.format(wizard['management_form'].prefix)] = current_step
         response = client.post(url, data_step)
-
+        form = response.context['form']
         if step == len(previous_organizer_remote):
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:form_thank_you')
 
 
+"""
 def test_organize_form_wizard_remote_new_organizer(client, new_organizer_remote, no_previous_application):
     # Test form submission for remote workshop with new organizer
     for step, data_step in new_organizer_remote:
