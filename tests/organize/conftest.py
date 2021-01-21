@@ -39,96 +39,22 @@ def application_on_hold(base_application):
 
 
 @pytest.fixture
-def form_list_remote_previous_organizer():
-    forms = (("previous_event", PreviousEventForm),
-             ("organizers", OrganizersFormSet),
-             ("workshop_type", WorkshopTypeForm),
-             ("workshop_remote", RemoteWorkshopForm))
-    return forms
-
-
-@pytest.fixture
-def form_list_remote_new_organizer():
-    forms = (("previous_event", PreviousEventForm),
-             ("application", ApplicationForm),
-             ("organizers", OrganizersFormSet),
-             ("workshop_type", WorkshopTypeForm),
-             ("workshop_remote", RemoteWorkshopForm))
-    return forms
-
-
-@pytest.fixture
-def form_list_previous_organizer():
-    forms = (("previous_event", PreviousEventForm),
-             ("organizers", OrganizersFormSet),
-             ("workshop_type", WorkshopTypeForm),
-             ("workshop", WorkshopForm))
-    return forms
-
-
-@pytest.fixture
-def form_list_new_organizer():
-    forms = (("previous_event", PreviousEventForm),
-             ("application", ApplicationForm),
-             ("organizers", OrganizersFormSet),
-             ("workshop_type", WorkshopTypeForm),
-             ("workshop", WorkshopForm))
-    return forms
-
-
-@pytest.fixture
-def condition_dict_remote_previous_organizer():
-    condition_dict = {
-        'application': True,
-        'workshop': True,
-        'workshop_remote': False
-    }
-    return condition_dict
-
-
-@pytest.fixture
-def condition_dict_remote_new_organizer():
-    condition_dict = {
-        'application': False,
-        'workshop': True,
-        'workshop_remote': False
-    }
-    return condition_dict
-
-
-@pytest.fixture
-def condition_dict_previous_organizer():
-    condition_dict = {
-        'application': True,
-        'workshop': False,
-        'workshop_remote': True
-    }
-    return condition_dict
-
-
-@pytest.fixture
-def condition_dict_new_organizer():
-    condition_dict = {
-        'application': False,
-        'workshop': False,
-        'workshop_remote': True
-    }
-    return condition_dict
-
-
-@pytest.fixture
 def previous_organizer_remote():
     previous_event = {
         'previous_event': '<Event: Django Girls Berlin, 21st July 2014>',
         'organize_form_wizard-current_step': 'previous_event'
     }
     organizers = {
-        'main_organizer_email': 'test@test.com',
-        'main_organizer_first_name': 'Anna',
-        'main_organizer_last_name': 'Smith',
-        'coorganizers': [{'email': 'test1@test.com', 'first_name': 'Jane', 'last_name': 'Doe'}],
+        'form-INITIAL_FORMS': '2',
+        'form-TOTAL_FORMS': '2',
+        'form-0-email': 'test@test.com',
+        'form-0-first_name': 'Anna',
+        'form-0-last_name': 'Smith',
+        'form-1-email': 'test1@test.com',
+        'form-1-first_name': 'Jane',
+        'form-1-last_name': 'Doe',
         'organize_form_wizard-current_step': 'organizers'
-    }
+        }
     workshop_type = {
         'remote': True,
         'organize_form_wizard-current_step': 'workshop-type'
@@ -140,18 +66,19 @@ def previous_organizer_remote():
         'sponsorship': 'Yes, we hope to approach McKinsey and Accenture to sponsor our event.',
         'coaches': 'I know a number of coaches from our local meet-up.',
         'tools': 'We will use Zoom for video conferencing, share Google folder and GitHub to share links to resources.',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
         'organize_form_wizard-current_step': 'workshop_remote'
     }
 
-    application_data = (
+    data = (
         ('previous_event', previous_event),
         ('organizers', organizers),
         ('workshop_type', workshop_type),
         ('workshop_remote', workshop_remote)
     )
 
-    return application_data
+    return data
 
 
 @pytest.fixture
@@ -185,6 +112,7 @@ def new_organizer_remote():
         'sponsorship': 'Yes we have a few organizations we plan to approach.',
         'coaches': 'Yes we have an active Python community already.',
         'tools': 'We will use Zoom and GitHub.',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'No',
         'organize_form_wizard-current_step': 'workshop_remote'
     }
@@ -224,6 +152,7 @@ def previous_organizer_in_person():
         'sponsorship': 'My employer will sponsor the event.',
         'coaches': 'My colleagues will coach at the event.',
         'safety': 'Social distancing',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
         'organize_form_wizard-current_step': 'workshop'
     }
@@ -269,6 +198,7 @@ def new_organizer_in_person():
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
         'organize_form_wizard-current_step': 'workshop'
     }
@@ -314,6 +244,7 @@ def past_date():
         'sponsorship': 'We have Midlands State University as our main sponsor.',
         'coaches': 'We have MSU Computer Science students as coaches.',
         'tools': 'We will use Zoom and GitHub.',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
         'organize_form_wizard-current_step': 'workshop_remote'
     }
@@ -385,6 +316,7 @@ def workshop_form_valid_date():
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None'
     }
     return data
@@ -401,6 +333,7 @@ def workshop_form_too_close():
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None'
     }
     return data
@@ -416,6 +349,7 @@ def workshop_form_past_date():
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None'
     }
     return data
@@ -430,6 +364,7 @@ def workshop_remote_form_valid_date():
         'sponsorship': 'We have willing sponsors starting with my employer.',
         'coaches': 'We know many international speakers who can coach remotely.',
         'tools': 'Will use Zoom and GitHub',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
     }
     return data
@@ -445,6 +380,7 @@ def workshop_remote_form_date_too_close():
         'sponsorship': 'We have willing sponsors starting with my employer.',
         'coaches': 'We know many international speakers who can coach remotely.',
         'tools': 'Will use Zoom and GitHub',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
     }
     return data
@@ -459,6 +395,7 @@ def workshop_remote_form_past_date():
         'sponsorship': 'We have willing sponsors starting with my employer.',
         'coaches': 'We know many international speakers who can coach remotely.',
         'tools': 'Will use Zoom and GitHub',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
     }
     return data
@@ -474,6 +411,7 @@ def workshop_form_date_year_only():
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None'
     }
     return data
@@ -488,6 +426,7 @@ def workshop_remote_form_date_year_only():
         'sponsorship': 'We have willing sponsors starting with my employer.',
         'coaches': 'We know many international speakers who can coach remotely.',
         'tools': 'Will use Zoom and GitHub',
+        'diversity': 'Promote on social media and use videos',
         'additional': 'None',
     }
     return data

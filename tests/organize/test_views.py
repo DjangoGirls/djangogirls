@@ -43,9 +43,6 @@ def test_organize_form_wizard_remote_previous_organizer(client, previous_organiz
         url = '/organize/form/' + step + '/'
         resp = client.get(url)
         assert resp.status_code == 200
-        wizard = resp.context['wizard']
-        current_step = wizard['steps'].current
-        data_step['{}-current_step'.format(wizard['management_form'].prefix)] = current_step
         response = client.post(url, data_step)
         form = response.context['form']
         if step == len(previous_organizer_remote):

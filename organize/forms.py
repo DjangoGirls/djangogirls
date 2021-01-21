@@ -115,6 +115,9 @@ class WorkshopForm(forms.Form):
     safety = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
+    diversity = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
     additional = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
@@ -146,6 +149,9 @@ class RemoteWorkshopForm(forms.Form):
     coaches = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'}))
     tools = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
+    diversity = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
     additional = forms.CharField(

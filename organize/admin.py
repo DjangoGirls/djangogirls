@@ -60,6 +60,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'coaches',
         'remote',
         'tools',
+        'diversity',
         'safety',
         'additional'
     )
@@ -101,6 +102,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
                 'remote',
                 'tools',
                 'safety',
+                'diversity',
                 'additional'
             ],
             'classes': ('suit-tab', 'suit-tab-application',)

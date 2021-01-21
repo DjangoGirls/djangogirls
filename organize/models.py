@@ -57,6 +57,8 @@ class EventApplication(models.Model):
     safety = models.TextField("Information about how you will ensure participants' and coaches' "
                               "safety during the Covid-19 pandemic",
                               blank=True)
+    diversity = models.TextField("Information about how you intend to ensure your workshop is inclusive "
+                                 "and promotes diversity")
     additional = models.TextField("Any additional information you think may help your application",
                                   blank=True)
 
