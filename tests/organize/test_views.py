@@ -1,9 +1,6 @@
 from django.urls import reverse
-from formtools.wizard.views import NamedUrlSessionWizardView
 
-from organize.forms import (
-    PreviousEventForm, ApplicationForm, WorkshopForm,  WorkshopTypeForm, RemoteWorkshopForm, OrganizersFormSet)
-from organize.models import EventApplication
+from organize.views import organize_form_wizard
 
 
 def test_form_thank_you(client):
@@ -36,50 +33,37 @@ def test_suspend(client):
     assert resp.status_code == 200
 
 
-def test_organize_form_wizard_remote_previous_organizer(client, previous_organizer_remote,
-                                                        previous_application_more_than_6_months):
-    # Test form submission for remote workshop with previous organizer
-    for step, data_step in previous_organizer_remote:
+def organize_view(client, workshop_data, previous_application, previous_event):
+    for step, data_step in workshop_data:
         url = '/organize/form/' + step + '/'
         resp = client.get(url)
         assert resp.status_code == 200
         response = client.post(url, data_step)
-        form = response.context['form']
-        if step == len(previous_organizer_remote):
+        if step == len(workshop_data):
+            # Check if event application is created - assumption is None or events/applications 6 months apart
+            # Check if organizer is added
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:form_thank_you')
 
 
-"""
-def test_organize_form_wizard_remote_new_organizer(client, new_organizer_remote, no_previous_application):
+def test_organize_form_wizard_remote_previous_organizer(client, previous_organizer_remote):
+    # Test form submission for remote workshop with previous organizer
+    organize_view(client, previous_organizer_remote)
+
+
+def test_organize_form_wizard_remote_new_organizer(client, new_organizer_remote, previous_application, previous_event):
     # Test form submission for remote workshop with new organizer
-    for step, data_step in new_organizer_remote:
-        url = '/organize/form/' + step + '/'
-        response = client.post(url, data_step)
-        if step == len(new_organizer_remote):
-            assert response.status_code == 302
-            assert response['Location'] == reverse('organize:form_thank_you')
+    organize_view(client, new_organizer_remote, previous_application, previous_event)
 
 
-def test_organize_form_wizard_in_person_previous_organizer(client, previous_organizer_in_person,
-                                                           previous_event_in_more_than_6_months):
+def test_organize_form_wizard_in_person_previous_organizer(client, previous_organizer_in_person):
     # Test form submission for in-person workshop with previous organizer
-    for step, data_step in previous_organizer_in_person:
-        url = '/organize/form/' + step + '/'
-        response = client.post(url, data_step)
-        if step == len(previous_organizer_in_person):
-            assert response.status_code == 302
-            assert response['Location'] == reverse('organize:form_thank_you')
+    organize_view(client, previous_organizer_in_person)
 
 
-def test_organize_form_wizard_in_person_new_organizer(client, new_organizer_in_person, no_previous_event):
+def test_organize_form_wizard_in_person_new_organizer(client, new_organizer_in_person):
     # Test form submission for in-person with new organizer
-    for step, data_step in new_organizer_in_person:
-        url = '/organize/form/' + step + '/'
-        response = client.post(url, data_step)
-        if step == len(new_organizer_in_person):
-            assert response.status_code == 302
-            assert response['Location'] == reverse('organize:form_thank_you')
+    organize_view(client, new_organizer_in_person)
 
 
 def test_organize_form_wizard_applications_too_close(client, previous_organizer_remote,
@@ -103,5 +87,6 @@ def test_organize_form_wizards_workshops_too_close(client, previous_organizer_in
         response = client.post(url, data_step)
         if step == len(previous_organizer_in_person):
             assert response.status_code == 302
-            assert response['Location'] == reverse('organize:form_thank_you')
-"""
+            assert response['Location'] == reverse('organize:prerequisites')
+            assert response['form.errors'] == 'Your workshops should be 6 months apart. ' \
+                                              'Please read our Organizer Manual.'
