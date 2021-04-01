@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import pytest
 
@@ -38,16 +38,6 @@ def application_on_hold(base_application):
 
 
 @pytest.fixture
-def past_event():
-    return Event.objects.create(
-        name="Django Girls Berlin",
-        date="2014-06-21",
-        city="Berlin",
-        country="Germany",
-        latlng='52.5170365, 13.3888599')
-
-
-@pytest.fixture
 def previous_organizer_remote(past_event):
     previous_event = {
         'previous_event-has_organized_before': True,
@@ -59,9 +49,9 @@ def previous_organizer_remote(past_event):
         'organizers-INITIAL_FORMS': '0',
         'organizers-MIN_NUM_FORMS': '1',
         'organizers-MAX_NUM_FORMS': '10',
-        'organizers-0-email': 'test@test.com',
-        'organizers-0-first_name': 'Anna',
-        'organizers-0-last_name': 'Smith',
+        'organizers-0-email': 'peter-pan@example.com',
+        'organizers-0-first_name': 'Peter',
+        'organizers-0-last_name': 'Pan',
         'organizers-1-email': 'test1@test.com',
         'organizers-1-first_name': 'Jane',
         'organizers-1-last_name': 'Doe',
@@ -77,7 +67,8 @@ def previous_organizer_remote(past_event):
         'workshop_remote-country': 'AO',
         'workshop_remote-sponsorship': 'Yes, we hope to approach McKinsey and Accenture to sponsor our event.',
         'workshop_remote-coaches': 'I know a number of coaches from our local meet-up.',
-        'workshop_remote-tools': 'We will use Zoom for video conferencing, share Google folder and GitHub to share links to resources.',
+        'workshop_remote-tools': 'We will use Zoom for video conferencing, share Google folder and GitHub to '
+                                 'share links to resources.',
         'workshop_remote-diversity': 'Promote on social media and use videos',
         'workshop_remote-additional': 'None',
         'organize_form_wizard-current_step': 'workshop_remote'
@@ -157,9 +148,9 @@ def previous_organizer_in_person(past_event):
         'organizers-INITIAL_FORMS': '0',
         'organizers-MIN_NUM_FORMS': '1',
         'organizers-MAX_NUM_FORMS': '10',
-        'organizers-0-email': 'jose@test.com',
-        'organizers-0-first_name': 'Jose',
-        'organizers-0-last_name': 'Jonas',
+        'organizers-0-email': 'peter-pan@example.com',
+        'organizers-0-first_name': 'Peter',
+        'organizers-0-last_name': 'Pan',
         'organizers-1-email': 'jonas@test.com',
         'organizers-1-first_name': 'Jonas',
         'organizers-1-last_name': 'Jose Jnr',
@@ -170,7 +161,7 @@ def previous_organizer_in_person(past_event):
         'organize_form_wizard-current_step': 'workshop_type'
     }
     workshop = {
-        'workshop-date': '2060-01-31',
+        'workshop-date': '2080-02-20',
         'workshop-city': 'Beira',
         'workshop-country': 'MZ',
         'workshop-venue': 'Beira Hall',
@@ -372,69 +363,49 @@ def workshop_remote_form_date_year_only():
 
 
 @pytest.fixture
-def previous_application():
-    return None
-
-
-@pytest.fixture
-def previous_event():
-    return None
-
-
-@pytest.fixture
 def previous_application_more_than_6_months():
-    return EventApplication.objects.create(
+    previous_application = EventApplication.objects.create(
         city='Addis Ababa',
         country='Ethiopia',
-        date='',
-        created_at='',
+        date='2070-01-30',
+        created_at=timedelta(days=-180),
         main_organizer_email='test@test.com',
+        main_organizer_first_name='Anna',
+        main_organizer_last_name='Smith',
         status='new'
     )
+    return previous_application
 
 
 @pytest.fixture
 def previous_application_less_than_6_months():
-    return EventApplication.objects.create(
+    previous_application = EventApplication.objects.create(
         city='Addis Ababa',
         country='Ethiopia',
-        date='',
-        created_at='',
+        date='2070-01-30',
+        created_at=datetime.now(),
         main_organizer_email='test@test.com',
+        main_organizer_first_name='Anna',
+        main_organizer_last_name='Smith',
         status='new'
     )
+    return previous_application
 
 
 @pytest.fixture
-def previous_event_in_6_months():
-    return Event.objects.create(
-        name="Django Girls Harare",
-        date="2014-06-21",
-        city="Harare",
-        country="Zimbabwe",
-        latlng='52.5170365, 13.3888599',
-        main_organizer_email='test@test.com'
+def previous_event_more_than_6_months(organizer_peter):
+    previous_event = Event.objects.create(
+        email='harare@djangogirls.org',
+        city='Harare',
+        name='Django Girls Harare',
+        country='Zimbabwe',
+        latlng='-17.831773, 31.045686',
+        is_on_homepage=True,
+        main_organizer=organizer_peter,
+        date='2016-04-16',
+        page_url='harare',
+        is_page_live=True
     )
-
-
-@pytest.fixture
-def previous_event_in_more_than_6_months():
-    return Event.objects.create(
-        name="Django Girls Harare",
-        date="2016-04-16",
-        city="Harare",
-        country="Zimbabwe",
-        latlng='52.5170365, 13.3888599',
-        main_organizer_email='test@test.com'
-    )
-
-
-@pytest.fixture
-def past_event():
-    return None
-
-
-@pytest.fixture
-def past_application():
-    return None
+    previous_event.team.add(organizer_peter)
+    return previous_event
 
