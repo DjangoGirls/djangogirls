@@ -156,7 +156,7 @@ def hidden_event(superuser):
         country="Italy",
         is_on_homepage=False,
         main_organizer=superuser,
-        date="2020-09-02",
+        date="2080-09-02",
         page_url="rome",
         is_page_live=False)
     event.team.add(superuser)
