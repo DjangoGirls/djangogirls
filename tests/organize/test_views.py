@@ -86,8 +86,8 @@ def test_organize_form_wizard_applications_too_close(client, previous_organizer_
         if step == len(previous_organizer_remote):
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:prerequisites')
-            assert response['form.errors'] == 'You cannot apply to organize an event when you ' \
-                                              'have another open application.'
+            assert response['form.errors'] == 'You cannot apply to organize another event when you ' \
+                                              'already have another open event application.'
 
 
 def test_organize_form_wizard_workshops_too_close(client, previous_organizer_in_person,
@@ -99,5 +99,5 @@ def test_organize_form_wizard_workshops_too_close(client, previous_organizer_in_
         if step == len(previous_organizer_in_person):
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:prerequisites')
-            assert response['form.errors'] == 'Your workshops should be 6 months apart. ' \
+            assert response['form.errors'] == 'Your workshops should be at least 6 months apart. ' \
                                               'Please read our Organizer Manual.'

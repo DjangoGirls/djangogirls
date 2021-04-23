@@ -7,7 +7,7 @@ from organize.constants import ON_HOLD
 from organize.models import EventApplication, Coorganizer
 
 
-@pytest.fixture
+@pytest.fixture()
 def base_application():
     return EventApplication.objects.create(
         date="2080-10-10",

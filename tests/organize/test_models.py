@@ -62,7 +62,7 @@ def test_latlng_is_fetched_when_creating_application(base_application):
     assert base_application.latlng == '0.0,0.0'
     base_application.latlng = ''
     base_application.save()
-    assert base_application.latlng == '39.4747112, -0.3798074'
+    assert base_application.latlng == '39.4747112, -0.3798073'
 
 
 def test_has_past_team_members(organizer_peter, base_application):
