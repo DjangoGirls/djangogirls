@@ -417,7 +417,6 @@ def data_dict(past_event):
         'main_organizer_email': 'test@example.com',
         'main_organizer_first_name': 'Anna',
         'main_organizer_last_name': 'Smith',
-        'coorganizers': [{'email': 'test@test.com', 'first_name': 'Test', 'last_name': 'User'}],
         'remote': True,
         'date': '2081-03-10',
         'city': 'Harare',
