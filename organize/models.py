@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 from django.core.exceptions import ValidationError
 from django_countries import countries
@@ -50,11 +50,12 @@ class EventApplicationManager(models.Manager):
         ).order_by('-date').first()
 
         if previous_event:
-            if date(self.date.year,
-                    self.date.month,
-                    self.date.day) - date(previous_event.date.year,
-                                          previous_event.date.month,
-                                          previous_event.date.day) < timedelta(days=180):
+            event_date = datetime.strptime(data_dict['date'], '%Y-%m-%d')
+            if date(event_date.year,
+                    event_date.month,
+                    event_date.day) - date(previous_event.date.year,
+                                           previous_event.date.month,
+                                           previous_event.date.day) < timedelta(days=180):
                 raise ValidationError({'date': _('Your workshops should be at least 6 months apart. '
                                                  'Please read our Organizer Manual.')})
         return super().create(**data_dict)

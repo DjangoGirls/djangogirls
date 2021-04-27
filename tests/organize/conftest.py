@@ -409,3 +409,36 @@ def previous_event_more_than_6_months(organizer_peter):
     previous_event.team.add(organizer_peter)
     return previous_event
 
+
+@pytest.fixture
+def data_dict(past_event):
+    return {
+        'previous_event': past_event,
+        'main_organizer_email': 'test@example.com',
+        'main_organizer_first_name': 'Anna',
+        'main_organizer_last_name': 'Smith',
+        'coorganizers': [{'email': 'test@test.com', 'first_name': 'Test', 'last_name': 'User'}],
+        'remote': True,
+        'date': '2081-03-10',
+        'city': 'Harare',
+        'country': 'ZW',
+        'sponsorship': 'Yes',
+        'coaches': 'Yes',
+        'tools': 'Zoom',
+        'diversity': 'Reach out',
+        'additional': 'No'
+    }
+
+
+@pytest.fixture
+def previous_deployed_application():
+    return EventApplication.objects.create(
+        city='Addis Ababa',
+        country='Ethiopia',
+        date='2080-10-10',
+        created_at=datetime.now() - timedelta(days=181),
+        main_organizer_email='test@example.com',
+        main_organizer_first_name='Anna',
+        main_organizer_last_name='Smith',
+        status='deployed'
+    )
