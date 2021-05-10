@@ -1,4 +1,6 @@
 from formtools.wizard.views import NamedUrlSessionWizardView
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 
 from .emails import (
@@ -30,17 +32,21 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
-        # Process the date from the forms
+        # Process the data from the forms
         data_dict = {}
         for form in form_list:
             data_dict.update(form.get_data_for_saving())
-
         organizers_data = data_dict.pop('coorganizers', [])
-        application = EventApplication.objects.create(**data_dict)
-        for organizer in organizers_data:
-            application.coorganizers.create(**organizer)
-        send_application_confirmation(application)
-        send_application_notification(application)
+
+        try:
+            application = EventApplication.object.create(**data_dict)
+            for organizer in organizers_data:
+                application.coorganizers.create(**organizer)
+            send_application_confirmation(application)
+            send_application_notification(application)
+        except ValidationError as error:
+            messages.error(self.request, error.messages[0])
+            return redirect('organize:prerequisites')
         return redirect('organize:form_thank_you')
 
 
