@@ -50,7 +50,6 @@ INSTALLED_APPS = (
     'coach',
     'contact',
     'pictures',
-    'stripemanager',
 )
 
 MIDDLEWARE = [
@@ -220,6 +219,8 @@ RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 STORE_DISCOUNT_CODE = os.environ.get('STORE_DISCOUNT_CODE')
 
