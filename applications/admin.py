@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.html import format_html
-from suit.admin import SortableModelAdmin
+from suit.sortables import SortableModelAdmin
 
 from core.models import Event
 
@@ -32,8 +32,8 @@ class FormAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(FormAdmin, self).get_urls()
         my_urls = [
-            url(r'submissions/$',
-                self.admin_site.admin_view(self.view_submissions)),
+            re_path(r'submissions/$',
+                    self.admin_site.admin_view(self.view_submissions)),
         ]
         return my_urls + urls
 

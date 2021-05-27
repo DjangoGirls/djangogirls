@@ -2,7 +2,7 @@ from datetime import datetime
 
 from codemirror import CodeMirrorTextarea
 from django import forms
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib import admin, messages
 from django.contrib.auth import admin as auth_admin
 from django.contrib.auth.forms import UserChangeForm
@@ -13,7 +13,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from suit.admin import SortableModelAdmin
+
+from suit.sortables import SortableModelAdmin
 
 from .filters import OpenRegistrationFilter
 from .forms import (AddOrganizerForm, EventForm,
@@ -129,12 +130,12 @@ class EventAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(EventAdmin, self).get_urls()
         my_urls = [
-            url(r'manage_organizers/$',
-                self.admin_site.admin_view(self.view_manage_organizers),
-                name='core_event_manage_organizers'),
-            url(r'add_organizers/$',
-                self.admin_site.admin_view(self.view_add_organizers),
-                name='core_event_add_organizers'),
+            re_path(r'manage_organizers/$',
+                    self.admin_site.admin_view(self.view_manage_organizers),
+                    name='core_event_manage_organizers'),
+            re_path(r'add_organizers/$',
+                    self.admin_site.admin_view(self.view_add_organizers),
+                    name='core_event_add_organizers'),
         ]
         return my_urls + urls
 
@@ -179,11 +180,14 @@ class EventAdmin(admin.ModelAdmin):
                     return HttpResponseRedirect(
                         reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
 
-        return render(request, 'admin/core/event/view_manage_organizers.html', {
+        context = admin.site.each_context(request)
+        context.update({
             'all_events': all_events,
             'event': event,
             'title': 'Remove organizers',
         })
+
+        return render(request, 'admin/core/event/view_manage_organizers.html', context)
 
     def view_add_organizers(self, request):
         """
@@ -197,19 +201,24 @@ class EventAdmin(admin.ModelAdmin):
             if form.is_valid():
                 user = form.save()
                 messages.success(request,
-                    "{} has been added to your event, yay! They've been also" \
-                    " invited to Slack and should receive credentials to login" \
-                    " in an e-mail.".format(user.get_full_name()))
+                                 "{} has been added to your event, yay! They've been also" 
+                                 " invited to Slack and should receive credentials to login" 
+                                 " in an e-mail.".format(user.get_full_name()))
                 return redirect('admin:core_event_add_organizers')
         else:
             form = AddOrganizerForm(event_choices=all_events)
 
-        return render(request, 'admin/core/event/view_add_organizers.html', {
-            'all_events': all_events,
-            'event': event,
-            'form': form,
-            'title': 'Add organizers',
-        })
+        context = admin.site.each_context(request)
+        context.update(
+            {
+                'all_events': all_events,
+                'event': event,
+                'form': form,
+                'title': 'Add organizers',
+            }
+        )
+
+        return render(request, 'admin/core/event/view_add_organizers.html', context)
 
     def save_model(self, request, obj, form, change):
         created = not obj.pk
@@ -277,6 +286,7 @@ class EventFilter(admin.SimpleListFilter):
             return queryset.filter(event=self.value())
 
         return queryset
+
 
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'event', 'position', 'is_public')
@@ -401,6 +411,7 @@ class MyFlatPageAdmin(FlatPageAdmin):
             help_text="Change this only if you know what you are doing")
 
     form = MyFlatpageForm
+
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, MyFlatPageAdmin)

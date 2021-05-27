@@ -1,4 +1,4 @@
-{% load staticfiles rev %}
+{% load static rev %}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,6 +21,7 @@
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
   <script type="text/javascript" src="{% static 'vendor/js/bootstrap.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'vendor/js/sss.min.js' %}"></script>
+
   {% block extra_js %}{% endblock %}
 </head>
 <body>
