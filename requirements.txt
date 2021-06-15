@@ -25,7 +25,7 @@ django-markdown-deux==1.0.5
 django-recaptcha==2.0.6
 django-sendgrid-v5==0.9.1
 django-storages==1.11.1
-django-suit==2.0a1
+https://github.com/darklow/django-suit/tarball/v2
 django-suit-redactor==0.0.4
 django-unused-media==0.2.2
 docutils==0.17.1
