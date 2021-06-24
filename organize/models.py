@@ -1,8 +1,11 @@
+from datetime import date, datetime, timedelta
+
 from django.core.exceptions import ValidationError
 from django_countries import countries
 from django_extensions.db.fields import AutoSlugField
 from django.db import models, transaction
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from django_date_extensions.fields import ApproximateDateField
 
 from core import gmail_accounts
@@ -24,6 +27,38 @@ from .emails import (
     send_application_rejection_email,
     send_application_deployed_email
 )
+
+
+class EventApplicationManager(models.Manager):
+
+    def create(self, **data_dict):
+        previous_application = EventApplication.objects.filter(
+            main_organizer_email=data_dict['main_organizer_email'],
+            status=NEW
+        ).order_by('-created_at').first()
+
+        if previous_application:
+            if date.today() - date(previous_application.created_at.year,
+                                   previous_application.created_at.month,
+                                   previous_application.created_at.day) < timedelta(days=180):
+                raise ValidationError({'date': _('You cannot apply to organize another event when you '
+                                                 'already have another open event application.')})
+
+        previous_event = EventApplication.objects.filter(
+            main_organizer_email=data_dict['main_organizer_email'],
+            status=DEPLOYED
+        ).order_by('-date').first()
+
+        if previous_event:
+            event_date = datetime.strptime(data_dict['date'], '%Y-%m-%d')
+            if date(event_date.year,
+                    event_date.month,
+                    event_date.day) - date(previous_event.date.year,
+                                           previous_event.date.month,
+                                           previous_event.date.day) < timedelta(days=180):
+                raise ValidationError({'date': _('Your workshops should be at least 6 months apart. '
+                                                 'Please read our Organizer Manual.')})
+        return super().create(**data_dict)
 
 
 class EventApplication(models.Model):
@@ -57,6 +92,8 @@ class EventApplication(models.Model):
     safety = models.TextField("Information about how you will ensure participants' and coaches' "
                               "safety during the Covid-19 pandemic",
                               blank=True)
+    diversity = models.TextField("Information about how you intend to ensure your workshop is inclusive "
+                                 "and promotes diversity")
     additional = models.TextField("Any additional information you think may help your application",
                                   blank=True)
 
@@ -70,6 +107,7 @@ class EventApplication(models.Model):
 
     comment = models.TextField(null=True, blank=True)
 
+    object = EventApplicationManager()
     objects = EventApplicationQuerySet.as_manager()
 
     class Meta:
@@ -85,6 +123,7 @@ class EventApplication(models.Model):
     def save(self, *args, **kwargs):
         if not self.latlng:
             self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
+
         super(EventApplication, self).save(*args, **kwargs)
 
     def create_event(self):

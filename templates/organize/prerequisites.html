@@ -17,6 +17,14 @@
 
         <div class="row">
             <div class="col-md-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 <div class="panel">
                     <h1>Prerequisities to organize a Django Girls workshop</h1>
 
@@ -86,6 +94,13 @@
                                     <input type="checkbox" id="non-profit" name="non-profit" required />
                                     <label for="non-profit">
                                         The event you’re organizing will be non-profit
+                                    </label>
+                                </li>
+                                <li class="checkbox-wrapper">
+                                    <input type="checkbox" id="do-not-pay" name="do-not-pay" required />
+                                    <label for="do-not-pay">
+                                        <strong>You will not pay coaches, speakers or organizers therefore you
+                                        will not request money from sponsors to pay coaches, speakers or organizers.</strong>
                                     </label>
                                 </li>
                             </ul>

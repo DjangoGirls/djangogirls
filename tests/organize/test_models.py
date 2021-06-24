@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from unittest import mock
 
 from organize.constants import DEPLOYED, ON_HOLD, REJECTED
+from organize.models import EventApplication
 from core.models import Event
 
 
@@ -89,3 +90,22 @@ def test_has_past_team_members(organizer_peter, base_application):
 
     # if there is a common organizer, return True
     assert base_application.has_past_team_members(next_event)
+
+
+def test_application_fails_if_new_application_exists(base_application, data_dict):
+    with pytest.raises(ValidationError) as error:
+        EventApplication.object.create(**data_dict)
+        assert error.value.args[0] == 'You cannot apply to organize another event when you ' \
+                                      'already have another open event application.'
+
+
+def test_application_fails_if_event_dates_not_six_months_apart(data_dict, previous_deployed_application):
+    with pytest.raises(ValidationError) as error:
+        EventApplication.object.create(**data_dict)
+        assert error.value.args[0] == 'Your workshops should be at least 6 months apart. ' \
+                                      'Please read our Organizer Manual.'
+
+
+def test_event_application_manager_create_method(data_dict):
+    event = EventApplication.object.create(**data_dict)
+    assert event.city == 'Harare'

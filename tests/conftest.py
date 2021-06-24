@@ -123,7 +123,7 @@ def future_event(organizer_peter):
         country="the Neverlands",
         is_on_homepage=True,
         main_organizer=organizer_peter,
-        date="2020-12-00",
+        date="2080-01-01",
         page_url="bonn",
         is_page_live=True)
     event.team.add(organizer_peter)
@@ -156,7 +156,7 @@ def hidden_event(superuser):
         country="Italy",
         is_on_homepage=False,
         main_organizer=superuser,
-        date="2020-09-02",
+        date="2080-09-02",
         page_url="rome",
         is_page_live=False)
     event.team.add(superuser)
