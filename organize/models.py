@@ -50,7 +50,7 @@ class EventApplicationManager(models.Manager):
         ).order_by('-date').first()
 
         if previous_event:
-            event_date = datetime.strptime(data_dict['date'], '%Y-%m-%d')
+            event_date = data_dict['date']
             if date(event_date.year,
                     event_date.month,
                     event_date.day) - date(previous_event.date.year,
