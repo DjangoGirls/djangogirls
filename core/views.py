@@ -63,7 +63,7 @@ def event(request, city):
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': city, 'past': date(event.date.year, event.date.month, event.date.day) <= now_approx}
+            {'city': city, 'past': date(event.date.year, event.date.month, event.date.day) < now_approx}
         )
 
     return render(request, "core/event.html", {
