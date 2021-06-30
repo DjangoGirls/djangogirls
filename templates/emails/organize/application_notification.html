@@ -46,10 +46,17 @@
   <strong>Have you organized any other event before?</strong><br />
   {{ application.experience|linebreaksbr }}
 </p>
+{% if application.remote %}
+<p>
+<strong>How will you host your workshop remotely?</strong>
+{{ application.tools|linebreaksbr }}
+</p>
+{% else %}
 <p>
   <strong>Do you have a venue in mind?</strong><br />
   {{ application.venue|linebreaksbr }}
 </p>
+{% endif %}
 <p>
   <strong>Do you have a plan which companies will you approach for sponsorship?</strong><br />
   {{ application.sponsorship|linebreaksbr }}
