@@ -14,8 +14,6 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from suit.sortables import SortableModelAdmin
-
 from .filters import OpenRegistrationFilter
 from .forms import (AddOrganizerForm, EventForm,
                     UserCreationForm, UserLimitedChangeForm)
@@ -288,7 +286,7 @@ class EventFilter(admin.SimpleListFilter):
         return queryset
 
 
-class EventPageContentAdmin(SortableModelAdmin):
+class EventPageContentAdmin(admin.ModelAdmin):
     list_display = ('name', 'event', 'position', 'is_public')
     list_filter = (EventFilter, 'is_public')
     search_fields = ('name', 'event__page_title', 'content', 'event__city',
@@ -324,7 +322,7 @@ class EventPageContentAdmin(SortableModelAdmin):
         return self.readonly_fields
 
 
-class EventPageMenuAdmin(SortableModelAdmin):
+class EventPageMenuAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'url', 'position')
     list_filter = (EventFilter,)
     sortable = 'position'

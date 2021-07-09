@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.html import format_html
-from suit.sortables import SortableModelAdmin
 
 from core.models import Event
 
@@ -71,7 +70,7 @@ class FormFilter(admin.SimpleListFilter):
         return queryset
 
 
-class QuestionAdmin(SortableModelAdmin):
+class QuestionAdmin(admin.ModelAdmin):
     list_display = ('form', 'title', 'question_type', 'is_required', 'order')
     sortable = 'order'
     list_filter = (FormFilter,)
