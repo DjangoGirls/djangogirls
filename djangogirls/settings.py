@@ -70,9 +70,12 @@ WSGI_APPLICATION = 'djangogirls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', '')
+
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(
-    default='postgres://postgres:@localhost:5432/djangogirls')
+    default='postgres://postgres:{}@localhost:5432/djangogirls'.format(POSTGRES_PASSWORD)
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
