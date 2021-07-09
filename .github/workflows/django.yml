@@ -1,20 +1,21 @@
-name: Django CI
+name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
   pull_request:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    notifications:
-      slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
-    cache:
-      directories:
-        - $HOME/.cache/pip
+# Review this lines. GHA raised an error for them.
+# - uncomment one-by-one, and open PR to test.
+#    notifications:
+#      slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
+#    cache:
+#      directories:
+#        - $HOME/.cache/pip
 
     services:
       postgres:
@@ -31,25 +32,44 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: 3.5
+        python-version:
+        - 3.5
+# Add/remove additional versions as we're looking to bump up.
+#        - 3.6
+#        - 3.7
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: psycopg2 prerequisites
         run: sudo apt-get install libpq-dev
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
+
+      - name: Copy static files.
+        run: |
+          mkdir static/local
+          cp -r static/source/img static/local/img
+
       - name: Run migrations
-        run: python manage.py migrate
+        run: |
+          python manage.py migrate
+        env:
+          POSTGRES_PASSWORD: postgres
       - name: Run Tests
         run: |
           py.test --cov
+        env:
+          POSTGRES_PASSWORD: postgres
 
-      - after_success:
-          - bash <(curl -s https://codecov.io/bash)
+# Can we restore this? Commented to get workflow running.
+#      - after_success:
+#          - bash <(curl -s https://codecov.io/bash)
