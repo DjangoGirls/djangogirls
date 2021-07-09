@@ -65,6 +65,7 @@ jobs:
 
         env:
           POSTGRES_PASSWORD: postgres
+
       - name: Run Tests
         run: |
           py.test --cov
