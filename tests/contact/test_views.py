@@ -1,4 +1,5 @@
 from django.urls import reverse
+from unittest import mock
 
 from contact.models import ContactEmail
 
@@ -10,6 +11,7 @@ def test_contact_page_loads(client):
     assert resp.status_code == 200
 
 
+@mock.patch("captcha.fields.ReCaptchaField.validate")
 def test_form_sends_email_to_support(client, mailoutbox):
     post_data = {
         'name': 'test name',
@@ -28,6 +30,7 @@ def test_form_sends_email_to_support(client, mailoutbox):
     assert email.body == 'nice message'
 
 
+@mock.patch("captcha.fields.ReCaptchaField.validate")
 def test_form_sends_email_to_chapter(client, mailoutbox, future_event):
     future_event.email = 'test@test.com'
     future_event.save()
@@ -65,6 +68,7 @@ def test_chapter_contact_requires_event(client, mailoutbox):
     assert ContactEmail.objects.exists() is False
 
 
+@mock.patch("captcha.fields.ReCaptchaField.validate")
 def test_email_is_saved_into_database(client, mailoutbox, future_event):
     assert ContactEmail.objects.exists() is False
 
