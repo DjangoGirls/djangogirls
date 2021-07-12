@@ -1,4 +1,5 @@
 import os
+import sys
 import dj_database_url
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -166,12 +167,14 @@ DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
+if 'test' in sys.argv:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+else:
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
+
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
-
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 STORE_DISCOUNT_CODE = os.environ.get('STORE_DISCOUNT_CODE')
 
