@@ -23,3 +23,11 @@ static/build/
 static/local/
 static/rev-manifest.json
 temp/
+djangogirls/local_settings_2.py
+htmlcov/
+new-venv/
+package-lock.json
+tests/tests/
+venv/
+migrate-venv/
+djangogirls/local_settings2.py
