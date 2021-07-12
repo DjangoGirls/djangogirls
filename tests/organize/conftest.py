@@ -1,6 +1,7 @@
 from datetime import date, datetime, timedelta
-
 import pytest
+
+from django_date_extensions.fields import ApproximateDate
 
 from core.models import Event
 from organize.constants import ON_HOLD
@@ -418,7 +419,7 @@ def data_dict(past_event):
         'main_organizer_first_name': 'Anna',
         'main_organizer_last_name': 'Smith',
         'remote': True,
-        'date': '2081-03-10',
+        'date': ApproximateDate(2081, 3, 10),
         'city': 'Harare',
         'country': 'ZW',
         'sponsorship': 'Yes',
