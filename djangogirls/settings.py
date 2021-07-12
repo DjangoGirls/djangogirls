@@ -136,6 +136,9 @@ LOGIN_URL = 'admin:login'
 
 if 'GITHUB_ACTIONS' in os.environ:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/source')]
+    RECAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+    RECAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 elif DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/local')]
 else:
