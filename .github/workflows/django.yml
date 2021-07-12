@@ -9,11 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-# Review this lines. GHA raised an error for them.
-# - uncomment one-by-one, and open PR to test.
-#    cache:
-#      directories:
-#        - $HOME/.cache/pip
 
     services:
       postgres:
