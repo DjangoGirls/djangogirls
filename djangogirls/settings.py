@@ -69,9 +69,12 @@ WSGI_APPLICATION = 'djangogirls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', '')
+
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(
-    default='postgres://postgres:@localhost:5432/djangogirls')
+    default='postgres://postgres:{}@localhost:5432/djangogirls'.format(POSTGRES_PASSWORD)
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -131,7 +134,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 DJANGO_GULP_REV_PATH = os.path.join(BASE_DIR, 'static/rev-manifest.json')
 LOGIN_URL = 'admin:login'
 
-if 'TRAVIS' in os.environ:
+if 'GITHUB_ACTIONS' in os.environ:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/source')]
 elif DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/local')]
