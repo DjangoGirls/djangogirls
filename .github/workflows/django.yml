@@ -54,6 +54,11 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
 
+      - name: Copy static files.
+        run: |
+          mkdir static/local
+          cp -r static/source/img static/local/img
+
       - name: Run migrations
         run: |
           python manage.py migrate
