@@ -49,7 +49,6 @@ def test_event_unpublished(client, hidden_event):
     assert 'city' and 'past' in resp.context
 
 
-@pytest.mark.skip(reason="Pending fix of #590 — Template `past` hardcoded as False.")
 def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     future_date = timezone.now() + timedelta(days=1)
     past_date = timezone.now() - timedelta(days=1)

@@ -1,10 +1,10 @@
-from datetime import date
-
 import icalendar
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
+from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from patreonmanager.models import FundraisingStatus
 
@@ -48,7 +48,8 @@ def resources(request):
 
 
 def event(request, city):
-    now_approx = date.today()
+    now = timezone.now()
+    now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
     event = get_object_or_404(Event, page_url=city.lower())
 
     if event.page_url != city:
@@ -63,7 +64,7 @@ def event(request, city):
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': city, 'past': False}
+            {'city': city, 'past': event.date <= now_approx}
         )
 
     return render(request, "core/event.html", {
