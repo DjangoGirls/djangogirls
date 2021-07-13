@@ -99,7 +99,6 @@ def test_application_fails_if_new_application_exists(base_application, data_dict
                                       'already have another open event application.'
 
 
-@pytest.mark.skip(reason="Broken test: See #598")
 def test_application_fails_if_event_dates_not_six_months_apart(data_dict, previous_deployed_application):
     with pytest.raises(ValidationError) as error:
         EventApplication.object.create(**data_dict)
