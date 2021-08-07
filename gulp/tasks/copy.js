@@ -4,7 +4,6 @@ const { task, series, src, dest } = require("gulp");
 const config = require("../config");
 const environments = require("gulp-environments");
 
-const development = environments.development;
 const production = environments.production;
 
 // was called copyfiles

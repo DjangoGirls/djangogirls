@@ -6,7 +6,9 @@ const config = require("../config");
 const clean = require("gulp-clean");
 
 const cleanTask = async () => {
-  return src(config.paths.build, { read: false }).pipe(clean({ force: true }));
+  return src(config.paths.build, { read: false, allowEmpty: true }).pipe(
+    clean({ force: true })
+  );
 };
 
 module.exports = cleanTask;
