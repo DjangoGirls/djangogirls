@@ -1,7 +1,8 @@
-var requireDir = require('require-dir'),
-  gulp = require('gulp');
+const gulp = require("gulp");
+const requireDir = require("require-dir");
+const path = require("path");
 
-
-requireDir('./gulp/tasks', { recurse: true });
-
-gulp.task('default', ['watch']);
+const tasks = requireDir(path.join(__dirname, "./gulp/tasks"), {
+  recurse: true,
+});
+module.exports = tasks;

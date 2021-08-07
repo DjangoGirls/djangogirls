@@ -1,15 +1,21 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  environments = require('gulp-environments'),
-  uglify = require('gulp-uglify');
+"use strict";
+
+const { series, src, dest } = require("gulp");
+const config = require("../config");
+const environments = require("gulp-environments");
+const uglify = require("gulp-uglify");
 
 var development = environments.development;
 var production = environments.production;
 
+const scriptsTask = async () => {
+  const destination = production()
+    ? config.paths.js.dest.production
+    : config.paths.js.dest.development;
 
-gulp.task('scripts', ['clean'], function(){
-  var dest = production() ? config.paths.js.dest.production : config.paths.js.dest.development;
-  return gulp.src(config.paths.js.src)
+  return src(config.paths.js.src)
     .pipe(production(uglify()))
-    .pipe(gulp.dest(dest))
-});
+    .pipe(dest(destination));
+};
+
+module.exports = scriptsTask;

@@ -1,9 +1,12 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  clean = require('gulp-clean');
+"use strict";
 
+const { task, src } = require("gulp");
+const config = require("../config");
+// TODO: gulp-clean is deprecated
+const clean = require("gulp-clean");
 
-gulp.task('clean', function () {
-  return gulp.src(config.paths.build, {read: false})
-    .pipe(clean({force: true}));
-});
+const cleanTask = async () => {
+  return src(config.paths.build, { read: false }).pipe(clean({ force: true }));
+};
+
+module.exports = cleanTask;

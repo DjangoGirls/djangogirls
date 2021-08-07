@@ -1,12 +1,14 @@
-var gulp = require('gulp'),
-  environments = require('gulp-environments'),
-  gutil = require('gulp-util');
+"use strict";
 
-var development = environments.development;
-var production = environments.production;
+const environments = require("gulp-environments");
+const gutil = require("gulp-util");
 
+const production = environments.production;
 
-gulp.task('set-production', function(){
-    gutil.log('Setting environment to production');
-    environments.current(production);
-});
+// was set-production
+const setProduction = async () => {
+  gutil.log("Setting environment to production");
+  environments.current(production);
+};
+
+module.exports = setProduction;

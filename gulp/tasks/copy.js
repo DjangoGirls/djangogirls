@@ -1,13 +1,18 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  environments = require('gulp-environments');
+"use strict";
 
-var development = environments.development;
-var production = environments.production;
+const { task, series, src, dest } = require("gulp");
+const config = require("../config");
+const environments = require("gulp-environments");
 
+const development = environments.development;
+const production = environments.production;
 
-gulp.task('copyfiles', ['clean'], function(){
-  var dest = production() ? config.paths.copy.dest.production : config.paths.copy.dest.development;
-  return gulp.src(config.paths.copy.src)
-    .pipe(gulp.dest(dest))
-});
+// was called copyfiles
+const copyFiles = async () => {
+  const destination = production()
+    ? config.paths.copy.dest.production
+    : config.paths.copy.dest.development;
+  return src(config.paths.copy.src).pipe(dest(destination));
+};
+
+module.exports = copyFiles;
