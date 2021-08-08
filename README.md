@@ -139,19 +139,47 @@ This means you shouldn't change any css files, but `.styl` files. They're in /st
 
 Autocompiling of `.styl` files to `.css`:
 
-    gulp watch
+    npx gulp watch
 
-We're also using gulp for our static files builds. To build static files for production, run this:
+We're also using gulp for our static files builds (see [below](#gulp-tasks)). To build static files for production, run this:
 
-    gulp build
+    npx gulp build
 
 For local development:
 
-    gulp local
+    npx gulp local
 
 #### Gulp Tasks
 
-TODO
+Static files are generated and maintained using [gulp.js](https://gulpjs.com/). To use, you'll need Node.js [installed](https://nodejs.org/en/download/). Then, run `npm install`. You can now use `npx gulp` (note that it's `np**x**`), followed by one of the following commands:
+
+* `gulp local` - run a one-off local build of css & js
+* `gulp watch` - compile and watch static assets for changes
+* `gulp build` - run a one-off production build, which involves minifying code and asset revision markers
+* `gulp clean` - remove the results of any of the above commands
+
+Running `gulp` on its own runs `watch` by default.
+
+#### Developing Gulp Tasks
+
+Each gulp task is a single function, which are combined using the `series` operator so they run as a workflow. Each are commented with what they do and why they're important. 
+
+The biggest gotcha is [async completion](https://gulpjs.com/docs/en/getting-started/async-completion#signal-task-completion). Each task much signal to gulp when it has finished. The easiest way to do this is using an `aysnc` function, **but** if your functionality uses gulp streams (most native gulp functionality does), then you should **not** use an `async` function. Instead, return the gulp stream from the function and it will be handled correctly.
+
+```js
+// WRONG - uses gulp's streams in an async function; subsequent tasks won't wait for completion correctly:
+const copyFiles = async () => {
+    return gulp.src(...).pipe(gulp.dest(...))
+}
+
+// RIGHT - either returns a gulp stream _or_ uses an `async` function:
+const copyFiles = () => {
+    return gulp.src(...).pipe(gulp.dest(...))
+}
+const deleteFiles = async () => {
+    await del(...)
+}
+```
 
 ### Hosting on PythonAnywhere
 
