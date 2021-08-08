@@ -1,6 +1,6 @@
 "use strict";
 
-const { series, src, dest } = require("gulp");
+const { src, dest } = require("gulp");
 const { production } = require("gulp-environments");
 const uglify = require("gulp-uglify");
 

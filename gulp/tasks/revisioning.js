@@ -1,6 +1,6 @@
 "use strict";
 
-const { src, dest, series } = require("gulp");
+const { src, dest } = require("gulp");
 const rev = require("gulp-rev");
 const revNapkin = require("gulp-rev-napkin");
 const revCSS = require("gulp-rev-css-url");

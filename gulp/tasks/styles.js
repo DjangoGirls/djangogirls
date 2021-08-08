@@ -1,6 +1,6 @@
 "use strict";
 
-const { src, dest, series, task } = require("gulp");
+const { src, dest, series } = require("gulp");
 const stylus = require("gulp-stylus");
 const { production } = require("gulp-environments");
 const concat = require("gulp-concat");
@@ -20,7 +20,7 @@ const stylusTask = () => {
 
 const tasks = [stylusTask];
 
-for (let key in config.paths.css.bundles) {
+for (const key in config.paths.css.bundles) {
   const func = () => {
     const destination = production()
       ? config.paths.css.dest.production

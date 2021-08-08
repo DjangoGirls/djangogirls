@@ -1,6 +1,6 @@
 "use strict";
 
-const { task, series, src, dest } = require("gulp");
+const { src, dest } = require("gulp");
 const { production } = require("gulp-environments");
 
 const config = require("../config");
