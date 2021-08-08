@@ -13,8 +13,8 @@
   "dependencies": {},
   "devDependencies": {
     "bootstrap": "^3.3.6",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-environments": "^0.1.1",
     "gulp-rev": "^7.0.0",

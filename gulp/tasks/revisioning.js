@@ -6,11 +6,7 @@ const rev = require("gulp-rev");
 const revNapkin = require("gulp-rev-napkin");
 const revCSS = require("gulp-rev-css-url");
 
-const clean = require("./clean");
-const styles = require("./styles");
-const scripts = require("./scripts");
-
-const revisioningTask = async () => {
+const revisioningTask = () => {
   return src(config.paths.revisioning, { base: config.paths.build })
     .pipe(rev())
     .pipe(revCSS())

@@ -8,7 +8,7 @@ const uglify = require("gulp-uglify");
 var development = environments.development;
 var production = environments.production;
 
-const scriptsTask = async () => {
+const scriptsTask = () => {
   const destination = production()
     ? config.paths.js.dest.production
     : config.paths.js.dest.development;

@@ -7,7 +7,7 @@ const environments = require("gulp-environments");
 const production = environments.production;
 
 // was called copyfiles
-const copyFiles = async () => {
+const copyFiles = () => {
   const destination = production()
     ? config.paths.copy.dest.production
     : config.paths.copy.dest.development;

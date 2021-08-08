@@ -10,7 +10,7 @@ const config = require("../config");
 
 const production = environments.production;
 
-const stylusTask = async () => {
+const stylusTask = () => {
   const compress = production();
   return src(config.paths.css.src)
     .pipe(
@@ -26,7 +26,7 @@ const tasks = [stylusTask];
 for (let key in config.paths.css.bundles) {
   const taskName = `styles:${key}`;
   // use deprecated gulp.task to get good dynamic task names
-  task(taskName, async () => {
+  task(taskName, () => {
     const destination = production()
       ? config.paths.css.dest.production
       : config.paths.css.dest.development;
