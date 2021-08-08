@@ -1,8 +1,15 @@
 "use strict";
 
-const config = require("../config");
 const del = require("del");
 
-const cleanTask = async () => del(config.paths.build);
+const config = require("../config");
+
+/**
+ * removes the files created during local and production builds
+ */
+const cleanTask = async () => {
+  await del(config.paths.copy.dest.development);
+  await del(config.paths.copy.dest.production);
+};
 
 module.exports = cleanTask;

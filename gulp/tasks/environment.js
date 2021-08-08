@@ -1,14 +1,14 @@
 "use strict";
 
-const environments = require("gulp-environments");
-const gutil = require("gulp-util");
+const { production, current } = require("gulp-environments");
+const log = require("fancy-log");
 
-const production = environments.production;
-
-// was set-production
-const setProduction = async () => {
-  gutil.log("Setting environment to production");
-  environments.current(production);
+/**
+ * Sets a global production marker that other tasks can read
+ */
+const setProductionTask = async () => {
+  log("Setting environment to production");
+  current(production);
 };
 
-module.exports = setProduction;
+module.exports = setProductionTask;

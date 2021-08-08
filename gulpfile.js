@@ -1,8 +1,12 @@
-const gulp = require("gulp");
-const requireDir = require("require-dir");
-const path = require("path");
+const build = require("./gulp/tasks/build");
+const watch = require("./gulp/tasks/watch");
+const local = require("./gulp/tasks/local");
+const clean = require("./gulp/tasks/clean");
 
-const tasks = requireDir(path.join(__dirname, "./gulp/tasks"), {
-  recurse: true,
-});
-module.exports = tasks;
+module.exports = {
+  build,
+  watch,
+  local,
+  clean,
+  default: watch,
+};

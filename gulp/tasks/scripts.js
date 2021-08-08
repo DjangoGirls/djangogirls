@@ -1,21 +1,26 @@
 "use strict";
 
 const { series, src, dest } = require("gulp");
-const config = require("../config");
-const environments = require("gulp-environments");
+const { production } = require("gulp-environments");
 const uglify = require("gulp-uglify");
 
-var development = environments.development;
-var production = environments.production;
+const config = require("../config");
 
+/**
+ * uses uglify to minify distributed JS
+ * skipped for local builds
+ */
 const scriptsTask = () => {
   const destination = production()
     ? config.paths.js.dest.production
     : config.paths.js.dest.development;
 
-  return src(config.paths.js.src)
-    .pipe(production(uglify()))
-    .pipe(dest(destination));
+  return (
+    src(config.paths.js.src)
+      // passing uglify into the production function means uglify only runs during produciton builds
+      .pipe(production(uglify()))
+      .pipe(dest(destination))
+  );
 };
 
 module.exports = scriptsTask;

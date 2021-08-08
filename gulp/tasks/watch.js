@@ -14,6 +14,9 @@ const watchPaths = async () => {
   watch(config.paths.copy.src, copyFiles);
 };
 
+/**
+ * watches js and CSS for filesystem changes
+ */
 const watchTask = series(clean, styles, scripts, copyFiles, watchPaths);
 
 module.exports = watchTask;

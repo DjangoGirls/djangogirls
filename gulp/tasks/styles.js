@@ -1,14 +1,11 @@
 "use strict";
 
 const { src, dest, series, task } = require("gulp");
-const gutil = require("gulp-util");
 const stylus = require("gulp-stylus");
-const environments = require("gulp-environments");
+const { production } = require("gulp-environments");
 const concat = require("gulp-concat");
 
 const config = require("../config");
-
-const production = environments.production;
 
 const stylusTask = () => {
   const compress = production();
@@ -24,9 +21,7 @@ const stylusTask = () => {
 const tasks = [stylusTask];
 
 for (let key in config.paths.css.bundles) {
-  const taskName = `styles:${key}`;
-  // use deprecated gulp.task to get good dynamic task names
-  task(taskName, () => {
+  const func = () => {
     const destination = production()
       ? config.paths.css.dest.production
       : config.paths.css.dest.development;
@@ -34,8 +29,17 @@ for (let key in config.paths.css.bundles) {
     return src(config.paths.css.bundles[key])
       .pipe(concat(`${key}.css`))
       .pipe(dest(destination));
+  };
+  // give the dynamic task a custom name for debugging
+  Object.defineProperty(func, "name", {
+    value: `styles:${key}`,
+    writable: false,
   });
-  tasks.push(taskName);
+
+  tasks.push(func);
 }
 
+/**
+ * compiles CSS using stylus
+ */
 module.exports = series(...tasks);

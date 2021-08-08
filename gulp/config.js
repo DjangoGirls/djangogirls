@@ -1,7 +1,6 @@
 module.exports = {
   paths: {
     project: './',
-    build: './static/build/',
     css: {
       src: [
         './static/source/css/*.styl',
