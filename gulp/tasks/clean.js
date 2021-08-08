@@ -10,6 +10,7 @@ const config = require("../config");
 const cleanTask = async () => {
   await del(config.paths.copy.dest.development);
   await del(config.paths.copy.dest.production);
+  await del(config.paths.temp);
 };
 
 module.exports = cleanTask;
