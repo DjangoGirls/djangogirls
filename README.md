@@ -69,7 +69,7 @@ Step into newly created `djangogirls` directory:
 
     cd djangogirls
 
-Create a new virtual environment if needed. Then, install all the required dependencies:
+Create a new virtual environment (python <3.8) if needed. Then, install all the required dependencies:
 
     pip install -r requirements.txt
 
