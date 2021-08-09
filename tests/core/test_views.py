@@ -49,6 +49,39 @@ def test_event_unpublished(client, hidden_event):
     assert 'city' and 'past' in resp.context
 
 
+def test_event_path(client, diff_url_event):
+    # Ensure new url path for event view works
+    url = reverse(
+        'core:event',
+        kwargs={'page_url': diff_url_event.page_url}
+    )
+    resp = client.get(url)
+    assert resp.status_code == 200
+
+    # Check if website is returning correct data
+    assert 'city' and 'past' in resp.context
+
+
+def test_event_live(client, future_event):
+    # Ensure new url path for event view works
+    url = reverse(
+        'core:event',
+        kwargs={'page_url': future_event.page_url}
+    )
+    resp = client.get(url)
+    assert resp.status_code == 200
+
+    # Check if website is returning correct data
+    assert 'event' and 'menu' and 'content' in resp.context
+
+
+def test_event_city(client, diff_url_event):
+    # Ensure old use of City in the url 404s when the slug is different
+    url = '/' + diff_url_event.city + '/'
+    resp = client.get(url)
+    assert resp.status_code == 404
+
+
 def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     future_date = timezone.now() + timedelta(days=1)
     past_date = timezone.now() - timedelta(days=1)
