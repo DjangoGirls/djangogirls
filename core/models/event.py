@@ -1,6 +1,5 @@
 from datetime import date, timedelta
 
-
 import icalendar
 from django.db import models
 from django.utils import timezone
@@ -55,20 +54,20 @@ class Event(models.Model):
         blank=True
     )
     email = models.EmailField(
-        "event email",
+        verbose_name="event email",
         max_length=75,
         null=True,
         blank=True
     )
     main_organizer = models.ForeignKey(
-        User,
+        to=User,
         null=True,
         blank=True,
         related_name="main_organizer",
         on_delete=models.deletion.SET_NULL
     )
     team = models.ManyToManyField(
-        User,
+        to=User,
         blank=True
     )
     is_on_homepage = models.BooleanField(
@@ -276,7 +275,7 @@ class Event(models.Model):
 
 class EventPageContent(models.Model):
     event = models.ForeignKey(
-        Event,
+        to=Event,
         null=False,
         blank=False,
         related_name="content",
@@ -313,7 +312,7 @@ class EventPageContent(models.Model):
 
 class EventPageMenu(models.Model):
     event = models.ForeignKey(
-        Event,
+        to=Event,
         null=False,
         blank=False,
         related_name="menu",
