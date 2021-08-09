@@ -18,7 +18,10 @@
         <div class="row">
 
             {% if not event.is_page_live %}
-            <div class="alert alert-info" role="alert">Hi there! You can see this page because you're logged in admin. When you want to make it public, go to <a href="/admin/core/event/{{ event.pk }}/change/">your website section in the admin</a> and click on 'Is live'.</div>
+            <div class="alert alert-info" role="alert">
+                Hi there! You can see this page because you're logged in admin. When you want to make it public, go to
+                <a href="{% url 'admin:core_event_change' event.pk %}">your website section in the admin</a> and click on 'Website is ready'.
+            </div>
             {% endif %}
 
             {% for message in messages %}
