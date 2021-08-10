@@ -47,13 +47,10 @@ def resources(request):
     return render(request, 'core/resources.html', {})
 
 
-def event(request, city):
+def event(request, page_url):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    event = get_object_or_404(Event, page_url=city.lower())
-
-    if event.page_url != city:
-        return redirect('core:event', city=event.page_url, permanent=True)
+    event = get_object_or_404(Event, page_url=page_url.lower())
 
     user = request.user
     user_is_organizer = user.is_authenticated and event.has_organizer(user)
@@ -64,7 +61,7 @@ def event(request, city):
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': city, 'past': event.date <= now_approx}
+            {'city': event.city, 'page_url': page_url, 'past': event.date <= now_approx}
         )
 
     return render(request, "core/event.html", {

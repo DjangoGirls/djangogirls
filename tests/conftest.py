@@ -164,6 +164,23 @@ def hidden_event(superuser):
 
 
 @pytest.fixture()
+def diff_url_event(superuser):
+    event = Event.objects.create(
+        email="foo@djangogirls.org",
+        city="Foo",
+        name="Django Girls Foo",
+        country="Italy",
+        is_on_homepage=False,
+        main_organizer=superuser,
+        date="2080-09-02",
+        page_url="bar",
+        is_page_live=False
+    )
+    event.team.add(superuser)
+    return event
+
+
+@pytest.fixture()
 def no_date_event(superuser):
     event = Event.objects.create(
         email="venice@djangogirls.org",
