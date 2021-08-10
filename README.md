@@ -69,9 +69,14 @@ Step into newly created `djangogirls` directory:
 
     cd djangogirls
 
-Create a new virtual environment (python <3.8) if needed. Then, install all the required dependencies:
+Create a new virtual environment (python <3.8) if needed. Then, install all the required dependencies.
+The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
+compiles `requirements.txt` ensuring compatibility between packages.
 
-    pip install -r requirements.txt
+    pip install pip-tools
+    pip-sync
+
+There is more information on how `pip-tools` work below.
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 
@@ -200,3 +205,29 @@ Several things were needed to get this working:
 3. Enable delegation of domain-wide authority for the service account.
 4. Enable Admin SDK for the domain.
 5. Give the service account permission to access admin.directory.users service (https://admin.google.com/AdminHome?chromeless=1#OGX:ManageOauthClients).
+
+
+### Using pip-tools
+
+The packages required by the project are in `requirements.in` which looks like a regular requirements file. Specific versions of packages can be
+specified, or left without a version in which case the latest version which is compatible with the other packages will be used.
+
+If you are working on a feature which requires a new package, add it to `requirements.in`, specifying a version if necessary.
+It's dependencies will be included in `requirements.txt` by the compile process. 
+
+The only time a dependency of a third party package needs adding to `requirements.in` is when a version has to be pinned.
+
+By running `pip-compile` the requirements are compiled into `requirements.txt`.
+
+Periodically requirements should be updated to ensure that new versions, most importantly security patches, are used. 
+This is done using the `-U` flag.
+
+Once requirements are compiled, `pip-sync` will install the requirements, but also remove any packages not required.
+This helps to ensure you have the packages required, but also that there isn't something installed that's missed 
+from `requirements.txt`.
+
+For example:
+
+    pip-compile -U
+
+    pip-sync
