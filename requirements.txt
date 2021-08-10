@@ -4,10 +4,6 @@
 #
 #    pip-compile
 #
---trusted-host pypi.python.org
---trusted-host pypi.org
---trusted-host files.pythonhosted.org
-
 atomicwrites==1.4.0
     # via pytest
 attrs==21.2.0
@@ -106,10 +102,6 @@ idna==2.8
     # via
     #   requests
     #   yarl
-importlib-metadata==4.6.3
-    # via
-    #   pep517
-    #   pluggy
 jmespath==0.10.0
     # via
     #   boto3
@@ -128,7 +120,7 @@ oauthlib==3.1.1
     # via requests-oauthlib
 pep517==0.11.0
     # via pip-tools
-pillow==6.2.0
+pillow==8.2.0
     # via
     #   -r requirements.in
     #   easy-thumbnails
@@ -220,10 +212,6 @@ starkbank-ecdsa==1.1.1
     # via sendgrid
 tomli==1.2.1
     # via pep517
-typing-extensions==3.10.0.0
-    # via
-    #   importlib-metadata
-    #   yarl
 uritemplate==3.0.1
     # via google-api-python-client
 urllib3==1.25.11
@@ -239,10 +227,6 @@ wrapt==1.12.1
     # via vcrpy
 yarl==1.6.3
     # via vcrpy
-zipp==3.5.0
-    # via
-    #   importlib-metadata
-    #   pep517
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
