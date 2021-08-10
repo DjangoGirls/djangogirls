@@ -72,7 +72,7 @@ slacker==0.9.65
 starkbank-ecdsa==1.1.1
 typing-extensions==3.10.0.0
 uritemplate==3.0.1
-urllib3==1.25.11
+urllib3==1.26.5
 vcrpy==2.0.1
 wrapt==1.12.1
 yarl==1.6.3
