@@ -1,9 +1,16 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  clean = require('gulp-clean');
+"use strict";
 
+const del = require("del");
 
-gulp.task('clean', function () {
-  return gulp.src(config.paths.build, {read: false})
-    .pipe(clean({force: true}));
-});
+const config = require("../config");
+
+/**
+ * removes the files created during local and production builds
+ */
+const cleanTask = async () => {
+  await del(config.paths.copy.dest.development);
+  await del(config.paths.copy.dest.production);
+  await del(config.paths.temp);
+};
+
+module.exports = cleanTask;

@@ -1,15 +1,26 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  environments = require('gulp-environments'),
-  uglify = require('gulp-uglify');
+"use strict";
 
-var development = environments.development;
-var production = environments.production;
+const { src, dest } = require("gulp");
+const { production } = require("gulp-environments");
+const uglify = require("gulp-uglify");
 
+const config = require("../config");
 
-gulp.task('scripts', ['clean'], function(){
-  var dest = production() ? config.paths.js.dest.production : config.paths.js.dest.development;
-  return gulp.src(config.paths.js.src)
-    .pipe(production(uglify()))
-    .pipe(gulp.dest(dest))
-});
+/**
+ * uses uglify to minify distributed JS
+ * skipped for local builds
+ */
+const scriptsTask = () => {
+  const destination = production()
+    ? config.paths.js.dest.production
+    : config.paths.js.dest.development;
+
+  return (
+    src(config.paths.js.src)
+      // passing uglify into the production function means uglify only runs during produciton builds
+      .pipe(production(uglify()))
+      .pipe(dest(destination))
+  );
+};
+
+module.exports = scriptsTask;

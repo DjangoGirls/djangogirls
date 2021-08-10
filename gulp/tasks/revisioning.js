@@ -1,18 +1,27 @@
-'use strict';
+"use strict";
 
-var gulp = require('gulp'),
-  config = require('../config'),
-  rev = require('gulp-rev'),
-  revNapkin = require('gulp-rev-napkin'),
-  revCSS = require('gulp-rev-css-url');
+const { src, dest } = require("gulp");
+const rev = require("gulp-rev");
+const revNapkin = require("gulp-rev-napkin");
+const revCSS = require("gulp-rev-css-url");
 
+const config = require("../config");
 
-gulp.task('revisioning', ['styles', 'scripts'], function () {
-  return gulp.src(config.paths.revisioning, {base: config.paths.build})
+/**
+ * uses gulp-rev to "append content hash to filenames: `unicorn.css` → `unicorn-d41d8cd98f.css`"
+ * Clues the browser into the fact that a static asset has changed
+ */
+const revisioningTask = () => {
+  return src(config.paths.revisioning, {
+    // this is a production-only task; otherwise use gulp-environments to get the correct path
+    base: config.paths.copy.dest.production,
+  })
     .pipe(rev())
     .pipe(revCSS())
-    .pipe(gulp.dest(config.paths.build))
-    .pipe(revNapkin({verbose: false}))
+    .pipe(dest(config.paths.copy.dest.production))
+    .pipe(revNapkin({ verbose: false }))
     .pipe(rev.manifest())
-    .pipe(gulp.dest(config.paths.manifest));
-});
+    .pipe(dest(config.paths.manifest));
+};
+
+module.exports = revisioningTask;

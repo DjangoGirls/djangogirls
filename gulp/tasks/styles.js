@@ -1,34 +1,45 @@
-var gulp = require('gulp'),
-  config = require('../config'),
-  gutil = require('gulp-util'),
-  stylus = require('gulp-stylus'),
-  environments = require('gulp-environments'),
-  concat = require('gulp-concat');
+"use strict";
 
-var development = environments.development;
-var production = environments.production;
+const { src, dest, series } = require("gulp");
+const stylus = require("gulp-stylus");
+const { production } = require("gulp-environments");
+const concat = require("gulp-concat");
 
+const config = require("../config");
 
-gulp.task('stylus', ['clean'], function(){
-  var compress = production()
-  return gulp.src(config.paths.css.src)
-    .pipe(stylus({
-      compress: production()
-    }))
-    .pipe(gulp.dest(config.paths.temp))
-});
+const stylusTask = () => {
+  const compress = production();
+  return src(config.paths.css.src)
+    .pipe(
+      stylus({
+        compress,
+      })
+    )
+    .pipe(dest(config.paths.temp));
+};
 
-var tasks = ['stylus'];
-for (var key in config.paths.css.bundles){
-  (function(key) {
-    tasks.push('styles:'+key);
-    gulp.task('styles:'+key, ['clean', 'stylus'], function() {
-      var dest = production() ? config.paths.css.dest.production : config.paths.css.dest.development;
-      return gulp.src(config.paths.css.bundles[key])
-        .pipe(concat(key+'.css'))
-        .pipe(gulp.dest(dest))
-    });
-  })(key);
+const tasks = [stylusTask];
+
+for (const key in config.paths.css.bundles) {
+  const func = () => {
+    const destination = production()
+      ? config.paths.css.dest.production
+      : config.paths.css.dest.development;
+
+    return src(config.paths.css.bundles[key])
+      .pipe(concat(`${key}.css`))
+      .pipe(dest(destination));
+  };
+  // give the dynamic task a custom name for debugging
+  Object.defineProperty(func, "name", {
+    value: `styles:${key}`,
+    writable: false,
+  });
+
+  tasks.push(func);
 }
 
-gulp.task('styles', tasks);
+/**
+ * compiles CSS using stylus
+ */
+module.exports = series(...tasks);
