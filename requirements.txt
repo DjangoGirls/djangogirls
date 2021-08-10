@@ -24,7 +24,7 @@ certifi==2021.5.30
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==2.0.4
+chardet==3.0.4
     # via requests
 click==7.0
     # via
@@ -100,7 +100,7 @@ httplib2==0.19.1
     #   oauth2client
 icalendar==4.0.3
     # via -r requirements.in
-idna==3.2
+idna==2.8
     # via
     #   requests
     #   yarl
@@ -182,7 +182,7 @@ pytz==2021.1
     #   py-trello
 pyyaml==5.4.1
     # via vcrpy
-requests==2.26.0
+requests==2.22.0
     # via
     #   py-trello
     #   requests-oauthlib
@@ -224,7 +224,7 @@ typing-extensions==3.10.0.0
     #   yarl
 uritemplate==3.0.1
     # via google-api-python-client
-urllib3==1.26.6
+urllib3==1.25.11
     # via
     #   botocore
     #   requests
