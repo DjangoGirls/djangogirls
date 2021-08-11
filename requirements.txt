@@ -191,6 +191,7 @@ requests==2.22.0
     #   py-trello
     #   requests-oauthlib
     #   slacker
+    #   stripe
 requests-oauthlib==1.3.0
     # via py-trello
 rsa==4.7.2
@@ -220,6 +221,8 @@ slacker==0.9.65
     # via -r requirements.in
 starkbank-ecdsa==1.1.1
     # via sendgrid
+stripe==2.60.0
+    # via -r requirements.in
 tomli==1.2.1
     # via pep517
 typing-extensions==3.10.0.0
