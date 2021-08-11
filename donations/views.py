@@ -3,19 +3,22 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from patreonmanager.models import FundraisingStatus
 from .forms import StripeForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
+    context = {
+        'form': StripeForm(),
+        'patreon_stats': FundraisingStatus.objects.all().first(),  # TODO: This isn't used
+        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
+    }
     return render(
         request,
-        'donations/index.html',
-        {
-            'form': StripeForm(),
-            'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
-        }
+        'donations/donate.html',
+        context
     )
 
 

@@ -11,12 +11,12 @@ class StripeForm(forms.Form):
         ('100', '100'),
     )
     CURRENCY_CHOICES = (
+        ('usd', '$ (US dollars)'),
         ('eur', '€ (Euro)'),
         ('gbp', '£ (GBP)'),
-        ('usd', '$ (US dollars)'),
     )
 
-    amount = forms.ChoiceField(choices=DONATION_CHOICES)
     currency = forms.ChoiceField(choices=CURRENCY_CHOICES)
+    amount = forms.ChoiceField(choices=DONATION_CHOICES)
     email = forms.EmailField()
     name = forms.CharField()

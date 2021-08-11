@@ -14,7 +14,6 @@ urlpatterns = [
     path('foundation/', views.foundation, name='foundation'),
     path('foundation/governing-document/', views.governing_document, name='foundation-governing-document'),
     path('contribute/', views.contribute, name='contribute'),
-    path('donate/', views.donate, name='donate'),
     path('2015/', views.year_2015, name='year_2015'),
     path('2016-2017/', views.year_2016_2017, name='year_2016_2017'),
     path('terms-conditions/', views.terms_conditions, name='terms-conditions'),

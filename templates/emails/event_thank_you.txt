@@ -20,7 +20,7 @@ If you would like to add photos from your event to our Flickr account at https:/
 
 
 Donation
-If you have any money leftover from your workshop, consider donating it to Django Girls Foundation at {{ settings.BASE_URL }}{% url 'core:donate' %}, a non-profit that supports organizers all over the world.
+If you have any money leftover from your workshop, consider donating it to Django Girls Foundation at {{ settings.BASE_URL }}{% url 'donations:index' %}, a non-profit that supports organizers all over the world.
 
 
 Discount in our store
