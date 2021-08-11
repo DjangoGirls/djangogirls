@@ -1,4 +1,6 @@
 import stripe
+from django.http import Http404
+from stripe.error import StripeError
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -11,10 +13,13 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def index(request):
     context = {
-        'form': StripeForm(),
         'patreon_stats': FundraisingStatus.objects.all().first(),  # TODO: This isn't used
-        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
     }
+    if settings.STRIPE_PUBLIC_KEY:
+        context.update({
+            'form': StripeForm(),
+            'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
+        })
     return render(
         request,
         'donations/donate.html',
@@ -34,23 +39,25 @@ def charge(request):
                 name=request.POST['name'],
                 source=request.POST['stripeToken']
             )
-
-            charge = stripe.Charge.create(
-                customer=customer,
-                amount=amount * 100,
-                currency=currency,
-                description="Donation"
-            )
-            return redirect(
-                reverse(
-                    'donations:success',
-                    kwargs={
-                        'amount': amount,
-                        'currency': currency
-                    }
+            try:
+                charge = stripe.Charge.create(
+                    customer=customer,
+                    amount=amount * 100,
+                    currency=currency,
+                    description="Donation"
                 )
-            )
-
+            except StripeError:
+                redirect(reverse('donations:error'))
+            else:
+                return redirect(
+                    reverse(
+                        'donations:success',
+                        kwargs={
+                            'amount': amount,
+                            'currency': currency
+                        }
+                    )
+                )
         return redirect(reverse('donations:error'))
 
 

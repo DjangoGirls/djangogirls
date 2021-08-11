@@ -4,6 +4,7 @@ from coach.models import Coach
 from core.models import EventPageContent, EventPageMenu
 from sponsor.models import Sponsor
 
+
 @pytest.fixture()
 def coach():
     return Coach.objects.create(
