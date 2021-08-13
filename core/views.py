@@ -1,7 +1,7 @@
 import icalendar
 from django.conf import settings
 from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
@@ -20,7 +20,7 @@ def index(request):
         'future_events': Event.objects.future(),
         'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
         'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
-        'patreon_stats': FundraisingStatus.objects.all().first(),  # TODO: This isn't used
+        'patreon_stats': FundraisingStatus.objects.all().first(),
         'organizers_count': User.objects.all().count(),
         'cities_count': Event.objects.values('city').distinct().count(),
         'country_count': Event.objects.values('country').distinct().count(),
@@ -103,6 +103,12 @@ def governing_document(request):
 
 def contribute(request):
     return render(request, 'core/contribute.html', {})
+
+
+def donate(request):
+    return render(request, 'core/donate.html', {
+        'patreon_stats': FundraisingStatus.objects.all().first(),
+    })
 
 
 def year_2015(request):
