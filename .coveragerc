@@ -2,8 +2,10 @@
 source = .
 branch = True
 omit =
+    **/management/*
     **/migrations/*
 	**/tests/*
     .venv
+    .env
     djangogirls/wsgi.py
     manage.py

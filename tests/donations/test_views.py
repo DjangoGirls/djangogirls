@@ -3,7 +3,7 @@ import pytest
 
 from django.test import override_settings
 from django.urls import reverse
-from stripe.error import InvalidRequestError
+from stripe.error import StripeError
 
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', 'test_public')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'test_public')
@@ -56,6 +56,6 @@ def test_charge_post_invalid_keys(client):
             'amount': "10",
             'stripeToken': "test_code"
         }
-        with pytest.raises(InvalidRequestError):
+        with pytest.raises(StripeError):
             # This is missing stripe data
             client.post(reverse('donations:charge'), data=charge_data)
