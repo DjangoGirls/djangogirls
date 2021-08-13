@@ -1,5 +1,3 @@
-import pytest
-
 from datetime import timedelta
 
 from django.urls import reverse

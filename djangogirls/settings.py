@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'coach',
     'contact',
     'pictures',
+    'donations',
 )
 
 MIDDLEWARE = [
@@ -271,3 +272,6 @@ CODEMIRROR_PATH = "vendor/codemirror/"
 GAPPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
 GAPPS_PRIVATE_KEY_ID = os.environ.get('GAPPS_PRIVATE_KEY_ID', '')
 GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
+
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
