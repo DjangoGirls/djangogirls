@@ -1,6 +1,7 @@
 from django import template
 register = template.Library()
 
+
 @register.simple_tag
 def element_by_counter(data, counter, divider):
     if divider == 0:

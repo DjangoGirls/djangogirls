@@ -17,11 +17,12 @@ def click_runner():
 @pytest.fixture
 def send_kwargs():
     return {
-        'subject_template':  "emails/submit_information_subject.txt",
+        'subject_template': "emails/submit_information_subject.txt",
         'plain_template': "emails/submit_information_email.txt",
         'html_template': "emails/submit_information_email.html",
         'timestamp_field': 'submit_information_email_sent',
-        'email_type': "submit information email"}
+        'email_type': "submit information email"
+    }
 
 
 def test_approximate_date_behaviour(mailoutbox, send_kwargs):

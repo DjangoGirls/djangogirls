@@ -19,7 +19,7 @@ from core.models import Event
 
 def send_event_emails(
     events, subject_template, plain_template, html_template, timestamp_field, email_type,
-    ignore_approximate_events=False):
+        ignore_approximate_events=False):
     """Send out any that need sending (thank yous, information request, ...)."""
 
     for event in events:
@@ -123,6 +123,7 @@ def send_offer_help_emails():
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=["hello@djangogirls.org"]
         )
+
 
 @click.command()
 def command():

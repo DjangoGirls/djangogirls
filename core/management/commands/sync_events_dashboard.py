@@ -16,7 +16,8 @@ class Command(BaseCommand):
     help = 'Syncs event in trello board. Need a token.'
     missing_args_message = (
         'You need to add a token! Get one here: '
-        'https://trello.com/1/authorize?key=01ab0348ca020573e7f728ae7400928a&scope=read%2Cwrite&name=My+Application&expiration=1hour&response_type=token'
+        'https://trello.com/1/authorize?key=01ab0348ca020573e7f728ae7400928a&scope=read%2Cwrite&'
+        'name=My+Application&expiration=1hour&response_type=token'
     )
 
     def add_arguments(self, parser):
@@ -29,6 +30,7 @@ class Command(BaseCommand):
 
 # Get data
 
+
 EventTuple = namedtuple('EventTuple', 'name id city date')
 
 
@@ -37,13 +39,14 @@ def event_list():
     result = []
     for e in event:
         name = e.name
-        id = str(e.pk)
+        _id = str(e.pk)
         city = e.city
         date = datetime.date(e.date.year, e.date.month, e.date.day or 1)
-        result.append(EventTuple(name, id, city, date))
+        result.append(EventTuple(name, _id, city, date))
     return result
 
 # Sync to trello
+
 
 ADMIN_BASE_URL = 'https://djangogirls.org/admin/core/event/'
 

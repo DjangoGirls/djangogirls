@@ -14,6 +14,7 @@ from core.management.commands.prepare_dispatch import \
     command as prepare_dispatch
 from core.models import Event
 
+
 @pytest.fixture
 def click_runner():
     return CliRunner(echo_stdin=True)
@@ -23,7 +24,7 @@ def click_runner():
 def random_day():
     today = date.today()
     start_date = today.toordinal()
-    end_date = today.replace(year=today.year+10).toordinal()
+    end_date = today.replace(year=today.year + 10).toordinal()
     random_day = date.fromordinal(random.randint(start_date, end_date))
     return random_day.strftime("%d/%m/%Y")
 
@@ -35,7 +36,7 @@ def test_update_coordinates(click_runner, past_event):
     past_event.save()
 
     past_event.refresh_from_db()
-    assert past_event.latlng == None
+    assert past_event.latlng is None
 
     call_command('update_coordinates')
 
@@ -160,7 +161,7 @@ def test_copy_event(click_runner, random_day, events, past_event):
 
 def test_prepare_dispatch_with_data(click_runner):
     today = date.today()
-    start_date = today.replace(year=today.year-20).toordinal()
+    start_date = today.replace(year=today.year - 20).toordinal()
     end_date = today.toordinal()
     random_past_day = date.fromordinal(random.randint(start_date, end_date))
 

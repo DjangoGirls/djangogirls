@@ -1,4 +1,3 @@
-
 from coach.models import Coach, DEFAULT_COACH_PHOTO
 
 

@@ -42,15 +42,21 @@ def command():
     """Creates new Django Girls organizer"""
     event_id = click.prompt(click.style(
         "What's the event ID? NOT the event page ID. We want EVENT ID here",
-        bold=True, fg='yellow'))
+        bold=True, fg='yellow'
+    ))
     event = Event.objects.get(id=event_id)
-    click.echo("Ok, we're adding to an event in {}, {}".format(
-        event.city, event.country))
+    click.echo(
+        "Ok, we're adding to an event in {}, {}".format(
+            event.city, event.country
+        )
+    )
     team = [get_organizer_data()]
 
     while click.confirm(
-        click.style("Do you want to add additional team members?",
-                    bold=True, fg='yellow'), default=False):
+        click.style(
+            "Do you want to add additional team members?",
+            bold=True, fg='yellow'),
+            default=False):
         team.append(get_organizer_data())
 
     click.echo("OK! That's it. Now I'll add your organizers.")
@@ -59,7 +65,8 @@ def command():
 
     for member in members:
         click.echo(
-                "User {} has been added and notified".format(member.email))
+            "User {} has been added and notified".format(member.email)
+        )
 
     click.echo(DELIMITER)
 

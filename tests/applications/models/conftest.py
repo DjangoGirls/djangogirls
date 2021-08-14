@@ -36,6 +36,7 @@ def accepted_application(db, form):
     return Application.objects.create(
         email='recipient@email.com', form=form, state='accepted')
 
+
 @pytest.fixture
 def email(db, form, user):
     return Email.objects.create(

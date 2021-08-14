@@ -74,14 +74,14 @@ def test_day_before_deadline():
 
 
 @freeze_time('2016-10-16')
-def test_day_before_deadline():
+def test_day_before_deadline_2():
     result = next_deadline()
 
     assert result == date(2016, 10, 16)
 
 
 @freeze_time('2016-10-17')
-def test_day_before_deadline():
+def test_day_before_deadline_3():
     result = next_deadline()
 
     assert result == date(2016, 10, 30)

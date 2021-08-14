@@ -9,8 +9,11 @@ def copy_event(previous_event, event_date):
         - create new event based on previous event
         - copy content and menu from previous event
     """
-    number = Event.objects.filter(city=previous_event.city,
-                                  country=previous_event.country).count()
+    number = Event.objects.filter(
+        city=previous_event.city,
+        country=previous_event.country
+    ).count()
+
     previous_event_id = previous_event.pk
     # If event is already Django Girls City #2, remove #2 from it
     if '#' in previous_event.name:
@@ -18,8 +21,8 @@ def copy_event(previous_event, event_date):
     else:
         generic_event_name = previous_event.name
 
-    previous_event_name = "{} #{}".format(generic_event_name, number)
-    event_name = "{} #{}".format(generic_event_name, number+1)
+    previous_event_name = f"{generic_event_name} #{number}"
+    event_name = f"{generic_event_name} #{number + 1}"
 
     # Copy event with a name {name} #{number}, new date and empty stats
     new_event = previous_event

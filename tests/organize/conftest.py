@@ -57,7 +57,7 @@ def previous_organizer_remote(past_event):
         'organizers-1-first_name': 'Jane',
         'organizers-1-last_name': 'Doe',
         'organize_form_wizard-current_step': 'organizers'
-        }
+    }
     workshop_type = {
         'workshop_type-remote': True,
         'organize_form_wizard-current_step': 'workshop_type'
@@ -240,7 +240,7 @@ def new_organizer_in_person():
 def workshop_form_valid_date():
     event_date = date.today() + timedelta(days=100)
     data = {
-        'date':  '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -257,7 +257,7 @@ def workshop_form_valid_date():
 def workshop_form_too_close():
     event_date = date.today() + timedelta(days=30)
     data = {
-        'date':  '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -273,7 +273,7 @@ def workshop_form_too_close():
 @pytest.fixture
 def workshop_form_past_date():
     data = {
-        'date':  '2020-07-01',
+        'date': '2020-07-01',
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -289,7 +289,7 @@ def workshop_form_past_date():
 @pytest.fixture
 def workshop_remote_form_valid_date():
     data = {
-        'date':  '2070-01-30',
+        'date': '2070-01-30',
         'city': 'Gaberone',
         'country': 'BW',
         'sponsorship': 'We have willing sponsors starting with my employer.',
@@ -305,7 +305,7 @@ def workshop_remote_form_valid_date():
 def workshop_remote_form_date_too_close():
     event_date = date.today() + timedelta(days=30)
     data = {
-        'date':  '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
         'city': 'Gaberone',
         'country': 'BW',
         'sponsorship': 'We have willing sponsors starting with my employer.',
@@ -320,7 +320,7 @@ def workshop_remote_form_date_too_close():
 @pytest.fixture
 def workshop_remote_form_past_date():
     data = {
-        'date':  '2020-07-01',
+        'date': '2020-07-01',
         'city': 'Gaberone',
         'country': 'BW',
         'sponsorship': 'We have willing sponsors starting with my employer.',
@@ -335,7 +335,7 @@ def workshop_remote_form_past_date():
 @pytest.fixture
 def workshop_form_date_year_only():
     data = {
-        'date':  '2060',
+        'date': '2060',
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -351,7 +351,7 @@ def workshop_form_date_year_only():
 @pytest.fixture
 def workshop_remote_form_date_year_only():
     data = {
-        'date':  '2050',
+        'date': '2050',
         'city': 'Gaberone',
         'country': 'BW',
         'sponsorship': 'We have willing sponsors starting with my employer.',

@@ -31,8 +31,10 @@ class PatronAdmin(admin.ModelAdmin):
 
     def payments_link(self, patron):
         link = (
-            reverse('admin:patreonmanager_payment_changelist') +
-            '?patron_id__exact=%s' % patron.pk)
+            reverse(
+                'admin:patreonmanager_payment_changelist'
+            ) + '?patron_id__exact=%s' % patron.pk
+        )
         count = patron.payments.count()
         return format_html(
             '<a href="{}">{}</a>', link,
