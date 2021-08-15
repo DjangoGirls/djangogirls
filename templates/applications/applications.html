@@ -1,5 +1,5 @@
 {% extends 'core/event.html' %}
-{% load static applications_tags rev %}
+{% load applications_tags i18n rev static %}
 
 {% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
 
@@ -17,42 +17,45 @@
   <form action="{% url 'applications:change_state' event.page_url %}" method="post" id="change-state-form">
   <div class="row">
     <div class="col-md-12 applications">
-      <h3 class="page-header">Applications for {{ event.page_title }}</h3>
+      <h3 class="page-header">{% blocktrans with title=event.page_title %}Applications for {{ title }}{% endblocktrans %}</h3>
           <p>
               Filter:
-              <a href="?{% if order %}order={{ order }}{% endif %}">All</a> |
-              <a href="?state=submitted{% if order %}&order={{ order }}{% endif %}" class="text-primary">Submitted</a> |
-              <a href="?state=accepted{% if order %}&order={{ order }}{% endif %}" class="text-success">Accepted</a> |
-              <a href="?state=rejected{% if order %}&order={{ order }}{% endif %}" class="text-danger">Rejected</a> |
-              <a href="?state=waitlisted{% if order %}&order={{ order }}{% endif %}" class="text-warning">Waiting list</a> |
-              <a href="?state=declined{% if order %}&order={{ order }}{% endif %}" class="text-danger">Declined</a> |
-              <a href="?rsvp_status=waiting{% if order %}&order={{ order }}{% endif %}" class="text-primary">RSVP: waiting</a> |
-              <a href="?rsvp_status=yes{% if order %}&order={{ order }}{% endif %}" class="text-success">RSVP: confirmed</a> |
-              <a href="?rsvp_status=no{% if order %}&order={{ order }}{% endif %}" class="text-danger">RSVP: rejected</a>
+              <a href="?{% if order %}order={{ order }}{% endif %}">{% trans "All" %}</a> |
+              <a href="?state=submitted{% if order %}&order={{ order }}{% endif %}" class="text-primary">{% trans "Submitted" %}</a> |
+              <a href="?state=accepted{% if order %}&order={{ order }}{% endif %}" class="text-success">{% trans "Accepted" %}</a> |
+              <a href="?state=rejected{% if order %}&order={{ order }}{% endif %}" class="text-danger">{% trans "Rejected" %}</a> |
+              <a href="?state=waitlisted{% if order %}&order={{ order }}{% endif %}" class="text-warning">{% trans "Waiting list" %}</a> |
+              <a href="?state=declined{% if order %}&order={{ order }}{% endif %}" class="text-danger">{% trans "Declined" %}</a> |
+              <a href="?rsvp_status=waiting{% if order %}&order={{ order }}{% endif %}" class="text-primary">{% trans "RSVP: waiting" %}</a> |
+              <a href="?rsvp_status=yes{% if order %}&order={{ order }}{% endif %}" class="text-success">{% trans "RSVP: confirmed" %}</a> |
+              <a href="?rsvp_status=no{% if order %}&order={{ order }}{% endif %}" class="text-danger">{% trans "RSVP: rejected" %}</a>
           </p>
       {% if applications %}
-          <p>Change the status of selected applications to:
+          <p>{% trans "Change the status of selected applications to:" %}
               <select name="state">
-                  <option value="" selected>Choose status</option>
-                  <option value="submitted">Application submitted</option>
-                  <option value="accepted">Application accepted</option>
-                  <option value="rejected">Application rejected</option>
-                  <option value="waitlisted">Application on waiting list</option>
-                  <option value="declined">Applicant declined</option>
+                  <option value="" selected>{% trans "Choose status" %}</option>
+                  <option value="submitted">{% trans "Application submitted" %}</option>
+                  <option value="accepted">{% trans "Application accepted" %}</option>
+                  <option value="rejected">{% trans "Application rejected" %}</option>
+                  <option value="waitlisted">{% trans "Application on waiting list" %}</option>
+                  <option value="declined">{% trans "Applicant declined" %}</option>
               </select>
-              <input type="submit" value="Apply" />
+              <input type="submit" value="{% trans "Apply" %}" />
           </p>
-          <a href="{% url 'applications:applications_csv' event.page_url %}{{ active_query_string }}" class="btn download">Download to csv</a>
-          <p>Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}, selected: <span id="selected-count">0</span></p>
+          <a href="{% url 'applications:applications_csv' event.page_url %}{{ active_query_string }}" class="btn download">{% trans "Download to csv" %}</a>
+          <p>
+{#  TODO Figure out how `pluralize` can with with blocktrans #}
+              Showing {{ applications|length }} application{{ applications|length|pluralize }} out of {{ all_applications_count }}, selected: <span id="selected-count">0</span>
+          </p>
           <table class="table">
               <thead>
                   <tr>
                       <th><input type="checkbox" name="application" id="select-all-box" /></th>
                       <th>#</th>
-                      <th>E-mail {% display_sorting_arrow 'email' order %}</th>
-                      <th>Application status {% display_sorting_arrow 'state' order %}</th>
-                      <th>RSVP {% display_sorting_arrow 'rsvp_status' order %}</th>
-                      <th>Score {% display_sorting_arrow 'average_score' order %}</th>
+                      <th>{% trans "E-mail" %} {% display_sorting_arrow 'email' order %}</th>
+                      <th>{% trans "Application status" %} {% display_sorting_arrow 'state' order %}</th>
+                      <th>{% trans "RSVP" %} {% display_sorting_arrow 'rsvp_status' order %}</th>
+                      <th>{% trans "Score" %} {% display_sorting_arrow 'average_score' order %}</th>
                       <th>&nbsp;</th>
                   </tr>
               </thead>
@@ -80,11 +83,11 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">Application submitted</a></li>
-                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">Application accepted</a></li>
-                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">Application rejected</a></li>
-                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">Application on waiting list</a></li>
-                              <li><a href="#" class="state-change" data-state="declined" data-app-id="{{ app.id }}"> Applicant declined</a></li>
+                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">{% trans "Application submitted" %}</a></li>
+                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">{% trans "Application accepted" %}</a></li>
+                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">{% trans "Application rejected" %}</a></li>
+                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">{% trans "Application on waiting list" %}</a></li>
+                              <li><a href="#" class="state-change" data-state="declined" data-app-id="{{ app.id }}">{% trans "Applicant declined" %}</a></li>
                             </ul>
                           </div>
                       </td>
@@ -101,9 +104,9 @@
                               <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a href="#" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">Waiting for response</a></li>
-                              <li><a href="#" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">Confirmed attendance</a></li>
-                              <li><a href="#" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">Rejected invitation</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">{% trans "Waiting for response" %}</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">{% trans "Confirmed attendance" %}</a></li>
+                              <li><a href="#" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">{% trans "Rejected invitation" %}</a></li>
                             </ul>
                           </div>
                         {% else %}
@@ -113,20 +116,23 @@
                       <td>
                           {% if app.was_scored_by_user %}
                               {{ app.average_score }}
-                              <span class="num_votes">({{ app.scores.count }} vote{{ app.scores.count|pluralize }}, &sigma;={{ app.stdev|floatformat:"1" }})</span>
+                              <span class="num_votes">
+{#                              TODO: Another complex tranlsation #}
+                                  ({{ app.scores.count }} vote{{ app.scores.count|pluralize }}, &sigma;={{ app.stdev|floatformat:"1" }})
+                              </span>
                           {% else %}
                               (hidden)
                           {% endif %}
                       </td>
                       <td class="text-right">
-                          <a href="{% url 'applications:application_detail' city=app.form.event.page_url app_number=app.number %}" class="btn">View Application</a>
+                          <a href="{% url 'applications:application_detail' city=app.form.event.page_url app_number=app.number %}" class="btn">{% trans "View Application" %}</a>
                       </td>
                   </tr>
                   {% endfor %}
               </tbody>
           </table>
       {% else %}
-          <p class="lead">Nothing to see here...</p>
+          <p class="lead">{% trans "Nothing to see here..." %}</p>
       {% endif %}
     </div>
   </div>

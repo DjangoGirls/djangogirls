@@ -99,35 +99,36 @@ class EventApplication(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     # application fields
-    about_you = models.TextField("About organizer")
-    why = models.TextField("Motivations to organize")
+    about_you = models.TextField(_("About organizer"))
+    why = models.TextField(_("Motivations to organize"))
     involvement = models.CharField(
-        "Involvement in Django Girls",
+        _("Involvement in Django Girls"),
         max_length=100
     )
-    experience = models.TextField("Experience with organizing other events")
+    experience = models.TextField(_("Experience with organizing other events"))
     venue = models.TextField(
-        "Information about your potential venue",
+        _("Information about your potential venue"),
         blank=True
     )
     sponsorship = models.TextField(
-        "Information about your potential sponsorship"
+        _("Information about your potential sponsorship")
     )
-    coaches = models.TextField("Information about your potential coaches")
+    coaches = models.TextField(_("Information about your potential coaches"))
     remote = models.BooleanField(default=False)
-    tools = models.TextField("Information about how you will host your remote workshop",
+    tools = models.TextField(_("Information about how you will host your remote workshop"),
                              blank=True)
     safety = models.TextField(
-        "Information about how you will ensure participants' and coaches' "
-        "safety during the Covid-19 pandemic",
+        _("Information about how you will ensure participants' and coaches' safety during the Covid-19 pandemic"),
         blank=True
     )
     diversity = models.TextField(
-        "Information about how you intend to ensure your workshop is inclusive "
-        "and promotes diversity"
+        _(
+            "Information about how you intend to ensure your workshop is inclusive "
+            "and promotes diversity"
+        )
     )
     additional = models.TextField(
-        "Any additional information you think may help your application",
+        _("Any additional information you think may help your application"),
         blank=True
     )
 
@@ -146,7 +147,7 @@ class EventApplication(models.Model):
 
     class Meta:
         permissions = (
-            ("can_accept_organize_application", "Can accept Organize Applications"),
+            ("can_accept_organize_application", _("Can accept Organize Applications")),
         )
 
     def __str__(self):
@@ -262,7 +263,7 @@ class EventApplication(models.Model):
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
             raise ValidationError({
-                'comment': 'This field is required.'
+                'comment': _('This field is required.')
             })
 
     def get_organizers_emails(self):
@@ -308,5 +309,5 @@ class Coorganizer(models.Model):
     last_name = models.CharField(max_length=30, blank=True, default="")
 
     class Meta:
-        verbose_name = "Co-organizer"
-        verbose_name_plural = "Co-organizers"
+        verbose_name = _("Co-organizer")
+        verbose_name_plural = _("Co-organizers")

@@ -8,23 +8,23 @@
 
 {% block object-tools %}
     <div class="row mb-3">
-        <h4 class="italic-title">Triaging</h4>
+        <h4 class="italic-title">{% trans "Triaging" %}</h4>
         <div class="box save-box">
           {% if original.status != 'rejected' and original.status != 'accepted' %}
             <a class="btn btn-outline-success" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'accepted' %}">
-              Accept application
+              {% trans "Accept application" %}
             </a>
             <a class="btn btn-outline-primary" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'in_review' %}">
-              Move to In Review
+              {% trans "Move to In Review" %}
             </a>
             <a class="btn btn-outline-secondary" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'on_hold' %}">
-              Move to Hold
+              {% trans "Move to Hold" %}
             </a>
             <a class="btn btn-outline-danger" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'rejected' %}">
-              Reject application
+              {% trans "Reject application" %}
             </a>
           {% else %}
-            Application closed.
+            {% trans "Application closed." %}
           {% endif %}
         </div>
     </div>

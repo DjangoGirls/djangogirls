@@ -3,6 +3,7 @@ from django import forms
 from django.conf import settings
 from django.core.validators import validate_email
 from django.db import transaction
+from django.utils.translation import gettext_lazy as _
 
 from .models import Event
 
@@ -28,8 +29,8 @@ class AddOrganizerForm(forms.Form):
     (including password).
     """
     event = forms.ModelChoiceField(queryset=Event.objects.all())
-    name = forms.CharField(label="Organizer's first and last name")
-    email = forms.CharField(label="E-mail address",
+    name = forms.CharField(label=_("Organizer's first and last name"))
+    email = forms.CharField(label=_("E-mail address"),
                             validators=[validate_email])
 
     def __init__(self, *args, **kwargs):

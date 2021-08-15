@@ -1,6 +1,7 @@
 import os
 import dj_database_url
 import sentry_sdk
+from django.utils.translation import gettext_lazy as _
 from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -84,6 +85,11 @@ DATABASES['default'] = dj_database_url.config(
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('de', _('German')),
+]
 
 LANGUAGE_CODE = 'en-us'
 

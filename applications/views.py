@@ -5,6 +5,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import striptags
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import gettext_lazy as _
 
 from core.models import EventPageMenu
 from core.utils import get_event
@@ -47,7 +48,7 @@ def apply(request, city):
         form.save()
         messages.success(
             request,
-            "Yay! Your application has been saved. You'll hear from us soon!"
+            _("Yay! Your application has been saved. You'll hear from us soon!")
         )
 
         return render(request, 'applications/apply.html', {
@@ -115,11 +116,12 @@ def applications_csv(request, city):
         return redirect('core:event', city=city)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = (
-        u'attachment; filename="{}.csv"'.format(city)
+        'attachment; filename="{}.csv"'.format(city)
     )
     writer = csv.writer(response)
-    csv_header = ["Application Number", "Application State",
-                  "RSVP Status", "Average Score"]
+    csv_header = [
+        _("Application Number"), _("Application State"), _("RSVP Status"), _("Average Score")
+    ]
     question_set = event.form.question_set
 
     question_titles = question_set.values_list('title', flat=True)
@@ -147,8 +149,8 @@ def application_detail(request, city, app_number):
     """
     Display the details of a single application.
     """
-    application = get_object_or_404(Application, form__event__page_url=city,
-                                    number=app_number)
+    application = get_object_or_404(
+        Application, form__event__page_url=city, number=app_number)
 
     try:
         score = Score.objects.get(
@@ -237,7 +239,7 @@ def compose_email(request, city, email_id=None):
 @csrf_exempt
 def change_state(request, city):
     """
-    Change the state of Applicaction(s). Use it like this:
+    Change the state of Application(s). Use it like this:
     e.g /applications/?state=accepted&application=1&application=2&application=3
     """
     state = request.POST.get('state', None)
@@ -251,11 +253,12 @@ def change_state(request, city):
     applications = [value for value in applications if value.isdigit()]
 
     applications = Application.objects.filter(
-        id__in=applications, form__event=event)
+        id__in=applications, form__event=event
+    )
     applications.update(state=state)
 
     ids = applications.values_list('id', flat=True)
-    ids = [str(id) for id in ids]
+    ids = [str(_id) for _id in ids]
 
     return JsonResponse({
         'message': 'Applications have been updated',
@@ -267,7 +270,7 @@ def change_state(request, city):
 @csrf_exempt
 def change_rsvp(request, city):
     """
-    Change the rsvp_status of Applicaction(s). Use it like this:
+    Change the rsvp_status of Application(s). Use it like this:
     e.g /applications/?rsvp=yes&application=1&application=2&application=3
     """
     rsvp_status = request.POST.get('rsvp_status', None)
@@ -278,11 +281,12 @@ def change_rsvp(request, city):
         return JsonResponse({'error': 'Missing parameters'})
 
     applications = Application.objects.filter(
-        id__in=applications, form__event=event)
+        id__in=applications, form__event=event
+    )
     applications.update(rsvp_status=rsvp_status)
 
     ids = applications.values_list('id', flat=True)
-    ids = [str(id) for id in ids]
+    ids = [str(_id) for _id in ids]
 
     return JsonResponse({
         'message': 'Applications have been updated',

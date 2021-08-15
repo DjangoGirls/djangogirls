@@ -4,6 +4,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDate
 
 from patreonmanager.models import FundraisingStatus
@@ -74,7 +75,7 @@ def event(request, page_url):
 def events_ical(request):
     events = Event.objects.public().order_by('-date')
     calendar = icalendar.Calendar()
-    calendar['summary'] = "List of Django Girls events around the world"
+    calendar['summary'] = _("List of Django Girls events around the world")
     for event in events:
         ical_event = event.as_ical()
         if ical_event is None:
@@ -147,7 +148,7 @@ def coc(request, lang=None):
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:
-        raise Http404("No translation for language {}".format(lang))
+        raise Http404(_("No translation for language {}".format(lang)))
 
 
 def crowdfunding_donors(request):

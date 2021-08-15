@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from contact.models import ContactEmail
 from core.forms import EventChoiceField, BetterReCaptchaField
@@ -8,7 +9,8 @@ from core.models import Event
 class ContactForm(forms.ModelForm):
     event = EventChoiceField(
         queryset=Event.objects.public().distinct("city", "country").order_by("city"),
-        required=False, label="Django Girls workshop in..."
+        required=False,
+        label=_("Django Girls workshop in...")
     )
     captcha = BetterReCaptchaField()
 
@@ -28,5 +30,7 @@ class ContactForm(forms.ModelForm):
         event = self.cleaned_data.get("event")
         if contact_type == ContactEmail.CHAPTER:
             if not event:
-                raise forms.ValidationError("Please select the event")
+                raise forms.ValidationError(
+                    _("Please select the event")
+                )
         return event

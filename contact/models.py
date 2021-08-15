@@ -2,13 +2,14 @@ from smtplib import SMTPException
 
 from django.core.mail import EmailMessage
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = 'chapter', 'support'
     CONTACT_TYPE_CHOICES = (
-        (CHAPTER, 'Django Girls Local Organizers'),
-        (SUPPORT, 'Django Girls HQ (Support Team)'),
+        (CHAPTER, _('Django Girls Local Organizers')),
+        (SUPPORT, _('Django Girls HQ (Support Team)')),
     )
 
     name = models.CharField(max_length=128)
@@ -16,12 +17,14 @@ class ContactEmail(models.Model):
     sent_to = models.EmailField(max_length=128)
     message = models.TextField()
     event = models.ForeignKey(
-        'core.Event', help_text='required for contacting a chapter',
+        'core.Event',
+        help_text=_('required for contacting a chapter'),
         null=True, blank=True, on_delete=models.deletion.SET_NULL
     )
     contact_type = models.CharField(
-        verbose_name="Who do you want to contact?",
-        max_length=20, choices=CONTACT_TYPE_CHOICES,
+        verbose_name=_("Who do you want to contact?"),
+        max_length=20,
+        choices=CONTACT_TYPE_CHOICES,
         default=CHAPTER
     )
     created_at = models.DateTimeField(auto_now_add=True)
