@@ -211,6 +211,7 @@ def test_contribute(client):
     resp = client.get(url)
     assert resp.status_code == 200
 
+
 """
 def test_crowdfunding_donors(client, visible_donors, hidden_donors):
     # Access crowdfunding donors page

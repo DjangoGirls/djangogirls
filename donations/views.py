@@ -1,5 +1,4 @@
 import stripe
-from django.http import Http404
 from stripe.error import StripeError
 from django.conf import settings
 from django.shortcuts import render, redirect
