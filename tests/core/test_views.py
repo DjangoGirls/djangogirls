@@ -1,3 +1,5 @@
+import pytest
+
 from datetime import timedelta
 
 from django.urls import reverse
@@ -205,11 +207,6 @@ def test_coc_redirect(client):
         assert resp.status_code == 301
         assert resp['Location'] == new_url
 
-
-def test_contribute(client):
-    url = reverse("core:contribute")
-    resp = client.get(url)
-    assert resp.status_code == 200
 
 """
 def test_crowdfunding_donors(client, visible_donors, hidden_donors):

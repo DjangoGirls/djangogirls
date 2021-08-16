@@ -19,7 +19,7 @@ def test_form_sends_email_to_support(client, mailoutbox):
         'g-recaptcha-response': 'PASSED',
     }
     resp = client.post(contact_url, data=post_data)
-
+    assert resp.status_code == 302
     assert len(mailoutbox) == 1
     email = mailoutbox[0]
 
