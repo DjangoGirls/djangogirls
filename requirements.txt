@@ -10,9 +10,9 @@ atomicwrites==1.4.0
     # via pytest
 attrs==21.2.0
     # via pytest
-boto3==1.18.20
+boto3==1.18.21
     # via django-storages
-botocore==1.21.20
+botocore==1.21.21
     # via
     #   boto3
     #   s3transfer
@@ -102,7 +102,7 @@ idna==3.2
     # via
     #   requests
     #   yarl
-importlib-metadata==4.6.3
+importlib-metadata==4.6.4
     # via
     #   pep517
     #   pluggy
@@ -185,6 +185,7 @@ requests==2.26.0
     #   py-trello
     #   requests-oauthlib
     #   slacker
+    #   stripe
 requests-oauthlib==1.3.0
     # via py-trello
 rsa==4.7.2
@@ -214,6 +215,8 @@ slacker==0.9.65
     # via -r requirements.in
 starkbank-ecdsa==1.1.1
     # via sendgrid
+stripe==2.60.0
+    # via -r requirements.in
 tomli==1.2.1
     # via pep517
 typing-extensions==3.10.0.0
