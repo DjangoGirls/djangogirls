@@ -33,5 +33,9 @@ jobs:
       run: |
         pip install -r requirements.txt
         coverage run -m pytest
+      env:
+        POSTGRES_PASSWORD: postgres
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v2
+      env:
+        POSTGRES_PASSWORD: postgres
