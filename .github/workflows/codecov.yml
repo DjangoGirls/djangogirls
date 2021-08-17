@@ -35,6 +35,6 @@ jobs:
         coverage run -m pytest
       env:
         POSTGRES_PASSWORD: postgres
-        DATABASE_URL: postgres://postgres:postgres@127.0.0.1/postgres
+        DATABASE_URL: postgres://postgres:postgres@127.0.0.1/djangogirls
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v2
