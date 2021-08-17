@@ -2,8 +2,6 @@ from django.urls import reverse
 
 import pytest
 
-from organize.models import Coorganizer, EventApplication
-
 
 def test_form_thank_you(client):
     # Access the thank you page

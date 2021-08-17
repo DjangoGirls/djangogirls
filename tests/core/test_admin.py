@@ -1,7 +1,6 @@
 from datetime import datetime
 from unittest import mock
 
-import vcr
 from django.urls import reverse
 
 from core.models import Event

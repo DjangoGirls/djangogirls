@@ -66,16 +66,19 @@ def test_get_sorted_applications_list(
         Score(application=application_accepted, user=admin_user, score=3.0),
         Score(application=application_accepted, user=superuser, score=3.0),
         Score(application=application_rejected, user=admin_user, score=3.0),
-        Score(application=application_rejected, user=superuser, score=4.0)])
+        Score(application=application_rejected, user=superuser, score=4.0)
+    ])
 
     # Order by average_score
     resp = admin_client.get('{}?order=average_score'.format(applications_url))
     assert resp.status_code == 200
     assert len(resp.context['applications']) == 4
     assert (
-        resp.context['applications'] ==
-        [application_waitlisted, application_submitted, application_accepted,
-         application_rejected])
+        resp.context['applications'] == [
+            application_waitlisted, application_submitted, application_accepted,
+            application_rejected
+        ]
+    )
     assert resp.context['order'] == 'average_score'
 
     # Order by -average_score
@@ -83,15 +86,18 @@ def test_get_sorted_applications_list(
     assert resp.status_code == 200
     assert len(resp.context['applications']) == 4
     assert (
-        resp.context['applications'] ==
-        [application_rejected, application_accepted, application_submitted,
-         application_waitlisted])
+        resp.context['applications'] == [
+            application_rejected, application_accepted, application_submitted,
+            application_waitlisted
+        ]
+    )
     assert resp.context['order'] == '-average_score'
 
 
 def get_filtered_applications_list(
     admin_client, future_event, application_submitted, application_accepted,
-    application_rejected, application_waitlisted):
+    application_rejected, application_waitlisted
+):
     # No filter
     applications_url = reverse(
         'applications:applications',
@@ -154,6 +160,7 @@ def test_repeated_rsvp(client, future_event, application_accepted):
     assert resp.status_code == 302
     application_accepted = Application.objects.get(id=application_accepted.id)
     assert application_accepted.rsvp_status == Application.RSVP_YES
+
 
 def test_no_rsvp(client, future_event, application_accepted):
     application_accepted.rsvp_status = Application.RSVP_WAITING
@@ -245,8 +252,7 @@ def changing_application_status_in_bulk(
     assert application_rejected.state == 'rejected'
     resp = admin_client.post(
         reverse('applications:change_state', args=[future_event.page_url]),
-        {'state': 'accepted', 'application': [
-            application_submitted.id, application_rejected.id]}
+        {'state': 'accepted', 'application': [application_submitted.id, application_rejected.id]}
     )
     assert resp.status_code == 200
     application_submitted = Application.objects.get(id=application_submitted.id)

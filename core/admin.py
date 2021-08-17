@@ -196,10 +196,12 @@ class EventAdmin(admin.ModelAdmin):
             form = AddOrganizerForm(request.POST, event_choices=all_events)
             if form.is_valid():
                 user = form.save()
-                messages.success(request,
-                    "{} has been added to your event, yay! They've been also" \
-                    " invited to Slack and should receive credentials to login" \
-                    " in an e-mail.".format(user.get_full_name()))
+                messages.success(
+                    request,
+                    "{} has been added to your event, yay! They've been also"
+                    " invited to Slack and should receive credentials to login"
+                    " in an e-mail.".format(user.get_full_name())
+                )
                 return redirect('admin:core_event_add_organizers')
         else:
             form = AddOrganizerForm(event_choices=all_events)
@@ -277,6 +279,7 @@ class EventFilter(admin.SimpleListFilter):
             return queryset.filter(event=self.value())
 
         return queryset
+
 
 class EventPageContentAdmin(SortableModelAdmin):
     list_display = ('name', 'event', 'position', 'is_public')
@@ -401,6 +404,7 @@ class MyFlatPageAdmin(FlatPageAdmin):
             help_text="Change this only if you know what you are doing")
 
     form = MyFlatpageForm
+
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, MyFlatPageAdmin)

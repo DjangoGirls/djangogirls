@@ -36,4 +36,4 @@ DONOR_QUOTES = [
     {'text': 'You don’t have know everything, you just have to be open to learning anything.',
      'name': 'Heather Bryant',
      'url': 'http://blog.djangogirls.org/post/137097700508/your-django-story-meet-heather-bryant'},
- ]
+]

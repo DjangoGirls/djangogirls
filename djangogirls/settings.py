@@ -125,53 +125,84 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Django Girls',
     'SEARCH_URL': '/admin/core/event/',
     'MENU': (
-        {'label': 'Organize Applications',
-         'icon': 'icon-envelope',
-         'models': (
-             'organize.eventapplication',),
-         'permissions': 'organize.can_accept_organize_application'},
-        {'label': 'Users & Groups',
-         'icon': 'icon-user',
-         'models': ('core.user', 'auth.group'),
-         'permissions': ('auth.add_user', 'auth.add_group')},
-        {'label': 'Events',
-         'icon': 'icon-star',
-         'models': (
-             'core.event', 'core.eventpagecontent',
-             'core.eventpagemenu')},
-        {'label': 'Organizers',
-         'icon': 'icon-eye-open',
-         'models': (
-            {'url': '/admin/core/event/add_organizers/',
-             'label': 'Add organizers'},
-            {'url': '/admin/core/event/manage_organizers/',
-             'label': 'Remove organizers'})},
-        {'label': 'Application Form',
-         'app': 'applications',
-         'icon': 'icon-tasks'},
-        {'label': 'Submitted Applications',
-         'url': '/admin/applications/form/submissions/',
-         'icon': 'icon-user'},
+        {
+            'label': 'Organize Applications',
+            'icon': 'icon-envelope',
+            'models': (
+                'organize.eventapplication',
+            ),
+            'permissions': 'organize.can_accept_organize_application'
+        },
+        {
+            'label': 'Users & Groups',
+            'icon': 'icon-user',
+            'models': ('core.user', 'auth.group'),
+            'permissions': ('auth.add_user', 'auth.add_group')
+        },
+        {
+            'label': 'Events',
+            'icon': 'icon-star',
+            'models': (
+                'core.event', 'core.eventpagecontent',
+                'core.eventpagemenu'
+            )
+        },
+        {
+            'label': 'Organizers',
+            'icon': 'icon-eye-open',
+            'models': (
+                {
+                    'url': '/admin/core/event/add_organizers/',
+                    'label': 'Add organizers'
+                },
+                {
+                    'url': '/admin/core/event/manage_organizers/',
+                    'label': 'Remove organizers'
+                }
+            )
+        },
+        {
+            'label': 'Application Form',
+            'app': 'applications',
+            'icon': 'icon-tasks'
+        },
+        {
+            'label': 'Submitted Applications',
+            'url': '/admin/applications/form/submissions/',
+            'icon': 'icon-user'
+        },
         {'app': 'flatpages', 'icon': 'icon-file'},
-        {'label': 'Blog & Django Stories',
-         'icon': 'icon-comment',
-         'models': ('story.Story',),
-         'permissions': ('story.add_story',)},
-        {'app': 'patreonmanager',
-         'icon': 'icon-gift',
-         'models': ('patron', 'payment', 'reward')},
-        {'label': 'Organizer\'s Manual',
-         'icon': 'icon-bookmark',
-         'url': 'https://organize.djangogirls.org/'},
-        {'label': 'Organizer\'s FAQ',
-         'icon': 'icon-bookmark',
-         'url': 'https://faq-organizers.djangogirls.org/'},
-        {'label': 'Organizer\'s Google Group',
-         'icon': 'icon-bookmark',
-         'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'},
-        {'label': 'Organizer\'s Slack',
-         'icon': 'icon-bookmark',
-         'url': 'https://djangogirls.slack.com/'},
+        {
+            'label': 'Blog & Django Stories',
+            'icon': 'icon-comment',
+            'models': ('story.Story',),
+            'permissions': ('story.add_story',)
+        },
+        {
+            'app': 'patreonmanager',
+            'icon': 'icon-gift',
+            'models': ('patron', 'payment', 'reward')
+        },
+        {
+            'label': 'Organizer\'s Manual',
+            'icon': 'icon-bookmark',
+            'url': 'https://organize.djangogirls.org/'
+        },
+        {
+            'label': 'Organizer\'s FAQ',
+            'icon': 'icon-bookmark',
+            'url': 'https://faq-organizers.djangogirls.org/'
+        },
+        {
+            'label': 'Organizer\'s Google Group',
+            'icon': 'icon-bookmark',
+            'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'
+        },
+        {
+            'label': 'Organizer\'s Slack',
+            'icon': 'icon-bookmark',
+            'url': 'https://djangogirls.slack.com/'
+        },
     )
 }
 

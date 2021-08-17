@@ -16,9 +16,11 @@ class Command(BaseCommand):
         AWS_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
         AWS_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET_NAME')
 
-        session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
-                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                          region_name=AWS_REGION_NAME)
+        session = Session(
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            region_name=AWS_REGION_NAME
+        )
 
         s3 = session.resource('s3')
 
@@ -32,15 +34,11 @@ class Command(BaseCommand):
         db_user = settings.DATABASES['default']['USER']
 
         # See command definitions at http://www.postgresql.org/docs/9.4/static/app-pgdump.html
-        pg_dump_command = "pg_dump --host={host} --port={port} --user={user} --format=c -O -x --file={file_name} {name}".format(
-            host=db_host,
-            port=db_port,
-            user=db_user,
-            file_name=db_file,
-            name=db_name)
+        pg_dump_command = \
+            f"pg_dump --host={db_host} --port={db_port} --user={db_user} --format=c -O -x --file={db_file} {db_name}"
         self.stdout.write("Enter {}'s psql password".format(db_user))
         os.system(pg_dump_command)
 
         bucket.upload_file(db_file, db_file)
-        os.system("rm {}".format(db_file))
-        self.stdout.write("{} successfully uploaded to AWS S3".format(db_file))
+        os.system(f"rm {db_file}")
+        self.stdout.write(f"{db_file} successfully uploaded to AWS S3")

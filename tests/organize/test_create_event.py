@@ -1,5 +1,3 @@
-from organize.models import EventApplication
-
 EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
 
 

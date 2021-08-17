@@ -4,21 +4,22 @@ import random
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
 
+
 DEFAULT_BACKGROUND_PHOTOS = {
     'about': [
-        settings.STATICFILES_DIRS[0]+'/img/photos/about1.jpg',
-        settings.STATICFILES_DIRS[0]+'/img/photos/about2.jpg'
+        settings.STATICFILES_DIRS[0] + '/img/photos/about1.jpg',
+        settings.STATICFILES_DIRS[0] + '/img/photos/about2.jpg'
     ],
     'apply': [
-        settings.STATICFILES_DIRS[0]+'/img/photos/apply.jpg'
+        settings.STATICFILES_DIRS[0] + '/img/photos/apply.jpg'
     ],
     'coach': [
-        settings.STATICFILES_DIRS[0]+'/img/photos/coach1.jpg',
-        settings.STATICFILES_DIRS[0]+'/img/photos/coach2.jpg'
+        settings.STATICFILES_DIRS[0] + '/img/photos/coach1.jpg',
+        settings.STATICFILES_DIRS[0] + '/img/photos/coach2.jpg'
     ],
     'footer': [
-        settings.STATICFILES_DIRS[0]+'/img/photos/footer1.jpg',
-        settings.STATICFILES_DIRS[0]+'/img/photos/footer2.jpg'
+        settings.STATICFILES_DIRS[0] + '/img/photos/footer1.jpg',
+        settings.STATICFILES_DIRS[0] + '/img/photos/footer2.jpg'
     ]
 }
 
@@ -27,7 +28,8 @@ def get_random_photo(section):
     if section in DEFAULT_BACKGROUND_PHOTOS:
         photos = DEFAULT_BACKGROUND_PHOTOS[section]
         return UploadedFile(
-            open(photos[random.randint(0, len(photos)-1)], 'rb'))
+            open(photos[random.randint(0, len(photos) - 1)], 'rb')
+        )
     return None
 
 

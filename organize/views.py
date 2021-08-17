@@ -6,7 +6,8 @@ from django.shortcuts import redirect, render
 from .emails import (
     send_application_confirmation, send_application_notification)
 from .forms import (
-    PreviousEventForm, ApplicationForm, WorkshopForm,  WorkshopTypeForm, RemoteWorkshopForm, OrganizersFormSet)
+    PreviousEventForm, ApplicationForm, WorkshopForm, WorkshopTypeForm, RemoteWorkshopForm, OrganizersFormSet
+)
 from .models import EventApplication
 
 # ORGANIZE FORM #

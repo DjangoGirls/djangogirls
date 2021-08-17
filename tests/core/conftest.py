@@ -43,14 +43,17 @@ def past_event_menu(past_event):
         url="#values",
         position=1,
         event=past_event,
-        title="About")
+        title="About"
+    )
     EventPageMenu.objects.create(
         url="#apply",
         position=10,
         event=past_event,
-        title="Apply for a pass!")
+        title="Apply for a pass!"
+    )
     EventPageMenu.objects.create(
         url="#faq",
         position=10,
         event=past_event,
-        title="FAQ")
+        title="FAQ"
+    )

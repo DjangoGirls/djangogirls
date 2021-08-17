@@ -5,6 +5,7 @@ from django.core.mail import EmailMessage
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from core.models import Event, User
 
@@ -28,16 +29,21 @@ class Form(models.Model):
         "djangogirls-how-we-scored-applications'>Django Girls "
         "blog</a>. Good luck!")
     confirmation_mail = models.TextField(
-        default="Hi there!\n\n"
-        "This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. "
-        "Yay! That's a huge step already, we're proud of you!\n\n"
-        "Mind that this is not a confirmation of participation in the event, but a confirmation that we received your application.\n\n"
-        "You'll receive an email from the team that organizes Django Girls {CITY} soon. "
-        "You can always reach them by answering to this email or by writing to {your event mail}.\n"
-        "For your reference, we're attaching your answers below.\n\n"
-        "Hugs, cupcakes and high-fives!\n"
-        "Django Girls",
-        help_text="Mail will be sent from your event mail.\nAlso the answers will be attached.")
+        default=_(
+            "Hi there!\n\n"
+            "This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">"
+            "Django Girls {CITY}</a>. "
+            "Yay! That's a huge step already, we're proud of you!\n\n"
+            "Mind that this is not a confirmation of participation in the event, but a confirmation that we received "
+            "your application.\n\n"
+            "You'll receive an email from the team that organizes Django Girls {CITY} soon. "
+            "You can always reach them by answering to this email or by writing to {your event mail}.\n"
+            "For your reference, we're attaching your answers below.\n\n"
+            "Hugs, cupcakes and high-fives!\n"
+            "Django Girls"
+        ),
+        help_text="Mail will be sent from your event mail.\nAlso the answers will be attached."
+    )
     open_from = models.DateTimeField(
         null=True, verbose_name="Application process is open from")
     open_until = models.DateTimeField(
@@ -80,7 +86,6 @@ class Question(models.Model):
         ('choices', 'Choices'),
         ('email', 'Email')
     )
-
 
     form = models.ForeignKey(Form, null=False, blank=False, on_delete=models.deletion.CASCADE)
     title = models.TextField(verbose_name="Question")
@@ -182,10 +187,10 @@ class Application(models.Model):
         c = sum(data) / float(len(data))
         if n < 2:
             return 0
-        ss = sum((x-c)**2 for x in data)
-        ss -= sum((x-c) for x in data)**2/len(data)
+        ss = sum((x - c) ** 2 for x in data)
+        ss -= sum((x - c) for x in data) ** 2 / len(data)
         assert not ss < 0, 'negative sum of square deviations: %f' % ss
-        return ss / (n-1)
+        return ss / (n - 1)
 
     def stdev(self):
         return self.variance() ** 0.5
@@ -277,7 +282,7 @@ class Email(models.Model):
     )
     recipients_group = models.CharField(
         max_length=50,
-        choices=Application.APPLICATION_STATES+Application.RSVP_STATUSES,
+        choices=Application.APPLICATION_STATES + Application.RSVP_STATUSES,
         verbose_name="Recipients",
         help_text="Only people assigned to chosen group will receive this email."
     )
@@ -314,8 +319,10 @@ class Email(models.Model):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
         self.sent_from = (
-            self.form.event.email or
-            '{}@djangogirls.org'.format(self.form.event.page_url))
+            self.form.event.email or '{}@djangogirls.org'.format(
+                self.form.event.page_url
+            )
+        )
         successfuly_sent = []
         failed_to_sent = []
 

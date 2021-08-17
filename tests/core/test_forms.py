@@ -1,5 +1,4 @@
 from core.forms import AddOrganizerForm
-from core.models import Event
 
 
 def test_name_splitting(future_event):

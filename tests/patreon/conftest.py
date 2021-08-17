@@ -28,4 +28,5 @@ def payment(db, patron, reward):
         reward=reward,
         patron=patron,
         pledge="20.00",
-        month=datetime.date(2016, 1, 20))
+        month=datetime.date(2016, 1, 20)
+    )

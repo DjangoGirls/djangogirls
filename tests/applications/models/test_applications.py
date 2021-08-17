@@ -61,14 +61,14 @@ def test_get_by_rsvp_code(application, event):
     rsvp_code_yes = application.get_rsvp_yes_code()
 
     assert (
-        Application.get_by_rsvp_code(rsvp_code_yes, event) ==
-        (application, 'yes'))
+        Application.get_by_rsvp_code(rsvp_code_yes, event) == (application, 'yes')
+    )
     assert (
-        Application.get_by_rsvp_code(rsvp_code_no, event) ==
-        (application, 'no'))
+        Application.get_by_rsvp_code(rsvp_code_no, event) == (application, 'no')
+    )
     assert (
-        Application.get_by_rsvp_code('notexisting', event) ==
-        (None, None))
+        Application.get_by_rsvp_code('notexisting', event) == (None, None)
+    )
 
 
 def test_is_accepted(application):

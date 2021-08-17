@@ -3,8 +3,6 @@ from datetime import date, datetime, timedelta
 import requests
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
-import djclick as click
-
 
 from .models import Event
 
@@ -13,7 +11,7 @@ NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
 
 
 def get_coordinates_for_city(city, country):
-    q = '{0}, {1}'.format(city, country)
+    q = f'{city}, {country}'
     req = requests.get(
         NOMINATIM_URL,
         params={'format': 'json', 'q': q}
@@ -21,7 +19,7 @@ def get_coordinates_for_city(city, country):
 
     try:
         data = req.json()[0]
-        return '{0}, {1}'.format(data['lat'], data['lon'])
+        return f'{data["lat"]}, {data["lon"]}'
     except (IndexError, KeyError):
         return None
 
@@ -36,7 +34,7 @@ def get_event(city, is_user_authenticated, is_preview):
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
         past = event.date <= now_approx
-        return (city, past)
+        return city, past
 
     return event
 
@@ -51,7 +49,7 @@ def get_approximate_date(date_str):
             return ApproximateDate(year=date_obj.year, month=date_obj.month)
         except ValueError:
             return None
-    return None
+
 
 def next_sunday(day):
     """

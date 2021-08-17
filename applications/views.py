@@ -12,8 +12,10 @@ from core.utils import get_event
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
 from .models import Application, Email, Form, Question, Score
-from .questions import (get_applications_for_event, get_organiser_menu,
-                    random_application)
+from .questions import (
+    get_applications_for_event, get_organiser_menu,
+    random_application
+)
 
 
 def apply(request, city):
@@ -30,8 +32,9 @@ def apply(request, city):
     if form_obj is None:
         return redirect('core:event', city)
 
-    organiser = (request.user in event.team.all()
-                 or request.user.is_superuser)
+    organiser = (
+        request.user in event.team.all() or request.user.is_superuser
+    )
 
     if not organiser and not form_obj.application_open:
         return redirect('core:event', city)

@@ -29,7 +29,7 @@ def test_event_older_than_a_week_email_sent(event, mailoutbox):
     event.created_at = timezone.now() - timezone.timedelta(weeks=3)
     event.save()
     handle_emails.send_offer_help_emails()
-    assert len(mailoutbox) == 2 # it's 2 because the second one goes to hello@
+    assert len(mailoutbox) == 2  # it's 2 because the second one goes to hello@
     assert event.city in mailoutbox[0].subject
 
 
@@ -40,7 +40,7 @@ def test_event_approx_in_future_email_sent(event, mailoutbox):
     event.date = ApproximateDate(year=in_six_weeks.year, month=in_six_weeks.month)
     event.save()
     handle_emails.send_offer_help_emails()
-    assert len(mailoutbox) == 2 # it's 2 because the second one goes to hello@
+    assert len(mailoutbox) == 2  # it's 2 because the second one goes to hello@
     assert event.city in mailoutbox[0].subject
 
 
@@ -73,7 +73,6 @@ def test_event_page_not_live_email_not_sent(event, mailoutbox):
     event.save()
     handle_emails.send_offer_help_emails()
     assert len(mailoutbox) == 0
-
 
 
 def test_event_page_not_on_homepage_email_not_sent(event, mailoutbox):

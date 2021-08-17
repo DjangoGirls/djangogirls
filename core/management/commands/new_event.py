@@ -5,10 +5,8 @@ from django.template.loader import render_to_string
 
 from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
 
-from pictures.models import StockPicture
 from ...command_helpers import gather_event_date_from_prompt
 from ...forms import EventForm
-from ...models import Event
 from ...utils import get_coordinates_for_city
 
 DELIMITER = "\n-------------------------------------------------------------\n"
@@ -25,24 +23,32 @@ def get_basic_info():
         And return all these information.
     """
     click.echo(
-        "Hello there! Let's create new Django Girls event! So exciting!")
+        "Hello there! Let's create new Django Girls event! So exciting!"
+    )
     click.echo("Let's start with some basics.")
     city = click.prompt(click.style(
-        "What is the name of the city?", bold=True, fg='yellow'))
+        "What is the name of the city?", bold=True, fg='yellow'
+    ))
     country = click.prompt(click.style(
-        "What is the name of the country?", bold=True, fg='yellow'))
+        "What is the name of the country?", bold=True, fg='yellow'
+    ))
 
     date = gather_event_date_from_prompt()
 
     url = click.prompt(click.style(
-        "What should be the URL of website? djangogirls.org/______", bold=True, fg='yellow'))
-    event_mail = click.prompt(click.style(
-        "What is the email prefix of the event? ______@djangogirls.org", bold=True, fg='yellow'),
-        default=url)
-    click.echo("Ok, got that! Your new event will happen in {0}, {1} on {2}".format(
-        city, country, date))
+        "What should be the URL of website? djangogirls.org/______", bold=True, fg='yellow'
+    ))
+    event_mail = click.prompt(
+        click.style(
+            "What is the email prefix of the event? ______@djangogirls.org", bold=True, fg='yellow'
+        ),
+        default=url
+    )
+    click.echo(
+        f"Ok, got that! Your new event will happen in {city}, {country} on {date}"
+    )
 
-    return (city, country, date, url, event_mail)
+    return city, country, date, url, event_mail
 
 
 @click.command()

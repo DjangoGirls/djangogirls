@@ -11,16 +11,17 @@ from core.models import Event
 
 
 GAPPS_JSON_CREDENTIALS = {
-  "type": "service_account",
-  "project_id": "djangogirls-website",
-  "private_key_id": settings.GAPPS_PRIVATE_KEY_ID,
-  "private_key": settings.GAPPS_PRIVATE_KEY.replace('\\n', '\n'),
-  "client_email": "django-girls-website@djangogirls-website.iam.gserviceaccount.com",
-  "client_id": "114585708723701029855",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://accounts.google.com/o/oauth2/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/django-girls-website%40djangogirls-website.iam.gserviceaccount.com"
+    "type": "service_account",
+    "project_id": "djangogirls-website",
+    "private_key_id": settings.GAPPS_PRIVATE_KEY_ID,
+    "private_key": settings.GAPPS_PRIVATE_KEY.replace('\\n', '\n'),
+    "client_email": "django-girls-website@djangogirls-website.iam.gserviceaccount.com",
+    "client_id": "114585708723701029855",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/"
+                            "django-girls-website%40djangogirls-website.iam.gserviceaccount.com"
 }
 
 
@@ -41,7 +42,7 @@ def get_gapps_client():
 
 def make_email(slug):
     """Get the email address for the given slug"""
-    return '{}@djangogirls.org'.format(slug)
+    return f'{slug}@djangogirls.org'
 
 
 def create_gmail_account(event):
@@ -52,7 +53,7 @@ def create_gmail_account(event):
     password = get_random_string(length=10)
     service = get_gapps_client()
     if not service:
-        return (None, None)
+        return None, None
 
     service.users().insert(body={
         "primaryEmail": email,
@@ -65,7 +66,7 @@ def create_gmail_account(event):
         "changePasswordAtNextLogin": True,
     }).execute()
 
-    return (email, password)
+    return email, password
 
 
 def migrate_gmail_account(new_event, slug):
@@ -73,11 +74,16 @@ def migrate_gmail_account(new_event, slug):
     Change the name of an account
     """
     old_email = make_email(slug)
-    old_event = Event.objects.exclude(id=new_event.id).filter(email=old_email).order_by('-id').first()
+    old_event = Event.objects.exclude(
+        id=new_event.id
+    ).filter(
+        email=old_email
+    ).order_by('-id').first()
+
     if old_event:
-        new_email = make_email(slug+str(old_event.date.month)+str(old_event.date.year))
+        new_email = make_email(slug + str(old_event.date.month) + str(old_event.date.year))
     else:
-        new_email = make_email(slug+str(timezone.now().month)+str(timezone.now().year))
+        new_email = make_email(slug + str(timezone.now().month) + str(timezone.now().year))
     service = get_gapps_client()
     if not service:
         return None
@@ -117,12 +123,11 @@ def get_or_create_gmail(event_application, event):
     Function that decides whether Gmail account should be migrated,
     or created. Returns a tuple of email address and password.
     """
-    if (get_gmail_account(event_application.website_slug) or
-            get_gmail_account(event.page_url)):
+    if get_gmail_account(event_application.website_slug) or get_gmail_account(event.page_url):
         # account exists, do we need to migrate?
         if event_application.has_past_team_members(event):
             # has old organizers, so no need to do anything
-            return (make_email(event_application.website_slug), None)
+            return make_email(event_application.website_slug), None
         else:
             # migrate old email
             migrate_gmail_account(event, event_application.website_slug)

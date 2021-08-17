@@ -1,4 +1,4 @@
-from django.conf.urls import url
+# from django.conf.urls import url
 
 app_name = "coach"
 urlpatterns = [

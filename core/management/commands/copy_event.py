@@ -17,8 +17,12 @@ def gather_information():
     click.echo("Hello there sunshine! We're gonna copy an event website now.")
 
     event = get_event(
-        click.prompt(click.style("First, give me the latest ID of the Event "
-        "object you want to copy", bold=True, fg='yellow'))
+        click.prompt(click.style(
+            "First, give me the latest ID of the Event "
+            "object you want to copy",
+            bold=True,
+            fg='yellow'
+        ))
     )
 
     while not event:
@@ -27,9 +31,12 @@ def gather_information():
     click.echo("Ok, we're copying {}, {}".format(
         event.city, event.country))
 
-    number = click.prompt(click.style("What is the number of the event in this city? "
-        "If this is a second event, write 2. If third, then 3. You got it", bold=True, fg='yellow')
-    )
+    number = click.prompt(click.style(
+        "What is the number of the event in this city? "
+        "If this is a second event, write 2. If third, then 3. You got it",
+        bold=True,
+        fg='yellow'
+    ))
 
     date = gather_event_date_from_prompt()
 
@@ -37,8 +44,10 @@ def gather_information():
         str(organizer) for organizer in event.team.all()))
 
     new_team = click.confirm(click.style(
-        "Do you need to change the whole team?", bold=True, fg='yellow'), default=False
-    )
+        "Do you need to change the whole team?",
+        bold=True,
+        fg='yellow'
+    ), default=False)
 
     return (event, number, date, new_team)
 
@@ -56,7 +65,7 @@ def command():
     number = int(number)
 
     # Change the name of previous event to {name} #{number-1}
-    event.name = "{} #{}".format(name, number-1)
+    event.name = "{} #{}".format(name, number - 1)
     event.save()
 
     # Copy event with a name {name} #{number}, new date and empty stats
@@ -83,8 +92,8 @@ def command():
         new_event.team.set(organizers)
 
     # Change the title and url of previous event page
-    event.page_title = "{} #{}".format(name, number-1)
-    event.page_url = "{}{}".format(event.page_url, number-1)
+    event.page_title = "{} #{}".format(name, number - 1)
+    event.page_url = "{}{}".format(event.page_url, number - 1)
     event.save()
 
     # Copy all EventPageContent objects
@@ -107,6 +116,8 @@ def command():
     # Brag on Slack
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
-    click.echo(click.style("Website is ready here: https://djangogirls.org/{0}".format(new_event.page_url),
-    bold=True, fg="green"))
+    click.echo(click.style(
+        "Website is ready here: https://djangogirls.org/{0}".format(new_event.page_url),
+        bold=True, fg="green"
+    ))
     click.echo("Congrats on yet another event!")

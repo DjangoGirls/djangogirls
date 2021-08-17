@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
 from django.core.exceptions import ValidationError
 from django_countries import countries
@@ -13,7 +13,6 @@ from core.deploy_event import copy_event
 from core.models import Event
 from core.validators import validate_approximatedate
 from core.utils import get_coordinates_for_city
-from pictures.models import StockPicture
 
 from .constants import (
     APPLICATION_STATUS,

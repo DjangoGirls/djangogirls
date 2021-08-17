@@ -24,10 +24,12 @@ class Command(BaseCommand):
         data = request.json()
 
         patron_count = data['linked'][0]['patron_count']
-        pledge_sum = int(int(data['linked'][0]['pledge_sum'])/100)
+        pledge_sum = int(int(data['linked'][0]['pledge_sum']) / 100)
         message = (
             "Daily Patreon update: {} patrons pledged ${} monthly!".format(
-                patron_count, pledge_sum))
+                patron_count, pledge_sum
+            )
+        )
         logging.info(message)
 
         stats = FundraisingStatus(number_of_patrons=patron_count,

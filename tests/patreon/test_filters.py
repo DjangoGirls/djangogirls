@@ -1,15 +1,14 @@
 import datetime
 
-from django.utils.timezone import make_aware
-
 from patreonmanager.admin import PatronAdmin
 from patreonmanager.filters import PendingRewardsFilter
-from patreonmanager.models import Patron, Payment, Reward
+from patreonmanager.models import Patron, Payment
 
 
 def test_pending_rewards(patron, reward, payment):
     filter = PendingRewardsFilter(
-        None, {'pending_rewards': 'true'}, Patron, PatronAdmin)
+        None, {'pending_rewards': 'true'}, Patron, PatronAdmin
+    )
     patrons = filter.queryset(None, Patron.objects.all())
     assert len(patrons) == 0
 

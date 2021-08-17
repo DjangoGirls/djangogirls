@@ -99,7 +99,7 @@ class AnswerInlineAdmin(admin.TabularInline):
 
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('number', 'form', 'newsletter_optin', 'email', 'created')
-    list_filter = ('form',  'newsletter_optin')
+    list_filter = ('form', 'newsletter_optin')
     inlines = [AnswerInlineAdmin]
 
 
