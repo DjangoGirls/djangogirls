@@ -34,7 +34,9 @@ jobs:
         pip install -r requirements.txt
         coverage run -m pytest
       env:
+        POSTGRES_DB: djangogirls
+        POSTGRES_HOST: postgres
         POSTGRES_PASSWORD: postgres
-        DATABASE_URL: postgres://postgres:postgres@127.0.0.1/djangogirls
+        POSTGRES_USER: postgres
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v2
