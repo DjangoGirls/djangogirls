@@ -6,6 +6,9 @@ from sentry_sdk.integrations.django import DjangoIntegration
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
 
+RELEASE_NUMBER = __import__('djangogirls').VERSION
+VERSION = RELEASE_NUMBER
+
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
 
 if DEBUG:
@@ -238,7 +241,8 @@ SENTRY_DSN = os.environ.get('SENTRY_DSN')
 if SENTRY_DSN:
     sentry_sdk.init(
         dsn=SENTRY_DSN,
-        integrations=[DjangoIntegration()]
+        integrations=[DjangoIntegration()],
+        release=f"{VERSION}",
     )
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
