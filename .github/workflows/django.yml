@@ -9,13 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-# Review this lines. GHA raised an error for them.
-# - uncomment one-by-one, and open PR to test.
-#    notifications:
-#      slack: djangogirls:f5ZWSNUTwKp1C8L8rr3PYjg7
-#    cache:
-#      directories:
-#        - $HOME/.cache/pip
 
     services:
       postgres:
