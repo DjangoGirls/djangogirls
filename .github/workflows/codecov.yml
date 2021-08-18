@@ -33,6 +33,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         coverage run -m pytest
+        coverage xml
       env:
         POSTGRES_DB: djangogirls
         POSTGRES_HOST: localhost
