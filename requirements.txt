@@ -83,10 +83,16 @@ docutils==0.15.2
     # via botocore
 easy-thumbnails==2.6
     # via -r requirements.in
+flake8==3.9.2
+    # via -r requirements.in
 freezegun==0.3.11
     # via -r requirements.in
 future==0.18.2
     # via django-sendgrid-v5
+gitdb==4.0.7
+    # via gitpython
+gitpython==3.1.18
+    # via -r requirements.in
 google-api-python-client==1.7.10
     # via -r requirements.in
 google-auth==1.34.0
@@ -108,6 +114,7 @@ idna==2.8
     #   yarl
 importlib-metadata==4.6.3
     # via
+    #   flake8
     #   pep517
     #   pluggy
 jmespath==0.10.0
@@ -118,6 +125,8 @@ lxml==4.4.0
     # via pyquery
 markdown2==2.4.0
     # via django-markdown-deux
+mccabe==0.6.1
+    # via flake8
 more-itertools==8.8.0
     # via pytest
 multidict==5.1.0
@@ -151,6 +160,10 @@ pyasn1-modules==0.2.8
     # via
     #   google-auth
     #   oauth2client
+pycodestyle==2.7.0
+    # via flake8
+pyflakes==2.3.1
+    # via flake8
 pyparsing==2.4.7
     # via httplib2
 pyquery==1.4.0
@@ -173,6 +186,8 @@ python-dateutil==2.8.2
     #   freezegun
     #   icalendar
     #   py-trello
+python-dotenv==0.19.0
+    # via -r requirements.in
 python-http-client==3.3.2
     # via
     #   django-sendgrid-v5
@@ -217,6 +232,8 @@ six==1.16.0
     #   vcrpy
 slacker==0.9.65
     # via -r requirements.in
+smmap==4.0.0
+    # via gitdb
 starkbank-ecdsa==1.1.1
     # via sendgrid
 stripe==2.60.0
@@ -225,6 +242,7 @@ tomli==1.2.1
     # via pep517
 typing-extensions==3.10.0.0
     # via
+    #   gitpython
     #   importlib-metadata
     #   yarl
 uritemplate==3.0.1
