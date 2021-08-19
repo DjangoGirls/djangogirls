@@ -1,16 +1,10 @@
 import os
 import dj_database_url
-import git
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
-
-
-repo = git.Repo(search_parent_directories=True)
-RELEASE_NUMBER = repo.head.object.hexsha
-VERSION = RELEASE_NUMBER
 
 DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
 
@@ -248,8 +242,7 @@ SENTRY_DSN = os.environ.get('SENTRY_DSN')
 if SENTRY_DSN:
     sentry_sdk.init(
         dsn=SENTRY_DSN,
-        integrations=[DjangoIntegration()],
-        release=VERSION,
+        integrations=[DjangoIntegration()]
     )
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_APIKEY')
