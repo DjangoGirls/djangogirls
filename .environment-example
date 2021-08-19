@@ -1,0 +1,41 @@
+# copy this file's contents into .environment and amend as required
+
+export DJANGO_SETTINGS_MODULE="djangogirls.settings"
+export CLEAN_PYC="TRUE"
+export COVERAGE="TRUE"
+export DJANGO_DEBUG="FALSE"
+export DEBUG_TOOLBAR="no"
+
+export POSTGRES_PASSWORD=""
+
+export DISABLE_RECAPTCHA="yes"
+export RECAPTCHA_USE_SSL="no"
+
+export EMAIL_BACKEND=""
+
+export MAILCHIMP_APIKEY=""
+
+export SENDGRID_API_KEY=""
+
+export RECAPTCHA_PUBLIC_KEY=""
+export RECAPTCHA_PRIVATE_KEY=""
+
+export SLACK_API_KEY=""
+
+export STORE_DISCOUNT_CODE=""
+
+export TRELLO_API_KEY=""
+
+export SENTRY_DSN=""
+
+export JOBS_EMAIL_USER=""
+export JOBS_EMAIL_PASSWORD=""
+
+export MEETUPS_EMAIL_USER=""
+export MEETUPS_EMAIL_PASSWORD=""
+
+export GAPPS_PRIVATE_KEY_ID=""
+export GAPPS_PRIVATE_KEY=""
+
+export STRIPE_PUBLIC_KEY=""
+export STRIPE_SECRET_KEY=""
