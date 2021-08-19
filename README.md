@@ -231,3 +231,18 @@ For example:
     pip-compile -U
 
     pip-sync
+
+
+### Handling environment variables
+
+The `requirements.txt` installs [python-dotenv](https://pypi.org/project/python-dotenv/) which provides the option for
+developers to load environment variables via a single file.
+
+You'll see `.environment-example` in the project root. This contains environment variables used by the project so that
+you can create your own copy of this and load it with values relevant to your development environment.
+
+To make use of this feature, create a copy of the example file and call it `.environment`. This file will be ignored by
+version control, but loaded by `manage.py`. So when you run django commands like `manage.py runserver` during development
+`python-dotenv` will load the environment variables from your `.environment` file so that they are available to the application.
+
+This is an optional feature. If you do not have a `.environment` file then it won't impact on the application at all.

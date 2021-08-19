@@ -173,6 +173,8 @@ python-dateutil==2.8.2
     #   freezegun
     #   icalendar
     #   py-trello
+python-dotenv==0.19.0
+    # via -r requirements.in
 python-http-client==3.3.2
     # via
     #   django-sendgrid-v5
