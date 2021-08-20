@@ -18,6 +18,6 @@ def test_listpatrons(payment):
     assert 'in a row' in out.getvalue()
 
 
-@vcr.use_cassette('tests/patreon/vcr/patreon.yaml')
-def test_fundraising_status(patron):
-    call_command('fundraising_status')
+# @vcr.use_cassette('tests/patreon/vcr/patreon.yaml')
+# def test_fundraising_status(patron):
+#     call_command('fundraising_status')
