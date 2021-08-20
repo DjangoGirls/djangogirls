@@ -49,7 +49,7 @@ def gather_information():
         fg='yellow'
     ), default=False)
 
-    return (event, number, date, new_team)
+    return event, number, date, new_team
 
 
 @click.command()
@@ -117,7 +117,7 @@ def command():
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
     click.echo(click.style(
-        "Website is ready here: https://djangogirls.org/{0}".format(new_event.page_url),
+        f"Website is ready here: https://djangogirls.org/{new_event.page_url}",
         bold=True, fg="green"
     ))
     click.echo("Congrats on yet another event!")

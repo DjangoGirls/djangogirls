@@ -28,7 +28,9 @@ class PreviousEventForm(forms.Form):
         empty_label=_("Choose event"),
         required=False,
         widget=forms.Select(
-            attrs={'aria-label': _('Choose event'), 'class': 'linked-select'}))
+            attrs={'aria-label': _('Choose event'), 'class': 'linked-select'}
+        )
+    )
 
     def clean(self):
         has_organized_before = self.cleaned_data.get('has_organized_before')
@@ -101,19 +103,25 @@ OrganizersFormSet = forms.formset_factory(
 
 class WorkshopForm(forms.Form):
     date = ApproximateDateFormField(
-        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+        widget=forms.TextInput(attrs={'class': 'compact-input'})
+    )
     city = forms.CharField(
         required=True,
         max_length=200,
-        widget=forms.TextInput(attrs={'class': 'compact-input'}))
+        widget=forms.TextInput(attrs={'class': 'compact-input'})
+    )
     country = LazyTypedChoiceField(
-        choices=[(None, 'Choose country')] + list(countries))
+        choices=[(None, 'Choose country')] + list(countries)
+    )
     venue = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
     sponsorship = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
     coaches = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'compact-input'}))
+        widget=forms.Textarea(attrs={'class': 'compact-input'})
+    )
     safety = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )

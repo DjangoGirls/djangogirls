@@ -12,9 +12,11 @@ def get_organizer_data():
         Returns a dictionary with first_name, last_name and email
     """
     main_name = click.prompt(click.style(
-        "First and last name", bold=True, fg='yellow'))
+        "First and last name", bold=True, fg='yellow'
+    ))
     main_email = click.prompt(click.style(
-        "E-mail address", bold=True, fg='yellow'))
+        "E-mail address", bold=True, fg='yellow'
+    ))
 
     data = {
         'name': main_name,
@@ -46,9 +48,7 @@ def command():
     ))
     event = Event.objects.get(id=event_id)
     click.echo(
-        "Ok, we're adding to an event in {}, {}".format(
-            event.city, event.country
-        )
+        f"Ok, we're adding to an event in {event.city}, {event.country}"
     )
     team = [get_organizer_data()]
 
@@ -65,7 +65,7 @@ def command():
 
     for member in members:
         click.echo(
-            "User {} has been added and notified".format(member.email)
+            f"User {member.email} has been added and notified"
         )
 
     click.echo(DELIMITER)

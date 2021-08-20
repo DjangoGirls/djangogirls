@@ -21,15 +21,18 @@ class Form(models.Model):
         default=_("Apply for a spot at Django Girls [City]!")
     )
     text_description = models.TextField(
-        default=_("Yay! We're so excited you want to be a part of our "
-        "workshop. Please mind that filling out the form below does "
-        "not give you a place on the workshop, but a chance to get "
-        "one. The application process is open from {INSERT DATE} "
-        "until {INSERT DATE}. If you're curious about the criteria "
-        "we use to choose applicants, you can read about it on "
-        "<a href='http://blog.djangogirls.org/post/91067112853/"
-        "djangogirls-how-we-scored-applications'>Django Girls "
-        "blog</a>. Good luck!"))
+        default=_(
+            "Yay! We're so excited you want to be a part of our "
+            "workshop. Please mind that filling out the form below does "
+            "not give you a place on the workshop, but a chance to get "
+            "one. The application process is open from {INSERT DATE} "
+            "until {INSERT DATE}. If you're curious about the criteria "
+            "we use to choose applicants, you can read about it on "
+            "<a href='http://blog.djangogirls.org/post/91067112853/"
+            "djangogirls-how-we-scored-applications'>Django Girls "
+            "blog</a>. Good luck!"
+        )
+    )
     confirmation_mail = models.TextField(
         default=_(
             "Hi there!\n\n"

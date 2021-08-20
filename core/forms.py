@@ -60,7 +60,8 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = [
             'city', 'country', 'date', 'email', 'latlng', 'name',
-            'page_title', 'page_url']
+            'page_title', 'page_url'
+        ]
 
     @transaction.atomic
     def save(self, commit=True):

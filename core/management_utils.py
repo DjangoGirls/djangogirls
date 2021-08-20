@@ -15,15 +15,15 @@ def get_main_organizer():
     team = []
     click.echo(_("Let's talk about the team. First the main organizer:"))
     main_name = click.prompt(click.style(
-        _("First and last name"), bold=True, fg='yellow'
+        "First and last name", bold=True, fg='yellow'
     ))
     main_email = click.prompt(click.style(
-        _("E-mail address"), bold=True, fg='yellow'
+        "E-mail address", bold=True, fg='yellow'
     ))
 
     team.append({'name': main_name, 'email': main_email})
 
-    click.echo(_("All right, the main organizer is {0} ({1})".format(main_name, main_email)))
+    click.echo("All right, the main organizer is {0} ({1})".format(main_name, main_email))
 
     return team
 
@@ -34,24 +34,24 @@ def get_team(team):
         and append that to a list we got from get_main_organizer
     """
     add_team = click.confirm(click.style(
-        _("Do you want to add additional team members?"), bold=True, fg='yellow'
+        "Do you want to add additional team members?", bold=True, fg='yellow'
     ), default=False)
     i = 1
     while add_team:
         i += 1
         name = click.prompt(click.style(
-            _(f"First and last name of #{i} member"), bold=True, fg='yellow'
+            f"First and last name of #{i} member", bold=True, fg='yellow'
         ))
         email = click.prompt(click.style(
-            _(f"E-mail address of #{i} member"), bold=True, fg='yellow'
+            f"E-mail address of #{i} member", bold=True, fg='yellow'
         ))
         if len(name) > 0:
             team.append({'name': name, 'email': email})
             click.echo(
-                _(f"All right, the #{i} team member of Django Girls is {name} ({email})")
+                f"All right, the #{i} team member of Django Girls is {name} ({email})"
             )
         add_team = click.confirm(click.style(
-            _("Do you want to add additional team members?"), bold=True, fg='yellow'
+            "Do you want to add additional team members?", bold=True, fg='yellow'
         ), default=False)
 
     return team

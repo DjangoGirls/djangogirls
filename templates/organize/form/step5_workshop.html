@@ -174,7 +174,7 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading{% if form.diversity.field %} {% endif %}">{% trans "How do you intent to make your workshop inclusive and promote diversity?" %}</label>
+                        <label class="form-section-heading{% if form.diversity.field.required %} required{% endif %}">{% trans "How do you intent to make your workshop inclusive and promote diversity?" %}</label>
                         <p class="form-section-subhead">{% trans "Please tell us how you intend to make sure your workshop is inclusive to people from marginalised communities and promote diversity." %}</p>
 
                         <ul class="row">
@@ -192,7 +192,7 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading{% if form.additional.field %} {% endif %}">{% trans "Any additional you may want to share with us?" %}</label>
+                        <label class="form-section-heading{% if form.additional.field.required %} required{% endif %}">{% trans "Any additional you may want to share with us?" %}</label>
                         <p class="form-section-subhead">{% trans "Please provide any additional information you may want to share with us and may think may help your application." %}</p>
 
                         <ul class="row">

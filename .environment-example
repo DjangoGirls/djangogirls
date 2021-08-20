@@ -11,8 +11,6 @@ export POSTGRES_PASSWORD=""
 export DISABLE_RECAPTCHA="yes"
 export RECAPTCHA_USE_SSL="no"
 
-export EMAIL_BACKEND=""
-
 export MAILCHIMP_APIKEY=""
 
 export SENDGRID_API_KEY=""
