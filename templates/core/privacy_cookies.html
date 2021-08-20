@@ -1,148 +1,226 @@
 {% extends 'global/base.html' %}
-{% load static %}
+{% load i18n static %}
 
-{% block title %}Cookie and Privacy Policies of Django Girls Website{% endblock %}
-{% block description %}This Policy applies to our use of any and all Data collected by us in relation to your use of the Site.
-{% endblock %}
+{% block title %}{% trans "Cookie and Privacy Policies of Django Girls Website" %}{% endblock %}
+{% block description %}{% trans "This Policy applies to our use of any and all Data collected by us in relation to your use of the Site." %}{% endblock %}
 
 {% block content %}
     <section id="textonly-pages">
             <div class="row clearfix">
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                        <h1>Cookie and Privacy Policies of Django Girls Website</h1>
+                    <h1>{% trans "Cookie and Privacy Policies of Django Girls Website" %}</h1>
 
-                    <p><b>We, Us, Our</b> Django Girls Foundation, Registered Charity Number 1163260 whose address is United House, North Road, London N7 9DP</p>
-                    <p><b>You, Your</b> Are a visitor to the Site</p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            <b>We, Us, Our</b> Django Girls Foundation, Registered Charity Number 1163260 whose address
+                            is United House, North Road, London N7 9DP
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans %}<b>You, Your</b> Are a visitor to the Site{% endblocktrans %}
+                    </p>
 
-                    <p><b>Site</b> djangogirls.org</p>
+                    <p>{% blocktrans %}<b>Site</b> djangogirls.org{% endblocktrans %}</p>
 
-                    <p>This Policy applies to our use of any and all Data collected by us in relation to your use of the Site.</p>
+                    <p>{% trans "This Policy applies to our use of any and all Data collected by us in relation to your use of the Site." %}</p>
 
-                    <h3>Definitions and Interpretation</h3>
+                    <h3>{% trans "Definitions and Interpretation" %}</h3>
 
-                    <p>In this Policy the following terms shall have the following meanings:</p>
-
-                    <ul>
-                        <li><b>Data</b> means all the information you submit to us via the Site.  This definition, where appropriate, incorporates the definitions provided in the Data Protection Act 1998.</li>
-                        <li><b>Cookie</b> means a small text file placed on your computer by this Site when you visit certain parts of the Site and/or when you use certain features of the Site.</li>
-                        <li><b>UK and EU Cookie law</b> means the Privacy and Electronic Communications (EC Directive) Regulations 2003 as amended by the Privacy and Electronic Communications (EC Directive) (Amendment) Regulations 2011.</li>
-                        <li><b>EU GDPR, GDPR</b> means The General Data Protection Regulation 2016/679, a regulation in EU law on data protection and privacy for all individuals within the European Union and the European Economic Area. </li>
-                        <li><b>User</b> means you or anyone who uses the Site.</li>
-                    </ul>
-
-                    <h3>Scope of this Policy</h3>
-
-                    <p>This Policy applies only to the actions of you and us when using the Site.  It does not extend to:</p>
-                    <ul>
-                        <li>any Event which you may attend as the organisers of those events are responsible for complying with the data protection legislation which applies in their jurisdiction. Despite this, the organisers of all events are required to follow the policies laid out below as part of their agreement with us and we hereby grant you the right to pursue them for any breach of these policies; or</li>
-                        <li>any websites that can be accessed from this Site including, but not limited to, any links we might provide.</li>
-                    </ul>
-
-                    <h3>Data Collected</h3>
-
-                    <p>Without limitation, all or any of the following Data may be collected by the Site from time to time:</p>
+                    <p>{% trans "In this Policy the following terms shall have the following meanings:" %}</p>
 
                     <ul>
-                        <li>name;</li>
-                        <li>date of birth;</li>
-                        <li>gender;</li>
-                        <li>contact information such as email addresses and telephone numbers;</li>
-                        <li>demographic information such as post code, preferences and interests;</li>
-                        <li>IP address (automatically collected);</li>
-                        <li>web browser type and version (automatically collected);</li>
-                        <li>operating system (automatically collected); and</li>
-                        <li>a list of URLs starting with a referring site, your activity on the Site, and the site you exit to (automatically collected).</li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            <b>Data</b> means all the information you submit to us via the Site. This definition, where appropriate, incorporates the definitions provided in the Data Protection Act 1998.
+                          {% endblocktrans %}
+                        </li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            <b>Cookie</b> means a small text file placed on your computer by this Site when you visit certain parts of the Site and/or when you use certain features of the Site.
+                          {% endblocktrans %}
+                        </li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            <b>UK and EU Cookie law</b> means the Privacy and Electronic Communications (EC Directive) Regulations 2003 as amended by the Privacy and Electronic Communications (EC Directive) (Amendment) Regulations 2011.
+                          {% endblocktrans %}
+                        </li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            <b>EU GDPR, GDPR</b> means The General Data Protection Regulation 2016/679, a regulation in EU law on data protection and privacy for all individuals within the European Union and the European Economic Area.
+                          {% endblocktrans %}
+                        </li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            <b>User</b> means you or anyone who uses the Site.
+                          {% endblocktrans %}
+                        </li>
                     </ul>
 
-                    <h3>Our Use of Data</h3>
+                    <h3>{% trans "Scope of this Policy" %}</h3>
 
-                    <p>We will keep any personal Data you submit for 60 months.
-</p>
-
-                    <p>Unless we are obliged or allowed by law, and subject to “Third Party Sites and Services” below, we will not disclose your Data to third parties.  This does not include the companies which form part of our group.</p>
-
-                    <p>All personal Data is stored securely in accordance with the principles of the Data Protection Act 1998 and the EU GDPR.</p>
-
-                    <p>We use your Data so as to give you the best possible service and experience when using the Site.</p>
-
-                    <p>Specifically, Data may be used by us for the following reasons:</p>
+                    <p>{% trans "This Policy applies only to the actions of you and us when using the Site. It does not extend to:" %}</p>
                     <ul>
-                        <li>internal record keeping;</li>
-                        <li>improvement of our products / services;</li>
-                        <li>transmission by email of promotional materials that may be of interest to you;</li>
-                        <li>contact for market research purposes which may be done using email, telephone, fax or mail;</li>
-                        <li>the organisation of an Event for which you have applied or in which you have expressed interest; or</li>
-                        <li>to customise or update the Site.</li>
+                        <li>
+                          {% blocktrans trimmed %}
+                            any Event which you may attend as the organisers of those events are responsible for complying with the data
+                            protection legislation which applies in their jurisdiction. Despite this, the organisers of all events are
+                            required to follow the policies laid out below as part of their agreement with us and we hereby grant you the
+                            right to pursue them for any breach of these policies; or
+                          {% endblocktrans %}
+                        </li>
+                        <li>{% trans "any websites that can be accessed from this Site including, but not limited to, any links we might provide." %}</li>
                     </ul>
 
-                    <h3>Third Party Sites and Services</h3>
+                    <h3>{% trans "Data Collected" %}</h3>
 
-                    <p>We may, from time to time, use other parties for dealing with matters that may include, but are not limited to, payment processing, delivery of purchased items, search engine facilities, advertising and marketing.  The providers of such services have access to some of your Data.</p>
-
-                    <p>Any Data used by such parties is used only to the extent required by them to perform the services that we’ve requested.  Any use for other purposes is strictly prohibited.</p>
-
-                    <p>Any Data that is processed by third parties will be processed within the terms of this Policy and in accordance with the Data Protection Act 1998 and the EU GDPR.</p>
-
-                    <h3>Links to Other Websites</h3>
-
-                    <p>We may, from time to time, provide links to other websites.  We have no control over such websites and can’t be responsible for their content.  This Policy does not extend to those websites and we suggest that you read the privacy policy or statement on those websites before using them.</p>
-                    <h3>Changes of Business Ownership and Control</h3>
-
-                    <p>We may, from time to time, expand or reduce our business and that may mean that the people who control our business change.  If we do that your Data will, if relevant, be transferred to the people who then control the business. They will have the same rights and obligations as we have under the terms of this Policy.</p>
-
-                    <p>If we do transfer Data for this reason we will not tell you in advance.</p>
-
-                    <h3>Controlling Use of Your Data</h3>
-                    <p>If we ask for Data from you, you will be given options to restrict our use of that Data.  This may include the following:</p>
+                    <p>{% trans "Without limitation, all or any of the following Data may be collected by the Site from time to time:" %}</p>
 
                     <ul>
-                        <li>use of Data for direct marketing purposes; and</li>
-                        <li>sharing Data with third parties.</li>
+                        <li>{% trans "name;" %}</li>
+                        <li>{% trans "date of birth;" %}</li>
+                        <li>{% trans "gender;" %}</li>
+                        <li>{% trans "contact information such as email addresses and telephone numbers;" %}</li>
+                        <li>{% trans "demographic information such as post code, preferences and interests;" %}</li>
+                        <li>{% trans "IP address (automatically collected);" %}</li>
+                        <li>{% trans "web browser type and version (automatically collected);" %}</li>
+                        <li>{% trans "operating system (automatically collected); and" %}</li>
+                        <li>{% trans "a list of URLs starting with a referring site, your activity on the Site, and the site you exit to (automatically collected)." %}</li>
                     </ul>
-                    <p>We do not use any of your data to profile you.</p>
 
-                    <h3>Your Right to Withhold Information</h3>
+                    <h3>{% trans "Our Use of Data" %}</h3>
 
-                    <p>You may access certain areas of the Site without providing any Data at all but to use all features and functions available on the Site you may be required to submit certain Data.</p>
+                    <p>{% trans "We will keep any personal Data you submit for 60 months." %}</p>
 
-                    <p>You may restrict your internet browser’s use of Cookies – we suggest that you look at the “Tools” setting for your internet browser.  See below under “Cookies” for more information.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        Unless we are obliged or allowed by law, and subject to “Third Party Sites and Services” below, we will not disclose your Data to third parties.  This does not include the companies which form part of our group.
+                      {% endblocktrans %}
+                    </p>
 
-                    <h3>Accessing Your Own Data</h3>
+                    <p>
+                      {% blocktrans trimmed %}
+                        All personal Data is stored securely in accordance with the principles of the Data Protection Act 1998 and the EU GDPR.
+                      {% endblocktrans %}
+                    </p>
 
-                    <p>You have the right to ask for a copy of any of your personal Data which we hold on payment of a small fee which will not exceed £10.</p>
-                    <h3>Security</h3>
+                    <p>{% trans "We use your Data so as to give you the best possible service and experience when using the Site." %}</p>
 
-                    <p>Data security is of great importance to us and to protect your Data we have put in place various physical, electronic and managerial procedures to safeguard and secure Data collected via the Site.</p>
+                    <p>{% trans "Specifically, Data may be used by us for the following reasons:" %}</p>
+                    <ul>
+                        <li>{% trans "internal record keeping;" %}</li>
+                        <li>{% trans "improvement of our products / services;" %}</li>
+                        <li>{% trans "transmission by email of promotional materials that may be of interest to you;" %}</li>
+                        <li>{% trans "contact for market research purposes which may be done using email, telephone, fax or mail;" %}</li>
+                        <li>{% trans "the organisation of an Event for which you have applied or in which you have expressed interest; or" %}</li>
+                        <li>{% trans "to customise or update the Site." %}</li>
+                    </ul>
 
-                    <h3>Cookies</h3>
+                    <h3>{% trans "Third Party Sites and Services" %}</h3>
 
-                    <p>The Site may place and access certain Cookies on your computer.  These are first party Cookies and we place them via the Site and only we use them.  We use Cookies to improve your experience of using the Site and to improve our range of products and/or services.  We choose the Cookies we use carefully and have taken steps to make sure that your privacy is always protected and respected.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We may, from time to time, use other parties for dealing with matters that may include, but are not limited to,
+                        payment processing, delivery of purchased items, search engine facilities, advertising and marketing. The providers
+                        of such services have access to some of your Data.
+                      {% endblocktrans %}
+                    </p>
 
-                    <p>All Cookies used by the Site are used in accordance with current UK and EU Cookie Law.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        Any Data used by such parties is used only to the extent required by them to perform the services that we’ve requested.
+                        Any use for other purposes is strictly prohibited.
+                      {% endblocktrans %}
+                    </p>
 
-                    <p>Certain features of the Site need Cookies for those features to work.  UK and EU Cookie Law deems these Cookies to be “strictly necessary”.  In those cases, we don’t ask for your consent to place them but you can still block these Cookies by changing your internet browser’s settings as detailed below.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        Any Data that is processed by third parties will be processed within the terms of this Policy and in accordance with the
+                        Data Protection Act 1998 and the EU GDPR.
+                      {% endblocktrans %}
+                    </p>
 
-                    <p>The Site uses analytics services provided by Google and others.  “Analytics” is a set of tools used to collect and analyse how the Site is used which then helps us understand the needs of our Users.  This, in turn, means that we can improve the Site and the products and/or services offered through it.</p>
+                    <h3>{% trans "Links to Other Websites" %}</h3>
 
-                    <p>You don’t have to let us use these analytic Cookies but when we use them your privacy and safe use of the Site are not at risk.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We may, from time to time, provide links to other websites. We have no control over such websites and can’t be responsible for their content.
+                        This Policy does not extend to those websites and we suggest that you read the privacy policy or statement on those websites before using them.
+                      {% endblocktrans %}
+                    </p>
 
-                    <p>The analytics service may place Cookies on your device immediately you visit the Site and it may not be possible to obtain your consent before it does.  You can remove these Cookies and prevent future use of them by following the steps set out below:</p>
+                    <h3>{% trans "Changes of Business Ownership and Control" %}</h3>
+
+                    <p>
+                      {% blocktrans trimmed %}
+                        We may, from time to time, expand or reduce our business and that may mean that the people who control our business change.
+                        If we do that your Data will, if relevant, be transferred to the people who then control the business.
+                        They will have the same rights and obligations as we have under the terms of this Policy.
+                      {% endblocktrans %}
+                    </p>
+
+                    <p>{% trans "If we do transfer Data for this reason we will not tell you in advance." %}</p>
+
+                    <h3>{% trans "Controlling Use of Your Data" %}</h3>
+                    <p>{% trans "If we ask for Data from you, you will be given options to restrict our use of that Data.  This may include the following:" %}</p>
 
                     <ul>
-                        <li>You can choose to enable or disable Cookies in your internet browser.</li>
-                        <li>Most internet browsers enable you to choose whether you wish to disable all Cookies or only third party Cookies.</li>
-                        <li>By default, most internet browsers accept Cookies but this can be changed. For further details, please consult the help menu in your internet browser.</li>
-                        <li>You can choose to delete Cookies at any time but if you do you may lose any information that enables you to access the Site quickly and efficiently and you may lose your personal settings.</li>
+                        <li>{% trans "use of Data for direct marketing purposes; and" %}</li>
+                        <li>{% trans "sharing Data with third parties." %}</li>
+                    </ul>
+                    <p>{% trans "We do not use any of your data to profile you." %}</p>
+
+                    <h3>{% trans "Your Right to Withhold Information" %}</h3>
+
+                    <p>{% trans "You may access certain areas of the Site without providing any Data at all but to use all features and functions available on the Site you may be required to submit certain Data." %}</p>
+
+                    <p>{% trans "You may restrict your internet browser’s use of Cookies – we suggest that you look at the “Tools” setting for your internet browser.  See below under “Cookies” for more information." %}</p>
+
+                    <h3>{% trans "Accessing Your Own Data" %}</h3>
+
+                    <p>{% trans "You have the right to ask for a copy of any of your personal Data which we hold on payment of a small fee which will not exceed £10." %}</p>
+
+                    <h3>{% trans "Security" %}</h3>
+
+                    <p>{% trans "Data security is of great importance to us and to protect your Data we have put in place various physical, electronic and managerial procedures to safeguard and secure Data collected via the Site." %}</p>
+
+                    <h3>{% trans "Cookies" %}</h3>
+
+                    <p>{% trans "The Site may place and access certain Cookies on your computer.  These are first party Cookies and we place them via the Site and only we use them.  We use Cookies to improve your experience of using the Site and to improve our range of products and/or services.  We choose the Cookies we use carefully and have taken steps to make sure that your privacy is always protected and respected." %}</p>
+
+                    <p>{% trans "All Cookies used by the Site are used in accordance with current UK and EU Cookie Law." %}</p>
+
+                    <p>{% trans "Certain features of the Site need Cookies for those features to work.  UK and EU Cookie Law deems these Cookies to be “strictly necessary”.  In those cases, we don’t ask for your consent to place them but you can still block these Cookies by changing your internet browser’s settings as detailed below." %}</p>
+
+                    <p>{% trans "The Site uses analytics services provided by Google and others.  “Analytics” is a set of tools used to collect and analyse how the Site is used which then helps us understand the needs of our Users.  This, in turn, means that we can improve the Site and the products and/or services offered through it." %}</p>
+
+                    <p>{% trans "You don’t have to let us use these analytic Cookies but when we use them your privacy and safe use of the Site are not at risk." %}</p>
+
+                    <p>{% trans "The analytics service may place Cookies on your device immediately you visit the Site and it may not be possible to obtain your consent before it does.  You can remove these Cookies and prevent future use of them by following the steps set out below:" %}</p>
+
+                    <ul>
+                        <li>{% trans "You can choose to enable or disable Cookies in your internet browser." %}</li>
+                        <li>{% trans "Most internet browsers enable you to choose whether you wish to disable all Cookies or only third party Cookies." %}</li>
+                        <li>{% trans "By default, most internet browsers accept Cookies but this can be changed. For further details, please consult the help menu in your internet browser." %}</li>
+                        <li>{% trans "You can choose to delete Cookies at any time but if you do you may lose any information that enables you to access the Site quickly and efficiently and you may lose your personal settings." %}</li>
                     </ul>
 
-                    <p>We recommend that you make sure that your internet browser is up-to-date and that if you are not sure about anything you look at the help and guidance provided by your internet browser.</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We recommend that you make sure that your internet browser is up-to-date and that if you are not sure about anything you
+                        look at the help and guidance provided by your internet browser.
+                      {% endblocktrans %}
+                    </p>
 
-                    <h3>Changes to this Policy</h3>
+                    <h3>{% trans "Changes to this Policy" %}</h3>
 
-                    <p>We have the right to change this Policy as and when we decide from time to time or as may be required by law.  Any changes will be immediately posted on the Site and you are deemed to have accepted the terms of this Policy on your first use of the Site following those changes.</p>
-
-
-                     </div>
-                </div>
-         </section>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We have the right to change this Policy as and when we decide from time to time or as may be required by law.
+                        Any changes will be immediately posted on the Site and you are deemed to have accepted the terms of this Policy
+                        on your first use of the Site following those changes.
+                      {% endblocktrans %}
+                    </p>
+                 </div>
+            </div>
+     </section>
 {% endblock %}

@@ -1,83 +1,103 @@
 {% extends 'global/base.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block content %}
     <div class="container" xmlns="http://www.w3.org/1999/html">
         <section id="resources">
             <div class="row clearfix">
                 <div class="col-md-12">
-                  <h2>Order Django Girls Workshop Box for your event!</h2>
-                  <p>Get a golden envelope full of Django Girls stickers, gold letter balloons,
-                    stickers of our partners, and buttons. <br /> Everything you need
-                    to make your workshop DjangoGirlsy! 🌸✨</p>
+                  <h2>{% trans "Order Django Girls Workshop Box for your event!" %}</h2>
+                  <p>
+                    {% blocktrans trimmed %}
+                      Get a golden envelope full of Django Girls stickers, gold letter balloons,
+                      stickers of our partners, and buttons. <br /> Everything you need
+                      to make your workshop DjangoGirlsy! 🌸✨
+                    {% endblocktrans %}
+                  </p>
                   <center>
                     <video style="width: 50%; margin-top: 30px;" autoplay>
                       <source src="https://s3-us-west-2.amazonaws.com/djangogirls/workshop_box.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
+                      {% trans "Your browser does not support the video tag." %}
                     </video>
                   </center>
                 </div>
             </div>
             <div class="row clearfix">
                 <div class="col-md-6">
-                  <h3>How it works?</h3>
-                  <p>We purchased Django Girls goodies in bulk quantity, which 
-                    massively lowered their price. It will save everyone time and
-                      money and you will be able to focus on more awesome things.
-                    The box can be sent to Django Girls workshops from all over the world:
-                      small goodies and swag won't drain your sponsor money anymore! YAY! ✨💰</p>
+                  <h3>{% trans "How it works?" %}</h3>
+                  <p>
+                    {% blocktrans trimmed %}
+                      We purchased Django Girls goodies in bulk quantity, which massively lowered their price. It will save everyone time and
+                      money and you will be able to focus on more awesome things. The box can be sent to Django Girls workshops from all over the world:
+                      small goodies and swag won't drain your sponsor money anymore! YAY! ✨💰
+                    {% endblocktrans %}
+                  </p>
 
-                    <p>We calculated that one event of 30 people would need to pay
-                        around £150 GBP for all of those things, and sometimes
-                        they're hard to get. We're able to buy and ship them all for around $50.
-                    </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      We calculated that one event of 30 people would need to pay around £150 GBP for all of those things, and sometimes
+                      they're hard to get. We're able to buy and ship them all for around $50.
+                    {% endblocktrans %}
+                  </p>
                 </div>
                 <div class="col-md-6">
-                  <h3>What's in the box?</h3>
+                  <h3>{% trans "What's in the box?" %}</h3>
                   <p>
-                    The shiny beautiful envelope contains many awesome things:</p>
+                    {% trans "The shiny beautiful envelope contains many awesome things:" %}
+                  </p>
                     <ul>
-                      <li>Django Girls logo stickers</li>
-                      <li>YAY! stickers</li>
-                      <li>Pixel Heart stickers</li>
-                      <li>Some stickers from our global partners</li>
-                      <li>Gold letters DJANGOGIRLS balloons, 16 inches tall</li>
-                      <li>Orange Django Girls logo buttons</li>
-                      <li>Little surprise, sometimes, maybe? 😄</li>
+                      <li>{% trans "Django Girls logo stickers" %}</li>
+                      <li>{% trans "YAY! stickers" %}</li>
+                      <li>{% trans "Pixel Heart stickers" %}</li>
+                      <li>{% trans "Some stickers from our global partners" %}</li>
+                      <li>{% trans "Gold letters DJANGOGIRLS balloons, 16 inches tall" %}</li>
+                      <li>{% trans "Orange Django Girls logo buttons" %}</li>
+                      <li>{% trans "Little surprise, sometimes, maybe? 😄" %}</li>
                     </ul>
                   
                 </div>
                 <div class="col-md-6">          
-                  <h3>How much is it?</h3>
-                  <p>The price will depend of your workshop's size. For example:</p>
-                      <ul>
-                    <li>£30 GBP for 30 people</li>
-                    <li>£40 GBP for 50 people</li>
-                    <li>£65 GBP for 100 people</li>
-                    </ul>
+                  <h3>{% trans "How much is it?" %}</h3>
+                  <p>{% trans "The price will depend of your workshop's size. For example:" %}</p>
+                  <ul>
+                    <li>{% trans "£30 GBP for 30 people" %}</li>
+                    <li>{% trans "£40 GBP for 50 people" %}</li>
+                    <li>{% trans "£65 GBP for 100 people" %}</li>
+                  </ul>
 
-                      <p>You will also need to add shipping costs. 📮</p>
+                  <p>{% trans "You will also need to add shipping costs. 📮" %}</p>
 
-                      <p>If your event is happening in a <a href="https://en.wikipedia.org/wiki/Developing_country#List_of_developing_economies">developing
-                      country</a> or if you tried but can't find sponsors, you'll be able
-                          to apply for a free box (you'll need to pay for shipping).</p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      If your event is happening in a <a href="https://en.wikipedia.org/wiki/Developing_country#List_of_developing_economies">developing
+                      country</a> or if you tried but can't find sponsors, you'll be able to apply for a free box (you'll need to pay for shipping).
+                    {% endblocktrans %}
+                  </p>
                 </div>
                 <div class="col-md-6">
-                    <h3>How to get one?</h3>
-                    <p>Yay, that's great that you want to order one! To do that, <a href="https://store.djangogirls.org/products/django-girls-workshop-box">go to our store</a>. <b>We strongly
-                         recommend you to buy it at least 6 weeks before your event</b>: if you don't do it,
-                        we can't guarantee that your box will be delivered on time for your event.</p>
+                    <h3>{% trans "How to get one?" %}</h3>
+                    <p>
+                      {% blocktrans trimmed %}
+                        Yay, that's great that you want to order one! To do that, <a href="https://store.djangogirls.org/products/django-girls-workshop-box">go to our store</a>.
+                        <b>We strongly recommend you to buy it at least 6 weeks before your event</b>: if you don't do it, we can't guarantee that your box will be delivered on time for your event.
+                      {% endblocktrans %}
+                    </p>
 
-                    <h4>Requirements to apply for a free box:</h4>
+                    <h4>{% trans "Requirements to apply for a free box:" %}</h4>
                     <ul>
-                        <li>Your event must happen in a developing country or you tried but can't find any sponsor.</li>
-                        <li>You need to have a venue for your workshop</li>
-                        <li>Application process for your event needs to be open</li>
-                        <li>You need to order it at least 6 weeks before workshop to allow for shipping time</li>
-                      </ul>
-                    <p><b>If you check all those requirements</b>, <a href="mailto:hello@djangogirls.org">send us an email</a> describing your situation: we will review your application and contact you soon. 💕</p>
+                        <li>{% trans "Your event must happen in a developing country or you tried but can't find any sponsor." %}</li>
+                        <li>{% trans "You need to have a venue for your workshop" %}</li>
+                        <li>{% trans "Application process for your event needs to be open" %}</li>
+                        <li>{% trans "You need to order it at least 6 weeks before workshop to allow for shipping time" %}</li>
+                    </ul>
+                    <p>
+                      {% blocktrans trimmed %}
+                        <b>If you check all those requirements</b>, <a href="mailto:hello@djangogirls.org">send us an email</a>
+                        describing your situation: we will review your application and contact you soon. 💕
+                      {% endblocktrans %}
+                    </p>
                 </div>
-                </div>
+            </div>
         </section>
     </div>
 {% endblock %}

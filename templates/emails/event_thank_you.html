@@ -1,42 +1,60 @@
-<p>Hello team {{event.city}}!</p>
+{% load i18n %}
 
-<p>Congratulations on running your own Django Girls event! We're super proud and so so so happy for you :)</p>
+<p>{% blocktrans with city=event.city %}Hello team {{ city }}!{% endblocktrans %}</p>
+
+<p>{% trans "Congratulations on running your own Django Girls event! We're super proud and so so so happy for you :)" %}</p>
 
 <p>
-<strong>Numbers</strong><br/>
-Whenever you have a little bit of time, we would be super grateful if you could <a href="{{ settings.BASE_URL }}{% url 'admin:core_event_change' event.id %}">fill out this form</a> to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+<strong>{% trans "Numbers" %}</strong><br/>
+{% url 'admin:core_event_change' event.id as event_url %}
+{% blocktrans trimmed with base_url=settings.BASE_URL %}
+    Whenever you have a little bit of time, we would be super grateful if you could <a href="{{ base_url }}{{ event_url }}">fill out this form</a>
+    to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+{% endblocktrans %}
 </p>
 
 <p>
-<strong>Tell us how it went!</strong><br/>
-We’d love to hear from you more about the workshop: how it went? Have you enjoyed it? What was your favourite moment of it? We wanna hear *everything* :)
+<strong>{% trans "Tell us how it went!" %}</strong><br/>
+{% trans "We’d love to hear from you more about the workshop: how it went? Have you enjoyed it? What was your favourite moment of it? We wanna hear *everything* :)" %}
 </p>
 
 <p>
-<strong>Share your experiences</strong><br/>
-If you want to write on your experience as an organizer or share with the community all the awesome things that happened during your event, you can write a post on our blog. You did something cool: don't be shy and brag about it! <a href="http://blog.djangogirls.org/submit">You can do it here.</a>
+<strong>{% trans "Share your experiences" %}</strong><br/>
+{% blocktrans %}If you want to write on your experience as an organizer or share with the community all the awesome things that happened during your event, you can write a post on our blog. You did something cool: don't be shy and brag about it! <a href="http://blog.djangogirls.org/submit">You can do it here.</a>{% endblocktrans %}
 </p>
 
 <p>
-<strong>Upload your photos</strong><br/>
-If you would like to add photos from your event to our <a href="https://www.flickr.com/photos/djangogirls/">Flickr account</a>, just let us know and we will provide you with information how to do it.
+<strong>{% trans "Upload your photos" %}</strong><br/>
+{% blocktrans %}If you would like to add photos from your event to our <a href="https://www.flickr.com/photos/djangogirls/">Flickr account</a>, just let us know and we will provide you with information how to do it.{% endblocktrans %}
 </p>
 
 <p>
-<strong>Donation</strong><br/>
-If you have any money leftover from your workshop, consider <a href="{{ settings.BASE_URL }}{% url 'donations:index' %}">donating it to Django Girls Foundation</a>, a non-profit that supports organizers all over the world.
+<strong>{% trans "Donation" %}</strong><br/>
+{% url 'donations:index' as donations_url %}
+{% blocktrans trimmed with base_url=settings.BASE_URL %}
+    If you have any money leftover from your workshop, consider <a href="{{ base_url }}{{ donations_url }}">donating it to
+    Django Girls Foundation</a>, a non-profit that supports organizers all over the world.
+{% endblocktrans %}
 </p>
 
 <p>
-<strong>Discount in our store</strong><br/>
-Use the code "{{ settings.STORE_DISCOUNT_CODE }}" to get a 15% discount on your order <a href="https://store.djangogirls.org">in our store</a>. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
+<strong>{% trans "Discount in our store" %}</strong><br/>
+{% blocktrans trimmed with discount_code=settings.STORE_DISCOUNT_CODE %}
+    Use the code "{{ discount_code }}" to get a 15% discount on your order <a href="https://store.djangogirls.org">in our store</a>. You can share this code with your coaches and attendees. All proceeds will go to Django Girls Foundation (non-profit organization).
+{% endblocktrans %}
 </p>
 
-<p>If you want to plan another event someday, don't hesitate to fill out the <a href="{{ settings.BASE_URL }}{% url 'organize:index' %}">organizing form again</a>.</p>
+<p>
+{% url 'organize:index' as organize_url %}
+{% blocktrans trimmed with base_url=settings.BASE_URL %}
+    If you want to plan another event someday, don't hesitate to fill out the <a href="{{ base_url }}{{ organize_url }}">organizing form again</a>.
+{% endblocktrans %}
+</p>
 
-<p><strong>Thanks and congrats yet again, you're awesome!</strong></p>
+
+<p><strong>{% trans "Thanks and congrats yet again, you're awesome!" %}</strong></p>
 
 <p>
-Hugs, rainbows and sunshines!<br/>
+{% trans "Hugs, rainbows and sunshines!" %}<br/>
 Django Girls
 </p>

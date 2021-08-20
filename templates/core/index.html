@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load staticfiles rev %}
+{% load i18n rev staticfiles %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/global.js' %}"></script>
@@ -12,11 +12,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1>
-                        We inspire women to fall in love with programming.
-                    </h1>
+                    <h1>{% trans "We inspire women to fall in love with programming." %}</h1>
                     <p>
-                        Django Girls organize free Python and Django workshops, create open sourced online tutorials and curate amazing first experiences with technology.
+                        {% trans "Django Girls organize free Python and Django workshops, create open sourced online tutorials and curate amazing first experiences with technology." %}
                     </p>
                 </div>
             </div>
@@ -28,12 +26,20 @@
         <section id="about">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>What is Django Girls?</h2>
+                    <h2>{% trans "What is Django Girls?" %}</h2>
                     <p>
-                        Django Girls is a <a href="{% url 'core:foundation' %}">non-profit organization</a> and a community that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. We are a volunteer run organization with hundreds of people contributing to bring more amazing women into the world of technology. We are making technology more approachable by creating resources designed with empathy.
+                      {% url 'core:foundation' as foundation_url %}
+                      {% blocktrans trimmed %}
+                        Django Girls is a <a href="{{ foundation_url }}">non-profit organization</a> and a community that empowers and helps women
+                        to organize free, one-day programming workshops by providing tools, resources and support. We are a volunteer run organization
+                        with hundreds of people contributing to bring more amazing women into the world of technology.
+                        We are making technology more approachable by creating resources designed with empathy.
+                      {% endblocktrans %}
                     </p>
                     <p>
+                      {% blocktrans trimmed %}
                         During each of our events, 30-60 women build their first web application using HTML, CSS, Python and Django.
+                      {% endblocktrans %}
                     </p>
                     {# <p><a href="">Learn more about Django Girls »</a></p> #}
                 </div>
@@ -44,21 +50,36 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Django Girls impact</h2>
+                    <h2>{% trans "Django Girls impact" %}</h2>
                     <p>
-                        Since 2014, an army of <span class="highlighted-number">{{ organizers_count|default_if_none:'0' }} volunteers</span> in the Django Girls community organized <span class="highlighted-number">{{ all_events_count|default_if_none:'0' }} events.</span> We've been to <span class="highlighted-number">{{ cities_count|default_if_none:'0' }} cities</span> in <span class="highlighted-number">{{ country_count|default_if_none:'0' }} countries</span> (<a href="{% url 'core:events_map' %}">see them all on a map</a>).
+                    {% url 'core:events_map' as event_map_url %}
+                      {% blocktrans trimmed %}
+                        Since 2014, an army of <span class="highlighted-number">{{ organizers_count|default_if_none:'0' }} volunteers</span> in the
+                        Django Girls community organized <span class="highlighted-number">{{ all_events_count|default_if_none:'0' }} events.</span>
+                        We've been to <span class="highlighted-number">{{ cities_count|default_if_none:'0' }} cities</span> in
+                        <span class="highlighted-number">{{ country_count|default_if_none:'0' }} countries</span> (<a href="{{ event_map_url }}">see them all on a map</a>).
+                      {% endblocktrans %}
                     </p>
                     <p>
-                        A total of <span class="highlighted-number">{{ attendees_sum|default_if_none:'0' }} incredible women attended</span> events organized by members of our community.
+                      {% blocktrans trimmed %}
+                        A total of <span class="highlighted-number">{{ attendees_sum|default_if_none:'0' }} incredible women attended</span>
+                        events organized by members of our community.
+                      {% endblocktrans %}
                     </p>
-                    <p><a href="{% url 'core:year_2016_2017' %}">Read our Annual Report to learn about the impact we make »</a></p>
+                    <p><a href="{% url 'core:year_2016_2017' %}">{% trans "Read our Annual Report to learn about the impact we make" %} »</a></p>
                 </div>
 
                <div class="col-md-6">
-                    <h2>Bring Django Girls to your city!</h2>
-                    <p>Is there no Django Girls event in your city? You can help make it happen!</p>
-                    <p>We open sourced the <a href="http://organize.djangogirls.org/">Organizer Manual</a> that provides you with all information required to organize Django Girls workshop. By volunteering to organize, you're joining a vibrant and supportive community of {{ organizers_count|default_if_none:'0' }} organizers all over the world!</p>
-                    <p><a class="btn" href="{% url 'organize:index' %}">Apply to organize a workshop</a></p>
+                    <h2>{% trans "Bring Django Girls to your city!" %}</h2>
+                    <p>{% trans "Is there no Django Girls event in your city? You can help make it happen!" %}</p>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We open sourced the <a href="http://organize.djangogirls.org/">Organizer Manual</a> that provides
+                        you with all information required to organize Django Girls workshop. By volunteering to organize,
+                        you're joining a vibrant and supportive community of {{ organizers_count|default_if_none:'0' }} organizers all over the world!
+                      {% endblocktrans %}
+                    </p>
+                    <p><a class="btn" href="{% url 'organize:index' %}">{% trans "Apply to organize a workshop" %}</a></p>
                 </div>
             </div>
         </section>
@@ -67,9 +88,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>
-                        Upcoming events
+                        {% trans "Upcoming events" %}
                         <a class="ical btn btn-default btn-xs" href="{% url 'core:icalendar' %}">ICAL</a>
-                        <a class="ical btn btn-default btn-xs" href="{% url 'core:events_map' %}">MAP</a>
+                        <a class="ical btn btn-default btn-xs" href="{% url 'core:events_map' %}">{% trans "MAP" %}</a>
                     </h2>
                 </div>
             </div>
@@ -83,15 +104,17 @@
                     {% endfor %}
                     </div>
                 </div>
-                <div class="show-more"><a href="javascript:;">Show all {{ future_events_count }} upcoming events »</a></div>
+                <div class="show-more"><a href="javascript:;">
+                    {% blocktrans %}Show all {{ future_events_count }} upcoming events{% endblocktrans %} »
+                </a></div>
             </div>
         </section>
 
         <section id="story">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Badass Django Ladies</h2>
-                    <p>Each week we try to introduce one badass lady who uses Python or Django and highlight her work:</p>
+                    <h2>{% trans "Badass Django Ladies" %}</h2>
+                    <p>{% trans "Each week we try to introduce one badass lady who uses Python or Django and highlight her work:" %}</p>
 
                     <div class="row">
                     {% for story in stories %}
@@ -99,13 +122,13 @@
                     {% endfor %}
                     </div>
 
-                    <p><a href="{% url 'story:stories' %}">Read all Django Stories »</a></p>
+                    <p><a href="{% url 'story:stories' %}">{% trans "Read all Django Stories" %} »</a></p>
                 </div>
                 <div class="col-md-6">
-                    <h2>Latest from our blog</h2>
+                    <h2>{% trans "Latest from our blog" %}</h2>
                     {% for blog in blogposts %}
-                    <a href="{{ blog.post_url }}" target="_blank" class="post-title">{{ blog.name }}</a>
-                    <p class="post-content">{{ blog.content|striptags|truncatewords:25 }} <a href="{{ blog.post_url }}" target="_blank">Read all »</a></p>
+                        <a href="{{ blog.post_url }}" target="_blank" class="post-title">{{ blog.name }}</a>
+                        <p class="post-content">{{ blog.content|striptags|truncatewords:25 }} <a href="{{ blog.post_url }}" target="_blank">{% trans "Read all" %} »</a></p>
                     {% endfor %}
                 </div>
             </div>
@@ -114,39 +137,47 @@
         <section id="support">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Support our work</h2>
-                    <p>Django Girls is a volunteer run organization, and we depend on your support to make it happen.</p>
+                    <h2>{% trans "Support our work" %}</h2>
+                    <p>{% trans "Django Girls is a volunteer run organization, and we depend on your support to make it happen." %}</p>
                     <p class="support-stats">
+                      {% blocktrans trimmed %}
                         <span class="highlighted-number">$692</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged
+                      {% endblocktrans %}
                     </p>
                     <div class="support-bar">
                       <div class="pledge" style="width: 46%">46%</div>
                     </div>
-                    <a class="btn" href="http://patreon.com/djangogirls">Make a recurring donation on Patreon</a>
+                    <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
                     <p class="partnership">
-                        You can also send us a one <a href="{% url 'donations:index' %}">time donation</a>.
-                        If you would like to discuss a bigger partnership, <a href="{% url 'contact:contact' %}">please get in touch</a>.
+                    {% url 'contact:contact' as contact_url %}
+                    {% url 'donations:index' as donations_url %}
+                      {% blocktrans trimmed %}
+                        You can also send us a one <a href="{{ donations_url }}">time donation</a>.
+                        If you would like to discuss a bigger partnership, <a href="{{ contact_url }}">please get in touch</a>.
+                      {% endblocktrans %}
                     </p>
                 </div>
 
                  <div class="col-md-6">
-                    <h2>Stay up to date!</h2>
+                    <h2>{% trans "Stay up to date!" %}</h2>
                     <p>
+                      {% blocktrans trimmed %}
                         Subscribe to Django Girls Dispatch to receive the latest and greatest from our community every two weeks, straight to your inbox!
+                      {% endblocktrans %}
                     </p>
                      <div id="mc_embed_signup">
-                     <form action="//djangogirls.us8.list-manage.com/subscribe/post?u=5a007b2dabdeddc350bdbbaed&amp;id=d278270e6f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                         <div id="mc_embed_signup_scroll">
-                             <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-                             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5a007b2dabdeddc350bdbbaed_d278270e6f" tabindex="-1" value=""></div>
-                             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-                         </div>
-                     </form>
-                 </div>
+                         <form action="//djangogirls.us8.list-manage.com/subscribe/post?u=5a007b2dabdeddc350bdbbaed&amp;id=d278270e6f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                             <div id="mc_embed_signup_scroll">
+                                 <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="{% trans "email address" %}" required>
+                                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5a007b2dabdeddc350bdbbaed_d278270e6f" tabindex="-1" value=""></div>
+                                 <input type="submit" value="{% trans "Subscribe" %}" name="subscribe" id="mc-embedded-subscribe" class="button">
+                             </div>
+                         </form>
+                     </div>
 
                     <p>
-                        <a href="{% url 'core:newsletter' %}">See the Django Girls Dispatch archives »</a>
+                        <a href="{% url 'core:newsletter' %}">{% trans "See the Django Girls Dispatch archives" %} »</a>
                     </p>
                 </div>
             </div>
@@ -155,15 +186,18 @@
         <section id="supporters">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>They already support us! 💕</h2>
-                    <p>These incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br /> If you wish to join them, support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or <a href="{% url 'contact:contact' %}">drop us a line</a>.</p>
+                    <h2>{% trans "They already support us! 💕" %}</h2>
+                    <p>
+                      {% blocktrans trimmed %}
+                        These incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br />
+                        If you wish to join them, support us on <a href="https://www.patreon.com/djangogirls">Patreon</a>
+                        or <a href="{{ contact_url }}">drop us a line</a>.
+                      {% endblocktrans %}
+                    </p>
                 </div>
             </div>
 
             {% include 'includes/_main_sponsors.html' %}
-
         </section>
-
     </div>
-
 {% endblock %}

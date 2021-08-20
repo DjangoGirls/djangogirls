@@ -1,374 +1,492 @@
 {% extends 'global/base.html' %}
-{% load static %}
+{% load i18n static %}
+
 {% block menu %}{% endblock %}
-{% block title %}Django Girls Impact Report 2016-2017{% endblock %}
-{% block description %}Thanks to the organizers, coaches, and volunteers in countries all over the world, 2016-2017 was an absolutely incredible year for Django Girls. Read all about our challenges and achievements from 2016-2017.{% endblock %}
-{% block og_title %}Django Girls Impact Report 2016-2017{% endblock %}
-{% block og_description %}Thanks to the organizers, coaches, and volunteers in countries all over the world, 2016-2017 was an absolutely incredible year for Django Girls. Read all about our challenges and achievements from 2016-2017.{% endblock %}
+{% block title %}{% trans "Django Girls Impact Report 2016-2017" %}{% endblock %}
+{% block description %}{% trans "Thanks to the organizers, coaches, and volunteers in countries all over the world, 2016-2017 was an absolutely incredible year for Django Girls. Read all about our challenges and achievements from 2016-2017." %}{% endblock %}
+{% block og_title %}{% trans "Django Girls Impact Report 2016-2017" %}{% endblock %}
+{% block og_description %}{% trans "Thanks to the organizers, coaches, and volunteers in countries all over the world, 2016-2017 was an absolutely incredible year for Django Girls. Read all about our challenges and achievements from 2016-2017." %}{% endblock %}
 {% block og_image %}https://djangogirls.org/static/img/report-2015/report.jpg{% endblock %}
 
 {% block extra_js %}<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>{% endblock %}
 
 {% block content %}
-        <section id="annual-report">
+    <section id="annual-report">
+        <div class="row clearfix">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="report-head">
+                    <a href="http://djangogirls.org/"><img src="{% static 'img/logo-bigger.png' %}" /></a>
+                    <h1>{% trans "Impact Report 2016-2017" %}</h1>
+                </div>
+                <p>
+                  {% blocktrans trimmed %}
+                   Django Girls Foundation is an initiative that aims to introduce women and girls who never coded before
+                   to the world of technology and increase the diversity of the tech industry. We achieve this by organising
+                   one-day workshops and inviting women to come and learn how to build the internet using HTML, CSS, Python and Django.
+                   Django Girls is a volunteer run organisation with volunteers all over the world. Django Girls has two part-time paid staff
+                   members and the support team (six awesome ladies who are also volunteers) to help provide support to all other volunteers.
+                  {% endblocktrans %}
+                </p>
+               <p>
+                 {% blocktrans trimmed %}
+                   This Impact Report aims to celebrate achievements of the Django Girls community in the past two years, and showcase
+                   the incredible growth of the organization. For the first time ever, we're also presenting results of a survey
+                   we conducted with almost 600 past Django Girls attendees to see if Django Girls Foundation actually achieves
+                   the goal of our mission: to bring more women into tech industry!
+                 {% endblocktrans %}
+               </p>
+            </div>
+        </div>
+        <div class="wrap">
             <div class="row clearfix">
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <div class="report-head">
-                        <a href="http://djangogirls.org/"><img src="{% static 'img/logo-bigger.png' %}" /></a>
-                        <h1>Impact Report 2016-2017</h1>
-                    </div>
-                    <p>
-                       Django Girls Foundation is an initiative that aims to introduce women and girls who never coded before
-                       to the world of technology and increase the diversity of the tech industry. We achieve this by organising
-                       one-day workshops and inviting women to come and learn how to build the internet using HTML, CSS, Python and Django.
-                       Django Girls is a volunteer run organisation with volunteers all over the world. Django Girls has two part-time paid staff
-                       members and the support team (six awesome ladies who are also volunteers) to help provide support to all other volunteers.
-                   </p>
-                   <p>
-                       This Impact Report aims to celebrate achievements of the Django Girls community in the past two years, and showcase
-                       the incredible growth of the organization. For the first time ever, we're also presenting results of a survey
-                       we conducted with almost 600 past Django Girls attendees to see if Django Girls Foundation actually achieves
-                       the goal of our mission: to bring more women into tech industry!
-                   </p>
-                </div>
-            </div>
-            <div class="wrap">
-                <div class="row clearfix">
-                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                      <h2>✨ Highlights ✨</h2>
-                      <p>👭👫👬 Django Girls community grew to <span>1069 volunteers</span> who have organised <span>377 free workshops</span> with <span>102 more</span> being currently planned. That's more than 3000 hours of happy coding!</p>
-                      <p>👩‍💻 <span>21%</span> of participants in our survey <span>started working in tech</span> after attending Django Girls workshop. <a href="#employment-stats">👉</a></p>
-                      <p>💯 In the last 2 years we improved our tools to support the growth of the organisation, maintended our free online resources (our tutorial is now in <span>14 languages!</span>), started Django Girls Store as a fundraising effort, shipped <span>146 organizer kits</span> and more.  <a href="#tutorial">👉</a></p>
-                      <p>📈🎉 In July 2017, on our 3rd birthday, we also celebrated our <span>10,000th workshop attendee</span> <a href="#growth">👉</a></p>
-                      <p>🎓 We learned that <span>79%</span> of Django Girls alumnis are <span>still learning programming</span> after the workshop. <a href="#learning-stats">👉</a></p>
-                      <p>📚 <span>693,524 people</span> used our free online <a href="https://tutorial.djangogirls.org">tutorial</a> in the last year</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row clearfix">
-                <div id="growth" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                  <h2>Growth 📈</h2>
-                  <div id="map"></div>
-                  <small>Map of Django Girls event from July 2014 to July 2017</small>
-
-                  <table>
-                    <thead>
-                      <tr>
-                        <td></td>
-                        <td>2014-2015</td>
-                        <td>2015-2016</td>
-                        <td>2016-2017</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>Number of Django Girls workshops</td><td>51</td><td>122</td><td>188</td></tr>
-                      <tr><td>Number of participants</td><td>1681</td><td>4129</td><td>~4373*</td></tr>
-                      <tr><td>Number of cities</td><td>42</td><td>102</td><td>163</td></tr>
-                      <tr><td>Number of new cities</td><td>-</td><td>79</td><td>108</td></tr>
-                      <tr><td>Number of countries</td><td>26</td><td>48</td><td>54</td></tr>
-                      <tr><td>Number of new countries</td><td>-</td><td>28</td><td>13</td></tr>
-                      <tr><td>Unique users reading our Tutorial</td><td>73,392</td><td>313,064</td><td>693,524</td></tr>
-                    </tbody>
-                  </table>
-                  * Gathering events data on number of participants is delayed.
-                </div>
-            </div>
-
-            <div class="wrap">
-                <div class="row clearfix">
-                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <h2>Foundation's Activities 👩‍💻👩‍💻👩‍💻</h2>
-
-                    <div class="row" id="tutorial">
-                        <div class="col-md-12"><h3>🌎 Maintenance & translation of our free online resources</h3></div>
-                        <div class="col-md-10">
-                            <p>
-                                The curriculum we developed Django Girls Tutorial is used in our workshops to introduce attendees to web development
-                                using Python and Django. The tutorial has been published online for free to allow everyone to learn without the need
-                                to attend an in-person workshop.<br /> We are proud that the <span>tutorial has been now translated into 14 languages</span>
-                                We are thankful to all the volunteers who have made this possible.
-                            </p>
-                            <p>
-                                The popularity of the online tutorial keeps growing significantly faster than our in-person workshops.
-                                In the second year it gained a 328.95% increase in the number of unique users who used the tutorial,
-                                and 121.53% increase in the last year. Since the tutorial as been published, it's been <span>read by
-                                1,068,995 of people!</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <video style="width: 100%; margin-top: 120px;" autoplay loop>
-                              <source src="https://s3-us-west-2.amazonaws.com/djangogirls/workshop_box.mp4" type="video/mp4">
-                              Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="col-md-8">
-                            <h3>🎁 Organiser Starter Kits</h3>
-                            <p>
-                                We realised that there are certain things such as room decorations and swag (stickers, buttons and tattoos)
-                                that are needed by all event organisers. We lowered the costs of decorations and swag for each event
-                                by ordering them in bulk from suppliers and stock them in the Django Girls shop. Organisers then order
-                                the Organizer Starter Kit from our shop for a small donation, and we donated a number of them to events
-                                organised in developing countries. We are super excited that we managed to
-                                introduce the Django Girls Starter Kit in 2016.
-                            </p>
-                                Since the introduction, <span>146 events have received their starter kits</span> which has helped them make their events awesome!
-                                Out of those, 28 were donated for free for events in need.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3>💰 Fundraising</h3>
-                            <p>
-                                Most of our funds were generated through corporate and individual donations through Patreon, an online
-                                donation management system. In 2016, we also managed to introduce Django Girls shop where we sell swag
-                                such as t-shirts, socks and tote bags as a way of making the charity sustainable. Details of how much
-                                was raised in 2016 are shown in the table below:
-                            </p>
-                        </div>
-                        <div class="col-md-12">
-                            <table>
-                              <thead>
-                                <tr>
-                                  <td>Activity</td>
-                                  <td>Amount</td>
-                                  <td>Notes</td>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr><td>Patreon donations</td><td>$12,546.71</td><td>Patreon donation have been steadly decreasing in the last months</td></tr>
-                                <tr><td>Django Girls Store</td><td>£7,258.00</td><td></td></tr>
-                                <tr><td>Organiser Starter Kits</td><td>£701.80</td><td></td></tr>
-                              </tbody>
-                            </table>
-                        </div>
-                    </div>
+                  <h2>{% trans "✨ Highlights ✨" %}</h2>
+                  <p>
+                    {% blocktrans trimmed %}
+                      👭👫👬 Django Girls community grew to <span>1069 volunteers</span> who have organised <span>377 free workshops</span> with <span>102 more</span> being currently planned. That's more than 3000 hours of happy coding!
+                    {% endblocktrans %}
+                  </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      👩‍💻 <span>21%</span> of participants in our survey <span>started working in tech</span> after attending Django Girls workshop. <a href="#employment-stats">👉</a>
+                    {% endblocktrans %}
+                  </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      💯 In the last 2 years we improved our tools to support the growth of the organisation, maintended our free online resources (our tutorial is now in <span>14 languages!</span>), started Django Girls Store as a fundraising effort, shipped <span>146 organizer kits</span> and more.  <a href="#tutorial">👉</a>
+                    {% endblocktrans %}
+                  </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      📈🎉 In July 2017, on our 3rd birthday, we also celebrated our <span>10,000th workshop attendee</span> <a href="#growth">👉</a>
+                    {% endblocktrans %}
+                  </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      🎓 We learned that <span>79%</span> of Django Girls alumnis are <span>still learning programming</span> after the workshop. <a href="#learning-stats">👉</a>
+                    {% endblocktrans %}
+                  </p>
+                  <p>
+                    {% blocktrans trimmed %}
+                      📚 <span>693,524 people</span> used our free online <a href="https://tutorial.djangogirls.org">tutorial</a> in the last year
+                    {% endblocktrans %}
+                  </p>
                 </div>
             </div>
         </div>
-
         <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                <h2>Participants Survey</h2>
-                <p>
-                    We have celebrated reaching our milestone of 10,000 workshop participants by conducting a survey to see
-                    how Django Girls alumni are doing after attending the workshop in their city. We reached out to our former
-                    attendees and received an overwhelming <span>response from 519 awesome women</span> who shared with us their experiences
-                    with Django Girls and how attending the workshop changed their lives.
-                </p>
-                <p>
-                    The ages of the <span>respondents ranged from 14 to 65 years</span>, with 71% being under the age of 30.
-                    This shows that Django Girls workshops are open and welcoming to women and girls irrespective of their age,
-                     as long they have an interest in technology and learning programmin
-                </p>
-                <p>
-                    We'd like to acknowledge that even though the total number of responses
-                    received is a significant representative sample of the Django Girls alumni, it is likely that most
-                    of the women who responded to our survey stayed active in the tech industry after attending our workshops
-                    and hence the results could be positively skewed.
-                </p>
+            <div id="growth" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+              <h2>{% trans "Growth 📈" %}</h2>
+              <div id="map"></div>
+              <small>{% trans "Map of Django Girls event from July 2014 to July 2017" %}</small>
 
-                <h3>
-                    Participants’ Involvement in Tech Activities
-                </h3>
-                <div class="row">
-                    <div class="col-md-7">
-                        <p>
-                            We asked the respondents if they were involved in tech-related activities after the workshop.
-                            The tech activities included attending tech events, organising Django Girls and similar tech events,
-                            coaching at Django Girls workshops, teaching or working in tech, working on coding projects and enrolling
-                            for programming courses.
-                        </p>
-                        <blockquote class="stats">We were excited to learn that <b>73% of the respondents are still involved
-                            tech-related activities</b> after the event.</blockquote>
-                    </div>
-                    <div class="col-md-5">
-                        <canvas id="involvement-chart"></canvas>
-                    </div>
-                    <div class="col-md-12">
-                        <p>
-                            These statistics show that our workshops are generating interest in technology and programming
-                            in the participants who attends them. This interest then results in them organising other
-                            workshops and tech events as well as attending tech events for some of the women. These findings
-                            <b>prove that Django Girls workshops have been a successful intervention</b> to
-                            increase the number of women involved in engineering and programming.
-                        </p>
-                    </div>
-                </div>
-
-                <h3 id="learning-stats">
-                    Participants’ learning to code after the workshop
-                </h3>
-                <div class="row">
-                    <div class="col-md-5">
-                        <canvas id="learning-chart"></canvas>
-                    </div>
-                    <div class="col-md-7">
-                        <p>
-                            We were also interested in finding out whether our former participants continued learning programming after attending the workshop.
-                        </p>
-                        <blockquote class="stats">79% of women attending Django Girls workshop continued learning programming after and 7% were planning to continue learning</blockquote>
-                        <p>
-                            1% of participants had tried and given up while 13% had not continued learning programming after the workshop.
-                    </div>
-                    <div class="col-md-12" style="padding-top: 30px;">
-                        <p>
-                            The findings showed that the majority of the women who attend Django Girls workshops continue learning to code after.
-                            The women continued learning in various ways; some on their own, enrolling for online coding courses or enrolling into universities.
-                            These findings show that Django Girls is indeed increasing the number of women in the programming field, who will one
-                            day be employed as programmers after they have developed their programming skills.
-                        </p>
-                    </div>
-                </div>
-
-
-                <h3 id="employment-stats">
-                    Participants’ Employment in Tech after attending workshops
-                </h3>
-                <div class="row">
-                    <div class="col-md-5" style="padding-top: 30px;">
-                        <canvas id="employment-chart"></canvas>
-                    </div>
-                    <div class="col-md-7">
-                        <p>
-                            The biggest question we were interested to answer was to know how many of the women started working in tech as
-                            developers after attending the workshop.
-                        </p>
-                        <blockquote class="stats">We were impressed to learn that <b>21% of Django Girls' former attendees are
-                        now hired as developers</b> after attending the workshop!</blockquote>
-                        <p>
-                            It was also interesting to note that 15% of the attendees of were already working in tech and hence their
-                            newly acquired skills made their jobs better. About 23% had not yet got jobs as developers but were still
-                            developing their skills so they could get jobs in the future while the remaining 40% had not got tech jobs
-                            and did not indicate their future plans.
-                        </p>
-                    </div>
-                    <div class="col-md-12">
-                        <p>
-                            This further affirmed that our work has had positive results in the lives of women we introduced to coding
-                            as well as the tech industry that hires these women. <strong>We are proud that at least <span>109 women now work as
-                            developers</span> after attending the workshop. This is a big achievement which we are happy about!</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <h3>
-                    Impact of Django Girls workshops on Participants’ lives
-                </h3>
-                <div class="row">
-                    <div class="col-md-5">
-                        <canvas id="impact-chart"></canvas>
-                    </div>
-                    <div class="col-md-7">
-                        <p>
-                            We were also interested in learning other ways the participants had been impacted by attending a Django Girls workshop.
-                        </p>
-                        <blockquote class="stats">The survey showed that 93% of the participants had been impacted positively in different ways.</blockquote>
-                        <p>
-                            The survey showed that about 43% had been inspired by meeting other women in tech resulting in them becoming more involved
-                            in tech by organising tech events and attending other tech events. Many of these women were so inspired to learn that the
-                            tech industry and programming are for women as well.
-                        </p>
-                    </div>
-                    <div class="col-md-12">
-                        <p>
-                            About 25% had been excited that learnt new knowledge about technology, programming and web development;
-                            gained experienced and experienced personal growth. About 14% of the participants had been happy to have
-                            been able to meet new friends and new connections within the tech industry whom they have kept in touch
-                            with since the workshop. About 11% of the participants had changed their career path and became interested
-                            in a career in the tech industry prompting them to continue learning to code so they could one day become
-                            developers. Only 7% said there was no remarkable impact on their lives due to participation in the workshop.
-                        </p>
-                    </div>
-                </div>
-
-                <h3>Summary</h3>
-                <p>
-                    <b>The findings show that Django Girls has been successful in inspiring women to fall in love with
-                    programming as participants are exposed to women who are in the programming discipline within
-                    their own communities.</b> The friendly environment that Django Girls workshops provide enables
-                    women who have never programmed before to learn to code and thereby arousing interest in tech
-                    and <b>causing many of these women to work towards a career change and aim to be employed in the tech
-                    industry</b>. The friendly environment also creates an atmosphere for making new friends and creating
-                    new network connections, fostering the beauty of the Django community which strives to be welcoming and diverse.
-                </p>
+              <table>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <td>{% trans "2014-2015" %}</td>
+                    <td>{% trans "2015-2016" %}</td>
+                    <td>{% trans "2016-2017" %}</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>{% trans "Number of Django Girls workshops" %}</td><td>51</td><td>122</td><td>188</td></tr>
+                  <tr><td>{% trans "Number of participants" %}</td><td>1681</td><td>4129</td><td>~4373*</td></tr>
+                  <tr><td>{% trans "Number of cities" %}</td><td>42</td><td>102</td><td>163</td></tr>
+                  <tr><td>{% trans "Number of new cities" %}</td><td>-</td><td>79</td><td>108</td></tr>
+                  <tr><td>{% trans "Number of countries" %}</td><td>26</td><td>48</td><td>54</td></tr>
+                  <tr><td>{% trans "Number of new countries" %}</td><td>-</td><td>28</td><td>13</td></tr>
+                  <tr><td>{% trans "Unique users reading our Tutorial" %}</td><td>73,392</td><td>313,064</td><td>693,524</td></tr>
+                </tbody>
+              </table>
+              {% trans "* Gathering events data on number of participants is delayed." %}
             </div>
         </div>
 
         <div class="wrap">
             <div class="row clearfix">
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                  <h2>#IAmDjangoGirl</h2>
-                  <p>
-                      On our third birthday, we asked our Twitter community to tell us about the ways Django Girls
-                      impacted their lives. The response we received was overwhelmingly positive:
-                  </p>
-                  <div class="col-md-6">
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> Thanks to Django Girls, I carved out a whole new career &amp; life for myself, and met some amazing people along the way! 🎉🎉</p>&mdash; Jen (@OuiDoll) <a href="https://twitter.com/OuiDoll/status/888380988711206912">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">HBDay to <a href="https://twitter.com/hashtag/DjangoGirls?src=hash">#DjangoGirls</a> ! Its been an amazing journey with folks here in Korea.6 workshops already held and 1 more on the way <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/qMy4Xn4vfu">pic.twitter.com/qMy4Xn4vfu</a></p>&mdash; Hassan Abid (하산) (@hassanabidpk) <a href="https://twitter.com/hassanabidpk/status/888243828049584129">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎉 Y&#39;all!! I used to be an awesome English teacher but now, because of <a href="https://twitter.com/djangogirls">@djangogirls</a>, I&#39;m an awesome django developer. <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> ❤ <a href="https://t.co/3C15jLGFeg">pic.twitter.com/3C15jLGFeg</a></p>&mdash; Rachell (@Rachell_Calhoun) <a href="https://twitter.com/Rachell_Calhoun/status/888465951917780993">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">From trainee @ home, coach two times and organizer once. I can tell you that <a href="https://twitter.com/djangogirls">@djangogirls</a> changed my life in many good ways <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/MbUuN5bc0R">pic.twitter.com/MbUuN5bc0R</a></p>&mdash; Jessica Temporal (@jesstemporal) <a href="https://twitter.com/jesstemporal/status/888524096941637632">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thanks to <a href="https://twitter.com/djangogirls">@djangogirls</a> I became more self-confident and learned that you don&#39;t need super powers to change the world  <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/5xVJ58TwEH">pic.twitter.com/5xVJ58TwEH</a></p>&mdash; Ola Sendecka (@asendecka) <a href="https://twitter.com/asendecka/status/888319391783374848">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy 3rd birthday to <a href="https://twitter.com/djangogirls">@djangogirls</a>! I feel amazingly lucky to have been a part of <a href="https://twitter.com/DjangoGirlsPDX">@DjangoGirlsPDX</a> for the past 2 years. 🙌💕 <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/g4512ebKgl">pic.twitter.com/g4512ebKgl</a></p>&mdash; Terian 💀💾🌸 (@spine_cone) <a href="https://twitter.com/spine_cone/status/888335425667866625">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎂 3 years ago I attended <a href="https://twitter.com/djangogirls">@djangogirls</a> and it was the kickstart of my new awesome life as a programmer + many other things 🎈 <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/6GIcYq0ftP">pic.twitter.com/6GIcYq0ftP</a></p>&mdash; Dori Czapari (@doriczapari) <a href="https://twitter.com/doriczapari/status/888434844849582080">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a>  Thanks to djangogirls I participated in some beautiful workshops and I met new friends. <a href="https://t.co/h4oEFCGbKz">pic.twitter.com/h4oEFCGbKz</a></p>&mdash; Fiorella de luca (@fiorella_deluca) <a href="https://twitter.com/fiorella_deluca/status/888343003118612480">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The decision 2 organize d 1st <a href="https://twitter.com/DjangoGirlsLAG">@DjangoGirlsLAG</a> was 1 of the best I ever made. I am grateful 4 d experience HBD <a href="https://twitter.com/djangogirls">@djangogirls</a> <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Aisha Bello #PyConNG (@AishaXBello) <a href="https://twitter.com/AishaXBello/status/888351714709057536">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thank you@AishaXBello <a href="https://twitter.com/DjangoGirlsLAG">@DjangoGirlsLAG</a> <a href="https://twitter.com/djangogirls">@djangogirls</a>. Because of y&#39;all, programming became my thing <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Hamdalah (@GeekHijabi) <a href="https://twitter.com/GeekHijabi/status/888360855607422976">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Organising &amp; coaching with <a href="https://twitter.com/djangogirls">@djangogirls</a> has brought so many amazing opportunities and wonderful people into my life! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> 🎂🎈💙💜🦋</p>&mdash; Helen ST 🚲💚 (@helenst) <a href="https://twitter.com/helenst/status/888475795986853889">July 21, 2017</a></blockquote>
-                  </div>
-                  <div class="col-md-6">
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Three years ago I attended the <a href="https://twitter.com/djangogirls">@djangogirls</a> workshop and now I&#39;m working as Python dev. I&#39;ve learnt so much thanks to you! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/vKbfczTZ6X">pic.twitter.com/vKbfczTZ6X</a></p>&mdash; Agatku (@AgataGrdal) <a href="https://twitter.com/AgataGrdal/status/888421497513152513">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Attending Django Girls Ota changed my mind of Women in STEM. Now I do all I can to encourage more Women/Girls into STEM. <a href="https://twitter.com/hashtag/Iamadjangogirl?src=hash">#Iamadjangogirl</a> <a href="https://t.co/qJc3lzCKiw">pic.twitter.com/qJc3lzCKiw</a></p>&mdash; Ada Lilian Oragudosi (@Oragudosi_Ada) <a href="https://twitter.com/Oragudosi_Ada/status/888385241479610368">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a>. I started contributing to organize Django Girls events in Italy in 2015 and I&#39;m proud I met so many passionate women! <a href="https://t.co/sPrHSqPXrc">pic.twitter.com/sPrHSqPXrc</a></p>&mdash; Laura Bartoli (@LauraCelesteBar) <a href="https://twitter.com/LauraCelesteBar/status/888358610375516160">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Django Girls helped me out to go back to the time when I used to code as a hobby ❤ <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://twitter.com/hashtag/Happybday?src=hash">#Happybday</a> <a href="https://t.co/lfrpcUYESq">pic.twitter.com/lfrpcUYESq</a></p>&mdash; Paula Côrte Real (@paulacortereal) <a href="https://twitter.com/paulacortereal/status/888445046755909632">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I organized two <a href="https://twitter.com/djangogirls">@djangogirls</a> Brazil and it was amazing to see the smiles and lives that changed! Happy B-day! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Leticia Portella (@leleportella) <a href="https://twitter.com/leleportella/status/888387852056358913">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy birthday <a href="https://twitter.com/djangogirls">@djangogirls</a> 1st attended <a href="https://twitter.com/DjangoGirlsPyUK">@DjangoGirlsPyUK</a> then organised two <a href="https://twitter.com/DjangoGirlsMcr">@DjangoGirlsMcr</a> organising third &amp; more to come <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/agwL42er1a">pic.twitter.com/agwL42er1a</a></p>&mdash; le (@lwyso) <a href="https://twitter.com/lwyso/status/888484750293442560">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thank you <a href="https://twitter.com/djangogirls">@djangogirls</a> for giving me the confidence to become a developer and  to run workshops to help others do the same! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/ALL3beAIK4">pic.twitter.com/ALL3beAIK4</a></p>&mdash; 🥞Päivi ✨ (@peconias) <a href="https://twitter.com/peconias/status/888409817081139201">July 21, 2017</a></blockquote>
-                      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/djangogirls">@djangogirls</a> taught me  a lot of being confident and awesome :).   Happy birthday ^^ <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/smm5Nwwqb7">pic.twitter.com/smm5Nwwqb7</a></p>&mdash; Aina Anjary Fenomamy (@anjania_catus) <a href="https://twitter.com/anjania_catus/status/888415616985706496">July 21, 2017</a></blockquote>
-                      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-12" style="padding-top: 30px;">
-                          <center><big><a href="https://twitter.com/search?vertical=default&q=%23iamadjangogirl&src=typd">See more success stories</a> 👉</big></center>
-                      </div>
+                <h2>{% trans "Foundation's Activities 👩‍💻👩‍💻👩‍💻" %}</h2>
+
+                <div class="row" id="tutorial">
+                    <div class="col-md-12"><h3>{% trans "🌎 Maintenance & translation of our free online resources" %}</h3></div>
+                    <div class="col-md-10">
+                        <p>
+                          {% blocktrans trimmed %}
+                            The curriculum we developed Django Girls Tutorial is used in our workshops to introduce attendees to web development
+                            using Python and Django. The tutorial has been published online for free to allow everyone to learn without the need
+                            to attend an in-person workshop.<br /> We are proud that the <span>tutorial has been now translated into 14 languages</span>
+                            We are thankful to all the volunteers who have made this possible.
+                          {% endblocktrans %}
+                        </p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            The popularity of the online tutorial keeps growing significantly faster than our in-person workshops.
+                            In the second year it gained a 328.95% increase in the number of unique users who used the tutorial,
+                            and 121.53% increase in the last year. Since the tutorial as been published, it's been <span>read by
+                            1,068,995 of people!</span>
+                          {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <video style="width: 100%; margin-top: 120px;" autoplay loop>
+                          <source src="https://s3-us-west-2.amazonaws.com/djangogirls/workshop_box.mp4" type="video/mp4">
+                          {% trans "Your browser does not support the video tag." %}
+                        </video>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>{% trans "🎁 Organiser Starter Kits" %}</h3>
+                        <p>
+                          {% blocktrans trimmed %}
+                            We realised that there are certain things such as room decorations and swag (stickers, buttons and tattoos)
+                            that are needed by all event organisers. We lowered the costs of decorations and swag for each event
+                            by ordering them in bulk from suppliers and stock them in the Django Girls shop. Organisers then order
+                            the Organizer Starter Kit from our shop for a small donation, and we donated a number of them to events
+                            organised in developing countries. We are super excited that we managed to
+                            introduce the Django Girls Starter Kit in 2016.
+                          {% endblocktrans %}
+                        </p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Since the introduction, <span>146 events have received their starter kits</span> which has helped them make their events awesome!
+                            Out of those, 28 were donated for free for events in need.
+                          {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>{% trans "💰 Fundraising" %}</h3>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Most of our funds were generated through corporate and individual donations through Patreon, an online
+                            donation management system. In 2016, we also managed to introduce Django Girls shop where we sell swag
+                            such as t-shirts, socks and tote bags as a way of making the charity sustainable. Details of how much
+                            was raised in 2016 are shown in the table below:
+                          {% endblocktrans %}
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        <table>
+                          <thead>
+                            <tr>
+                              <td>{% trans "Activity" %}</td>
+                              <td>{% trans "Amount" %}</td>
+                              <td>{% trans "Notes" %}</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr><td>{% trans "Patreon donations" %}</td><td>$12,546.71</td><td>{% trans "Patreon donation have been steadly decreasing in the last months" %}</td></tr>
+                            <tr><td>{% trans "Django Girls Store" %}</td><td>£7,258.00</td><td></td></tr>
+                            <tr><td>{% trans "Organiser Starter Kits" %}</td><td>£701.80</td><td></td></tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <h2>{% trans "Participants Survey" %}</h2>
+            <p>
+              {% blocktrans trimmed %}
+                We have celebrated reaching our milestone of 10,000 workshop participants by conducting a survey to see
+                how Django Girls alumni are doing after attending the workshop in their city. We reached out to our former
+                attendees and received an overwhelming <span>response from 519 awesome women</span> who shared with us their experiences
+                with Django Girls and how attending the workshop changed their lives.
+              {% endblocktrans %}
+            </p>
+            <p>
+              {% blocktrans trimmed %}
+                The ages of the <span>respondents ranged from 14 to 65 years</span>, with 71% being under the age of 30.
+                This shows that Django Girls workshops are open and welcoming to women and girls irrespective of their age,
+                as long they have an interest in technology and learning programming
+              {% endblocktrans %}
+            </p>
+            <p>
+                We'd like to acknowledge that even though the total number of responses
+                received is a significant representative sample of the Django Girls alumni, it is likely that most
+                of the women who responded to our survey stayed active in the tech industry after attending our workshops
+                and hence the results could be positively skewed.
+              {% endblocktrans %}
+            </p>
+
+            <h3>{% trans "Participants’ Involvement in Tech Activities" %}</h3>
+            <div class="row">
+                <div class="col-md-7">
+                    <p>
+                      {% blocktrans trimmed %}
+                        We asked the respondents if they were involved in tech-related activities after the workshop.
+                        The tech activities included attending tech events, organising Django Girls and similar tech events,
+                        coaching at Django Girls workshops, teaching or working in tech, working on coding projects and enrolling
+                        for programming courses.
+                      {% endblocktrans %}
+                    </p>
+                    <blockquote class="stats">
+                      {% trans "We were excited to learn that <b>73% of the respondents are still involved tech-related activities</b> after the event." %}
+                    </blockquote>
+                </div>
+                <div class="col-md-5">
+                    <canvas id="involvement-chart"></canvas>
+                </div>
+                <div class="col-md-12">
+                    <p>
+                      {% blocktrans trimmed %}
+                        These statistics show that our workshops are generating interest in technology and programming
+                        in the participants who attends them. This interest then results in them organising other
+                        workshops and tech events as well as attending tech events for some of the women. These findings
+                        <b>prove that Django Girls workshops have been a successful intervention</b> to
+                        increase the number of women involved in engineering and programming.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+            <h3 id="learning-stats">{% trans "Participants’ learning to code after the workshop" %}</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <canvas id="learning-chart"></canvas>
+                </div>
+                <div class="col-md-7">
+                    <p>
+                      {% trans "We were also interested in finding out whether our former participants continued learning programming after attending the workshop." %}
+                    </p>
+                    <blockquote class="stats">
+                      {% blocktrans trimmed %}
+                        79% of women attending Django Girls workshop continued learning programming after and 7% were planning to continue learning
+                      {% endblocktrans %}
+                    </blockquote>
+                    <p>
+                      {% blocktrans trimmed %}
+                        1% of participants had tried and given up while 13% had not continued learning programming after the workshop.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="col-md-12" style="padding-top: 30px;">
+                    <p>
+                      {% blocktrans trimmed %}
+                        The findings showed that the majority of the women who attend Django Girls workshops continue learning to code after.
+                        The women continued learning in various ways; some on their own, enrolling for online coding courses or enrolling into universities.
+                        These findings show that Django Girls is indeed increasing the number of women in the programming field, who will one
+                        day be employed as programmers after they have developed their programming skills.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+
+            <h3 id="employment-stats">{% trans "Participants’ Employment in Tech after attending workshops" %}</h3>
+            <div class="row">
+                <div class="col-md-5" style="padding-top: 30px;">
+                    <canvas id="employment-chart"></canvas>
+                </div>
+                <div class="col-md-7">
+                    <p>
+                      {% blocktrans trimmed %}
+                        The biggest question we were interested to answer was to know how many of the women started working in tech as
+                        developers after attending the workshop.
+                      {% endblocktrans %}
+                    </p>
+                    <blockquote class="stats">
+                        {% trans "We were impressed to learn that <b>21% of Django Girls' former attendees are now hired as developers</b> after attending the workshop!" %}
+                    </blockquote>
+                    <p>
+                      {% blocktrans trimmed %}
+                        It was also interesting to note that 15% of the attendees of were already working in tech and hence their
+                        newly acquired skills made their jobs better. About 23% had not yet got jobs as developers but were still
+                        developing their skills so they could get jobs in the future while the remaining 40% had not got tech jobs
+                        and did not indicate their future plans.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <p>
+                      {% blocktrans trimmed %}
+                        This further affirmed that our work has had positive results in the lives of women we introduced to coding
+                        as well as the tech industry that hires these women. <strong>We are proud that at least <span>109 women now work as
+                        developers</span> after attending the workshop. This is a big achievement which we are happy about!</strong>
+                      {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+            <h3>{% trans "Impact of Django Girls workshops on Participants’ lives" %}</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <canvas id="impact-chart"></canvas>
+                </div>
+                <div class="col-md-7">
+                    <p>
+                      {% blocktrans trimmed %}
+                        We were also interested in learning other ways the participants had been impacted by attending a Django Girls workshop.
+                      {% endblocktrans %}
+                    </p>
+                    <blockquote class="stats">
+                        {% trans "The survey showed that 93% of the participants had been impacted positively in different ways." %}
+                    </blockquote>
+                    <p>
+                      {% blocktrans trimmed %}
+                        The survey showed that about 43% had been inspired by meeting other women in tech resulting in them becoming more involved
+                        in tech by organising tech events and attending other tech events. Many of these women were so inspired to learn that the
+                        tech industry and programming are for women as well.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <p>
+                      {% blocktrans trimmed %}
+                        About 25% had been excited that learnt new knowledge about technology, programming and web development;
+                        gained experienced and experienced personal growth. About 14% of the participants had been happy to have
+                        been able to meet new friends and new connections within the tech industry whom they have kept in touch
+                        with since the workshop. About 11% of the participants had changed their career path and became interested
+                        in a career in the tech industry prompting them to continue learning to code so they could one day become
+                        developers. Only 7% said there was no remarkable impact on their lives due to participation in the workshop.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+            <h3>{% trans "Summary" %}</h3>
+            <p>
+              {% blocktrans trimmed %}
+                <b>The findings show that Django Girls has been successful in inspiring women to fall in love with
+                programming as participants are exposed to women who are in the programming discipline within
+                their own communities.</b> The friendly environment that Django Girls workshops provide enables
+                women who have never programmed before to learn to code and thereby arousing interest in tech
+                and <b>causing many of these women to work towards a career change and aim to be employed in the tech
+                industry</b>. The friendly environment also creates an atmosphere for making new friends and creating
+                new network connections, fostering the beauty of the Django community which strives to be welcoming and diverse.
+              {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="row clearfix">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+              <h2>#IAmDjangoGirl</h2>
+              <p>
+                {% blocktrans trimmed %}
+                  On our third birthday, we asked our Twitter community to tell us about the ways Django Girls
+                  impacted their lives. The response we received was overwhelmingly positive:
+                {% endblocktrans %}
+              </p>
+              <div class="col-md-6">
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> Thanks to Django Girls, I carved out a whole new career &amp; life for myself, and met some amazing people along the way! 🎉🎉</p>&mdash; Jen (@OuiDoll) <a href="https://twitter.com/OuiDoll/status/888380988711206912">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">HBDay to <a href="https://twitter.com/hashtag/DjangoGirls?src=hash">#DjangoGirls</a> ! Its been an amazing journey with folks here in Korea.6 workshops already held and 1 more on the way <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/qMy4Xn4vfu">pic.twitter.com/qMy4Xn4vfu</a></p>&mdash; Hassan Abid (하산) (@hassanabidpk) <a href="https://twitter.com/hassanabidpk/status/888243828049584129">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎉 Y&#39;all!! I used to be an awesome English teacher but now, because of <a href="https://twitter.com/djangogirls">@djangogirls</a>, I&#39;m an awesome django developer. <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> ❤ <a href="https://t.co/3C15jLGFeg">pic.twitter.com/3C15jLGFeg</a></p>&mdash; Rachell (@Rachell_Calhoun) <a href="https://twitter.com/Rachell_Calhoun/status/888465951917780993">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">From trainee @ home, coach two times and organizer once. I can tell you that <a href="https://twitter.com/djangogirls">@djangogirls</a> changed my life in many good ways <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/MbUuN5bc0R">pic.twitter.com/MbUuN5bc0R</a></p>&mdash; Jessica Temporal (@jesstemporal) <a href="https://twitter.com/jesstemporal/status/888524096941637632">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thanks to <a href="https://twitter.com/djangogirls">@djangogirls</a> I became more self-confident and learned that you don&#39;t need super powers to change the world  <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/5xVJ58TwEH">pic.twitter.com/5xVJ58TwEH</a></p>&mdash; Ola Sendecka (@asendecka) <a href="https://twitter.com/asendecka/status/888319391783374848">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy 3rd birthday to <a href="https://twitter.com/djangogirls">@djangogirls</a>! I feel amazingly lucky to have been a part of <a href="https://twitter.com/DjangoGirlsPDX">@DjangoGirlsPDX</a> for the past 2 years. 🙌💕 <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/g4512ebKgl">pic.twitter.com/g4512ebKgl</a></p>&mdash; Terian 💀💾🌸 (@spine_cone) <a href="https://twitter.com/spine_cone/status/888335425667866625">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎂 3 years ago I attended <a href="https://twitter.com/djangogirls">@djangogirls</a> and it was the kickstart of my new awesome life as a programmer + many other things 🎈 <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/6GIcYq0ftP">pic.twitter.com/6GIcYq0ftP</a></p>&mdash; Dori Czapari (@doriczapari) <a href="https://twitter.com/doriczapari/status/888434844849582080">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a>  Thanks to djangogirls I participated in some beautiful workshops and I met new friends. <a href="https://t.co/h4oEFCGbKz">pic.twitter.com/h4oEFCGbKz</a></p>&mdash; Fiorella de luca (@fiorella_deluca) <a href="https://twitter.com/fiorella_deluca/status/888343003118612480">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The decision 2 organize d 1st <a href="https://twitter.com/DjangoGirlsLAG">@DjangoGirlsLAG</a> was 1 of the best I ever made. I am grateful 4 d experience HBD <a href="https://twitter.com/djangogirls">@djangogirls</a> <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Aisha Bello #PyConNG (@AishaXBello) <a href="https://twitter.com/AishaXBello/status/888351714709057536">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thank you@AishaXBello <a href="https://twitter.com/DjangoGirlsLAG">@DjangoGirlsLAG</a> <a href="https://twitter.com/djangogirls">@djangogirls</a>. Because of y&#39;all, programming became my thing <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Hamdalah (@GeekHijabi) <a href="https://twitter.com/GeekHijabi/status/888360855607422976">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Organising &amp; coaching with <a href="https://twitter.com/djangogirls">@djangogirls</a> has brought so many amazing opportunities and wonderful people into my life! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> 🎂🎈💙💜🦋</p>&mdash; Helen ST 🚲💚 (@helenst) <a href="https://twitter.com/helenst/status/888475795986853889">July 21, 2017</a></blockquote>
+              </div>
+              <div class="col-md-6">
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Three years ago I attended the <a href="https://twitter.com/djangogirls">@djangogirls</a> workshop and now I&#39;m working as Python dev. I&#39;ve learnt so much thanks to you! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/vKbfczTZ6X">pic.twitter.com/vKbfczTZ6X</a></p>&mdash; Agatku (@AgataGrdal) <a href="https://twitter.com/AgataGrdal/status/888421497513152513">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Attending Django Girls Ota changed my mind of Women in STEM. Now I do all I can to encourage more Women/Girls into STEM. <a href="https://twitter.com/hashtag/Iamadjangogirl?src=hash">#Iamadjangogirl</a> <a href="https://t.co/qJc3lzCKiw">pic.twitter.com/qJc3lzCKiw</a></p>&mdash; Ada Lilian Oragudosi (@Oragudosi_Ada) <a href="https://twitter.com/Oragudosi_Ada/status/888385241479610368">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a>. I started contributing to organize Django Girls events in Italy in 2015 and I&#39;m proud I met so many passionate women! <a href="https://t.co/sPrHSqPXrc">pic.twitter.com/sPrHSqPXrc</a></p>&mdash; Laura Bartoli (@LauraCelesteBar) <a href="https://twitter.com/LauraCelesteBar/status/888358610375516160">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Django Girls helped me out to go back to the time when I used to code as a hobby ❤ <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://twitter.com/hashtag/Happybday?src=hash">#Happybday</a> <a href="https://t.co/lfrpcUYESq">pic.twitter.com/lfrpcUYESq</a></p>&mdash; Paula Côrte Real (@paulacortereal) <a href="https://twitter.com/paulacortereal/status/888445046755909632">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I organized two <a href="https://twitter.com/djangogirls">@djangogirls</a> Brazil and it was amazing to see the smiles and lives that changed! Happy B-day! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a></p>&mdash; Leticia Portella (@leleportella) <a href="https://twitter.com/leleportella/status/888387852056358913">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy birthday <a href="https://twitter.com/djangogirls">@djangogirls</a> 1st attended <a href="https://twitter.com/DjangoGirlsPyUK">@DjangoGirlsPyUK</a> then organised two <a href="https://twitter.com/DjangoGirlsMcr">@DjangoGirlsMcr</a> organising third &amp; more to come <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/agwL42er1a">pic.twitter.com/agwL42er1a</a></p>&mdash; le (@lwyso) <a href="https://twitter.com/lwyso/status/888484750293442560">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thank you <a href="https://twitter.com/djangogirls">@djangogirls</a> for giving me the confidence to become a developer and  to run workshops to help others do the same! <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/ALL3beAIK4">pic.twitter.com/ALL3beAIK4</a></p>&mdash; 🥞Päivi ✨ (@peconias) <a href="https://twitter.com/peconias/status/888409817081139201">July 21, 2017</a></blockquote>
+                  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/djangogirls">@djangogirls</a> taught me  a lot of being confident and awesome :).   Happy birthday ^^ <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/smm5Nwwqb7">pic.twitter.com/smm5Nwwqb7</a></p>&mdash; Aina Anjary Fenomamy (@anjania_catus) <a href="https://twitter.com/anjania_catus/status/888415616985706496">July 21, 2017</a></blockquote>
+                  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </div>
+              <div class="row">
+                  <div class="col-md-12" style="padding-top: 30px;">
+                      <center><big><a href="https://twitter.com/search?vertical=default&q=%23iamadjangogirl&src=typd">{% trans "See more success stories" %}</a> 👉</big></center>
                   </div>
               </div>
           </div>
-        </div>
+      </div>
+    </div>
 
-        <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 sponsors col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                  <h2>Sponsors 📢️</h2>
-                  <p>
-                    Again, we would like to thank amazing sponsors of Django Girls and of the individual Django Girls workshops all over the world. They help us make Django Girls sustainable and more importantly, they help local organizers keep their events free. We want Django Girls to be accessible to many people as possible, and that couldn't happen without them.
-                  </p>
-                  <a href="https://www.elastic.co/" target="_blank"><img src="{% static 'img/global/supporters/elastic.png' %}" alt="Elastic" /></a>
-                  <p>Known for Elasticsearch, Kibana, Beats, and Logstash, Elastic creates products to to search, analyze, and visualize your data, allowing you to get actionable insight in real time. Before becoming one of our biggest sponsors, they also sponsored several local events. Thanks <3</p>
-                  <a href="http://djangoproject.com/" target="_blank"><img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" /></a>
-                  <p>The Django Software Foundation (DSF) is a non-profit organization created to promote, support, and advance the development of Django. They've helped many Django Girls events that had problems finding local sponsors. Thanks <3</p>
-                  <a href="http://python.org/" target="_blank"><img src="{% static 'img/report-2015/python.png' %}" alt="Python Software Foundation" /></a>
-                  <p>The Python Software Foundation (PSF) is a non-profit organization that holds the intellectual property rights behind the Python programming language. They are one of the biggest sponsors for local events. Thanks <3</p>
-                  <a href="http://github.com/" target="_blank"><img src="{% static 'img/report-2015/github.png' %}" alt="Github" style="height: 60px" /></a>
-                  <p>GitHub is a Git repository hosting service. They have sponsored many Django Girls events, and they provide useful materials for new learners like cheat-sheets. Thanks <3</p>
-                  <a href="https://www.divio.com/en/" target="_blank"><img src="{% static 'img/global/supporters/divio.png' %}" alt="Divio" style="height: 50px"/></a>
-                  <p>Divio, that created Django CMS and Aldryn, uses Python and Django to provide support for website installation, maintenance, troubleshooting, and development. They sponsored many local events and joined as Patreon supporters in June 2015. Thanks <3</p>
-                  <a href="https://lincolnloop.com/" target="_blank"><img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" /></a>
-                  <p>Lincoln Loop is a full service web studio offering user experience and development based on the Django Web Framework. They joined our Patreon campaign in April 2015, and have contributed to local events. Thanks <3</p>
-                  <a href="https://pythonanywhere.com/" target="_blank"><img src="{% static 'img/global/supporters/pythonanywhere.png' %}" alt="Python Anywhere" /></a>
-                  <p>Since May, Django Girls has been hosted on PythonAnywhere! They host, run, and code Python in the cloud, and have made the lives of our attendees much easier by being really simple and pleasant to use. Thanks <3</p>
-                  <a href="https://mandrill.com/" target="_blank"><img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" /></a>
-                  <p>Mandrill is a transactional email platform from MailChimp. They'vebeen supporting our emails since September 2015 and have also sponsored local events. Thanks <3</p>
+    <div class="row clearfix">
+        <div class="col-md-8 col-md-offset-2 sponsors col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+              <h2>{% trans "Sponsors 📢️" %}</h2>
+              <p>
+                {% blocktrans trimmed %}
+                  Again, we would like to thank amazing sponsors of Django Girls and of the individual Django Girls workshops all over the world.
+                  They help us make Django Girls sustainable and more importantly, they help local organizers keep their events free.
+                  We want Django Girls to be accessible to many people as possible, and that couldn't happen without them.
+                {% endblocktrans %}
+              </p>
+              <a href="https://www.elastic.co/" target="_blank"><img src="{% static 'img/global/supporters/elastic.png' %}" alt="Elastic" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  Known for Elasticsearch, Kibana, Beats, and Logstash, Elastic creates products to to search, analyze, and visualize your data,
+                  allowing you to get actionable insight in real time. Before becoming one of our biggest sponsors, they also sponsored several local events. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="http://djangoproject.com/" target="_blank"><img src="{% static 'img/global/django.png' %}" alt="Django Software Foundation" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  The Django Software Foundation (DSF) is a non-profit organization created to promote, support, and advance the development of Django.
+                  They've helped many Django Girls events that had problems finding local sponsors. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="http://python.org/" target="_blank"><img src="{% static 'img/report-2015/python.png' %}" alt="Python Software Foundation" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  The Python Software Foundation (PSF) is a non-profit organization that holds the intellectual property rights behind the Python programming language.
+                  They are one of the biggest sponsors for local events. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="http://github.com/" target="_blank"><img src="{% static 'img/report-2015/github.png' %}" alt="Github" style="height: 60px" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  GitHub is a Git repository hosting service. They have sponsored many Django Girls events, and they provide useful materials for new learners
+                  like cheat-sheets. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="https://www.divio.com/en/" target="_blank"><img src="{% static 'img/global/supporters/divio.png' %}" alt="Divio" style="height: 50px"/></a>
+              <p>
+                {% blocktrans trimmed %}
+                  Divio, that created Django CMS and Aldryn, uses Python and Django to provide support for website installation, maintenance, troubleshooting, and development.
+                  They sponsored many local events and joined as Patreon supporters in June 2015. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="https://lincolnloop.com/" target="_blank"><img src="{% static 'img/global/supporters/lincolnloop.png' %}" alt="Lincoln Loop" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  Lincoln Loop is a full service web studio offering user experience and development based on the Django Web Framework.
+                  They joined our Patreon campaign in April 2015, and have contributed to local events. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="https://pythonanywhere.com/" target="_blank"><img src="{% static 'img/global/supporters/pythonanywhere.png' %}" alt="Python Anywhere" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  Since May, Django Girls has been hosted on PythonAnywhere! They host, run, and code Python in the cloud, and have made the lives of our
+                  attendees much easier by being really simple and pleasant to use. Thanks <3
+                {% endblocktrans %}
+              </p>
+              <a href="https://mandrill.com/" target="_blank"><img src="{% static 'img/global/supporters/mandrill.png' %}" alt="Mandrill" /></a>
+              <p>
+                {% blocktrans trimmed %}
+                  Mandrill is a transactional email platform from MailChimp. They'vebeen supporting our emails since September 2015 and have also
+                  sponsored local events. Thanks <3
+                {% endblocktrans %}
+              </p>
 
-                  <p>We would also like to thank our regular donors from <a href="https://www.patreon.com/djangogirls">Patreon</a>: your commitment to help us every month is amazing. Thanks <3</p>
-                </div>
+              <p>
+                {% blocktrans trimmed %}
+                  We would also like to thank our regular donors from <a href="https://www.patreon.com/djangogirls">Patreon</a>: your commitment to help us every month is amazing. Thanks <3
+                {% endblocktrans %}
+              </p>
             </div>
-      </section>
+        </div>
+    </section>
 
 
-      <script>
+    <script>
           L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
           var in2015 = L.layerGroup()
           var in20162017 = L.layerGroup()
@@ -457,5 +575,5 @@
                  },
                  options: {}
               });
-      </script>
+    </script>
 {% endblock %}

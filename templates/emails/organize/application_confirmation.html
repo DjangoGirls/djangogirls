@@ -1,25 +1,37 @@
-<p>Hello,</p>
+{% load i18n %}
+
+<p>{% trans "Hello," %}</p>
 
 <p>
-Thank you for submitting the application to organize Django Girls in {{ city }}! Yay!
+{% trans "Thank you for submitting the application to organize Django Girls in {{ city }}! Yay!" %}
 </p>
 
 <p>
+{% blocktrans trimmed %}
 We’re now going to review your application and get back to you in around a week. Django Girls is a volunteer-run charity, and we’re doing our best to respond in timely fashion.
 In the meantime, you can familiarise yourself with our free resources for organizers.
+{% endblocktrans %}
 </p>
 
-<p>There are three requirements for becoming an organizer of Django Girls:
+<p>{% trans "There are three requirements for becoming an organizer of Django Girls:" %}
     <ul>
-        <li> Being an awesome person - already done! :)</li>
-        <li>The event should be <b>free for participants</b>, and <b>women should have a preference</b> in the application process (but men can apply, too). You should also use the <a href="http://tutorial.djangogirls.org/">tutorial we've prepared for workshops</a>, and ideally work in small groups of attendees and coaches (each group working at their own pace).
-        <li>Share our values: Django Girls events are <b>inclusive</b>, <b>friendly</b> and provide <b>safe</b> environments that follow an enforced <a href="https://djangogirls.org/pages/coc/">Code of Conduct</a>. Remember that Django Girls events are not only aimed to teach people about programming, but to do it in a <b>friendly</b> and <b>positive</b> way.</li>
+        <li>{% trans "Being an awesome person - already done! :)" %}</li>
+        <li>
+            {% blocktrans trimmed %}
+                The event should be <b>free for participants</b>, and <b>women should have a preference</b> in the application process (but men can apply, too). You should also use the <a href="http://tutorial.djangogirls.org/">tutorial we've prepared for workshops</a>, and ideally work in small groups of attendees and coaches (each group working at their own pace).
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans trimmed %}
+                Share our values: Django Girls events are <b>inclusive</b>, <b>friendly</b> and provide <b>safe</b> environments that follow an enforced <a href="https://djangogirls.org/pages/coc/">Code of Conduct</a>. Remember that Django Girls events are not only aimed to teach people about programming, but to do it in a <b>friendly</b> and <b>positive</b> way.
+            {% endblocktrans %}
+        </li>
     </ul>
 </p>
 
 <p>
-Our <a href="http://organize.djangogirls.org/">Organizer's Manual</a> describes quite well the process of organizing a workshop. You can also read experiences of other organizers on our blog: <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Seoul</a>, <a href="http://blog.djangogirls.org/post/143835232733/django-girls-wroc%C5%82aw-3-192-applications-32">Wrocław</a>, <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Windhoek</a> or <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Budapest</a>.
+{% blocktrans %}Our <a href="http://organize.djangogirls.org/">Organizer's Manual</a> describes quite well the process of organizing a workshop. You can also read experiences of other organizers on our blog: <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Seoul</a>, <a href="http://blog.djangogirls.org/post/143835232733/django-girls-wroc%C5%82aw-3-192-applications-32">Wrocław</a>, <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Windhoek</a> or <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Budapest</a>.{% endblocktrans %}
 </p>
 
-<p>Hugs, rainbows and sunshines!</p>
+<p>{% trans "Hugs, rainbows and sunshines!" %}</p>
 <p>Django Girls</p>

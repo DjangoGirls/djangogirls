@@ -148,7 +148,7 @@ DEFAULT_QUESTIONS = [
     {
         "title": _("How did you hear about Django Girls?"),
         "question_type": "choices",
-        "choices": "; ".join(["Facebook", "Twitter", _("From a friend"), "PyLadies"]),
+        "choices": "; ".join(["Facebook", "Twitter", "From a friend", "PyLadies"]),
         "is_required": False,
         "is_multiple_choice": True,
     },

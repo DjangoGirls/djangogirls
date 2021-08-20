@@ -1,13 +1,13 @@
 {% extends 'global/base.html' %}
-{% load staticfiles markdown_deux_tags %}
+{% load i18n markdown_deux_tags staticfiles %}
 
-{% block title %}Django Girls Foundation{% endblock %}
+{% block title %}{% trans "Django Girls Foundation" %}{% endblock %}
 
 {% block content %}
     <div class="container without-background" id="flatpage">
-          <div id="value" class="row">
-              <div class="col-md-12">
-                  <h1>Django Girls Foundation</h1>
+        <div id="value" class="row">
+            <div class="col-md-12">
+                <h1>{% trans "Django Girls Foundation" %}</h1>
                   {% markdown trusted %}
 Django Girls Foundation is a Charitable Incorporated Organisation (“the CIO”). The goal of the foundation is to advance the education of the public in particular but not exclusively women in the subject of computer science by providing or assisting in the provision of programming workshops and educational material.
 

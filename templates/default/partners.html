@@ -1,8 +1,12 @@
-<h3>Sponsors</h3>
+{% load i18n %}
+
+<h3>{% trans "Sponsors" %}</h3>
 
 <p>
-	We couldn't be here without the support from amazing people and organizations 
-	who donated money, knowledge and time to help us make this a reality. 
-	If you want to contribute and support our goal,
-	<a href="{% url 'contact:contact' %}">please get it touch</a>
+    {% url 'contact:contact' as contact_url %}
+    {% blocktrans trimmed %}
+        We couldn't be here without the support from amazing people and organizations
+        who donated money, knowledge and time to help us make this a reality.
+        If you want to contribute and support our goal, <a href="{{ contact_url }}">please get it touch</a>
+    {% endblocktrans %}
 </p>
