@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-20 00:21+0000\n"
+"POT-Creation-Date: 2021-08-20 10:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Apply for a pass!"
 msgstr ""
 
-#: core/default_eventpage_content.py:85
+#: core/default_eventpage_content.py:85 templates/global/footer.html:9
 msgid "FAQ"
 msgstr ""
 
@@ -688,6 +688,7 @@ msgid "In-Person"
 msgstr ""
 
 #: organize/forms.py:28 organize/forms.py:31
+#: templates/organize/form/step1_previous_event.html:75
 msgid "Choose event"
 msgstr ""
 
@@ -695,7 +696,8 @@ msgstr ""
 msgid "You have to choose an event."
 msgstr ""
 
-#: organize/forms.py:148
+#: organize/forms.py:148 templates/organize/form/step5_workshop.html:81
+#: templates/organize/form/step5_workshop_remote.html:79
 msgid "Choose country"
 msgstr ""
 
@@ -938,6 +940,26 @@ msgstr ""
 
 #: story/models.py:19
 msgid "stories"
+msgstr ""
+
+#: templates/404.html:8
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:10
+msgid "Sorry! The page you're looking for isn't available."
+msgstr ""
+
+#: templates/404.html:13
+#, python-format
+msgid "See all <a href=\"%(events_url)s\">upcoming events</a>."
+msgstr ""
+
+#: templates/404.html:17
+#, python-format
+msgid ""
+"<a href=\"%(organise_url)s\">Find out</a> about organizing a Django Girls "
+"workshop in your city."
 msgstr ""
 
 #: templates/admin/applications/form/view_submissions.html:5
@@ -2381,7 +2403,8 @@ msgstr ""
 msgid "See more success stories"
 msgstr ""
 
-#: templates/core/contribute.html:9
+#: templates/core/contribute.html:9 templates/global/footer.html:23
+#: templates/global/menu.html:25
 msgid "Contribute"
 msgstr ""
 
@@ -2821,7 +2844,7 @@ msgstr ""
 msgid "Read our Annual Report to learn about the impact we make"
 msgstr ""
 
-#: templates/core/index.html:73
+#: templates/core/index.html:73 templates/includes/_no_event.html:25
 msgid "Bring Django Girls to your city!"
 msgstr ""
 
@@ -2840,7 +2863,7 @@ msgid ""
 "organizers all over the world!"
 msgstr ""
 
-#: templates/core/index.html:82
+#: templates/core/index.html:82 templates/organize/index.html:97
 msgid "Apply to organize a workshop"
 msgstr ""
 
@@ -2914,7 +2937,7 @@ msgid "email address"
 msgstr ""
 
 #: templates/core/index.html:174 templates/core/newsletter.html:22
-#: templates/core/newsletter.html:38
+#: templates/core/newsletter.html:38 templates/includes/_no_event.html:18
 msgid "Subscribe"
 msgstr ""
 
@@ -3367,7 +3390,8 @@ msgid ""
 "your first use of the Site following those changes."
 msgstr ""
 
-#: templates/core/resources.html:9
+#: templates/core/resources.html:9 templates/global/footer.html:37
+#: templates/global/menu.html:21
 msgid "Resources"
 msgstr ""
 
@@ -3399,7 +3423,7 @@ msgstr ""
 msgid "Read it"
 msgstr ""
 
-#: templates/core/resources.html:42
+#: templates/core/resources.html:42 templates/global/footer.html:40
 msgid "Organizer's Manual"
 msgstr ""
 
@@ -3425,7 +3449,7 @@ msgid ""
 "This can be used for coaching any event -- not only Django Girls workshops."
 msgstr ""
 
-#: templates/core/resources.html:84
+#: templates/core/resources.html:84 templates/global/footer.html:42
 msgid "Tutorial Extensions"
 msgstr ""
 
@@ -3762,7 +3786,7 @@ msgid ""
 "will be able to achieve any specific outcome."
 msgstr ""
 
-#: templates/core/terms_conditions.html:158
+#: templates/core/terms_conditions.html:158 templates/global/menu.html:20
 msgid "Events"
 msgstr ""
 
@@ -4702,9 +4726,122 @@ msgid "Thanks and congrats yet again, you're awesome!"
 msgstr ""
 
 #: templates/emails/event_thank_you.html:58
+#: templates/emails/existing_user.html:43 templates/emails/new_user.html:45
 #: templates/emails/organize/application_confirmation.html:36
 #: templates/emails/organize/event_deployed.html:95
+#: templates/emails/submit_information_email.html:16
 msgid "Hugs, rainbows and sunshines!"
+msgstr ""
+
+#: templates/emails/existing_user.html:3 templates/emails/new_user.html:3
+#: templates/emails/organize/event_deployed.html:3
+msgid "Hi there!"
+msgstr ""
+
+#: templates/emails/existing_user.html:5
+#, python-format
+msgid "Congrats! You can now manage %(event)s event!"
+msgstr ""
+
+#: templates/emails/existing_user.html:7
+#, python-format
+msgid "The website address is https://djangogirls.org/%(page_url)s"
+msgstr ""
+
+#: templates/emails/existing_user.html:10
+msgid "To manage it, login here:<br /> https://djangogirls.org/admin/"
+msgstr ""
+
+#: templates/emails/existing_user.html:17
+#, python-format
+msgid "Email: %(email)s<br /> Use your existing password."
+msgstr ""
+
+#: templates/emails/existing_user.html:23 templates/emails/new_user.html:23
+msgid ""
+"Here you can find instructions on editing website: https://organize."
+"djangogirls.org/website/"
+msgstr ""
+
+#: templates/emails/existing_user.html:26
+#, python-format
+msgid ""
+"\n"
+"    Your event's email is %(email)s. Ask the main organizer of you event\n"
+"    for password and instructions to access it.\n"
+msgstr ""
+
+#: templates/emails/existing_user.html:33 templates/emails/new_user.html:35
+msgid ""
+"You can contact hello@ if you need assistance but it’s usually faster to "
+"check our <a href=\"https://faq-organizers.djangogirls.org/\">FAQ</a> or to "
+"post questions to the <a href=\"https://groups.google.com/forum/#!forum/"
+"django-girls-organizers\"> Google Group of Django Girls Organizers</a> or <a "
+"href=\"https://djangogirls.slack.com/messages/general/\"> Slack channel</a> "
+"- there are more people that can help you! :)"
+msgstr ""
+
+#: templates/emails/new_user.html:5
+msgid ""
+"Congrats! You're now a Django Girls organizer, so awesome! Here is access to "
+"your website:"
+msgstr ""
+
+#: templates/emails/new_user.html:7
+#, python-format
+msgid "Your website address is https://djangogirls.org/%(page_url)s"
+msgstr ""
+
+#: templates/emails/new_user.html:10
+msgid "Login here:<br /> https://djangogirls.org/admin/"
+msgstr ""
+
+#: templates/emails/new_user.html:17
+#, python-format
+msgid ""
+"\n"
+"  Email: %(email)s<br />\n"
+"  Password: %(password)s\n"
+msgstr ""
+
+#: templates/emails/new_user.html:26
+#, python-format
+msgid ""
+"Your event's email is %(email)s. Ask the main organizer of you event for "
+"password and instructions to access it."
+msgstr ""
+
+#: templates/emails/new_user.html:32
+msgid ""
+"We also invited you to Django Girls Slack, where we chat, communicate and "
+"meet each other!"
+msgstr ""
+
+#: templates/emails/offer_help_email.html:3
+#, python-format
+msgid "Hi team %(event)s!"
+msgstr ""
+
+#: templates/emails/offer_help_email.html:5
+msgid "How are you? We hope you are doing fantastic! :)"
+msgstr ""
+
+#: templates/emails/offer_help_email.html:8
+#, python-format
+msgid ""
+"We've noticed that the Django Girls %(event.city)s event has no live website "
+"or isn’t open for applications yet. Is everything going well with "
+"preparations?"
+msgstr ""
+
+#: templates/emails/offer_help_email.html:14
+msgid ""
+"Let us know how it goes. If you're stuck on something, we can definitely "
+"help! :)"
+msgstr ""
+
+#: templates/emails/offer_help_email.html:17
+msgid "Hugs, cupcakes and sparkles"
 msgstr ""
 
 #: templates/emails/organize/application_confirmation.html:3
@@ -4804,22 +4941,27 @@ msgid "Team:"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:36
+#: templates/organize/form/step2_application.html:38
 msgid "Who are you?"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:40
+#: templates/organize/form/step2_application.html:55
 msgid "Why do you want to organize a Django Girls workshop?"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:44
+#: templates/organize/form/step2_application.html:72
 msgid "Have you been involved in Django Girls before?"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:48
+#: templates/organize/form/step2_application.html:94
 msgid "Have you organized any other event before?"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:52
+#: templates/organize/form/step5_workshop.html:105
 msgid "Do you have a venue in mind?"
 msgstr ""
 
@@ -4828,11 +4970,9 @@ msgid "Do you have a plan which companies will you approach for sponsorship?"
 msgstr ""
 
 #: templates/emails/organize/application_notification.html:60
+#: templates/organize/form/step5_workshop.html:141
+#: templates/organize/form/step5_workshop_remote.html:121
 msgid "Do you have potential coaches in mind?"
-msgstr ""
-
-#: templates/emails/organize/event_deployed.html:3
-msgid "Hi there!"
 msgstr ""
 
 #: templates/emails/organize/event_deployed.html:6
@@ -4992,4 +5132,960 @@ msgstr ""
 msgid ""
 "Have a lovely day and thank you again for reaching out to us!<br /> Django "
 "Girls team"
+msgstr ""
+
+#: templates/emails/submit_information_email.html:3
+#, python-format
+msgid "Hello team %(event)s!"
+msgstr ""
+
+#: templates/emails/submit_information_email.html:5
+msgid ""
+"Hope you’re all doing fantastic and took some well deserved rest after "
+"organizing your Django Girls workshop :)"
+msgstr ""
+
+#: templates/emails/submit_information_email.html:9
+#, python-format
+msgid ""
+"Just a friendly reminder to <a href=\"%(base)s%(event_url)s\">fill out this "
+"form</a> to provide information how many people attended your workshop. This "
+"will help us show the global impact that Django Girls is having on the "
+"world! :)"
+msgstr ""
+
+#: templates/event/base.html:7 templates/global/base.html:6
+msgid "Django Girls - start your journey with programming"
+msgstr ""
+
+#: templates/event/base.html:8
+msgid ""
+"Django Girls is a one-day workshop about programming in Python and Django "
+"tailored for women."
+msgstr ""
+
+#: templates/event/menu.html:7 templates/global/menu.html:7
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/global/base.html:7
+msgid ""
+"Django Girls is a one-day workshop about programming in Python and Django "
+"for women."
+msgstr ""
+
+#: templates/global/base.html:11
+msgid ""
+"Django Girls is a one-day workshop about programming in Python and Django "
+"for women"
+msgstr ""
+
+#: templates/global/base.html:13
+msgid ""
+"Join us and become a female developer! Build your first website in Python "
+"and Django in a friendly, safe environment."
+msgstr ""
+
+#: templates/global/footer.html:10
+msgid "Foundation"
+msgstr ""
+
+#: templates/global/footer.html:11 templates/global/menu.html:23
+msgid "Newsletter"
+msgstr ""
+
+#: templates/global/footer.html:12
+msgid "Chat with us!"
+msgstr ""
+
+#: templates/global/footer.html:13
+msgid "Code of Conduct"
+msgstr ""
+
+#: templates/global/footer.html:14
+msgid "Contact"
+msgstr ""
+
+#: templates/global/footer.html:19
+msgid "Support us"
+msgstr ""
+
+#: templates/global/footer.html:21
+msgid "Make a donation"
+msgstr ""
+
+#: templates/global/footer.html:22
+msgid "Donate on Patreon"
+msgstr ""
+
+#: templates/global/footer.html:24
+msgid "Sponsor us"
+msgstr ""
+
+#: templates/global/footer.html:28
+msgid "Community"
+msgstr ""
+
+#: templates/global/footer.html:39
+msgid "Tutorial"
+msgstr ""
+
+#: templates/global/footer.html:41
+msgid "Coaching Guide"
+msgstr ""
+
+#: templates/global/footer.html:43
+msgid "Graphics"
+msgstr ""
+
+#: templates/global/footer.html:50
+msgid "Terms & Conditions"
+msgstr ""
+
+#: templates/global/footer.html:51
+msgid "Privacy & Cookies"
+msgstr ""
+
+#: templates/global/footer.html:58
+#, python-format
+msgid "<b>%(future_events_count)s</b> upcoming events"
+msgstr ""
+
+#: templates/global/footer.html:59
+#, python-format
+msgid "<b>%(past_events_count)s</b> past events"
+msgstr ""
+
+#: templates/global/footer.html:60
+#, python-format
+msgid "<b>%(applicants_sum|default_if_none:'0')s</b> applicants"
+msgstr ""
+
+#: templates/global/footer.html:61
+#, python-format
+msgid "<b>%(attendees_sum|default_if_none:'0')s</b> attendees"
+msgstr ""
+
+#: templates/global/footer.html:62
+#, python-format
+msgid "<b>%(countries_count)s</b> countries"
+msgstr ""
+
+#: templates/global/menu.html:22
+msgid "Organize"
+msgstr ""
+
+#: templates/global/menu.html:24
+msgid "Blog"
+msgstr ""
+
+#: templates/global/menu.html:28
+msgid "Support us 💕"
+msgstr ""
+
+#: templates/global/menu.html:30
+msgid "Donate"
+msgstr ""
+
+#: templates/global/menu.html:31
+msgid "Our Patreon page"
+msgstr ""
+
+#: templates/includes/_event.html:8
+msgid "Photo credit:"
+msgstr ""
+
+#: templates/includes/_faq.html:6
+msgid "Q: How can I register?"
+msgstr ""
+
+#: templates/includes/_faq.html:11
+msgid ""
+"A: You want to attend a workshop happening in your city? So cool! You can "
+"register on the event's website. If there is no website, it means that "
+"registrations are not opened yet. Come back in a few days to check or send "
+"an email to the local organizers of the workshop you want to attend."
+msgstr ""
+
+#: templates/includes/_faq.html:23
+msgid "Q: I missed the deadline! Can I still apply to a workshop?"
+msgstr ""
+
+#: templates/includes/_faq.html:29
+#, python-format
+msgid ""
+"A: Sadly, you won't be able to apply: events receive many applications and "
+"already have a waiting list in case an attendee has to cancel. You can "
+"subscribe to our <a href=\"%(newsletter_url)s\">newsletter</a> to know where "
+"the next events are planed."
+msgstr ""
+
+#: templates/includes/_faq.html:41
+msgid "Q: I want to coach or sponsor an event!"
+msgstr ""
+
+#: templates/includes/_faq.html:45
+msgid ""
+"A: You rock! Just send an email to the local organizers of the workshop!"
+msgstr ""
+
+#: templates/includes/_faq.html:52
+msgid ""
+"Q: I'm following Django Girls tutorial and something is not working in my "
+"code: can you help me debug it?"
+msgstr ""
+
+#: templates/includes/_faq.html:57
+msgid ""
+"A: Sadly, Django Girls Support Team won't be able to help you: our work is "
+"to help other organizers plan their workshop. If you need assistance while "
+"doing the tutorial, go to <a href=\"https://gitter.im/DjangoGirls/tutorial/"
+"\">Django Girls Gitter room</a>: a group of volunteers is waiting for you "
+"there and will be happy to answer all your questions ;)"
+msgstr ""
+
+#: templates/includes/_no_event.html:5
+msgid "Don't see an event in your city?"
+msgstr ""
+
+#: templates/includes/_no_event.html:11
+msgid "Sign up for our newsletter"
+msgstr ""
+
+#: templates/includes/_no_event.html:13
+msgid ""
+"Stay up to date with everything that's happening in Django Girls valley:"
+msgstr ""
+
+#: templates/includes/_no_event.html:16
+msgid "Your e-mail"
+msgstr ""
+
+#: templates/includes/_no_event.html:17
+msgid "Your city"
+msgstr ""
+
+#: templates/includes/_no_event.html:27
+msgid ""
+"Everyone can organize their own Django Girls event and share it with their "
+"community."
+msgstr ""
+
+#: templates/includes/_no_event.html:29
+msgid "Find out more"
+msgstr ""
+
+#: templates/organize/commitment.html:20
+msgid "Django Girls Organizer Commitement"
+msgstr ""
+
+#: templates/organize/commitment.html:23
+msgid ""
+"Django Girls is an initiative aimed at introducing women who have never "
+"coded before to the world of technology and increasing the diversity within "
+"the tech industry. We do that by organizing workshops and inviting women to "
+"join us to learn how to build the internet using HTML, CSS, Python and "
+"Django <strong>in a safe, friendly and inclusive environment.</strong>"
+msgstr ""
+
+#: templates/organize/commitment.html:31
+msgid ""
+"As a Django Girls Organizer, you make a commitement to foster and advance "
+"Django Girls values:"
+msgstr ""
+
+#: templates/organize/commitment.html:35
+msgid ""
+"The workshop you organize will strive to provide safe, inclusive, friendly "
+"and positive experience for everyone attending and coaching"
+msgstr ""
+
+#: templates/organize/commitment.html:39
+#, python-format
+msgid ""
+"<span>You will require everyone involved with the workshop to comply with <a "
+"href=\"%(coc_url)s\">Django Girls Code of Conduct</a></span>"
+msgstr ""
+
+#: templates/organize/commitment.html:44
+msgid ""
+"You’ll strive to have tons of fun while organizing your amazing workshop!"
+msgstr ""
+
+#: templates/organize/commitment.html:49
+msgid "Sign the commitement"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:10
+msgid "Welcome to Django Girls!"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:12
+msgid ""
+"We’re delighted to welcome you as a part of Django Girls family! We’ve "
+"deployed your event’s website now and an information pack with access "
+"details is on the way to your inbox right now."
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:14
+msgid "In the information pack, you will receive access to the following:"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:18
+msgid "Your brand new shiny Django Girls Kraków event website"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:21
+msgid "The e-mail account for your event: kraków@djangogirls.org"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:24
+msgid "Our private community of organizers on Slack (a group chat application)"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:27
+msgid ""
+"Workshop Box, a starter kit full of goodies and decorations for your event"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:31
+msgid "We hope you’re as excited as we are about starting this adventure!"
+msgstr ""
+
+#: templates/organize/confirmation-of-acceptance.html:33
+msgid "Good luck and see you on Slack 👋<br />Django Girls Team"
+msgstr ""
+
+#: templates/organize/form/step1_previous_event.html:45
+msgid "Have you organized a Django Girls workshop before?"
+msgstr ""
+
+#: templates/organize/form/step1_previous_event.html:48
+msgid ""
+"If so, the form will be much shorter as we already know a lot about you! :)"
+msgstr ""
+
+#: templates/organize/form/step1_previous_event.html:80
+#: templates/organize/form/step2_application.html:111
+#: templates/organize/form/step3_organizers.html:185
+msgid "Go to next step"
+msgstr ""
+
+#: templates/organize/form/step2_application.html:25
+msgid "Application to organize a workshop"
+msgstr ""
+
+#: templates/organize/form/step2_application.html:39
+msgid ""
+"Tell us a little bit about yourself. What’s your background and daily "
+"occupation?"
+msgstr ""
+
+#: templates/organize/form/step2_application.html:56
+msgid ""
+"What motivated or inspired you to do it? What is your goal in organizing an "
+"event?"
+msgstr ""
+
+#: templates/organize/form/step2_application.html:73
+msgid "Check boxes next to all the things that describe you"
+msgstr ""
+
+#: templates/organize/form/step2_application.html:95
+msgid ""
+"If you helped organize a different workshop or event before, or are involved "
+"in your local community, we’d love to hear about it!"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:25
+msgid "Who is going to organize this workshop?"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:43
+msgid "Lead organizer"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:44
+msgid "This is probably you! :)"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:49
+#: templates/organize/form/step3_organizers.html:92
+#: templates/organize/form/step3_organizers.html:132
+msgid "First name"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:60
+#: templates/organize/form/step3_organizers.html:103
+#: templates/organize/form/step3_organizers.html:143
+msgid "Last name"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:71
+#: templates/organize/form/step3_organizers.html:114
+#: templates/organize/form/step3_organizers.html:154
+msgid "Email address"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:85
+msgid "Your organizing team"
+msgstr ""
+
+#: templates/organize/form/step3_organizers.html:86
+msgid ""
+"Who is going to organize this event with you? Please confirm with your co-"
+"organizers that they agreed for you to provide their information here. They "
+"will be able to access your event’s emails and edit your event’s website."
+msgstr ""
+
+#: templates/organize/form/step4_workshop_type.html:25
+msgid "Remote or In-Person Workshop?"
+msgstr ""
+
+#: templates/organize/form/step4_workshop_type.html:31
+msgid "Remote or In-Person?"
+msgstr ""
+
+#: templates/organize/form/step4_workshop_type.html:32
+msgid "Will your workshop be Remote or In-Person?"
+msgstr ""
+
+#: templates/organize/form/step4_workshop_type.html:36
+msgid "Workshop Type"
+msgstr ""
+
+#: templates/organize/form/step4_workshop_type.html:49
+msgid "Proceed!"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:32
+#: templates/organize/form/step5_workshop_remote.html:32
+msgid "Tell us all about your Django Girls event!"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:34
+msgid ""
+"Please know that we are only accepting applications for remote workshops at "
+"this time."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:48
+#: templates/organize/form/step5_workshop_remote.html:46
+msgid "Where?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:49
+#: templates/organize/form/step5_workshop_remote.html:47
+msgid "In which city do you want to organize a workshop?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:54
+#: templates/organize/form/step5_workshop_remote.html:52
+msgid "City"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:66
+#: templates/organize/form/step5_workshop_remote.html:64
+msgid "Country"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:86
+#: templates/organize/form/step5_workshop_remote.html:84
+msgid "When?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:87
+#: templates/organize/form/step5_workshop_remote.html:85
+msgid ""
+"There should be <b>at least 3 months</b> between now and your event's date, "
+"and <b>6 months</b> after the previous workshop in that region. Please enter "
+"your date in dd/mm/yyyy format."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:91
+#: templates/organize/form/step5_workshop_remote.html:89
+msgid "Date of your event"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:106
+msgid "Tell us about your ideas on where to host the event in your city."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:123
+#: templates/organize/form/step5_workshop_remote.html:103
+msgid "Do you already know which companies you will approach for sponsorship?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:124
+#: templates/organize/form/step5_workshop_remote.html:104
+msgid ""
+"It doesn’t need to be very specific yet, but we would love to see your ideas."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:142
+#: templates/organize/form/step5_workshop_remote.html:122
+msgid ""
+"Have you approached them to ask if they would be interested in helping out?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:159
+msgid "How will you host your in-person workshop during the Covid-19 pandemic?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:160
+msgid ""
+"Please provide information on how you plan to ensure safety for attendees "
+"and coaches for your in-person workshop during the Covid-19 pandemic."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:177
+#: templates/organize/form/step5_workshop_remote.html:157
+msgid ""
+"How do you intent to make your workshop inclusive and promote diversity?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:178
+#: templates/organize/form/step5_workshop_remote.html:158
+msgid ""
+"Please tell us how you intend to make sure your workshop is inclusive to "
+"people from marginalised communities and promote diversity."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:195
+#: templates/organize/form/step5_workshop_remote.html:175
+msgid "Any additional you may want to share with us?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:196
+#: templates/organize/form/step5_workshop_remote.html:176
+msgid ""
+"Please provide any additional information you may want to share with us and "
+"may think may help your application."
+msgstr ""
+
+#: templates/organize/form/step5_workshop.html:220
+#: templates/organize/form/step5_workshop_remote.html:200
+msgid "Finish!"
+msgstr ""
+
+#: templates/organize/form/step5_workshop_remote.html:139
+msgid "How will you host your workshop remotely?"
+msgstr ""
+
+#: templates/organize/form/step5_workshop_remote.html:140
+msgid ""
+"Please provide information on how you plan to host your workshop remotely, "
+"that is, what tools will you use."
+msgstr ""
+
+#: templates/organize/form/thank_you.html:15
+msgid "You rock!"
+msgstr ""
+
+#: templates/organize/form/thank_you.html:17
+msgid ""
+"Thank you so much for taking the time to submit your application to organize "
+"the Django Girls workshop in your city. We’re now going to review your "
+"application and will get back to you shortly."
+msgstr ""
+
+#: templates/organize/form/thank_you.html:19
+msgid ""
+"In the meantime, if you want to start planning your workshop, here are few "
+"things that can help you:"
+msgstr ""
+
+#: templates/organize/form/thank_you.html:23
+msgid ""
+"Read our <a href=\"https://organize.djangogirls.org/\">Organizer’s Manual</a>"
+msgstr ""
+
+#: templates/organize/form/thank_you.html:26
+#, python-format
+msgid ""
+"<span>Read experiences of other organizers in   <a href=\"http://blog."
+"djangogirls.org/post/152858499038/django-girls-seoul-workshop-2\">Seoul</a>, "
+"<a href=\"http://blog.djangogirls.org/post/143835232733/django-girls-wroc"
+"%%C5%%82aw-3-192-applications-32\">Wrocław</a>, <a href=\"http://blog."
+"djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia"
+"\">Windhoek</a> and <a href=\"http://blog.djangogirls.org/post/138915381173/"
+"a-toolkit-of-awesome-tips-tricks-from-seasoned\">Budapest</a></span>"
+msgstr ""
+
+#: templates/organize/form/thank_you.html:34
+msgid ""
+"Get to know our <a href=\"https://coach.djangogirls.org/\">Coaching Guide</a>"
+msgstr ""
+
+#: templates/organize/index.html:9
+msgid "Organize Django Girls workshop"
+msgstr ""
+
+#: templates/organize/index.html:16
+msgid ""
+"Django Girls events are organized by groups of wonderful volunteers in "
+"cities all over the world. Events are always non-profit and free for "
+"participants. We <strong><u>DO NOT PAY</u></strong> coaches, speakers or "
+"organizers. Attendees don’t need any previous knowledge about programming "
+"and there are no age limitations. All attendees need is a laptop and some "
+"curiosity!"
+msgstr ""
+
+#: templates/organize/index.html:25
+msgid ""
+"As of 2020, Django Girls workshops can only be held remotely. This is due to "
+"the ongoing Global Pandemic, and allows workshops continue while ensuring "
+"the safety of our organisers, volunteers and participants. We will review "
+"this decision in 2021, and hope to also allow for in-person workshops as "
+"soon as it is safe to do so."
+msgstr ""
+
+#: templates/organize/index.html:32
+msgid "In-Person Workshops"
+msgstr ""
+
+#: templates/organize/index.html:35
+msgid ""
+"An in-person workshop is any workshop where participants, coaches, and "
+"organisers, all meet in the same physical location. Participants can work "
+"together in teams and support from coaches is done face-to-face."
+msgstr ""
+
+#: templates/organize/index.html:42
+msgid ""
+"These workshops should only be conducted when it is safe to do so, and you "
+"may be asked in your application to provide evidence of why you feel this "
+"type of worshops is safe, and what, if any, safety measures you will be "
+"putting in place."
+msgstr ""
+
+#: templates/organize/index.html:50
+msgid ""
+"If you are not sure if it is safe to hold an in-person workshop, you might "
+"prefer to organise a remote workshop instead."
+msgstr ""
+
+#: templates/organize/index.html:55
+msgid "Remote Workshops"
+msgstr ""
+
+#: templates/organize/index.html:58
+msgid ""
+"A remote workshop is a workshop conducted online, where participants, "
+"coaches and organisers are in different physical locations."
+msgstr ""
+
+#: templates/organize/index.html:65
+msgid ""
+"This type of workshop may be more suitable in situations where it might not "
+"be safe, affordable, or logistically possible to host a workshop in-person, "
+"or where difficulties finding sponsorship would be a barrier to running to "
+"the workshop in-person. Remote workshops also allow for more flexibility "
+"with the location of your attendees and coaches."
+msgstr ""
+
+#: templates/organize/index.html:75
+#, python-format
+msgid ""
+"Since July 2014, <span>%(organizers_count)s</span> volunteers organized "
+"<span>%(past_events_count)s</span> Django Girls workshops. Join them and <a "
+"href=\"%(prerequisites_url)s\">bring Django Girls to your city!</a>"
+msgstr ""
+
+#: templates/organize/index.html:81
+msgid "The Value of Organizing Django Girls"
+msgstr ""
+
+#: templates/organize/index.html:85
+msgid ""
+"Join a crowd of over 500 passionate, kind and helpful organizers all over "
+"the world"
+msgstr ""
+
+#: templates/organize/index.html:88
+msgid "Make a real impact to advance the diversity in the tech industry"
+msgstr ""
+
+#: templates/organize/index.html:91
+msgid "Play a huge role in fostering tech community in your local area"
+msgstr ""
+
+#: templates/organize/index.html:100
+msgid "Resources for organizers"
+msgstr ""
+
+#: templates/organize/index.html:104
+msgid "Django Girls Organizer’s Manual"
+msgstr ""
+
+#: templates/organize/index.html:107
+msgid "Django Girls Coaching Guide"
+msgstr ""
+
+#: templates/organize/index.html:110
+msgid "Media resources"
+msgstr ""
+
+#: templates/organize/index.html:113
+msgid "Django Girls Workshop Tutorial"
+msgstr ""
+
+#: templates/organize/index.html:116
+msgid "Private mailing list &amp; Slack"
+msgstr ""
+
+#: templates/organize/index.html:129
+msgid ""
+"Django Girls helped me gain more self-confidence and gave me a boost to keep "
+"learning. I’ve created my own blog and then prepared workshops and taught "
+"other women to code. Nothing is impossible with this bunch of positive "
+"people!"
+msgstr ""
+
+#: templates/organize/index.html:135
+msgid "Agata Grdal, organizer of Django Girls Wrocław"
+msgstr ""
+
+#: templates/organize/index.html:142
+msgid "Experiences of Django Girls organizers"
+msgstr ""
+
+#: templates/organize/index.html:150
+msgid ""
+"Organizers of Django Girls Windhoek, Namibia share their experience of "
+"organizing an event in Africa. <a href=\"http://blog.djangogirls.org/"
+"post/139654610313/django-girls-workshop-in-windhoek-namibia\">Read "
+"more&nbsp;»</a>"
+msgstr ""
+
+#: templates/organize/index.html:159
+msgid ""
+"A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls "
+"organizers in Budapest, Hungary. <a href=\"http://blog.djangogirls.org/"
+"post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned\">Read "
+"more&nbsp;»</a>"
+msgstr ""
+
+#: templates/organize/index.html:168
+msgid ""
+"Learn how Django Girls Seoul built a local tech community using events as "
+"their main tool. <a href=\"http://blog.djangogirls.org/post/152858499038/"
+"django-girls-seoul-workshop-2\">Read more&nbsp;»</a>"
+msgstr ""
+
+#: templates/organize/prerequisites.html:29
+msgid "Prerequisities to organize a Django Girls workshop"
+msgstr ""
+
+#: templates/organize/prerequisites.html:32
+msgid ""
+"Yay! You want to organize a Django Girls workshop! That’s wonderful. Before "
+"we can get you started, there are few things requirements that we’d like to "
+"confirm with you to make sure your workshop is going to be planned as "
+"smoothly as possible:"
+msgstr ""
+
+#: templates/organize/prerequisites.html:42
+msgid ""
+"Confirm that you understand that we are only accepting applications for "
+"remote workshops at this time:"
+msgstr ""
+
+#: templates/organize/prerequisites.html:48
+msgid "The event you're organizing will be remote"
+msgstr ""
+
+#: templates/organize/prerequisites.html:55
+msgid ""
+"Confirm that you’ve read the following chapters of our <a href=\"http://"
+"organize.djangogirls.org/\">Organizer's Manual</a>:"
+msgstr ""
+
+#: templates/organize/prerequisites.html:64
+msgid "Introduction to Organizer’s Manual"
+msgstr ""
+
+#: templates/organize/prerequisites.html:70
+msgid "Organizing Django Girls workshop step by step"
+msgstr ""
+
+#: templates/organize/prerequisites.html:76
+msgid "Environment at Django Girls workshop"
+msgstr ""
+
+#: templates/organize/prerequisites.html:82
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: templates/organize/prerequisites.html:89
+msgid "Confirm that you meet following requirements to organize a workshop:"
+msgstr ""
+
+#: templates/organize/prerequisites.html:94
+msgid "You’re at least 18 years old"
+msgstr ""
+
+#: templates/organize/prerequisites.html:100
+msgid ""
+"Your workshop will be free for participants, and women will have preference "
+"in attending"
+msgstr ""
+
+#: templates/organize/prerequisites.html:106
+msgid "The event you’re organizing will be non-profit"
+msgstr ""
+
+#: templates/organize/prerequisites.html:113
+msgid ""
+"You will not pay coaches, speakers or organizers therefore you will not "
+"request money from sponsors to pay coaches, speakers or organizers."
+msgstr ""
+
+#: templates/organize/prerequisites.html:124
+msgid "Get started!"
+msgstr ""
+
+#: templates/organize/suspend.html:9
+msgid "Suspension of In-Person Workshop Applications"
+msgstr ""
+
+#: templates/organize/suspend.html:11
+msgid ""
+"Please note that due to the Global Covid-19 Pandemic, we have suspended all "
+"in-person workshop applications. We have updated our Organiser Manual to "
+"support remote workshops as a potential alternative. Please consider "
+"applying for a remote workshop instead."
+msgstr ""
+
+#: templates/organize/suspend.html:18
+msgid "Any inconveniences caused are sincerely regretted."
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:4
+msgid "Password Reset Complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+#, python-format
+msgid ""
+"All done! Go ahead and get back to <a href=\"%(admin_url)s\">being awesome "
+"now.</a> &#x1F496; Thanks for all you do!"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:4
+msgid "Password Reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:7
+msgid ""
+"Alright, the big event. Enter a new, super safe and super memorable (just to "
+"you!) password."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:11
+msgid "Set my new password!"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:5
+msgctxt "Followed by mailbox icon, check your inbox or email"
+msgid "Check Your"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:12
+#, python-format
+msgid ""
+"We just sent reset instructions to your email. If you have any issues, <a "
+"href=%(reset_url)s>try again</a> and if you still don't get anything, <a "
+"href=\"%(contact_url)s\">say hello</a>!"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:4
+msgid "Forget your password?"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:7
+msgid ""
+"Been thinking about cupcakes and high fives too much lately? It's okay, we "
+"can make a new password for you. Enter your email and we'll send you reset "
+"instructions."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:11
+msgid "Reset password link time!"
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:4
+#: templates/sponsor/sponsor-request.html:11
+msgid "Request for GitHub sponsoring"
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:5
+msgid "Fill the form available on this page to apply for a GitHub grant."
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:14
+msgid ""
+"GitHub can sponsor one Django Girls workshop per city with a 250$ grant. "
+"Applications must be received 2 months before the date of your workshop to "
+"be considered."
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:22
+#, python-format
+msgid ""
+"Before applying, your website needs to be ready and online. Then, you need "
+"to <a href=\"%(events_url)s\">check if an event already happened in your "
+"city</a> and if they received money from GitHub (check their sponsors "
+"section)."
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:30
+msgid ""
+"If your event is the first in your city or if the previous ones didn't "
+"receive sponsoring from GitHub, you can apply."
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:36
+msgid ""
+"Note: Filling this form will be long. You'll have to download and edit some "
+"documents (invoice, bank information, etc)."
+msgstr ""
+
+#: templates/sponsor/sponsor-request.html:42
+#, python-format
+msgid ""
+"We send those requests once every two weeks to GitHub. <b>Next deadline: "
+"%(deadline)s.</b>"
+msgstr ""
+
+#: templates/story/stories.html:9
+msgid "Django Girls Story"
+msgstr ""
+
+#: templates/story/stories.html:11
+msgid ""
+"“Your Django Story” is a volunteer-run interview series for the Django Girls "
+"blog that features women who make awesome things with Python and Django."
+msgstr ""
+
+#: templates/story/stories.html:18
+msgid ""
+"Each week we feature a new developer who tells us about how she got started "
+"on her journey with code, what she did before becoming a programmer, the "
+"cool things she’s currently working on, and much more. Each interview also "
+"features advice for aspiring developers, which is always a great read!"
+msgstr ""
+
+#: templates/story/stories.html:26
+msgid ""
+"Many of the women we’ve featured got their start at Django Girls workshops, "
+"and went on to found their own companies, secure full-time jobs as "
+"developers, and run Django Girls events."
+msgstr ""
+
+#: templates/story/stories.html:33
+msgid ""
+"If you would like to suggest someone to be featured in “Your Django "
+"Story” (or would like to nominate yourself!), please <a href=\"mailto:"
+"story@djangogirls.org\">contact us!</a>"
 msgstr ""
