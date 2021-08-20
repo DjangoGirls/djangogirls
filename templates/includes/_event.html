@@ -1,9 +1,11 @@
+{% load i18n %}
+
 <a href="{% url 'core:event' event.page_url %}">
     <div class="col-md-4 event"{% if event.photo %} style="background-image: url({{ event.photo.url }})"{% endif %}>
         <div class="overlay">
             <p class="city">{{ event.city }}</p>
             <span class="date">{{ event.date }}</span>
-            {% if event.photo_credit %}<p class="credit" rel="{{ event.photo_link }}">Photo credit: {{ event.photo_credit }} (<span rel="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC</span>)</p>{% endif %}
+            {% if event.photo_credit %}<p class="credit" rel="{{ event.photo_link }}">{% trans "Photo credit:" %} {{ event.photo_credit }} (<span rel="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC</span>)</p>{% endif %}
         </div>
     </div>
 </a>

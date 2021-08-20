@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load staticfiles rev %}
+{% load i18n rev staticfiles %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
@@ -26,88 +26,102 @@
                 {% endif %}
 
                 <div class="panel">
-                    <h1>Prerequisities to organize a Django Girls workshop</h1>
+                    <h1>{% trans "Prerequisities to organize a Django Girls workshop" %}</h1>
 
-                    <p class="intro">Yay! You want to organize a Django Girls workshop! That’s wonderful. Before we can get you started, there are few things requirements that we’d like to confirm with you to make sure your workshop is going to be planned as smoothly as possible:</p>
+                    <p class="intro">
+                        {% blocktrans trimmed %}
+                            Yay! You want to organize a Django Girls workshop! That’s wonderful. Before we can get you started,
+                            there are few things requirements that we’d like to confirm with you to make sure your workshop is
+                            going to be planned as smoothly as possible:
+                        {% endblocktrans %}
+                    </p>
 
                     <form data-required-form action="{% url 'organize:commitment' %}">
                         <fieldset>
                             <legend>
-                                Confirm that you understand that we are only accepting applications for remote workshops at this time:
+                                {% trans "Confirm that you understand that we are only accepting applications for remote workshops at this time:" %}
                             </legend>
                             <ul class="unstyled">
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="remote-workshop" name="remote-workshop" required />
                                     <label for="remote-workshop">
-                                       The event you're organizing will be remote
+                                       {% trans "The event you're organizing will be remote" %}
                                     </label>
                                 </li>
                             </ul>
                         </fieldset>
                         <fieldset>
-                            <legend>Confirm that you’ve read the following chapters of our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>:</legend>
+                            <legend>
+                                {% blocktrans trimmed %}
+                                    Confirm that you’ve read the following chapters of our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>:
+                                {% endblocktrans %}
+                            </legend>
 
                             <ul class="unstyled">
                               <li class="checkbox-wrapper">
                                   <input type="checkbox" id="introduction" name="introduction" required />
                                   <label for="introduction">
-                                      <a href="https://organize.djangogirls.org/">Introduction to Organizer’s Manual</a>
+                                      <a href="https://organize.djangogirls.org/">{% trans "Introduction to Organizer’s Manual" %}</a>
                                   </label>
                               </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="step-by-step" name="step-by-step" required />
                                     <label for="step-by-step">
-                                        <a href="https://organize.djangogirls.org/remote_workshops/">Organizing Django Girls workshop step by step</a>
+                                        <a href="https://organize.djangogirls.org/remote_workshops/">{% trans "Organizing Django Girls workshop step by step" %}</a>
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="environment" name="environment" required />
                                     <label for="environment">
-                                        <a href="https://organize.djangogirls.org/environment/">Environment at Django Girls workshop</a>
+                                        <a href="https://organize.djangogirls.org/environment/">{% trans "Environment at Django Girls workshop" %}</a>
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="faq" name="faq" required />
                                     <label for="faq">
-                                        <a href="https://faq-organizers.djangogirls.org/">Frequently Asked Questions</a>
+                                        <a href="https://faq-organizers.djangogirls.org/">{% trans "Frequently Asked Questions" %}</a>
                                     </label>
                                 </li>
                             </ul>
                         </fieldset>
 
                         <fieldset>
-                            <legend>Confirm that you meet following requirements to organize a workshop:</legend>
+                            <legend>{% trans "Confirm that you meet following requirements to organize a workshop:" %}</legend>
                             <ul class="unstyled">
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="eighteen" name="eighteen" required />
                                     <label for="eighteen">
-                                        You’re at least 18 years old
+                                        {% trans "You’re at least 18 years old" %}
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="free" name="free" required />
                                     <label for="free">
-                                        Your workshop will be free for participants, and women will have preference in attending
+                                        {% trans "Your workshop will be free for participants, and women will have preference in attending" %}
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="non-profit" name="non-profit" required />
                                     <label for="non-profit">
-                                        The event you’re organizing will be non-profit
+                                        {% trans "The event you’re organizing will be non-profit" %}
                                     </label>
                                 </li>
                                 <li class="checkbox-wrapper">
                                     <input type="checkbox" id="do-not-pay" name="do-not-pay" required />
                                     <label for="do-not-pay">
-                                        <strong>You will not pay coaches, speakers or organizers therefore you
-                                        will not request money from sponsors to pay coaches, speakers or organizers.</strong>
+                                        <strong>
+                                            {% blocktrans trimmed %}
+                                                You will not pay coaches, speakers or organizers therefore you
+                                                will not request money from sponsors to pay coaches, speakers or organizers.
+                                            {% endblocktrans %}
+                                        </strong>
                                     </label>
                                 </li>
                             </ul>
                         </fieldset>
 
                         <div class="cta-wrapper">
-                            <button type="submit" class="cta">Get started!</button>
+                            <button type="submit" class="cta">{% trans "Get started!" %}</button>
                         </div>
                     </form>
                 </div>

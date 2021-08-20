@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
-                <h1>Who is going to organize this workshop?</h1>
+                <h1>{% trans "Who is going to organize this workshop?" %}</h1>
 
                 <form novalidate data-required-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
@@ -40,13 +40,13 @@
                     {% endif %}
 
                     <fieldset class="form-section">
-                        <legend class="form-section-heading required">Lead organizer</legend>
-                        <p class="form-section-subhead">This is probably you! :)</p>
+                        <legend class="form-section-heading required">{% trans "Lead organizer" %}</legend>
+                        <p class="form-section-subhead">{% trans "This is probably you! :)" %}</p>
 
                         <ul class="row">
                             {% with form=wizard.form.0 %}
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.first_name.id_for_label }}" class="compact-label{% if form.first_name.field.required %} required{% endif %}">First name</label>
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label{% if form.first_name.field.required %} required{% endif %}">{% trans "First name" %}</label>
                                 {{ form.first_name }}
                                 {% if form.first_name.errors %}
                                     <ul class="error-list">
@@ -57,7 +57,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.last_name.id_for_label }}" class="compact-label{% if form.last_name.field.required %} required{% endif %}">Last name</label>
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label{% if form.last_name.field.required %} required{% endif %}">{% trans "Last name" %}</label>
                                 {{ form.last_name }}
                                 {% if form.last_name.errors %}
                                     <ul class="error-list">
@@ -68,7 +68,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.email.id_for_label }}" class="compact-label{% if form.email.field.required %} required{% endif %}">Email address</label>
+                                <label for="{{ form.email.id_for_label }}" class="compact-label{% if form.email.field.required %} required{% endif %}">{% trans "Email address" %}</label>
                                 {{ form.email }}
                                 {% if form.email.errors %}
                                     <ul class="error-list">
@@ -82,14 +82,14 @@
                         </ul>
                     </fieldset>
                     <fieldset id="coorganizers" class="form-section">
-                        <legend class="form-section-heading">Your organizing team</legend>
-                        <p class="form-section-subhead">Who is going to organize this event with you? Please confirm with your co-organizers that they agreed for you to provide their information here. They will be able to access your event’s emails and edit your event’s website.</p>
+                        <legend class="form-section-heading">{% trans "Your organizing team" %}</legend>
+                        <p class="form-section-subhead">{% trans "Who is going to organize this event with you? Please confirm with your co-organizers that they agreed for you to provide their information here. They will be able to access your event’s emails and edit your event’s website." %}</p>
 
                         {% for form in wizard.form %}
                         {% if not forloop.first %}
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">{% trans "First name" %}</label>
                                 {{ form.first_name }}
                                 {% if form.first_name.errors %}
                                     <ul class="error-list">
@@ -100,7 +100,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">{% trans "Last name" %}</label>
                                 {{ form.last_name }}
                                 {% if form.last_name.errors %}
                                     <ul class="error-list">
@@ -111,7 +111,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                <label for="{{ form.email.id_for_label }}" class="compact-label">{% trans "Email address" %}</label>
                                 {{ form.email }}
                                 {% if form.email.errors %}
                                     <ul class="error-list">
@@ -129,7 +129,7 @@
                         {% with form=wizard.form.empty_form %}
                         <ul class="row">
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">First name</label>
+                                <label for="{{ form.first_name.id_for_label }}" class="compact-label">{% trans "First name" %}</label>
                                 {{ form.first_name }}
                                 {% if form.first_name.errors %}
                                     <ul class="error-list">
@@ -140,7 +140,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">Last name</label>
+                                <label for="{{ form.last_name.id_for_label }}" class="compact-label">{% trans "Last name" %}</label>
                                 {{ form.last_name }}
                                 {% if form.last_name.errors %}
                                     <ul class="error-list">
@@ -151,7 +151,7 @@
                                 {% endif %}
                             </li>
                             <li class="col-sm-12 col-md-4">
-                                <label for="{{ form.email.id_for_label }}" class="compact-label">Email address</label>
+                                <label for="{{ form.email.id_for_label }}" class="compact-label">{% trans "Email address" %}</label>
                                 {{ form.email }}
                                 {% if form.email.errors %}
                                     <ul class="error-list">
@@ -182,7 +182,7 @@
                         </button>
                     </div>
                     <div class="cta-wrapper">
-                        <button type="submit" class="cta">Go to next step</button>
+                        <button type="submit" class="cta">{% trans "Go to next step" %}</button>
                     </div>
                 </form>
             </div>

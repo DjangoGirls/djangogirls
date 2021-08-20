@@ -29,7 +29,7 @@
         <div class="row workshop">
             <div class="col-md-12">
                 <div class="panel">
-                    <h1>Tell us all about your Django Girls event!</h1>
+                    <h1>{% trans "Tell us all about your Django Girls event!" %}</h1>
 
                     <form novalidate data-required-form action="" method="post">{% csrf_token %}
                         {{ wizard.management_form }}
@@ -43,13 +43,13 @@
                         {% endif %}
 
                         <fieldset class="form-section">
-                            <legend class="form-section-heading">Where?</legend>
-                            <p class="form-section-subhead">In which city do you want to organize a workshop?</p>
+                            <legend class="form-section-heading">{% trans "Where?" %}</legend>
+                            <p class="form-section-subhead">{% trans "In which city do you want to organize a workshop?" %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-4">
                                     <label for="{{ wizard.form.city.id_for_label }}"
-                                           class="compact-label{% if form.city.field.required %} required{% endif %}">City</label>
+                                           class="compact-label{% if form.city.field.required %} required{% endif %}">{% trans "City" %}</label>
                                     {{ wizard.form.city }}
                                     {% if wizard.form.city.errors %}
                                         <ul class="error-list">
@@ -61,7 +61,7 @@
                                 </li>
                                 <li class="col-sm-12 col-md-4">
                                     <label for="{{ wizard.form.country.id_for_label }}"
-                                           class="compact-label{% if form.country.field.required %} required{% endif %}">Country</label>
+                                           class="compact-label{% if form.country.field.required %} required{% endif %}">{% trans "Country" %}</label>
                                     {{ wizard.form.country }}
                                     {% if wizard.form.country.errors %}
                                         <ul class="error-list">
@@ -76,17 +76,17 @@
                         <script type="text/javascript">
                             $('#{{ wizard.form.country.id_for_label }}').select2({
                                 theme: "bootstrap",
-                                placeholder: 'Choose country'
+                                placeholder: '{% trans "Choose country" %}'
                             });
                         </script>
 
                         <fieldset class="form-section">
-                            <legend class="form-section-heading">When?</legend>
-                            <p class="form-section-subhead">There should be <b>at least 3 months</b> between now and your event's date, and <b>6 months</b> after the previous workshop in that region. Please enter your date in dd/mm/yyyy format.</p>
+                            <legend class="form-section-heading">{% trans "When?" %}</legend>
+                            <p class="form-section-subhead">{% trans "There should be <b>at least 3 months</b> between now and your event's date, and <b>6 months</b> after the previous workshop in that region. Please enter your date in dd/mm/yyyy format." %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-4">
-                                    <label for="{{ wizard.form.date.id_for_label }}" class="compact-label{% if form.date.field.required %} required{% endif %}">Date of your event</label>
+                                    <label for="{{ wizard.form.date.id_for_label }}" class="compact-label{% if form.date.field.required %} required{% endif %}">{% trans "Date of your event" %}</label>
                                     {{ wizard.form.date }}
                                     {% if wizard.form.date.errors %}
                                         <ul class="error-list">
@@ -100,8 +100,8 @@
                         </fieldset>
 
                         <section class="form-section">
-                            <label class="form-section-heading{% if form.sponsorship.field.required %} required{% endif %}">Do you already know which companies you will approach for sponsorship?</label>
-                            <p class="form-section-subhead">It doesn’t need to be very specific yet, but we would love to see your ideas.</p>
+                            <label class="form-section-heading{% if form.sponsorship.field.required %} required{% endif %}">{% trans "Do you already know which companies you will approach for sponsorship?" %}</label>
+                            <p class="form-section-subhead">{% trans "It doesn’t need to be very specific yet, but we would love to see your ideas." %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-9">
@@ -118,8 +118,8 @@
                         </section>
 
                         <section class="form-section">
-                            <label class="form-section-heading{% if form.coaches.field.required %} required{% endif %}">Do you have potential coaches in mind?</label>
-                            <p class="form-section-subhead">Have you approached them to ask if they would be interested in helping out?</p>
+                            <label class="form-section-heading{% if form.coaches.field.required %} required{% endif %}">{% trans "Do you have potential coaches in mind?" %}</label>
+                            <p class="form-section-subhead">{% trans "Have you approached them to ask if they would be interested in helping out?" %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-9">
@@ -136,8 +136,8 @@
                         </section>
 
                         <section class="form-section">
-                            <label class="form-section-heading{% if form.tools.field.required %} required{% endif %}">How will you host your workshop remotely?</label>
-                            <p class="form-section-subhead">Please provide information on how you plan to host your workshop remotely, that is, what tools will you use.</p>
+                            <label class="form-section-heading{% if form.tools.field.required %} required{% endif %}">{% trans "How will you host your workshop remotely?" %}</label>
+                            <p class="form-section-subhead">{% trans "Please provide information on how you plan to host your workshop remotely, that is, what tools will you use." %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-9">
@@ -154,8 +154,8 @@
                         </section>
 
                         <section class="form-section">
-                            <label class="form-section-heading{% if form.diversity.field %} {% endif %}">How do you intent to make your workshop inclusive and promote diversity?</label>
-                            <p class="form-section-subhead">Please tell us how you intend to make sure your workshop is inclusive to people from marginalised communities and promote diversity.</p>
+                            <label class="form-section-heading{% if form.diversity.field %} {% endif %}">{% trans "How do you intent to make your workshop inclusive and promote diversity?" %}</label>
+                            <p class="form-section-subhead">{% trans "Please tell us how you intend to make sure your workshop is inclusive to people from marginalised communities and promote diversity." %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-9">
@@ -172,8 +172,8 @@
                         </section>
 
                         <section class="form-section">
-                            <label class="form-section-heading{% if form.additional.field %} {% endif %}">Any additional you may want to share with us?</label>
-                            <p class="form-section-subhead">Please provide any additional information you may want to share with us and may think may help your application.</p>
+                            <label class="form-section-heading{% if form.additional.field %} {% endif %}">{% trans "Any additional you may want to share with us?" %}</label>
+                            <p class="form-section-subhead">{% trans "Please provide any additional information you may want to share with us and may think may help your application." %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-9">
@@ -197,13 +197,12 @@
                             </ul>
                         </section>
                         <div class="cta-wrapper">
-                            <button type="submit" class="cta">Finish!</button>
+                            <button type="submit" class="cta">{% trans "Finish!" %}</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 

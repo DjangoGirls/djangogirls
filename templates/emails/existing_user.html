@@ -1,33 +1,45 @@
-<p>Hi there!</p>
+{% load i18n %}
 
-<p>Congrats! You can now manage {{ event.name }} event!</p>
+<p>{% trans "Hi there!" %}</p>
 
-<p>The website address is https://djangogirls.org/{{ event.page_url }}</p>
+<p>{% blocktrans with event=event.name %}Congrats! You can now manage {{ event }} event!{% endblocktrans %}</p>
+
+<p>{% blocktrans with page_url=event.page_url %}The website address is https://djangogirls.org/{{ page_url }}{% endblocktrans %}</p>
 
 <p>
+{% blocktrans trimmed %}
   To manage it, login here:<br />
   https://djangogirls.org/admin/
+{% endblocktrans %}
 </p>
 
 <p>
-  Email: {{ user.email }}<br />
+{% blocktrans trimmed with email=user.email %}
+  Email: {{ email }}<br />
   Use your existing password.
+{% endblocktrans %}
 </p>
 
-<p>Here you can find instructions on editing website: https://organize.djangogirls.org/website/</p>
-
-<p>Your event's email is {{ event.email }}. Ask the main organizer of you event
-  for password and instructions to access it.</p>
+<p>{% trans "Here you can find instructions on editing website: https://organize.djangogirls.org/website/" %}</p>
 
 <p>
+{% blocktrans with email=event.email %}
+    Your event's email is {{ email }}. Ask the main organizer of you event
+    for password and instructions to access it.
+{% endblocktrans %}
+</p>
+
+<p>
+{% blocktrans trimmed %}
   You can contact hello@ if you need assistance but it’s usually faster to check
   our <a href="https://faq-organizers.djangogirls.org/">FAQ</a> or to post questions
   to the <a href="https://groups.google.com/forum/#!forum/django-girls-organizers">
   Google Group of Django Girls Organizers</a> or <a href="https://djangogirls.slack.com/messages/general/">
   Slack channel</a> - there are more people that can help you! :)
+{% endblocktrans %}
 </p>
 
 <p>
-  Hugs, rainbows and sunshines!<br />
+  {% trans "Hugs, rainbows and sunshines!" %}<br />
   Django Girls
 </p>

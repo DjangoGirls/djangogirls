@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
+{% load i18n %}
 
 {% block content %}
-
 <div class="container organize">
     <div class="row">
         <div class="col-md-12">
@@ -12,24 +12,26 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
-                <h1>🎉 You rock! 🎉</h1>
+                <h1>🎉 {% trans "You rock!" %} 🎉</h1>
 
-                <p>Thank you so much for taking the time to submit your application to organize the Django Girls workshop in your city. We’re now going to review your application and will get back to you shortly.</p>
+                <p>{% trans "Thank you so much for taking the time to submit your application to organize the Django Girls workshop in your city. We’re now going to review your application and will get back to you shortly." %}</p>
 
-                <p class="tight-bottom">In the meantime, if you want to start planning your workshop, here are few things that can help you:</p>
+                <p class="tight-bottom">{% trans "In the meantime, if you want to start planning your workshop, here are few things that can help you:" %}</p>
 
                 <ul class="bulleted">
                     <li>
-                        <span>Read our <a href="https://organize.djangogirls.org/">Organizer’s Manual</a></span>
+                        <span>{% blocktrans %}Read our <a href="https://organize.djangogirls.org/">Organizer’s Manual</a>{% endblocktrans %}</span>
                     </li>
                     <li>
+                        {% blocktrans trimmed %}
                         <span>Read experiences of other organizers in   <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Seoul</a>,
                           <a href="http://blog.djangogirls.org/post/143835232733/django-girls-wroc%C5%82aw-3-192-applications-32">Wrocław</a>,
                           <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Windhoek</a>
                           and <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Budapest</a></span>
+                        {% endblocktrans %}
                     </li>
                     <li>
-                        <span>Get to know our <a href="https://coach.djangogirls.org/">Coaching Guide</a></span>
+                        <span>{% blocktrans %}Get to know our <a href="https://coach.djangogirls.org/">Coaching Guide</a>{% endblocktrans %}</span>
                     </li>
                 </ul>
             </div>
