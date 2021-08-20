@@ -20,12 +20,16 @@ def test_index(client, future_event, past_event):
 
 def test_event_published(client, future_event, past_event):
     # Check if it's possible to access the page
-    url1 = '/' + future_event.page_url + '/'
+    no_language_url1 = '/' + future_event.page_url + '/'
+    redirect_resp_1 = client.get(no_language_url1)
+    assert redirect_resp_1.status_code == 302  # i18n language code redirect
+
+    url1 = reverse('core:event', kwargs={'page_url': future_event.page_url})
     resp_1 = client.get(url1)
     assert resp_1.status_code == 200
 
     # Check if it's possible to access the page
-    url2 = '/' + past_event.page_url + '/'
+    url2 = reverse('core:event', kwargs={'page_url': past_event.page_url})
     resp_2 = client.get(url2)
     assert resp_2.status_code == 200
 
@@ -39,7 +43,7 @@ def test_event_published(client, future_event, past_event):
 
 def test_event_unpublished(client, hidden_event):
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -75,7 +79,7 @@ def test_event_live(client, future_event):
 
 def test_event_city(client, diff_url_event):
     # Ensure old use of City in the url 404s when the slug is different
-    url = '/' + diff_url_event.city + '/'
+    url = reverse('core:event', kwargs={'page_url': diff_url_event.city})
     resp = client.get(url)
     assert resp.status_code == 404
 
@@ -90,7 +94,7 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + no_date_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -99,11 +103,12 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
 
     # make the event date in the past
     no_date_event.date = ApproximateDate(
-        year=past_date.year, month=past_date.month, day=past_date.day)
+        year=past_date.year, month=past_date.month, day=past_date.day
+    )
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + no_date_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -116,7 +121,7 @@ def test_event_unpublished_with_auth_normal(user, client, hidden_event):
     authenticated and not a superuser"""
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -127,7 +132,7 @@ def test_event_unpublished_with_auth_superuser(admin_client, hidden_event):
     """ Test that an unpublished page can be accessed when the user is
     authenticated and a superuser"""
 
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = admin_client.get(url)
 
     assert resp.status_code == 200
@@ -139,7 +144,7 @@ def test_event_unpublished_with_auth_not_organizer(user, client, hidden_event):
     is not an organizer"""
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -152,7 +157,7 @@ def test_event_unpublished_with_auth_in_team(user, client, hidden_event):
     hidden_event.team.add(user)
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -165,7 +170,7 @@ def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
     hidden_event.main_organizer = user
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -181,12 +186,12 @@ def test_coc(client):
         'pt-br': '<h1>Código de Conduta</h1>'
     }
     for lang, title in AVAILABLE_LANG.items():
-        response = client.get('/coc/{}/'.format(lang))
+        response = client.get('/en/coc/{}/'.format(lang))
         assert title in response.content.decode('utf-8'), title
 
 
 def test_coc_invalid_lang(client):
-    response = client.get('/coc/pl/')
+    response = client.get('/en/coc/pl/')
     assert response.status_code == 404
 
 

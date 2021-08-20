@@ -8,6 +8,7 @@ from core.slack_client import slack
 
 from ...models import FundraisingStatus
 
+
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = 'http://api.patreon.com/'
 
@@ -26,9 +27,7 @@ class Command(BaseCommand):
         patron_count = data['linked'][0]['patron_count']
         pledge_sum = int(int(data['linked'][0]['pledge_sum']) / 100)
         message = (
-            "Daily Patreon update: {} patrons pledged ${} monthly!".format(
-                patron_count, pledge_sum
-            )
+            f"Daily Patreon update: {patron_count} patrons pledged ${pledge_sum} monthly!"
         )
         logging.info(message)
 
