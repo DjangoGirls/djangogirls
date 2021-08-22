@@ -1,4 +1,5 @@
 import stripe
+from django.http import HttpResponseForbidden
 from stripe.error import StripeError
 from django.conf import settings
 from django.shortcuts import render, redirect
@@ -58,6 +59,9 @@ def charge(request):
                     )
                 )
         return redirect(reverse('donations:error'))
+
+    else:
+        return HttpResponseForbidden()
 
 
 def success(request, currency, amount):
