@@ -29,8 +29,8 @@ def test_index(client):
 
 
 def test_charge_get(client):
-    with pytest.raises(ValueError):
-        client.get(reverse('donations:charge'))
+    resp = client.get(reverse('donations:charge'))
+    assert resp.status_code == 403
 
 
 def test_charge_post(client):
