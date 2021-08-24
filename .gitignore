@@ -24,3 +24,4 @@ static/local/
 static/rev-manifest.json
 temp/
 .environment
+htmlcov

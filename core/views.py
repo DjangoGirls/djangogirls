@@ -133,8 +133,9 @@ def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
 
 
-def workshop_box(request):
-    return render(request, 'core/workshop_box.html', {})
+# This view's URL is commented out, so avoid coverage hit by commenting out the view also
+# def workshop_box(request):
+#     return render(request, 'core/workshop_box.html', {})
 
 
 def server_error(request):
@@ -156,9 +157,10 @@ def coc_legacy(request, lang=None):
         raise Http404(_("No translation for language {}".format(lang)))
 
 
-def crowdfunding_donors(request):
-    donor_list = Donor.objects.filter(visible=True).order_by('-amount')
-    return render(request, 'core/crowdfunding_donors.html', {
-        'donor_list': donor_list,
-        'quotes': DONOR_QUOTES,
-    })
+# This view's URL is commented out, so avoid coverage hit by commenting out the view also
+# def crowdfunding_donors(request):
+#     donor_list = Donor.objects.filter(visible=True).order_by('-amount')
+#     return render(request, 'core/crowdfunding_donors.html', {
+#         'donor_list': donor_list,
+#         'quotes': DONOR_QUOTES,
+#     })

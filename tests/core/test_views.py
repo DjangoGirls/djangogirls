@@ -172,7 +172,7 @@ def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
     assert hidden_event.page_title in resp.content.decode('utf-8')
 
 
-def test_coc(client):
+def test_coc_legacy(client):
     AVAILABLE_LANG = {
         'en': '<h1>Code of Conduct</h1>',
         'es': '<h1>Código de Conducta</h1>',
@@ -185,9 +185,106 @@ def test_coc(client):
         assert title in response.content.decode('utf-8'), title
 
 
+def test_coc_no_lang(client):
+    title = "<h1>Code of Conduct</h1>"
+
+    response = client.get(f"/coc/")
+    assert title in response.content.decode('utf-8'), title
+
+
 def test_coc_invalid_lang(client):
     response = client.get('/coc/pl/')
     assert response.status_code == 404
+
+
+def test_coc(client):
+    url = reverse('core:coc')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events(client):
+    url = reverse('core:events')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_map(client):
+    url = reverse('core:events_map')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_resources(client):
+    url = reverse('core:resources')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_icalendar_no_events(client):
+    url = reverse('core:icalendar')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_icalendar_events(client, events):
+    url = reverse('core:icalendar')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_newsletter(client):
+    url = reverse('core:newsletter')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_faq(client):
+    url = reverse('core:faq')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_foundation(client):
+    url = reverse('core:foundation')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_foundation_gov_doc(client):
+    url = reverse('core:foundation-governing-document')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_year_2015(client):
+    url = reverse('core:year_2015')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_year_2016_17(client):
+    url = reverse('core:year_2016_2017')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_terms(client):
+    url = reverse('core:terms-conditions')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_privacy_cookies(client):
+    url = reverse('core:privacy-cookies')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_server_error(client):
+    url = reverse('core:server_error')
+    response = client.get(url)
+    assert response.status_code == 500
 
 
 # Disabling this due to test requiring redirects to exist in flatpages (database content)
