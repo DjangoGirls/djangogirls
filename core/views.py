@@ -141,7 +141,12 @@ def server_error(request):
     return HttpResponse(status=500)
 
 
-def coc(request, lang=None):
+def coc(request):
+    template_name = "core/coc.html"
+    return render(request, template_name)
+
+
+def coc_legacy(request, lang=None):
     if lang is None:
         lang = 'en'
     template_name = "core/coc/{}.html".format(lang)
