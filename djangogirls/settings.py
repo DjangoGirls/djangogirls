@@ -1,10 +1,16 @@
 import os
 import dj_database_url
 import sentry_sdk
-from django.utils.translation import gettext_lazy as _
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from .utils.sanitize import sanitize
+
+
+def gettext(s):
+    """
+    i18n passthrough
+    """
+    return s
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -89,20 +95,20 @@ DATABASES['default'] = dj_database_url.config(
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
-    ('pt-br', _('Brazilian Portuguese')),
-    ('en', _('English')),
-    ('fr', _('French')),
-    ('de', _('German')),
-    ('ko', _('Korean')),
-    ('fa', _('Persian')),
-    ('pt', _('Portuguese')),
-    ('ru', _('Russian')),
-    ('es', _('Spanish')),
+    ('en', gettext('English')),
+    ('pt-br', gettext('Brazilian Portuguese')),
+    ('fr', gettext('French')),
+    ('de', gettext('German')),
+    ('ko', gettext('Korean')),
+    ('fa', gettext('Persian')),
+    ('pt', gettext('Portuguese')),
+    ('ru', gettext('Russian')),
+    ('es', gettext('Spanish')),
 ]
 
-LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True

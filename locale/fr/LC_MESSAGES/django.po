@@ -2929,7 +2929,7 @@ msgstr ""
 
 #: templates/core/index.html:15
 msgid "We inspire women to fall in love with programming."
-msgstr ""
+msgstr "Nous incitons les femmes à tomber amoureuses de la programmation."
 
 #: templates/core/index.html:17
 msgid ""
@@ -2939,7 +2939,7 @@ msgstr ""
 
 #: templates/core/index.html:29
 msgid "What is Django Girls?"
-msgstr ""
+msgstr "Qu'est-ce que Django Girls?"
 
 #: templates/core/index.html:32
 #, python-format
