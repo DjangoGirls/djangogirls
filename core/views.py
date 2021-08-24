@@ -11,8 +11,6 @@ from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
-from sponsor.models import Donor
-from .quotes import DONOR_QUOTES
 
 
 def index(request):

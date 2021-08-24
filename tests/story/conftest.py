@@ -1,7 +1,4 @@
-from datetime import date, datetime, timedelta
 import pytest
-
-from django_date_extensions.fields import ApproximateDate
 
 
 @pytest.fixture

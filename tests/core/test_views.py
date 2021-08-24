@@ -188,7 +188,7 @@ def test_coc_legacy(client):
 def test_coc_no_lang(client):
     title = "<h1>Code of Conduct</h1>"
 
-    response = client.get(f"/coc/")
+    response = client.get("/coc/")
     assert title in response.content.decode('utf-8'), title
 
 
