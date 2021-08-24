@@ -1,4 +1,5 @@
 import djclick as click
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from .forms import AddOrganizerForm
@@ -74,13 +75,14 @@ def brag_on_slack_bang(city, country, team):
     """
     This is posting a message about Django Girls new event to #general channel on Slack!
     """
-    text = f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! " \
-           f"Welcome Django Girls {city}, {country}. " \
-           f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
+    if settings.ENABLE_SLACK_NOTIFICATIONS:
+        text = f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! " \
+               f"Welcome Django Girls {city}, {country}. " \
+               f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
 
-    slack.chat.post_message(
-        channel='#general',
-        text=text,
-        username='Django Girls',
-        icon_emoji=':django_heart:'
-    )
+        slack.chat.post_message(
+            channel='#general',
+            text=text,
+            username='Django Girls',
+            icon_emoji=':django_heart:'
+        )

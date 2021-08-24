@@ -4,6 +4,9 @@ import sentry_sdk
 from django.utils.translation import gettext_lazy as _
 from sentry_sdk.integrations.django import DjangoIntegration
 
+from .utils.sanitize import sanitize
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
 
@@ -88,20 +91,21 @@ DATABASES['default'] = dj_database_url.config(
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGES = [
+    ('pt-br', _('Brazilian Portuguese')),
     ('en', _('English')),
     ('fr', _('French')),
     ('de', _('German')),
+    ('ko', _('Korean')),
+    ('fa', _('Persian')),
     ('pt', _('Portuguese')),
+    ('ru', _('Russian')),
+    ('es', _('Spanish')),
 ]
 
 LANGUAGE_CODE = 'en'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -177,6 +181,7 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
                                "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
+ENABLE_SLACK_NOTIFICATIONS = sanitize(os.environ.get('ENABLE_SLACK_NOTIFICATIONS', False), bool)
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
