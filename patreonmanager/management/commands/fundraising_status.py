@@ -11,7 +11,7 @@ from ...models import FundraisingStatus
 
 
 DJANGOGIRLS_USER_ID = 483065
-BASE_API_URL = 'http://api.patreon.com/'
+BASE_API_URL = 'https://api.patreon.com/'
 
 
 class Command(BaseCommand):

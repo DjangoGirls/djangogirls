@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.4]
     method: GET
-    uri: http://api.patreon.com/user/483065
+    uri: https://api.patreon.com/user/483065
   response:
     body:
       string: !!binary |

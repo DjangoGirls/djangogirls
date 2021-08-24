@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.4]
     method: GET
-    uri: http://nominatim.openstreetmap.org/search?format=json&q=Oz%2C+Neverland
+    uri: https://nominatim.openstreetmap.org/search?format=json&q=Oz%2C+Neverland
   response:
     body: {string: '[]'}
     headers:
