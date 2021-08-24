@@ -10,8 +10,7 @@ from django.core.management import call_command
 from core.management.commands.add_organizer import command as add_organizer
 from core.management.commands.copy_event import command as copy_event
 from core.management.commands.new_event import command as new_event
-from core.management.commands.prepare_dispatch import \
-    command as prepare_dispatch
+from core.management.commands.prepare_dispatch import command as prepare_dispatch
 from core.models import Event
 
 
@@ -54,7 +53,7 @@ def test_add_organizer(_, click_runner, future_event):
         "jan@kowalski.example.org\n"
         "N\n").format(future_event.pk)
 
-    click_runner.invoke(add_organizer, input=command_input)
+    click_runner.invoke(add_organizer, input=command_input, catch_exceptions=False)
     future_event.refresh_from_db()
     assert future_event.team.count() == 2
 
@@ -74,7 +73,7 @@ def test_new_event_with_one_organizer(click_runner, random_day, events):
         "N\n"
     ).format(random_day=random_day)
 
-    click_runner.invoke(new_event, input=command_input)
+    click_runner.invoke(new_event, input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
     event = Event.objects.order_by('pk').last()
     assert event.team.count() == 1
@@ -98,7 +97,7 @@ def test_new_event_with_two_organizers(click_runner, random_day, events):
         "N"
     ).format(random_day=random_day)
 
-    click_runner.invoke(new_event, input=command_input)
+    click_runner.invoke(new_event, input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
     event = Event.objects.order_by('pk').last()
     assert event.team.count() == 2
@@ -122,7 +121,9 @@ def test_new_event_short(click_runner, random_day, events, stock_pictures):
     result = click_runner.invoke(
         new_event,
         args=["--short"],
-        input=command_input)
+        input=command_input,
+        catch_exceptions=False
+    )
     assert Event.objects.count() == 5
     short_email_body = (
         "Event e-mail is: oz@djangogirls.org\n"
@@ -142,7 +143,7 @@ def test_copy_event(click_runner, random_day, events, past_event):
             random_day=random_day,
             new_event_number=new_event_number)
 
-    click_runner.invoke(copy_event, input=command_input)
+    click_runner.invoke(copy_event, input=command_input, catch_exceptions=False)
     old_event = past_event
     name = old_event.name.split('#')[0].strip()
     new_name = "{} #{}".format(name, new_event_number)
@@ -170,8 +171,7 @@ def test_prepare_dispatch_with_data(click_runner):
     ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
 
     result = click_runner.invoke(
-        prepare_dispatch,
-        input=command_input
+        prepare_dispatch, input=command_input, catch_exceptions=False
     )
     assert result.exception is None
     assert 'PREVIOUS EVENTS' in result.output
@@ -185,7 +185,7 @@ def test_prepare_dispatch_without_data(click_runner):
         "{random_past_day}\n"
     ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
 
-    result = click_runner.invoke(prepare_dispatch, input=command_input)
+    result = click_runner.invoke(prepare_dispatch, input=command_input, catch_exceptions=False)
     assert result.exception is None
     assert 'PREVIOUS EVENTS' in result.output
 
