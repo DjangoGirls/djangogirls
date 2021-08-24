@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-20 10:32+0000\n"
+"POT-Creation-Date: 2021-08-24 01:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Apply for a spot at Django Girls [City]!"
 msgstr ""
 
-#: applications/models.py:24
+#: applications/models.py:25
 msgid ""
 "Yay! We're so excited you want to be a part of our workshop. Please mind "
 "that filling out the form below does not give you a place on the workshop, "
@@ -41,7 +41,7 @@ msgid ""
 "a>. Good luck!"
 msgstr ""
 
-#: applications/models.py:35
+#: applications/models.py:38
 msgid ""
 "Hi there!\n"
 "\n"
@@ -61,116 +61,116 @@ msgid ""
 "Django Girls"
 msgstr ""
 
-#: applications/models.py:50
+#: applications/models.py:53
 msgid "Application process is open from"
 msgstr ""
 
-#: applications/models.py:52
+#: applications/models.py:55
 msgid "Application process is open until"
 msgstr ""
 
-#: applications/models.py:98
+#: applications/models.py:101
 msgid "Question"
 msgstr ""
 
-#: applications/models.py:102
+#: applications/models.py:105
 msgid "Additional help text to the question?"
 msgstr ""
 
-#: applications/models.py:107
+#: applications/models.py:110
 msgid "Type of the question"
 msgstr ""
 
-#: applications/models.py:111
+#: applications/models.py:114
 msgid "Is the answer to the question required?"
 msgstr ""
 
-#: applications/models.py:116
+#: applications/models.py:119
 msgid "List all available options, separated with semicolon (;)"
 msgstr ""
 
-#: applications/models.py:117 applications/models.py:122
+#: applications/models.py:120 applications/models.py:125
 msgid "Used only with 'Choices' question type"
 msgstr ""
 
-#: applications/models.py:121
+#: applications/models.py:124
 msgid "Are there multiple choices allowed?"
 msgstr ""
 
-#: applications/models.py:124
+#: applications/models.py:127
 msgid "Position of the question"
 msgstr ""
 
-#: applications/models.py:135
+#: applications/models.py:138
 msgid "You can only get choices for fields that have question_type == choices."
 msgstr ""
 
-#: applications/models.py:144 templates/applications/applications.html:37
+#: applications/models.py:147 templates/applications/applications.html:37
 #: templates/applications/applications.html:86
 msgid "Application submitted"
 msgstr ""
 
-#: applications/models.py:145 templates/applications/applications.html:38
+#: applications/models.py:148 templates/applications/applications.html:38
 #: templates/applications/applications.html:87
 msgid "Application accepted"
 msgstr ""
 
-#: applications/models.py:146 templates/applications/applications.html:39
+#: applications/models.py:149 templates/applications/applications.html:39
 #: templates/applications/applications.html:88
 msgid "Application rejected"
 msgstr ""
 
-#: applications/models.py:147 templates/applications/applications.html:40
+#: applications/models.py:150 templates/applications/applications.html:40
 #: templates/applications/applications.html:89
 msgid "Application on waiting list"
 msgstr ""
 
-#: applications/models.py:148 templates/applications/applications.html:41
+#: applications/models.py:151 templates/applications/applications.html:41
 #: templates/applications/applications.html:90
 msgid "Applicant declined"
 msgstr ""
 
-#: applications/models.py:155
+#: applications/models.py:158
 msgid "RSVP: Waiting for response"
 msgstr ""
 
-#: applications/models.py:156
+#: applications/models.py:159
 msgid "RSVP: Confirmed attendance"
 msgstr ""
 
-#: applications/models.py:157
+#: applications/models.py:160
 msgid "RSVP: Rejected invitation"
 msgstr ""
 
-#: applications/models.py:169
+#: applications/models.py:172
 msgid "State of the application"
 msgstr ""
 
-#: applications/models.py:181
+#: applications/models.py:184
 msgid "RSVP status"
 msgstr ""
 
-#: applications/models.py:301
+#: applications/models.py:304
 msgid "5 being the most positive, 1 being the most negative."
 msgstr ""
 
-#: applications/models.py:306
+#: applications/models.py:309
 msgid "Any extra comments?"
 msgstr ""
 
-#: applications/models.py:324
+#: applications/models.py:327
 msgid "Content of the email"
 msgstr ""
 
-#: applications/models.py:325
+#: applications/models.py:328
 msgid "You can use HTML syntax in this message. Preview on the right."
 msgstr ""
 
-#: applications/models.py:330 templates/applications/communication.html:22
+#: applications/models.py:333 templates/applications/communication.html:22
 msgid "Recipients"
 msgstr ""
 
-#: applications/models.py:331
+#: applications/models.py:334
 msgid "Only people assigned to chosen group will receive this email."
 msgstr ""
 
@@ -419,34 +419,26 @@ msgstr ""
 msgid "Remove organizers"
 msgstr ""
 
-#: core/admin.py:203
+#: core/admin.py:204
 msgid ""
 "{} has been added to your event, yay! They've been also invited to Slack and "
 "should receive credentials to login in an e-mail."
 msgstr ""
 
-#: core/admin.py:352 core/admin.py:359
+#: core/admin.py:357 core/admin.py:364
 msgid "Personal info"
 msgstr ""
 
-#: core/admin.py:353
+#: core/admin.py:358
 msgid "Permissions"
 msgstr ""
 
-#: core/admin.py:355 core/admin.py:360
+#: core/admin.py:360 core/admin.py:365
 msgid "Important dates"
 msgstr ""
 
-#: core/admin.py:405
+#: core/admin.py:410
 msgid "Change this only if you know what you are doing"
-msgstr ""
-
-#: core/command_helpers.py:12
-msgid "What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)"
-msgstr ""
-
-#: core/command_helpers.py:18
-msgid "Wrong format! Try again :)"
 msgstr ""
 
 #: core/default_eventpage_content.py:83
@@ -489,7 +481,7 @@ msgstr ""
 msgid "Organizer's first and last name"
 msgstr ""
 
-#: core/forms.py:33 core/management_utils.py:21
+#: core/forms.py:33
 msgid "E-mail address"
 msgstr ""
 
@@ -509,36 +501,8 @@ msgstr ""
 msgid "Enter the same password as above, for verification."
 msgstr ""
 
-#: core/management_utils.py:16
+#: core/management_utils.py:17
 msgid "Let's talk about the team. First the main organizer:"
-msgstr ""
-
-#: core/management_utils.py:18
-msgid "First and last name"
-msgstr ""
-
-#: core/management_utils.py:26
-#, python-brace-format
-msgid "All right, the main organizer is {0} ({1})"
-msgstr ""
-
-#: core/management_utils.py:37 core/management_utils.py:54
-msgid "Do you want to add additional team members?"
-msgstr ""
-
-#: core/management_utils.py:43
-#, python-brace-format
-msgid "First and last name of #{i} member"
-msgstr ""
-
-#: core/management_utils.py:46
-#, python-brace-format
-msgid "E-mail address of #{i} member"
-msgstr ""
-
-#: core/management_utils.py:51
-#, python-brace-format
-msgid "All right, the #{i} team member of Django Girls is {name} ({email})"
 msgstr ""
 
 #: core/validators.py:13
@@ -560,24 +524,44 @@ msgstr ""
 msgid "List of Django Girls events around the world"
 msgstr ""
 
-#: core/views.py:151
+#: core/views.py:156
 msgid "No translation for language {}"
 msgstr ""
 
-#: djangogirls/settings.py:91
+#: djangogirls/settings.py:94
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: djangogirls/settings.py:95
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:92
+#: djangogirls/settings.py:96
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:93
+#: djangogirls/settings.py:97
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:94
+#: djangogirls/settings.py:98
+msgid "Korean"
+msgstr ""
+
+#: djangogirls/settings.py:99
+msgid "Persian"
+msgstr ""
+
+#: djangogirls/settings.py:100
 msgid "Portuguese"
+msgstr ""
+
+#: djangogirls/settings.py:101
+msgid "Russian"
+msgstr ""
+
+#: djangogirls/settings.py:102
+msgid "Spanish"
 msgstr ""
 
 #: organize/admin.py:21
@@ -692,11 +676,11 @@ msgstr ""
 msgid "Choose event"
 msgstr ""
 
-#: organize/forms.py:39
+#: organize/forms.py:41
 msgid "You have to choose an event."
 msgstr ""
 
-#: organize/forms.py:148 templates/organize/form/step5_workshop.html:81
+#: organize/forms.py:156 templates/organize/form/step5_workshop.html:81
 #: templates/organize/form/step5_workshop_remote.html:79
 msgid "Choose country"
 msgstr ""
@@ -2401,6 +2385,130 @@ msgstr ""
 
 #: templates/core/2016-2017.html:405
 msgid "See more success stories"
+msgstr ""
+
+#: templates/core/coc.html:4
+msgid "Django Girls Code of Conduct"
+msgstr ""
+
+#: templates/core/coc.html:10 templates/global/footer.html:13
+msgid "Code of Conduct"
+msgstr ""
+
+#: templates/core/coc.html:13
+msgid "This document is also available in:"
+msgstr ""
+
+#: templates/core/coc.html:42
+msgid ""
+"Django Girls aims to be a welcoming event, where people meet in a friendly "
+"environment. Accordingly, we expect that all participants are expected to "
+"show respect and courtesy to other participants throughout the workshop."
+msgstr ""
+
+#: templates/core/coc.html:50
+msgid ""
+"To make clear what is expected, all delegates/attendees, speakers, "
+"exhibitors, organizers and volunteers at any Django Girls event are required "
+"to conform to the following Code of Conduct. Organizers will enforce this "
+"code before and throughout the event."
+msgstr ""
+
+#: templates/core/coc.html:57
+msgid "In short"
+msgstr ""
+
+#: templates/core/coc.html:61
+msgid ""
+"Django Girls is dedicated to providing a harassment-free workshop experience "
+"for everyone, regardless of gender, sexual orientation, disability, physical "
+"appearance, body size, race, or religion."
+msgstr ""
+
+#: templates/core/coc.html:66
+msgid "We do not tolerate harassment of workshop participants in any form."
+msgstr ""
+
+#: templates/core/coc.html:67
+msgid ""
+"Sexual language and imagery is not appropriate for any workshop venue, "
+"including talks."
+msgstr ""
+
+#: templates/core/coc.html:69
+msgid ""
+"Be kind to others. Do not insult or put down other attendees. Behave "
+"professionally. Don't publish photographs of people without their consent. "
+"Remember that harassment and sexist, racist, or exclusionary jokes are not "
+"appropriate for Django Girls."
+msgstr ""
+
+#: templates/core/coc.html:76
+msgid ""
+"Conference participants violating these rules may be sanctioned or expelled "
+"from the workshop without a refund at the discretion of the workshop "
+"organizers."
+msgstr ""
+
+#: templates/core/coc.html:83
+msgid "Longer version"
+msgstr ""
+
+#: templates/core/coc.html:86
+msgid ""
+"Harassment includes offensive verbal comments related to gender, sexual "
+"orientation, disability, physical appearance, body size, race, religion, "
+"sexual images in public spaces, deliberate intimidation, stalking, "
+"following, harassing photography or recording, sustained disruption of talks "
+"or other events, inappropriate physical contact, and unwelcome sexual "
+"attention."
+msgstr ""
+
+#: templates/core/coc.html:94
+msgid ""
+"Participants asked to stop any harassing behavior are expected to comply "
+"immediately."
+msgstr ""
+
+#: templates/core/coc.html:97
+msgid ""
+"Be careful in the words that you choose. Remember that sexist, racist, and "
+"other exclusionary jokes can be offensive to those around you. Excessive "
+"swearing and offensive jokes are not appropriate for Django Girls."
+msgstr ""
+
+#: templates/core/coc.html:104
+msgid ""
+"If a participant engages in harassing behavior, the workshop organizers may "
+"take any action they deem appropriate, including warning the offender or "
+"expulsion from the workshop with no refund."
+msgstr ""
+
+#: templates/core/coc.html:110
+msgid ""
+"We expect participants to follow these rules at all workshop venues and "
+"workshop-related social events."
+msgstr ""
+
+#: templates/core/coc.html:112
+msgid "Reporting harassment"
+msgstr ""
+
+#: templates/core/coc.html:115
+msgid ""
+"If you are being harassed, notice that someone else is being harassed, or "
+"have any other concerns, please contact your coach or one of the organizers "
+"immediately. If your concern is with the organizing team, please email "
+"details to coc@djangogirls.org."
+msgstr ""
+
+#: templates/core/coc.html:122
+msgid ""
+"The staff is well informed on how to deal with the incident and how to "
+"further proceed with the situation. Conference staff will be happy to help "
+"participants contact hotel/venue security or local law enforcement, provide "
+"escorts, or otherwise assist those experiencing harassment to feel safe for "
+"the duration of the conference. We value your attendance."
 msgstr ""
 
 #: templates/core/contribute.html:9 templates/global/footer.html:23
@@ -4849,9 +4957,10 @@ msgid "Hello,"
 msgstr ""
 
 #: templates/emails/organize/application_confirmation.html:6
+#, python-format
 msgid ""
 "Thank you for submitting the application to organize Django Girls in "
-"{{ city }}! Yay!"
+"%(city)s! Yay!"
 msgstr ""
 
 #: templates/emails/organize/application_confirmation.html:10
@@ -4891,7 +5000,7 @@ msgstr ""
 #: templates/emails/organize/application_confirmation.html:33
 #, python-format
 msgid ""
-"Our <a href=\"http://organize.djangogirls.org/\">Organizer's Manual</a> "
+"Our <a href=\"https://organize.djangogirls.org/\">Organizer's Manual</a> "
 "describes quite well the process of organizing a workshop. You can also read "
 "experiences of other organizers on our blog: <a href=\"http://blog."
 "djangogirls.org/post/152858499038/django-girls-seoul-workshop-2\">Seoul</a>, "
@@ -5196,10 +5305,6 @@ msgstr ""
 
 #: templates/global/footer.html:12
 msgid "Chat with us!"
-msgstr ""
-
-#: templates/global/footer.html:13
-msgid "Code of Conduct"
 msgstr ""
 
 #: templates/global/footer.html:14
