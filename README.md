@@ -257,8 +257,8 @@ so that we can upgrade the version of Django to supported versions ([628](https:
 Since these are major changes to the website, pull requests related for each of this cannot be submitted to the `main` 
 branch. 
 
-If you are submitting a pull request for [Issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571), 
+To contribute to [Issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571), 
 submit the pull request to the `translations` branch.
 
-If you are submitting a pull request for [Issue 628 - Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628),
+To contribute to [Issue 628 - Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628),
 submit the pull request to the `dev` branch. 
