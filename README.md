@@ -246,3 +246,19 @@ version control, but loaded by `manage.py`. So when you run django commands like
 `python-dotenv` will load the environment variables from your `.environment` file so that they are available to the application.
 
 This is an optional feature. If you do not have a `.environment` file then it won't impact on the application at all.
+
+## Submitting a Pull Request
+We have two major issues we are trying to resolve in our project:
+1. [Website internationalization/translations](https://github.com/DjangoGirls/djangogirls/issues/571) 
+so that non-English speakers can view the website based on their locale ([571](https://github.com/DjangoGirls/djangogirls/issues/571)).
+2. [Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628) 
+so that we can upgrade the version of Django to supported versions ([628](https://github.com/DjangoGirls/djangogirls/issues/628)).
+
+Since these are major changes to the website, pull requests related for each of this cannot be submitted to the `main` 
+branch. 
+
+If you are submitting a pull request for [Issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571), 
+submit the pull request to the `translations` branch.
+
+If you are submitting a pull request for [Issue 628 - Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628),
+submit the pull request to the `dev` branch. 
