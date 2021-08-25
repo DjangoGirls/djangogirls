@@ -264,10 +264,11 @@ def test_changing_application_status_in_bulk(
     assert application_rejected.state == 'accepted'
 
 
-@pytest.mark.xfail(reason="TODO")
 def test_application_scores_is_queried_once(
         admin_client, future_event_form, future_event, admin_user):
+    """Regression test to ensure the scored by user query on applications list page runs only once."""
 
+    # Seed some applications
     Application.objects.bulk_create(
         Application(form=future_event_form, email=f"foo+{i}@email.com")
         for i in range(5)
@@ -277,11 +278,11 @@ def test_application_scores_is_queried_once(
     for application in Application.objects.filter(form=future_event_form):
         Score.objects.create(user=admin_user, application=application, score=random.randint(1, 5))
 
-    applications_url = reverse('applications:applications', kwargs={'city': future_event.page_url})
-
     with CaptureQueriesContext(connection) as queries:
-        admin_client.get(applications_url)
+        admin_client.get(
+            reverse('applications:applications', kwargs={'city': future_event.page_url}))
 
     score_queries = [q for q in queries.captured_queries if 'applications_score' in q['sql']]
-    # We want to query the scores only once when accessing the view
-    assert len(score_queries) == 1
+
+    # The first query is for the annotation in get_applications_for_event, the second is for the scores themselves
+    assert len(score_queries) == 2

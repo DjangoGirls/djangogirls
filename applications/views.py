@@ -86,7 +86,7 @@ def application_list(request, city):
 
     try:
         applications = get_applications_for_event(
-            event, state, rsvp_status, order)
+            event, state, rsvp_status, order, user=request.user)
     except Application.DoesNotExist:
         return redirect('core:event', city=city)
 

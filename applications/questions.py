@@ -1,7 +1,10 @@
 from collections import OrderedDict
 
 from django import forms
+from django.db.models import Exists, OuterRef
 from django.urls import reverse
+
+from core.models import User
 
 
 def get_organiser_menu(city):
@@ -65,12 +68,12 @@ def generate_form_from_questions(questions):
     return fields
 
 
-def get_applications_for_event(event, state=None, rsvp_status=None, order=None):
+def get_applications_for_event(event, state=None, rsvp_status=None, order=None, user: User = None):
     """
     Return a QuerySet of Application objects for a given event.
     Raises Form.DoesNotExist if Form for event does not yet exist.
     """
-    from applications.models import Application  # circular import
+    from applications.models import Application, Score  # circular import
 
     applications = (
         Application.objects
@@ -80,6 +83,10 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None):
         .prefetch_related('answer_set', 'scores', 'scores__user',
                           'form__event', 'scores__application')
     )
+
+    if user:
+        scores_subquery = Score.objects.filter(application=OuterRef("pk"), user=user)
+        applications = applications.annotate(was_scored_by_user=Exists(scores_subquery))
 
     if rsvp_status:
         applications = applications.filter(
