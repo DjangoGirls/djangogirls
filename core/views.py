@@ -4,7 +4,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _, get_language
+from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDate
 
 from patreonmanager.models import FundraisingStatus
