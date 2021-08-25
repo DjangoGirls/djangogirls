@@ -1,9 +1,12 @@
-import pytest
+import random
 
+import pytest
 from django.urls import reverse
 
-from applications.models import Score, Application
+from applications.models import Application, Score
 from applications.views import application_list
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
 
 
 def test_access_applications_view(client, user_client, admin_client, future_event):
@@ -246,7 +249,7 @@ def test_changing_application_rsvp_errors(
     assert 'error' in resp.json()
 
 
-def changing_application_status_in_bulk(
+def test_changing_application_status_in_bulk(
         admin_client, future_event, application_submitted, application_rejected):
     assert application_submitted.state == 'submitted'
     assert application_rejected.state == 'rejected'
@@ -259,3 +262,26 @@ def changing_application_status_in_bulk(
     application_rejected = Application.objects.get(id=application_rejected.id)
     assert application_submitted.state == 'accepted'
     assert application_rejected.state == 'accepted'
+
+
+@pytest.mark.xfail(reason="TODO")
+def test_application_scores_is_queried_once(
+        admin_client, future_event_form, future_event, admin_user):
+
+    Application.objects.bulk_create(
+        Application(form=future_event_form, email=f"foo+{i}@email.com")
+        for i in range(5)
+    )
+
+    # For every application, create a random score
+    for application in Application.objects.filter(form=future_event_form):
+        Score.objects.create(user=admin_user, application=application, score=random.randint(1, 5))
+
+    applications_url = reverse('applications:applications', kwargs={'city': future_event.page_url})
+
+    with CaptureQueriesContext(connection) as queries:
+        admin_client.get(applications_url)
+
+    score_queries = [q for q in queries.captured_queries if 'applications_score' in q['sql']]
+    # We want to query the scores only once when accessing the view
+    assert len(score_queries) == 1
