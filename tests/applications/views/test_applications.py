@@ -270,7 +270,8 @@ def test_application_scores_is_queried_once(
         admin_client.get(
             reverse('applications:applications', kwargs={'city': future_event.page_url}))
 
-    score_queries = [q for q in queries.captured_queries if 'applications_score' in q['sql']]
+    score_table_name = Score._meta.db_table
+    score_queries = [q for q in queries.captured_queries if score_table_name in q['sql']]
 
     # The first query is for the annotation in get_applications_for_event, the second is for the scores themselves
     assert len(score_queries) == 2
