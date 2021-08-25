@@ -1,5 +1,6 @@
 from django.db.models import Exists, OuterRef
 
+from applications.models import Application, Score
 from core.models import User
 
 
@@ -8,7 +9,6 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
     Return a QuerySet of Application objects for a given event.
     Raises Form.DoesNotExist if Form for event does not yet exist.
     """
-    from applications.models import Application, Score  # circular import
 
     applications = (
         Application.objects
