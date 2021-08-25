@@ -1,6 +1,6 @@
 from django.db.models import Exists, OuterRef
 
-from applications.models import Application, Score
+from applications.models import Application, Score, Event
 from core.models import User
 
 
@@ -47,16 +47,15 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
     return applications
 
 
-def get_random_application(request, event, prev_application):
+def get_random_application(user: User, event: Event, prev_application: Application):
     """
     Get a new random application for a particular event,
-    that hasn't been scored by the request user.
+    that hasn't been scored by the user.
     """
-    from applications.models import Application  # circular import
     return Application.objects.filter(
         form__event=event
     ).exclude(
-        pk=prev_application.id
+        pk=prev_application.id,
     ).exclude(
-        scores__user=request.user
+        scores__user=user
     ).order_by('?').first()

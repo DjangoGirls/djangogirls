@@ -170,7 +170,7 @@ def application_detail(request, city, app_number):
 
         if request.POST.get('random'):
             # Go to a new random application.
-            new_app = get_random_application(request, event, application)
+            new_app = get_random_application(request.user, event, application)
             if new_app:
                 return redirect(
                     'applications:application_detail', city, new_app.number)
