@@ -1,5 +1,3 @@
-import random
-
 import pytest
 from django.db import connection
 from django.test.utils import CaptureQueriesContext
@@ -265,18 +263,8 @@ def test_changing_application_status_in_bulk(
 
 
 def test_application_scores_is_queried_once(
-        admin_client, future_event_form, future_event, admin_user):
+        admin_client, future_event, scored_applications):
     """Regression test to ensure the scored by user query on applications list page runs only once."""
-
-    # Seed some applications
-    Application.objects.bulk_create(
-        Application(form=future_event_form, email=f"foo+{i}@email.com")
-        for i in range(5)
-    )
-
-    # For every application, create a random score
-    for application in Application.objects.filter(form=future_event_form):
-        Score.objects.create(user=admin_user, application=application, score=random.randint(1, 5))
 
     with CaptureQueriesContext(connection) as queries:
         admin_client.get(
