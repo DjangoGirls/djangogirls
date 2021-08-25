@@ -12,10 +12,8 @@ from core.utils import get_event
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
 from .models import Application, Email, Form, Question, Score
-from .questions import (
-    get_applications_for_event, get_organiser_menu,
-    random_application
-)
+from .questions import get_organiser_menu
+from .services import get_applications_for_event, get_random_application
 
 
 def apply(request, city):
@@ -172,7 +170,7 @@ def application_detail(request, city, app_number):
 
         if request.POST.get('random'):
             # Go to a new random application.
-            new_app = random_application(request, event, application)
+            new_app = get_random_application(request, event, application)
             if new_app:
                 return redirect(
                     'applications:application_detail', city, new_app.number)
