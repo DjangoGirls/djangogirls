@@ -41,6 +41,7 @@ def test_application_form_prevent_duplicate_emails():
     application_form = ApplicationForm(form_data, form=form)
     assert not application_form.is_valid()
 
+
 @pytest.mark.django_db
 @vcr.use_cassette('tests/applications/vcr/application_form_prevent_duplicate_emails.yaml')
 def test_application_form_no_newsletter():
