@@ -1,12 +1,12 @@
 import random
 
 import pytest
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 
 from applications.models import Application, Score
 from applications.views import application_list
-from django.db import connection
-from django.test.utils import CaptureQueriesContext
 
 
 def test_access_applications_view(client, user_client, admin_client, future_event):
