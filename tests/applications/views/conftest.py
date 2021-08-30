@@ -1,11 +1,6 @@
 import pytest
 
-from applications.models import Answer, Application, Form
-
-
-@pytest.fixture
-def future_event_form(future_event):
-    return Form.objects.create(event=future_event)
+from applications.models import Answer, Application
 
 
 @pytest.fixture

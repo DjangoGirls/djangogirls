@@ -1,8 +1,9 @@
 import pytest
-
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 
-from applications.models import Score, Application
+from applications.models import Application, Score
 from applications.views import application_list
 
 
@@ -246,7 +247,7 @@ def test_changing_application_rsvp_errors(
     assert 'error' in resp.json()
 
 
-def changing_application_status_in_bulk(
+def test_changing_application_status_in_bulk(
         admin_client, future_event, application_submitted, application_rejected):
     assert application_submitted.state == 'submitted'
     assert application_rejected.state == 'rejected'
@@ -259,3 +260,18 @@ def changing_application_status_in_bulk(
     application_rejected = Application.objects.get(id=application_rejected.id)
     assert application_submitted.state == 'accepted'
     assert application_rejected.state == 'accepted'
+
+
+def test_application_scores_is_queried_once(
+        admin_client, future_event, scored_applications):
+    """Regression test to ensure the scored by user query on applications list page runs only once."""
+
+    with CaptureQueriesContext(connection) as queries:
+        admin_client.get(
+            reverse('applications:applications', kwargs={'city': future_event.page_url}))
+
+    score_table_name = Score._meta.db_table
+    score_queries = [q for q in queries.captured_queries if score_table_name in q['sql']]
+
+    # The first query is for the annotation in get_applications_for_event, the second is for the scores themselves
+    assert len(score_queries) == 2
