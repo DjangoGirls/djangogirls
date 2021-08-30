@@ -17,7 +17,7 @@ django-suit-redactor==0.0.4
 django-suit==0.2.26
 django-unused-media==0.1.13
 # Django suit breaks with Django 2.2
-django<2.1
+django<2.3
 django-sendgrid-v5==0.8.1
 easy-thumbnails==2.6
 freezegun==0.3.11
