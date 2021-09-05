@@ -1,9 +1,9 @@
+from adminsortable2.admin import SortableAdminMixin
 from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.html import format_html
-from suit.admin import SortableModelAdmin
 
 from core.models import Event
 
@@ -71,9 +71,8 @@ class FormFilter(admin.SimpleListFilter):
         return queryset
 
 
-class QuestionAdmin(SortableModelAdmin):
+class QuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('form', 'title', 'question_type', 'is_required', 'order')
-    sortable = 'order'
     list_filter = (FormFilter,)
 
     def get_queryset(self, request):

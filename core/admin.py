@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from adminsortable2.admin import SortableAdminMixin
 from codemirror import CodeMirrorTextarea
 from django import forms
 from django.conf.urls import url
@@ -13,11 +14,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from suit.admin import SortableModelAdmin
 
 from .filters import OpenRegistrationFilter
-from .forms import (AddOrganizerForm, EventForm,
-                    UserCreationForm, UserLimitedChangeForm)
+from .forms import (
+    AddOrganizerForm, EventForm,
+    UserCreationForm, UserLimitedChangeForm
+)
 from .models import (Event, EventPageContent, EventPageMenu, User)
 from coach.admin import CoachInline
 from sponsor.admin import SponsorInline
@@ -281,11 +283,13 @@ class EventFilter(admin.SimpleListFilter):
         return queryset
 
 
-class EventPageContentAdmin(SortableModelAdmin):
+class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('name', 'event', 'position', 'is_public')
     list_filter = (EventFilter, 'is_public')
-    search_fields = ('name', 'event__page_title', 'content', 'event__city',
-                     'event__country', 'event__name')
+    search_fields = (
+        'name', 'event__page_title', 'content', 'event__city',
+        'event__country', 'event__name'
+    )
     form = EventPageContentForm
     sortable = 'position'
     inlines = [
@@ -317,7 +321,7 @@ class EventPageContentAdmin(SortableModelAdmin):
         return self.readonly_fields
 
 
-class EventPageMenuAdmin(SortableModelAdmin):
+class EventPageMenuAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'event', 'url', 'position')
     list_filter = (EventFilter,)
     sortable = 'position'

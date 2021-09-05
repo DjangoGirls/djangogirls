@@ -4,6 +4,10 @@
 #
 #    pip-compile
 #
+--trusted-host pypi.python.org
+--trusted-host pypi.org
+--trusted-host files.pythonhosted.org
+
 atomicwrites==1.4.0
     # via pytest
 attrs==21.2.0
@@ -36,6 +40,7 @@ dj-database-url==0.5.0
 django==2.0.13
     # via
     #   -r requirements.in
+    #   django-admin-sortable2
     #   django-formtools
     #   django-leaflet
     #   django-recaptcha
@@ -43,6 +48,8 @@ django==2.0.13
     #   django-storages
     #   django-unused-media
     #   easy-thumbnails
+django-admin-sortable2==1.0
+    # via -r requirements.in
 django-autoslug==1.9.4
     # via -r requirements.in
 django-click==2.1.0

@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'adminsortable2',
     'django_date_extensions',
     'django_unused_media',
     'django_extensions',
