@@ -20,7 +20,7 @@ SITE_ID = 1
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'contact',
     'pictures',
     'donations',
-)
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -226,3 +226,22 @@ GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
 
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+# ***** DEBUG TOOLBAR *****
+
+DEBUG_TOOLBAR = DEBUG and os.environ.get('DEBUG_TOOLBAR', 'no') == 'yes'
+
+if DEBUG_TOOLBAR:
+    INTERNAL_IPS = [
+        '127.0.0.1',
+    ]
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax(),
+    }

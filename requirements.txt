@@ -41,6 +41,7 @@ django==2.2.24
     # via
     #   -r requirements.in
     #   django-admin-sortable2
+    #   django-debug-toolbar
     #   django-formtools
     #   django-leaflet
     #   django-recaptcha
@@ -59,6 +60,8 @@ django-codemirror-widget==0.4.1
 django-countries==5.3.3
     # via -r requirements.in
 django-date-extensions==3.0
+    # via -r requirements.in
+django-debug-toolbar==3.2.2
     # via -r requirements.in
 django-extensions==2.2.9
     # via -r requirements.in
@@ -216,7 +219,9 @@ six==1.16.0
 slacker==0.9.65
     # via -r requirements.in
 sqlparse==0.4.1
-    # via django
+    # via
+    #   django
+    #   django-debug-toolbar
 starkbank-ecdsa==1.1.1
     # via sendgrid
 stripe==2.60.0
