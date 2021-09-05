@@ -1,28 +1,17 @@
 from datetime import datetime
 
-from adminsortable2.admin import SortableAdminMixin
-from codemirror import CodeMirrorTextarea
-from django import forms
 from django.conf.urls import url
 from django.contrib import admin, messages
-from django.contrib.auth import admin as auth_admin
-from django.contrib.auth.forms import UserChangeForm
-from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
-from django.contrib.flatpages.models import FlatPage
-from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from .filters import OpenRegistrationFilter
-from .forms import (
+from ..filters import OpenRegistrationFilter
+from ..forms import (
     AddOrganizerForm, EventForm,
-    UserCreationForm, UserLimitedChangeForm
 )
-from .models import (Event, EventPageContent, EventPageMenu, User)
-from coach.admin import CoachInline
-from sponsor.admin import SponsorInline
+from ..models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -146,9 +135,9 @@ class EventAdmin(admin.ModelAdmin):
         It's based on get_queryset, so superuser see all events, while
         is_staff users see events they're assigned to only.
         """
-        return self.get_queryset(request) \
-            .filter(date__gte=datetime.now()
-                    .strftime("%Y-%m-%d")).order_by('name')
+        return self.get_queryset(request).filter(
+            date__gte=datetime.now().strftime("%Y-%m-%d")
+        ).order_by('name')
 
     def _get_event_from_get(self, request, all_events):
         """
@@ -171,6 +160,7 @@ class EventAdmin(admin.ModelAdmin):
         event = self._get_event_from_get(request, all_events)
 
         if 'remove' in request.GET and event in all_events:
+            from core.models import User
             user = User.objects.get(id=request.GET['remove'])
             if user == request.user:
                 messages.error(request, 'You cannot remove yourself from a team.')
@@ -221,198 +211,3 @@ class EventAdmin(admin.ModelAdmin):
         if created:
             obj.add_default_content()
             obj.add_default_menu()
-
-
-class ResizableCodeMirror(CodeMirrorTextarea):
-
-    def __init__(self, **kwargs):
-        super(ResizableCodeMirror, self).__init__(
-            js_var_format='%s_editor', **kwargs)
-
-    @property
-    def media(self):
-        mine = forms.Media(
-            css={'all': ('vendor/jquery-ui/jquery-ui.min.css',)},
-            js=('vendor/jquery-ui/jquery-ui.min.js',))
-        return super(ResizableCodeMirror, self).media + mine
-
-    def render(self, name, value, attrs=None):
-        output = super(ResizableCodeMirror, self).render(name, value, attrs)
-        return output + mark_safe(
-            '''
-                <script type="text/javascript">
-                $('.CodeMirror').resizable({
-                  resize: function() {
-                    %s_editor.setSize($(this).width(), $(this).height());
-                  }
-                });
-                </script>
-            ''' % name)
-
-
-class EventPageContentForm(ModelForm):
-
-    class Meta:
-        widgets = {
-            'content': ResizableCodeMirror(mode="xml")
-        }
-        fields = (
-            'event',
-            'name',
-            'content',
-            'background',
-            'position',
-            'is_public',
-        )
-
-
-class EventFilter(admin.SimpleListFilter):
-    title = "Event"
-    parameter_name = "event"
-
-    def lookups(self, request, queryset):
-        qs = Event.objects.all()
-        if not request.user.is_superuser:
-            qs = qs.filter(team__in=[request.user])
-        return map(lambda x: (x.id, str(x)), qs)
-
-    def queryset(self, request, queryset):
-        if self.value():
-            return queryset.filter(event=self.value())
-
-        return queryset
-
-
-class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('name', 'event', 'position', 'is_public')
-    list_filter = (EventFilter, 'is_public')
-    search_fields = (
-        'name', 'event__page_title', 'content', 'event__city',
-        'event__country', 'event__name'
-    )
-    form = EventPageContentForm
-    sortable = 'position'
-    inlines = [
-        SponsorInline,
-        CoachInline
-    ]
-
-    def get_queryset(self, request):
-        qs = super(EventPageContentAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(event__team=request.user)
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super(EventPageContentAdmin, self).get_form(
-            request, obj, **kwargs)
-        if not request.user.is_superuser:
-            if 'event' in form.base_fields:
-                form.base_fields['event'].queryset = Event.objects.filter(
-                    team=request.user
-                )
-        return form
-
-    def get_readonly_fields(self, request, obj=None):
-        if obj and not request.user.is_superuser:
-            # Don't let change objects for events that already happened
-            if not obj.event.is_upcoming():
-                return set([x.name for x in self.model._meta.fields])
-        return self.readonly_fields
-
-
-class EventPageMenuAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'event', 'url', 'position')
-    list_filter = (EventFilter,)
-    sortable = 'position'
-
-    def get_queryset(self, request):
-        qs = super(EventPageMenuAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(event__team=request.user)
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
-        if not request.user.is_superuser:
-            if 'event' in form.base_fields:
-                form.base_fields['event'].queryset = Event.objects.filter(
-                    team=request.user
-                )
-        return form
-
-    def get_readonly_fields(self, request, obj=None):
-        if obj and not request.user.is_superuser:
-            # Don't let change objects for events that already happened
-            if not obj.event.is_upcoming():
-                return set([x.name for x in self.model._meta.fields])
-        return self.readonly_fields
-
-
-class UserAdmin(auth_admin.UserAdmin):
-    fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                    'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
-    )
-    limited_fieldsets = (
-        (None, {'fields': ('email',)}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
-    )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')
-        }),
-    )
-    form = UserChangeForm
-    limited_form = UserLimitedChangeForm
-    add_form = UserCreationForm
-    change_password_form = auth_admin.AdminPasswordChangeForm
-    list_display = ('email', 'first_name', 'last_name', 'is_superuser', 'date_joined')
-    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups', 'date_joined')
-    search_fields = ('first_name', 'last_name', 'email')
-    ordering = ('email',)
-    readonly_fields = ('last_login', 'date_joined',)
-
-    def get_queryset(self, request):
-        qs = super(UserAdmin, self).get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        return qs.filter(pk=request.user.pk)
-
-    def get_form(self, request, obj=None, **kwargs):
-        defaults = {}
-        if obj and not request.user.is_superuser:
-            defaults.update({
-                'form': self.limited_form,
-                'fields': admin.util.flatten_fieldsets(self.limited_fieldsets),
-            })
-        defaults.update(kwargs)
-        return super(UserAdmin, self).get_form(request, obj, **defaults)
-
-    def get_fieldsets(self, request, obj=None):
-        if obj and not request.user.is_superuser:
-            return self.limited_fieldsets
-        return super(UserAdmin, self).get_fieldsets(request, obj)
-
-
-class MyFlatPageAdmin(FlatPageAdmin):
-
-    class MyFlatpageForm(FlatpageForm):
-        template_name = forms.CharField(
-            initial='flatpage.html',
-            help_text="Change this only if you know what you are doing")
-
-    form = MyFlatpageForm
-
-
-admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, MyFlatPageAdmin)
-admin.site.register(Event, EventAdmin)
-admin.site.register(EventPageContent, EventPageContentAdmin)
-admin.site.register(EventPageMenu, EventPageMenuAdmin)
-admin.site.register(User, UserAdmin)
