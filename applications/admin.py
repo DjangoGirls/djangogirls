@@ -12,9 +12,10 @@ from .models import Answer, Application, Email, Form, Question
 
 class FormAdmin(admin.ModelAdmin):
     list_display = (
-        'text_header', 'event', 'text_description',
+        'text_header', 'event',
         'open_from', 'open_until', 'number_of_applications',
-        'get_submissions_url')
+        'get_submissions_url'
+    )
 
     def get_queryset(self, request):
         qs = super(FormAdmin, self).get_queryset(request)
