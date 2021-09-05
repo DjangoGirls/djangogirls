@@ -37,7 +37,7 @@ cssselect==1.1.0
     # via pyquery
 dj-database-url==0.5.0
     # via -r requirements.in
-django==2.0.13
+django==2.2.24
     # via
     #   -r requirements.in
     #   django-admin-sortable2
@@ -75,10 +75,6 @@ django-recaptcha==1.4.0
 django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
-    # via -r requirements.in
-django-suit==0.2.26
-    # via -r requirements.in
-django-suit-redactor==0.0.4
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
@@ -219,6 +215,8 @@ six==1.16.0
     #   vcrpy
 slacker==0.9.65
     # via -r requirements.in
+sqlparse==0.4.1
+    # via django
 starkbank-ecdsa==1.1.1
     # via sendgrid
 stripe==2.60.0

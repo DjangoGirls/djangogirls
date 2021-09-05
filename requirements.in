@@ -13,12 +13,9 @@ django-leaflet==0.24.0
 django-markdown-deux==1.0.5
 django-recaptcha==1.4.0
 django-storages[boto3]==1.7.1
-django-suit-redactor==0.0.4
 
-django-suit==0.2.26
 django-unused-media==0.1.13
-# Django suit breaks with Django 2.2
-django<2.1
+django>=2.2,<3
 django-sendgrid-v5==0.8.1
 easy-thumbnails==2.6
 freezegun==0.3.11
