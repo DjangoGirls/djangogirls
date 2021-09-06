@@ -1,6 +1,6 @@
-from django.template import Library
+from urllib.parse import urlparse
 
-from django.utils.six.moves.urllib.parse import urlparse
+from django.template import Library
 
 register = Library()
 

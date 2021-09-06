@@ -4,7 +4,8 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 
 from .emails import (
-    send_application_confirmation, send_application_notification)
+    send_application_confirmation, send_application_notification
+)
 from .forms import (
     PreviousEventForm, ApplicationForm, WorkshopForm, WorkshopTypeForm, RemoteWorkshopForm, OrganizersFormSet
 )
