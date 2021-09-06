@@ -29,10 +29,10 @@ pip-tools
 psycopg2-binary==2.8.3
 py-trello==0.13.0
 pyquery==1.4.0
-pytest-cov==2.6.0
-pytest-django==3.4.3
+pytest-cov==2.12.1
+pytest-django==4.4.0
 pytest-env==0.6.2
-pytest==3.9.1
+pytest==6.2.5
 python-dotenv
 sentry-sdk
 slacker==0.9.65
