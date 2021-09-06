@@ -4,21 +4,21 @@ django-admin-sortable2
 django-autoslug==1.9.4
 django-click==2.1.0
 django-tinymce
-django-countries==5.3.3
-django-date-extensions==3.0
+django-countries
+django-date-extensions
 django-debug-toolbar
-django-extensions<3
-django-formtools==2.1
+django-extensions
+django-formtools
 django-gulp-rev==0.2
 django-leaflet==0.24.0
 django-markdown-deux==1.0.5
-django-recaptcha==1.4.0
+django-recaptcha
 django-storages[boto3]==1.7.1
 
 django-unused-media==0.1.13
-django>=2.2,<3
+django>=3.2,<4
 django-sendgrid-v5==0.8.1
-easy-thumbnails==2.6
+easy-thumbnails
 flake8
 freezegun==0.3.11
 google-api-python-client==1.7.10
@@ -34,7 +34,7 @@ pytest-django==3.4.3
 pytest-env==0.6.2
 pytest==3.9.1
 python-dotenv
-sentry-sdk==1.3.1
+sentry-sdk
 slacker==0.9.65
 stripe
 vcrpy==2.0.1

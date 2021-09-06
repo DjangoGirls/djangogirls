@@ -8,6 +8,8 @@
 --trusted-host pypi.org
 --trusted-host files.pythonhosted.org
 
+asgiref==3.4.1
+    # via django
 atomicwrites==1.4.0
     # via pytest
 attrs==21.2.0
@@ -37,7 +39,7 @@ cssselect==1.1.0
     # via pyquery
 dj-database-url==0.5.0
     # via -r requirements.in
-django==2.2.24
+django==3.2.7
     # via
     #   -r requirements.in
     #   django-admin-sortable2
@@ -239,6 +241,7 @@ tomli==1.2.1
     # via pep517
 typing-extensions==3.10.0.0
     # via
+    #   asgiref
     #   importlib-metadata
     #   yarl
 uritemplate==3.0.1
