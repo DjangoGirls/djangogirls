@@ -1,7 +1,15 @@
-{% extends 'admin/base.html' %}
+{% extends "admin/base.html" %}
 {% load rev %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static_rev 'css/admin.css' %}">
 {% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django girls administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
