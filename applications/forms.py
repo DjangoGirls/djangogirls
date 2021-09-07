@@ -26,10 +26,10 @@ class ApplicationForm(forms.Form):
         self.base_fields.update({
             'captcha': BetterReCaptchaField()
         })
-        super(ApplicationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = self.cleaned_data
+        cleaned_data = super().clean()
 
         question = Question.objects.filter(
             form=self.form,
@@ -43,13 +43,9 @@ class ApplicationForm(forms.Form):
         email = self.cleaned_data.get(field_name)
 
         if email is not None:
-            if (Application.objects
-                    .filter(form=self.form, email=email)
-                    .exists()):
-                self.add_error(
-                    field_name,
-                    _('Application for this e-mail already exists.')
-                )
+            existing_application = Application.objects.filter(form=self.form, email=email)
+            if existing_application.exists():
+                self.add_error(field_name, _('Application for this e-mail already exists.'))
 
         # Always return cleaned_data
         return cleaned_data
@@ -93,8 +89,9 @@ class ApplicationForm(forms.Form):
 
         if application.email:
             # Send confirmation email
-            subject = "Confirmation of your application for {}".format(
-                self.form.event.page_title)
+            subject = _("Confirmation of your application for %(page_title)s") % {
+                'page_title': self.form.event.page_title
+            }
             body = render_to_string(
                 'emails/application_confirmation.html',
                 {
@@ -123,8 +120,9 @@ class ApplicationForm(forms.Form):
                 url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
                 payload = {"email_address": application.email,
                            "status": "pending"}
-                requests.post(url, auth=(
-                    'user', settings.MAILCHIMP_API_KEY), json=payload)
+                requests.post(
+                    url, auth=('user', settings.MAILCHIMP_API_KEY), json=payload
+                )
 
 
 class ScoreForm(forms.ModelForm):
@@ -140,7 +138,7 @@ class EmailForm(forms.ModelForm):
         """
         When email is already sent, the form should be disabled
         """
-        super(EmailForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if self.instance.sent:
             # email was sent, let's disable all fields:
             for field in self.fields:

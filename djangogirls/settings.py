@@ -266,3 +266,7 @@ if DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax(),
     }
+
+RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
+if RECAPTCHA_TESTING:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

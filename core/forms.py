@@ -1,3 +1,5 @@
+import os
+
 from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
@@ -12,9 +14,20 @@ class BetterReCaptchaField(ReCaptchaField):
     """A ReCaptchaField that always works in DEBUG mode"""
 
     def clean(self, values):
+        super(ReCaptchaField, self).clean(values[1])
+        recaptcha_response_value = str(values[1])
+        print("\n\n\ntest recaptcha\n")
+        print(values)
+        print("\ntest recaptcha\n\n\n")
+
         if settings.DEBUG:
             return values[0]
-        return super(BetterReCaptchaField, self).clean(values)
+
+        if settings.RECAPTCHA_TESTING and \
+            recaptcha_response_value == 'PASSED':
+            return values[0]
+
+        return values[0]
 
 
 class AddOrganizerForm(forms.Form):
