@@ -13,8 +13,9 @@ def test_access_apply_view(client, future_event, future_event_form):
     assert resp.status_code == 200
     assert resp.context['form_obj'] == future_event_form
     # there is two more fields than default questions,
-    # because we always add newsletter option at the end and a captcha
-    assert len(resp.context['form'].fields) == len(DEFAULT_QUESTIONS) + 2
+    # because we always add newsletter option at the end
+    # and a captcha is not added for testing anymore
+    assert len(resp.context['form'].fields) == len(DEFAULT_QUESTIONS) + 1
 
     # Redirect to event page because there is no form
     future_event_form.delete()

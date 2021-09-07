@@ -23,9 +23,10 @@ class ApplicationForm(forms.Form):
         self.base_fields = generate_form_from_questions(
             self.form.question_set.all()
         )
-        self.base_fields.update({
-            'captcha': BetterReCaptchaField()
-        })
+        if not settings.RECAPTCHA_TESTING:
+            self.base_fields.update({
+                'captcha': BetterReCaptchaField()
+            })
         super().__init__(*args, **kwargs)
 
     def clean(self):
