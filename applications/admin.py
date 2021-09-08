@@ -18,7 +18,7 @@ class FormAdmin(admin.ModelAdmin):
     )
 
     def get_queryset(self, request):
-        qs = super(FormAdmin, self).get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(event__team__in=[request.user])
@@ -31,7 +31,7 @@ class FormAdmin(admin.ModelAdmin):
         return form
 
     def get_urls(self):
-        urls = super(FormAdmin, self).get_urls()
+        urls = super().get_urls()
         my_urls = [
             url(r'submissions/$',
                 self.admin_site.admin_view(self.view_submissions)),
@@ -77,13 +77,13 @@ class QuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_filter = (FormFilter,)
 
     def get_queryset(self, request):
-        qs = super(QuestionAdmin, self).get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(form__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(QuestionAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             form_objs = Form.objects.filter(event__team__in=[request.user])
             form.base_fields['form'].queryset = form_objs
@@ -109,8 +109,7 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class EmailAdmin(admin.ModelAdmin):
-    list_display = ('form', 'author', 'subject', 'recipients_group', 'created',
-                    'sent')
+    list_display = ('form', 'author', 'subject', 'recipients_group', 'created', 'sent')
 
 
 admin.site.register(Form, FormAdmin)

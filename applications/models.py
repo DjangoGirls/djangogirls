@@ -59,7 +59,7 @@ class Form(models.Model):
 
     def save(self, *args, **kwargs):
         is_form_new = False if self.pk else True
-        super(Form, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
         if is_form_new:
             self.create_default_questions()
@@ -79,7 +79,7 @@ class Form(models.Model):
     @property
     def application_open(self):
         if self.open_from and self.open_until:
-            return (self.open_from < timezone.now() < self.open_until)
+            return self.open_from < timezone.now() < self.open_until
         return True
 
 

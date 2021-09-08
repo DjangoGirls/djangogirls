@@ -58,7 +58,8 @@ def apply(request, city):
         })
 
     number_of_email_questions = Question.objects.filter(
-        question_type='email', form=form_obj).count()
+        question_type='email', form=form_obj
+    ).count()
 
     return render(request, 'applications/apply.html', {
         'event': event,
