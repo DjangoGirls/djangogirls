@@ -1,5 +1,3 @@
-import os
-
 from captcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
