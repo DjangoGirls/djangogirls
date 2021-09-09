@@ -1,26 +1,32 @@
 {% extends "admin/change_form.html" %}
 {% load i18n %}
 
-{% block object-tools %}
-    <h4 class="italic-title">Triaging</h4>
-    <div class="box save-box">
-      {% if original.status != 'rejected' and original.status != 'accepted' %}
-        <a class="btn btn-high btn-info" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'accepted' %}">
-          Accept application
-        </a>
-        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'in_review' %}">
-          Move to In Review
-        </a>
-        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'on_hold' %}">
-          Move to Hold
-        </a>
-        <a class="btn btn-high" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'rejected' %}">
-          Reject application
-        </a>
-      {% else %}
-        Application closed.
-      {% endif %}
-    </div>
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+{% endblock %}
 
+{% block object-tools %}
+    <div class="row mb-3">
+        <h4 class="italic-title">Triaging</h4>
+        <div class="box save-box">
+          {% if original.status != 'rejected' and original.status != 'accepted' %}
+            <a class="btn btn-outline-success" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'accepted' %}">
+              Accept application
+            </a>
+            <a class="btn btn-outline-primary" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'in_review' %}">
+              Move to In Review
+            </a>
+            <a class="btn btn-outline-secondary" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'on_hold' %}">
+              Move to Hold
+            </a>
+            <a class="btn btn-outline-danger" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'rejected' %}">
+              Reject application
+            </a>
+          {% else %}
+            Application closed.
+          {% endif %}
+        </div>
+    </div>
     {{ block.super }}
 {% endblock %}

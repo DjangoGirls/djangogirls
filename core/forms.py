@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.validators import validate_email
 from django.db import transaction
 
-from .models import Event, User
+from .models import Event
 
 
 class BetterReCaptchaField(ReCaptchaField):
@@ -34,7 +34,7 @@ class AddOrganizerForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         event_choices = kwargs.pop('event_choices', None)
-        super(AddOrganizerForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if event_choices is not None:
             self.fields['event'].queryset = event_choices
 
@@ -46,46 +46,6 @@ class AddOrganizerForm(forms.Form):
         first_name, _, last_name = self.cleaned_data['name'].partition(' ')
         user = event.add_organizer(email, first_name, last_name)
         return user
-
-
-class UserCreationForm(forms.ModelForm):
-    error_messages = {
-        'password_mismatch': "The two password fields didn't match.",
-    }
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label="Password confirmation",
-        widget=forms.PasswordInput,
-        help_text="Enter the same password as above, for verification."
-    )
-
-    class Meta:
-        model = User
-        fields = ('email',)
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
-                code='password_mismatch',
-            )
-        return password2
-
-    def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
-
-
-class UserLimitedChangeForm(forms.ModelForm):
-
-    class Meta:
-        model = User
-        fields = ('email', 'first_name', 'last_name')
 
 
 class EventChoiceField(forms.ModelChoiceField):

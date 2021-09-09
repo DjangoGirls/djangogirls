@@ -20,8 +20,7 @@ SITE_ID = 1
 
 # Application definition
 
-INSTALLED_APPS = (
-    'suit',
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +30,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'adminsortable2',
     'django_date_extensions',
     'django_unused_media',
     'django_extensions',
@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'contact',
     'pictures',
     'donations',
-)
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,90 +125,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 AUTH_USER_MODEL = 'core.User'
 
-SUIT_CONFIG = {
-    'ADMIN_NAME': 'Django Girls',
-    'SEARCH_URL': '/admin/core/event/',
-    'MENU': (
-        {
-            'label': 'Organize Applications',
-            'icon': 'icon-envelope',
-            'models': (
-                'organize.eventapplication',
-            ),
-            'permissions': 'organize.can_accept_organize_application'
-        },
-        {
-            'label': 'Users & Groups',
-            'icon': 'icon-user',
-            'models': ('core.user', 'auth.group'),
-            'permissions': ('auth.add_user', 'auth.add_group')
-        },
-        {
-            'label': 'Events',
-            'icon': 'icon-star',
-            'models': (
-                'core.event', 'core.eventpagecontent',
-                'core.eventpagemenu'
-            )
-        },
-        {
-            'label': 'Organizers',
-            'icon': 'icon-eye-open',
-            'models': (
-                {
-                    'url': '/admin/core/event/add_organizers/',
-                    'label': 'Add organizers'
-                },
-                {
-                    'url': '/admin/core/event/manage_organizers/',
-                    'label': 'Remove organizers'
-                }
-            )
-        },
-        {
-            'label': 'Application Form',
-            'app': 'applications',
-            'icon': 'icon-tasks'
-        },
-        {
-            'label': 'Submitted Applications',
-            'url': '/admin/applications/form/submissions/',
-            'icon': 'icon-user'
-        },
-        {'app': 'flatpages', 'icon': 'icon-file'},
-        {
-            'label': 'Blog & Django Stories',
-            'icon': 'icon-comment',
-            'models': ('story.Story',),
-            'permissions': ('story.add_story',)
-        },
-        {
-            'app': 'patreonmanager',
-            'icon': 'icon-gift',
-            'models': ('patron', 'payment', 'reward')
-        },
-        {
-            'label': 'Organizer\'s Manual',
-            'icon': 'icon-bookmark',
-            'url': 'https://organize.djangogirls.org/'
-        },
-        {
-            'label': 'Organizer\'s FAQ',
-            'icon': 'icon-bookmark',
-            'url': 'https://faq-organizers.djangogirls.org/'
-        },
-        {
-            'label': 'Organizer\'s Google Group',
-            'icon': 'icon-bookmark',
-            'url': 'https://groups.google.com/forum/#!forum/django-girls-organizers'
-        },
-        {
-            'label': 'Organizer\'s Slack',
-            'icon': 'icon-bookmark',
-            'url': 'https://djangogirls.slack.com/'
-        },
-    )
-}
 
 THUMBNAIL_PRESERVE_EXTENSIONS = True
 THUMBNAIL_ALIASES = {
@@ -310,3 +226,22 @@ GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
 
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+
+# ***** DEBUG TOOLBAR *****
+
+DEBUG_TOOLBAR = DEBUG and os.environ.get('DEBUG_TOOLBAR', 'no') == 'yes'
+
+if DEBUG_TOOLBAR:
+    INTERNAL_IPS = [
+        '127.0.0.1',
+    ]
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax(),
+    }

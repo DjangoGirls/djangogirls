@@ -15,17 +15,18 @@ class CoachAdmin(admin.ModelAdmin):
     search_fields = ('name', 'twitter_handle', 'url')
 
     def get_queryset(self, request):
-        qs = super(CoachAdmin, self).get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(eventpagecontent__event__team=request.user).distinct()
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(CoachAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             if 'eventpagecontent' in form.base_fields:
                 qs = EventPageContent.objects.filter(
-                    event__team=request.user)
+                    event__team=request.user
+                )
                 form.base_fields['eventpagecontent'].queryset = qs
         return form
 

@@ -1,7 +1,15 @@
-{% extends 'admin/base.html' %}
-{% load staticfiles rev %}
+{% extends "admin/base.html" %}
+{% load i18n rev %}
+
+{% block title %}{{ title }} | {% trans "Django Girls admin" %}{% endblock %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static_rev 'css/admin.css' %}">
 {% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{% trans "Django Girls administration" %}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -67,7 +67,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'additional'
     )
     inlines = (InlineCoorganizerAdmin,)
-    suit_form_tabs = (
+    suit_form_tabs = (  # TODO: Can this be changed into something still useful?
         ('general', 'General'),
         ('application', 'Application'),
         ('organizers', 'Organizers')
@@ -136,8 +136,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
-    def view_change_application_status(
-            self, request, application_id, new_status):
+    def view_change_application_status(self, request, application_id, new_status):
         """
         Custom EventApplication admin view for handling triaging
         """
@@ -151,7 +150,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
                     request,
                     'admin/organize/eventapplication/view_change_status.html',
                     {'application': application,
-                     'new_status': new_status})
+                     'new_status': new_status}
+                )
             elif request.method == 'POST':
                 if new_status == REJECTED:
                     application.reject()
@@ -169,5 +169,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
             'Application for {city}, {country} has been moved to {status}'.format(
                 city=application.city,
                 country=application.country,
-                status=application.get_status_display()))
+                status=application.get_status_display()
+            )
+        )
         return redirect('admin:organize_eventapplication_changelist')
