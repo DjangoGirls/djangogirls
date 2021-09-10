@@ -152,7 +152,7 @@ def coc_legacy(request, lang=None):
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:
-        raise Http404(_("No translation for language {}".format(lang)))
+        raise Http404(_("No translation for language %(lang)s") % {'lang': lang})
 
 
 # This view's URL is commented out, so avoid coverage hit by commenting out the view also

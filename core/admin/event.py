@@ -168,7 +168,10 @@ class EventAdmin(admin.ModelAdmin):
             else:
                 if user in event.team.all():
                     event.team.remove(user)
-                    messages.success(request, _('Organizer {} has been removed'.format(user.get_full_name())))
+                    messages.success(
+                        request,
+                        _('Organizer %(user_name)s has been removed') % {'user_name': user.get_full_name()}
+                    )
                     return HttpResponseRedirect(
                         reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
 
@@ -192,10 +195,10 @@ class EventAdmin(admin.ModelAdmin):
                 messages.success(
                     request,
                     _(
-                        "{} has been added to your event, yay! They've been also"
+                        "%(user_name)s has been added to your event, yay! They've been also"
                         " invited to Slack and should receive credentials to login"
-                        " in an e-mail.".format(user.get_full_name())
-                    )
+                        " in an e-mail."
+                    ) % {'user_name': user.get_full_name()}
                 )
                 return redirect('admin:core_event_add_organizers')
         else:

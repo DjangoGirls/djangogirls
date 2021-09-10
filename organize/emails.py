@@ -6,7 +6,8 @@ from core.emails import send_email
 
 def send_application_confirmation(event_application):
     subject = (
-        _("Confirmation of application to organise Django Girls {} workshop".format(event_application.city)))
+        _("Confirmation of application to organise Django Girls %(city)s workshop") % {'city': event_application.city}
+    )
     content = render_to_string(
         'emails/organize/application_confirmation.html',
         {
@@ -22,8 +23,9 @@ def send_application_notification(event_application):
     who applied
     """
     subject = (
-        _("New request to organise Django Girls {}, {}".format(
-            event_application.city, event_application.get_country_display()))
+        _("New request to organise Django Girls %(city)s, %(country)s") % {
+            'city': event_application.city, 'country': event_application.get_country_display()
+        }
     )
     content = render_to_string(
         'emails/organize/application_notification.html', {
@@ -34,9 +36,11 @@ def send_application_notification(event_application):
 
 
 def send_application_deployed_email(event_application, event, email_password):
-    subject = (_(
-        "Congrats! Your application to organize Django Girls {} "
-        "has been accepted!".format(event_application.city)))
+    subject = (
+        _("Congrats! Your application to organize Django Girls %(city)s has been accepted!") % {
+            'city': event_application.city
+        }
+    )
     content = render_to_string('emails/organize/event_deployed.html', {
         'event': event,
         'password': email_password,
@@ -47,10 +51,11 @@ def send_application_deployed_email(event_application, event, email_password):
 
 
 def send_application_rejection_email(event_application):
-    """ Sends a rejection email to all organizars who created this application
+    """ Sends a rejection email to all organizers who created this application
     """
     subject = (
-        _("Application to organize Django Girls {} has been reviewed".format(event_application.city)))
+        _("Application to organize Django Girls %(city)s has been reviewed") % {'city': event_application.city}
+    )
     content = render_to_string('emails/organize/rejection.html', {
         'application': event_application
     })
