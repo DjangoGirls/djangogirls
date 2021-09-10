@@ -12,9 +12,9 @@ asgiref==3.4.1
     # via django
 attrs==21.2.0
     # via pytest
-boto3==1.18.29
+boto3==1.18.39
     # via django-storages
-botocore==1.21.29
+botocore==1.21.39
     # via
     #   boto3
     #   s3transfer
@@ -236,7 +236,7 @@ six==1.16.0
     #   vcrpy
 slacker==0.9.65
     # via -r requirements.in
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   django
     #   django-debug-toolbar
