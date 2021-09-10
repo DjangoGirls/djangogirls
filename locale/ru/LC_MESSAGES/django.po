@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24 01:42+0000\n"
+"POT-Creation-Date: 2021-09-10 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,76 +202,76 @@ msgstr ""
 msgid "No, thank you."
 msgstr ""
 
-#: applications/questions.py:131
+#: applications/questions.py:76
 msgid "What's your name?"
 msgstr ""
 
-#: applications/questions.py:135
+#: applications/questions.py:80
 msgid "Your e-mail address:"
 msgstr ""
 
-#: applications/questions.py:139
+#: applications/questions.py:84
 msgid "Your phone number:"
 msgstr ""
 
-#: applications/questions.py:140
+#: applications/questions.py:85
 msgid "Include your country prefix"
 msgstr ""
 
-#: applications/questions.py:144
+#: applications/questions.py:89
 msgid "Where are you from?"
 msgstr ""
 
-#: applications/questions.py:145
+#: applications/questions.py:90
 msgid "City, Country"
 msgstr ""
 
-#: applications/questions.py:149
+#: applications/questions.py:94
 msgid "How old are you?"
 msgstr ""
 
-#: applications/questions.py:154
+#: applications/questions.py:99
 msgid "Which operating system do you use?"
 msgstr ""
 
-#: applications/questions.py:160
+#: applications/questions.py:105
 msgid "What is your current level of experience with programming?"
 msgstr ""
 
-#: applications/questions.py:163
+#: applications/questions.py:108
 msgid ""
 "I'm a total beginner, I don't know anything about it; I've tried some HTML "
 "or CSS before; I've tried some JavaScript before; I've done a few lessons of "
 "Python; I've built a website before; I work as a programmer"
 msgstr ""
 
-#: applications/questions.py:172
+#: applications/questions.py:117
 msgid ""
 "If you checked anything other than beginner, could you tell us a bit more "
 "about your programming knowledge?"
 msgstr ""
 
-#: applications/questions.py:179
+#: applications/questions.py:124
 msgid "What is your current occupation?"
 msgstr ""
 
-#: applications/questions.py:180
+#: applications/questions.py:125
 msgid "What is your current job? Are you a student?"
 msgstr ""
 
-#: applications/questions.py:184
+#: applications/questions.py:129
 msgid "Why do you want to attend the workshop?"
 msgstr ""
 
-#: applications/questions.py:185
+#: applications/questions.py:130
 msgid "Tell us about your motivations and aspirations."
 msgstr ""
 
-#: applications/questions.py:190
+#: applications/questions.py:135
 msgid "How are you planning to share what you've learnt with others?"
 msgstr ""
 
-#: applications/questions.py:193
+#: applications/questions.py:138
 msgid ""
 "Django Girls is a volunteer-run organisation and we look for people who are "
 "active and can help us help more women get into the field. We want you to "
@@ -280,17 +280,17 @@ msgid ""
 "your local meetups, writing a blog or simply teaching your friends."
 msgstr ""
 
-#: applications/questions.py:204
+#: applications/questions.py:149
 msgid "How did you hear about Django Girls?"
 msgstr ""
 
-#: applications/questions.py:211
+#: applications/questions.py:156
 msgid ""
 "I acknowledge that some of my data will be used on Third Party Sites and "
 "Services."
 msgstr ""
 
-#: applications/questions.py:213
+#: applications/questions.py:158
 msgid ""
 "Data collected through this form is used only for the purpose of Django "
 "Girls events. We're using Third Party Sites and Services to make it happen: "
@@ -299,37 +299,37 @@ msgid ""
 "Privacy policy <a href='/privacy-cookies/'>here</a>."
 msgstr ""
 
-#: applications/questions.py:221
+#: applications/questions.py:166
 msgid "Yes"
 msgstr ""
 
-#: applications/questions.py:227
+#: applications/questions.py:172
 msgid ""
 "It is important that all attendees comply with the <a href='/coc/'>Django "
 "Girls Code of Conduct</a>"
 msgstr ""
 
-#: applications/questions.py:231
+#: applications/questions.py:176
 msgid "I've read and understood the Django Girls Code of Conduct"
 msgstr ""
 
-#: applications/views.py:53
+#: applications/views.py:51
 msgid "Yay! Your application has been saved. You'll hear from us soon!"
 msgstr ""
 
-#: applications/views.py:125
+#: applications/views.py:123
 msgid "Application Number"
 msgstr ""
 
-#: applications/views.py:125
+#: applications/views.py:123
 msgid "Application State"
 msgstr ""
 
-#: applications/views.py:125
+#: applications/views.py:123
 msgid "RSVP Status"
 msgstr ""
 
-#: applications/views.py:125
+#: applications/views.py:123
 msgid "Average Score"
 msgstr ""
 
@@ -377,70 +377,92 @@ msgstr ""
 msgid "Ooops. We couldn't send your email :( Please try again later"
 msgstr ""
 
-#: core/admin.py:45
+#: core/admin/event.py:35
 msgid "past event?"
 msgstr ""
 
-#: core/admin.py:50
+#: core/admin/event.py:40
 msgid "has stats?"
 msgstr ""
 
-#: core/admin.py:56
+#: core/admin/event.py:46
 msgid "page URL"
 msgstr ""
 
-#: core/admin.py:73 core/admin.py:106 organize/admin.py:88
+#: core/admin/event.py:63 core/admin/event.py:96 organize/admin.py:88
 msgid "Event info"
 msgstr ""
 
-#: core/admin.py:83 core/admin.py:113
+#: core/admin/event.py:73 core/admin/event.py:103
 msgid "Event main picture"
 msgstr ""
 
-#: core/admin.py:89
+#: core/admin/event.py:79
 msgid "Team"
 msgstr ""
 
-#: core/admin.py:93 core/admin.py:118
+#: core/admin/event.py:83 core/admin/event.py:108
 msgid "Event website"
 msgstr ""
 
-#: core/admin.py:100 core/admin.py:125
+#: core/admin/event.py:90 core/admin/event.py:115
 msgid "Statistics"
 msgstr ""
 
-#: core/admin.py:176
+#: core/admin/event.py:167
 msgid "You cannot remove yourself from a team."
 msgstr ""
 
-#: core/admin.py:180
-msgid "Organizer {} has been removed"
+#: core/admin/event.py:173
+#, python-format
+msgid "Organizer %(user_name)s has been removed"
 msgstr ""
 
-#: core/admin.py:187
+#: core/admin/event.py:181
 msgid "Remove organizers"
 msgstr ""
 
-#: core/admin.py:204
+#: core/admin/event.py:198
+#, python-format
 msgid ""
-"{} has been added to your event, yay! They've been also invited to Slack and "
-"should receive credentials to login in an e-mail."
+"%(user_name)s has been added to your event, yay! They've been also invited "
+"to Slack and should receive credentials to login in an e-mail."
 msgstr ""
 
-#: core/admin.py:357 core/admin.py:364
+#: core/admin/event.py:211
+msgid "Add organizers"
+msgstr ""
+
+#: core/admin/flat_page.py:11
+msgid "Change this only if you know what you are doing"
+msgstr ""
+
+#: core/admin/forms/user.py:9
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: core/admin/forms/user.py:11
+msgid "Password"
+msgstr ""
+
+#: core/admin/forms/user.py:13
+msgid "Password confirmation"
+msgstr ""
+
+#: core/admin/forms/user.py:15
+msgid "Enter the same password as above, for verification."
+msgstr ""
+
+#: core/admin/user.py:14 core/admin/user.py:28
 msgid "Personal info"
 msgstr ""
 
-#: core/admin.py:358
+#: core/admin/user.py:17
 msgid "Permissions"
 msgstr ""
 
-#: core/admin.py:360 core/admin.py:365
+#: core/admin/user.py:31
 msgid "Important dates"
-msgstr ""
-
-#: core/admin.py:410
-msgid "Change this only if you know what you are doing"
 msgstr ""
 
 #: core/default_eventpage_content.py:83
@@ -487,22 +509,6 @@ msgstr ""
 msgid "E-mail address"
 msgstr ""
 
-#: core/forms.py:54
-msgid "The two password fields didn't match."
-msgstr ""
-
-#: core/forms.py:56
-msgid "Password"
-msgstr ""
-
-#: core/forms.py:58
-msgid "Password confirmation"
-msgstr ""
-
-#: core/forms.py:60
-msgid "Enter the same password as above, for verification."
-msgstr ""
-
 #: core/management_utils.py:17
 msgid "Let's talk about the team. First the main organizer:"
 msgstr ""
@@ -522,47 +528,48 @@ msgstr ""
 msgid "Event date should be in the future"
 msgstr ""
 
-#: core/views.py:78
+#: core/views.py:76
 msgid "List of Django Girls events around the world"
 msgstr ""
 
-#: core/views.py:156
-msgid "No translation for language {}"
-msgstr ""
-
-#: djangogirls/settings.py:94
-msgid "Brazilian Portuguese"
-msgstr ""
-
-#: djangogirls/settings.py:95
-msgid "English"
-msgstr ""
-
-#: djangogirls/settings.py:96
-msgid "French"
-msgstr ""
-
-#: djangogirls/settings.py:97
-msgid "German"
-msgstr ""
-
-#: djangogirls/settings.py:98
-msgid "Korean"
-msgstr ""
-
-#: djangogirls/settings.py:99
-msgid "Persian"
-msgstr ""
-
-#: djangogirls/settings.py:100
-msgid "Portuguese"
+#: core/views.py:155
+#, python-format
+msgid "No translation for language %(lang)s"
 msgstr ""
 
 #: djangogirls/settings.py:101
-msgid "Russian"
+msgid "English"
 msgstr ""
 
 #: djangogirls/settings.py:102
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: djangogirls/settings.py:103
+msgid "French"
+msgstr ""
+
+#: djangogirls/settings.py:104
+msgid "German"
+msgstr ""
+
+#: djangogirls/settings.py:105
+msgid "Korean"
+msgstr ""
+
+#: djangogirls/settings.py:106
+msgid "Persian"
+msgstr ""
+
+#: djangogirls/settings.py:107
+msgid "Portuguese"
+msgstr ""
+
+#: djangogirls/settings.py:108
+msgid "Russian"
+msgstr ""
+
+#: djangogirls/settings.py:109
 msgid "Spanish"
 msgstr ""
 
@@ -587,11 +594,11 @@ msgstr ""
 msgid "Main organizer"
 msgstr ""
 
-#: organize/admin.py:164
+#: organize/admin.py:165
 msgid "Invalid status provided for application"
 msgstr ""
 
-#: organize/admin.py:171
+#: organize/admin.py:172
 #, python-brace-format
 msgid "Application for {city}, {country} has been moved to {status}"
 msgstr ""
@@ -641,20 +648,25 @@ msgid "Deployed"
 msgstr ""
 
 #: organize/emails.py:9
-msgid "Confirmation of application to organise Django Girls {} workshop"
+#, python-format
+msgid "Confirmation of application to organise Django Girls %(city)s workshop"
 msgstr ""
 
-#: organize/emails.py:25
-msgid "New request to organise Django Girls {}, {}"
+#: organize/emails.py:26
+#, python-format
+msgid "New request to organise Django Girls %(city)s, %(country)s"
 msgstr ""
 
-#: organize/emails.py:38
+#: organize/emails.py:40
+#, python-format
 msgid ""
-"Congrats! Your application to organize Django Girls {} has been accepted!"
+"Congrats! Your application to organize Django Girls %(city)s has been "
+"accepted!"
 msgstr ""
 
-#: organize/emails.py:53
-msgid "Application to organize Django Girls {} has been reviewed"
+#: organize/emails.py:57
+#, python-format
+msgid "Application to organize Django Girls %(city)s has been reviewed"
 msgstr ""
 
 #: organize/forms.py:12
@@ -763,37 +775,37 @@ msgstr ""
 msgid "Co-organizers"
 msgstr ""
 
-#: patreonmanager/admin.py:29
+#: patreonmanager/admin.py:33
 msgid "Twitter"
 msgstr ""
 
-#: patreonmanager/admin.py:41 patreonmanager/admin.py:47
+#: patreonmanager/admin.py:45 patreonmanager/admin.py:52
 #, python-format
 msgid "%d payment"
 msgid_plural "%d payments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: patreonmanager/admin.py:42
+#: patreonmanager/admin.py:47
 msgid "Payments"
 msgstr ""
 
-#: patreonmanager/admin.py:48
+#: patreonmanager/admin.py:54
 msgid "Uncompleted payments"
 msgstr ""
 
-#: patreonmanager/admin.py:72
+#: patreonmanager/admin.py:80
 msgid "Patron"
 msgstr ""
 
-#: patreonmanager/admin.py:77
+#: patreonmanager/admin.py:85
 #, python-format
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
 msgstr[0] ""
 msgstr[1] ""
 
-#: patreonmanager/admin.py:80
+#: patreonmanager/admin.py:88
 msgid "Mark selected payments as completed"
 msgstr ""
 
@@ -965,6 +977,14 @@ msgid ""
 "application form</a> first."
 msgstr ""
 
+#: templates/admin/base_site.html:4
+msgid "Django Girls admin"
+msgstr ""
+
+#: templates/admin/base_site.html:12
+msgid "Django Girls administration"
+msgstr ""
+
 #: templates/admin/core/event/view_add_organizers.html:6
 msgid "Add a new organizer to your event"
 msgstr ""
@@ -1017,27 +1037,27 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:5
+#: templates/admin/organize/eventapplication/change_form.html:11
 msgid "Triaging"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:9
+#: templates/admin/organize/eventapplication/change_form.html:15
 msgid "Accept application"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:12
+#: templates/admin/organize/eventapplication/change_form.html:18
 msgid "Move to In Review"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:15
+#: templates/admin/organize/eventapplication/change_form.html:21
 msgid "Move to Hold"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:18
+#: templates/admin/organize/eventapplication/change_form.html:24
 msgid "Reject application"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/change_form.html:21
+#: templates/admin/organize/eventapplication/change_form.html:27
 msgid "Application closed."
 msgstr ""
 
@@ -1890,11 +1910,11 @@ msgstr ""
 msgid "Thank you for constant support and love we receive from you!"
 msgstr ""
 
-#: templates/core/2015.html:478 templates/core/2016-2017.html:414
+#: templates/core/2015.html:478 templates/core/2016-2017.html:415
 msgid "Sponsors 📢️"
 msgstr ""
 
-#: templates/core/2015.html:480 templates/core/2016-2017.html:416
+#: templates/core/2015.html:480 templates/core/2016-2017.html:417
 msgid ""
 "Again, we would like to thank amazing sponsors of Django Girls and of the "
 "individual Django Girls workshops all over the world. They help us make "
@@ -1903,7 +1923,7 @@ msgid ""
 "as possible, and that couldn't happen without them."
 msgstr ""
 
-#: templates/core/2015.html:488 templates/core/2016-2017.html:424
+#: templates/core/2015.html:488 templates/core/2016-2017.html:425
 msgid ""
 "Known for Elasticsearch, Kibana, Beats, and Logstash, Elastic creates "
 "products to to search, analyze, and visualize your data, allowing you to get "
@@ -1911,28 +1931,28 @@ msgid ""
 "sponsors, they also sponsored several local events. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:495 templates/core/2016-2017.html:431
+#: templates/core/2015.html:495 templates/core/2016-2017.html:432
 msgid ""
 "The Django Software Foundation (DSF) is a non-profit organization created to "
 "promote, support, and advance the development of Django. They've helped many "
 "Django Girls events that had problems finding local sponsors. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:501 templates/core/2016-2017.html:438
+#: templates/core/2015.html:501 templates/core/2016-2017.html:439
 msgid ""
 "The Python Software Foundation (PSF) is a non-profit organization that holds "
 "the intellectual property rights behind the Python programming language. "
 "They are one of the biggest sponsors for local events. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:507 templates/core/2016-2017.html:445
+#: templates/core/2015.html:507 templates/core/2016-2017.html:446
 msgid ""
 "GitHub is a Git repository hosting service. They have sponsored many Django "
 "Girls events, and they provide useful materials for new learners like cheat-"
 "sheets. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:513 templates/core/2016-2017.html:452
+#: templates/core/2015.html:513 templates/core/2016-2017.html:453
 msgid ""
 "Divio, that created Django CMS and Aldryn, uses Python and Django to provide "
 "support for website installation, maintenance, troubleshooting, and "
@@ -1940,28 +1960,28 @@ msgid ""
 "supporters in June 2015. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:519 templates/core/2016-2017.html:459
+#: templates/core/2015.html:519 templates/core/2016-2017.html:460
 msgid ""
 "Lincoln Loop is a full service web studio offering user experience and "
 "development based on the Django Web Framework. They joined our Patreon "
 "campaign in April 2015, and have contributed to local events. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:525 templates/core/2016-2017.html:466
+#: templates/core/2015.html:525 templates/core/2016-2017.html:467
 msgid ""
 "Since May, Django Girls has been hosted on PythonAnywhere! They host, run, "
 "and code Python in the cloud, and have made the lives of our attendees much "
 "easier by being really simple and pleasant to use. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:531 templates/core/2016-2017.html:473
+#: templates/core/2015.html:531 templates/core/2016-2017.html:474
 msgid ""
 "Mandrill is a transactional email platform from MailChimp. They'vebeen "
 "supporting our emails since September 2015 and have also sponsored local "
 "events. Thanks <3"
 msgstr ""
 
-#: templates/core/2015.html:537 templates/core/2016-2017.html:480
+#: templates/core/2015.html:537 templates/core/2016-2017.html:481
 msgid ""
 "We would also like to thank our regular donors from <a href=\"https://www."
 "patreon.com/djangogirls\">Patreon</a>: your commitment to help us every "
@@ -2220,11 +2240,20 @@ msgid ""
 "they have an interest in technology and learning programming"
 msgstr ""
 
-#: templates/core/2016-2017.html:219
+#: templates/core/2016-2017.html:212
+msgid ""
+"We'd like to acknowledge that even though the total number of responses "
+"received is a significant representative sample of the Django Girls alumni, "
+"it is likely that most of the women who responded to our survey stayed "
+"active in the tech industry after attending our workshops and hence the "
+"results could be positively skewed."
+msgstr ""
+
+#: templates/core/2016-2017.html:220
 msgid "Participants’ Involvement in Tech Activities"
 msgstr ""
 
-#: templates/core/2016-2017.html:223
+#: templates/core/2016-2017.html:224
 msgid ""
 "We asked the respondents if they were involved in tech-related activities "
 "after the workshop. The tech activities included attending tech events, "
@@ -2233,14 +2262,14 @@ msgid ""
 "enrolling for programming courses."
 msgstr ""
 
-#: templates/core/2016-2017.html:231
+#: templates/core/2016-2017.html:232
 #, python-format
 msgid ""
 "We were excited to learn that <b>73%% of the respondents are still involved "
 "tech-related activities</b> after the event."
 msgstr ""
 
-#: templates/core/2016-2017.html:239
+#: templates/core/2016-2017.html:240
 msgid ""
 "These statistics show that our workshops are generating interest in "
 "technology and programming in the participants who attends them. This "
@@ -2250,31 +2279,31 @@ msgid ""
 "increase the number of women involved in engineering and programming."
 msgstr ""
 
-#: templates/core/2016-2017.html:250
+#: templates/core/2016-2017.html:251
 msgid "Participants’ learning to code after the workshop"
 msgstr ""
 
-#: templates/core/2016-2017.html:257
+#: templates/core/2016-2017.html:258
 msgid ""
 "We were also interested in finding out whether our former participants "
 "continued learning programming after attending the workshop."
 msgstr ""
 
-#: templates/core/2016-2017.html:260
+#: templates/core/2016-2017.html:261
 #, python-format
 msgid ""
 "79%% of women attending Django Girls workshop continued learning programming "
 "after and 7%% were planning to continue learning"
 msgstr ""
 
-#: templates/core/2016-2017.html:265
+#: templates/core/2016-2017.html:266
 #, python-format
 msgid ""
 "1%% of participants had tried and given up while 13%% had not continued "
 "learning programming after the workshop."
 msgstr ""
 
-#: templates/core/2016-2017.html:272
+#: templates/core/2016-2017.html:273
 msgid ""
 "The findings showed that the majority of the women who attend Django Girls "
 "workshops continue learning to code after. The women continued learning in "
@@ -2284,24 +2313,24 @@ msgid ""
 "employed as programmers after they have developed their programming skills."
 msgstr ""
 
-#: templates/core/2016-2017.html:283
+#: templates/core/2016-2017.html:284
 msgid "Participants’ Employment in Tech after attending workshops"
 msgstr ""
 
-#: templates/core/2016-2017.html:290
+#: templates/core/2016-2017.html:291
 msgid ""
 "The biggest question we were interested to answer was to know how many of "
 "the women started working in tech as developers after attending the workshop."
 msgstr ""
 
-#: templates/core/2016-2017.html:296
+#: templates/core/2016-2017.html:297
 #, python-format
 msgid ""
 "We were impressed to learn that <b>21%% of Django Girls' former attendees "
 "are now hired as developers</b> after attending the workshop!"
 msgstr ""
 
-#: templates/core/2016-2017.html:299
+#: templates/core/2016-2017.html:300
 #, python-format
 msgid ""
 "It was also interesting to note that 15%% of the attendees of were already "
@@ -2311,7 +2340,7 @@ msgid ""
 "remaining 40%% had not got tech jobs and did not indicate their future plans."
 msgstr ""
 
-#: templates/core/2016-2017.html:309
+#: templates/core/2016-2017.html:310
 msgid ""
 "This further affirmed that our work has had positive results in the lives of "
 "women we introduced to coding as well as the tech industry that hires these "
@@ -2320,24 +2349,24 @@ msgid ""
 "which we are happy about!</strong>"
 msgstr ""
 
-#: templates/core/2016-2017.html:318
+#: templates/core/2016-2017.html:319
 msgid "Impact of Django Girls workshops on Participants’ lives"
 msgstr ""
 
-#: templates/core/2016-2017.html:325
+#: templates/core/2016-2017.html:326
 msgid ""
 "We were also interested in learning other ways the participants had been "
 "impacted by attending a Django Girls workshop."
 msgstr ""
 
-#: templates/core/2016-2017.html:330
+#: templates/core/2016-2017.html:331
 #, python-format
 msgid ""
 "The survey showed that 93%% of the participants had been impacted positively "
 "in different ways."
 msgstr ""
 
-#: templates/core/2016-2017.html:333
+#: templates/core/2016-2017.html:334
 #, python-format
 msgid ""
 "The survey showed that about 43%% had been inspired by meeting other women "
@@ -2346,7 +2375,7 @@ msgid ""
 "to learn that the tech industry and programming are for women as well."
 msgstr ""
 
-#: templates/core/2016-2017.html:342
+#: templates/core/2016-2017.html:343
 #, python-format
 msgid ""
 "About 25%% had been excited that learnt new knowledge about technology, "
@@ -2360,11 +2389,11 @@ msgid ""
 "lives due to participation in the workshop."
 msgstr ""
 
-#: templates/core/2016-2017.html:354
+#: templates/core/2016-2017.html:355
 msgid "Summary"
 msgstr ""
 
-#: templates/core/2016-2017.html:356
+#: templates/core/2016-2017.html:357
 msgid ""
 "<b>The findings show that Django Girls has been successful in inspiring "
 "women to fall in love with programming as participants are exposed to women "
@@ -2378,14 +2407,14 @@ msgid ""
 "be welcoming and diverse."
 msgstr ""
 
-#: templates/core/2016-2017.html:374
+#: templates/core/2016-2017.html:375
 msgid ""
 "On our third birthday, we asked our Twitter community to tell us about the "
 "ways Django Girls impacted their lives. The response we received was "
 "overwhelmingly positive:"
 msgstr ""
 
-#: templates/core/2016-2017.html:405
+#: templates/core/2016-2017.html:406
 msgid "See more success stories"
 msgstr ""
 

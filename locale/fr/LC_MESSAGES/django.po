@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangogirls\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-09 21:12+0000\n"
+"POT-Creation-Date: 2021-09-10 09:23+0000\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -403,21 +403,23 @@ msgstr ""
 msgid "You cannot remove yourself from a team."
 msgstr ""
 
-#: core/admin/event.py:171
-msgid "Organizer {} has been removed"
+#: core/admin/event.py:173
+#, python-format
+msgid "Organizer %(user_name)s has been removed"
 msgstr ""
 
-#: core/admin/event.py:178
+#: core/admin/event.py:181
 msgid "Remove organizers"
 msgstr ""
 
-#: core/admin/event.py:195
+#: core/admin/event.py:198
+#, python-format
 msgid ""
-"{} has been added to your event, yay! They've been also invited to Slack and "
-"should receive credentials to login in an e-mail."
+"%(user_name)s has been added to your event, yay! They've been also invited "
+"to Slack and should receive credentials to login in an e-mail."
 msgstr ""
 
-#: core/admin/event.py:208
+#: core/admin/event.py:211
 msgid "Add organizers"
 msgstr ""
 
@@ -521,7 +523,8 @@ msgid "List of Django Girls events around the world"
 msgstr ""
 
 #: core/views.py:155
-msgid "No translation for language {}"
+#, python-format
+msgid "No translation for language %(lang)s"
 msgstr ""
 
 #: djangogirls/settings.py:101
@@ -635,20 +638,25 @@ msgid "Deployed"
 msgstr ""
 
 #: organize/emails.py:9
-msgid "Confirmation of application to organise Django Girls {} workshop"
+#, python-format
+msgid "Confirmation of application to organise Django Girls %(city)s workshop"
 msgstr ""
 
-#: organize/emails.py:25
-msgid "New request to organise Django Girls {}, {}"
+#: organize/emails.py:26
+#, python-format
+msgid "New request to organise Django Girls %(city)s, %(country)s"
 msgstr ""
 
-#: organize/emails.py:38
+#: organize/emails.py:40
+#, python-format
 msgid ""
-"Congrats! Your application to organize Django Girls {} has been accepted!"
+"Congrats! Your application to organize Django Girls %(city)s has been "
+"accepted!"
 msgstr ""
 
-#: organize/emails.py:53
-msgid "Application to organize Django Girls {} has been reviewed"
+#: organize/emails.py:57
+#, python-format
+msgid "Application to organize Django Girls %(city)s has been reviewed"
 msgstr ""
 
 #: organize/forms.py:12
