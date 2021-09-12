@@ -1,8 +1,7 @@
 from adminsortable2.admin import SortableAdminMixin
-from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.html import format_html
 
 from core.models import Event
@@ -33,8 +32,7 @@ class FormAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
-            url(r'submissions/$',
-                self.admin_site.admin_view(self.view_submissions)),
+            path('submissions/', self.admin_site.admin_view(self.view_submissions)),
         ]
         return my_urls + urls
 

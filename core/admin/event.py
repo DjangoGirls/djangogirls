@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -121,12 +121,16 @@ class EventAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(EventAdmin, self).get_urls()
         my_urls = [
-            url(r'manage_organizers/$',
+            path(
+                'manage_organizers/',
                 self.admin_site.admin_view(self.view_manage_organizers),
-                name='core_event_manage_organizers'),
-            url(r'add_organizers/$',
+                name='core_event_manage_organizers'
+            ),
+            path(
+                'add_organizers/',
                 self.admin_site.admin_view(self.view_add_organizers),
-                name='core_event_add_organizers'),
+                name='core_event_add_organizers'
+            ),
         ]
         return my_urls + urls
 

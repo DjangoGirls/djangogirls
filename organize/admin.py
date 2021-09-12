@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
-from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404, render
+from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from .models import EventApplication, Coorganizer
@@ -132,10 +132,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(EventApplicationAdmin, self).get_urls()
         my_urls = [
-            url(r'(?P<application_id>\d+)/triage/(?P<new_status>[\w\d/]+)/$',
-                self.admin_site.admin_view(
-                    self.view_change_application_status),
-                name='organize_eventapplication_change_application_status'),
+            path(
+                '<int:application_id>/triage/<str:new_status>/',
+                self.admin_site.admin_view(self.view_change_application_status),
+                name='organize_eventapplication_change_application_status'
+            ),
         ]
         return my_urls + urls
 

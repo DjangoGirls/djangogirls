@@ -5,7 +5,7 @@ from django_countries import countries
 from django_extensions.db.fields import AutoSlugField
 from django.db import models, transaction
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDateField
 
 from core import gmail_accounts
