@@ -1,5 +1,5 @@
 {% extends 'core/event.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block title %}{{ form.text_header }}{% endblock %}
 {% block description %}{{ form.text_description|striptags }}{% endblock %}
@@ -23,13 +23,24 @@
 
     {% if request.user and number_of_email_questions == 0 %}
     <div class="alert alert-danger">
-        Attention! This form doesn't have a question with type "email"! It's important to collect emails of candidates correctly,
-        otherwise you won't be able to email them through our system. :sadpanda:
+        {% blocktrans trimmed %}
+            Attention! This form doesn't have a question with type "email"! It's important to collect emails of candidates correctly,
+            otherwise you won't be able to email them through our system. :sadpanda:
+        {% endblocktrans %}
     </div>
     {% endif %}
 
     {% if request.user and not form_obj.application_open %}
-        <div class="alert alert-info" role="alert">Hi there! If you can see this message, it means people can't register to your event. If you want to open registrations, go to <a href="/admin/applications/form/{{ form_obj.pk }}/change/">your form in the admin interface</a> and make sure "Application process" fields are correctly configured. Note: we have a <a href="https://github.com/DjangoGirls/djangogirls/issues/240">timezone problem</a>! To be sure your form is open, use the time given by our server (available in the top part of your admin interface). Sorry 😓 </div>
+        <div class="alert alert-info" role="alert">
+            {% blocktrans %}
+                Hi there! If you can see this message, it means people can't register to your event.
+                If you want to open registrations, go to
+                <a href="/admin/applications/form/{{ form_obj.pk }}/change/">your form in the admin interface</a> and
+                make sure "Application process" fields are correctly configured. Note: we have a
+                <a href="https://github.com/DjangoGirls/djangogirls/issues/240">timezone problem</a>! To be sure your
+                form is open, use the time given by our server (available in the top part of your admin interface). Sorry 😓
+            {% endblocktrans %}
+        </div>
     {% endif %}
 
     {% for message in messages %}
@@ -42,7 +53,7 @@
     <form action="" method="post">
       {% csrf_token %}
       {% include 'includes/_form.html' %}
-      <input type="submit" value="Submit your application" />
+      <input type="submit" value="{% trans "Submit your application" %}" />
     </form>
     {% endif %}
 </div>

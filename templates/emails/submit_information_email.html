@@ -1,10 +1,18 @@
-<p>Hello team {{event.city}}!</p>
+{% load i18n %}
 
-<p>Hope you’re all doing fantastic and took some well deserved rest after organizing your Django Girls workshop :)</p>
+<p>{% blocktrans with event=event.city %}Hello team {{ event }}!{% endblocktrans %}</p>
 
-<p>Just a friendly reminder to <a href="{{ settings.BASE_URL }}{% url 'admin:core_event_change' event.id %}">fill out this form</a> to provide information how many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)</p>
+<p>{% trans "Hope you’re all doing fantastic and took some well deserved rest after organizing your Django Girls workshop :)" %}</p>
 
 <p>
-Hugs, rainbows and sunshines!<br/>
+{% url 'admin:core_event_change' event.id as event_url %}
+{% blocktrans trimmed with base=settings.BASE_URL %}
+    Just a friendly reminder to <a href="{{ base }}{{ event_url }}">fill out this form</a> to provide information how
+    many people attended your workshop. This will help us show the global impact that Django Girls is having on the world! :)
+{% endblocktrans %}
+</p>
+
+<p>
+{% trans "Hugs, rainbows and sunshines!" %}<br/>
 Django Girls
 </p>

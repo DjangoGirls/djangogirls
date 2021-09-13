@@ -5,6 +5,7 @@ from django import forms
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.utils.translation import gettext_lazy as _
 
 from core.forms import BetterReCaptchaField
 
@@ -20,7 +21,8 @@ class ApplicationForm(forms.Form):
         """
         self.form = kwargs.pop('form')
         self.base_fields = generate_form_from_questions(
-            self.form.question_set.all())
+            self.form.question_set.all()
+        )
         self.base_fields.update({
             'captcha': BetterReCaptchaField()
         })
@@ -28,11 +30,11 @@ class ApplicationForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        email = None
-        field_name = None
 
-        question = Question.objects.filter(form=self.form,
-                                           question_type='email').first()
+        question = Question.objects.filter(
+            form=self.form,
+            question_type='email'
+        ).first()
 
         if not question:
             return cleaned_data
@@ -44,8 +46,10 @@ class ApplicationForm(forms.Form):
             if (Application.objects
                     .filter(form=self.form, email=email)
                     .exists()):
-                self.add_error(field_name,
-                               'Application for this e-mail already exists.')
+                self.add_error(
+                    field_name,
+                    _('Application for this e-mail already exists.')
+                )
 
         # Always return cleaned_data
         return cleaned_data

@@ -1,140 +1,207 @@
 {% extends 'global/base.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block content %}
-
     <div class="container">
-
         <section id="resources">
             <div class="row clearfix">
                 <div class="col-md-12">
-                    <h2>Contribute</h2>
+                    <h2>{% trans "Contribute" %}</h2>
                     <p>
-                        There are many ways to contribute to Django Girls: you can organize an event, coach, work on the tutorial and help on Gitter. If you'd rather help us financially, you can always support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or <a href="https://www.paypal.com/uk/webapps/mpp/search-cause?charityId=129929&s=3">PayPal Giving Funds</a>.
+                      {% blocktrans trimmed %}
+                        There are many ways to contribute to Django Girls: you can organize an event, coach, work on the tutorial and help on Gitter.
+                        If you'd rather help us financially, you can always support us on <a href="https://www.patreon.com/djangogirls">Patreon</a> or
+                        <a href="https://www.paypal.com/uk/webapps/mpp/search-cause?charityId=129929&s=3">PayPal Giving Funds</a>.
+                      {% endblocktrans %}
                     </p>
                 </div>
             </div>
 
             <div class="row clearfix">
                 <div class="col-md-6">
-                    <h3>Support us!</h3>
+                    <h3>{% trans "Support us!" %}</h3>
                     <div class="cover">
                         <a href="https://www.patreon.com/djangogirls">
                             <img src="{% static 'img/global/contribute/love.jpg' %}" alt="Pixel heart and Django." />
                         </a>
                     </div>
                     <div class="info">
+                        <p>
+                          {% url 'donations:index' as doantion_url %}
+                          {% blocktrans trimmed %}
+                            Django Girls is a <a href="http://apps.charitycommission.gov.uk/Showcharity/RegisterOfCharities/CharityFramework.aspx?RegisteredCharityNumber=1163260&SubsidiaryNumber=0">Registered Charity</a>
+                            and is volunteer run. If you're an individual or a company and want to support us, you can make a <a href="https://www.patreon.com/djangogirls">monthly donation</a>.
+                            You can send one-time donations to our <a href="{{ donation_url }}">PayPal account</a> or <a href="{{ donation_url }}">donate via credit card</a>.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>Django Girls is a <a href="http://apps.charitycommission.gov.uk/Showcharity/RegisterOfCharities/CharityFramework.aspx?RegisteredCharityNumber=1163260&SubsidiaryNumber=0">Registered Charity</a> and is volunteer run. If you're an individual or a company and want to support us, you can make a <a href="https://www.patreon.com/djangogirls">monthly donation</a>. You can send one-time donations to our <a href="{% url 'donations:index' %}">PayPal account</a> or <a href="{% url 'donations:index' %}">donate via credit card</a>.</p>
-
-                        <p>If you want to help an <a href="http://djangogirls.org/events">event</a> in particular, you can contact the local organization team to sponsor them.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            If you want to help an <a href="http://djangogirls.org/events">event</a> in particular, you can contact the local organization team to sponsor them.
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Organize!</h3>
+                    <h3>{% trans "Organize!" %}</h3>
                     <div class="cover">
                         <a href="https://organize.djangogirls.org/">
                             <img src="{% static 'img/global/contribute/organize.jpg' %}" alt="Flowers and name tag on a table." />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Each Django Girls event is a free, one-day workshop for 30-60 people on HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Each Django Girls event is a free, one-day workshop for 30-60 people on HTML, CSS, Python and Django.
+                            A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>Want to get started? Check our <a href="https://organize.djangogirls.org/">Organizer's Manual</a> and <a href="https://djangogirls.org/organize/">bring Django Girls to your city!</a></p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Want to get started? Check our <a href="https://organize.djangogirls.org/">Organizer's Manual</a> and
+                            <a href="https://djangogirls.org/organize/">bring Django Girls to your city!</a>
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="row clearfix">
              <div class="col-md-6">
-                    <h3>Coach!</h3>
+                    <h3>{% trans "Coach!" %}</h3>
                     <div class="cover">
                         <a href="http://djangogirls.org/events">
                             <img src="{% static 'img/global/contribute/coach.jpg' %}" alt="A coach helping an attendee." />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Have you heard about an event happening in your city and you want to help? Contact the local <a href="http://djangogirls.org/events">organizing team</a> and ask if they need more coaches!</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Have you heard about an event happening in your city and you want to help? Contact the local <a href="http://djangogirls.org/events">organizing team</a> and ask if they need more coaches!
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>You will be helping a group of 3 people to install what they need for the event and guide them through our <a href="https://tutorial.djangogirls.org/">tutorial</a>.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            You will be helping a group of 3 people to install what they need for the event and guide them through our <a href="https://tutorial.djangogirls.org/">tutorial</a>.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>Don't forget to check our <a href="https://coach.djangogirls.org/">Coaching Manual</a>!</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Don't forget to check our <a href="https://coach.djangogirls.org/">Coaching Manual</a>!
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Work on the website!</h3>
+                    <h3>{% trans "Work on the website!" %}</h3>
                     <div class="cover">
                         <a href="https://github.com/DjangoGirls/djangogirls">
-                            <img src="{% static 'img/global/contribute/debug.jpg' %}" alt="Computer screen with a console and a webpage." />
+                            <img src="{% static 'img/global/contribute/debug.jpg' %}" alt="{% trans "Computer screen with a console and a webpage." %}" />
                         </a>
                     </div>
                     <div class="info">
-                        <p>There is always something to do to make our website better. You can report (or fix!) bugs and typos, or work on new features.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            There is always something to do to make our website better. You can report (or fix!) bugs and typos, or work on new features.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>We are waiting for your <a href="https://github.com/DjangoGirls/djangogirls">pull requests!</a></p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            We are waiting for your <a href="https://github.com/DjangoGirls/djangogirls">pull requests!</a>
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="row clearfix">
                 <div class="col-md-6">
-                    <h3>Fix the tutorial!</h3>
+                    <h3>{% trans "Fix the tutorial!" %}</h3>
                     <div class="cover">
                         <a href="https://github.com/DjangoGirls/tutorial">
-                            <img src="{% static 'img/global/contribute/tutoedit.jpg' %}" alt="A note book and a pen." />
+                            <img src="{% static 'img/global/contribute/tutoedit.jpg' %}" alt="{% trans "A note book and a pen." %}" />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Is something in the tutorial not clear, or is there a typo? You can improve the tutorial by making a pull request to our <a href="https://github.com/DjangoGirls/tutorial">GitHub repository</a>.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Is something in the tutorial not clear, or is there a typo? You can improve the tutorial by making a pull request to our <a href="https://github.com/DjangoGirls/tutorial">GitHub repository</a>.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>You just finished our tutorial and want to help? Making pull requests to fix typo is a great way to use your new Git skills!</p>
+                        <p>{% trans "You just finished our tutorial and want to help? Making pull requests to fix typo is a great way to use your new Git skills!" %}</p>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Translate the tutorial!</h3>
+                    <h3>{% trans "Translate the tutorial!" %}</h3>
                     <div class="cover">
                         <a href="https://crowdin.com/project/django-girls-tutorial">
-                            <img src="{% static 'img/global/contribute/translate.jpg' %}" alt="A computer screen saying hello and golden balloons saying yay!." />
+                            <img src="{% static 'img/global/contribute/translate.jpg' %}" alt="{% trans "A computer screen saying hello and golden balloons saying yay!." %}" />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Our tutorial has already been translated into <a href="https://tutorial.djangogirls.org/">19 languages</a>, but we always need helping maintaining those translations. Or you can help us translating the tutorial into a new language!</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Our tutorial has already been translated into <a href="https://tutorial.djangogirls.org/">19 languages</a>, but we always need helping
+                            maintaining those translations. Or you can help us translating the tutorial into a new language!
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>If you want to join an existing <a href="https://crowdin.com/project/django-girls-tutorial">translation team</a> or launch a new translation, <a href="mailto:translations@djangogirls.org">contact us</a>.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            If you want to join an existing <a href="https://crowdin.com/project/django-girls-tutorial">translation team</a> or launch a new translation,
+                            <a href="mailto:translations@djangogirls.org">contact us</a>.
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="row clearfix">
                 <div class="col-md-6">
-                    <h3>Help on Gitter!</h3>
+                    <h3>{% trans "Help on Gitter!" %}</h3>
                     <div class="cover">
                         <a href="https://gitter.im/DjangoGirls/tutorial">
-                            <img src="{% static 'img/global/contribute/gitter.jpg' %}" alt="A web page opened on a computer." />
+                            <img src="{% static 'img/global/contribute/gitter.jpg' %}" alt="{% trans "A web page opened on a computer." %}" />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Many people are doing our tutorial outside of a workshop. Sometimes, they get stuck and need help. How about spending a few hours a week helping them?</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Many people are doing our tutorial outside of a workshop. Sometimes, they get stuck and need help. How about spending a few hours a week helping them?
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>This <a href="https://gitter.im/DjangoGirls/tutorial">Gitter room</a> is designed to be a friendly space, especially for beginners. Remember that our <a href="https://djangogirls.org/pages/coc/">Code of Conduct</a> also applies there.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            This <a href="https://gitter.im/DjangoGirls/tutorial">Gitter room</a> is designed to be a friendly space, especially for beginners.
+                            Remember that our <a href="https://djangogirls.org/pages/coc/">Code of Conduct</a> also applies there.
+                          {% endblocktrans %}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>Want to do more?</h3>
+                    <h3>{% trans "Want to do more?" %}</h3>
                     <div class="cover">
                         <a href="https://trello.com/b/q7p6jcfg/django-girls">
-                            <img src="{% static 'img/global/contribute/more.jpg' %}" alt="A pile a tattoo." />
+                            <img src="{% static 'img/global/contribute/more.jpg' %}" alt="{% trans "A pile a tattoo." %}" />
                         </a>
                     </div>
                     <div class="info">
-                        <p>Want to help out in a way that isn't listed here? You can look at our <a href="https://trello.com/b/q7p6jcfg/django-girls">Trello board</a> and propose new projects to work on.</p>
+                        <p>
+                          {% blocktrans trimmed %}
+                            Want to help out in a way that isn't listed here? You can look at our <a href="https://trello.com/b/q7p6jcfg/django-girls">Trello board</a> and propose new projects to work on.
+                          {% endblocktrans %}
+                        </p>
 
-                        <p>Don't forget to read the rules described in the first column before adding a new card! ❤</p>
+                        <p>{% trans "Don't forget to read the rules described in the first column before adding a new card! ❤" %}</p>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
-
 {% endblock %}

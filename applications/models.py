@@ -17,17 +17,22 @@ RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
 class Form(models.Model):
     event = models.OneToOneField(Event, on_delete=models.deletion.CASCADE)
     text_header = models.CharField(
-        max_length=255, default="Apply for a spot at Django Girls [City]!")
+        max_length=255,
+        default=_("Apply for a spot at Django Girls [City]!")
+    )
     text_description = models.TextField(
-        default="Yay! We're so excited you want to be a part of our "
-        "workshop. Please mind that filling out the form below does "
-        "not give you a place on the workshop, but a chance to get "
-        "one. The application process is open from {INSERT DATE} "
-        "until {INSERT DATE}. If you're curious about the criteria "
-        "we use to choose applicants, you can read about it on "
-        "<a href='http://blog.djangogirls.org/post/91067112853/"
-        "djangogirls-how-we-scored-applications'>Django Girls "
-        "blog</a>. Good luck!")
+        default=_(
+            "Yay! We're so excited you want to be a part of our "
+            "workshop. Please mind that filling out the form below does "
+            "not give you a place on the workshop, but a chance to get "
+            "one. The application process is open from {INSERT DATE} "
+            "until {INSERT DATE}. If you're curious about the criteria "
+            "we use to choose applicants, you can read about it on "
+            "<a href='http://blog.djangogirls.org/post/91067112853/"
+            "djangogirls-how-we-scored-applications'>Django Girls "
+            "blog</a>. Good luck!"
+        )
+    )
     confirmation_mail = models.TextField(
         default=_(
             "Hi there!\n\n"
@@ -45,9 +50,9 @@ class Form(models.Model):
         help_text="Mail will be sent from your event mail.\nAlso the answers will be attached."
     )
     open_from = models.DateTimeField(
-        null=True, verbose_name="Application process is open from")
+        null=True, verbose_name=_("Application process is open from"))
     open_until = models.DateTimeField(
-        null=True, verbose_name="Application process is open until")
+        null=True, verbose_name=_("Application process is open until"))
 
     def __str__(self):
         return 'Application form for {}'.format(self.event.name)
@@ -87,22 +92,39 @@ class Question(models.Model):
         ('email', 'Email')
     )
 
-    form = models.ForeignKey(Form, null=False, blank=False, on_delete=models.deletion.CASCADE)
-    title = models.TextField(verbose_name="Question")
+    form = models.ForeignKey(
+        to=Form,
+        null=False,
+        blank=False,
+        on_delete=models.deletion.CASCADE
+    )
+    title = models.TextField(verbose_name=_("Question"))
     help_text = models.TextField(
-        blank=True, default='', verbose_name="Additional help text to the question?")
+        blank=True,
+        default='',
+        verbose_name=_("Additional help text to the question?")
+    )
     question_type = models.CharField(
         max_length=50,
-        choices=QUESTION_TYPES, verbose_name="Type of the question")
+        choices=QUESTION_TYPES,
+        verbose_name=_("Type of the question")
+    )
     is_required = models.BooleanField(
-        default=True, verbose_name="Is the answer to the question required?")
+        default=True,
+        verbose_name=_("Is the answer to the question required?")
+    )
     choices = models.TextField(
-        blank=True, default='', verbose_name="List all available options, separated with semicolon (;)",
-        help_text="Used only with 'Choices' question type")
+        blank=True,
+        default='',
+        verbose_name=_("List all available options, separated with semicolon (;)"),
+        help_text=_("Used only with 'Choices' question type")
+    )
     is_multiple_choice = models.BooleanField(
-        default=False, verbose_name="Are there multiple choices allowed?",
-        help_text="Used only with 'Choices' question type")
-    order = models.PositiveIntegerField(help_text="Position of the question")
+        default=False,
+        verbose_name=_("Are there multiple choices allowed?"),
+        help_text=_("Used only with 'Choices' question type")
+    )
+    order = models.PositiveIntegerField(help_text=_("Position of the question"))
 
     class Meta:
         ordering = ['order']
@@ -113,8 +135,8 @@ class Question(models.Model):
     def get_choices_as_list(self):
         if self.question_type != 'choices':
             raise TypeError(
-                "You can only get choices for fields that have"
-                " question_type == choices."
+                _("You can only get choices for fields that have"
+                    " question_type == choices.")
             )
 
         return self.choices.split(';')
@@ -122,29 +144,34 @@ class Question(models.Model):
 
 class Application(models.Model):
     APPLICATION_STATES = (
-        ('submitted', 'Application submitted'),
-        ('accepted', 'Application accepted'),
-        ('rejected', 'Application rejected'),
-        ('waitlisted', 'Application on waiting list'),
-        ('declined', 'Applicant declined'),
+        ('submitted', _('Application submitted')),
+        ('accepted', _('Application accepted')),
+        ('rejected', _('Application rejected')),
+        ('waitlisted', _('Application on waiting list')),
+        ('declined', _('Applicant declined')),
     )
     RSVP_WAITING = 'waiting'
     RSVP_YES = 'yes'
     RSVP_NO = 'no'
 
     RSVP_STATUSES = (
-        (RSVP_WAITING, 'RSVP: Waiting for response'),
-        (RSVP_YES, 'RSVP: Confirmed attendance'),
-        (RSVP_NO, 'RSVP: Rejected invitation')
+        (RSVP_WAITING, _('RSVP: Waiting for response')),
+        (RSVP_YES, _('RSVP: Confirmed attendance')),
+        (RSVP_NO, _('RSVP: Rejected invitation'))
     )
 
-    form = models.ForeignKey(Form, null=False, blank=False,
-                             on_delete=models.deletion.CASCADE)
+    form = models.ForeignKey(
+        Form,
+        null=False,
+        blank=False,
+        on_delete=models.deletion.CASCADE
+    )
     number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.CharField(
+        verbose_name=_("State of the application"),
         max_length=50,
-        choices=APPLICATION_STATES, verbose_name="State of the application",
+        choices=APPLICATION_STATES,
         null=True,
         default='submitted'
     )
@@ -153,7 +180,8 @@ class Application(models.Model):
 
     rsvp_status = models.CharField(
         max_length=50,
-        choices=RSVP_STATUSES, verbose_name="RSVP status",
+        choices=RSVP_STATUSES,
+        verbose_name=_("RSVP status"),
         default=RSVP_WAITING
     )
     rsvp_yes_code = models.CharField(max_length=24, null=True, blank=True)
@@ -211,18 +239,17 @@ class Application(models.Model):
         return self.rsvp_no_code
 
     @classmethod
-    def get_by_rsvp_code(self, code, event):
+    def get_by_rsvp_code(cls, code, event):
         """ Returns application and RSVP status or None """
         try:
-            application = self.objects.get(rsvp_yes_code=code, form__event=event)
+            application = cls.objects.get(rsvp_yes_code=code, form__event=event)
             return application, Application.RSVP_YES
-        except self.DoesNotExist:
+        except cls.DoesNotExist:
             try:
-                application = self.objects.get(rsvp_no_code=code, form__event=event)
+                application = cls.objects.get(rsvp_no_code=code, form__event=event)
                 return application, Application.RSVP_NO
-            except self.DoesNotExist:
+            except cls.DoesNotExist:
                 return None, None
-        return None, None
 
     @property
     def is_accepted(self):
@@ -241,9 +268,17 @@ class Application(models.Model):
 
 class Answer(models.Model):
     application = models.ForeignKey(
-        Application, null=False, blank=False, on_delete=models.deletion.PROTECT)
-    question = models.ForeignKey(Question, null=False, blank=False,
-                                 on_delete=models.deletion.PROTECT)
+        Application,
+        null=False,
+        blank=False,
+        on_delete=models.deletion.PROTECT
+    )
+    question = models.ForeignKey(
+        Question,
+        null=False,
+        blank=False,
+        on_delete=models.deletion.PROTECT
+    )
     answer = models.TextField()
 
     class Meta:
@@ -255,36 +290,48 @@ class Score(models.Model):
     A score represents the score given by a coach for an application.
     """
 
-    user = models.ForeignKey(User, related_name='scores',
-                             on_delete=models.deletion.PROTECT)
-    application = models.ForeignKey(Application, related_name='scores',
-                                    on_delete=models.deletion.PROTECT)
+    user = models.ForeignKey(
+        User,
+        related_name='scores',
+        on_delete=models.deletion.PROTECT
+    )
+    application = models.ForeignKey(
+        Application,
+        related_name='scores',
+        on_delete=models.deletion.PROTECT
+    )
     score = models.FloatField(
-        help_text='5 being the most positive, 1 being the most negative.',
+        help_text=_('5 being the most positive, 1 being the most negative.'),
         validators=[MaxValueValidator(5), MinValueValidator(0)],
         default=0
     )
     comment = models.TextField(
-        null=True, blank=True, help_text='Any extra comments?')
+        null=True, blank=True, help_text=_('Any extra comments?'))
 
     class Meta:
         unique_together = ('user', 'application',)
 
 
 class Email(models.Model):
-    form = models.ForeignKey(Form, on_delete=models.deletion.PROTECT)
-    author = models.ForeignKey(User, related_name="author",
-                               on_delete=models.deletion.PROTECT)
+    form = models.ForeignKey(
+        Form,
+        on_delete=models.deletion.PROTECT
+    )
+    author = models.ForeignKey(
+        User,
+        related_name="author",
+        on_delete=models.deletion.PROTECT
+    )
     subject = models.CharField(max_length=255)
     text = models.TextField(
-        verbose_name="Content of the email",
-        help_text="You can use HTML syntax in this message. Preview on the right."
+        verbose_name=_("Content of the email"),
+        help_text=_("You can use HTML syntax in this message. Preview on the right.")
     )
     recipients_group = models.CharField(
         max_length=50,
         choices=Application.APPLICATION_STATES + Application.RSVP_STATUSES,
-        verbose_name="Recipients",
-        help_text="Only people assigned to chosen group will receive this email."
+        verbose_name=_("Recipients"),
+        help_text=_("Only people assigned to chosen group will receive this email.")
     )
     number_of_recipients = models.IntegerField(default=0, null=True)
     successfuly_sent = models.TextField(null=True, blank=True)
@@ -340,7 +387,7 @@ class Email(models.Model):
                 try:
                     msg.send()
                     successfuly_sent.append(recipient.email)
-                except:
+                except:  # TODO: What's the possible exception here? Catch specifics
                     failed_to_sent.append(recipient.email)
 
         self.sent = timezone.now()

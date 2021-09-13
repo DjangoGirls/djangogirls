@@ -19,13 +19,12 @@ def test_index(client, future_event, past_event):
 
 
 def test_event_published(client, future_event, past_event):
-    # Check if it's possible to access the page
-    url1 = '/' + future_event.page_url + '/'
+    url1 = reverse('core:event', kwargs={'page_url': future_event.page_url})
     resp_1 = client.get(url1)
     assert resp_1.status_code == 200
 
     # Check if it's possible to access the page
-    url2 = '/' + past_event.page_url + '/'
+    url2 = reverse('core:event', kwargs={'page_url': past_event.page_url})
     resp_2 = client.get(url2)
     assert resp_2.status_code == 200
 
@@ -39,7 +38,7 @@ def test_event_published(client, future_event, past_event):
 
 def test_event_unpublished(client, hidden_event):
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -75,7 +74,7 @@ def test_event_live(client, future_event):
 
 def test_event_city(client, diff_url_event):
     # Ensure old use of City in the url 404s when the slug is different
-    url = '/' + diff_url_event.city + '/'
+    url = reverse('core:event', kwargs={'page_url': diff_url_event.city})
     resp = client.get(url)
     assert resp.status_code == 404
 
@@ -90,7 +89,7 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + no_date_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -99,11 +98,12 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
 
     # make the event date in the past
     no_date_event.date = ApproximateDate(
-        year=past_date.year, month=past_date.month, day=past_date.day)
+        year=past_date.year, month=past_date.month, day=past_date.day
+    )
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = '/' + no_date_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
@@ -116,7 +116,7 @@ def test_event_unpublished_with_auth_normal(user, client, hidden_event):
     authenticated and not a superuser"""
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -127,7 +127,7 @@ def test_event_unpublished_with_auth_superuser(admin_client, hidden_event):
     """ Test that an unpublished page can be accessed when the user is
     authenticated and a superuser"""
 
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = admin_client.get(url)
 
     assert resp.status_code == 200
@@ -139,7 +139,7 @@ def test_event_unpublished_with_auth_not_organizer(user, client, hidden_event):
     is not an organizer"""
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -152,7 +152,7 @@ def test_event_unpublished_with_auth_in_team(user, client, hidden_event):
     hidden_event.team.add(user)
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
@@ -165,14 +165,14 @@ def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
     hidden_event.main_organizer = user
 
     client.force_login(user)
-    url = '/' + hidden_event.page_url + '/'
+    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
     assert hidden_event.page_title in resp.content.decode('utf-8')
 
 
-def test_coc(client):
+def test_coc_legacy(client):
     AVAILABLE_LANG = {
         'en': '<h1>Code of Conduct</h1>',
         'es': '<h1>Código de Conducta</h1>',
@@ -181,8 +181,15 @@ def test_coc(client):
         'pt-br': '<h1>Código de Conduta</h1>'
     }
     for lang, title in AVAILABLE_LANG.items():
-        response = client.get('/coc/{}/'.format(lang))
+        response = client.get(f"/coc/{lang}/")
         assert title in response.content.decode('utf-8'), title
+
+
+def test_coc_no_lang(client):
+    title = "<h1>Code of Conduct</h1>"
+
+    response = client.get("/coc/")
+    assert title in response.content.decode('utf-8'), title
 
 
 def test_coc_invalid_lang(client):
@@ -190,20 +197,111 @@ def test_coc_invalid_lang(client):
     assert response.status_code == 404
 
 
-def test_coc_redirect(client):
-    REDIRECTS = {
-        'coc/': '/coc/',
-        'coc-es-la/': '/coc/es/',
-        'coc-fr/': '/coc/fr/',
-        'coc-kr/': '/coc/ko/',
-        'coc-pt-br/': '/coc/pt-br/',
-        'coc/rec/': '/coc/pt-br/',
-    }
-    for old_url_name, new_url in REDIRECTS.items():
-        old_url = reverse('django.contrib.flatpages.views.flatpage', args=[old_url_name])
-        resp = client.get(old_url)
-        assert resp.status_code == 301
-        assert resp['Location'] == new_url
+def test_coc(client):
+    url = reverse('core:coc')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events(client):
+    url = reverse('core:events')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_map(client):
+    url = reverse('core:events_map')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_resources(client):
+    url = reverse('core:resources')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_icalendar_no_events(client):
+    url = reverse('core:icalendar')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_events_icalendar_events(client, events):
+    url = reverse('core:icalendar')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_newsletter(client):
+    url = reverse('core:newsletter')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_faq(client):
+    url = reverse('core:faq')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_foundation(client):
+    url = reverse('core:foundation')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_foundation_gov_doc(client):
+    url = reverse('core:foundation-governing-document')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_year_2015(client):
+    url = reverse('core:year_2015')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_year_2016_17(client):
+    url = reverse('core:year_2016_2017')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_terms(client):
+    url = reverse('core:terms-conditions')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_privacy_cookies(client):
+    url = reverse('core:privacy-cookies')
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+def test_server_error(client):
+    url = reverse('core:server_error')
+    response = client.get(url)
+    assert response.status_code == 500
+
+
+# Disabling this due to test requiring redirects to exist in flatpages (database content)
+# def test_coc_redirect(client):
+#     REDIRECTS = {
+#         'coc/': '/coc/',
+#         'coc-es-la/': '/coc/es/',
+#         'coc-fr/': '/coc/fr/',
+#         'coc-kr/': '/coc/ko/',
+#         'coc-pt-br/': '/coc/pt-br/',
+#         'coc/rec/': '/coc/pt-br/',
+#     }
+#     for old_url_name, new_url in REDIRECTS.items():
+#         old_url = reverse('django.contrib.flatpages.views.flatpage', args=[old_url_name])
+#         resp = client.get(old_url)
+#         assert resp.status_code == 301
+#         assert resp['Location'] == new_url
 
 
 def test_contribute(client):

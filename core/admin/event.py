@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from ..filters import OpenRegistrationFilter
 from ..forms import (
@@ -31,18 +32,18 @@ class EventAdmin(admin.ModelAdmin):
     def is_past_event(self, obj):
         return not obj.is_upcoming()
     is_past_event.boolean = True
-    is_past_event.short_description = 'past event?'
+    is_past_event.short_description = _('past event?')
 
     def has_stats(self, obj):
         return obj.has_stats
     has_stats.boolean = True
-    has_stats.short_description = 'has stats?'
+    has_stats.short_description = _('has stats?')
 
     def full_url(self, obj):
         url = reverse('core:event', kwargs={'city': obj.page_url})
         url = 'https://djangogirls.org{url}'.format(url=url)
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
-    full_url.short_description = 'page URL'
+    full_url.short_description = _('page URL')
 
     def get_readonly_fields(self, request, obj=None):
         fields = set(self.readonly_fields) | {'full_url'}
@@ -59,7 +60,7 @@ class EventAdmin(admin.ModelAdmin):
     def get_fieldsets(self, request, obj=None):
         if request.user.is_superuser:
             return [
-                ('Event info', {'fields': [
+                (_('Event info'), {'fields': [
                     'name',
                     'date',
                     'city',
@@ -69,49 +70,49 @@ class EventAdmin(admin.ModelAdmin):
                     'page_url',
                     'is_deleted'
                 ]}),
-                ('Event main picture', {'fields': [
+                (_('Event main picture'), {'fields': [
                     'photo',
                     'photo_credit',
                     'photo_link',
                     'is_on_homepage'
                 ]}),
-                ('Team', {'fields': [
+                (_('Team'), {'fields': [
                     'main_organizer',
                     'team'
                 ]}),
-                ('Event website', {'fields': [
+                (_('Event website'), {'fields': [
                     'page_title',
                     'page_description',
                     'page_main_color',
                     'page_custom_css',
                     'is_page_live'
                 ]}),
-                ('Statistics', {'fields': [
+                (_('Statistics'), {'fields': [
                     'applicants_count',
                     'attendees_count',
                 ]}),
             ]
         return [
-            ('Event info', {'fields': [
+            (_('Event info'), {'fields': [
                 'name',
                 'date',
                 'city',
                 'country',
                 'full_url'
             ]}),
-            ('Event main picture', {'fields': [
+            (_('Event main picture'), {'fields': [
                 'photo',
                 'photo_credit',
                 'photo_link',
             ]}),
-            ('Event website', {'fields': [
+            (_('Event website'), {'fields': [
                 'page_title',
                 'page_description',
                 'page_main_color',
                 'page_custom_css',
                 'is_page_live'
             ]}),
-            ('Statistics', {'fields': [
+            (_('Statistics'), {'fields': [
                 'applicants_count',
                 'attendees_count',
             ]}),
@@ -163,18 +164,21 @@ class EventAdmin(admin.ModelAdmin):
             from core.models import User
             user = User.objects.get(id=request.GET['remove'])
             if user == request.user:
-                messages.error(request, 'You cannot remove yourself from a team.')
+                messages.error(request, _('You cannot remove yourself from a team.'))
             else:
                 if user in event.team.all():
                     event.team.remove(user)
-                    messages.success(request, 'Organizer {} has been removed'.format(user.get_full_name()))
+                    messages.success(
+                        request,
+                        _('Organizer %(user_name)s has been removed') % {'user_name': user.get_full_name()}
+                    )
                     return HttpResponseRedirect(
                         reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,
             'event': event,
-            'title': 'Remove organizers',
+            'title': _('Remove organizers'),
         })
 
     def view_add_organizers(self, request):
@@ -190,9 +194,11 @@ class EventAdmin(admin.ModelAdmin):
                 user = form.save()
                 messages.success(
                     request,
-                    "{} has been added to your event, yay! They've been also"
-                    " invited to Slack and should receive credentials to login"
-                    " in an e-mail.".format(user.get_full_name())
+                    _(
+                        "%(user_name)s has been added to your event, yay! They've been also"
+                        " invited to Slack and should receive credentials to login"
+                        " in an e-mail."
+                    ) % {'user_name': user.get_full_name()}
                 )
                 return redirect('admin:core_event_add_organizers')
         else:
@@ -202,7 +208,7 @@ class EventAdmin(admin.ModelAdmin):
             'all_events': all_events,
             'event': event,
             'form': form,
-            'title': 'Add organizers',
+            'title': _('Add organizers'),
         })
 
     def save_model(self, request, obj, form, change):

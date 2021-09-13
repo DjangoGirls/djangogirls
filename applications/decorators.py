@@ -2,6 +2,7 @@ from functools import wraps
 
 from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 
 from core.utils import get_event
 
@@ -18,7 +19,8 @@ def organiser_only(function):
 
         if not city:
             raise ValueError(
-                '"City" slug must be present to user this decorator.')
+                _('"City" slug must be present to user this decorator.')
+            )
 
         if not request.user.is_authenticated:
             return redirect('core:event', city)

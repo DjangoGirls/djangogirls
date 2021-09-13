@@ -1,12 +1,12 @@
 {% extends 'core/event.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block content %}
 
 <div class="container without-background">
     <div class="row">
         <div class="col-md-6 rsvp-left-column">
-            <h3>Your answer has been saved!</h3>
+            <h3>{% trans "Your answer has been saved!" %}</h3>
             {{ message }}
         </div>
         <div class="col-md-6 rsvp-right-column">

@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.12.4]
     method: GET
-    uri: http://nominatim.openstreetmap.org/search?format=json&q=London%2C+Country
+    uri: https://nominatim.openstreetmap.org/search?format=json&q=London%2C+Country
   response:
     body: {string: "[{\"place_id\":\"26541444\",\"licence\":\"Data \xA9 OpenStreetMap\
         \ contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"\

@@ -3,6 +3,16 @@ import dj_database_url
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+from .utils.sanitize import sanitize
+
+
+def gettext(s):
+    """
+    i18n passthrough
+    """
+    return s
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = 'https://djangogirls.org'
 
@@ -56,6 +66,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -84,17 +95,26 @@ DATABASES['default'] = dj_database_url.config(
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+LANGUAGE_CODE = 'en'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+    ('en', gettext('English')),
+    ('pt-br', gettext('Brazilian Portuguese')),
+    ('fr', gettext('French')),
+    ('de', gettext('German')),
+    ('ko', gettext('Korean')),
+    ('fa', gettext('Persian')),
+    ('pt', gettext('Portuguese')),
+    ('ru', gettext('Russian')),
+    ('es', gettext('Spanish')),
+]
 
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 # Templates
 TEMPLATES = [
@@ -168,6 +188,7 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND",
                                "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
+ENABLE_SLACK_NOTIFICATIONS = sanitize(os.environ.get('ENABLE_SLACK_NOTIFICATIONS', False), bool)
 SLACK_API_KEY = os.environ.get('SLACK_API_KEY')
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')

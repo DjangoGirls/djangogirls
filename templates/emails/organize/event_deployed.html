@@ -1,85 +1,97 @@
-<p>Hi there!</p>
+{% load i18n %}
+
+<p>{% trans "Hi there!" %}</p>
 
 <p>
-    Congratulations! Your application to organize Django Girls workshop in your
-    city has been accepted. We’re delighted to have you with us!
+    {% trans "Congratulations! Your application to organize Django Girls workshop in your city has been accepted. We’re delighted to have you with us!" %}
 </p>
 
-<p>Below you can find all details and access to your chapter.</p>
+<p>{% trans "Below you can find all details and access to your chapter." %}</p>
 
-<h3>1) Email address</h3>
+<h3>{% trans "1) Email address" %}</h3>
 
-<p>Your e-mail is {{ event.email }}.</p>
+<p>{% blocktrans with email=event.email %}Your e-mail is {{ email }}.{% endblocktrans %}</p>
 
 <p>
+{% blocktrans with email=event.email %}
     You can login here: <a href="http://mail.djangogirls.org/">http://mail.djangogirls.org/</a><br/>
-    Username: {{ event.email }} (@djangogirls.com works too!)<br/>
+    Username: {{ email }} (@djangogirls.com works too!)<br/>
+{% endblocktrans %}
+{% spaceless %}
     {% if password %}
-      Password: {{ password }}<br/>
+      {% trans "Password:" %} {{ password }}<br/>
     {% else %}
-      Previous organizers should have password to this account. Let us know if you need to reset it.
+      {% trans "Previous organizers should have password to this account. Let us know if you need to reset it." %}
     {% endif %}
+{% endspaceless %}
 </p>
 
 <p>
-    You can also add this inbox to your email client:<br/>
+    {% trans "You can also add this inbox to your email client:" %}<br/>
     - IMAP: imap.gmail.com (SSL, port 993)<br/>
     - SMTP: smtp.gmail.com (SSL, port 465)<br/>
 </p>
 
 <p>
-    Or you can forward incoming mail to your private email account by
-    following these instructions.
+    {% trans "Or you can forward incoming mail to your private email account by following these instructions." %}
 </p>
 
-<h3>2) Website</h3>
+<h3>{% trans "2) Website" %}</h3>
 
 <p>
-    Your website address is <a href="https://djangogirls.org/{{ event.page_url }}">https://djangogirls.org/{{ event.page_url }}</a>
-</p>
-
-<p>
-    You should receive a separate email with auto generated password and
-    instructions to login.
+  {% blocktrans trimmed with page_url=event.page_url %}
+    Your website address is <a href="https://djangogirls.org/{{ page_url }}">https://djangogirls.org/{{ page_url }}</a>
+  {% endblocktrans %}
 </p>
 
 <p>
-    Your website is currently hidden for public, you can only see it if you’re
-    logged in. If you want to make it available for everyone, go here and
-    edit your website changing the “is live” option.
+    {% trans "You should receive a separate email with auto generated password and instructions to login." %}
 </p>
 
 <p>
+{% blocktrans trimmed %}
+    Your website is currently hidden for public, you can only see it if you’re logged in. If you want to make it
+    available for everyone, go here and edit your website changing the “is live” option.
+{% endblocktrans %}
+</p>
+
+<p>
+{% blocktrans trimmed %}
     More instructions on editing your website:
     <a href="https://organize.djangogirls.org/website/">https://organize.djangogirls.org/website/</a>
+{% endblocktrans %}
 </p>
 
-<h3>3) Organizers community</h3>
+<h3>{% trans "3) Organizers community" %}</h3>
 <p>
+{% blocktrans trimmed %}
     Django Girls has a growing community of more than 300 organizers.
-    You should receive an invitation to join a private group on Google Groups and
-    Slack -- this is where you can chat with other organisers, ask for their
-    help or advice. Use it wisely and plenty!
+    You should receive an invitation to join a private group on Google Groups and Slack -- this is where you can
+    chat with other organisers, ask for their help or advice. Use it wisely and plenty!
+{% endblocktrans %}
 </p>
 
-<h3>4) Postponing or canceling</h3>
+<h3>{% trans "4) Postponing or canceling" %}</h3>
 
 <p>
+{% blocktrans trimmed %}
     If you need to cancel or postpone your event, it’s not a problem at all!
     Please let us know by sending an email and we’ll help.
+{% endblocktrans %}
 </p>
 
-<h3>5) Need more help?</h3>
+<h3>{% trans "5) Need more help?" %}</h3>
 
 <p>
-    Don’t forget about Organiser’s FAQ, Manual or to post questions
-    to our Google Group of Django Girls Organizers or Slack channel
-    - there are always more people there that can help you! :)
+{% blocktrans trimmed %}
+    Don’t forget about Organiser’s FAQ, Manual or to post questions to our Google Group of Django Girls Organizers or
+    Slack channel - there are always more people there that can help you! :)
+{% endblocktrans %}
 </p>
 
-<p>Good luck!</p>
+<p>{% trans "Good luck!" %}</p>
 
 <p>
-Hugs, rainbows and sunshines!<br/>
-Django Girls team
+{% trans "Hugs, rainbows and sunshines!" %}<br/>
+{% trans "Django Girls team" %}
 </p>

@@ -1,84 +1,119 @@
 {% extends 'global/base.html' %}
-{% load staticfiles rev %}
+{% load i18n rev staticfiles %}
 
 {% block content %}
     <div class="container organize organize-landing">
 
         <div class="row">
             <div class="col-xs-12">
-                <h1>Organize Django Girls workshop</h1>
+                <h1>{% trans "Organize Django Girls workshop" %}</h1>
             </div>
         </div>
 
         <div class="row">
             <section class="col-xs-12 col-md-8">
-                <p>Django Girls events are organized by groups of wonderful volunteers in cities all over the world.
-                    Events are always non-profit and free for participants. We <strong><u>DO NOT PAY</u></strong> coaches, speakers or organizers.
-                    Attendees don’t need any previous knowledge about programming and there are no age limitations.
-                    All attendees need is a laptop and some curiosity!</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        Django Girls events are organized by groups of wonderful volunteers in cities all over the world.
+                        Events are always non-profit and free for participants. We <strong><u>DO NOT PAY</u></strong> coaches, speakers or organizers.
+                        Attendees don’t need any previous knowledge about programming and there are no age limitations.
+                        All attendees need is a laptop and some curiosity!
+                    {% endblocktrans %}
+                </p>
 
-                <p>As of 2020, Django Girls workshops can only be held remotely. This is due to the ongoing Global Pandemic, and allows workshops continue while ensuring the safety of our organisers, volunteers and participants. We will review this decision in 2021, and hope to also allow for in-person workshops as soon as it is safe to do so. </p>
+                <p>
+                    {% blocktrans trimmed %}
+                        As of 2020, Django Girls workshops can only be held remotely. This is due to the ongoing Global Pandemic,
+                        and allows workshops continue while ensuring the safety of our organisers, volunteers and participants.
+                        We will review this decision in 2021, and hope to also allow for in-person workshops as soon as it is safe to do so.
+                    {% endblocktrans %}
+                </p>
 
-                <h3>In-Person Workshops</h3>
+                <h3>{% trans "In-Person Workshops" %}</h3>
 
-                <p>An in-person workshop is any workshop where participants, coaches, and organisers, all meet in the
-                    same physical location. Participants can work together in teams and support from coaches is done face-to-face.</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        An in-person workshop is any workshop where participants, coaches, and organisers, all meet in the
+                        same physical location. Participants can work together in teams and support from coaches is done face-to-face.
+                    {% endblocktrans %}
+                </p>
 
-                <p>These workshops should only be conducted when it is safe to do so, and you may be
-                    asked in your application to provide evidence of why you feel this type of worshops is safe, and
-                    what, if any, safety measures you will be putting in place.</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        These workshops should only be conducted when it is safe to do so, and you may be
+                        asked in your application to provide evidence of why you feel this type of worshops is safe, and
+                        what, if any, safety measures you will be putting in place.
+                    {% endblocktrans %}
+                </p>
 
-                <p>If you are not sure if it is safe to hold an in-person workshop, you might prefer to organise a remote workshop instead.</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        If you are not sure if it is safe to hold an in-person workshop, you might prefer to organise a remote workshop instead.
+                    {% endblocktrans %}
+                </p>
 
-                <h3>Remote Workshops</h3>
+                <h3>{% trans "Remote Workshops" %}</h3>
 
-                <p>A remote workshop is a workshop conducted online, where participants, coaches and organisers are in
-                    different physical locations.</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        A remote workshop is a workshop conducted online, where participants, coaches and organisers are in
+                        different physical locations.
+                    {% endblocktrans %}
+                </p>
 
-                <p>This type of workshop may be more suitable in situations where it might not be safe, affordable, or
-                    logistically possible to host a workshop in-person, or where difficulties finding sponsorship would be a barrier to running to the workshop in-person. Remote workshops also allow for more flexibility
-                    with the location of your attendees and coaches.</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        This type of workshop may be more suitable in situations where it might not be safe, affordable, or
+                        logistically possible to host a workshop in-person, or where difficulties finding sponsorship would
+                        be a barrier to running to the workshop in-person. Remote workshops also allow for more flexibility
+                        with the location of your attendees and coaches.
+                    {% endblocktrans %}
+                </p>
 
-                <p>Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span>
-                    Django Girls workshops. Join them and <a href="{% url "organize:prerequisites" %}">bring Django
-                        Girls to your city!</a></p>
+                <p>
+                {% url "organize:prerequisites" as prerequisites_url %}
+                    {% blocktrans trimmed %}
+                        Since July 2014, <span>{{ organizers_count }}</span> volunteers organized <span>{{ past_events_count }}</span>
+                        Django Girls workshops. Join them and <a href="{{ prerequisites_url }}">bring Django Girls to your city!</a>
+                    {% endblocktrans %}
+                </p>
 
-                <h2>The Value of Organizing Django Girls</h2>
+                <h2>{% trans "The Value of Organizing Django Girls" %}</h2>
 
                 <ul class="bulleted">
                     <li>
-                        <span>Join a crowd of over 500 passionate, kind and helpful organizers all over the world</span>
+                        <span>{% trans "Join a crowd of over 500 passionate, kind and helpful organizers all over the world" %}</span>
                     </li>
                     <li>
-                        <span>Make a real impact to advance the diversity in the tech industry</span>
+                        <span>{% trans "Make a real impact to advance the diversity in the tech industry" %}</span>
                     </li>
                     <li>
-                        <span>Play a huge role in fostering tech community in your local area</span>
+                        <span>{% trans "Play a huge role in fostering tech community in your local area" %}</span>
                     </li>
                 </ul>
             </section>
 
             <section class="col-xs-12 col-md-4 sidebar">
-                <a href="{% url "organize:prerequisites" %}" class="cta">Apply to organize a workshop&nbsp;»</a>
+                <a href="{% url "organize:prerequisites" %}" class="cta">{% trans "Apply to organize a workshop" %}&nbsp;»</a>
 
                 <div class="panel narrow">
-                    <h2>Resources for organizers</h2>
+                    <h2>{% trans "Resources for organizers" %}</h2>
 
                     <ul class="bulleted narrow">
                         <li>
-                            <a href="https://organize.djangogirls.org/">Django Girls Organizer’s Manual</a>
+                            <a href="https://organize.djangogirls.org/">{% trans "Django Girls Organizer’s Manual" %}</a>
                         </li>
                         <li>
-                            <a href="https://coach.djangogirls.org/">Django Girls Coaching Guide</a>
+                            <a href="https://coach.djangogirls.org/">{% trans "Django Girls Coaching Guide" %}</a>
                         </li>
                         <li>
-                            <a href="https://github.com/djangogirls/resources">Media resources</a>
+                            <a href="https://github.com/djangogirls/resources">{% trans "Media resources" %}</a>
                         </li>
                         <li>
-                            <a href="https://tutorial.djangogirls.org/">Django Girls Workshop Tutorial</a>
+                            <a href="https://tutorial.djangogirls.org/">{% trans "Django Girls Workshop Tutorial" %}</a>
                         </li>
                         <li>
-                            <span>Private mailing list &amp; Slack</span>
+                            <span>{% blocktrans %}Private mailing list &amp; Slack{% endblocktrans %}</span>
                         </li>
                     </ul>
                 </div>
@@ -90,35 +125,51 @@
                 <img src="{% static_rev 'img/report-2015/agata.jpg' %}" alt="Agata Grdal, organizer of Django Girls Wrocław" />
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8">
-                <div>Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve
-                    created my own blog and then prepared workshops and taught other women to code. Nothing is
-                    impossible with this bunch of positive people!</div>
-                <cite>— Agata Grdal, organizer of Django Girls Wrocław</cite>
+                <div>
+                    {% blocktrans trimmed %}
+                        Django Girls helped me gain more self-confidence and gave me a boost to keep learning. I’ve
+                        created my own blog and then prepared workshops and taught other women to code. Nothing is
+                        impossible with this bunch of positive people!
+                    {% endblocktrans %}
+                </div>
+                <cite>— {% trans "Agata Grdal, organizer of Django Girls Wrocław" %}</cite>
             </div>
         </blockquote>
 
         <section class="media-blocks">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Experiences of Django Girls organizers</h2>
+                    <h2>{% trans "Experiences of Django Girls organizers" %}</h2>
                 </div>
             </div>
 
             <ul class="row">
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-1.jpg' %}" alt="Organizers of Django Girls Windhoek" />
-                    <p>Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in
-                        Africa. <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Read more&nbsp;»</a></p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Organizers of Django Girls Windhoek, Namibia share their experience of organizing an event in
+                            Africa. <a href="http://blog.djangogirls.org/post/139654610313/django-girls-workshop-in-windhoek-namibia">Read more&nbsp;»</a>
+                        {% endblocktrans %}
+                    </p>
                 </li>
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-2.jpg' %}" alt="Organizers of Django Girls Budapest" />
-                    <p>A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary.
-                        <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Read more&nbsp;»</a></p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls organizers in Budapest, Hungary.
+                            <a href="http://blog.djangogirls.org/post/138915381173/a-toolkit-of-awesome-tips-tricks-from-seasoned">Read more&nbsp;»</a>
+                        {% endblocktrans %}
+                    </p>
                 </li>
                 <li class="col-xs-12 col-md-4">
                     <img src="{% static 'img/photos/organize-3.jpg' %}" alt="Django Girls Seoul" />
-                    <p>Learn how Django Girls Seoul built a local tech community using events as their main tool.
-                        <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Read more&nbsp;»</a></p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Learn how Django Girls Seoul built a local tech community using events as their main tool.
+                            <a href="http://blog.djangogirls.org/post/152858499038/django-girls-seoul-workshop-2">Read more&nbsp;»</a>
+                        {% endblocktrans %}
+                    </p>
                 </li>
             </ul>
         </section>

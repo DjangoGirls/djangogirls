@@ -1,15 +1,21 @@
 {% extends "admin/base_site.html" %}
+{% load i18n %}
 
 {% block content %}
-<h1>Submitted applications</h1>
+<h1>{% trans "Submitted applications" %}</h1>
 {% if forms %}
-<p>To see applications that have been submitted to your workshop, choose an event from the list below:</p>
+<p>{% trans "To see applications that have been submitted to your workshop, choose an event from the list below:" %}</p>
 <ul>
   {% for form in forms %}
     <li><a href="{% url 'applications:applications' form.event.page_url %}">{{ form.event.name }}</a></li>
   {% endfor %}
 </ul>
 {% else %}
-<p>To see submitted applications, you need to <a href="{% url 'admin:applications_form_add' %}">add an application form</a> first.
+<p>
+{% url 'admin:applications_form_add' as add_url %}
+{% blocktrans trimmed %}
+    To see submitted applications, you need to <a href="{{ add_url }}">add an application form</a> first.
+{% endblocktrans %}
+</p>
 {% endif %}
 {% endblock %}

@@ -1,6 +1,7 @@
+{% load i18n %}
+
 <div class="container">
 	<div class="row social">
-
 		<div class="col-md-6 col-xs-6 text-center">
 			<div class="facebook">
 				<div class="fb-page"
@@ -35,11 +36,13 @@
 
 	<div class="row credits">
 		<div class="col-md-12 col-xs-12">
-			♥ Django Girls Europe is organized by <a href="http://twitter.com/olasitarska">Ola Sitarska</a>
-			and <a href="http://twitter.com/asednecka">Ola Sendecka</a> with the support from
-			<a href="http://europython.eu/">EuroPython 2014</a>.<br>
+            {% blocktrans trimmed %}
+			    ♥ Django Girls Europe is organized by <a href="http://twitter.com/olasitarska">Ola Sitarska</a>
+			    and <a href="http://twitter.com/asednecka">Ola Sendecka</a> with the support from
+			    <a href="http://europython.eu/">EuroPython 2014</a>.<br>
 
-			Django Girls Europe is a part of <a href="/">Django Girls</a>.
+    			Django Girls Europe is a part of <a href="/">Django Girls</a>.
+            {% endblocktrans %}
 		</div>
 	</div>
 </div>

@@ -1,27 +1,29 @@
-<h2>Actions</h2>
-<p><a href="https://djangogirls.org{% url 'admin:organize_eventapplication_change' application.id %}">See application</a></p>
+{% load i18n %}
 
-<h2>Event information</h2>
+<h2>{% trans "Actions" %}</h2>
+<p><a href="https://djangogirls.org{% url 'admin:organize_eventapplication_change' application.id %}">{% trans "See application" %}</a></p>
+
+<h2>{% trans "Event information" %}</h2>
 <p>
-  <strong>Previously organized event:</strong><br />
+  <strong>{% trans "Previously organized event:" %}</strong><br />
   {{ application.previous_event|default:"-" }}
 </p>
 <p>
-  <strong>Date:</strong><br />
+  <strong>{% trans "Date:" %}</strong><br />
   {{ application.date }}
 </p>
 <p>
-  <strong>Location:</strong><br />
+  <strong>{% trans "Location:" %}</strong><br />
   {{ application.city }}, {{ application.get_country_display }}
 </p>
 
-<h2>Organizers</h2>
+<h2>{% trans "Organizers" %}</h2>
 <p>
-  <strong>Lead organizer:</strong><br />
+  <strong>{% trans "Lead organizer:" %}</strong><br />
   {{ application.get_main_organizer_name }} ({{ application.main_organizer_email }})
 </p>
 <p>
-  <strong>Team:</strong>
+  <strong>{% trans "Team:" %}</strong>
   {% for member in application.coorganizers.all %}
     <br /> - {{ member.first_name }} {{ member.last_name }} ({{ member.email }})
   {% empty %}
@@ -29,35 +31,35 @@
   {% endfor %}
 </p>
 
-<h2>Application</h2>
+<h2>{% trans "Application" %}</h2>
 <p>
-  <strong>Who are you?</strong><br />
+  <strong>{% trans "Who are you?" %}</strong><br />
   {{ application.about_you|linebreaksbr }}
 </p>
 <p>
-  <strong>Why do you want to organize a Django Girls workshop?</strong><br />
+  <strong>{% trans "Why do you want to organize a Django Girls workshop?" %}</strong><br />
   {{ application.why|linebreaksbr }}
 </p>
 <p>
-  <strong>Have you been involved in Django Girls before?</strong><br />
+  <strong>{% trans "Have you been involved in Django Girls before?" %}</strong><br />
   {{ application.involvement|linebreaksbr }}
 </p>
 <p>
-  <strong>Have you organized any other event before?</strong><br />
+  <strong>{% trans "Have you organized any other event before?" %}</strong><br />
   {{ application.experience|linebreaksbr }}
 </p>
 <p>
-  <strong>Do you have a venue in mind?</strong><br />
+  <strong>{% trans "Do you have a venue in mind?" %}</strong><br />
   {{ application.venue|linebreaksbr }}
 </p>
 <p>
-  <strong>Do you have a plan which companies will you approach for sponsorship?</strong><br />
+  <strong>{% trans "Do you have a plan which companies will you approach for sponsorship?" %}</strong><br />
   {{ application.sponsorship|linebreaksbr }}
 </p>
 <p>
-  <strong>Do you have potential coaches in mind?</strong><br />
+  <strong>{% trans "Do you have potential coaches in mind?" %}</strong><br />
   {{ application.coaches|linebreaksbr }}
 </p>
 
-<h2>Actions</h2>
-<p><a href="https://djangogirls.org{% url 'admin:organize_eventapplication_change' application.id %}">See application</a></p>
+<h2>{% trans "Actions" %}</h2>
+<p><a href="https://djangogirls.org{% url 'admin:organize_eventapplication_change' application.id %}">{% trans "See application" %}</a></p>
