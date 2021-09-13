@@ -6,7 +6,7 @@ from core.emails import send_email
 
 def send_application_confirmation(event_application):
     subject = (
-        _("Confirmation of application to organise Django Girls %(city)s workshop") % {'city': event_application.city}
+        f"Confirmation of application to organise Django Girls {event_application.city} workshop"
     )
     content = render_to_string(
         'emails/organize/application_confirmation.html',
@@ -23,9 +23,7 @@ def send_application_notification(event_application):
     who applied
     """
     subject = (
-        _("New request to organise Django Girls %(city)s, %(country)s") % {
-            'city': event_application.city, 'country': event_application.get_country_display()
-        }
+        f"New request to organise Django Girls {event_application.city}, {event_application.get_country_display()}"
     )
     content = render_to_string(
         'emails/organize/application_notification.html', {
@@ -37,9 +35,7 @@ def send_application_notification(event_application):
 
 def send_application_deployed_email(event_application, event, email_password):
     subject = (
-        _("Congrats! Your application to organize Django Girls %(city)s has been accepted!") % {
-            'city': event_application.city
-        }
+        f"Congrats! Your application to organize Django Girls {event_application.city} has been accepted!"
     )
     content = render_to_string('emails/organize/event_deployed.html', {
         'event': event,
@@ -54,7 +50,7 @@ def send_application_rejection_email(event_application):
     """ Sends a rejection email to all organizers who created this application
     """
     subject = (
-        _("Application to organize Django Girls %(city)s has been reviewed") % {'city': event_application.city}
+        f"Application to organize Django Girls {event_application.city} has been reviewed"
     )
     content = render_to_string('emails/organize/rejection.html', {
         'application': event_application
