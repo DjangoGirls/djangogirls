@@ -4,10 +4,6 @@
 #
 #    pip-compile
 #
---trusted-host pypi.python.org
---trusted-host pypi.org
---trusted-host files.pythonhosted.org
-
 atomicwrites==1.4.0
     # via pytest
 attrs==21.2.0
@@ -108,11 +104,6 @@ idna==3.2
     # via
     #   requests
     #   yarl
-importlib-metadata==4.7.1
-    # via
-    #   flake8
-    #   pep517
-    #   pluggy
 jmespath==0.10.0
     # via
     #   boto3
@@ -227,7 +218,7 @@ six==1.16.0
     #   vcrpy
 slacker==0.9.65
     # via -r requirements.in
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   django
     #   django-debug-toolbar
@@ -237,10 +228,6 @@ stripe==2.60.0
     # via -r requirements.in
 tomli==1.2.1
     # via pep517
-typing-extensions==3.10.0.0
-    # via
-    #   importlib-metadata
-    #   yarl
 uritemplate==3.0.1
     # via google-api-python-client
 urllib3==1.26.6
@@ -256,10 +243,6 @@ wrapt==1.12.1
     # via vcrpy
 yarl==1.6.3
     # via vcrpy
-zipp==3.5.0
-    # via
-    #   importlib-metadata
-    #   pep517
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
