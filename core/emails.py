@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from django.utils.translation import gettext_lazy as _
 
 
 def notify_existing_user(user, event):
@@ -12,7 +11,7 @@ def notify_existing_user(user, event):
         'user': user,
         'event': event
     })
-    subject = _('You have been granted access to new Django Girls event')
+    subject = 'You have been granted access to new Django Girls event'
     send_email(content, subject, [user.email])
 
 
@@ -26,7 +25,7 @@ def notify_new_user(user, event, password, errors=None):
         'password': password,
         'errors': errors,
     })
-    subject = _('Access to Django Girls website')
+    subject = 'Access to Django Girls website'
     send_email(content, subject, [user.email])
 
 
