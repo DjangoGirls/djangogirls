@@ -10,7 +10,7 @@
             <h1>{% trans "FAQ: Frequently Asked Questions" %}</h1>
 
             <p>
-              {% url 'contact:contact' as contact_url %}
+              {% url 'contact:landing' as contact_url %}
               {% blocktrans trimmed %}
                 Django Girls events have been happening all over the world for a while now, and we get some repeat
                 questions. If you need more help: <a href="{{ contact_url }}">contact us</a>!
