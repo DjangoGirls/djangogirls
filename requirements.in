@@ -38,4 +38,4 @@ python-dotenv
 sentry-sdk
 slacker==0.9.65
 stripe
-vcrpy
+vcrpy<3

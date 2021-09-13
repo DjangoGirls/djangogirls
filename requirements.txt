@@ -262,7 +262,7 @@ urllib3==1.26.6
     #   botocore
     #   requests
     #   sentry-sdk
-vcrpy==4.1.1
+vcrpy==2.1.1
     # via -r requirements.in
 wheel==0.37.0
     # via pip-tools
