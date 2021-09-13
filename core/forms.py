@@ -52,7 +52,7 @@ class AddOrganizerForm(forms.Form):
 class EventChoiceField(forms.ModelChoiceField):
 
     def label_from_instance(self, obj):
-        return "{}, {}".format(obj.city, obj.country)
+        return f"{obj.city}, {obj.country}"
 
 
 class EventForm(forms.ModelForm):

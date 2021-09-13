@@ -55,7 +55,7 @@ class Form(models.Model):
         null=True, verbose_name=_("Application process is open until"))
 
     def __str__(self):
-        return 'Application form for {}'.format(self.event.name)
+        return f'Application form for {self.event.name}'
 
     def save(self, *args, **kwargs):
         is_form_new = False if self.pk else True
@@ -344,7 +344,7 @@ class Email(models.Model):
         return self.subject
 
     def get_rsvp_link(self, code):
-        return 'http://djangogirls.org/{}/rsvp/{}'.format(self.form.event.page_url, code)
+        return f'http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}'
 
     def add_rsvp_links(self, body, application):
         body = body.replace('[rsvp-url-yes]', self.get_rsvp_link(application.get_rsvp_yes_code()))
@@ -366,9 +366,7 @@ class Email(models.Model):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
         self.sent_from = (
-            self.form.event.email or '{}@djangogirls.org'.format(
-                self.form.event.page_url
-            )
+            self.form.event.email or f'{self.form.event.page_url}@djangogirls.org'
         )
         successfuly_sent = []
         failed_to_sent = []

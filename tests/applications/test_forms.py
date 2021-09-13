@@ -29,7 +29,7 @@ def test_application_form_prevent_duplicate_emails():
     form_data = {
         'newsletter_optin': 'yes',
         'g-recaptcha-response': 'PASSED',
-        'question_{}'.format(question.pk): 'test@test.pl'
+        f'question_{question.pk}': 'test@test.pl'
     }
 
     application_form = ApplicationForm(form_data, form=form)
@@ -65,7 +65,7 @@ def test_application_form_no_newsletter():
     form_data = {
         'newsletter_optin': 'no',
         'g-recaptcha-response': 'PASSED',
-        'question_{}'.format(question.pk): 'test@test.pl'
+        f'question_{question.pk}': 'test@test.pl'
     }
 
     application_form = ApplicationForm(form_data, form=form)

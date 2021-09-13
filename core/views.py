@@ -148,7 +148,7 @@ def coc(request):
 def coc_legacy(request, lang=None):
     if lang is None:
         lang = 'en'
-    template_name = "core/coc/{}.html".format(lang)
+    template_name = f"core/coc/{lang}.html"
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:

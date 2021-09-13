@@ -151,20 +151,19 @@ class EventApplication(models.Model):
         )
 
     def __str__(self):
-        return "{}, {} ({})".format(
-            self.city, self.get_country_display(), self.get_status_display())
+        return f"{self.city}, {self.get_country_display()} ({self.get_status_display()})"
 
     def save(self, *args, **kwargs):
         if not self.latlng:
             self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
 
-        super(EventApplication, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
         """
-        name = 'Django Girls {}'.format(self.city)
-        email = '{}@djangogirls.org'.format(self.website_slug)
+        name = f'Django Girls {self.city}'
+        email = f'{self.website_slug}@djangogirls.org'
 
         event = Event.objects.create(
             date=self.date,
@@ -275,9 +274,7 @@ class EventApplication(models.Model):
         return emails
 
     def get_main_organizer_name(self):
-        return '{} {}'.format(
-            self.main_organizer_first_name,
-            self.main_organizer_last_name)
+        return f'{self.main_organizer_first_name} {self.main_organizer_last_name}'
 
     def change_status_to(self, status):
         """ Changes status to the status provided

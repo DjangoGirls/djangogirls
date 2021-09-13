@@ -40,7 +40,7 @@ class ApplicationForm(forms.Form):
         if not question:
             return cleaned_data
 
-        field_name = 'question_{}'.format(question.pk)
+        field_name = f'question_{question.pk}'
         email = self.cleaned_data.get(field_name)
 
         if email is not None:
@@ -84,8 +84,7 @@ class ApplicationForm(forms.Form):
         if not self.form.event.email:
             # If event doesn't have an email (legacy events), create
             # it just by taking the url. In 99% cases, it is correct.
-            self.form.event.email = "{}@djangogirls.org".format(
-                self.form.event.page_url)
+            self.form.event.email = f"{self.form.event.page_url}@djangogirls.org"
             self.form.event.save()
 
         if application.email:

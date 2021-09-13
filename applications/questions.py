@@ -32,7 +32,7 @@ def generate_form_from_questions(questions):
             'help_text': question.help_text or None,
             'required': question.is_required,
         }
-        name = 'question_{}'.format(question.pk)
+        name = f'question_{question.pk}'
 
         if question.question_type == 'text':
             options['widget'] = forms.Textarea

@@ -123,11 +123,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
     )
 
     def main_organizer(self, obj):
-        return "{} {} ({})".format(
-            obj.main_organizer_first_name,
-            obj.main_organizer_last_name,
-            obj.main_organizer_email
-        )
+        return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
 
     def get_urls(self):
         urls = super(EventApplicationAdmin, self).get_urls()
@@ -170,11 +166,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
 
         messages.success(
             request,
-            _('Application for {city}, {country} has been moved to {status}'.format(
-                city=application.city,
-                country=application.country,
-                status=application.get_status_display()
-            ))
+            _('Application for %(city)s, %(country)s has been moved to %(status)s') % {
+                'city': application.city,
+                'country': application.country,
+                'status': application.get_status_display()
+            }
         )
 
         return redirect('admin:organize_eventapplication_changelist')

@@ -34,10 +34,10 @@ class Coach(models.Model):
 
     def photo_display_for_admin(self):
         coach_change_url = reverse("admin:coach_coach_change", args=[self.id])
-        return """
-            <a href=\"{}\" target=\"_blank\">
-                <img src=\"{}\" width=\"100\" />
-            </a>""".format(coach_change_url, self.photo_url)
+        return f"""
+            <a href=\"{coach_change_url}\" target=\"_blank\">
+                <img src=\"{self.photo_url}\" width=\"100\" />
+            </a>"""
     photo_display_for_admin.allow_tags = True
 
     @property

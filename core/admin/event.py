@@ -177,7 +177,7 @@ class EventAdmin(admin.ModelAdmin):
                         _('Organizer %(user_name)s has been removed') % {'user_name': user.get_full_name()}
                     )
                     return HttpResponseRedirect(
-                        reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
+                        reverse('admin:core_event_manage_organizers') + f'?event_id={event.id}')
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,
