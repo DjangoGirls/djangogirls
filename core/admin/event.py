@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.conf.urls import url
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
