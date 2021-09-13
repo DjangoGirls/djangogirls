@@ -1,5 +1,4 @@
 from django.template.loader import render_to_string
-from django.utils.translation import gettext_lazy as _
 
 from core.emails import send_email
 
