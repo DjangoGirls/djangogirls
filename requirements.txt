@@ -83,6 +83,8 @@ django-unused-media==0.1.13
     # via -r requirements.in
 easy-thumbnails==2.6
     # via -r requirements.in
+flake8==3.9.2
+    # via -r requirements.in
 freezegun==0.3.11
     # via -r requirements.in
 future==0.18.2
@@ -108,6 +110,7 @@ idna==3.2
     #   yarl
 importlib-metadata==4.7.1
     # via
+    #   flake8
     #   pep517
     #   pluggy
 jmespath==0.10.0
@@ -118,6 +121,8 @@ lxml==4.6.3
     # via pyquery
 markdown2==2.4.1
     # via django-markdown-deux
+mccabe==0.6.1
+    # via flake8
 more-itertools==8.8.0
     # via pytest
 multidict==5.1.0
@@ -151,6 +156,10 @@ pyasn1-modules==0.2.8
     # via
     #   google-auth
     #   oauth2client
+pycodestyle==2.7.0
+    # via flake8
+pyflakes==2.3.1
+    # via flake8
 pyparsing==2.4.7
     # via httplib2
 pyquery==1.4.0
