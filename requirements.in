@@ -3,7 +3,7 @@ dj-database-url==0.5.0
 django-admin-sortable2
 django-autoslug==1.9.4
 django-click==2.1.0
-django-codemirror-widget==0.4.1
+django-tinymce
 django-countries==5.3.3
 django-date-extensions==3.0
 django-debug-toolbar
