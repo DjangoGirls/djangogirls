@@ -20,7 +20,7 @@ django>=3.2,<4
 django-sendgrid-v5==0.8.1
 easy-thumbnails
 flake8
-freezegun==0.3.11
+freezegun
 google-api-python-client==1.7.10
 icalendar==4.0.3
 oauth2client==4.1.3
@@ -38,4 +38,4 @@ python-dotenv
 sentry-sdk
 slacker==0.9.65
 stripe
-vcrpy<3
+vcrpy

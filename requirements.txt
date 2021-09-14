@@ -12,9 +12,9 @@ asgiref==3.4.1
     # via django
 attrs==21.2.0
     # via pytest
-boto3==1.18.40
+boto3==1.18.41
     # via django-storages
-botocore==1.21.40
+botocore==1.21.41
     # via
     #   boto3
     #   s3transfer
@@ -85,7 +85,7 @@ easy-thumbnails==2.6
     # via -r requirements.in
 flake8==3.9.2
     # via -r requirements.in
-freezegun==0.3.11
+freezegun==1.1.0
     # via -r requirements.in
 future==0.18.2
     # via django-sendgrid-v5
@@ -228,7 +228,6 @@ six==1.16.0
     #   django-click
     #   django-extensions
     #   django-unused-media
-    #   freezegun
     #   google-api-python-client
     #   google-auth-httplib2
     #   oauth2client
@@ -262,7 +261,7 @@ urllib3==1.26.6
     #   botocore
     #   requests
     #   sentry-sdk
-vcrpy==2.1.1
+vcrpy==4.1.1
     # via -r requirements.in
 wheel==0.37.0
     # via pip-tools
