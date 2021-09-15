@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'captcha',
     'django_countries',
     'gulp_rev',
+    'tinymce',
 
     'core',
     'applications',
@@ -237,9 +238,6 @@ JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 
 MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
 MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')
-
-CODEMIRROR_PATH = "vendor/codemirror/"
-
 
 GAPPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
 GAPPS_PRIVATE_KEY_ID = os.environ.get('GAPPS_PRIVATE_KEY_ID', '')

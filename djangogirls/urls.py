@@ -43,6 +43,7 @@ urlpatterns += i18n_patterns(
         RedirectView.as_view(url='/account/password_reset', permanent=True),
         name='admin_password_reset'
     ),
+    path('tinymce/', include('tinymce.urls')),
 
     # Regular links:
     path('admin/', admin.site.urls),
