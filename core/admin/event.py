@@ -40,7 +40,7 @@ class EventAdmin(admin.ModelAdmin):
     has_stats.short_description = _('has stats?')
 
     def full_url(self, obj):
-        url = reverse('core:event', kwargs={'city': obj.page_url})
+        url = reverse('core:event', kwargs={'page_url': obj.page_url})
         url = 'https://djangogirls.org{url}'.format(url=url)
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
     full_url.short_description = _('page URL')
