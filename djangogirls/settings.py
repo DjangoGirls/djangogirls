@@ -94,6 +94,8 @@ DATABASES['default'] = dj_database_url.config(
     default=f'postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
 )
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 LANGUAGE_CODE = 'en'
@@ -264,3 +266,7 @@ if DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax(),
     }
+
+RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
+if RECAPTCHA_TESTING:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

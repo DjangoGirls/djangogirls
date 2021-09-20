@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
-from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404, render
+from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from .models import EventApplication, Coorganizer
@@ -123,19 +123,16 @@ class EventApplicationAdmin(admin.ModelAdmin):
     )
 
     def main_organizer(self, obj):
-        return "{} {} ({})".format(
-            obj.main_organizer_first_name,
-            obj.main_organizer_last_name,
-            obj.main_organizer_email
-        )
+        return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
 
     def get_urls(self):
         urls = super(EventApplicationAdmin, self).get_urls()
         my_urls = [
-            url(r'(?P<application_id>\d+)/triage/(?P<new_status>[\w\d/]+)/$',
-                self.admin_site.admin_view(
-                    self.view_change_application_status),
-                name='organize_eventapplication_change_application_status'),
+            path(
+                '<int:application_id>/triage/<str:new_status>/',
+                self.admin_site.admin_view(self.view_change_application_status),
+                name='organize_eventapplication_change_application_status'
+            ),
         ]
         return my_urls + urls
 
@@ -169,11 +166,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
 
         messages.success(
             request,
-            _('Application for {city}, {country} has been moved to {status}'.format(
-                city=application.city,
-                country=application.country,
-                status=application.get_status_display()
-            ))
+            _('Application for %(city)s, %(country)s has been moved to %(status)s') % {
+                'city': application.city,
+                'country': application.country,
+                'status': application.get_status_display()
+            }
         )
 
         return redirect('admin:organize_eventapplication_changelist')
