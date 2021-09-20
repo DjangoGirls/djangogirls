@@ -23,14 +23,13 @@ class ApplicationForm(forms.Form):
         self.base_fields = generate_form_from_questions(
             self.form.question_set.all()
         )
-        if not settings.RECAPTCHA_TESTING:
-            self.base_fields.update({
-                'captcha': BetterReCaptchaField()
-            })
-        super().__init__(*args, **kwargs)
+        self.base_fields.update({
+            'captcha': BetterReCaptchaField()
+        })
+        super(ApplicationForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = self.cleaned_data
 
         question = Question.objects.filter(
             form=self.form,
@@ -40,13 +39,17 @@ class ApplicationForm(forms.Form):
         if not question:
             return cleaned_data
 
-        field_name = f'question_{question.pk}'
+        field_name = 'question_{}'.format(question.pk)
         email = self.cleaned_data.get(field_name)
 
         if email is not None:
-            existing_application = Application.objects.filter(form=self.form, email=email)
-            if existing_application.exists():
-                self.add_error(field_name, _('Application for this e-mail already exists.'))
+            if (Application.objects
+                    .filter(form=self.form, email=email)
+                    .exists()):
+                self.add_error(
+                    field_name,
+                    _('Application for this e-mail already exists.')
+                )
 
         # Always return cleaned_data
         return cleaned_data
@@ -84,14 +87,14 @@ class ApplicationForm(forms.Form):
         if not self.form.event.email:
             # If event doesn't have an email (legacy events), create
             # it just by taking the url. In 99% cases, it is correct.
-            self.form.event.email = f"{self.form.event.page_url}@djangogirls.org"
+            self.form.event.email = "{}@djangogirls.org".format(
+                self.form.event.page_url)
             self.form.event.save()
 
         if application.email:
             # Send confirmation email
-            subject = _("Confirmation of your application for %(page_title)s") % {
-                'page_title': self.form.event.page_title
-            }
+            subject = "Confirmation of your application for {}".format(
+                self.form.event.page_title)
             body = render_to_string(
                 'emails/application_confirmation.html',
                 {
@@ -120,9 +123,8 @@ class ApplicationForm(forms.Form):
                 url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
                 payload = {"email_address": application.email,
                            "status": "pending"}
-                requests.post(
-                    url, auth=('user', settings.MAILCHIMP_API_KEY), json=payload
-                )
+                requests.post(url, auth=(
+                    'user', settings.MAILCHIMP_API_KEY), json=payload)
 
 
 class ScoreForm(forms.ModelForm):
@@ -138,7 +140,7 @@ class EmailForm(forms.ModelForm):
         """
         When email is already sent, the form should be disabled
         """
-        super().__init__(*args, **kwargs)
+        super(EmailForm, self).__init__(*args, **kwargs)
         if self.instance.sent:
             # email was sent, let's disable all fields:
             for field in self.fields:

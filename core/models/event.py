@@ -186,7 +186,7 @@ class Event(models.Model):
         return event
 
     def organizers(self):
-        members = [f"{x.get_full_name()} <{x.email}>"
+        members = ["{} <{}>".format(x.get_full_name(), x.email)
                    for x in self.team.all()]
         return ", ".join(members)
 
@@ -230,7 +230,7 @@ class Event(models.Model):
                 user.invite_to_slack()
             except (ConnectionError, SlackerError) as e:
                 errors.append(
-                    f'Slack invite unsuccessful, reason: {e}'
+                    'Slack invite unsuccessful, reason: {}'.format(e)
                 )
             notify_new_user(user, event=self, password=password, errors=errors)
         else:

@@ -1,7 +1,8 @@
 from adminsortable2.admin import SortableAdminMixin
+from django.conf.urls import url
 from django.contrib import admin
 from django.shortcuts import redirect, render
-from django.urls import reverse, path
+from django.urls import reverse
 from django.utils.html import format_html
 
 from core.models import Event
@@ -17,7 +18,7 @@ class FormAdmin(admin.ModelAdmin):
     )
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(FormAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(event__team__in=[request.user])
@@ -30,9 +31,10 @@ class FormAdmin(admin.ModelAdmin):
         return form
 
     def get_urls(self):
-        urls = super().get_urls()
+        urls = super(FormAdmin, self).get_urls()
         my_urls = [
-            path('submissions/', self.admin_site.admin_view(self.view_submissions)),
+            url(r'submissions/$',
+                self.admin_site.admin_view(self.view_submissions)),
         ]
         return my_urls + urls
 
@@ -75,13 +77,13 @@ class QuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_filter = (FormFilter,)
 
     def get_queryset(self, request):
-        qs = super().get_queryset(request)
+        qs = super(QuestionAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(form__event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
+        form = super(QuestionAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             form_objs = Form.objects.filter(event__team__in=[request.user])
             form.base_fields['form'].queryset = form_objs
@@ -107,7 +109,8 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class EmailAdmin(admin.ModelAdmin):
-    list_display = ('form', 'author', 'subject', 'recipients_group', 'created', 'sent')
+    list_display = ('form', 'author', 'subject', 'recipients_group', 'created',
+                    'sent')
 
 
 admin.site.register(Form, FormAdmin)

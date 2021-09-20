@@ -27,7 +27,7 @@ class Command(BaseCommand):
         bucket = s3.Bucket(AWS_BUCKET_NAME)
 
         timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H%M_UTC')
-        db_file = f"pgbackup_{timestamp}.dump"
+        db_file = "pgbackup_{}.dump".format(timestamp)
         db_host = settings.DATABASES['default']['HOST']
         db_port = settings.DATABASES['default']['PORT']
         db_name = settings.DATABASES['default']['NAME']
@@ -36,7 +36,7 @@ class Command(BaseCommand):
         # See command definitions at http://www.postgresql.org/docs/9.4/static/app-pgdump.html
         pg_dump_command = \
             f"pg_dump --host={db_host} --port={db_port} --user={db_user} --format=c -O -x --file={db_file} {db_name}"
-        self.stdout.write(f"Enter {db_user}'s psql password")
+        self.stdout.write("Enter {}'s psql password".format(db_user))
         os.system(pg_dump_command)
 
         bucket.upload_file(db_file, db_file)

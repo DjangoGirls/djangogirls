@@ -10,8 +10,8 @@
                     <li><a href="{% url 'core:foundation' %}">{% trans "Foundation" %}</a></li>
                     <li><a href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
                     <li><a href="http://gitter.im/DjangoGirls/tutorial"><strong>{% trans "Chat with us!" %}</strong></a></li>
-                    <li><a href="{% url 'coc_legacy' lang=LANGUAGE_CODE|default:"en" %}">{% trans "Code of Conduct" %}</a></li>
-                    <li><a href="{% url 'contact:landing' %}">{% trans "Contact" %}</a></li>
+                    <li><a href="{% url 'coc_legacy' lang=LANGUAGE_CODE|default_if_none:"en" %}">{% trans "Code of Conduct" %}</a></li>
+                    <li><a href="{% url 'contact:contact' %}">{% trans "Contact" %}</a></li>
                 </ul>
             </div>
 

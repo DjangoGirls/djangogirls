@@ -15,21 +15,14 @@ from story.models import Story
 
 def index(request):
 
-    blogs = Story.objects.filter(is_story=False).order_by('-created')[:3]
-    city_count = Event.objects.values('city').distinct().count()
-    country_count = Event.objects.values('country').distinct().count()
-    future_events = Event.objects.future()
-    organizers = User.objects.all().count()
-    stories = Story.objects.filter(is_story=True).order_by('-created')[:2]
-
     return render(request, 'core/index.html', {
-        'future_events': future_events,
-        'stories': stories,
-        'blogposts': blogs,
+        'future_events': Event.objects.future(),
+        'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
+        'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
         'patreon_stats': FundraisingStatus.objects.all().first(),  # TODO: This isn't used
-        'organizers_count': organizers,
-        'cities_count': city_count,
-        'country_count': country_count,
+        'organizers_count': User.objects.all().count(),
+        'cities_count': Event.objects.values('city').distinct().count(),
+        'country_count': Event.objects.values('country').distinct().count(),
     })
 
 
@@ -155,7 +148,7 @@ def coc(request):
 def coc_legacy(request, lang=None):
     if lang is None:
         lang = 'en'
-    template_name = f"core/coc/{lang}.html"
+    template_name = "core/coc/{}.html".format(lang)
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:

@@ -12,8 +12,8 @@ def test_create_event(base_application, stock_pictures):
     assert event.latlng == base_application.latlng
     assert event.page_url == base_application.website_slug
 
-    name = f"Django Girls {event.city}"
-    email = f"{event.page_url}@djangogirls.org"
+    name = "Django Girls {}".format(event.city)
+    email = "{}@djangogirls.org".format(event.page_url)
     assert event.name == name
     assert event.page_title == name
     assert event.email == email

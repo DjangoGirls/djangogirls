@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load i18n rev static %}
+{% load i18n rev staticfiles %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
@@ -35,7 +35,7 @@
                             <span>{% trans "The workshop you organize will strive to provide safe, inclusive, friendly and positive experience for everyone attending and coaching" %}</span>
                         </li>
                         <li>
-                            {% url 'coc_legacy' lang='en' as coc_url %}
+                            {% url 'coc_legacy' 'en' as coc_url %}
                             {% blocktrans trimmed %}
                                 <span>You will require everyone involved with the workshop to comply with <a href="{{ coc_url }}">Django Girls Code of Conduct</a></span>
                             {% endblocktrans %}

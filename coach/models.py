@@ -1,4 +1,4 @@
-from django.templatetags.static import static
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -34,10 +34,10 @@ class Coach(models.Model):
 
     def photo_display_for_admin(self):
         coach_change_url = reverse("admin:coach_coach_change", args=[self.id])
-        return f"""
-            <a href=\"{coach_change_url}\" target=\"_blank\">
-                <img src=\"{self.photo_url}\" width=\"100\" />
-            </a>"""
+        return """
+            <a href=\"{}\" target=\"_blank\">
+                <img src=\"{}\" width=\"100\" />
+            </a>""".format(coach_change_url, self.photo_url)
     photo_display_for_admin.allow_tags = True
 
     @property

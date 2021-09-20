@@ -52,11 +52,13 @@ class Patron(BasePatron):
 
     @property
     def name(self):
-        return f'{self.first_name} {self.last_name}'.strip()
+        return '{p.first_name} {p.last_name}'.format(p=self).strip()
 
     @property
     def shipping(self):
-        return f'{self.street}\n{self.zip} {self.state}\n{self.country}'.strip()
+        return ('{p.street}\n{p.zip} {p.state}\n{p.country}'
+                .format(p=self)
+                .strip())
 
 
 class Reward(BaseReward):

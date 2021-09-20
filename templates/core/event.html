@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-6">
                 <p>
-                  {% url 'coc_legacy' lang='en' as coc_url %}
+                  {% url 'coc_legacy' as coc_url %}
                   {% blocktrans trimmed %}
                     Participants need to follow the <a href="{{ coc_url }}">Django Girls Code of Conduct</a>.
                   {% endblocktrans %}
