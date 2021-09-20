@@ -14,7 +14,7 @@ class BetterReCaptchaField(ReCaptchaField):
     def clean(self, values):
         if settings.DEBUG:
             return values[0]
-        return super().clean(values)
+        return super(BetterReCaptchaField, self).clean(values)
 
 
 class AddOrganizerForm(forms.Form):
@@ -52,7 +52,7 @@ class AddOrganizerForm(forms.Form):
 class EventChoiceField(forms.ModelChoiceField):
 
     def label_from_instance(self, obj):
-        return f"{obj.city}, {obj.country}"
+        return "{}, {}".format(obj.city, obj.country)
 
 
 class EventForm(forms.ModelForm):

@@ -7,10 +7,10 @@ register = template.Library()
 @register.simple_tag
 def display_sorting_arrow(name, current_order):
     is_reversed = False
-    if f'-{name}' == current_order:
+    if '-{}'.format(name) == current_order:
         is_reversed = True
 
     if is_reversed:
-        return mark_safe(f'<a href="?order={name}">▼</a>')
+        return mark_safe('<a href="?order={}">▼</a>'.format(name))
     else:
-        return mark_safe(f'<a href="?order=-{name}">▲</a>')
+        return mark_safe('<a href="?order=-{}">▲</a>'.format(name))

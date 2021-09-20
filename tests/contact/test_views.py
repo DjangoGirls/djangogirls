@@ -2,11 +2,11 @@ from django.urls import reverse
 
 from contact.models import ContactEmail
 
-CONTACT_URL = 'contact:landing'
+contact_url = reverse('contact:contact')
 
 
 def test_contact_page_loads(client):
-    resp = client.get(reverse(CONTACT_URL))
+    resp = client.get(contact_url)
     assert resp.status_code == 200
 
 
@@ -18,7 +18,7 @@ def test_form_sends_email_to_support(client, mailoutbox):
         'contact_type': ContactEmail.SUPPORT,
         'g-recaptcha-response': 'PASSED',
     }
-    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    resp = client.post(contact_url, data=post_data)
 
     assert len(mailoutbox) == 1
     email = mailoutbox[0]
@@ -40,7 +40,7 @@ def test_form_sends_email_to_chapter(client, mailoutbox, future_event):
         'event': future_event.pk,
         'g-recaptcha-response': 'PASSED',
     }
-    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    resp = client.post(contact_url, data=post_data)
     assert resp.status_code == 302
     assert len(mailoutbox) == 1
     email = mailoutbox[0]
@@ -58,7 +58,7 @@ def test_chapter_contact_requires_event(client, mailoutbox):
         'contact_type': ContactEmail.CHAPTER,
         'event': "",
     }
-    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    resp = client.post(contact_url, data=post_data)
     assert resp.status_code == 200
     assert len(mailoutbox) == 0
     assert 'event' in resp.context['form'].errors
@@ -76,7 +76,7 @@ def test_email_is_saved_into_database(client, mailoutbox, future_event):
         'event': future_event.pk,
         'g-recaptcha-response': 'PASSED',
     }
-    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    resp = client.post(contact_url, data=post_data)
     assert resp.status_code == 302
     assert len(mailoutbox) == 1
     assert ContactEmail.objects.count() == 1

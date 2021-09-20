@@ -11,8 +11,7 @@ from core.models import Event
 def test_application_form_prevent_duplicate_emails():
     event = Event.objects.create(
         name='Test', city='Test', country='Test',
-        is_page_live=True, page_url='test'
-    )
+        is_page_live=True, page_url='test')
     form = Form.objects.create(event=event)
 
     # Override default questions, we need just the e-mail
@@ -21,15 +20,14 @@ def test_application_form_prevent_duplicate_emails():
         title="Your e-mail address:",
         question_type="email",
         form=form,
-        order=1
-    )
+        order=1)
 
     assert Application.objects.count() == 0
 
     form_data = {
         'newsletter_optin': 'yes',
         'g-recaptcha-response': 'PASSED',
-        f'question_{question.pk}': 'test@test.pl'
+        'question_{}'.format(question.pk): 'test@test.pl'
     }
 
     application_form = ApplicationForm(form_data, form=form)
@@ -65,7 +63,7 @@ def test_application_form_no_newsletter():
     form_data = {
         'newsletter_optin': 'no',
         'g-recaptcha-response': 'PASSED',
-        f'question_{question.pk}': 'test@test.pl'
+        'question_{}'.format(question.pk): 'test@test.pl'
     }
 
     application_form = ApplicationForm(form_data, form=form)

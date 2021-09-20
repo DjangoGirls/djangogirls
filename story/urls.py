@@ -1,8 +1,8 @@
-from django.urls import path
+from django.conf.urls import url
 
 from story.views import StoryListView
 
 app_name = "story"
 urlpatterns = [
-    path('', StoryListView.as_view(), name='stories'),
+    url(r'^$', StoryListView.as_view(), name='stories'),
 ]

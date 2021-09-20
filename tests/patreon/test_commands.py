@@ -1,8 +1,7 @@
-from io import StringIO
-
 import vcr
 
 from django.core.management import call_command
+from django.utils.six import StringIO
 
 from patreonmanager.models import Payment
 

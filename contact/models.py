@@ -43,8 +43,8 @@ class ContactEmail(models.Model):
             self.message,
             "Django Girls Contact <hello@djangogirls.org>",
             [self.sent_to],
-            reply_to=[f"{self.name} <{self.email}>"],
-            headers={'Reply-To': f"{self.name} <{self.email}>"}
+            reply_to=["{} <{}>".format(self.name, self.email)],
+            headers={'Reply-To': "{} <{}>".format(self.name, self.email)}
             # Seems like this is needed for Mandrill
         )
         try:
@@ -60,4 +60,4 @@ class ContactEmail(models.Model):
         return 'hello@djangogirls.org'
 
     def _get_subject(self):
-        return f"{self.name} - from the djangogirls.org website"
+        return "%s - from the djangogirls.org website" % self.name

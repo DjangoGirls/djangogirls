@@ -1,4 +1,3 @@
-from django.template.loader import render_to_string
 from django.urls import reverse
 
 import pytest
@@ -40,10 +39,7 @@ def organize_view(client, workshop_data, previous_application, previous_event):
         resp = client.get(url)
         assert resp.status_code == 200
         response = client.post(url, data_step)
-        assert response.content != render_to_string('organize/form/thank_you.html')
         if step == len(workshop_data):
-            # Final step
-            assert response.content == render_to_string('organize/form/thank_you.html')
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:form_thank_you')
 

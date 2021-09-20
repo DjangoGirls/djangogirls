@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load i18n rev static %}
+{% load i18n rev staticfiles %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/global.js' %}"></script>
@@ -149,7 +149,7 @@
                     </div>
                     <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
                     <p class="partnership">
-                    {% url 'contact:landing' as contact_url %}
+                    {% url 'contact:contact' as contact_url %}
                     {% url 'donations:index' as donations_url %}
                       {% blocktrans trimmed %}
                         You can also send us a one <a href="{{ donations_url }}">time donation</a>.

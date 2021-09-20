@@ -5,7 +5,7 @@ from django_countries import countries
 from django_extensions.db.fields import AutoSlugField
 from django.db import models, transaction
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from django_date_extensions.fields import ApproximateDateField
 
 from core import gmail_accounts
@@ -151,19 +151,20 @@ class EventApplication(models.Model):
         )
 
     def __str__(self):
-        return f"{self.city}, {self.get_country_display()} ({self.get_status_display()})"
+        return "{}, {} ({})".format(
+            self.city, self.get_country_display(), self.get_status_display())
 
     def save(self, *args, **kwargs):
         if not self.latlng:
             self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
 
-        super().save(*args, **kwargs)
+        super(EventApplication, self).save(*args, **kwargs)
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
         """
-        name = f'Django Girls {self.city}'
-        email = f'{self.website_slug}@djangogirls.org'
+        name = 'Django Girls {}'.format(self.city)
+        email = '{}@djangogirls.org'.format(self.website_slug)
 
         event = Event.objects.create(
             date=self.date,
@@ -277,7 +278,9 @@ class EventApplication(models.Model):
         return self.main_organizer_email
 
     def get_main_organizer_name(self):
-        return f'{self.main_organizer_first_name} {self.main_organizer_last_name}'
+        return '{} {}'.format(
+            self.main_organizer_first_name,
+            self.main_organizer_last_name)
 
     def change_status_to(self, status):
         """ Changes status to the status provided
