@@ -14,7 +14,7 @@ def test_download_applications_list(
     resp = admin_client.get(applications_url)
     assert resp.status_code == 200
     assert (
-        resp.get('Content-Disposition') == 'attachment; filename="{}.csv"'.format(future_event.page_url)
+        resp.get('Content-Disposition') == f'attachment; filename="{future_event.page_url}.csv"'
     )
     csv_file = StringIO(resp.content.decode('utf-8'))
     reader = csv.reader(csv_file)
@@ -37,7 +37,7 @@ def test_download_applications_list_uses_query_parameters_to_filter_applications
     resp = admin_client.get(applications_url + '?state=submitted&state=accepted')
     assert resp.status_code == 200
     assert (
-        resp.get('Content-Disposition') == 'attachment; filename="{}.csv"'.format(future_event.page_url)
+        resp.get('Content-Disposition') == f'attachment; filename="{future_event.page_url}.csv"'
     )
     csv_file = StringIO(resp.content.decode('utf-8'))
     reader = csv.reader(csv_file)
@@ -77,7 +77,7 @@ def test_download_applications_list_with_question_added(
 
     assert resp.status_code == 200
     assert (
-        resp.get('Content-Disposition') == 'attachment; filename="{}.csv"'.format(future_event.page_url)
+        resp.get('Content-Disposition') == f'attachment; filename="{future_event.page_url}.csv"'
     )
     csv_file = StringIO(resp.content.decode('utf-8'))
     reader = csv.reader(csv_file)

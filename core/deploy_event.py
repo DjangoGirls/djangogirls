@@ -38,7 +38,7 @@ def copy_event(previous_event, event_date):
     previous_event = Event.objects.get(pk=previous_event_id)
     previous_event.name = previous_event_name
     previous_event.page_title = previous_event_name
-    previous_event.page_url = "{}{}".format(previous_event.page_url, number)
+    previous_event.page_url = f"{previous_event.page_url}{number}"
     previous_event.save()
 
     # populate content & menu from the default event

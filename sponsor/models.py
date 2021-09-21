@@ -19,8 +19,7 @@ class Sponsor(models.Model):
 
     def logo_display_for_admin(self):
         if self.logo:
-            return "<a href=\"{}\" target=\"_blank\"><img src=\"{}\" width=\"100\" /></a>".format(
-                self.logo.url, self.logo.url)
+            return f"<a href=\"{self.logo.url}\" target=\"_blank\"><img src=\"{self.logo.url}\" width=\"100\" /></a>"
         else:
             return _("No logo")
 
