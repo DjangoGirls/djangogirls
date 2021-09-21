@@ -21,7 +21,7 @@ class Command(BaseCommand):
         logging.basicConfig(level=logging.INFO)
 
         logging.info("Trying to fetch data from Patreon...")
-        url = "{}user/{}".format(BASE_API_URL, DJANGOGIRLS_USER_ID)
+        url = f"{BASE_API_URL}user/{DJANGOGIRLS_USER_ID}"
         request = requests.get(url)
         data = request.json()
 

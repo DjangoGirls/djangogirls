@@ -58,7 +58,8 @@ def apply(request, city):
         })
 
     number_of_email_questions = Question.objects.filter(
-        question_type='email', form=form_obj).count()
+        question_type='email', form=form_obj
+    ).count()
 
     return render(request, 'applications/apply.html', {
         'event': event,
@@ -112,11 +113,11 @@ def applications_csv(request, city):
     try:
         applications = get_applications_for_event(
             event, state, rsvp_status, order)
-    except:
+    except:  # TODO: what's the exception here?
         return redirect('core:event', city=city)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = (
-        'attachment; filename="{}.csv"'.format(city)
+        f'attachment; filename="{city}.csv"'
     )
     writer = csv.writer(response)
     csv_header = [
@@ -150,11 +151,12 @@ def application_detail(request, city, app_number):
     Display the details of a single application.
     """
     application = get_object_or_404(
-        Application, form__event__page_url=city, number=app_number)
-
+        Application, form__event__page_url=city, number=app_number
+    )
     try:
         score = Score.objects.get(
-            user=request.user, application=application)
+            user=request.user, application=application
+        )
     except Score.DoesNotExist:
         score = None
     score_form = ScoreForm(instance=score)
@@ -175,7 +177,8 @@ def application_detail(request, city, app_number):
             new_app = get_random_application(request.user, event, application)
             if new_app:
                 return redirect(
-                    'applications:application_detail', city, new_app.number)
+                    'applications:application_detail', city, new_app.number
+                )
             return redirect('applications:applications', city)
 
     return render(request, 'applications/application_detail.html', {
@@ -213,7 +216,8 @@ def compose_email(request, city, email_id=None):
     event = get_event(city, request.user.is_authenticated, False)
     form_obj = get_object_or_404(Form, event=event)
     emailmsg = None if not email_id else get_object_or_404(
-        Email, form__event=event, id=email_id)
+        Email, form__event=event, id=email_id
+    )
 
     form = EmailForm(request.POST or None, instance=emailmsg, initial={
         'author': request.user, 'form': form_obj
@@ -247,7 +251,7 @@ def change_state(request, city):
     event = get_event(city, request.user.is_authenticated, False)
 
     if not state or not applications:
-        return JsonResponse({'error': 'Missing parameters'})
+        return JsonResponse({'error': _('Missing parameters')})
 
     # cleanup applications so we don't put something unwated in the db
     applications = [value for value in applications if value.isdigit()]
@@ -261,7 +265,7 @@ def change_state(request, city):
     ids = [str(_id) for _id in ids]
 
     return JsonResponse({
-        'message': 'Applications have been updated',
+        'message': _('Applications have been updated'),
         'updated': ids
     })
 
@@ -278,7 +282,7 @@ def change_rsvp(request, city):
     event = get_event(city, request.user.is_authenticated, False)
 
     if not rsvp_status or not applications:
-        return JsonResponse({'error': 'Missing parameters'})
+        return JsonResponse({'error': _('Missing parameters')})
 
     applications = Application.objects.filter(
         id__in=applications, form__event=event
@@ -289,7 +293,7 @@ def change_rsvp(request, city):
     ids = [str(_id) for _id in ids]
 
     return JsonResponse({
-        'message': 'Applications have been updated',
+        'message': _('Applications have been updated'),
         'updated': ids
     })
 
@@ -306,27 +310,29 @@ def rsvp(request, city, code):
 
     application, rsvp = Application.get_by_rsvp_code(code, event)
     if not application:
-        return redirect('/{}/'.format(event.page_url))
+        return redirect(f'/{event.page_url}/')
 
     if application.rsvp_status != Application.RSVP_WAITING:
         messages.error(
             request,
-            "Something went wrong with your RSVP link. Please contact us at "
-            "{} with your name.".format(event.email)
+            _(
+                "Something went wrong with your RSVP link. Please contact us at "
+                "%(email)s with your name."
+            ) % {'email': event.email}
         )
-        return redirect('/{}/'.format(event.page_url))
+        return redirect(f'/{event.page_url}/')
 
     application.rsvp_status = rsvp
     application.save()
 
     if rsvp == Application.RSVP_YES:
-        message = (
+        message = _(
             "Your participation in the workshop has been confirmed! "
             "We can't wait to meet you. We will be in "
             "touch with details soon."
         )
     else:
-        message = (
+        message = _(
             "Your answer has been saved, thanks for letting us know. Your "
             "spot will be assigned to another person on the waiting list."
         )

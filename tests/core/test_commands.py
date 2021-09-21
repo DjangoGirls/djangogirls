@@ -48,10 +48,10 @@ def test_add_organizer(_, click_runner, future_event):
     assert future_event.team.count() == 1
 
     command_input = (
-        "{}\n"
+        f"{future_event.pk}\n"
         "Jan Kowalski\n"
         "jan@kowalski.example.org\n"
-        "N\n").format(future_event.pk)
+        "N\n")
 
     click_runner.invoke(add_organizer, input=command_input, catch_exceptions=False)
     future_event.refresh_from_db()
@@ -65,13 +65,13 @@ def test_new_event_with_one_organizer(click_runner, random_day, events):
     command_input = (
         "Oz\n"
         "Neverland\n"
-        "{random_day}\n"
+        f"{random_day}\n"
         "oz\n"
         "oz\n"
         "Jan Kowalski\n"
         "jan@kowalski.example.org\n"
         "N\n"
-    ).format(random_day=random_day)
+    )
 
     click_runner.invoke(new_event, input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
@@ -86,7 +86,7 @@ def test_new_event_with_two_organizers(click_runner, random_day, events):
     command_input = (
         "Oz\n"
         "Neverland\n"
-        "{random_day}\n"
+        f"{random_day}\n"
         "oz\n"
         "oz\n"
         "Jan Kowalski\n"
@@ -95,7 +95,7 @@ def test_new_event_with_two_organizers(click_runner, random_day, events):
         "Eleanor Organizer\n"
         "ealenor@organizer.example.org\n"
         "N"
-    ).format(random_day=random_day)
+    )
 
     click_runner.invoke(new_event, input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
@@ -110,13 +110,13 @@ def test_new_event_short(click_runner, random_day, events, stock_pictures):
     command_input = (
         "Oz\n"
         "Neverland\n"
-        "{random_day}\n"
+        f"{random_day}\n"
         "oz\n"
         "oz\n"
         "Jan Kowalski\n"
         "jan@kowalski.example.org\n"
         "N\n"
-    ).format(random_day=random_day)
+    )
 
     result = click_runner.invoke(
         new_event,
@@ -136,17 +136,15 @@ def test_copy_event(click_runner, random_day, events, past_event):
 
     new_event_number = 2
     command_input = (
-        "{event_id}\n"
-        "{new_event_number}\n"
-        "{random_day}\n").format(
-            event_id=past_event.pk,
-            random_day=random_day,
-            new_event_number=new_event_number)
+        f"{past_event.pk}\n"
+        f"{new_event_number}\n"
+        f"{random_day}\n"
+    )
 
     click_runner.invoke(copy_event, input=command_input, catch_exceptions=False)
     old_event = past_event
     name = old_event.name.split('#')[0].strip()
-    new_name = "{} #{}".format(name, new_event_number)
+    new_name = f"{name} #{new_event_number}"
     try:
         new_event = Event.objects.get(name=new_name)
     except Event.DoesNotExist:
@@ -167,8 +165,8 @@ def test_prepare_dispatch_with_data(click_runner):
     random_past_day = date.fromordinal(random.randint(start_date, end_date))
 
     command_input = (
-        "{random_past_day}\n"
-    ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
+        f'{random_past_day.strftime("%Y-%m-%d")}\n'
+    )
 
     result = click_runner.invoke(
         prepare_dispatch, input=command_input, catch_exceptions=False
@@ -182,8 +180,8 @@ def test_prepare_dispatch_without_data(click_runner):
     random_past_day = date.fromordinal(random.randint(start_date, start_date))
 
     command_input = (
-        "{random_past_day}\n"
-    ).format(random_past_day=random_past_day.strftime("%Y-%m-%d"))
+        f'{random_past_day.strftime("%Y-%m-%d")}\n'
+    )
 
     result = click_runner.invoke(prepare_dispatch, input=command_input, catch_exceptions=False)
     assert result.exception is None
@@ -195,8 +193,8 @@ def test_prepare_dispatch_wrong_date(click_runner):
     random_past_day = date.fromordinal(random.randint(start_date, start_date))
 
     command_input = (
-        "{random_past_day}\n"
-    ).format(random_past_day=random_past_day.strftime("%Y/%m/%d"))
+        f'{random_past_day.strftime("%Y/%m/%d")}\n'
+    )
 
     result = click_runner.invoke(prepare_dispatch, input=command_input)
     assert isinstance(result.exception, ValueError)

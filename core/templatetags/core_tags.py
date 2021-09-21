@@ -1,6 +1,6 @@
-from django.template import Library
+from urllib.parse import urlparse
 
-from django.utils.six.moves.urllib.parse import urlparse
+from django.template import Library
 
 register = Library()
 
@@ -12,4 +12,4 @@ def build_menu_item_url(menu_url, event_page_url):
         return menu_url
     elif parse_result.path.startswith('/'):     # Absolute path.
         return menu_url
-    return '/{}/{}'.format(event_page_url, menu_url)
+    return f'/{event_page_url}/{menu_url}'

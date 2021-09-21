@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from contact.models import ContactEmail
@@ -24,6 +25,12 @@ class ContactForm(forms.ModelForm):
             "message",
         )
         widgets = {"contact_type": forms.RadioSelect}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if settings.RECAPTCHA_TESTING:
+            del self.fields['captcha']
 
     def clean_event(self):
         contact_type = self.cleaned_data.get("contact_type")
