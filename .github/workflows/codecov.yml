@@ -6,13 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OS: ubuntu-latest
-      PYTHON: '3.7'
+      PYTHON: '3.9'
 
     strategy:
       max-parallel: 4
       matrix:
         python-version:
-        - 3.7
+        - 3.9
 
     services:
       postgres:
