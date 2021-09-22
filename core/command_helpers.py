@@ -9,7 +9,9 @@ def gather_event_date_from_prompt():
         date_str = click.prompt(
             click.style(
                 "What is the date of the event? (Format: DD/MM/YYYY or MM/YYYY)",
-                bold=True, fg='yellow'))
+                bold=True, fg='yellow'
+            )
+        )
         date = get_approximate_date(date_str)
         if date is None:
             click.secho("Wrong format! Try again :)", bold=True, fg='red')

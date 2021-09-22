@@ -22,18 +22,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel">
-                    <h1>Remote or In-Person Workshop?</h1>
+                    <h1>{% trans "Remote or In-Person Workshop?" %}</h1>
 
                     <form novalidate data-required-form action="" method="post">
                         {% csrf_token %}
                         {{ wizard.management_form }}
                         <fieldset class="form-section">
-                            <legend class="form-section-heading{% if wizard.form.remote.field.required %} required{% endif %}">Remote or In-Person?</legend>
-                            <p class="form-section-subhead">Will your workshop be Remote or In-Person?</p>
+                            <legend class="form-section-heading{% if wizard.form.remote.field.required %} required{% endif %}">{% trans "Remote or In-Person?" %}</legend>
+                            <p class="form-section-subhead">{% trans "Will your workshop be Remote or In-Person?" %}</p>
 
                             <ul class="row">
                                 <li class="col-sm-12 col-md-4">
-                                    <label for="{{ wizard.form.remote.id_for_label }}" class="compact-label{% if form.remote.field.required %} required{% endif %}">Workshop Type</label>
+                                    <label for="{{ wizard.form.remote.id_for_label }}" class="compact-label{% if form.remote.field.required %} required{% endif %}">{% trans "Workshop Type" %}</label>
                                     {{ wizard.form.remote }}
                                     {% if wizard.form.remote.errors %}
                                         <ul class="error-list">
@@ -46,7 +46,7 @@
                             </ul>
                         </fieldset>
                         <div class="cta-wrapper">
-                            <button type="submit" class="cta" id="Submit">Proceed!</button>
+                            <button type="submit" class="cta" id="Submit">{% trans "Proceed!" %}</button>
                         </div>
                     </form>
                 </div>

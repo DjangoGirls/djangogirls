@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
-from django.conf.urls import url
 from django.shortcuts import redirect, get_object_or_404, render
+from django.urls import path
+from django.utils.translation import gettext_lazy as _
 
 from .models import EventApplication, Coorganizer
 from .constants import ON_HOLD, IN_REVIEW, REJECTED, ACCEPTED
@@ -16,14 +17,16 @@ def change_status_to_on_hold(modeladmin, request, queryset):
     queryset.change_status_to(ON_HOLD)
 
 
-change_status_to_on_hold.short_description = "Move selected application to on hold"
+change_status_to_on_hold.short_description = (
+    _("Move selected application to on hold"))
 
 
 def change_status_to_in_review(modeladmin, request, queryset):
     queryset.change_status_to(IN_REVIEW)
 
 
-change_status_to_in_review.short_description = "Move selected application to in review"
+change_status_to_in_review.short_description = (
+    _("Move selected application to in review"))
 
 
 @admin.register(EventApplication)
@@ -67,13 +70,13 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'additional'
     )
     inlines = (InlineCoorganizerAdmin,)
-    suit_form_tabs = (
+    suit_form_tabs = (  # TODO: Can this be changed into something still useful?
         ('general', 'General'),
         ('application', 'Application'),
         ('organizers', 'Organizers')
     )
     fieldsets = (
-        ('Application info', {
+        (_('Application info'), {
             'fields': [
                 'status',
                 'created_at',
@@ -82,7 +85,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
             ],
             'classes': ('suit-tab', 'suit-tab-general',),
         }),
-        ('Event info', {
+        (_('Event info'), {
             'fields': [
                 'previous_event',
                 'date',
@@ -92,7 +95,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
             ],
             'classes': ('suit-tab', 'suit-tab-general',)
         }),
-        ('Application', {
+        (_('Application'), {
             'fields': [
                 'about_you',
                 'why',
@@ -109,7 +112,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
             ],
             'classes': ('suit-tab', 'suit-tab-application',)
         }),
-        ('Main organizer', {
+        (_('Main organizer'), {
             'fields': [
                 'main_organizer_email',
                 'main_organizer_first_name',
@@ -120,24 +123,20 @@ class EventApplicationAdmin(admin.ModelAdmin):
     )
 
     def main_organizer(self, obj):
-        return "{} {} ({})".format(
-            obj.main_organizer_first_name,
-            obj.main_organizer_last_name,
-            obj.main_organizer_email
-        )
+        return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
 
     def get_urls(self):
         urls = super(EventApplicationAdmin, self).get_urls()
         my_urls = [
-            url(r'(?P<application_id>\d+)/triage/(?P<new_status>[\w\d/]+)/$',
-                self.admin_site.admin_view(
-                    self.view_change_application_status),
-                name='organize_eventapplication_change_application_status'),
+            path(
+                '<int:application_id>/triage/<str:new_status>/',
+                self.admin_site.admin_view(self.view_change_application_status),
+                name='organize_eventapplication_change_application_status'
+            ),
         ]
         return my_urls + urls
 
-    def view_change_application_status(
-            self, request, application_id, new_status):
+    def view_change_application_status(self, request, application_id, new_status):
         """
         Custom EventApplication admin view for handling triaging
         """
@@ -151,7 +150,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
                     request,
                     'admin/organize/eventapplication/view_change_status.html',
                     {'application': application,
-                     'new_status': new_status})
+                     'new_status': new_status}
+                )
             elif request.method == 'POST':
                 if new_status == REJECTED:
                     application.reject()
@@ -159,15 +159,18 @@ class EventApplicationAdmin(admin.ModelAdmin):
                     event = application.deploy()
                     application.send_deployed_email(event)
         else:
-            messages.error(request, 'Invalid status provided for application')
+            messages.error(request, _('Invalid status provided for application'))
             return redirect(
                 'admin:organize_eventapplication_change',
                 application.id)
 
         messages.success(
             request,
-            'Application for {city}, {country} has been moved to {status}'.format(
-                city=application.city,
-                country=application.country,
-                status=application.get_status_display()))
+            _('Application for %(city)s, %(country)s has been moved to %(status)s') % {
+                'city': application.city,
+                'country': application.country,
+                'status': application.get_status_display()
+            }
+        )
+
         return redirect('admin:organize_eventapplication_changelist')

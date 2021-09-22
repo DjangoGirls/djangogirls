@@ -1,16 +1,17 @@
-{% load staticfiles rev %}
+{% load i18n rev static %}
+
 <!DOCTYPE HTML>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-  <title>{% block title %}Django Girls - start your journey with programming{% endblock %}</title>
-  <meta name="description" content="{% block description %}Django Girls is a one-day workshop about programming in Python and Django for women.{% endblock %}">
+  <title>{% block title %}{% trans "Django Girls - start your journey with programming" %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% trans "Django Girls is a one-day workshop about programming in Python and Django for women." %}{% endblock %}">
   <meta name="keywords" content="programming, python, django, workshop, women, females">
   <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="{% block og_title %}Django Girls is a one-day workshop about programming in Python and Django for women{% endblock %}" />
+  <meta property="og:title" content="{% block og_title %}{% trans "Django Girls is a one-day workshop about programming in Python and Django for women" %}{% endblock %}" />
   <meta property="og:type" content="website" />
-  <meta property="og:description" content="{% block og_description %}Join us and become a female developer! Build your first website in Python and Django in a friendly, safe environment.{% endblock %}" />
+  <meta property="og:description" content="{% block og_description %}{% trans "Join us and become a female developer! Build your first website in Python and Django in a friendly, safe environment." %}{% endblock %}" />
   <meta property="og:image" content="{% block og_image %}https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png{% endblock %}" />
 
   <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Lora:400,700,400i,700i/Roboto:300,400,300i,400i">

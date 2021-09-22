@@ -1,7 +1,11 @@
 import random
 
 from django.db import models
+from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
+
+mark_safe_lazy = lazy(mark_safe, str)
 
 
 class EventPictureManager(models.Manager):
@@ -18,17 +22,18 @@ class StockPicture(models.Model):
     COVER = "CO"
     BACKGROUND = "BA"
     KIND_CHOICES = (
-        (COVER, "Event cover (356 x 210px)"),
-        (BACKGROUND, "Section background"),
+        (COVER, _("Event cover (356 x 210px)")),
+        (BACKGROUND, _("Section background")),
     )
 
     photo = models.ImageField(upload_to="stock_pictures/")
     photo_credit = models.CharField(
         max_length=200,
-        help_text=mark_safe(
+        help_text=mark_safe_lazy(_(
             "Only use pictures with a "
             "<a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."))
-    photo_link = models.URLField("photo URL")
+    )
+    photo_link = models.URLField(_("photo URL"))
     kind = models.CharField(max_length=2, choices=KIND_CHOICES)
 
     objects = EventPictureManager()

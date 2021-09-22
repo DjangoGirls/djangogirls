@@ -1,8 +1,9 @@
 import pytest
-
+from django.db import connection
+from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 
-from applications.models import Score, Application
+from applications.models import Application, Score
 from applications.views import application_list
 
 
@@ -44,10 +45,10 @@ def test_organiser_menu_in_applications_list(admin_client, future_event):
         'applications:communication',
         kwargs={'city': future_event.page_url})
     assert (
-        '<a href="{}">Applications</a>'.format(applications_url)
+        f'<a href="{applications_url}">Applications</a>'
         in str(resp.content.decode('utf-8')))
     assert (
-        '<a href="{}">Messaging</a>'.format(messaging_url)
+        f'<a href="{messaging_url}">Messaging</a>'
         in str(resp.content.decode('utf-8')))
 
 
@@ -70,7 +71,7 @@ def test_get_sorted_applications_list(
     ])
 
     # Order by average_score
-    resp = admin_client.get('{}?order=average_score'.format(applications_url))
+    resp = admin_client.get(f'{applications_url}?order=average_score')
     assert resp.status_code == 200
     assert len(resp.context['applications']) == 4
     assert (
@@ -82,7 +83,7 @@ def test_get_sorted_applications_list(
     assert resp.context['order'] == 'average_score'
 
     # Order by -average_score
-    resp = admin_client.get('{}?order=-average_score'.format(applications_url))
+    resp = admin_client.get(f'{applications_url}?order=-average_score')
     assert resp.status_code == 200
     assert len(resp.context['applications']) == 4
     assert (
@@ -106,22 +107,22 @@ def get_filtered_applications_list(
     assert len(resp.context['applications']) == 4
 
     # Filter by submitted
-    resp.self.client.get('{}?state=submitted'.format(applications_url))
+    resp.self.client.get(f'{applications_url}?state=submitted')
     assert len(resp.context['applications']) == 1
     assert resp.context['applications'] == [application_submitted]
 
     # Filter by accepted
-    resp.self.client.get('{}?state=accepted'.format(applications_url))
+    resp.self.client.get(f'{applications_url}?state=accepted')
     assert len(resp.context['applications']) == 1
     assert resp.context['applications'] == [application_accepted]
 
     # Filter by rejected
-    resp.self.client.get('{}?state=rejected'.format(applications_url))
+    resp.self.client.get(f'{applications_url}?state=rejected')
     assert len(resp.context['applications']) == 1
     assert resp.context['applications'] == [application_rejected]
 
     # Filter by wait listed
-    resp.self.client.get('{}?state=waitlisted'.format(applications_url))
+    resp.self.client.get(f'{applications_url}?state=waitlisted')
     assert len(resp.context['applications']) == 1
     assert resp.context['applications'] == [application_waitlisted]
 
@@ -246,7 +247,7 @@ def test_changing_application_rsvp_errors(
     assert 'error' in resp.json()
 
 
-def changing_application_status_in_bulk(
+def test_changing_application_status_in_bulk(
         admin_client, future_event, application_submitted, application_rejected):
     assert application_submitted.state == 'submitted'
     assert application_rejected.state == 'rejected'
@@ -259,3 +260,18 @@ def changing_application_status_in_bulk(
     application_rejected = Application.objects.get(id=application_rejected.id)
     assert application_submitted.state == 'accepted'
     assert application_rejected.state == 'accepted'
+
+
+def test_application_scores_is_queried_once(
+        admin_client, future_event, scored_applications):
+    """Regression test to ensure the scored by user query on applications list page runs only once."""
+
+    with CaptureQueriesContext(connection) as queries:
+        admin_client.get(
+            reverse('applications:applications', kwargs={'city': future_event.page_url}))
+
+    score_table_name = Score._meta.db_table
+    score_queries = [q for q in queries.captured_queries if score_table_name in q['sql']]
+
+    # The first query is for the annotation in get_applications_for_event, the second is for the scores themselves
+    assert len(score_queries) == 2

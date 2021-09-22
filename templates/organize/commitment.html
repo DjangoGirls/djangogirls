@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load staticfiles rev %}
+{% load i18n rev static %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/organize.js' %}"></script>
@@ -17,26 +17,36 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel">
-                    <h1>✨ Django Girls Organizer Commitement ✨</h1>
+                    <h1>✨ {% trans "Django Girls Organizer Commitement" %} ✨</h1>
 
-                    <p>Django Girls is an initiative aimed at introducing women who have never coded before to the world of technology and increasing the diversity within the tech industry. We do that by organizing workshops and inviting women to join us to learn how to build the internet using HTML, CSS, Python and Django <strong>in a safe, friendly and inclusive environment.</strong>  </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Django Girls is an initiative aimed at introducing women who have never coded before to the world of
+                            technology and increasing the diversity within the tech industry. We do that by organizing workshops
+                            and inviting women to join us to learn how to build the internet using HTML, CSS, Python and Django
+                            <strong>in a safe, friendly and inclusive environment.</strong>
+                        {% endblocktrans %}
+                    </p>
 
-                    <p class="tight-bottom">As a Django Girls Organizer, you make a commitement to foster and advance Django Girls values:</p>
+                    <p class="tight-bottom">{% trans "As a Django Girls Organizer, you make a commitement to foster and advance Django Girls values:" %}</p>
 
                     <ul class="bulleted">
                         <li>
-                            <span>The workshop you organize will strive to provide safe, inclusive, friendly and positive experience for everyone attending and coaching</span>
+                            <span>{% trans "The workshop you organize will strive to provide safe, inclusive, friendly and positive experience for everyone attending and coaching" %}</span>
                         </li>
                         <li>
-                            <span>You will require everyone involved with the workshop to comply with <a href="{% url 'core:coc' 'en' %}">Django Girls Code of Conduct</a></span>
+                            {% url 'coc_legacy' lang='en' as coc_url %}
+                            {% blocktrans trimmed %}
+                                <span>You will require everyone involved with the workshop to comply with <a href="{{ coc_url }}">Django Girls Code of Conduct</a></span>
+                            {% endblocktrans %}
                         </li>
                         <li>
-                            <span>You’ll strive to have tons of fun while organizing your amazing workshop! 🙌</span>
+                            <span>{% trans "You’ll strive to have tons of fun while organizing your amazing workshop!" %} 🙌</span>
                         </li>
                     </ul>
 
                     <div class="cta-wrapper">
-                        <a href="{% url 'organize:form_step' step='previous_event' %}" class="cta">Sign the commitement</a>
+                        <a href="{% url 'organize:form_step' step='previous_event' %}" class="cta">{% trans "Sign the commitement" %}</a>
                     </div>
                 </div>
 

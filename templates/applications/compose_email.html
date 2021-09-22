@@ -1,5 +1,5 @@
 {% extends 'core/event.html' %}
-{% load static applications_tags rev %}
+{% load applications_tags i18n rev static %}
 
 {% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
 
@@ -11,14 +11,14 @@
   <div class="row">
     <div class="col-md-12" style="padding: 0px">
       <h3 class="page-header">
-        Edit email for {{ event.page_title }}
+        {% blocktrans with title=event.page_title %}Edit email for {{ title }}{% endblocktrans %}
       </h3>
 
       <div class="col-md-7 stretch-form">
         <div class="rsvp-buttons">
-          <a class="btn small" data-option="yes">Add a "RSVP: yes" link to email</a>
-          <a class="btn small" data-option="no">Add a "RSVP: no" link to email</a>
-          <a href="" target="_blank">What's that?</a>
+          <a class="btn small" data-option="yes">{% trans 'Add a "RSVP: yes" link to email' %}</a>
+          <a class="btn small" data-option="no">{% trans 'Add a "RSVP: no" link to email' %}</a>
+          <a href="" target="_blank">{% trans "What's that?" %}</a>
         </div>
 
         <form action="" method="post">
@@ -26,24 +26,26 @@
           {% include 'includes/_form.html' %}
 
           {% if not email.sent %}
-          <input type="submit" name="save" value="Save for later" />
-          <input type="submit" name="send" value="Save & send to recipients" />
+            <input type="submit" name="save" value="{% trans "Save for later" %}" />
+            <input type="submit" name="send" value="{% trans "Save & send to recipients" %}" />
           {% endif %}
         </form>
       </div>
       <div class="col-md-5">
           {% if not email.sent %}
-              <h4>Email preview</h4>
+              <h4>{% trans "Email preview" %}</h4>
               <div id="preview" style="white-space: pre-wrap;">{{ email.text|safe }}</div>
           {% else %}
               <p>
-                  This email was sent on {{ email.sent }} by {{ email.author }} to {{ email.number_of_recipients }} recipients.
+                  {% blocktrans with sent=email.sent author=email.author num_rec=email.number_of_recipients %}
+                      This email was sent on {{ sent }} by {{ author }} to {{ num_rec }} recipients.
+                  {% endblocktrans %}
               </p>
               <p>
-                  <b>Successfully sent emails:</b> {{ email.successfuly_sent }}
+                  <b>{% trans "Successfully sent emails:" %}</b> {{ email.successfuly_sent }}
               </p>
               <p>
-                  <b>Emails that failed to sent:</b> {{ email.failed_to_sent }}
+                  <b>{% trans "Emails that failed to sent:" %}</b> {{ email.failed_to_sent }}
               </p>
 
           {% endif %}

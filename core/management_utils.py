@@ -1,4 +1,6 @@
 import djclick as click
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from .forms import AddOrganizerForm
 from .slack_client import slack
@@ -12,7 +14,7 @@ def get_main_organizer():
     a list of dictionary.
     """
     team = []
-    click.echo("Let's talk about the team. First the main organizer:")
+    click.echo(_("Let's talk about the team. First the main organizer:"))
     main_name = click.prompt(click.style(
         "First and last name", bold=True, fg='yellow'
     ))
@@ -22,7 +24,7 @@ def get_main_organizer():
 
     team.append({'name': main_name, 'email': main_email})
 
-    click.echo(f"All right, the main organizer is {main_name} ({main_email})")
+    click.echo("All right, the main organizer is {0} ({1})".format(main_name, main_email))
 
     return team
 
@@ -73,13 +75,14 @@ def brag_on_slack_bang(city, country, team):
     """
     This is posting a message about Django Girls new event to #general channel on Slack!
     """
-    text = f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! " \
-           f"Welcome Django Girls {city}, {country}. " \
-           f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
+    if settings.ENABLE_SLACK_NOTIFICATIONS:
+        text = f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! " \
+               f"Welcome Django Girls {city}, {country}. " \
+               f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
 
-    slack.chat.post_message(
-        channel='#general',
-        text=text,
-        username='Django Girls',
-        icon_emoji=':django_heart:'
-    )
+        slack.chat.post_message(
+            channel='#general',
+            text=text,
+            username='Django Girls',
+            icon_emoji=':django_heart:'
+        )

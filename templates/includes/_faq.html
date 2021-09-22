@@ -1,44 +1,65 @@
+{% load i18n %}
+
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#apply"><strong>Q: How can I register?</strong></a>
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#apply"><strong>{% trans "Q: How can I register?" %}</strong></a>
         </div>
-                    <div id="apply" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <p>A: You want to attend a workshop happening in your city? So cool! You can register on the event's website. If there is no website, it means that registrations are not opened yet. Come back in a few days to check or send an email to the local organizers of the workshop you want to attend.</p>
-                        </div>
-                    </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#too_late"><strong>Q: I missed the deadline! Can I still apply to a workshop?</strong></a>
-        </div>
-                    <div id="too_late" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <p>A: Sadly, you won't be able to apply: events receive many applications and already have a waiting list in case an attendee has to cancel. You can subscribe to our <a href="{% url 'core:newsletter' %}">newsletter</a> to know where the next events are planed.</p>
-                        </div>
-                    </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coach_sponsor"><strong>Q: I want to coach or sponsor an event!</strong></a>
-        </div>
-        <div id="coach_sponsor" class="panel-collapse collapse">
+        <div id="apply" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>A: You rock! Just send an email to the local organizers of the workshop!</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        A: You want to attend a workshop happening in your city? So cool! You can register on the event's website.
+                        If there is no website, it means that registrations are not opened yet. Come back in a few days to check or
+                        send an email to the local organizers of the workshop you want to attend.
+                    {% endblocktrans %}
+                </p>
             </div>
         </div>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#tutorial"><strong>Q: I'm following Django Girls tutorial and something is not working in my code: can you help me debug it?</strong></a>
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#too_late"><strong>{% trans "Q: I missed the deadline! Can I still apply to a workshop?" %}</strong></a>
+        </div>
+        <div id="too_late" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>
+                {% url 'core:newsletter' as newsletter_url %}
+                    {% blocktrans trimmed %}
+                        A: Sadly, you won't be able to apply: events receive many applications and already have a waiting list in case an
+                        attendee has to cancel. You can subscribe to our <a href="{{ newsletter_url }}">newsletter</a> to know where
+                        the next events are planed.
+                    {% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#coach_sponsor"><strong>{% trans "Q: I want to coach or sponsor an event!" %}</strong></a>
+        </div>
+        <div id="coach_sponsor" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>{% trans "A: You rock! Just send an email to the local organizers of the workshop!" %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#tutorial"><strong>{% trans "Q: I'm following Django Girls tutorial and something is not working in my code: can you help me debug it?" %}</strong></a>
         </div>
         <div id="tutorial" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>A: Sadly, Django Girls Support Team won't be able to help you: our work is to help other organizers plan their workshop. If you need assistance while doing the tutorial, go to <a href="https://gitter.im/DjangoGirls/tutorial/">Django Girls Gitter room</a>: a group of volunteers is waiting for you there and will be happy to answer all your questions ;)</p>
+                <p>
+                    {% blocktrans trimmed %}
+                        A: Sadly, Django Girls Support Team won't be able to help you: our work is to help other organizers plan their workshop.
+                        If you need assistance while doing the tutorial, go to <a href="https://gitter.im/DjangoGirls/tutorial/">Django Girls Gitter room</a>:
+                        a group of volunteers is waiting for you there and will be happy to answer all your questions ;)
+                    {% endblocktrans %}
+                </p>
             </div>
         </div>
     </div>

@@ -1,29 +1,31 @@
+{% load i18n %}
+
 <div class="row">
     <div class="col-md-12">
-        <h2>Don’t see an event in your city?</h2>
+        <h2>{% trans "Don't see an event in your city?" %}</h2>
     </div>
 </div>
 
 <div class="row centered">
     <div class="col-md-12">
-        <h4>Sign up for our newsletter</h4>
+        <h4>{% trans "Sign up for our newsletter" %}</h4>
         <p>
-            Stay up to date with everything that's happening in Django Girls valley:
+            {% trans "Stay up to date with everything that's happening in Django Girls valley:" %}
         </p>
         <form action="http://test2975.createsend.com/t/i/s/tykhhd/" method="post" id="subForm">
-            <input id="fieldEmail" name="cm-tykhhd-tykhhd" type="email" placeholder="Your e-mail" required />
-            <input id="fieldjjtklt" name="cm-f-jjtklt" type="text" placeholder="Your city" />
-            <input type="submit" value="Subscribe" />
+            <input id="fieldEmail" name="cm-tykhhd-tykhhd" type="email" placeholder="{% trans "Your e-mail" %}" required />
+            <input id="fieldjjtklt" name="cm-f-jjtklt" type="text" placeholder="{% trans "Your city" %}" />
+            <input type="submit" value="{% trans "Subscribe" %}" />
         </form>
     </div>
 </div>
 
 <div class="row centered">
     <div class="col-md-12">
-        <h4>Bring Django Girls to your city!</h4>
+        <h4>{% trans "Bring Django Girls to your city!" %}</h4>
         <p>
-            Everyone can organize their own Django Girls event and share it with their community.
+            {% trans "Everyone can organize their own Django Girls event and share it with their community." %}
         </p>
-        <a href="{% url 'organize:index' %}" class="btn">Find out more</a>
+        <a href="{% url 'organize:index' %}" class="btn">{% trans "Find out more" %}</a>
     </div>
 </div>

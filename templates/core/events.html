@@ -1,17 +1,15 @@
 {% extends 'global/base.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block content %}
-
     <div class="container">
-
         <section id="events">
             <div class="row">
                 <div class="col-md-12">
                     <h2>
-                        Upcoming events
+                        {% trans "Upcoming events" %}
                         <a class="ical btn btn-default btn-xs" href="{% url 'core:icalendar' %}">ICAL</a>
-                        <a class="ical btn btn-default btn-xs" href="{% url 'core:events_map' %}">MAP</a>
+                        <a class="ical btn btn-default btn-xs" href="{% url 'core:events_map' %}">{% trans "MAP" %}</a>
                     </h2>
                 </div>
             </div>
@@ -29,7 +27,7 @@
 
             <div class="row past-events">
                 <div class="col-md-12">
-                    <h2>Past events</h2>
+                    <h2>{% trans "Past events" %}</h2>
                 </div>
             </div>
 
@@ -39,9 +37,6 @@
                     {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                 {% endfor %}
             </div>
-
         </section>
-
     </div>
-
 {% endblock %}

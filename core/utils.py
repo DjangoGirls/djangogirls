@@ -7,7 +7,7 @@ from django_date_extensions.fields import ApproximateDate
 from .models import Event
 
 
-NOMINATIM_URL = 'http://nominatim.openstreetmap.org/search'
+NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search'
 
 
 def get_coordinates_for_city(city, country):

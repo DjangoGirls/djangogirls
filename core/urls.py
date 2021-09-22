@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from . import views
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('terms-conditions/', views.terms_conditions, name='terms-conditions'),
     path('privacy-cookies/', views.privacy_cookies, name='privacy-cookies'),
     # path(r'^workshop-box/$', views.workshop_box, name='workshop-box'),
-    re_path(r'^coc/(?:(?P<lang>[a-z-]+)/)?$', views.coc, name='coc'),
+    path('coc/', views.coc, name='coc'),
     # path(r'^crowdfunding-donors/$', views.crowdfunding_donors, name='crowdfunding-donors'),
     path('server-error/', views.server_error, name='server_error'),
     path('<slug:page_url>/', views.event, name='event'),

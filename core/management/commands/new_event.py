@@ -78,7 +78,8 @@ def command(short):
         'latlng': latlng,
         'name': name,
         'page_title': name,
-        'page_url': url})
+        'page_url': url
+    })
     if not form.is_valid():
         click.secho(
             "OOPS! Something went wrong!", fg='red')

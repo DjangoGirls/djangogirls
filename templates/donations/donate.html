@@ -2,7 +2,7 @@
 {% load i18n static %}
 
 {% block content %}
-    {% url 'contact:contact' as contact_url %}
+    {% url 'contact:landing' as contact_url %}
 
 	<script src="https://js.stripe.com/v3/"></script>
 
@@ -91,9 +91,9 @@
                 <div class="col-md-6">
                 {# TODO: Can this data be dynamic? #}
                     <p>
-                        <span class="highlighted-number">$692</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged</p>
+                        <span class="highlighted-number">$806</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged</p>
                         <div class="support-bar">
-                            <div class="pledge" style="width: 46%">46%
+                            <div class="pledge" style="width: 53%">53%
                             </div>
                         </div>
                         <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>

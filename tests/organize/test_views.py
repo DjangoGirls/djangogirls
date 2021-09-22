@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 import pytest
@@ -35,11 +36,14 @@ def test_suspend(client):
 
 def organize_view(client, workshop_data, previous_application, previous_event):
     for step, data_step in workshop_data:
-        url = '/organize/form/' + step + '/'
+        url = reverse('organize:form_step', kwargs={'step': step})
         resp = client.get(url)
         assert resp.status_code == 200
         response = client.post(url, data_step)
+        assert response.content != render_to_string('organize/form/thank_you.html')
         if step == len(workshop_data):
+            # Final step
+            assert response.content == render_to_string('organize/form/thank_you.html')
             assert response.status_code == 302
             assert response['Location'] == reverse('organize:form_thank_you')
 
@@ -79,7 +83,7 @@ def test_organize_form_wizard_applications_too_close(client, previous_organizer_
                                                      previous_application_less_than_6_months):
     # Test form submission with applications less than 6 months apart
     for step, data_step in previous_organizer_remote:
-        url = '/organize/form/' + step + '/'
+        url = reverse('organize:form_step', kwargs={'step': step})
         response = client.post(url, data_step)
         if step == len(previous_organizer_remote):
             assert response.status_code == 302
@@ -92,7 +96,7 @@ def test_organize_form_wizard_workshops_too_close(client, previous_organizer_in_
                                                   future_event):
     # Test form submission with workshops less than 6 months apart
     for step, data_step in previous_organizer_in_person:
-        url = '/organize/form/' + step + '/'
+        url = reverse('organize:form_step', kwargs={'step': step})
         response = client.post(url, data_step)
         if step == len(previous_organizer_in_person):
             assert response.status_code == 302

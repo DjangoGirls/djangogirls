@@ -1,24 +1,35 @@
+{% load i18n %}
+
 <div class="row">
 	<div class="col-md-6">
-		<h2>Be a Mentor!</h2>
+		<h2>{% trans "Be a Mentor!" %}</h2>
 		<p>
+        {% url 'contact:landing' as contact_url %}
+          {% blocktrans trimmed %}
 			We would be delighted if you would like to join us as a mentor!
-			<a href="{% url 'contact:contact' %}">Contact us</a> if you're interested ❤️
+			<a href="{{ contact_url }}">Contact us</a> if you're interested ❤️
+          {% endblocktrans %}
 		</p>
 	</div>
 
 	<div class="col-md-6">
-		<h2>Django Girls</h2>
+		<h2>{% trans "Django Girls" %}</h2>
 		<p>
-			This workshop is a part of bigger initiative: <a href="http://djangogirls.org/">Django Girls</a>.
+          {% blocktrans trimmed %}
+			This workshop is a part of bigger initiative: <a href="https://djangogirls.org/">Django Girls</a>.
 			It is a non-profit organization and events are organized by volunteers in different places of the world.
+          {% endblocktrans %}
 		</p>
 		<p>
+          {% blocktrans trimmed %}
 			To see the source for the program find us on Github:
 			<a href="https://github.com/DjangoGirls/">github.com/DjangoGirls</a>.
+          {% endblocktrans %}
 		</p>
 		<p>
-			If you want to bring Django Girls to your city, <a href="{% url 'contact:contact' %}">drop us a line</a>
+          {% blocktrans trimmed %}
+			If you want to bring Django Girls to your city, <a href="{{ contact_url }}">drop us a line</a>
+          {% endblocktrans %}
 		</p>
 	</div>
 </div>

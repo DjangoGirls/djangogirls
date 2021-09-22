@@ -5,7 +5,7 @@ from django_countries import countries
 from django_extensions.db.fields import AutoSlugField
 from django.db import models, transaction
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDateField
 
 from core import gmail_accounts
@@ -99,35 +99,36 @@ class EventApplication(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     # application fields
-    about_you = models.TextField("About organizer")
-    why = models.TextField("Motivations to organize")
+    about_you = models.TextField(_("About organizer"))
+    why = models.TextField(_("Motivations to organize"))
     involvement = models.CharField(
-        "Involvement in Django Girls",
+        _("Involvement in Django Girls"),
         max_length=100
     )
-    experience = models.TextField("Experience with organizing other events")
+    experience = models.TextField(_("Experience with organizing other events"))
     venue = models.TextField(
-        "Information about your potential venue",
+        _("Information about your potential venue"),
         blank=True
     )
     sponsorship = models.TextField(
-        "Information about your potential sponsorship"
+        _("Information about your potential sponsorship")
     )
-    coaches = models.TextField("Information about your potential coaches")
+    coaches = models.TextField(_("Information about your potential coaches"))
     remote = models.BooleanField(default=False)
-    tools = models.TextField("Information about how you will host your remote workshop",
+    tools = models.TextField(_("Information about how you will host your remote workshop"),
                              blank=True)
     safety = models.TextField(
-        "Information about how you will ensure participants' and coaches' "
-        "safety during the Covid-19 pandemic",
+        _("Information about how you will ensure participants' and coaches' safety during the Covid-19 pandemic"),
         blank=True
     )
     diversity = models.TextField(
-        "Information about how you intend to ensure your workshop is inclusive "
-        "and promotes diversity"
+        _(
+            "Information about how you intend to ensure your workshop is inclusive "
+            "and promotes diversity"
+        )
     )
     additional = models.TextField(
-        "Any additional information you think may help your application",
+        _("Any additional information you think may help your application"),
         blank=True
     )
 
@@ -146,24 +147,23 @@ class EventApplication(models.Model):
 
     class Meta:
         permissions = (
-            ("can_accept_organize_application", "Can accept Organize Applications"),
+            ("can_accept_organize_application", _("Can accept Organize Applications")),
         )
 
     def __str__(self):
-        return "{}, {} ({})".format(
-            self.city, self.get_country_display(), self.get_status_display())
+        return f"{self.city}, {self.get_country_display()} ({self.get_status_display()})"
 
     def save(self, *args, **kwargs):
         if not self.latlng:
             self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
 
-        super(EventApplication, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def create_event(self):
         """ Creates event based on the data from the EventApplication.
         """
-        name = 'Django Girls {}'.format(self.city)
-        email = '{}@djangogirls.org'.format(self.website_slug)
+        name = f'Django Girls {self.city}'
+        email = f'{self.website_slug}@djangogirls.org'
 
         event = Event.objects.create(
             date=self.date,
@@ -262,7 +262,7 @@ class EventApplication(models.Model):
     def clean(self):
         if self.status == ON_HOLD and not self.comment:
             raise ValidationError({
-                'comment': 'This field is required.'
+                'comment': _('This field is required.')
             })
 
     def get_organizers_emails(self):
@@ -273,10 +273,11 @@ class EventApplication(models.Model):
         emails.append(self.main_organizer_email)
         return emails
 
+    def get_main_organizer_email(self):
+        return self.main_organizer_email
+
     def get_main_organizer_name(self):
-        return '{} {}'.format(
-            self.main_organizer_first_name,
-            self.main_organizer_last_name)
+        return f'{self.main_organizer_first_name} {self.main_organizer_last_name}'
 
     def change_status_to(self, status):
         """ Changes status to the status provided
@@ -308,5 +309,5 @@ class Coorganizer(models.Model):
     last_name = models.CharField(max_length=30, blank=True, default="")
 
     class Meta:
-        verbose_name = "Co-organizer"
-        verbose_name_plural = "Co-organizers"
+        verbose_name = _("Co-organizer")
+        verbose_name_plural = _("Co-organizers")

@@ -1,6 +1,7 @@
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.urls import reverse
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
@@ -12,26 +13,31 @@ DEFAULT_COACH_PHOTO = static('img/global/coach-empty.jpg')
 class Coach(models.Model):
     name = models.CharField(max_length=200)
     twitter_handle = models.CharField(
-        max_length=200, null=True, blank=True,
-        help_text="No @, No http://, just username")
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text=_("No @, No http://, just username"))
     photo = models.ImageField(
-        upload_to="event/coaches/", null=True, blank=True,
-        help_text="For best display keep it square")
+        upload_to="event/coaches/",
+        null=True,
+        blank=True,
+        help_text=_("For best display keep it square")
+    )
     url = models.URLField(null=True, blank=True)
 
     class Meta:
         ordering = ("name",)
-        verbose_name_plural = "Coaches"
+        verbose_name_plural = _("Coaches")
 
     def __str__(self):
         return self.name
 
     def photo_display_for_admin(self):
         coach_change_url = reverse("admin:coach_coach_change", args=[self.id])
-        return """
-            <a href=\"{}\" target=\"_blank\">
-                <img src=\"{}\" width=\"100\" />
-            </a>""".format(coach_change_url, self.photo_url)
+        return f"""
+            <a href=\"{coach_change_url}\" target=\"_blank\">
+                <img src=\"{self.photo_url}\" width=\"100\" />
+            </a>"""
     photo_display_for_admin.allow_tags = True
 
     @property

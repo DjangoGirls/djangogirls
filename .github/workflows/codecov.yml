@@ -8,6 +8,12 @@ jobs:
       OS: ubuntu-latest
       PYTHON: '3.7'
 
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version:
+        - 3.7
+
     services:
       postgres:
         image: postgres:10.8
@@ -25,10 +31,10 @@ jobs:
       with:
         fetch-depth: '2'
 
-    - name: Setup Python
+    - name: Setup Python ${{ matrix.python-version }}
       uses: actions/setup-python@master
       with:
-        python-version: 3.7
+        python-version: ${{ matrix.python-version }}
     - name: Generate Report
       run: |
         pip install -r requirements.txt

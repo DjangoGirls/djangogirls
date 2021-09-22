@@ -1,12 +1,19 @@
-<p>Hi team {{event.city}}!</p>
+{% load i18n %}
 
-<p>How are you? We hope you are doing fantastic! :)</p>
+<p>{% blocktrans with event=event.city %}Hi team {{ event }}!{% endblocktrans %}</p>
 
-<p>We've noticed that the Django Girls {{event.city}} event has no live website or isn’t open for applications yet. Is everything going well with preparations?</p>
-
-<p>Let us know how it goes. If you're stuck on something, we can definitely help! :)</p>
+<p>{% trans "How are you? We hope you are doing fantastic! :)" %}</p>
 
 <p>
-Hugs, cupcakes and sparkles,<br/>
+{% blocktrans trimmed with event=event.city %}
+    We've noticed that the Django Girls {{event.city}} event has no live website or isn’t open for applications yet.
+    Is everything going well with preparations?
+{% endblocktrans %}
+</p>
+
+<p>{% trans "Let us know how it goes. If you're stuck on something, we can definitely help! :)" %}</p>
+
+<p>
+{% trans "Hugs, cupcakes and sparkles" %},<br/>
 Django Girls team
 </p>

@@ -1,13 +1,13 @@
 {% extends 'global/base.html' %}
-{% load staticfiles markdown_deux_tags %}
+{% load i18n markdown_deux_tags static %}
 
-{% block title %}Django Girls Foundation Governing Document{% endblock %}
+{% block title %}{% trans "Django Girls Foundation Governing Document" %}{% endblock %}
 
 {% block content %}
     <div class="container without-background" id="flatpage">
           <div id="value" class="row">
               <div class="col-md-12">
-                  <h1>Django Girls Foundation Governing Document</h1>
+                  <h1>{% trans "Django Girls Foundation Governing Document" %}</h1>
                   {% markdown trusted %}
 *Date of constitution (last amended): 20th August 2015*
 

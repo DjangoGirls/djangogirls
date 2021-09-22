@@ -3,6 +3,7 @@ import random
 
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
+from django.utils.translation import gettext_lazy as _
 
 
 DEFAULT_BACKGROUND_PHOTOS = {
@@ -79,9 +80,9 @@ def get_default_eventpage_data():
 
 def get_default_menu():
     return [
-        {'title': 'About', 'url': '#values'},
-        {'title': 'Apply for a pass!', 'url': '#apply'},
-        {'title': 'FAQ', 'url': '#faq'},
-        {'title': 'Become a coach', 'url': '#coach'},
-        {'title': 'Partners', 'url': '#partners'},
+        {'title': _('About'), 'url': '#values'},
+        {'title': _('Apply for a pass!'), 'url': '#apply'},
+        {'title': _('FAQ'), 'url': '#faq'},
+        {'title': _('Become a coach'), 'url': '#coach'},
+        {'title': _('Partners'), 'url': '#partners'},
     ]

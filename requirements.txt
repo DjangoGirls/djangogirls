@@ -4,13 +4,17 @@
 #
 #    pip-compile
 #
-atomicwrites==1.4.0
-    # via pytest
+--trusted-host pypi.python.org
+--trusted-host pypi.org
+--trusted-host files.pythonhosted.org
+
+asgiref==3.4.1
+    # via django
 attrs==21.2.0
     # via pytest
-boto3==1.18.22
+boto3==1.18.42
     # via django-storages
-botocore==1.21.22
+botocore==1.21.42
     # via
     #   boto3
     #   s3transfer
@@ -20,7 +24,7 @@ certifi==2021.5.30
     # via
     #   requests
     #   sentry-sdk
-charset-normalizer==2.0.4
+charset-normalizer==2.0.5
     # via requests
 click==7.0
     # via
@@ -33,9 +37,12 @@ cssselect==1.1.0
     # via pyquery
 dj-database-url==0.5.0
     # via -r requirements.in
-django==2.0.13
+django==3.2.7
     # via
     #   -r requirements.in
+    #   django-admin-sortable2
+    #   django-debug-toolbar
+    #   django-extensions
     #   django-formtools
     #   django-leaflet
     #   django-recaptcha
@@ -43,19 +50,21 @@ django==2.0.13
     #   django-storages
     #   django-unused-media
     #   easy-thumbnails
+django-admin-sortable2==1.0
+    # via -r requirements.in
 django-autoslug==1.9.4
     # via -r requirements.in
 django-click==2.1.0
     # via -r requirements.in
-django-codemirror-widget==0.4.1
+django-countries==7.2.1
     # via -r requirements.in
-django-countries==5.3.3
+django-date-extensions==3.1.1
     # via -r requirements.in
-django-date-extensions==3.0
+django-debug-toolbar==3.2.2
     # via -r requirements.in
-django-extensions==2.2.9
+django-extensions==3.1.3
     # via -r requirements.in
-django-formtools==2.1
+django-formtools==2.3
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
@@ -63,27 +72,27 @@ django-leaflet==0.24.0
     # via -r requirements.in
 django-markdown-deux==1.0.5
     # via -r requirements.in
-django-recaptcha==1.4.0
+django-recaptcha==2.0.6
     # via -r requirements.in
 django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
     # via -r requirements.in
-django-suit==0.2.26
-    # via -r requirements.in
-django-suit-redactor==0.0.4
+django-tinymce==3.3.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
-easy-thumbnails==2.6
+easy-thumbnails==2.7.1
     # via -r requirements.in
-freezegun==0.3.11
+flake8==3.9.2
+    # via -r requirements.in
+freezegun==1.1.0
     # via -r requirements.in
 future==0.18.2
     # via django-sendgrid-v5
 google-api-python-client==1.7.10
     # via -r requirements.in
-google-auth==2.0.0
+google-auth==2.1.0
     # via
     #   google-api-python-client
     #   google-auth-httplib2
@@ -100,26 +109,32 @@ idna==3.2
     # via
     #   requests
     #   yarl
-importlib-metadata==4.6.4
+importlib-metadata==4.8.1
     # via
+    #   flake8
     #   pep517
     #   pluggy
+    #   pytest
+iniconfig==1.1.1
+    # via pytest
 jmespath==0.10.0
     # via
     #   boto3
     #   botocore
 lxml==4.6.3
     # via pyquery
-markdown2==2.4.0
+markdown2==2.4.1
     # via django-markdown-deux
-more-itertools==8.8.0
-    # via pytest
+mccabe==0.6.1
+    # via flake8
 multidict==5.1.0
     # via yarl
 oauth2client==4.1.3
     # via -r requirements.in
 oauthlib==3.1.1
     # via requests-oauthlib
+packaging==21.0
+    # via pytest
 pep517==0.11.0
     # via pip-tools
 pillow==8.2.0
@@ -128,7 +143,7 @@ pillow==8.2.0
     #   easy-thumbnails
 pip-tools==6.2.0
     # via -r requirements.in
-pluggy==0.13.1
+pluggy==1.0.0
     # via pytest
 psycopg2-binary==2.8.3
     # via -r requirements.in
@@ -145,19 +160,28 @@ pyasn1-modules==0.2.8
     # via
     #   google-auth
     #   oauth2client
+pycodestyle==2.7.0
+    # via flake8
+pyflakes==2.3.1
+    # via flake8
 pyparsing==2.4.7
-    # via httplib2
+    # via
+    #   httplib2
+    #   packaging
 pyquery==1.4.0
     # via -r requirements.in
-pytest==3.9.1
+pytest==6.2.5
     # via
     #   -r requirements.in
     #   pytest-cov
     #   pytest-django
+    #   pytest-dotenv
     #   pytest-env
-pytest-cov==2.6.0
+pytest-cov==2.12.1
     # via -r requirements.in
-pytest-django==3.4.3
+pytest-django==4.4.0
+    # via -r requirements.in
+pytest-dotenv==0.5.2
     # via -r requirements.in
 pytest-env==0.6.2
     # via -r requirements.in
@@ -168,7 +192,9 @@ python-dateutil==2.8.2
     #   icalendar
     #   py-trello
 python-dotenv==0.19.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   pytest-dotenv
 python-http-client==3.3.2
     # via
     #   django-sendgrid-v5
@@ -194,32 +220,38 @@ rsa==4.7.2
     #   oauth2client
 s3transfer==0.5.0
     # via boto3
-sendgrid==6.8.0
+sendgrid==6.8.1
     # via django-sendgrid-v5
 sentry-sdk==1.3.1
     # via -r requirements.in
 six==1.16.0
     # via
     #   django-click
-    #   django-extensions
     #   django-unused-media
-    #   freezegun
     #   google-api-python-client
     #   google-auth-httplib2
     #   oauth2client
-    #   pytest
     #   python-dateutil
     #   vcrpy
 slacker==0.9.65
     # via -r requirements.in
+sqlparse==0.4.2
+    # via
+    #   django
+    #   django-debug-toolbar
 starkbank-ecdsa==1.1.1
     # via sendgrid
 stripe==2.60.0
     # via -r requirements.in
+toml==0.10.2
+    # via
+    #   pytest
+    #   pytest-cov
 tomli==1.2.1
     # via pep517
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
     # via
+    #   asgiref
     #   importlib-metadata
     #   yarl
 uritemplate==3.0.1
@@ -229,7 +261,7 @@ urllib3==1.26.6
     #   botocore
     #   requests
     #   sentry-sdk
-vcrpy==2.0.1
+vcrpy==4.1.1
     # via -r requirements.in
 wheel==0.37.0
     # via pip-tools

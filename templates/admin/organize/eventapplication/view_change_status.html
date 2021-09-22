@@ -1,23 +1,37 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_urls %}
-{% load url from suit_compat %}
-
 
 {% block content %}
     <form action="" method="post">{% csrf_token %}
       {% if new_status == 'accepted' %}
       <div class="alert alert-block alert-success">
-        <h4 class="alert-heading">Approve {{ application.city }}, {{ application.country }} application?</h4>
-        <p>Are you sure you want to approve the {{ application.city }}, {{ application.country }} application?</p>
+        <h4 class="alert-heading">
+            {% blocktrans with app_city=application.city app_country=application.country %}
+                Approve {{ app_city }}, {{ app_country }} application?
+            {% endblocktrans %}
+        </h4>
+        <p>
+            {% blocktrans with app_city=application.city app_country=application.country %}
+                Are you sure you want to approve the {{ application.city }}, {{ application.country }} application?
+            {% endblocktrans %}
+        </p>
         <br />
-        <input type="submit" value="Yes, I'm sure" class="btn btn-success"/>
+        <input type="submit" value="{% trans "Yes, I'm sure" %}" class="btn btn-success"/>
       </div>
       {% elif new_status == 'rejected' %}
       <div class="alert alert-block alert-error">
-        <h4 class="alert-heading">Reject {{ application.city }}, {{ application.country }} application?</h4>
-        <p>Are you sure you want to reject the {{ application.city }}, {{ application.country }} application?</p>
+        <h4 class="alert-heading">
+            {% blocktrans with app_city=application.city app_country=application.country %}
+                Reject {{ application.city }}, {{ application.country }} application?
+            {% endblocktrans %}
+        </h4>
+        <p>
+            {% blocktrans with app_city=application.city app_country=application.country %}
+                Are you sure you want to reject the {{ application.city }}, {{ application.country }} application?
+            {% endblocktrans %}
+        </p>
         <br />
-        <input type="submit" value="Yes, I'm sure" class="btn btn-danger"/>
+        <input type="submit" value="{% trans "Yes, I'm sure" %}" class="btn btn-danger"/>
       </div>
       {% endif %}
     </form>

@@ -1,9 +1,10 @@
 {% extends "admin/base_site.html" %}
+{% load i18n %}
+
 
 {% block content %}
-
-<h1 style="margin: 0 0 10px 0">Add a new organizer to your event</h1>
-<p>We will send them access instructions through automated email.</p>
+<h1 style="margin: 0 0 10px 0">{% trans "Add a new organizer to your event" %}</h1>
+<p>{% trans "We will send them access instructions through automated email." %}</p>
 
 <div id="content" class="colM row-fluid">
  <div id="content-main">
@@ -29,7 +30,7 @@
                <div>
                   <div class="control-label"></div>
                   <div class="controls">
-                    <button type="submit" class="btn btn-high btn-info" name="_save">Add organizer</button>
+                    <button type="submit" class="btn btn-high btn-info" name="_save">{% trans "Add organizer" %}</button>
                   </div>
               </div>
             </div>

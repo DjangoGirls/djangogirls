@@ -5,6 +5,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import striptags
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.translation import gettext_lazy as _
 
 from core.models import EventPageMenu
 from core.utils import get_event
@@ -12,10 +13,8 @@ from core.utils import get_event
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
 from .models import Application, Email, Form, Question, Score
-from .questions import (
-    get_applications_for_event, get_organiser_menu,
-    random_application
-)
+from .questions import get_organiser_menu
+from .services import get_applications_for_event, get_random_application
 
 
 def apply(request, city):
@@ -49,7 +48,7 @@ def apply(request, city):
         form.save()
         messages.success(
             request,
-            "Yay! Your application has been saved. You'll hear from us soon!"
+            _("Yay! Your application has been saved. You'll hear from us soon!")
         )
 
         return render(request, 'applications/apply.html', {
@@ -59,7 +58,8 @@ def apply(request, city):
         })
 
     number_of_email_questions = Question.objects.filter(
-        question_type='email', form=form_obj).count()
+        question_type='email', form=form_obj
+    ).count()
 
     return render(request, 'applications/apply.html', {
         'event': event,
@@ -86,7 +86,7 @@ def application_list(request, city):
 
     try:
         applications = get_applications_for_event(
-            event, state, rsvp_status, order)
+            event, state, rsvp_status, order, user=request.user)
     except Application.DoesNotExist:
         return redirect('core:event', city=city)
 
@@ -113,15 +113,16 @@ def applications_csv(request, city):
     try:
         applications = get_applications_for_event(
             event, state, rsvp_status, order)
-    except:
+    except:  # TODO: what's the exception here?
         return redirect('core:event', city=city)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = (
-        u'attachment; filename="{}.csv"'.format(city)
+        f'attachment; filename="{city}.csv"'
     )
     writer = csv.writer(response)
-    csv_header = ["Application Number", "Application State",
-                  "RSVP Status", "Average Score"]
+    csv_header = [
+        _("Application Number"), _("Application State"), _("RSVP Status"), _("Average Score")
+    ]
     question_set = event.form.question_set
 
     question_titles = question_set.values_list('title', flat=True)
@@ -149,12 +150,13 @@ def application_detail(request, city, app_number):
     """
     Display the details of a single application.
     """
-    application = get_object_or_404(Application, form__event__page_url=city,
-                                    number=app_number)
-
+    application = get_object_or_404(
+        Application, form__event__page_url=city, number=app_number
+    )
     try:
         score = Score.objects.get(
-            user=request.user, application=application)
+            user=request.user, application=application
+        )
     except Score.DoesNotExist:
         score = None
     score_form = ScoreForm(instance=score)
@@ -172,10 +174,11 @@ def application_detail(request, city, app_number):
 
         if request.POST.get('random'):
             # Go to a new random application.
-            new_app = random_application(request, event, application)
+            new_app = get_random_application(request.user, event, application)
             if new_app:
                 return redirect(
-                    'applications:application_detail', city, new_app.number)
+                    'applications:application_detail', city, new_app.number
+                )
             return redirect('applications:applications', city)
 
     return render(request, 'applications/application_detail.html', {
@@ -213,7 +216,8 @@ def compose_email(request, city, email_id=None):
     event = get_event(city, request.user.is_authenticated, False)
     form_obj = get_object_or_404(Form, event=event)
     emailmsg = None if not email_id else get_object_or_404(
-        Email, form__event=event, id=email_id)
+        Email, form__event=event, id=email_id
+    )
 
     form = EmailForm(request.POST or None, instance=emailmsg, initial={
         'author': request.user, 'form': form_obj
@@ -239,7 +243,7 @@ def compose_email(request, city, email_id=None):
 @csrf_exempt
 def change_state(request, city):
     """
-    Change the state of Applicaction(s). Use it like this:
+    Change the state of Application(s). Use it like this:
     e.g /applications/?state=accepted&application=1&application=2&application=3
     """
     state = request.POST.get('state', None)
@@ -247,20 +251,21 @@ def change_state(request, city):
     event = get_event(city, request.user.is_authenticated, False)
 
     if not state or not applications:
-        return JsonResponse({'error': 'Missing parameters'})
+        return JsonResponse({'error': _('Missing parameters')})
 
     # cleanup applications so we don't put something unwated in the db
     applications = [value for value in applications if value.isdigit()]
 
     applications = Application.objects.filter(
-        id__in=applications, form__event=event)
+        id__in=applications, form__event=event
+    )
     applications.update(state=state)
 
     ids = applications.values_list('id', flat=True)
-    ids = [str(id) for id in ids]
+    ids = [str(_id) for _id in ids]
 
     return JsonResponse({
-        'message': 'Applications have been updated',
+        'message': _('Applications have been updated'),
         'updated': ids
     })
 
@@ -269,7 +274,7 @@ def change_state(request, city):
 @csrf_exempt
 def change_rsvp(request, city):
     """
-    Change the rsvp_status of Applicaction(s). Use it like this:
+    Change the rsvp_status of Application(s). Use it like this:
     e.g /applications/?rsvp=yes&application=1&application=2&application=3
     """
     rsvp_status = request.POST.get('rsvp_status', None)
@@ -277,17 +282,18 @@ def change_rsvp(request, city):
     event = get_event(city, request.user.is_authenticated, False)
 
     if not rsvp_status or not applications:
-        return JsonResponse({'error': 'Missing parameters'})
+        return JsonResponse({'error': _('Missing parameters')})
 
     applications = Application.objects.filter(
-        id__in=applications, form__event=event)
+        id__in=applications, form__event=event
+    )
     applications.update(rsvp_status=rsvp_status)
 
     ids = applications.values_list('id', flat=True)
-    ids = [str(id) for id in ids]
+    ids = [str(_id) for _id in ids]
 
     return JsonResponse({
-        'message': 'Applications have been updated',
+        'message': _('Applications have been updated'),
         'updated': ids
     })
 
@@ -304,27 +310,29 @@ def rsvp(request, city, code):
 
     application, rsvp = Application.get_by_rsvp_code(code, event)
     if not application:
-        return redirect('/{}/'.format(event.page_url))
+        return redirect(f'/{event.page_url}/')
 
     if application.rsvp_status != Application.RSVP_WAITING:
         messages.error(
             request,
-            "Something went wrong with your RSVP link. Please contact us at "
-            "{} with your name.".format(event.email)
+            _(
+                "Something went wrong with your RSVP link. Please contact us at "
+                "%(email)s with your name."
+            ) % {'email': event.email}
         )
-        return redirect('/{}/'.format(event.page_url))
+        return redirect(f'/{event.page_url}/')
 
     application.rsvp_status = rsvp
     application.save()
 
     if rsvp == Application.RSVP_YES:
-        message = (
+        message = _(
             "Your participation in the workshop has been confirmed! "
             "We can't wait to meet you. We will be in "
             "touch with details soon."
         )
     else:
-        message = (
+        message = _(
             "Your answer has been saved, thanks for letting us know. Your "
             "spot will be assigned to another person on the waiting list."
         )

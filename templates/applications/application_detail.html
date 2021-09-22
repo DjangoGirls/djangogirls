@@ -1,5 +1,5 @@
 {% extends 'core/event.html' %}
-{% load static %}
+{% load i18n static %}
 
 {% block title %}{{ event.page_title }}{% endblock %}
 {% block description %}{{ event.page_description }}{% endblock %}
@@ -26,16 +26,24 @@
 
         <div class="col-md-5 scoring">
             {% if user_score.score > 0 %}
-            <h4>Scores</h4>
+            <h4>{% trans "Scores" %}</h4>
             <ul>
-                <li>Average score: {{ application.average_score }}</li>
-                <li>Your score: {{ user_score.score }}</li>
+                <li>
+                    {% blocktrans trimmed with avg_score=application.average_score %}
+                        Average score: {{ avg_score }}
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed with score=user_score.score %}
+                        Your score: {{ user_score.score }}
+                    {% endblocktrans %}
+                </li>
             </ul>
             <table>
                 <thead>
-                    <td>Person</td>
-                    <td>Score</td>
-                    <td>Comment</td>
+                    <td>{% trans "Person" %}</td>
+                    <td>{% trans "Score" %}</td>
+                    <td>{% trans "Comment" %}</td>
                 </thead>
                 {% for s in scores %}
                 <tr>
@@ -53,8 +61,8 @@
                 {% with score_form as form %}
                     {% include 'includes/_form.html' %}
                 {% endwith %}
-                <input class="btn" type="submit" value="Save" />
-                <input class="btn" type="submit" name="random" value="Save &amp; draw next" />
+                <input class="btn" type="submit" value="{% trans "Save" %}" />
+                <input class="btn" type="submit" name="random" value="{% trans "Save & draw next" %}" />
             </form>
         </div>
     </div>

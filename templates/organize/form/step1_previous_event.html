@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
-                <h1>Application to organize a workshop</h1>
+                <h1>{% trans "Application to organize a workshop" %}</h1>
                 <form novalidate previous-event-form action="" method="post">{% csrf_token %}
                     {{ wizard.management_form }}
 
@@ -41,8 +41,12 @@
                     {% endif %}
 
                     <fieldset class="form-section">
-                        <legend class="form-section-heading{% if wizard.form.has_organized_before.field.required %} required{% endif %}">Have you organized a Django Girls workshop before?</legend>
-                        <p class="form-section-subhead">If so, the form will be much shorter as we already know a lot about you! :)</p>
+                        <legend class="form-section-heading{% if wizard.form.has_organized_before.field.required %} required{% endif %}">
+                            {% trans "Have you organized a Django Girls workshop before?" %}
+                        </legend>
+                        <p class="form-section-subhead">
+                            {% trans "If so, the form will be much shorter as we already know a lot about you! :)" %}
+                        </p>
 
                         <div class="radio-wrapper">
                             <ul class="narrow-options">
@@ -68,12 +72,12 @@
                     <script type="text/javascript">
                         $('#{{ wizard.form.previous_event.id_for_label }}').select2({
                             theme: "bootstrap",
-                            placeholder: "Choose event"
+                            placeholder: "{% trans "Choose event" %}"
                         });
                     </script>
 
                     <div class="cta-wrapper">
-                        <button type="submit" class="cta">Go to next step</button>
+                        <button type="submit" class="cta">{% trans "Go to next step" %}</button>
                     </div>
                 </form>
             </div>

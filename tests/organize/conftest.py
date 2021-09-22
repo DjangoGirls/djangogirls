@@ -240,7 +240,7 @@ def new_organizer_in_person():
 def workshop_form_valid_date():
     event_date = date.today() + timedelta(days=100)
     data = {
-        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': f'{event_date.year}-{event_date.month}-{event_date.day}',
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -257,7 +257,7 @@ def workshop_form_valid_date():
 def workshop_form_too_close():
     event_date = date.today() + timedelta(days=30)
     data = {
-        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': f'{event_date.year}-{event_date.month}-{event_date.day}',
         'city': 'Gaberone',
         'country': 'BW',
         'venue': 'Baixa Mall',
@@ -305,7 +305,7 @@ def workshop_remote_form_valid_date():
 def workshop_remote_form_date_too_close():
     event_date = date.today() + timedelta(days=30)
     data = {
-        'date': '{0}-{1}-{2}'.format(event_date.year, event_date.month, event_date.day),
+        'date': f'{event_date.year}-{event_date.month}-{event_date.day}',
         'city': 'Gaberone',
         'country': 'BW',
         'sponsorship': 'We have willing sponsors starting with my employer.',

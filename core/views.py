@@ -4,26 +4,32 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.template import TemplateDoesNotExist
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDate
 
 from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 from story.models import Story
-from sponsor.models import Donor
-from .quotes import DONOR_QUOTES
 
 
 def index(request):
 
+    blogs = Story.objects.filter(is_story=False).order_by('-created')[:3]
+    city_count = Event.objects.values('city').distinct().count()
+    country_count = Event.objects.values('country').distinct().count()
+    future_events = Event.objects.future()
+    organizers = User.objects.all().count()
+    stories = Story.objects.filter(is_story=True).order_by('-created')[:2]
+
     return render(request, 'core/index.html', {
-        'future_events': Event.objects.future(),
-        'stories': Story.objects.filter(is_story=True).order_by('-created')[:2],
-        'blogposts': Story.objects.filter(is_story=False).order_by('-created')[:3],
+        'future_events': future_events,
+        'stories': stories,
+        'blogposts': blogs,
         'patreon_stats': FundraisingStatus.objects.all().first(),  # TODO: This isn't used
-        'organizers_count': User.objects.all().count(),
-        'cities_count': Event.objects.values('city').distinct().count(),
-        'country_count': Event.objects.values('country').distinct().count(),
+        'organizers_count': organizers,
+        'cities_count': city_count,
+        'country_count': country_count,
     })
 
 
@@ -74,7 +80,7 @@ def event(request, page_url):
 def events_ical(request):
     events = Event.objects.public().order_by('-date')
     calendar = icalendar.Calendar()
-    calendar['summary'] = "List of Django Girls events around the world"
+    calendar['summary'] = _("List of Django Girls events around the world")
     for event in events:
         ical_event = event.as_ical()
         if ical_event is None:
@@ -132,27 +138,34 @@ def privacy_cookies(request):
     return render(request, 'core/privacy_cookies.html', {})
 
 
-def workshop_box(request):
-    return render(request, 'core/workshop_box.html', {})
+# This view's URL is commented out, so avoid coverage hit by commenting out the view also
+# def workshop_box(request):
+#     return render(request, 'core/workshop_box.html', {})
 
 
 def server_error(request):
     return HttpResponse(status=500)
 
 
-def coc(request, lang=None):
+def coc(request):
+    template_name = "core/coc.html"
+    return render(request, template_name)
+
+
+def coc_legacy(request, lang=None):
     if lang is None:
         lang = 'en'
-    template_name = "core/coc/{}.html".format(lang)
+    template_name = f"core/coc/{lang}.html"
     try:
         return render(request, template_name)
     except TemplateDoesNotExist:
-        raise Http404("No translation for language {}".format(lang))
+        raise Http404(_("No translation for language %(lang)s") % {'lang': lang})
 
 
-def crowdfunding_donors(request):
-    donor_list = Donor.objects.filter(visible=True).order_by('-amount')
-    return render(request, 'core/crowdfunding_donors.html', {
-        'donor_list': donor_list,
-        'quotes': DONOR_QUOTES,
-    })
+# This view's URL is commented out, so avoid coverage hit by commenting out the view also
+# def crowdfunding_donors(request):
+#     donor_list = Donor.objects.filter(visible=True).order_by('-amount')
+#     return render(request, 'core/crowdfunding_donors.html', {
+#         'donor_list': donor_list,
+#         'quotes': DONOR_QUOTES,
+#     })
