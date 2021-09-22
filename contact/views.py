@@ -9,7 +9,7 @@ from contact.forms import ContactForm
 class ContactView(FormView):
     form_class = ContactForm
     template_name = "contact/contact.html"
-    success_url = reverse_lazy("contact:contact")
+    success_url = reverse_lazy("contact:landing")
 
     def form_valid(self, form):
         contact_email = form.save()

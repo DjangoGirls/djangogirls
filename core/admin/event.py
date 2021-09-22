@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from django.conf.urls import url
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -40,7 +39,7 @@ class EventAdmin(admin.ModelAdmin):
     has_stats.short_description = _('has stats?')
 
     def full_url(self, obj):
-        url = reverse('core:event', kwargs={'city': obj.page_url})
+        url = reverse('core:event', kwargs={'page_url': obj.page_url})
         url = 'https://djangogirls.org{url}'.format(url=url)
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
     full_url.short_description = _('page URL')
@@ -121,12 +120,16 @@ class EventAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(EventAdmin, self).get_urls()
         my_urls = [
-            url(r'manage_organizers/$',
+            path(
+                'manage_organizers/',
                 self.admin_site.admin_view(self.view_manage_organizers),
-                name='core_event_manage_organizers'),
-            url(r'add_organizers/$',
+                name='core_event_manage_organizers'
+            ),
+            path(
+                'add_organizers/',
                 self.admin_site.admin_view(self.view_add_organizers),
-                name='core_event_add_organizers'),
+                name='core_event_add_organizers'
+            ),
         ]
         return my_urls + urls
 
@@ -173,7 +176,7 @@ class EventAdmin(admin.ModelAdmin):
                         _('Organizer %(user_name)s has been removed') % {'user_name': user.get_full_name()}
                     )
                     return HttpResponseRedirect(
-                        reverse('admin:core_event_manage_organizers') + '?event_id={}'.format(event.id))
+                        reverse('admin:core_event_manage_organizers') + f'?event_id={event.id}')
 
         return render(request, 'admin/core/event/view_manage_organizers.html', {
             'all_events': all_events,

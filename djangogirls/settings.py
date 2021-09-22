@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'captcha',
     'django_countries',
     'gulp_rev',
+    'tinymce',
 
     'core',
     'applications',
@@ -92,6 +93,8 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config(
     default=f'postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
 )
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -238,9 +241,6 @@ JOBS_EMAIL_PASSWORD = os.environ.get('JOBS_EMAIL_PASSWORD')
 MEETUPS_EMAIL_USER = os.environ.get('MEETUPS_EMAIL_USER')
 MEETUPS_EMAIL_PASSWORD = os.environ.get('MEETUPS_EMAIL_PASSWORD')
 
-CODEMIRROR_PATH = "vendor/codemirror/"
-
-
 GAPPS_ADMIN_SDK_SCOPES = 'https://www.googleapis.com/auth/admin.directory.user'
 GAPPS_PRIVATE_KEY_ID = os.environ.get('GAPPS_PRIVATE_KEY_ID', '')
 GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
@@ -266,3 +266,7 @@ if DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: not request.is_ajax(),
     }
+
+RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
+if RECAPTCHA_TESTING:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

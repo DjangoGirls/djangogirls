@@ -1,5 +1,5 @@
 {% extends 'global/base.html' %}
-{% load i18n rev staticfiles %}
+{% load i18n rev static %}
 
 {% block extra_js %}
     <script type="text/javascript" src="{% static_rev 'js/global.js' %}"></script>
@@ -141,15 +141,15 @@
                     <p>{% trans "Django Girls is a volunteer run organization, and we depend on your support to make it happen." %}</p>
                     <p class="support-stats">
                       {% blocktrans trimmed %}
-                        <span class="highlighted-number">$692</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged
+                        <span class="highlighted-number">$806</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged
                       {% endblocktrans %}
                     </p>
                     <div class="support-bar">
-                      <div class="pledge" style="width: 46%">46%</div>
+                      <div class="pledge" style="width: 53%">53%</div>
                     </div>
                     <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
                     <p class="partnership">
-                    {% url 'contact:contact' as contact_url %}
+                    {% url 'contact:landing' as contact_url %}
                     {% url 'donations:index' as donations_url %}
                       {% blocktrans trimmed %}
                         You can also send us a one <a href="{{ donations_url }}">time donation</a>.
@@ -183,10 +183,10 @@
             </div>
             </section>
 
-        <section id="supporters">
+        <section id="sponsors">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{% trans "They already support us! 💕" %}</h2>
+                    <h2>{% trans "They already sponsor us! 💕" %}</h2>
                     <p>
                       {% blocktrans trimmed %}
                         These incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br />
@@ -198,6 +198,22 @@
             </div>
 
             {% include 'includes/_main_sponsors.html' %}
+        </section>
+
+        <section id="supporters">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="margin-top: 50px">{% trans "They already support us! 💕" %}</h3>
+                    <p>
+                        {% blocktrans trimmed %}
+                            These incredible companies are actively helping us to change the ratio in the tech industry by supporting us in other ways. <br />
+                            If you wish to join them, <a href="{{ contact_url }}">drop us a line</a>.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+            {% include 'includes/_main_supporters.html' %}
         </section>
     </div>
 {% endblock %}

@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="logo">
-                <a href="/">
+                <a href="{% url 'core:index' %}">
                     <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
                 </a>
             </div>
@@ -21,7 +21,7 @@
                 <li><a href="{% url 'core:resources' %}">{% trans "Resources" %}</a></li>
                 <li><a href="{% url 'organize:index' %}">{% trans "Organize" %}</a></li>
                 <li><a href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
-                <li><a href="http://blog.djangogirls.org/">{% trans "Blog" %}</a></li>
+                <li><a href="https://blog.djangogirls.org/">{% trans "Blog" %}</a></li>
                 <li><a href="{% url 'core:contribute' %}">{% trans "Contribute" %}</a></li>
 
                  <li class="dropdown">
