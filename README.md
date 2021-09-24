@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/DjangoGirls/djangogirls.svg?branch=master)](https://travis-ci.org/DjangoGirls/djangogirls) [![codecov](https://codecov.io/gh/DjangoGirls/djangogirls/branch/master/graph/badge.svg)](https://codecov.io/gh/DjangoGirls/djangogirls)
 
 
-This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).
+This repository contains the Django application which powers [DjangoGirls.org](http://djangogirls.org/).
 
 ## What's in it?
 
-It's a simple CMS that contains 4 models:
+It's a simple CMS that contains 3 main models:
 
 - __Event__ - a list of events and their website configuration
 - __EventPageContent__ - blocks of content that are visible on the website
@@ -69,7 +69,7 @@ Step into newly created `djangogirls` directory:
 
     cd djangogirls
 
-Create a new virtual environment (python <3.8) if needed. Then, install all the required dependencies.
+Create a new virtual environment (python 3.9) if needed. Then, install all the required dependencies.
 The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
@@ -140,7 +140,7 @@ For a coverage report with information about missing lines, run this:
 
 We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
 
-This means you shouldn't change any css files, but `.styl` files. They're in /static/source/css/ directory.
+This means you shouldn't change any css files, but `.styl` files. They're in `/static/source/css/` directory.
 
 Autocompiling of `.styl` files to `.css`:
 
@@ -247,15 +247,20 @@ version control, but loaded by `manage.py`. So when you run django commands like
 
 This is an optional feature. If you do not have a `.environment` file then it won't impact on the application at all.
 
-## Submitting a Pull Request
-We have two major issues we are trying to resolve in our project:
-1. [Website internationalization/translations](https://github.com/DjangoGirls/djangogirls/issues/571) 
-so that non-English speakers can view the website based on their locale ([571](https://github.com/DjangoGirls/djangogirls/issues/571)).
-2. [Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628) 
-so that we can upgrade the version of Django to supported versions ([628](https://github.com/DjangoGirls/djangogirls/issues/628)).
+## Help with translation of the website
+Join us on [poeditor.com](https://poeditor.com/join/project?hash=n5I3liMVyj) to help with translation of the website so 
+that non-English speakers can view the website based on their locale.
 
-Since these are major changes to the website, pull requests related for each of this cannot be submitted to the `main` 
-branch. 
+Languages available for translation are;
 
-To contribute to [Issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571), 
-submit the pull request to the `translations` branch.
+* French
+* German
+* Korean
+* Persian
+* Portuguese
+* Portuguese (BR)
+* Russian
+* Spanish
+
+See [issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571) for further details. 
+Alternatively submit the pull request to the `translations` branch.
