@@ -24,7 +24,7 @@ freezegun
 google-api-python-client==1.7.10
 icalendar==4.0.3
 oauth2client==4.1.3
-pillow==8.2.0
+pillow==8.3.2
 pip-tools
 psycopg2-binary==2.8.3
 py-trello==0.13.0
