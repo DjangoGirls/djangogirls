@@ -259,6 +259,3 @@ branch.
 
 To contribute to [Issue 571- Website internationalization/translations ](https://github.com/DjangoGirls/djangogirls/issues/571), 
 submit the pull request to the `translations` branch.
-
-To contribute to [Issue 628 - Migrate from Django Suit which is pinning us on Django version 2.0](https://github.com/DjangoGirls/djangogirls/issues/628),
-submit the pull request to the `dev` branch. 
