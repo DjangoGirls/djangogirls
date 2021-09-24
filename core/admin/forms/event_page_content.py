@@ -1,14 +1,7 @@
-import copy
-
 import tinymce
 
 from django import forms
 from tinymce.widgets import AdminTinyMCE
-
-
-default_tinymce_config = copy.deepcopy(tinymce.settings.DEFAULT_CONFIG)
-default_tinymce_config['plugins'] += ' | code'
-default_tinymce_config['toolbar'] += ' | code'
 
 
 class EventPageContentForm(forms.ModelForm):
@@ -17,8 +10,8 @@ class EventPageContentForm(forms.ModelForm):
         widgets = {
             'content': AdminTinyMCE(
                 mce_attrs={
-                    'plugins': default_tinymce_config['plugins'],
-                    'toolbar': default_tinymce_config['toolbar'],
+                    'plugins': tinymce.settings.DEFAULT_CONFIG['plugins'] + ' | code',
+                    'toolbar': tinymce.settings.DEFAULT_CONFIG['toolbar'] + ' | code',
                 },
             )
         }
