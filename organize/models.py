@@ -274,7 +274,7 @@ class EventApplication(models.Model):
         return emails
 
     def get_main_organizer_email(self):
-        return [self.main_organizer_email]
+        return self.main_organizer_email
 
     def get_main_organizer_name(self):
         return f'{self.main_organizer_first_name} {self.main_organizer_last_name}'
