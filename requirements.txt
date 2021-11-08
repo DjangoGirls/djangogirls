@@ -229,7 +229,7 @@ sqlparse==0.4.2
     # via
     #   django
     #   django-debug-toolbar
-starkbank-ecdsa==1.1.1
+starkbank-ecdsa==2.0.1
     # via sendgrid
 stripe==2.60.0
     # via -r requirements.in
