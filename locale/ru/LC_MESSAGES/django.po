@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 09:23+0000\n"
+"POT-Creation-Date: 2021-09-22 18:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,8 +24,13 @@ msgstr ""
 msgid "\"City\" slug must be present to user this decorator."
 msgstr ""
 
-#: applications/forms.py:51
+#: applications/forms.py:49
 msgid "Application for this e-mail already exists."
+msgstr ""
+
+#: applications/forms.py:92
+#, python-format
+msgid "Confirmation of your application for %(page_title)s"
 msgstr ""
 
 #: applications/models.py:21
@@ -317,20 +322,47 @@ msgstr ""
 msgid "Yay! Your application has been saved. You'll hear from us soon!"
 msgstr ""
 
-#: applications/views.py:123
+#: applications/views.py:124
 msgid "Application Number"
 msgstr ""
 
-#: applications/views.py:123
+#: applications/views.py:124
 msgid "Application State"
 msgstr ""
 
-#: applications/views.py:123
+#: applications/views.py:124
 msgid "RSVP Status"
 msgstr ""
 
-#: applications/views.py:123
+#: applications/views.py:124
 msgid "Average Score"
+msgstr ""
+
+#: applications/views.py:254 applications/views.py:285
+msgid "Missing parameters"
+msgstr ""
+
+#: applications/views.py:268 applications/views.py:296
+msgid "Applications have been updated"
+msgstr ""
+
+#: applications/views.py:319
+#, python-format
+msgid ""
+"Something went wrong with your RSVP link. Please contact us at %(email)s "
+"with your name."
+msgstr ""
+
+#: applications/views.py:330
+msgid ""
+"Your participation in the workshop has been confirmed! We can't wait to meet "
+"you. We will be in touch with details soon."
+msgstr ""
+
+#: applications/views.py:336
+msgid ""
+"Your answer has been saved, thanks for letting us know. Your spot will be "
+"assigned to another person on the waiting list."
 msgstr ""
 
 #: coach/models.py:19
@@ -345,11 +377,11 @@ msgstr ""
 msgid "Coaches"
 msgstr ""
 
-#: contact/forms.py:13
+#: contact/forms.py:14
 msgid "Django Girls workshop in..."
 msgstr ""
 
-#: contact/forms.py:34
+#: contact/forms.py:41
 msgid "Please select the event"
 msgstr ""
 
@@ -377,59 +409,59 @@ msgstr ""
 msgid "Ooops. We couldn't send your email :( Please try again later"
 msgstr ""
 
-#: core/admin/event.py:35
+#: core/admin/event.py:34
 msgid "past event?"
 msgstr ""
 
-#: core/admin/event.py:40
+#: core/admin/event.py:39
 msgid "has stats?"
 msgstr ""
 
-#: core/admin/event.py:46
+#: core/admin/event.py:45
 msgid "page URL"
 msgstr ""
 
-#: core/admin/event.py:63 core/admin/event.py:96 organize/admin.py:88
+#: core/admin/event.py:62 core/admin/event.py:95 organize/admin.py:88
 msgid "Event info"
 msgstr ""
 
-#: core/admin/event.py:73 core/admin/event.py:103
+#: core/admin/event.py:72 core/admin/event.py:102
 msgid "Event main picture"
 msgstr ""
 
-#: core/admin/event.py:79
+#: core/admin/event.py:78
 msgid "Team"
 msgstr ""
 
-#: core/admin/event.py:83 core/admin/event.py:108
+#: core/admin/event.py:82 core/admin/event.py:107
 msgid "Event website"
 msgstr ""
 
-#: core/admin/event.py:90 core/admin/event.py:115
+#: core/admin/event.py:89 core/admin/event.py:114
 msgid "Statistics"
 msgstr ""
 
-#: core/admin/event.py:167
+#: core/admin/event.py:170
 msgid "You cannot remove yourself from a team."
 msgstr ""
 
-#: core/admin/event.py:173
+#: core/admin/event.py:176
 #, python-format
 msgid "Organizer %(user_name)s has been removed"
 msgstr ""
 
-#: core/admin/event.py:181
+#: core/admin/event.py:184
 msgid "Remove organizers"
 msgstr ""
 
-#: core/admin/event.py:198
+#: core/admin/event.py:201
 #, python-format
 msgid ""
 "%(user_name)s has been added to your event, yay! They've been also invited "
 "to Slack and should receive credentials to login in an e-mail."
 msgstr ""
 
-#: core/admin/event.py:211
+#: core/admin/event.py:214
 msgid "Add organizers"
 msgstr ""
 
@@ -485,14 +517,6 @@ msgstr ""
 msgid "Partners"
 msgstr ""
 
-#: core/emails.py:15
-msgid "You have been granted access to new Django Girls event"
-msgstr ""
-
-#: core/emails.py:29
-msgid "Access to Django Girls website"
-msgstr ""
-
 #: core/filters.py:7
 msgid "Open registration"
 msgstr ""
@@ -528,48 +552,48 @@ msgstr ""
 msgid "Event date should be in the future"
 msgstr ""
 
-#: core/views.py:76
+#: core/views.py:83
 msgid "List of Django Girls events around the world"
 msgstr ""
 
-#: core/views.py:155
+#: core/views.py:162
 #, python-format
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:101
+#: djangogirls/settings.py:104
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:102
+#: djangogirls/settings.py:105
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:103
+#: djangogirls/settings.py:106
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:104
+#: djangogirls/settings.py:107
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:105
+#: djangogirls/settings.py:108
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:106
+#: djangogirls/settings.py:109
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:110
 msgid "Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:111
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:112
 msgid "Spanish"
 msgstr ""
 
@@ -594,13 +618,13 @@ msgstr ""
 msgid "Main organizer"
 msgstr ""
 
-#: organize/admin.py:165
+#: organize/admin.py:162
 msgid "Invalid status provided for application"
 msgstr ""
 
-#: organize/admin.py:172
-#, python-brace-format
-msgid "Application for {city}, {country} has been moved to {status}"
+#: organize/admin.py:169
+#, python-format
+msgid "Application for %(city)s, %(country)s has been moved to %(status)s"
 msgstr ""
 
 #: organize/constants.py:5
@@ -645,28 +669,6 @@ msgstr ""
 
 #: organize/constants.py:25
 msgid "Deployed"
-msgstr ""
-
-#: organize/emails.py:9
-#, python-format
-msgid "Confirmation of application to organise Django Girls %(city)s workshop"
-msgstr ""
-
-#: organize/emails.py:26
-#, python-format
-msgid "New request to organise Django Girls %(city)s, %(country)s"
-msgstr ""
-
-#: organize/emails.py:40
-#, python-format
-msgid ""
-"Congrats! Your application to organize Django Girls %(city)s has been "
-"accepted!"
-msgstr ""
-
-#: organize/emails.py:57
-#, python-format
-msgid "Application to organize Django Girls %(city)s has been reviewed"
 msgstr ""
 
 #: organize/forms.py:12
@@ -763,7 +765,7 @@ msgstr ""
 msgid "Can accept Organize Applications"
 msgstr ""
 
-#: organize/models.py:266
+#: organize/models.py:265
 msgid "This field is required."
 msgstr ""
 
@@ -928,7 +930,7 @@ msgstr ""
 msgid "Make sure logo is not bigger than 200 pixels wide"
 msgstr ""
 
-#: sponsor/models.py:25
+#: sponsor/models.py:24
 msgid "No logo"
 msgstr ""
 
@@ -1061,7 +1063,7 @@ msgstr ""
 msgid "Application closed."
 msgstr ""
 
-#: templates/admin/organize/eventapplication/view_change_status.html:10
+#: templates/admin/organize/eventapplication/view_change_status.html:9
 #, python-format
 msgid ""
 "\n"
@@ -1069,7 +1071,7 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/admin/organize/eventapplication/view_change_status.html:15
+#: templates/admin/organize/eventapplication/view_change_status.html:14
 #, python-format
 msgid ""
 "\n"
@@ -1078,12 +1080,12 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/admin/organize/eventapplication/view_change_status.html:20
-#: templates/admin/organize/eventapplication/view_change_status.html:35
+#: templates/admin/organize/eventapplication/view_change_status.html:19
+#: templates/admin/organize/eventapplication/view_change_status.html:34
 msgid "Yes, I'm sure"
 msgstr ""
 
-#: templates/admin/organize/eventapplication/view_change_status.html:25
+#: templates/admin/organize/eventapplication/view_change_status.html:24
 #, python-format
 msgid ""
 "\n"
@@ -1092,7 +1094,7 @@ msgid ""
 "            "
 msgstr ""
 
-#: templates/admin/organize/eventapplication/view_change_status.html:30
+#: templates/admin/organize/eventapplication/view_change_status.html:29
 #, python-format
 msgid ""
 "\n"
@@ -3045,7 +3047,7 @@ msgstr ""
 
 #: templates/core/index.html:143
 msgid ""
-"<span class=\"highlighted-number\">$692</span> of <span class=\"highlighted-"
+"<span class=\"highlighted-number\">$806</span> of <span class=\"highlighted-"
 "number\">$1,500</span> monthly goal pledged"
 msgstr ""
 
@@ -3085,7 +3087,7 @@ msgid "See the Django Girls Dispatch archives"
 msgstr ""
 
 #: templates/core/index.html:189
-msgid "They already support us! 💕"
+msgid "They already sponsor us! 💕"
 msgstr ""
 
 #: templates/core/index.html:191
@@ -3095,6 +3097,18 @@ msgid ""
 "helping us to change the ratio in the tech industry. <br /> If you wish to "
 "join them, support us on <a href=\"https://www.patreon.com/djangogirls"
 "\">Patreon</a> or <a href=\"%(contact_url)s\">drop us a line</a>."
+msgstr ""
+
+#: templates/core/index.html:206
+msgid "They already support us! 💕"
+msgstr ""
+
+#: templates/core/index.html:208
+#, python-format
+msgid ""
+"These incredible companies are actively helping us to change the ratio in "
+"the tech industry by supporting us in other ways. <br /> If you wish to join "
+"them, <a href=\"%(contact_url)s\">drop us a line</a>."
 msgstr ""
 
 #: templates/core/newsletter.html:4
@@ -5294,7 +5308,7 @@ msgid ""
 "world! :)"
 msgstr ""
 
-#: templates/event/base.html:7 templates/global/base.html:6
+#: templates/event/base.html:7 templates/global/base.html:7
 msgid "Django Girls - start your journey with programming"
 msgstr ""
 
@@ -5308,19 +5322,19 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/global/base.html:7
+#: templates/global/base.html:8
 msgid ""
 "Django Girls is a one-day workshop about programming in Python and Django "
 "for women."
 msgstr ""
 
-#: templates/global/base.html:11
+#: templates/global/base.html:12
 msgid ""
 "Django Girls is a one-day workshop about programming in Python and Django "
 "for women"
 msgstr ""
 
-#: templates/global/base.html:13
+#: templates/global/base.html:14
 msgid ""
 "Join us and become a female developer! Build your first website in Python "
 "and Django in a friendly, safe environment."
@@ -5592,6 +5606,11 @@ msgstr ""
 msgid "Good luck and see you on Slack 👋<br />Django Girls Team"
 msgstr ""
 
+#: templates/organize/form/step1_previous_event.html:31
+#: templates/organize/form/step2_application.html:25
+msgid "Application to organize a workshop"
+msgstr ""
+
 #: templates/organize/form/step1_previous_event.html:45
 msgid "Have you organized a Django Girls workshop before?"
 msgstr ""
@@ -5605,10 +5624,6 @@ msgstr ""
 #: templates/organize/form/step2_application.html:111
 #: templates/organize/form/step3_organizers.html:185
 msgid "Go to next step"
-msgstr ""
-
-#: templates/organize/form/step2_application.html:25
-msgid "Application to organize a workshop"
 msgstr ""
 
 #: templates/organize/form/step2_application.html:39
