@@ -24,7 +24,9 @@ DEFAULT_BACKGROUND_PHOTOS = {
     ]
 }
 
+
 four_random_flickr_photos = select_random_flickr_photos(4)
+
 
 def get_random_photo(section):
     if section in DEFAULT_BACKGROUND_PHOTOS:
@@ -34,11 +36,13 @@ def get_random_photo(section):
         )
     return None
 
+
 def select_photo(section):
     if not four_random_flickr_photos:
         return get_random_photo(section)
     else:
         return four_random_flickr_photos.pop(0)
+
 
 def get_default_eventpage_data():
     return [
