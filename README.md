@@ -247,6 +247,16 @@ version control, but loaded by `manage.py`. So when you run django commands like
 
 This is an optional feature. If you do not have a `.environment` file then it won't impact on the application at all.
 
+### Before you Open a Pull Request
+
+This project runs a linting check with [flake8](https://pypi.org/project/flake8/) whenever a pull request is merged. Before you create a pull request, it's advisable to fix any linting issues locally to avoid errors while merging. In order to have flake8 run in your local machine automatically you can do the following:
+
+1) Run `pip install pre-commit` to install [pre-commit](https://pypi.org/project/pre-commit/). This package helps setting up git hooks.
+
+2) Run `pre-commit install` to install the git hook. After this, whenever you run `git commit` in your local machine, flake8 will run and report any linting errors that it found.
+
+3) If you've already committed your changes before installing `pre-commit`, you can follow steps 1 and 2 and then run `pre-commit run --all-files` to run flake8 against all of the files.
+
 ## Help with translation of the website
 Join us on [poeditor.com](https://poeditor.com/join/project?hash=n5I3liMVyj) to help with translation of the website so 
 that non-English speakers can view the website based on their locale.

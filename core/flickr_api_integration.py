@@ -4,17 +4,18 @@ import io
 from django.core.files.images import ImageFile
 from django.conf import settings
 
+
 def get_flickr_photo_list():
     try:
         req = requests.get('https://www.flickr.com/services/rest/'
-        '?method=flickr.people.getPublicPhotos'
-        f'&api_key={settings.FLICKR_API_KEY}'
-        f'&user_id={settings.FLICKR_DJANGO_GIRLS_USER_ID}'
-        '&extras=o_dims&format=json&nojsoncallback=1')
+                           '?method=flickr.people.getPublicPhotos'
+                           f'&api_key={settings.FLICKR_API_KEY}'
+                           f'&user_id={settings.FLICKR_DJANGO_GIRLS_USER_ID}'
+                           '&extras=o_dims&format=json&nojsoncallback=1')
         return req.json()
     except requests.exceptions.RequestException:
         return None
-    
+
 
 def filter_landscape_photos(json_response):
     try:
@@ -23,23 +24,26 @@ def filter_landscape_photos(json_response):
     except (TypeError, KeyError):
         return None
 
+
 def get_random_photo_selection(photo_list, amount_to_select):
     try:
         return random.sample(photo_list, k=amount_to_select)
     except (TypeError, ValueError):
         return None
 
+
 def get_photo_files(photo_list):
     photo_files_list = []
     try:
         for photo in photo_list:
             request = requests.get(f'https://live.staticflickr.com/{photo["server"]}/'
-            f'{photo["id"]}_{photo["secret"]}_b.jpg')
+                                   f'{photo["id"]}_{photo["secret"]}_b.jpg')
             photo_file = ImageFile(io.BytesIO(request.content), name=f'{photo["id"]}.jpg')
             photo_files_list.append(photo_file)
         return photo_files_list if len(photo_files_list) else None
     except (requests.exceptions.RequestException, TypeError, KeyError):
         return None
+
 
 def select_random_flickr_photos(amount_to_select):
     photo_list = get_flickr_photo_list()
