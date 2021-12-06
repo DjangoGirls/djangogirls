@@ -248,6 +248,9 @@ GAPPS_PRIVATE_KEY = os.environ.get('GAPPS_PRIVATE_KEY', '')
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
+FLICKR_DJANGO_GIRLS_USER_ID = os.environ.get("FLICKR_DJANGO_GIRLS_USER_ID")
+FLICKR_API_KEY = os.environ.get("FLICKR_API_KEY")
+
 # ***** DEBUG TOOLBAR *****
 
 DEBUG_TOOLBAR = DEBUG and os.environ.get('DEBUG_TOOLBAR', 'no') == 'yes'
