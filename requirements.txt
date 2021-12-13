@@ -111,7 +111,7 @@ jmespath==0.10.0
     # via
     #   boto3
     #   botocore
-lxml==4.6.3
+lxml==4.6.5
     # via pyquery
 markdown2==2.4.1
     # via django-markdown-deux
