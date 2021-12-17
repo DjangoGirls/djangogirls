@@ -74,7 +74,7 @@ django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
     # via -r requirements.in
-django-tinymce==3.3.0
+django-tinymce==3.4.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
