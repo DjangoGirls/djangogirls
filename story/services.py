@@ -69,8 +69,7 @@ def request_latest_stories_from_tumblr() -> Iterator[RemoteStory]:
             timeout=5,
         )
         response.raise_for_status()
-    except RequestException as exc:
-        print(exc)
+    except RequestException:
         logger.exception("Exception when requesting tumblr posts")
         return iter(())
 
