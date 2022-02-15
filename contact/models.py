@@ -45,7 +45,6 @@ class ContactEmail(models.Model):
             [self.sent_to],
             reply_to=[f"{self.name} <{self.email}>"],
             headers={'Reply-To': f"{self.name} <{self.email}>"}
-            # Seems like this is needed for Mandrill
         )
         try:
             email.send(fail_silently=False)
