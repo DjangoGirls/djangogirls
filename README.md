@@ -17,8 +17,9 @@ It's a simple CMS that contains 3 main models:
 
 Simply go to command line and run this command:
 
+```bash
     python ./manage.py new_event
-
+```
 And then follow the instructions.
 
 ## How to manage your website?
@@ -61,61 +62,88 @@ Please note that we use Python 3 only, so make sure that you use correct version
 
 ## Setting up a development environment
 
-First, clone the repository:
+First, fork and clone the repository:
 
-    git clone git@github.com:DjangoGirls/djangogirls.git
+```bash
+    git clone git@github.com:your-username/djangogirls.git
+```
 
 Step into newly created `djangogirls` directory:
 
+```bash
     cd djangogirls
+```
 
 Create a new virtual environment (python 3.9) if needed. Then, install all the required dependencies.
 The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
+```bash
     pip install pip-tools
+```
+
+```bash
     pip-sync
+```
 
 There is more information on how `pip-tools` work below.
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 
+```bash
     psql
+```
 
 In the `psql` shell, create a database and a role with the necessary permissions:
 
+```sql
     CREATE DATABASE djangogirls;
     CREATE ROLE postgres;
     GRANT ALL privileges ON DATABASE djangogirls TO postgres;
     ALTER ROLE postgres WITH LOGIN;
+```
 
 Exit the `psql` shell:
 
+```bash
     \q
+```
 
 Run the migration to create database schema:
 
+```bash
     ./manage.py migrate
+```
 
 Load sample data to the database
 
+```bash
     ./manage.py loaddata sample_db.json
+```
 
 Create a user so you can login to the admin:
 
+```bash
     ./manage.py createsuperuser
+```
 
 Install dependencies for static files:
 
+```bash
     npm install
+```
 
 Compile CSS and JS files:
 
+```bash
     gulp watch
+```
 
 Run your local server:
 
+```bash
      ./manage.py runserver
+```
 
 :tada: You're done.
 
@@ -124,17 +152,21 @@ Run your local server:
 
 You can run the tests like this:
 
+```bash
 	python -m pytest
+```
 
 Or if you want coverage reports:
 
+```bash
 	python -m pytest --cov
-
+```
 
 For a coverage report with information about missing lines, run this:
 
+```bash
 	python -m pytest --cov-report term-missing --cov
-
+```
 
 ### Static files
 
@@ -144,15 +176,21 @@ This means you shouldn't change any css files, but `.styl` files. They're in `/s
 
 Autocompiling of `.styl` files to `.css`:
 
+```bash
     npx gulp watch
+```
 
 We're also using gulp for our static files builds (see [below](#gulp-tasks)). To build static files for production, run this:
 
+```bash
     npx gulp build
+```
 
 For local development:
 
+```bash
     npx gulp local
+```
 
 #### Gulp Tasks
 
@@ -228,10 +266,13 @@ from `requirements.txt`.
 
 For example:
 
+```bash
     pip-compile -U
+```
 
+```bash
     pip-sync
-
+```
 
 ### Handling environment variables
 
