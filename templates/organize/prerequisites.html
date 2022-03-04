@@ -39,19 +39,6 @@
                     <form data-required-form action="{% url 'organize:commitment' %}">
                         <fieldset>
                             <legend>
-                                {% trans "Confirm that you understand that we are only accepting applications for remote workshops at this time:" %}
-                            </legend>
-                            <ul class="unstyled">
-                                <li class="checkbox-wrapper">
-                                    <input type="checkbox" id="remote-workshop" name="remote-workshop" required />
-                                    <label for="remote-workshop">
-                                       {% trans "The event you're organizing will be remote" %}
-                                    </label>
-                                </li>
-                            </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>
                                 {% blocktrans trimmed %}
                                     Confirm that you’ve read the following chapters of our <a href="http://organize.djangogirls.org/">Organizer's Manual</a>:
                                 {% endblocktrans %}
