@@ -250,7 +250,7 @@ def workshop_form_valid_date():
         'venue': 'Baixa Mall',
         'sponsorship': 'We have a few local companies we can approach.',
         'coaches': 'We have many Python developers here.',
-        'local_restrictions': 'Maximum number of attendees is 50 and social distancing of 1.5m apart. https://somegovt.com/',
+        'local_restrictions': 'Maximum number of attendees is 50. https://somegovt.com/',
         'safety': 'We will practise social distancing, wear masks and sanitize hands,',
         'diversity': 'Promote on social media and use videos',
         'additional': 'None',
