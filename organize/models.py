@@ -119,7 +119,7 @@ class EventApplication(models.Model):
                              blank=True)
     local_restrictions = models.TextField(
         _("Information about local restrictions for physical restrictions due to Covid-19 pandemic."),
-        blank= True)                                    
+        blank=True)
     safety = models.TextField(
         _("Information about how you will ensure participants' and coaches' safety during the Covid-19 pandemic"),
         blank=True
@@ -135,7 +135,8 @@ class EventApplication(models.Model):
         blank=True
     )
     confirm_covid_19_protocols = models.BooleanField(
-        _("Confirmation that you will postpone or have a remote event if your government regulations for Covid-19 change."),
+        _("Confirmation that you will postpone or have a remote event if your government"
+          "regulations for Covid-19 change."),
         default=False
     )
     # status reflecting state of the event in a triaging process.

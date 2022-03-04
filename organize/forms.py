@@ -5,8 +5,7 @@ from django_countries.fields import LazyTypedChoiceField
 from django_date_extensions.fields import ApproximateDateFormField
 
 from core.models import Event
-from core.validators import (validate_approximatedate, validate_event_date, 
-                             validate_future_date, validate_local_restrictions)
+from core.validators import validate_approximatedate, validate_event_date, validate_future_date, validate_local_restrictions
 from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
@@ -124,7 +123,7 @@ class WorkshopForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
     local_restrictions = forms.CharField(
-        required=True, 
+        required=True,
         widget=forms.Textarea(attrs={'class': 'compact-input'})
     )
     safety = forms.CharField(

@@ -1,9 +1,6 @@
-import re
-
 from datetime import date, timedelta
 
 from django.core.exceptions import ValidationError
-from django.core.validators import URLValidator
 from django.utils.translation import gettext_lazy as _
 
 from urlextract import URLExtract
