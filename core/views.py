@@ -61,13 +61,18 @@ def event(request, page_url):
     user = request.user
     user_is_organizer = user.is_authenticated and event.has_organizer(user)
     is_preview = 'preview' in request.GET
-    previewable = user.is_superuser or user_is_organizer or is_preview
+    can_preview = user.is_superuser or user_is_organizer or is_preview
 
-    if not (event.is_page_live or previewable):
+    if event.date:
+        is_past = event.date <= now_approx
+    else:
+        is_past = False
+
+    if not (event.is_page_live or can_preview):
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': event.city, 'page_url': page_url, 'past': event.date <= now_approx}
+            {'city': event.city, 'page_url': page_url, 'past': is_past}
         )
 
     return render(request, "core/event.html", {
