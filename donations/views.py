@@ -1,6 +1,6 @@
 import stripe
 from django.http import HttpResponseForbidden
-from stripe.error import StripeError
+from stripe.error import StripeError, CardError
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -34,20 +34,25 @@ def charge(request):
             amount = int(request.POST['amount'])
             currency = request.POST['currency']
 
-            customer = stripe.Customer.create(
-                email=request.POST['email'],
-                name=request.POST['name'],
-                source=request.POST['stripeToken']
-            )
             try:
-                charge = stripe.Charge.create(
+                customer = stripe.Customer.create(
+                    email=request.POST['email'],
+                    name=request.POST['name'],
+                    source=request.POST['stripeToken']
+                )
+            except CardError as err:
+                request.session['stripe_message'] = err.user_message
+                return redirect(reverse('donations:error'))
+            try:
+                stripe.Charge.create(
                     customer=customer,
                     amount=amount * 100,
                     currency=currency,
                     description="Donation"
                 )
-            except StripeError:
-                redirect(reverse('donations:error'))
+            except StripeError as err:
+                request.session['stripe_message'] = err.user_message
+                return redirect(reverse('donations:error'))
             else:
                 return redirect(
                     reverse(
@@ -82,4 +87,9 @@ def success(request, currency, amount):
 
 
 def error(request):
-    return render(request, 'donations/error.html')
+
+    if 'stripe_message' in request.session:
+        error_message = request.session.get('stripe_message')
+        del request.session['stripe_message']
+
+    return render(request, 'donations/error.html', {'stripe_message': error_message})
