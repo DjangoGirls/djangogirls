@@ -80,9 +80,6 @@ compiles `requirements.txt` ensuring compatibility between packages.
 
 ```bash
 pip install pip-tools
-```
-
-```bash
 pip-sync
 ```
 
@@ -268,9 +265,6 @@ For example:
 
 ```bash
 pip-compile -U
-```
-
-```bash
 pip-sync
 ```
 
