@@ -18,7 +18,7 @@ class CoachAdmin(admin.ModelAdmin):
         qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(eventpagecontent__event__team=request.user).distinct()
+        return qs.filter(eventpagecontent__event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
