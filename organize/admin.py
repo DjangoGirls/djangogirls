@@ -65,9 +65,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'coaches',
         'remote',
         'tools',
-        'diversity',
+        'local_restrictions',
         'safety',
-        'additional'
+        'diversity',
+        'additional',
+        'confirm_covid_19_protocols'
     )
     inlines = (InlineCoorganizerAdmin,)
     suit_form_tabs = (  # TODO: Can this be changed into something still useful?
@@ -106,9 +108,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
                 'coaches',
                 'remote',
                 'tools',
+                'local_restrictions',
                 'safety',
                 'diversity',
-                'additional'
+                'additional',
+                'confirm_covid_19_protocols'
             ],
             'classes': ('suit-tab', 'suit-tab-application',)
         }),

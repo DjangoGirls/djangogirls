@@ -94,7 +94,7 @@ DATABASES['default'] = dj_database_url.config(
     default=f'postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
 )
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -134,8 +134,8 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
-                'core.context_processors.statistics',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.statistics',
             ],
             'debug': DEBUG,
         },

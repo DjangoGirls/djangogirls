@@ -39,3 +39,5 @@ sentry-sdk
 slacker==0.9.65
 stripe
 vcrpy
+urlextract
+dnspython
