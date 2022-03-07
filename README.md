@@ -17,8 +17,9 @@ It's a simple CMS that contains 3 main models:
 
 Simply go to command line and run this command:
 
-    python ./manage.py new_event
-
+```bash
+python ./manage.py new_event
+```
 And then follow the instructions.
 
 ## How to manage your website?
@@ -61,61 +62,85 @@ Please note that we use Python 3 only, so make sure that you use correct version
 
 ## Setting up a development environment
 
-First, clone the repository:
+First, fork and clone the repository:
 
-    git clone git@github.com:DjangoGirls/djangogirls.git
+```bash
+git clone git@github.com:your-username/djangogirls.git
+```
 
 Step into newly created `djangogirls` directory:
 
-    cd djangogirls
+```bash
+cd djangogirls
+```
 
 Create a new virtual environment (python 3.9) if needed. Then, install all the required dependencies.
 The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
-    pip install pip-tools
-    pip-sync
+```bash
+pip install pip-tools
+pip-sync
+```
 
 There is more information on how `pip-tools` work below.
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 
-    psql
+```bash
+psql
+```
 
 In the `psql` shell, create a database and a role with the necessary permissions:
 
-    CREATE DATABASE djangogirls;
-    CREATE ROLE postgres;
-    GRANT ALL privileges ON DATABASE djangogirls TO postgres;
-    ALTER ROLE postgres WITH LOGIN;
+```sql
+CREATE DATABASE djangogirls;
+CREATE ROLE postgres;
+GRANT ALL privileges ON DATABASE djangogirls TO postgres;
+ALTER ROLE postgres WITH LOGIN;
+```
 
 Exit the `psql` shell:
 
-    \q
+```bash
+\q
+```
 
 Run the migration to create database schema:
 
-    ./manage.py migrate
+```bash
+./manage.py migrate
+```
 
 Load sample data to the database
 
-    ./manage.py loaddata sample_db.json
+```bash
+./manage.py loaddata sample_db.json
+```
 
 Create a user so you can login to the admin:
 
-    ./manage.py createsuperuser
+```bash
+./manage.py createsuperuser
+```
 
 Install dependencies for static files:
 
-    npm install
+```bash
+npm install
+```
 
 Compile CSS and JS files:
 
-    gulp watch
+```bash
+gulp watch
+```
 
 Run your local server:
 
-     ./manage.py runserver
+```bash
+./manage.py runserver
+```
 
 :tada: You're done.
 
@@ -124,17 +149,21 @@ Run your local server:
 
 You can run the tests like this:
 
-	python -m pytest
+```bash
+python -m pytest
+```
 
 Or if you want coverage reports:
 
-	python -m pytest --cov
-
+```bash
+python -m pytest --cov
+```
 
 For a coverage report with information about missing lines, run this:
 
-	python -m pytest --cov-report term-missing --cov
-
+```bash
+python -m pytest --cov-report term-missing --cov
+```
 
 ### Static files
 
@@ -144,15 +173,21 @@ This means you shouldn't change any css files, but `.styl` files. They're in `/s
 
 Autocompiling of `.styl` files to `.css`:
 
-    npx gulp watch
+```bash
+npx gulp watch
+```
 
 We're also using gulp for our static files builds (see [below](#gulp-tasks)). To build static files for production, run this:
 
-    npx gulp build
+```bash
+npx gulp build
+```
 
 For local development:
 
-    npx gulp local
+```bash
+npx gulp local
+```
 
 #### Gulp Tasks
 
@@ -228,10 +263,10 @@ from `requirements.txt`.
 
 For example:
 
-    pip-compile -U
-
-    pip-sync
-
+```bash
+pip-compile -U
+pip-sync
+```
 
 ### Handling environment variables
 
