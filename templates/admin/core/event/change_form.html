@@ -2,5 +2,16 @@
 {% load i18n %}
 
 {% block object-tools-items %}
+
+    <div class="row mb-3">
+        <div class="box save-box">
+        {% if request.user.is_superuser %}
+            <a class="btn btn-outline-success" href="{% url 'admin:core_event_duplicate_event' %}">
+            {% trans "Duplicate Event" %}
+            </a>
+        {% endif %}
+        </div>
+    </div>
+
     {{ block.super }}
 {% endblock %}

@@ -1,15 +1,24 @@
 {% extends "admin/base.html" %}
 {% load i18n rev %}
+{% load static %}
 
 {% block title %}{{ title }} | {% trans "Django Girls admin" %}{% endblock %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static_rev 'css/admin.css' %}">
+    <style>
+        :root {
+          --primary: #ff8c00;
+          --secondary: #FFA000;
+          --link-fg: #000000;
+          --link-selected-fg: #ffc87c;
+        }
+        </style>
 {% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">{% trans "Django Girls administration" %}</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}"><img src="{% static 'img/logo.png' %}" height="60px" /></a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

@@ -4,6 +4,7 @@ from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, path
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -43,6 +44,12 @@ class EventAdmin(admin.ModelAdmin):
         url = 'https://djangogirls.org{url}'.format(url=url)
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
     full_url.short_description = _('page URL')
+
+    def event_action(self, obj):
+        return format_html(
+            '<a class="button" href="{}">Duplicate</a>&nbsp;',
+            reverse('admin:core_event_duplicate_event')
+        )
 
     def get_readonly_fields(self, request, obj=None):
         fields = set(self.readonly_fields) | {'full_url'}
@@ -130,6 +137,11 @@ class EventAdmin(admin.ModelAdmin):
                 self.admin_site.admin_view(self.view_add_organizers),
                 name='core_event_add_organizers'
             ),
+            path(
+                'duplicate_event/',
+                self.admin_site.admin_view(self.duplicate_event),
+                name='core_event_duplicate_event'
+            ),
         ]
         return my_urls + urls
 
@@ -213,6 +225,12 @@ class EventAdmin(admin.ModelAdmin):
             'form': form,
             'title': _('Add organizers'),
         })
+
+    def duplicate_event(self, request, obj, form):
+        new_event = super(EventAdmin, self).save_model(request, obj, form)
+        new_event.pk = None
+        new_event.save()
+        return new_event
 
     def save_model(self, request, obj, form, change):
         created = not obj.pk
