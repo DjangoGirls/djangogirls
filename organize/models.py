@@ -221,7 +221,6 @@ class EventApplication(models.Model):
 
         self.change_status_to(DEPLOYED)
 
-        event = None
         previous_event = (
             Event.objects
             .filter(city=self.city, country=self.get_country_display())
