@@ -288,7 +288,7 @@ class Event(models.Model):
         clone = Event.objects.get(id=self.id)
         clone.id = None
         clone.name += ' (clone)'
-        clone.page_url += '_(clone)'
+        clone.page_url += '_clone'
         clone.save()
         return clone
 
