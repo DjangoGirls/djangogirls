@@ -272,6 +272,26 @@ class Event(models.Model):
             # No StockPicture available
             pass
 
+    def clone(self):
+        """
+        Clone this Event, for events with multiple website - that is English and non-English version.
+
+        :return: the cloned Event
+        :rtype: Event or NoneType
+        """
+        if not self.id:
+            # this Event isn't saved yet...
+            return None
+
+        # first, get a copy of self (that isn't self), we'll save this into
+        # the database as a new record by wiping the ID and re-saving
+        clone = Event.objects.get(id=self.id)
+        clone.id = None
+        clone.name += ' (clone)'
+        clone.page_url += '_(clone)'
+        clone.save()
+        return clone
+
 
 class EventPageContent(models.Model):
     event = models.ForeignKey(
