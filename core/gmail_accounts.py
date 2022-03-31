@@ -3,8 +3,8 @@ from httplib2 import Http
 from django.conf import settings
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from apiclient.errors import HttpError
-from apiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
 from core.models import Event
