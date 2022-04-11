@@ -287,7 +287,7 @@ class Event(models.Model):
         # the database as a new record by wiping the ID and re-saving
         clone = Event.objects.get(id=self.id)
         clone.id = None
-        clone.name += ' (clone)'
+        clone.name += ' clone'
         clone.page_url += '_clone'
         clone.save()
         return clone
