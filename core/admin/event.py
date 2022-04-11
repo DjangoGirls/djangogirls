@@ -14,12 +14,32 @@ from ..forms import (
 from ..models import Event
 
 
+@admin.action(description='Clone selected Events')
+def clone_action(modeladmin, request, queryset):
+    """
+    Clone the selected Events, making a copy of the Event.
+    """
+    count = 0
+    for event in queryset:
+        event.clone()
+        count += 1
+
+    messages.success(
+        request,
+        '{} event{} cloned'.format(
+            count,
+            '' if count == 1 else 's'
+        )
+    )
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
                     'is_on_homepage', 'is_past_event', 'has_stats')
     list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
     filter_horizontal = ['team']
+    actions = [clone_action]
     form = EventForm
 
     def get_queryset(self, request):
@@ -129,7 +149,7 @@ class EventAdmin(admin.ModelAdmin):
                 'add_organizers/',
                 self.admin_site.admin_view(self.view_add_organizers),
                 name='core_event_add_organizers'
-            ),
+            )
         ]
         return my_urls + urls
 
