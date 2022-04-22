@@ -68,7 +68,7 @@ def event(request, page_url):
     else:
         is_past = False
 
-    if not (event_obj.is_page_live or can_preview):
+    if not (event_obj.is_page_live or can_preview) or event_obj.is_frozen:
         return render(
             request,
             'applications/event_not_live.html',

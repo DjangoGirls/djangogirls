@@ -115,7 +115,10 @@ class Event(models.Model):
         verbose_name="Website is ready",
         default=False
     )
-
+    is_frozen = models.BooleanField(
+        verbose_name="Event frozen",
+        default=False
+    )
     attendees_count = models.IntegerField(
         verbose_name="Number of attendees",
         null=True,
@@ -291,6 +294,16 @@ class Event(models.Model):
         clone.page_url += '_clone'
         clone.save()
         return clone
+
+    def freeze(self):
+        self.is_frozen = True
+        self.is_on_homepage = False
+        self.save(update_fields=['is_frozen', 'is_on_homepage'])
+
+    def unfreeze(self):
+        self.is_frozen = False
+        self.is_on_homepage = True
+        self.save(update_fields=['is_frozen', 'is_on_homepage'])
 
 
 class EventPageContent(models.Model):

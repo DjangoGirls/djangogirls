@@ -33,13 +33,53 @@ def clone_action(modeladmin, request, queryset):
     )
 
 
+@admin.action(description='Freeze selected Events')
+def freeze_action(modeladmin, request, queryset):
+    """
+    Freeze selected events, making the event website inaccessible the same way it
+    would be if it is not yet live.
+    """
+    count = 0
+    for event in queryset:
+        event.freeze()
+        count += 1
+
+    messages.success(
+        request,
+        '{} event{} frozen'.format(
+            count,
+            '' if count == 1 else 's'
+        )
+    )
+
+
+@admin.action(description='Unfreeze selected events')
+def unfreeze_action(modeladmin, request, queryset):
+    """
+    Unfreeze selected events, making the  event website accessible the same way it
+    would be if it is live.
+    """
+    count = 0
+    for event in queryset:
+        event.unfreeze()
+        count += 1
+
+    messages.success(
+        request,
+        '{} event{} unfrozen'.format(
+            count,
+            '' if count == 1 else 's'
+        )
+    )
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'organizers', 'email', 'date', 'city', 'country',
-                    'is_on_homepage', 'is_past_event', 'has_stats')
+                    'is_on_homepage', 'is_past_event', 'has_stats', 'is_frozen')
     list_filter = (OpenRegistrationFilter,)
     search_fields = ('city', 'country', 'name')
     filter_horizontal = ['team']
-    actions = [clone_action]
+    actions = [clone_action, freeze_action, unfreeze_action]
     form = EventForm
 
     def get_queryset(self, request):
@@ -87,7 +127,8 @@ class EventAdmin(admin.ModelAdmin):
                     'latlng',
                     'email',
                     'page_url',
-                    'is_deleted'
+                    'is_deleted',
+                    'is_frozen'
                 ]}),
                 (_('Event main picture'), {'fields': [
                     'photo',
@@ -104,7 +145,7 @@ class EventAdmin(admin.ModelAdmin):
                     'page_description',
                     'page_main_color',
                     'page_custom_css',
-                    'is_page_live'
+                    'is_page_live',
                 ]}),
                 (_('Statistics'), {'fields': [
                     'applicants_count',
