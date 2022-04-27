@@ -160,3 +160,44 @@ def test_organizers_cannot_remove_themselves(
     resp = client.get(manage_organizers_url, data)
     assert resp.status_code == 302
     assert future_event.team.count() == 1
+
+
+def test_clone_events_admin(admin_client, future_event):
+    to_be_cloned = Event.objects.values_list('pk', flat=True)
+    data = {
+        'action': 'clone_action',
+        '_selected_action': to_be_cloned
+    }
+
+    change_url = reverse('admin:core_event_changelist')
+    response = admin_client.post(change_url, data, follow=True)
+    assert response.status_code == 200
+    assert Event.objects.filter(name__icontains='clone').count() == 1
+
+
+def test_freeze_events_action(admin_client, future_event):
+    to_be_frozen = Event.objects.values_list('pk', flat=True)
+    data = {
+        'action': 'freeze_action',
+        '_selected_action': to_be_frozen
+    }
+
+    change_url = reverse('admin:core_event_changelist')
+    response = admin_client.post(change_url, data, follow=True)
+    assert response.status_code == 200
+    assert Event.objects.filter(is_frozen=True).count() == 1
+    assert Event.objects.filter(is_on_homepage=False).count() == 1
+
+
+def test_unfreeze_events_action(admin_client, future_event):
+    to_be_unfrozen = Event.objects.values_list('pk', flat=True)
+    data = {
+        'action': 'unfreeze_action',
+        '_selected_action': to_be_unfrozen
+    }
+
+    change_url = reverse('admin:core_event_changelist')
+    response = admin_client.post(change_url, data, follow=True)
+    assert response.status_code == 200
+    assert Event.objects.filter(is_frozen=False).count() == 1
+    assert Event.objects.filter(is_on_homepage=True).count() == 1
