@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -23,5 +24,7 @@ urlpatterns = [
     # path(r'^crowdfunding-donors/$', views.crowdfunding_donors, name='crowdfunding-donors'),
     path('server-error/', views.server_error, name='server_error'),
     path('<slug:page_url>/', views.event, name='event'),
+    path('robots.txt', TemplateView.as_view(
+        template_name="core/txt/robots.txt", content_type='text/plain'), name="robots"),
     path('', views.index, name='index'),
 ]
