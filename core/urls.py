@@ -1,7 +1,15 @@
 from django.urls import path
 from django.views.generic import TemplateView
+from django.contrib.sitemaps.views import sitemap
 
 from . import views
+from .sitemap import StaticViewSitemap
+from story.sitemap import BlogSiteMap
+
+sitemaps = {
+    "website": StaticViewSitemap,
+    "blog": BlogSiteMap
+}
 
 app_name = "core"
 urlpatterns = [
@@ -29,4 +37,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('google3ef9938c7b93b707.html', TemplateView.as_view(
         template_name="google3ef9938c7b93b707.html"), name="google_site_verification"),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 ]
