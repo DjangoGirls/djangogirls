@@ -11,5 +11,5 @@ sitemaps = {
 app_name = "story"
 urlpatterns = [
     path('', StoryListView.as_view(), name='stories'),
-    path('/sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
