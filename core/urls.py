@@ -28,5 +28,5 @@ urlpatterns = [
         template_name="core/txt/robots.txt", content_type='text/plain'), name="robots"),
     path('', views.index, name='index'),
     path('google3ef9938c7b93b707.html', TemplateView.as_view(
-        template_name="core/txt/google3ef9938c7b93b707.html"), name="google_site_verification"),
+        template_name="google3ef9938c7b93b707.html"), name="google_site_verification"),
 ]
