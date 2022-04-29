@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'django.contrib.sitemaps',
 
     'adminsortable2',
     'django_date_extensions',
@@ -63,6 +62,7 @@ INSTALLED_APPS = [
     'contact',
     'pictures',
     'donations',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

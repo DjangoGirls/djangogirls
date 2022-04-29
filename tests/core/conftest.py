@@ -3,6 +3,7 @@ import pytest
 from coach.models import Coach
 from core.models import EventPageContent, EventPageMenu
 from sponsor.models import Sponsor
+from story.models import Story
 
 
 @pytest.fixture()
@@ -56,4 +57,17 @@ def past_event_menu(past_event):
         position=10,
         event=past_event,
         title="FAQ"
+    )
+
+
+@pytest.fixture
+def blog_posts(db):
+    return Story.objects.bulk_create(
+        [
+            Story(name='Post 1', content='Lorem ipsum dolor sit amet', is_story=False, post_url='post-1-url'),
+            Story(name='Post 2', content='Lorem ipsum dolor sit amet', is_story=False, post_url='post-2-url'),
+            Story(name='Post 3', content='Lorem ipsum dolor sit amet', is_story=False, post_url='post-3-url'),
+            Story(name='Post 4', content='Lorem ipsum dolor sit amet', is_story=False, post_url='post-4-url'),
+            Story(name='Post 5', content='Lorem ipsum dolor sit amet', is_story=False, post_url='post-5-url')
+        ]
     )
