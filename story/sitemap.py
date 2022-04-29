@@ -11,7 +11,10 @@ class BlogSiteMap(Sitemap):
 
     def location(self, item):
         url = item.post_url
-        return url.replace('https://', '')
+        if url is not None and 'http://' in url:
+            return url.replace('http://', '')
+        else:
+            return url.replace('https://', '')
 
     def lastmod(self, obj):
         return obj.created
