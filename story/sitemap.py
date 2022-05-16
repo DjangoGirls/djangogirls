@@ -7,7 +7,7 @@ class BlogSiteMap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Story.objects.all()
+        return Story.objects.all().order_by('-created')
 
     def location(self, item):
         url = item.post_url
