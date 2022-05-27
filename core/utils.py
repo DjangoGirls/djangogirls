@@ -24,17 +24,17 @@ def get_coordinates_for_city(city, country):
         return None
 
 
-def get_event(city, is_user_authenticated, is_preview):
+def get_event(page_url, is_user_authenticated, is_preview):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
     try:
-        event = Event.objects.get(page_url=city)
+        event = Event.objects.get(page_url=page_url)
     except Event.DoesNotExist:
         return None
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
         past = event.date <= now_approx
-        return city, past
+        return page_url, past
 
     return event
 

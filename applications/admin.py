@@ -23,7 +23,7 @@ class FormAdmin(admin.ModelAdmin):
         return qs.filter(event__team__in=[request.user])
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(FormAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
             event = Event.objects.filter(team__in=[request.user])
             form.base_fields['event'].queryset = event
