@@ -5,18 +5,18 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
-def get_organiser_menu(city):
+def get_organiser_menu(page_url):
     """
     Get menu entries for organiser-visible pages
     """
     menu = [
         {
             'title': _('Applications'),
-            'url': reverse('applications:applications', args=[city])
+            'url': reverse('applications:applications', args=[page_url])
         },
         {
             'title': _('Messaging'),
-            'url': reverse('applications:communication', args=[city])
+            'url': reverse('applications:communication', args=[page_url])
         },
     ]
 

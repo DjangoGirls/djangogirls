@@ -17,8 +17,8 @@ from .questions import get_organiser_menu
 from .services import get_applications_for_event, get_random_application
 
 
-def apply(request, city):
-    event = get_event(city, request.user.is_authenticated, False)
+def apply(request, page_url):
+    event = get_event(page_url, request.user.is_authenticated, False)
     if not event:
         raise Http404
     elif isinstance(event, tuple):
@@ -29,14 +29,14 @@ def apply(request, city):
 
     form_obj = Form.objects.filter(event=event).first()
     if form_obj is None:
-        return redirect('core:event', city)
+        return redirect('core:event', page_url)
 
     organiser = (
         request.user in event.team.all() or request.user.is_superuser
     )
 
     if not organiser and not form_obj.application_open:
-        return redirect('core:event', city)
+        return redirect('core:event', page_url)
 
     menu = EventPageMenu.objects.filter(event=event)
 
@@ -71,7 +71,7 @@ def apply(request, city):
 
 
 @organiser_only
-def application_list(request, city):
+def application_list(request, page_url):
     """
     Display a list of applications for this city.
     If 'state' get parameter is passed, filter the list.
@@ -80,7 +80,7 @@ def application_list(request, city):
     """
     state = request.GET.getlist('state', None)
     rsvp_status = request.GET.getlist('rsvp_status', None)
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
     order = request.GET.get('order', None)
     active_query_string = '?' + request.META.get('QUERY_STRING', '')
 
@@ -88,7 +88,7 @@ def application_list(request, city):
         applications = get_applications_for_event(
             event, state, rsvp_status, order, user=request.user)
     except Application.DoesNotExist:
-        return redirect('core:event', city=city)
+        return redirect('core:event', page_url=page_url)
 
     return render(request, 'applications/applications.html', {
         'event': event,
@@ -96,28 +96,28 @@ def application_list(request, city):
         'all_applications_count': Application.objects.filter(form__event=event).count(),
         'active_query_string': active_query_string,
         'order': order,
-        'menu': get_organiser_menu(city),
+        'menu': get_organiser_menu(page_url),
     })
 
 
 @organiser_only
-def applications_csv(request, city):
+def applications_csv(request, page_url):
     """
     Download a csv of applications for this city, respecting filter and
     order parameters from url.
     """
     state = request.GET.getlist('state', None)
     rsvp_status = request.GET.getlist('rsvp_status', None)
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
     order = request.GET.get('order', None)
     try:
         applications = get_applications_for_event(
             event, state, rsvp_status, order)
     except:  # TODO: what's the exception here?
-        return redirect('core:event', city=city)
+        return redirect('core:event', page_url=page_url)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = (
-        f'attachment; filename="{city}.csv"'
+        f'attachment; filename="{page_url}.csv"'
     )
     writer = csv.writer(response)
     csv_header = [
@@ -146,12 +146,12 @@ def applications_csv(request, city):
 
 
 @organiser_only
-def application_detail(request, city, app_number):
+def application_detail(request, page_url, app_number):
     """
     Display the details of a single application.
     """
     application = get_object_or_404(
-        Application, form__event__page_url=city, number=app_number
+        Application, form__event__page_url=page_url, number=app_number
     )
     try:
         score = Score.objects.get(
@@ -160,7 +160,7 @@ def application_detail(request, city, app_number):
     except Score.DoesNotExist:
         score = None
     score_form = ScoreForm(instance=score)
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
     all_scores = Score.objects.filter(application=application)
 
     if request.POST:
@@ -177,9 +177,9 @@ def application_detail(request, city, app_number):
             new_app = get_random_application(request.user, event, application)
             if new_app:
                 return redirect(
-                    'applications:application_detail', city, new_app.number
+                    'applications:application_detail', page_url, new_app.number
                 )
-            return redirect('applications:applications', city)
+            return redirect('applications:applications', page_url)
 
     return render(request, 'applications/application_detail.html', {
         'event': event,
@@ -188,32 +188,32 @@ def application_detail(request, city, app_number):
         'scores': all_scores,
         'user_score': score,
         'score_form': score_form,
-        'menu': get_organiser_menu(city),
+        'menu': get_organiser_menu(page_url),
     })
 
 
 @organiser_only
-def communication(request, city):
+def communication(request, page_url):
     """
     Send emails to applicants and attendees
     """
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
 
     emails = Email.objects.filter(form__event=event).order_by('-created')
 
     return render(request, 'applications/communication.html', {
         'event': event,
-        'menu': get_organiser_menu(city),
+        'menu': get_organiser_menu(page_url),
         'emails': emails,
     })
 
 
 @organiser_only
-def compose_email(request, city, email_id=None):
+def compose_email(request, page_url, email_id=None):
     """
     Create new email or update email to applicants and attendees
     """
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
     form_obj = get_object_or_404(Form, event=event)
     emailmsg = None if not email_id else get_object_or_404(
         Email, form__event=event, id=email_id
@@ -229,11 +229,11 @@ def compose_email(request, city, email_id=None):
         obj.save()
         if request.POST.get('send'):
             obj.send()
-        return redirect('applications:communication', city)
+        return redirect('applications:communication', page_url)
 
     return render(request, 'applications/compose_email.html', {
         'event': event,
-        'menu': get_organiser_menu(city),
+        'menu': get_organiser_menu(page_url),
         'form': form,
         'email': emailmsg,
     })
@@ -241,14 +241,14 @@ def compose_email(request, city, email_id=None):
 
 @organiser_only
 @csrf_exempt
-def change_state(request, city):
+def change_state(request, page_url):
     """
     Change the state of Application(s). Use it like this:
     e.g /applications/?state=accepted&application=1&application=2&application=3
     """
     state = request.POST.get('state', None)
     applications = request.POST.getlist('application', None)
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
 
     if not state or not applications:
         return JsonResponse({'error': _('Missing parameters')})
@@ -272,14 +272,14 @@ def change_state(request, city):
 
 @organiser_only
 @csrf_exempt
-def change_rsvp(request, city):
+def change_rsvp(request, page_url):
     """
     Change the rsvp_status of Application(s). Use it like this:
     e.g /applications/?rsvp=yes&application=1&application=2&application=3
     """
     rsvp_status = request.POST.get('rsvp_status', None)
     applications = request.POST.getlist('application', None)
-    event = get_event(city, request.user.is_authenticated, False)
+    event = get_event(page_url, request.user.is_authenticated, False)
 
     if not rsvp_status or not applications:
         return JsonResponse({'error': _('Missing parameters')})
@@ -298,8 +298,8 @@ def change_rsvp(request, city):
     })
 
 
-def rsvp(request, city, code):
-    event = get_event(city, request.user.is_authenticated, False)
+def rsvp(request, page_url, code):
+    event = get_event(page_url, request.user.is_authenticated, False)
     if not event:
         raise Http404
     elif isinstance(event, tuple):
