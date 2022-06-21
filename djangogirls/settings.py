@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'adminsortable2',
+    'django_bleach',
     'django_date_extensions',
     'django_unused_media',
     'django_extensions',
@@ -274,3 +275,15 @@ if DEBUG_TOOLBAR:
 RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
 if RECAPTCHA_TESTING:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u']
+
+BLEACH_ALLOWED_ATTRIBUTES = ['title']
+
+BLEACH_ALLOWED_PROTOCOLS = [
+    'http', 'https', 'data'
+]
+
+BLEACH_STRIP_TAGS = True
+
+BLEACH_STRIP_COMMENTS = True

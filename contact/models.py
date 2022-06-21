@@ -4,6 +4,8 @@ from django.core.mail import EmailMessage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from django_bleach.models import BleachField
+
 
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = 'chapter', 'support'
@@ -15,7 +17,7 @@ class ContactEmail(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
     sent_to = models.EmailField(max_length=128)
-    message = models.TextField()
+    message = BleachField()
     event = models.ForeignKey(
         'core.Event',
         help_text=_('required for contacting a chapter'),
