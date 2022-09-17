@@ -10,7 +10,7 @@ def test_download_applications_list(
         admin_client, future_event, future_event_form, applications):
     applications_url = reverse(
         'applications:applications_csv',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     resp = admin_client.get(applications_url)
     assert resp.status_code == 200
     assert (
@@ -33,7 +33,7 @@ def test_download_applications_list_uses_query_parameters_to_filter_applications
         admin_client, future_event, applications):
     applications_url = reverse(
         'applications:applications_csv',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     resp = admin_client.get(applications_url + '?state=submitted&state=accepted')
     assert resp.status_code == 200
     assert (
@@ -50,7 +50,7 @@ def test_download_applications_list_with_question_added(
         applications):
     applications_url = reverse(
         'applications:applications_csv',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     # add new question x as next to last question
     last_question = future_event_form.question_set.last()
     questionx = Question.objects.create(

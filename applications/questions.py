@@ -5,18 +5,18 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
-def get_organiser_menu(city):
+def get_organiser_menu(page_url):
     """
     Get menu entries for organiser-visible pages
     """
     menu = [
         {
             'title': _('Applications'),
-            'url': reverse('applications:applications', args=[city])
+            'url': reverse('applications:applications', args=[page_url])
         },
         {
             'title': _('Messaging'),
-            'url': reverse('applications:communication', args=[city])
+            'url': reverse('applications:communication', args=[page_url])
         },
     ]
 
@@ -158,7 +158,7 @@ DEFAULT_QUESTIONS = [
             "Data collected through this form is used only for the "
             "purpose of Django Girls events. We're using Third Party Sites "
             "and Services to make it happen: for example, we're using "
-            "Mandrill to send you emails. Don't worry: We don't share your data with spammers, "
+            "Sendgrid to send you emails. Don't worry: We don't share your data with spammers, "
             "and we don't sell it! More info on our Privacy policy "
             "<a href='/privacy-cookies/'>here</a>."
         ),

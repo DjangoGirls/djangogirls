@@ -10,7 +10,7 @@
     <div class="row mb-3">
         <h4 class="italic-title">{% trans "Triaging" %}</h4>
         <div class="box save-box">
-          {% if original.status != 'rejected' and original.status != 'accepted' %}
+          {% if original.status != 'rejected' and original.status != 'accepted' and original.status != 'deployed' %}
             <a class="btn btn-outline-success" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'accepted' %}">
               {% trans "Accept application" %}
             </a>
@@ -23,6 +23,8 @@
             <a class="btn btn-outline-danger" href="{% url 'admin:organize_eventapplication_change_application_status' original.pk 'rejected' %}">
               {% trans "Reject application" %}
             </a>
+          {% elif original.status == 'deployed' %}
+              {% trans "Application deployed." %}
           {% else %}
             {% trans "Application closed." %}
           {% endif %}

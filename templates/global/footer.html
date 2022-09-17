@@ -21,7 +21,7 @@
                     <li><a href="{% url 'donations:index' %}">{% trans "Make a donation" %}</a></li>
                     <li><a href="https://www.patreon.com/djangogirls">{% trans "Donate on Patreon" %}</a></li>
                     <li><a href="{% url 'core:contribute' %}">{% trans "Contribute" %}</a></li>
-                    <li><a href="https://goo.gl/P9YbdI">{% trans "Sponsor us" %}</a></li>
+                    <li><a href="https://drive.google.com/file/d/1QVS4_eWu-cZyvbK5-G0x4sXkDg9Xx6eY/view?usp=sharing">{% trans "Sponsor us" %}</a></li>
                 </ul>
             </div>
             <div class="col-md-2">
@@ -57,8 +57,8 @@
                 <ul>
                     <li>{% blocktrans %}<b>{{ future_events_count }}</b> upcoming events{% endblocktrans %}</li>
                     <li>{% blocktrans %}<b>{{ past_events_count }}</b> past events{% endblocktrans %}</li>
-                    <li>{% blocktrans %}<b>{{ applicants_sum|default_if_none:'0' }}</b> applicants{% endblocktrans %}</li>
-                    <li>{% blocktrans %}<b>{{ attendees_sum|default_if_none:'0' }}</b> attendees{% endblocktrans %}</li>
+                    <li>{% blocktrans %}<b>{{ applicants_sum }}</b> applicants{% endblocktrans %}</li>
+                    <li>{% blocktrans %}<b>{{ attendees_sum }}</b> attendees{% endblocktrans %}</li>
                     <li>{% blocktrans %}<b>{{ countries_count }}</b> countries{% endblocktrans %}</li>
                 </ul>
             </div>

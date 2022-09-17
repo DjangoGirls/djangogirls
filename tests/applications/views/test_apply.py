@@ -8,7 +8,7 @@ from applications.questions import DEFAULT_QUESTIONS
 
 def test_access_apply_view(client, future_event, future_event_form):
     apply_url = reverse(
-        'applications:apply', kwargs={'city': future_event.page_url})
+        'applications:apply', kwargs={'page_url': future_event.page_url})
     resp = client.get(apply_url)
     assert resp.status_code == 200
     assert resp.context['form_obj'] == future_event_form
@@ -35,7 +35,7 @@ def test_application_not_open(client, future_event_form, future_event):
     future_event_form.save()
 
     resp = client.get(
-        reverse('applications:apply', kwargs={'city': future_event.page_url}))
+        reverse('applications:apply', kwargs={'page_url': future_event.page_url}))
     assert resp.status_code == 302
 
 
@@ -46,7 +46,7 @@ def test_application_open(client, future_event_form, future_event):
     future_event_form.save()
 
     resp = client.get(
-        reverse('applications:apply', kwargs={'city': future_event.page_url}))
+        reverse('applications:apply', kwargs={'page_url': future_event.page_url}))
     assert resp.status_code == 200
     assert resp.context['form_obj'] == future_event_form
 
@@ -60,7 +60,7 @@ def test_application_not_open_organiser(client, future_event_form, future_event)
     client.force_login(future_event.main_organizer)
 
     resp = client.get(
-        reverse('applications:apply', kwargs={'city': future_event.page_url}))
+        reverse('applications:apply', kwargs={'page_url': future_event.page_url}))
     assert resp.status_code == 200
     assert resp.context['form_obj'] == future_event_form
 
@@ -72,14 +72,14 @@ def test_application_not_open_superuser(admin_client, future_event_form, future_
     future_event_form.save()
 
     resp = admin_client.get(
-        reverse('applications:apply', kwargs={'city': future_event.page_url}))
+        reverse('applications:apply', kwargs={'page_url': future_event.page_url}))
     assert resp.status_code == 200
     assert resp.context['form_obj'] == future_event_form
 
 
 def test_event_not_live(client, hidden_event):
     resp = client.get(
-        reverse('applications:apply', kwargs={'city': hidden_event.page_url}))
+        reverse('applications:apply', kwargs={'page_url': hidden_event.page_url}))
     assert resp.status_code == 200
     assert resp.context['city'] == hidden_event.page_url
 

@@ -11,7 +11,7 @@ def test_access_applications_view(client, user_client, admin_client, future_even
     # as anonymous user
     applications_url = reverse(
         'applications:applications',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     resp = client.get(applications_url)
     assert resp.status_code == 302
 
@@ -29,21 +29,21 @@ def test_access_applications_view(client, user_client, admin_client, future_even
     assert resp.status_code == 200
 
 
-def test_organiser_only_decorator_without_city(rf, user, future_event):
+def test_organiser_only_decorator_without_page_url(rf, user, future_event):
     request = rf.get('')
     request.user = user
     with pytest.raises(ValueError):
-        application_list(request, city=None)
+        application_list(request, page_url=None)
 
 
 def test_organiser_menu_in_applications_list(admin_client, future_event):
     applications_url = reverse(
         'applications:applications',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     resp = admin_client.get(applications_url)
     messaging_url = reverse(
         'applications:communication',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     assert (
         f'<a href="{applications_url}">Applications</a>'
         in str(resp.content.decode('utf-8')))
@@ -58,7 +58,7 @@ def test_get_sorted_applications_list(
         superuser):
     applications_url = reverse(
         'applications:applications',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
 
     # Add some scores:
     Score.objects.bulk_create([
@@ -102,7 +102,7 @@ def get_filtered_applications_list(
     # No filter
     applications_url = reverse(
         'applications:applications',
-        kwargs={'city': future_event.page_url})
+        kwargs={'page_url': future_event.page_url})
     resp = admin_client.get(applications_url)
     assert len(resp.context['applications']) == 4
 
@@ -268,7 +268,7 @@ def test_application_scores_is_queried_once(
 
     with CaptureQueriesContext(connection) as queries:
         admin_client.get(
-            reverse('applications:applications', kwargs={'city': future_event.page_url}))
+            reverse('applications:applications', kwargs={'page_url': future_event.page_url}))
 
     score_table_name = Score._meta.db_table
     score_queries = [q for q in queries.captured_queries if score_table_name in q['sql']]

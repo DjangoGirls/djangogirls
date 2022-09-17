@@ -115,7 +115,10 @@ class Event(models.Model):
         verbose_name="Website is ready",
         default=False
     )
-
+    is_frozen = models.BooleanField(
+        verbose_name="Event frozen",
+        default=False
+    )
     attendees_count = models.IntegerField(
         verbose_name="Number of attendees",
         null=True,
@@ -271,6 +274,36 @@ class Event(models.Model):
         except IndexError:
             # No StockPicture available
             pass
+
+    def clone(self):
+        """
+        Clone this Event, for events with multiple website - that is English and non-English version.
+
+        :return: the cloned Event
+        :rtype: Event or NoneType
+        """
+        if not self.id:
+            # this Event isn't saved yet...
+            return None
+
+        # first, get a copy of self (that isn't self), we'll save this into
+        # the database as a new record by wiping the ID and re-saving
+        clone = Event.objects.get(id=self.id)
+        clone.id = None
+        clone.name += ' clone'
+        clone.page_url += '_clone'
+        clone.save()
+        return clone
+
+    def freeze(self):
+        self.is_frozen = True
+        self.is_on_homepage = False
+        self.save(update_fields=['is_frozen', 'is_on_homepage'])
+
+    def unfreeze(self):
+        self.is_frozen = False
+        self.is_on_homepage = True
+        self.save(update_fields=['is_frozen', 'is_on_homepage'])
 
 
 class EventPageContent(models.Model):

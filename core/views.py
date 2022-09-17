@@ -56,24 +56,29 @@ def resources(request):
 def event(request, page_url):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    event = get_object_or_404(Event, page_url=page_url.lower())
+    event_obj = get_object_or_404(Event, page_url=page_url.lower())
 
     user = request.user
-    user_is_organizer = user.is_authenticated and event.has_organizer(user)
+    user_is_organizer = user.is_authenticated and event_obj.has_organizer(user)
     is_preview = 'preview' in request.GET
-    previewable = user.is_superuser or user_is_organizer or is_preview
+    can_preview = user.is_superuser or user_is_organizer or is_preview
 
-    if not (event.is_page_live or previewable):
+    if event_obj.date:
+        is_past = event_obj.date <= now_approx
+    else:
+        is_past = False
+
+    if not (event_obj.is_page_live or can_preview) or event_obj.is_frozen:
         return render(
             request,
             'applications/event_not_live.html',
-            {'city': event.city, 'page_url': page_url, 'past': event.date <= now_approx}
+            {'city': event_obj.city, 'page_url': page_url, 'past': is_past}
         )
 
     return render(request, "core/event.html", {
-        'event': event,
-        'menu': event.menu.all(),
-        'content': event.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
+        'event': event_obj,
+        'menu': event_obj.menu.all(),
+        'content': event_obj.content.prefetch_related('coaches', 'sponsors').filter(is_public=True),
     })
 
 

@@ -4,7 +4,7 @@ from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from .models import EventApplication, Coorganizer
-from .constants import ON_HOLD, IN_REVIEW, REJECTED, ACCEPTED
+from .constants import ON_HOLD, IN_REVIEW, REJECTED, ACCEPTED, DEPLOYED
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -65,9 +65,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
         'coaches',
         'remote',
         'tools',
-        'diversity',
+        'local_restrictions',
         'safety',
-        'additional'
+        'diversity',
+        'additional',
+        'confirm_covid_19_protocols'
     )
     inlines = (InlineCoorganizerAdmin,)
     suit_form_tabs = (  # TODO: Can this be changed into something still useful?
@@ -106,9 +108,11 @@ class EventApplicationAdmin(admin.ModelAdmin):
                 'coaches',
                 'remote',
                 'tools',
+                'local_restrictions',
                 'safety',
                 'diversity',
-                'additional'
+                'additional',
+                'confirm_covid_19_protocols'
             ],
             'classes': ('suit-tab', 'suit-tab-application',)
         }),
@@ -142,7 +146,13 @@ class EventApplicationAdmin(admin.ModelAdmin):
         """
         application = get_object_or_404(EventApplication, id=application_id)
 
-        if new_status in [IN_REVIEW, ON_HOLD]:
+        if application.status is DEPLOYED:
+            messages.error(request, _('The application is already deployed'))
+            return redirect(
+                'admin:organize_eventapplication_change',
+                application.id
+            )
+        elif new_status in [IN_REVIEW, ON_HOLD]:
             application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
             if request.method == 'GET':
@@ -157,12 +167,15 @@ class EventApplicationAdmin(admin.ModelAdmin):
                     application.reject()
                 else:
                     event = application.deploy()
-                    application.send_deployed_email(event)
+                    if event:
+                        # deploy returns None if it is already deployed
+                        application.send_deployed_email(event)
         else:
             messages.error(request, _('Invalid status provided for application'))
             return redirect(
                 'admin:organize_eventapplication_change',
-                application.id)
+                application.id
+            )
 
         messages.success(
             request,
