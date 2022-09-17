@@ -1,9 +1,7 @@
 from typing import Any
 from unittest import mock
 
-import pytest
 from requests.exceptions import RequestException
-
 
 from core import tumblr_client
 
