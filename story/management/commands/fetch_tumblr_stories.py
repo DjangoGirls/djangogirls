@@ -4,6 +4,7 @@ from urllib.request import urlretrieve
 
 from django.core.files import File
 from django.core.management.base import BaseCommand
+from django.db import transaction
 
 from story.models import Story
 
@@ -36,15 +37,16 @@ class Command(BaseCommand):
         created = 0
         for missing_story in missing_stories:
             self.stdout.write(f"Fetching {missing_story.title}")
-            story = Story.objects.create(
-                post_url=missing_story.url,
-                name=missing_story.title,
-                content=missing_story.content,
-                is_story=missing_story.is_story,
-            )
-            story.created = missing_story.created
-            story.save()
-            if missing_story.is_story and missing_story.banner_url:
-                story.image.save(*download_image(missing_story.banner_url), save=True)
+            with transaction.atomic():
+                story = Story.objects.create(
+                    post_url=missing_story.url,
+                    name=missing_story.title,
+                    content=missing_story.content,
+                    is_story=missing_story.is_story,
+                )
+                story.created = missing_story.created
+                story.save()
+                if missing_story.is_story and missing_story.banner_url:
+                    story.image.save(*download_image(missing_story.banner_url), save=True)
             created += 1
         self.stdout.write(f"{created} stories loaded and created from Tumblr blog")
