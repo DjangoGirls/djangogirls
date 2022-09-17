@@ -1,8 +1,11 @@
+from datetime import datetime
+
 import pytest
 
 from django.contrib.auth.models import Permission, Group
 
 from core.models import Event, User
+from core.tumblr_client import RemoteStory
 from pictures.models import StockPicture
 from sponsor.models import Donor
 
@@ -235,3 +238,19 @@ def hidden_donors():
         Donor(name="Tanaka", amount=100, visible=False)
     ])
     return hidden_donors
+
+
+@pytest.fixture()
+def remote_story():
+    return RemoteStory(
+        url="tumblr.com/stories/1",
+        content_parts=[
+            {"text": "This is a story text", "type": "text"},
+            {"text": "This is another story text", "type": "text"},
+            {
+                "media": [{"url": "/media-small"}, {"url": "/media-large"}],
+                "type": "image",
+            },
+        ],
+        created=datetime.utcnow(),
+    )
