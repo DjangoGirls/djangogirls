@@ -149,7 +149,7 @@ platformdirs==2.5.1
     # via urlextract
 pluggy==1.0.0
     # via pytest
-protobuf==3.17.1
+protobuf==3.18.3
     # via
     #   google-api-core
     #   googleapis-common-protos
@@ -242,7 +242,6 @@ six==1.16.0
     #   google-auth
     #   google-auth-httplib2
     #   oauth2client
-    #   protobuf
     #   python-dateutil
     #   vcrpy
 slacker==0.9.65
