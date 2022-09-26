@@ -1,9 +1,6 @@
 from django.contrib import admin
 
 
-from .models import Story
-
-
 class StoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_story', 'created')
     search_fields = ('name', 'content')
