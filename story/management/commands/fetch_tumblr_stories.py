@@ -6,15 +6,14 @@ from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from story.models import Story
-
 from core.tumblr_client import request_latest_stories
+from story.models import Story
 
 
 def download_image(url: str) -> Tuple[str, File]:
     image_name = urlparse(url).path.split("/")[-1]
     content = urlretrieve(url)
-    return (image_name, File(open(content[0], "rb")))
+    return image_name, File(open(content[0], "rb"))
 
 
 class Command(BaseCommand):
