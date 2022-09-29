@@ -274,3 +274,7 @@ if DEBUG_TOOLBAR:
 RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
 if RECAPTCHA_TESTING:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+TUMBLR_API_KEY = os.environ.get("TUMBLR_API_KEY")
+TUMBLR_API_BASE_URL = os.environ.get("TUMBLR_API_BASE_URL", "https://api.tumblr.com/v2")
+TUMBLR_BLOG_HOSTNAME = os.environ.get("TUMBLR_BLOG_HOSTNAME", "blog.djangogirls.org")
