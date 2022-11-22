@@ -139,7 +139,7 @@ packaging==21.0
     #   pytest
 pep517==0.11.0
     # via pip-tools
-pillow==9.0.1
+pillow==9.3.0
     # via
     #   -r requirements.in
     #   easy-thumbnails
