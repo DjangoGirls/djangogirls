@@ -16,7 +16,7 @@ botocore==1.21.42
     #   s3transfer
 cachetools==4.2.2
     # via google-auth
-certifi==2021.5.30
+certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
