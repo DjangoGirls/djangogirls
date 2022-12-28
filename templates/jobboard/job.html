@@ -1,0 +1,21 @@
+{% extends 'global/base.html' %}
+{% load i18n rev static %}
+
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+            <img src="{{ job.company.logo.url }}">
+        </div>
+        <h4>{{ job.role }}</h4>
+        <p>{{ job.location }}</p>
+        <p>{{ job.remuneration }}</p>
+
+        <p>{{ job.description| safe }}</p>
+        <br>
+        <div class="text-center">
+            <a href="{{ job.apply }}" class="btn btn-primary">Apply here</a>
+        </div>
+        
+    </div>
+
+{% endblock content %}
