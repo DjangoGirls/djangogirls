@@ -36,10 +36,11 @@
                           <p></p>
                           <div class="row">
                               <div class="col-md-6 text-center">
-                                  <a href="{{ job.apply }}" class="cta">Apply here</a>
+                                  <a href="{{ job.apply }}" class="cta">{% trans "Apply here" %}</a>
                               </div>
                               <div class="col-md-6 text-center">
-                                  <a href="{% url 'jobboard:job_detail' job.id %}" class="cta">More information</a>
+                                  <a href="{% url 'jobboard:job_detail' job.id %}" class="cta">
+                                    {% trans "More information" %}</a>
                               </div>
                           </div>
                         </div> 

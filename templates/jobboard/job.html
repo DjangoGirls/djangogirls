@@ -3,19 +3,31 @@
 
 {% block content %}
     <div class="container">
-        <div class="text-center">
-            <img src="{{ job.company.logo.url }}">
+        {% if job %}
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h2 class="text-center">{{ job.company }}</h2>
+                <hr>
+                <div class="text-center">
+                    <img src="{{ job.company.logo.url }}">
+                </div>
+                <br>
+                <h4>{{ job.role }}</h4>
+                <p>{{ job.location }}</p>
+                <p>{{ job.remuneration }}</p>
+    
+                <p>{{ job.description| safe }}</p>
+                <br>
+                <div class="text-center">
+                    <a href="{{ job.apply }}" class="btn btn-primary">{% trans "Apply here" %}</a>
+                </div>
+            {% else %}
+                <h4>{% trans "Sorry the job listing does not exist." %}</h4>
+            {% endif %}
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <h4>{{ job.role }}</h4>
-        <p>{{ job.location }}</p>
-        <p>{{ job.remuneration }}</p>
-
-        <p>{{ job.description| safe }}</p>
-        <br>
-        <div class="text-center">
-            <a href="{{ job.apply }}" class="btn btn-primary">Apply here</a>
-        </div>
-        
     </div>
 
 {% endblock content %}

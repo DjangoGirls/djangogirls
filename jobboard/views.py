@@ -9,5 +9,9 @@ def index(request):
 
 
 def job_detail(request, id):
-    job = Job.objects.get(id=id)
+    try:
+        job = Job.objects.get(id=id)
+    except Job.DoesNotExist:
+        job = None
+
     return render(request, 'jobboard/job.html', {'job': job})

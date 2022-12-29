@@ -5,6 +5,7 @@ from tinymce import models as tinymce_models
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField()
     logo = models.ImageField()
 
     class Meta:
