@@ -36,7 +36,7 @@ def test_edit_company_superuser(admin_client, company, edit_company):
     response = admin_client.get(reverse('admin:jobboard_company_change', args=(company.pk,)))
     assert response.status_code == 200
     response = admin_client.post(reverse('admin:jobboard_company_change', args=(company.pk,)), data=edit_company)
-    assert response.status_code == 302
+    assert response.status_code == 200
 
 
 """Tests to make sure only superusers can manage companies and jobs and organizers have no
