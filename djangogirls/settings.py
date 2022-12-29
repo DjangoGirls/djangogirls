@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'contact',
     'pictures',
     'donations',
+    'jobboard',
     'django.contrib.sitemaps',
 ]
 
