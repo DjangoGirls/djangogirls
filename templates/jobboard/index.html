@@ -22,7 +22,7 @@
                             <h3 class="card-title text-center">
                               <a href="{% url 'jobboard:job_detail' job.id %}">{{ job.company.name }}</a>
                               {% if job.date_created|timesince > "20 hours" %}
-                              <span class="badge badge-dprimary">New</span>
+                              <span class="badge badge-dprimary">{% trans "New" %}</span>
                               {% endif %}
                           </h3>
                           <div class="card-text d-inline-block text-truncate text-wrap" style="max-height: 30rem;">
