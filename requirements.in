@@ -53,5 +53,5 @@ icalendar==4.0.3
 oauth2client==4.1.3
 py-trello==0.13.0
 sentry-sdk
-slacker==0.9.65
+slack_sdk==3.19.5
 stripe
