@@ -6,15 +6,14 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django_date_extensions.fields import ApproximateDate, ApproximateDateField
-from slacker import Error as SlackerError
+from slack_sdk.errors import SlackApiError
 
+from core.default_eventpage_content import get_default_eventpage_data, get_default_menu
+from core.emails import notify_existing_user, notify_new_user
+from core.models.managers.event import EventManager
+from core.models.user import User
+from core.validators import validate_approximatedate
 from pictures.models import StockPicture
-
-from ..default_eventpage_content import get_default_eventpage_data, get_default_menu
-from ..emails import notify_existing_user, notify_new_user
-from ..validators import validate_approximatedate
-from .managers.event import EventManager
-from .user import User
 
 
 class Event(models.Model):
@@ -168,7 +167,7 @@ class Event(models.Model):
             errors = []
             try:
                 user.invite_to_slack()
-            except (ConnectionError, SlackerError) as e:
+            except (ConnectionError, SlackApiError) as e:
                 errors.append(f"Slack invite unsuccessful, reason: {e}")
             notify_new_user(user, event=self, password=password, errors=errors)
         else:

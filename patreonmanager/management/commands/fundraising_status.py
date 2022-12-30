@@ -3,11 +3,11 @@ import logging
 import requests
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from slacker import Error as SlackerError
+from slack_sdk.errors import SlackApiError
 
-from core.slack_client import slack
+from core.slack_client import post_message_to_slack
 
-from ...models import FundraisingStatus
+from patreonmanager.models import FundraisingStatus
 
 DJANGOGIRLS_USER_ID = 483065
 BASE_API_URL = "https://api.patreon.com/"
@@ -35,8 +35,6 @@ class Command(BaseCommand):
 
         if settings.ENABLE_SLACK_NOTIFICATIONS:
             try:
-                slack.chat.post_message(
-                    channel="#notifications", text=message, username="Django Girls", icon_emoji=":django_heart:"
-                )
-            except SlackerError:
-                logging.warning("Slack message not sent.")
+                post_message_to_slack("#notifications", message)
+            except SlackApiError:
+                logging.exception("[Daily Patreon Update] Slack message not sent.")
