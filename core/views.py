@@ -174,3 +174,7 @@ def coc_legacy(request, lang=None):
 #         'donor_list': donor_list,
 #         'quotes': DONOR_QUOTES,
 #     })
+
+
+def healthcheck(request):
+    return HttpResponse("healthy")

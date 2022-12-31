@@ -6,9 +6,10 @@ from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView
 from django.views.i18n import JavaScriptCatalog
 
-from core.views import coc_legacy
+from core.views import coc_legacy, healthcheck
 
 urlpatterns = [
+    path('healthcheck/', healthcheck, name='healthcheck'),
     path('i18n/', include('django.conf.urls.i18n')),
 
     re_path(r'^coc/(?:(?P<lang>[a-z-]+)/)?$', coc_legacy, name='coc_legacy'),
