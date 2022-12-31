@@ -1,6 +1,6 @@
-click==7.0
+click
 dj-database-url==0.5.0
-django-admin-sortable2
+django-admin-sortable2==1.0.4
 django-autoslug==1.9.4
 django-bleach<4
 django-click==2.1.0
@@ -36,7 +36,7 @@ pytest-dotenv
 pytest-env==0.6.2
 pytest==6.2.5
 python-dotenv
-sentry-sdk==1.11.1
+sentry-sdk
 slacker==0.9.65
 stripe
 vcrpy
