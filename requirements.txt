@@ -99,6 +99,8 @@ dnspython==2.3.0
     # via -r requirements.in
 easy-thumbnails==2.8.5
     # via -r requirements.in
+easydict==1.10
+    # via -r requirements.in
 filelock==3.9.0
     # via
     #   urlextract
@@ -219,6 +221,7 @@ pytest==6.2.5
     #   pytest-django
     #   pytest-dotenv
     #   pytest-env
+    #   pytest-mock
 pytest-cov==2.12.1
     # via -r requirements.in
 pytest-django==4.4.0
@@ -226,6 +229,8 @@ pytest-django==4.4.0
 pytest-dotenv==0.5.2
     # via -r requirements.in
 pytest-env==0.6.2
+    # via -r requirements.in
+pytest-mock==3.10.0
     # via -r requirements.in
 python-dateutil==2.8.2
     # via

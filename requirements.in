@@ -20,6 +20,7 @@ django-unused-media==0.1.13
 django>=3.2,<4
 dnspython
 easy-thumbnails
+easydict==1.10
 pillow==9.3.0
 psycopg2-binary==2.8.3
 pyquery==1.4.0
@@ -40,8 +41,9 @@ isort==5.8.0
 freezegun
 pytest-cov==2.12.1
 pytest-django==4.4.0
-pytest-dotenv
+pytest-dotenv==0.5.2
 pytest-env==0.6.2
+pytest-mock==3.10.0
 pytest==6.2.5
 vcrpy
 
