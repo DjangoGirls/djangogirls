@@ -4,7 +4,7 @@ from slack_sdk import WebClient
 slack_client = WebClient(token=settings.SLACK_BOT_TOKEN)
 
 
-def user_invite_to_slack(email, first_name):
+def invite_user_to_slack(email, first_name):
     return slack_client.admin_users_invite(
         channel_ids=settings.SLACK_INVITE_CHANNEL_IDS,
         team_id=settings.SLACK_TEAM_ID,

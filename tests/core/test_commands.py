@@ -43,7 +43,7 @@ def test_update_coordinates(click_runner, past_event):
     assert past_event.latlng == latlng
 
 
-@mock.patch("core.models.user_invite")
+@mock.patch("core.models.User.invite_to_slack")
 def test_add_organizer(_, click_runner, future_event):
     assert future_event.team.count() == 1
 
