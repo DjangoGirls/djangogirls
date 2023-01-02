@@ -196,7 +196,6 @@ class Application(models.Model):
             )
         ]
 
-
     def save(self, *args, **kwargs):
         if self.pk is None:
             current_max = Application.objects.filter(form=self.form).aggregate(models.Max('number'))['number__max']
