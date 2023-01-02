@@ -13,7 +13,6 @@ django-gulp-rev==0.2
 django-leaflet==0.24.0
 django-markdown-deux==1.0.5
 django-recaptcha
-django-sendgrid-v5==0.8.1
 django-storages[boto3]==1.7.1
 django-tinymce
 django-tinymce
@@ -27,8 +26,9 @@ pyquery==1.4.0
 urlextract
 
 # Local development
+python-dotenv==0.21.0
 pip-tools==6.12.1
-python-dotenv
+pre-commit==2.21.0
 
 # Linting / Formatting
 autoflake==1.4
@@ -46,6 +46,9 @@ pytest==6.2.5
 vcrpy
 
 # Integrations
+django-gulp-rev==0.2
+django-leaflet==0.24.0
+django-sendgrid-v5==0.8.1
 google-api-python-client==2.37.0
 icalendar==4.0.3
 oauth2client==4.1.3
