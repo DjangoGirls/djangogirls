@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 import random
 
+from functools import lru_cache
+
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
 from django.utils.translation import gettext_lazy as _
@@ -25,9 +27,6 @@ DEFAULT_BACKGROUND_PHOTOS = {
 }
 
 
-four_random_flickr_photos = select_random_flickr_photos(4)
-
-
 def get_random_photo(section):
     if section in DEFAULT_BACKGROUND_PHOTOS:
         photos = DEFAULT_BACKGROUND_PHOTOS[section]
@@ -37,11 +36,16 @@ def get_random_photo(section):
     return None
 
 
+@lru_cache
+def get_four_random_flickr_photos():
+    return select_random_flickr_photos(4)
+
+
 def select_photo(section):
+    four_random_flickr_photos = get_four_random_flickr_photos()
     if not four_random_flickr_photos:
         return get_random_photo(section)
-    else:
-        return four_random_flickr_photos.pop(0)
+    return four_random_flickr_photos.pop(0)
 
 
 def get_default_eventpage_data():
