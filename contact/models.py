@@ -17,7 +17,7 @@ class ContactEmail(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
     sent_to = models.EmailField(max_length=128)
-    message = BleachField()
+    message = models.TextField()
     event = models.ForeignKey(
         'core.Event',
         help_text=_('required for contacting a chapter'),
