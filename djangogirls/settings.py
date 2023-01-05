@@ -280,10 +280,6 @@ BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u']
 
 BLEACH_ALLOWED_ATTRIBUTES = ['title']
 
-BLEACH_ALLOWED_PROTOCOLS = [
-    'http', 'https', 'data'
-]
-
 BLEACH_STRIP_TAGS = True
 
 BLEACH_STRIP_COMMENTS = True
