@@ -80,7 +80,9 @@ def test_message_with_links_fails(client, mailoutbox, future_event):
     resp = client.post(reverse(CONTACT_URL), data=post_data)
     assert resp.status_code == 302
     assert len(mailoutbox) == 1
-    assert ContactEmail.objects.exists() is True
+    contact_email = ContactEmail.objects.first()
+    assert contact_email is not None
+    assert '<a href="#">' not in contact_email.message
 
 
 def test_email_is_saved_into_database(client, mailoutbox, future_event):
