@@ -1843,7 +1843,7 @@ msgstr ""
 
 #: templates/core/contribute.html:46
 msgid "Organize!"
-msgstr "organizar!"
+msgstr "Organizar!"
 
 #: templates/core/contribute.html:54
 msgid "Each Django Girls event is a free, one-day workshop for 30-60 people on HTML, CSS, Python and Django. A typical workshop takes 8 hours and people work in small, 3-person groups with a coach dedicated to each group."
@@ -2789,7 +2789,7 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:158 templates/global/menu.html:20
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: templates/core/terms_conditions.html:160
 msgid "Events organised through the Site are usually organised by third parties and not by us. Although we set out guidelines for all organisers to follow we have no control over whether those guidelines are followed or not. For this reason and to the maximum extent permitted by law, we accept no liability for any direct or indirect loss or damage, foreseeable or otherwise, including any indirect, consequential, special or exemplary damages arising from your booking or attendance at an Event or from anything arising from it."
@@ -3796,7 +3796,7 @@ msgstr ""
 
 #: templates/global/footer.html:11 templates/global/menu.html:23
 msgid "Newsletter"
-msgstr ""
+msgstr "Boletín informativo"
 
 #: templates/global/footer.html:12
 msgid "Chat with us!"
@@ -3872,7 +3872,7 @@ msgstr ""
 
 #: templates/global/menu.html:22
 msgid "Organize"
-msgstr ""
+msgstr "Organizar"
 
 #: templates/global/menu.html:24
 msgid "Blog"

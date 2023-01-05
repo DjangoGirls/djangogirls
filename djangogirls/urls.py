@@ -54,6 +54,7 @@ urlpatterns += i18n_patterns(
     path('donate/', include('donations.urls')),
     path('organize/', include('organize.urls')),
     path('story/', include('story.urls')),
+    path('jobs/', include('jobboard.urls')),
     # path('', include('sponsor.urls')),
     path('', include('applications.urls')),
     path('', include('core.urls')),

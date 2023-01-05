@@ -1,0 +1,63 @@
+{% extends 'global/base.html' %}
+{% load i18n rev static %}
+
+{% block content %}
+
+<div class="container organize">
+    <h2 class="text-center">{% trans "Job Board" %}</h2>
+
+    
+    {% if job_list %}
+        <h4>{% blocktranslate%} Django Girls global partners are hiring! Want to see your job posted here? 
+            <a href="/contact/">Contact us</a> about becoming a global partner for Django Girls 
+            and recruit the best talent for your organization. {% endblocktranslate %}</h4>
+
+        {% for job in job_list %}
+
+        {% if forloop.first %}<div class="row">{% endif %}
+            <div class="col-md-6">
+                <div class="panel">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">
+                              <a href="{% url 'jobboard:job_detail' job.id %}">{{ job.company.name }}</a>
+                              {% if job.date_created|timesince > "20 hours" %}
+                              <span class="badge badge-dprimary">{% trans "New" %}</span>
+                              {% endif %}
+                          </h3>
+                          <div class="card-text d-inline-block text-truncate text-wrap" style="max-height: 30rem;">
+                              <h4><a href="{% url 'jobboard:job_detail' job.id %}">
+                                {{ job.role }}</a></h4>
+                              <p>{{ job.location }}</p>
+                              {% if job.remuneration %}
+                                  <p>{{ job.remuneration }}</p>
+                              {% endif %}
+                              <p>{{ job.summary }}</p></div>
+                          <p></p>
+                          <div class="row">
+                              <div class="col-md-6 text-center">
+                                  <a href="{{ job.apply }}" class="cta">{% trans "Apply here" %}</a>
+                              </div>
+                              <div class="col-md-6 text-center">
+                                  <a href="{% url 'jobboard:job_detail' job.id %}" class="cta">
+                                    {% trans "More information" %}</a>
+                              </div>
+                          </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+        {% if forloop.last %}</div>{% endif %}
+
+        {% endfor %}
+
+    {% else %}
+
+        <h4>{% trans "Sorry, no job openings at the moment." %}</4>
+
+    {% endif %}
+    
+</div>
+
+{% endblock content %}
