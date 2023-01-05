@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-curl --fail -L http://localhost:8000/healthcheck/
+curl --fail -L http://localhost:8000/
