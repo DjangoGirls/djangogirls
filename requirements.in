@@ -3,7 +3,7 @@ dj-database-url==0.5.0
 django-admin-sortable2==1.0.4
 django-autoslug==1.9.4
 django-bleach<4
-django-click==2.1.0
+django-click==2.3.0
 django-tinymce
 django-countries
 django-date-extensions
