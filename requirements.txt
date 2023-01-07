@@ -67,7 +67,7 @@ django-debug-toolbar==3.8.1
     # via -r requirements.in
 django-extensions==3.2.1
     # via -r requirements.in
-django-formtools==2.4
+django-formtools==2.3.0
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
