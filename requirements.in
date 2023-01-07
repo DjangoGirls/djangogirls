@@ -9,7 +9,7 @@ django-countries
 django-date-extensions
 django-debug-toolbar
 django-extensions
-django-formtools
+django-formtools==2.3.0
 django-gulp-rev==0.2
 django-leaflet==0.24.0
 django-markdown-deux==1.0.5
