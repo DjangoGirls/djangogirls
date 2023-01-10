@@ -83,13 +83,13 @@ pip install pip-tools
 pip-sync
 ```
 
+> There is more information on how `pip-tools` work below in [Using pip-tools](#using-pip-tools).
+
 Install the [pre-commit](https://github.com/pre-commit/pre-commit) hook. It's useful so we automatically format and lint code before committing any changes.
 
 ```bash
 pre-commit install
 ```
-
-There is more information on how `pip-tools` work below.
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 
