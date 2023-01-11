@@ -188,7 +188,13 @@ class Application(models.Model):
     rsvp_no_code = models.CharField(max_length=24, null=True, blank=True)
 
     class Meta:
-        unique_together = ("form", "email")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["form", "email"],
+                condition=models.Q(email__isnull=False),
+                name="unique_form_email_email_not_null",
+            )
+        ]
 
     def save(self, *args, **kwargs):
         if self.pk is None:

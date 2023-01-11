@@ -4,6 +4,7 @@ import requests
 from django import forms
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.db import transaction
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
@@ -52,7 +53,8 @@ class ApplicationForm(forms.Form):
         return cleaned_data
 
     def save(self, *args, **kwargs):
-        application = Application.objects.create(form=self.form)
+        application = Application(form=self.form)
+        answers = []
 
         for name in self.cleaned_data:
             question = None
@@ -66,20 +68,14 @@ class ApplicationForm(forms.Form):
                         application.newsletter_optin = True
                     else:
                         application.newsletter_optin = False
-                    application.save()
 
             value = ', '.join(value) if type(value) == list else value
 
             if question:
-                Answer.objects.create(
-                    application=application,
-                    question=question,
-                    answer=value
-                )
+                answers.append(Answer(question=question, answer=value))
 
                 if question.question_type == 'email':
                     application.email = value
-                    application.save()
 
         if not self.form.event.email:
             # If event doesn't have an email (legacy events), create
@@ -123,6 +119,12 @@ class ApplicationForm(forms.Form):
                 requests.post(
                     url, auth=('user', settings.MAILCHIMP_API_KEY), json=payload
                 )
+
+        with transaction.atomic():
+            application.save()
+            for answer in answers:
+                answer.application = application
+            Answer.objects.bulk_create(answers)
 
 
 class ScoreForm(forms.ModelForm):
