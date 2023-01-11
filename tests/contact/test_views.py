@@ -65,6 +65,26 @@ def test_chapter_contact_requires_event(client, mailoutbox):
     assert ContactEmail.objects.exists() is False
 
 
+def test_message_with_links_fails(client, mailoutbox, future_event):
+    future_event.email = 'test@test.com'
+    future_event.save()
+
+    post_data = {
+        'name': 'test name',
+        'message': 'nice message <a href="#">test link</a>',
+        'email': 'lord@dracula.trans',
+        'contact_type': ContactEmail.CHAPTER,
+        'event': future_event.pk,
+        'g-recaptcha-response': 'PASSED',
+    }
+    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    assert resp.status_code == 302
+    assert len(mailoutbox) == 1
+    contact_email = ContactEmail.objects.first()
+    assert contact_email is not None
+    assert '<a href="#">' not in contact_email.message
+
+
 def test_email_is_saved_into_database(client, mailoutbox, future_event):
     assert ContactEmail.objects.exists() is False
 

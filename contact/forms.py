@@ -2,6 +2,8 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
+from django_bleach.forms import BleachField
+
 from contact.models import ContactEmail
 from core.forms import EventChoiceField, BetterReCaptchaField
 from core.models import Event
@@ -14,6 +16,7 @@ class ContactForm(forms.ModelForm):
         label=_("Django Girls workshop in...")
     )
     captcha = BetterReCaptchaField()
+    message = BleachField()
 
     class Meta:
         model = ContactEmail

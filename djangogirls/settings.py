@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'adminsortable2',
+    'django_bleach',
     'django_date_extensions',
     'django_unused_media',
     'django_extensions',
@@ -275,6 +276,11 @@ if DEBUG_TOOLBAR:
 RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == 'True'
 if RECAPTCHA_TESTING:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u']
+BLEACH_ALLOWED_ATTRIBUTES = ['title']
+BLEACH_STRIP_TAGS = True
+BLEACH_STRIP_COMMENTS = True
 
 TUMBLR_API_KEY = os.environ.get("TUMBLR_API_KEY")
 TUMBLR_API_BASE_URL = os.environ.get("TUMBLR_API_BASE_URL", "https://api.tumblr.com/v2")
