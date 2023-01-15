@@ -15,7 +15,6 @@ django-markdown-deux==1.0.5
 django-recaptcha
 django-storages[boto3]==1.7.1
 django-tinymce
-django-tinymce
 django-unused-media==0.1.13
 django>=3.2,<4
 dnspython
