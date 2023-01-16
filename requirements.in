@@ -1,10 +1,9 @@
-click
+# Core dependencies
 dj-database-url==0.5.0
 django-admin-sortable2==1.0.4
 django-autoslug==1.9.4
 django-bleach<4
 django-click==2.3.0
-django-tinymce
 django-countries
 django-date-extensions
 django-debug-toolbar
@@ -15,30 +14,44 @@ django-leaflet==0.24.0
 django-markdown-deux==1.0.5
 django-recaptcha
 django-storages[boto3]==1.7.1
-
+django-tinymce
 django-unused-media==0.1.13
 django>=3.2,<4
-django-sendgrid-v5==0.8.1
+dnspython
 easy-thumbnails
-flake8
-freezegun
-google-api-python-client==2.37.0
-icalendar==4.0.3
-oauth2client==4.1.3
 pillow==9.3.0
-pip-tools
 psycopg2-binary==2.8.3
-py-trello==0.13.0
 pyquery==1.4.0
+urlextract
+
+# Local development
+python-dotenv==0.21.0
+pip-tools==6.12.1
+pre-commit==2.21.0
+
+# Linting / Formatting
+autoflake==1.4
+black==22.3.0
+flake8==4.0.1
+isort==5.8.0
+
+# Testing
+freezegun
 pytest-cov==2.12.1
 pytest-django==4.4.0
 pytest-dotenv
 pytest-env==0.6.2
 pytest==6.2.5
-python-dotenv
+vcrpy
+
+# Integrations
+django-gulp-rev==0.2
+django-leaflet==0.24.0
+django-sendgrid-v5==0.8.1
+google-api-python-client==2.37.0
+icalendar==4.0.3
+oauth2client==4.1.3
+py-trello==0.13.0
 sentry-sdk
 slacker==0.9.65
 stripe
-vcrpy
-urlextract
-dnspython

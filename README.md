@@ -74,7 +74,7 @@ Step into newly created `djangogirls` directory:
 cd djangogirls
 ```
 
-Create a new virtual environment (python 3.9) if needed. Then, install all the required dependencies.
+Create a new virtual environment (Python 3.10) if needed. Then, install all the required dependencies.
 The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
@@ -83,7 +83,13 @@ pip install pip-tools
 pip-sync
 ```
 
-There is more information on how `pip-tools` work below.
+> There is more information on how `pip-tools` work below in [Using pip-tools](#using-pip-tools).
+
+Install the [pre-commit](https://github.com/pre-commit/pre-commit) hook. It's useful so we automatically format and lint code before committing any changes.
+
+```bash
+pre-commit install
+```
 
 Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
 

@@ -12,4 +12,4 @@ exclude =
     .venv,
     __pycache__,
     **/migrations/**
-max-line-length = 119
+max-line-length = 120
