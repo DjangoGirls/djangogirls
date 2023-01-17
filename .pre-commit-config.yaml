@@ -1,4 +1,14 @@
+ci:
+    autofix_commit_msg: |
+        ci: auto fixes from pre-commit hooks
+
+        for more information, see https://pre-commit.ci
+    autofix_prs: true
+    autoupdate_commit_msg: 'ci: pre-commit autoupdate'
+    autoupdate_schedule: monthly
+
 fail_fast: true
+
 repos:
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.0.0
@@ -15,19 +25,34 @@ repos:
             "--ignore-init-module-imports",
           ]
         files: \.py$
+
   - repo: https://github.com/pycqa/isort
     rev: 5.11.4
     hooks:
       - id: isort
         name: isort
         entry: bash -c 'isort "$@"; git add -u;' --
+
   - repo: https://github.com/psf/black
     rev: 22.12.0
     hooks:
       - id: black
         entry: bash -c 'black "$@"; git add -u;' --
         language_version: python3.10
+
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
     hooks:
       - id: flake8
+
+  -  repo: https://github.com/asottile/pyupgrade
+     rev: v3.3.0
+     hooks:
+       -  id: pyupgrade
+          args: ["--py310-plus"]
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.12.0'
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "3.2"]
