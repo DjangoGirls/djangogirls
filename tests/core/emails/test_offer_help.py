@@ -1,7 +1,6 @@
 import pytest
-from django_date_extensions.fields import ApproximateDate
-
 from django.utils import timezone
+from django_date_extensions.fields import ApproximateDate
 
 from applications.models import Form
 from core.management.commands import handle_emails
@@ -13,11 +12,8 @@ def event():
     in_six_weeks = timezone.now() + timezone.timedelta(weeks=6)
 
     return Event.objects.create(
-        city="Test City",
-        is_on_homepage=True,
-        date=in_six_weeks,
-        is_page_live=True,
-        email="first@djangogirls.org")
+        city="Test City", is_on_homepage=True, date=in_six_weeks, is_page_live=True, email="first@djangogirls.org"
+    )
 
 
 def test_event_in_six_weeks_emails_not_sent(event, mailoutbox):

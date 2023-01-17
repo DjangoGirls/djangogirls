@@ -3,4 +3,4 @@ def test_company_model_string_representation(company):
 
 
 def test_job_model_string_representation(job):
-    assert str(job) == f'{job.company} - {job.role}'
+    assert str(job) == f"{job.company} - {job.role}"

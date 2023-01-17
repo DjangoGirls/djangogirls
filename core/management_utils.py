@@ -15,56 +15,46 @@ def get_main_organizer():
     """
     team = []
     click.echo(_("Let's talk about the team. First the main organizer:"))
-    main_name = click.prompt(click.style(
-        "First and last name", bold=True, fg='yellow'
-    ))
-    main_email = click.prompt(click.style(
-        "E-mail address", bold=True, fg='yellow'
-    ))
+    main_name = click.prompt(click.style("First and last name", bold=True, fg="yellow"))
+    main_email = click.prompt(click.style("E-mail address", bold=True, fg="yellow"))
 
-    team.append({'name': main_name, 'email': main_email})
+    team.append({"name": main_name, "email": main_email})
 
-    click.echo("All right, the main organizer is {0} ({1})".format(main_name, main_email))
+    click.echo(f"All right, the main organizer is {main_name} ({main_email})")
 
     return team
 
 
 def get_team(team):
     """
-        We're asking user for names and address of the rest of the team,
-        and append that to a list we got from get_main_organizer
+    We're asking user for names and address of the rest of the team,
+    and append that to a list we got from get_main_organizer
     """
-    add_team = click.confirm(click.style(
-        "Do you want to add additional team members?", bold=True, fg='yellow'
-    ), default=False)
+    add_team = click.confirm(
+        click.style("Do you want to add additional team members?", bold=True, fg="yellow"), default=False
+    )
     i = 1
     while add_team:
         i += 1
-        name = click.prompt(click.style(
-            f"First and last name of #{i} member", bold=True, fg='yellow'
-        ))
-        email = click.prompt(click.style(
-            f"E-mail address of #{i} member", bold=True, fg='yellow'
-        ))
+        name = click.prompt(click.style(f"First and last name of #{i} member", bold=True, fg="yellow"))
+        email = click.prompt(click.style(f"E-mail address of #{i} member", bold=True, fg="yellow"))
         if len(name) > 0:
-            team.append({'name': name, 'email': email})
-            click.echo(
-                f"All right, the #{i} team member of Django Girls is {name} ({email})"
-            )
-        add_team = click.confirm(click.style(
-            "Do you want to add additional team members?", bold=True, fg='yellow'
-        ), default=False)
+            team.append({"name": name, "email": email})
+            click.echo(f"All right, the #{i} team member of Django Girls is {name} ({email})")
+        add_team = click.confirm(
+            click.style("Do you want to add additional team members?", bold=True, fg="yellow"), default=False
+        )
 
     return team
 
 
 def create_users(team, event):
     """
-        Create or get User objects based on team list
+    Create or get User objects based on team list
     """
     members = []
     for member in team:
-        member['event'] = event.pk
+        member["event"] = event.pk
         form = AddOrganizerForm(member)
         user = form.save()
         members.append(user)
@@ -76,13 +66,10 @@ def brag_on_slack_bang(city, country, team):
     This is posting a message about Django Girls new event to #general channel on Slack!
     """
     if settings.ENABLE_SLACK_NOTIFICATIONS:
-        text = f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! " \
-               f"Welcome Django Girls {city}, {country}. " \
-               f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
-
-        slack.chat.post_message(
-            channel='#general',
-            text=text,
-            username='Django Girls',
-            icon_emoji=':django_heart:'
+        text = (
+            f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! "
+            f"Welcome Django Girls {city}, {country}. "
+            f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
         )
+
+        slack.chat.post_message(channel="#general", text=text, username="Django Girls", icon_emoji=":django_heart:")

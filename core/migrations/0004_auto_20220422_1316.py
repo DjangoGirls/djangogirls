@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0003_auto_20210906_0915'),
+        ("core", "0003_auto_20210906_0915"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='is_frozen',
-            field=models.BooleanField(default=False, verbose_name='Event frozen because of some irregularities'),
+            model_name="event",
+            name="is_frozen",
+            field=models.BooleanField(default=False, verbose_name="Event frozen because of some irregularities"),
         ),
     ]

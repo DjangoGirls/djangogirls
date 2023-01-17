@@ -11,15 +11,12 @@ from core.models import Event, User
 
 from .questions import DEFAULT_QUESTIONS
 
-RSVP_LINKS = ['[rsvp-url-yes]', '[rsvp-url-no]']
+RSVP_LINKS = ["[rsvp-url-yes]", "[rsvp-url-no]"]
 
 
 class Form(models.Model):
     event = models.OneToOneField(Event, on_delete=models.deletion.CASCADE)
-    text_header = models.CharField(
-        max_length=255,
-        default=_("Apply for a spot at Django Girls [City]!")
-    )
+    text_header = models.CharField(max_length=255, default=_("Apply for a spot at Django Girls [City]!"))
     text_description = models.TextField(
         default=_(
             "Yay! We're so excited you want to be a part of our "
@@ -36,7 +33,7 @@ class Form(models.Model):
     confirmation_mail = models.TextField(
         default=_(
             "Hi there!\n\n"
-            "This is a confirmation of your application to <a href=\"http://djangogirls.org/{city}\">"
+            'This is a confirmation of your application to <a href="http://djangogirls.org/{city}">'
             "Django Girls {CITY}</a>. "
             "Yay! That's a huge step already, we're proud of you!\n\n"
             "Mind that this is not a confirmation of participation in the event, but a confirmation that we received "
@@ -47,15 +44,13 @@ class Form(models.Model):
             "Hugs, cupcakes and high-fives!\n"
             "Django Girls"
         ),
-        help_text="Mail will be sent from your event mail.\nAlso the answers will be attached."
+        help_text="Mail will be sent from your event mail.\nAlso the answers will be attached.",
     )
-    open_from = models.DateTimeField(
-        null=True, verbose_name=_("Application process is open from"))
-    open_until = models.DateTimeField(
-        null=True, verbose_name=_("Application process is open until"))
+    open_from = models.DateTimeField(null=True, verbose_name=_("Application process is open from"))
+    open_until = models.DateTimeField(null=True, verbose_name=_("Application process is open until"))
 
     def __str__(self):
-        return f'Application form for {self.event.name}'
+        return f"Application form for {self.event.name}"
 
     def save(self, *args, **kwargs):
         is_form_new = False if self.pk else True
@@ -67,8 +62,8 @@ class Form(models.Model):
     def create_default_questions(self):
         i = 1
         for question in DEFAULT_QUESTIONS:
-            question['form'] = self
-            question['order'] = i
+            question["form"] = self
+            question["order"] = i
             Question.objects.create(**question)
             i += 1
 
@@ -84,88 +79,59 @@ class Form(models.Model):
 
 
 class Question(models.Model):
-    TEXT = 'text'
-    QUESTION_TYPES = (
-        ('paragraph', 'Paragraph'),
-        (TEXT, 'Long text'),
-        ('choices', 'Choices'),
-        ('email', 'Email')
-    )
+    TEXT = "text"
+    QUESTION_TYPES = (("paragraph", "Paragraph"), (TEXT, "Long text"), ("choices", "Choices"), ("email", "Email"))
 
-    form = models.ForeignKey(
-        to=Form,
-        null=False,
-        blank=False,
-        on_delete=models.deletion.CASCADE
-    )
+    form = models.ForeignKey(to=Form, null=False, blank=False, on_delete=models.deletion.CASCADE)
     title = models.TextField(verbose_name=_("Question"))
-    help_text = models.TextField(
-        blank=True,
-        default='',
-        verbose_name=_("Additional help text to the question?")
-    )
-    question_type = models.CharField(
-        max_length=50,
-        choices=QUESTION_TYPES,
-        verbose_name=_("Type of the question")
-    )
-    is_required = models.BooleanField(
-        default=True,
-        verbose_name=_("Is the answer to the question required?")
-    )
+    help_text = models.TextField(blank=True, default="", verbose_name=_("Additional help text to the question?"))
+    question_type = models.CharField(max_length=50, choices=QUESTION_TYPES, verbose_name=_("Type of the question"))
+    is_required = models.BooleanField(default=True, verbose_name=_("Is the answer to the question required?"))
     choices = models.TextField(
         blank=True,
-        default='',
+        default="",
         verbose_name=_("List all available options, separated with semicolon (;)"),
-        help_text=_("Used only with 'Choices' question type")
+        help_text=_("Used only with 'Choices' question type"),
     )
     is_multiple_choice = models.BooleanField(
         default=False,
         verbose_name=_("Are there multiple choices allowed?"),
-        help_text=_("Used only with 'Choices' question type")
+        help_text=_("Used only with 'Choices' question type"),
     )
     order = models.PositiveIntegerField(help_text=_("Position of the question"))
 
     class Meta:
-        ordering = ['order']
+        ordering = ["order"]
 
     def __str__(self):
         return self.title
 
     def get_choices_as_list(self):
-        if self.question_type != 'choices':
-            raise TypeError(
-                _("You can only get choices for fields that have"
-                    " question_type == choices.")
-            )
+        if self.question_type != "choices":
+            raise TypeError(_("You can only get choices for fields that have" " question_type == choices."))
 
-        return self.choices.split(';')
+        return self.choices.split(";")
 
 
 class Application(models.Model):
     APPLICATION_STATES = (
-        ('submitted', _('Application submitted')),
-        ('accepted', _('Application accepted')),
-        ('rejected', _('Application rejected')),
-        ('waitlisted', _('Application on waiting list')),
-        ('declined', _('Applicant declined')),
+        ("submitted", _("Application submitted")),
+        ("accepted", _("Application accepted")),
+        ("rejected", _("Application rejected")),
+        ("waitlisted", _("Application on waiting list")),
+        ("declined", _("Applicant declined")),
     )
-    RSVP_WAITING = 'waiting'
-    RSVP_YES = 'yes'
-    RSVP_NO = 'no'
+    RSVP_WAITING = "waiting"
+    RSVP_YES = "yes"
+    RSVP_NO = "no"
 
     RSVP_STATUSES = (
-        (RSVP_WAITING, _('RSVP: Waiting for response')),
-        (RSVP_YES, _('RSVP: Confirmed attendance')),
-        (RSVP_NO, _('RSVP: Rejected invitation'))
+        (RSVP_WAITING, _("RSVP: Waiting for response")),
+        (RSVP_YES, _("RSVP: Confirmed attendance")),
+        (RSVP_NO, _("RSVP: Rejected invitation")),
     )
 
-    form = models.ForeignKey(
-        Form,
-        null=False,
-        blank=False,
-        on_delete=models.deletion.CASCADE
-    )
+    form = models.ForeignKey(Form, null=False, blank=False, on_delete=models.deletion.CASCADE)
     number = models.PositiveIntegerField(default=1, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     state = models.CharField(
@@ -173,16 +139,13 @@ class Application(models.Model):
         max_length=50,
         choices=APPLICATION_STATES,
         null=True,
-        default='submitted'
+        default="submitted",
     )
     email = models.EmailField(null=True, blank=True)
     newsletter_optin = models.BooleanField(default=False)
 
     rsvp_status = models.CharField(
-        max_length=50,
-        choices=RSVP_STATUSES,
-        verbose_name=_("RSVP status"),
-        default=RSVP_WAITING
+        max_length=50, choices=RSVP_STATUSES, verbose_name=_("RSVP status"), default=RSVP_WAITING
     )
     rsvp_yes_code = models.CharField(max_length=24, null=True, blank=True)
     rsvp_no_code = models.CharField(max_length=24, null=True, blank=True)
@@ -198,9 +161,9 @@ class Application(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            current_max = Application.objects.filter(form=self.form).aggregate(models.Max('number'))['number__max']
+            current_max = Application.objects.filter(form=self.form).aggregate(models.Max("number"))["number__max"]
             self.number = (current_max or 0) + 1
-        super(Application, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @property
     def average_score(self):
@@ -223,14 +186,14 @@ class Application(models.Model):
             return 0
         ss = sum((x - c) ** 2 for x in data)
         ss -= sum((x - c) for x in data) ** 2 / len(data)
-        assert not ss < 0, 'negative sum of square deviations: %f' % ss
+        assert not ss < 0, "negative sum of square deviations: %f" % ss
         return ss / (n - 1)
 
     def stdev(self):
         return self.variance() ** 0.5
 
     def generate_code(self):
-        return ''.join([random.choice(string.ascii_letters + string.digits) for i in range(24)])
+        return "".join([random.choice(string.ascii_letters + string.digits) for i in range(24)])
 
     def get_rsvp_yes_code(self):
         if not self.rsvp_yes_code:
@@ -246,7 +209,7 @@ class Application(models.Model):
 
     @classmethod
     def get_by_rsvp_code(cls, code, event):
-        """ Returns application and RSVP status or None """
+        """Returns application and RSVP status or None"""
         try:
             application = cls.objects.get(rsvp_yes_code=code, form__event=event)
             return application, Application.RSVP_YES
@@ -259,7 +222,7 @@ class Application(models.Model):
 
     @property
     def is_accepted(self):
-        return self.state == 'accepted'
+        return self.state == "accepted"
 
     def is_scored_by_user(self, user):
         """
@@ -273,22 +236,12 @@ class Application(models.Model):
 
 
 class Answer(models.Model):
-    application = models.ForeignKey(
-        Application,
-        null=False,
-        blank=False,
-        on_delete=models.deletion.PROTECT
-    )
-    question = models.ForeignKey(
-        Question,
-        null=False,
-        blank=False,
-        on_delete=models.deletion.PROTECT
-    )
+    application = models.ForeignKey(Application, null=False, blank=False, on_delete=models.deletion.PROTECT)
+    question = models.ForeignKey(Question, null=False, blank=False, on_delete=models.deletion.PROTECT)
     answer = models.TextField()
 
     class Meta:
-        ordering = ('question__order',)
+        ordering = ("question__order",)
 
 
 class Score(models.Model):
@@ -296,48 +249,35 @@ class Score(models.Model):
     A score represents the score given by a coach for an application.
     """
 
-    user = models.ForeignKey(
-        User,
-        related_name='scores',
-        on_delete=models.deletion.PROTECT
-    )
-    application = models.ForeignKey(
-        Application,
-        related_name='scores',
-        on_delete=models.deletion.PROTECT
-    )
+    user = models.ForeignKey(User, related_name="scores", on_delete=models.deletion.PROTECT)
+    application = models.ForeignKey(Application, related_name="scores", on_delete=models.deletion.PROTECT)
     score = models.FloatField(
-        help_text=_('5 being the most positive, 1 being the most negative.'),
+        help_text=_("5 being the most positive, 1 being the most negative."),
         validators=[MaxValueValidator(5), MinValueValidator(0)],
-        default=0
+        default=0,
     )
-    comment = models.TextField(
-        null=True, blank=True, help_text=_('Any extra comments?'))
+    comment = models.TextField(null=True, blank=True, help_text=_("Any extra comments?"))
 
     class Meta:
-        unique_together = ('user', 'application',)
+        unique_together = (
+            "user",
+            "application",
+        )
 
 
 class Email(models.Model):
-    form = models.ForeignKey(
-        Form,
-        on_delete=models.deletion.PROTECT
-    )
-    author = models.ForeignKey(
-        User,
-        related_name="author",
-        on_delete=models.deletion.PROTECT
-    )
+    form = models.ForeignKey(Form, on_delete=models.deletion.PROTECT)
+    author = models.ForeignKey(User, related_name="author", on_delete=models.deletion.PROTECT)
     subject = models.CharField(max_length=255)
     text = models.TextField(
         verbose_name=_("Content of the email"),
-        help_text=_("You can use HTML syntax in this message. Preview on the right.")
+        help_text=_("You can use HTML syntax in this message. Preview on the right."),
     )
     recipients_group = models.CharField(
         max_length=50,
         choices=Application.APPLICATION_STATES + Application.RSVP_STATUSES,
         verbose_name=_("Recipients"),
-        help_text=_("Only people assigned to chosen group will receive this email.")
+        help_text=_("Only people assigned to chosen group will receive this email."),
     )
     number_of_recipients = models.IntegerField(default=0, null=True)
     successfuly_sent = models.TextField(null=True, blank=True)
@@ -350,11 +290,11 @@ class Email(models.Model):
         return self.subject
 
     def get_rsvp_link(self, code):
-        return f'http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}'
+        return f"http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}"
 
     def add_rsvp_links(self, body, application):
-        body = body.replace('[rsvp-url-yes]', self.get_rsvp_link(application.get_rsvp_yes_code()))
-        body = body.replace('[rsvp-url-no]', self.get_rsvp_link(application.get_rsvp_no_code()))
+        body = body.replace("[rsvp-url-yes]", self.get_rsvp_link(application.get_rsvp_yes_code()))
+        body = body.replace("[rsvp-url-no]", self.get_rsvp_link(application.get_rsvp_no_code()))
         return body
 
     def get_applications(self):
@@ -364,22 +304,20 @@ class Email(models.Model):
         if self.recipients_group in application_states:
             return Application.objects.filter(form=self.form, state=self.recipients_group)
         elif self.recipients_group in rsvp_statuses:
-            return Application.objects.filter(form=self.form, state='accepted', rsvp_status=self.recipients_group)
+            return Application.objects.filter(form=self.form, state="accepted", rsvp_status=self.recipients_group)
         else:
             return Application.objects.none()
 
     def send(self):
         recipients = self.get_applications()
         self.number_of_recipients = recipients.count()
-        self.sent_from = (
-            self.form.event.email or f'{self.form.event.page_url}@djangogirls.org'
-        )
+        self.sent_from = self.form.event.email or f"{self.form.event.page_url}@djangogirls.org"
         successfuly_sent = []
         failed_to_sent = []
 
         for recipient in recipients:
             if recipient.email:
-                body = self.text.replace('\n', '<br />')
+                body = self.text.replace("\n", "<br />")
 
                 for rsvp_link in RSVP_LINKS:
                     if rsvp_link in body:
@@ -395,6 +333,6 @@ class Email(models.Model):
                     failed_to_sent.append(recipient.email)
 
         self.sent = timezone.now()
-        self.successfuly_sent = ', '.join(successfuly_sent)
-        self.failed_to_sent = ', '.join(failed_to_sent)
+        self.successfuly_sent = ", ".join(successfuly_sent)
+        self.failed_to_sent = ", ".join(failed_to_sent)
         self.save()

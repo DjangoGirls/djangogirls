@@ -1,4 +1,4 @@
-EVENT_FIELDS = ['date', 'city', 'country', 'latlng']
+EVENT_FIELDS = ["date", "city", "country", "latlng"]
 
 
 def test_create_event(base_application, stock_pictures):
@@ -19,17 +19,13 @@ def test_create_event(base_application, stock_pictures):
     assert event.email == email
 
     # check that we populate content from default event
-    expected_content_sections = [
-        'about', 'values', 'apply', 'faq', 'coach', 'partners', 'footer'
-    ]
+    expected_content_sections = ["about", "values", "apply", "faq", "coach", "partners", "footer"]
     event_content_sections = [e.name for e in event.content.all()]
     assert set(event_content_sections) == set(expected_content_sections)
 
     # check that we populate menu from default event
     assert event.menu.count() > 0
-    expected_menu_items = [
-        'About', 'Apply for a pass!', 'FAQ', 'Become a coach', 'Partners'
-    ]
+    expected_menu_items = ["About", "Apply for a pass!", "FAQ", "Become a coach", "Partners"]
     event_menu_items = [e.title for e in event.menu.all()]
     assert set(event_menu_items) == set(expected_menu_items)
 
