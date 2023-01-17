@@ -9,18 +9,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='StockPicture',
+            name="StockPicture",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo', models.ImageField(upload_to='stock_pictures/')),
-                ('photo_credit', models.CharField(help_text="Only use pictures with a <a href='https://creativecommons.org/licenses/'>Creative Commons license</a>.", max_length=200)),
-                ('photo_link', models.URLField(verbose_name='photo URL')),
-                ('kind', models.CharField(choices=[('CO', 'Event cover (356 x 210px)'), ('BA', 'Section background')], max_length=2)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("photo", models.ImageField(upload_to="stock_pictures/")),
+                (
+                    "photo_credit",
+                    models.CharField(
+                        help_text="Only use pictures with a <a href='https://creativecommons.org/licenses/'>Creative Commons license</a>.",
+                        max_length=200,
+                    ),
+                ),
+                ("photo_link", models.URLField(verbose_name="photo URL")),
+                (
+                    "kind",
+                    models.CharField(
+                        choices=[("CO", "Event cover (356 x 210px)"), ("BA", "Section background")], max_length=2
+                    ),
+                ),
             ],
         ),
     ]

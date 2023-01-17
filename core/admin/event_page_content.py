@@ -9,18 +9,12 @@ from sponsor.admin import SponsorInline
 
 
 class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('name', 'event', 'position', 'is_public')
-    list_filter = (EventFilter, 'is_public')
-    search_fields = (
-        'name', 'event__page_title', 'content', 'event__city',
-        'event__country', 'event__name'
-    )
+    list_display = ("name", "event", "position", "is_public")
+    list_filter = (EventFilter, "is_public")
+    search_fields = ("name", "event__page_title", "content", "event__city", "event__country", "event__name")
     form = EventPageContentForm
-    sortable = 'position'
-    inlines = [
-        SponsorInline,
-        CoachInline
-    ]
+    sortable = "position"
+    inlines = [SponsorInline, CoachInline]
 
     def get_queryset(self, request):
         qs = super(EventPageContentAdmin, self).get_queryset(request)
@@ -29,13 +23,10 @@ class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
         return qs.filter(event__team=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(EventPageContentAdmin, self).get_form(
-            request, obj, **kwargs)
+        form = super(EventPageContentAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            if 'event' in form.base_fields:
-                form.base_fields['event'].queryset = Event.objects.filter(
-                    team=request.user
-                )
+            if "event" in form.base_fields:
+                form.base_fields["event"].queryset = Event.objects.filter(team=request.user)
         return form
 
     def get_readonly_fields(self, request, obj=None):

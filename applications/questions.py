@@ -10,14 +10,8 @@ def get_organiser_menu(page_url):
     Get menu entries for organiser-visible pages
     """
     menu = [
-        {
-            'title': _('Applications'),
-            'url': reverse('applications:applications', args=[page_url])
-        },
-        {
-            'title': _('Messaging'),
-            'url': reverse('applications:communication', args=[page_url])
-        },
+        {"title": _("Applications"), "url": reverse("applications:applications", args=[page_url])},
+        {"title": _("Messaging"), "url": reverse("applications:communication", args=[page_url])},
     ]
 
     return menu
@@ -28,44 +22,41 @@ def generate_form_from_questions(questions):
 
     for question in questions:
         options = {
-            'label': question.title,
-            'help_text': question.help_text or None,
-            'required': question.is_required,
+            "label": question.title,
+            "help_text": question.help_text or None,
+            "required": question.is_required,
         }
-        name = f'question_{question.pk}'
+        name = f"question_{question.pk}"
 
-        if question.question_type == 'text':
-            options['widget'] = forms.Textarea
+        if question.question_type == "text":
+            options["widget"] = forms.Textarea
 
-        if question.question_type == 'choices':
-            choices = ((x, x) for x in question.choices.split(';'))
-            options['choices'] = choices
+        if question.question_type == "choices":
+            choices = ((x, x) for x in question.choices.split(";"))
+            options["choices"] = choices
 
-        if question.question_type in ['paragraph', 'text']:
+        if question.question_type in ["paragraph", "text"]:
             fields[name] = forms.CharField(**options)
-        elif question.question_type == 'choices':
+        elif question.question_type == "choices":
             if question.is_multiple_choice:
-                options['widget'] = forms.CheckboxSelectMultiple
+                options["widget"] = forms.CheckboxSelectMultiple
                 fields[name] = forms.MultipleChoiceField(**options)
             else:
-                options['widget'] = forms.RadioSelect
+                options["widget"] = forms.RadioSelect
                 fields[name] = forms.ChoiceField(**options)
 
-        if question.question_type == 'email':
+        if question.question_type == "email":
             fields[name] = forms.EmailField(**options)
 
-    fields['newsletter_optin'] = forms.ChoiceField(
+    fields["newsletter_optin"] = forms.ChoiceField(
         widget=forms.RadioSelect,
-        label=_('Do you want to receive news from the Django Girls team?'),
+        label=_("Do you want to receive news from the Django Girls team?"),
         help_text=_(
-            'No spam, pinky swear! Only helpful programming tips and '
-            'latest news from the Django Girls world. We send it once every two weeks.'
+            "No spam, pinky swear! Only helpful programming tips and "
+            "latest news from the Django Girls world. We send it once every two weeks."
         ),
         required=True,
-        choices=(
-            ('yes', _('Yes, please!')),
-            ('no', _('No, thank you.'))
-        )
+        choices=(("yes", _("Yes, please!")), ("no", _("No, thank you."))),
     )
 
     return fields
@@ -131,9 +122,7 @@ DEFAULT_QUESTIONS = [
         "question_type": "text",
     },
     {
-        "title": _(
-            "How are you planning to share what you've learnt with others?"
-        ),
+        "title": _("How are you planning to share what you've learnt with others?"),
         "help_text": _(
             "Django Girls is a volunteer-run organisation and we "
             "look for people who are active and can help us help more women get "
@@ -143,7 +132,7 @@ DEFAULT_QUESTIONS = [
             "writing a blog or simply teaching your friends."
         ),
         "question_type": "text",
-        "is_required": False
+        "is_required": False,
     },
     {
         "title": _("How did you hear about Django Girls?"),
@@ -169,12 +158,11 @@ DEFAULT_QUESTIONS = [
     },
     {
         "title": _(
-            "It is important that all attendees comply with the "
-            "<a href='/coc/'>Django Girls Code of Conduct</a>"
+            "It is important that all attendees comply with the " "<a href='/coc/'>Django Girls Code of Conduct</a>"
         ),
         "question_type": "choices",
         "choices": _("I've read and understood the Django Girls Code of Conduct"),
         "is_required": True,
         "is_multiple_choice": True,
-    }
+    },
 ]

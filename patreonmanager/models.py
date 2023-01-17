@@ -9,8 +9,7 @@ class Patron(models.Model):
     twitter = models.CharField(_("twitter"), max_length=50, blank=True)
     address = models.TextField(_("address"), blank=True)
     since = models.DateTimeField(_("patron since"), blank=True, null=True)
-    last_update = models.DateTimeField(
-        _("last update"), default=timezone.now, editable=False)
+    last_update = models.DateTimeField(_("last update"), default=timezone.now, editable=False)
 
     class Meta:
         verbose_name = _("patron")
@@ -28,23 +27,23 @@ class Reward(models.Model):
     class Meta:
         verbose_name = _("reward")
         verbose_name_plural = _("rewards")
-        ordering = ['value']
+        ordering = ["value"]
 
     def __str__(self):
         return self.name
 
 
 class PaymentManager(models.Manager):
-
     def complete(self):
         return self.update(completed=True)
+
     complete.alters_data = True
 
 
 class Payment(models.Model):
     class STATUS(object):
-        DECLINED = 'DECLINED'
-        PROCESSED = 'PROCESSED'
+        DECLINED = "DECLINED"
+        PROCESSED = "PROCESSED"
 
         choices = [
             (DECLINED, _("declined")),
@@ -52,15 +51,12 @@ class Payment(models.Model):
         ]
 
     patron = models.ForeignKey(
-        'Patron', verbose_name=_("patron"), related_name='payments',
-        on_delete=models.deletion.PROTECT)
+        "Patron", verbose_name=_("patron"), related_name="payments", on_delete=models.deletion.PROTECT
+    )
     month = models.DateField(_("month"))
-    reward = models.ForeignKey(
-        'Reward', verbose_name=_("reward"), related_name='+',
-        on_delete=models.deletion.PROTECT)
+    reward = models.ForeignKey("Reward", verbose_name=_("reward"), related_name="+", on_delete=models.deletion.PROTECT)
     pledge = models.DecimalField(_("pledge"), max_digits=8, decimal_places=2)
-    status = models.CharField(
-        _("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
+    status = models.CharField(_("status"), max_length=12, choices=STATUS.choices, default=STATUS.PROCESSED)
     completed = models.BooleanField(_("completed"), default=False)
 
     objects = PaymentManager()
@@ -68,12 +64,10 @@ class Payment(models.Model):
     class Meta:
         verbose_name = _("payment")
         verbose_name_plural = _("payments")
-        unique_together = (
-            ('patron', 'month'),
-        )
+        unique_together = (("patron", "month"),)
 
     def get_month_display(self):
-        return self.month.strftime('%B %Y')
+        return self.month.strftime("%B %Y")
 
 
 class FundraisingStatus(models.Model):
@@ -84,7 +78,7 @@ class FundraisingStatus(models.Model):
     amount_raised = models.IntegerField()
 
     class Meta:
-        ordering = ('-date_updated',)
+        ordering = ("-date_updated",)
 
     @property
     def percentage_of_goal(self):

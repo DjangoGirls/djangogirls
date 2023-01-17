@@ -1,8 +1,7 @@
 from datetime import datetime
 
 import pytest
-
-from django.contrib.auth.models import Permission, Group
+from django.contrib.auth.models import Group, Permission
 
 from core.models import Event, User
 from core.tumblr_client import RemoteStory
@@ -24,11 +23,10 @@ def user(db, django_user_model, django_username_field):
     username_field = django_username_field
 
     try:
-        user = UserModel._default_manager.get(**{username_field: 'user@example.com'})
+        user = UserModel._default_manager.get(**{username_field: "user@example.com"})
     except UserModel.DoesNotExist:
         extra_fields = {}
-        user = UserModel._default_manager.create_user(
-            'user@example.com', 'password', **extra_fields)
+        user = UserModel._default_manager.create_user("user@example.com", "password", **extra_fields)
     return user
 
 
@@ -41,11 +39,10 @@ def admin_user(db, django_user_model, django_username_field):
     username_field = django_username_field
 
     try:
-        user = UserModel._default_manager.get(**{username_field: 'admin@example.com'})
+        user = UserModel._default_manager.get(**{username_field: "admin@example.com"})
     except UserModel.DoesNotExist:
         extra_fields = {}
-        user = UserModel._default_manager.create_superuser(
-            'admin@example.com', 'password', **extra_fields)
+        user = UserModel._default_manager.create_superuser("admin@example.com", "password", **extra_fields)
     return user
 
 
@@ -71,8 +68,8 @@ def user_client(db, user):
 
 @pytest.fixture()
 def organizers_group():
-    add_event_permission = Permission.objects.get(codename='add_event')
-    change_event_permission = Permission.objects.get(codename='change_event')
+    add_event_permission = Permission.objects.get(codename="add_event")
+    change_event_permission = Permission.objects.get(codename="change_event")
     group = Group.objects.create(name="Organizers")
     group.permissions.set([add_event_permission, change_event_permission])
     return group
@@ -86,7 +83,8 @@ def superuser():
         email="super-girl@example.com",
         is_active=True,
         is_superuser=True,
-        is_staff=True)
+        is_staff=True,
+    )
 
 
 @pytest.fixture()
@@ -98,7 +96,8 @@ def organizer_peter(organizers_group):
         password="",
         is_active=True,
         is_superuser=False,
-        is_staff=True)
+        is_staff=True,
+    )
     user.groups.add(organizers_group)
     return user
 
@@ -112,7 +111,8 @@ def organizer_julia(organizers_group):
         password="",
         is_active=True,
         is_superuser=False,
-        is_staff=True)
+        is_staff=True,
+    )
     user.groups.add(organizers_group)
     return user
 
@@ -128,7 +128,8 @@ def future_event(organizer_peter):
         main_organizer=organizer_peter,
         date="2080-01-01",
         page_url="bonn",
-        is_page_live=True)
+        is_page_live=True,
+    )
     event.team.add(organizer_peter)
     return event
 
@@ -145,7 +146,8 @@ def past_event(organizer_peter):
         main_organizer=organizer_peter,
         date="2013-10-12",
         page_url="rome",
-        is_page_live=True)
+        is_page_live=True,
+    )
     event.team.add(organizer_peter)
     return event
 
@@ -161,7 +163,8 @@ def hidden_event(superuser):
         main_organizer=superuser,
         date="2080-09-02",
         page_url="rome",
-        is_page_live=False)
+        is_page_live=False,
+    )
     event.team.add(superuser)
     return event
 
@@ -177,7 +180,7 @@ def diff_url_event(superuser):
         main_organizer=superuser,
         date="2080-09-02",
         page_url="bar",
-        is_page_live=False
+        is_page_live=False,
     )
     event.team.add(superuser)
     return event
@@ -193,7 +196,8 @@ def no_date_event(superuser):
         is_on_homepage=False,
         main_organizer=superuser,
         page_url="venice",
-        is_page_live=False)
+        is_page_live=False,
+    )
     event.team.add(superuser)
     return event
 
@@ -205,38 +209,47 @@ def events(future_event, past_event, hidden_event, no_date_event):
 
 @pytest.fixture()
 def stock_pictures():
-    StockPicture.objects.bulk_create([
-        StockPicture(
-            photo="stock_pictures/city_one.jpg",
-            photo_credit="Someone",
-            photo_link="https://djangogirls.org",
-            kind=StockPicture.COVER),
-        StockPicture(
-            photo="stock_pictures/city_two.jpg",
-            photo_credit="Someone Else",
-            photo_link="https://djangogirls.org",
-            kind=StockPicture.COVER)])
+    StockPicture.objects.bulk_create(
+        [
+            StockPicture(
+                photo="stock_pictures/city_one.jpg",
+                photo_credit="Someone",
+                photo_link="https://djangogirls.org",
+                kind=StockPicture.COVER,
+            ),
+            StockPicture(
+                photo="stock_pictures/city_two.jpg",
+                photo_credit="Someone Else",
+                photo_link="https://djangogirls.org",
+                kind=StockPicture.COVER,
+            ),
+        ]
+    )
 
 
 @pytest.fixture()
 def visible_donors():
-    donors = Donor.objects.bulk_create([
-        Donor(name="Ola", amount=50, visible=True),
-        Donor(name="Aisha", amount=50, visible=True),
-        Donor(name="Claire", amount=20, visible=True),
-        Donor(name="Rachel", amount=100, visible=True)
-    ])
+    donors = Donor.objects.bulk_create(
+        [
+            Donor(name="Ola", amount=50, visible=True),
+            Donor(name="Aisha", amount=50, visible=True),
+            Donor(name="Claire", amount=20, visible=True),
+            Donor(name="Rachel", amount=100, visible=True),
+        ]
+    )
     return donors
 
 
 @pytest.fixture()
 def hidden_donors():
-    hidden_donors = Donor.objects.bulk_create([
-        Donor(name="Gift", amount=20, visible=False),
-        Donor(name="Anna", amount=10, visible=False),
-        Donor(name="Matthew", amount=50, visible=False),
-        Donor(name="Tanaka", amount=100, visible=False)
-    ])
+    hidden_donors = Donor.objects.bulk_create(
+        [
+            Donor(name="Gift", amount=20, visible=False),
+            Donor(name="Anna", amount=10, visible=False),
+            Donor(name="Matthew", amount=50, visible=False),
+            Donor(name="Tanaka", amount=100, visible=False),
+        ]
+    )
     return hidden_donors
 
 

@@ -36,6 +36,7 @@ def sanitize_int(value):
     elif isinstance(value, int):
         return value
 
+
 # pylint: enable=inconsistent-return-statements
 
 
@@ -52,9 +53,9 @@ def sanitize_bool(value, strict=False):
     """
     if isinstance(value, str):
         # pylint: disable=no-else-return
-        if value.lower().strip() in {'y', 'yes', 't', 'true', '1'}:
+        if value.lower().strip() in {"y", "yes", "t", "true", "1"}:
             return True
-        elif value.lower().strip() in {'n', 'no', 'f', 'false', '0'}:
+        elif value.lower().strip() in {"n", "no", "f", "false", "0"}:
             return False
         else:
             int_value = sanitize_int(value)
