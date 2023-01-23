@@ -1,17 +1,11 @@
+import datetime
 import logging
 from dataclasses import dataclass
-import datetime
-from typing import (
-    Any,
-    Iterator,
-    Optional,
-)
+from typing import Any, Iterator, Optional
 
 import requests
-from requests.exceptions import RequestException
-
 from django.conf import settings
-
+from requests.exceptions import RequestException
 
 logger = logging.getLogger(__name__)
 
@@ -24,19 +18,11 @@ class RemoteStory:
 
     @property
     def text_parts(self) -> list[str]:
-        return [
-            content_part["text"]
-            for content_part in self.content_parts
-            if content_part["type"] == "text"
-        ]
+        return [content_part["text"] for content_part in self.content_parts if content_part["type"] == "text"]
 
     @property
     def image_parts(self) -> list[dict]:
-        return [
-            content_part["media"]
-            for content_part in self.content_parts
-            if content_part["type"] == "image"
-        ]
+        return [content_part["media"] for content_part in self.content_parts if content_part["type"] == "image"]
 
     @property
     def banner_url(self) -> Optional[str]:
@@ -70,9 +56,7 @@ def parse_posts(posts_data: list[dict[str, Any]]) -> Iterator[RemoteStory]:
 def request_latest_stories() -> Iterator[RemoteStory]:
     # TODO: probably write a wrapper for tumblr requests if
     # more endpoints are used in the future
-    blog_base_url = (
-        f"{settings.TUMBLR_API_BASE_URL}/blog/{settings.TUMBLR_BLOG_HOSTNAME}"
-    )
+    blog_base_url = f"{settings.TUMBLR_API_BASE_URL}/blog/{settings.TUMBLR_BLOG_HOSTNAME}"
     posts_endpoint = f"{blog_base_url}/posts/"
     try:
         # `npf` means Neue Post Format - so we don't get different response

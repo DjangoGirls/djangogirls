@@ -22,17 +22,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         latest_stories = list(request_latest_stories())
         remote_urls = set(remote_story.url for remote_story in latest_stories)
-        in_db_urls = set(
-            Story.objects.filter(post_url__in=remote_urls).values_list(
-                "post_url", flat=True
-            )
-        )
+        in_db_urls = set(Story.objects.filter(post_url__in=remote_urls).values_list("post_url", flat=True))
         to_create_urls = remote_urls.difference(in_db_urls)
-        missing_stories = [
-            remote_story
-            for remote_story in latest_stories
-            if remote_story.url in to_create_urls
-        ]
+        missing_stories = [remote_story for remote_story in latest_stories if remote_story.url in to_create_urls]
         created = 0
         for missing_story in missing_stories:
             self.stdout.write(f"Fetching {missing_story.title}")

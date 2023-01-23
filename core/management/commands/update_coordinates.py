@@ -6,7 +6,7 @@ from core.utils import get_coordinates_for_city
 
 
 class Command(BaseCommand):
-    help = 'Update coordinates of event cities'
+    help = "Update coordinates of event cities"
 
     def handle(self, *args, **options):
 

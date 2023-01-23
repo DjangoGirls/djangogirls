@@ -9,21 +9,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Sponsor',
+            name="Sponsor",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=200, null=True)),
-                ('logo', models.ImageField(blank=True, help_text='Make sure logo is not bigger than 200 pixels wide', null=True, upload_to='event/sponsors/')),
-                ('url', models.URLField(blank=True, null=True)),
-                ('description', models.TextField(blank=True, null=True)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(blank=True, max_length=200, null=True)),
+                (
+                    "logo",
+                    models.ImageField(
+                        blank=True,
+                        help_text="Make sure logo is not bigger than 200 pixels wide",
+                        null=True,
+                        upload_to="event/sponsors/",
+                    ),
+                ),
+                ("url", models.URLField(blank=True, null=True)),
+                ("description", models.TextField(blank=True, null=True)),
             ],
             options={
-                'ordering': ('name',),
+                "ordering": ("name",),
             },
         ),
     ]

@@ -14,9 +14,9 @@ def data_dict():
     """
 
     return {
-        'name': 'Story 1',
-        'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut '
-                   'labore et dolore magna aliqua. Ut pharetra sit amet aliquam id diam maecenas ultricies mi.',
-        'is_story': True,
-        'post_url': 'story-1-url',
+        "name": "Story 1",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut "
+        "labore et dolore magna aliqua. Ut pharetra sit amet aliquam id diam maecenas ultricies mi.",
+        "is_story": True,
+        "post_url": "story-1-url",
     }

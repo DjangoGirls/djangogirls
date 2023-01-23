@@ -6,9 +6,7 @@ from patreonmanager.models import Patron, Payment
 
 
 def test_pending_rewards(patron, reward, payment):
-    filter = PendingRewardsFilter(
-        None, {'pending_rewards': 'true'}, Patron, PatronAdmin
-    )
+    filter = PendingRewardsFilter(None, {"pending_rewards": "true"}, Patron, PatronAdmin)
     patrons = filter.queryset(None, Patron.objects.all())
     assert len(patrons) == 0
 

@@ -7,74 +7,68 @@ from django_date_extensions.fields import ApproximateDate
 
 def test_index(client, future_event, past_event):
     # Access homepage
-    resp = client.get(reverse('core:index'))
+    resp = client.get(reverse("core:index"))
     assert resp.status_code == 200
 
     # Check if it returns a list of past and future events
-    assert 'past_events' and 'future_events' in resp.context
+    assert "past_events" and "future_events" in resp.context
 
     # Only the future event is on the list
-    event_ids = set(event.pk for event in resp.context['future_events'])
+    event_ids = set(event.pk for event in resp.context["future_events"])
     assert event_ids == {future_event.pk}
 
 
 def test_event_published(client, future_event, past_event):
-    url1 = reverse('core:event', kwargs={'page_url': future_event.page_url})
+    url1 = reverse("core:event", kwargs={"page_url": future_event.page_url})
     resp_1 = client.get(url1)
     assert resp_1.status_code == 200
 
     # Check if it's possible to access the page
-    url2 = reverse('core:event', kwargs={'page_url': past_event.page_url})
+    url2 = reverse("core:event", kwargs={"page_url": past_event.page_url})
     resp_2 = client.get(url2)
     assert resp_2.status_code == 200
 
     # Check if website is returning correct data
-    assert 'page' and 'menu' and 'content' in resp_1.context
-    assert 'page' and 'menu' and 'content' in resp_2.context
+    assert "page" and "menu" and "content" in resp_1.context
+    assert "page" and "menu" and "content" in resp_2.context
 
     # Check if not public content is not available in context:
-    assert future_event.pk not in {content.pk for content in resp_1.context['content']}
+    assert future_event.pk not in {content.pk for content in resp_1.context["content"]}
 
 
 def test_event_unpublished(client, hidden_event):
     # Check if accessing unpublished page renders the event_not_live page
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
     # Check if website is returning correct data
-    assert 'city' and 'past' in resp.context
+    assert "city" and "past" in resp.context
 
 
 def test_event_path(client, diff_url_event):
     # Ensure new url path for event view works
-    url = reverse(
-        'core:event',
-        kwargs={'page_url': diff_url_event.page_url}
-    )
+    url = reverse("core:event", kwargs={"page_url": diff_url_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
     # Check if website is returning correct data
-    assert 'city' and 'past' in resp.context
+    assert "city" and "past" in resp.context
 
 
 def test_event_live(client, future_event):
     # Ensure new url path for event view works
-    url = reverse(
-        'core:event',
-        kwargs={'page_url': future_event.page_url}
-    )
+    url = reverse("core:event", kwargs={"page_url": future_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
     # Check if website is returning correct data
-    assert 'event' and 'menu' and 'content' in resp.context
+    assert "event" and "menu" and "content" in resp.context
 
 
 def test_event_city(client, diff_url_event):
     # Ensure old use of City in the url 404s when the slug is different
-    url = reverse('core:event', kwargs={'page_url': diff_url_event.city})
+    url = reverse("core:event", kwargs={"page_url": diff_url_event.city})
     resp = client.get(url)
     assert resp.status_code == 404
 
@@ -84,205 +78,202 @@ def test_event_unpublished_with_future_and_past_dates(client, no_date_event):
     past_date = timezone.now() - timedelta(days=1)
 
     # make the event date in the future
-    no_date_event.date = ApproximateDate(
-        year=future_date.year, month=future_date.month, day=future_date.day)
+    no_date_event.date = ApproximateDate(year=future_date.year, month=future_date.month, day=future_date.day)
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
     # Check if website is returning correct content
-    assert 'will be coming soon' in str(resp.content)
+    assert "will be coming soon" in str(resp.content)
 
     # make the event date in the past
-    no_date_event.date = ApproximateDate(
-        year=past_date.year, month=past_date.month, day=past_date.day
-    )
+    no_date_event.date = ApproximateDate(year=past_date.year, month=past_date.month, day=past_date.day)
     no_date_event.save()
 
     # Check if accessing unpublished page renders the event_not_live page
-    url = reverse('core:event', kwargs={'page_url': no_date_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": no_date_event.page_url})
     resp = client.get(url)
     assert resp.status_code == 200
 
     # Check if website is returning correct content
-    assert 'has already happened' in str(resp.content)
+    assert "has already happened" in str(resp.content)
 
 
 def test_event_unpublished_with_auth_normal(user, client, hidden_event):
-    """ Test that an unpublished page can not be accessed when the user is
+    """Test that an unpublished page can not be accessed when the user is
     authenticated and not a superuser"""
 
     client.force_login(user)
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
-    assert 'city' and 'past' in resp.context
+    assert "city" and "past" in resp.context
 
 
 def test_event_unpublished_with_auth_superuser(admin_client, hidden_event):
-    """ Test that an unpublished page can be accessed when the user is
+    """Test that an unpublished page can be accessed when the user is
     authenticated and a superuser"""
 
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = admin_client.get(url)
 
     assert resp.status_code == 200
-    assert hidden_event.page_title in resp.content.decode('utf-8')
+    assert hidden_event.page_title in resp.content.decode("utf-8")
 
 
 def test_event_unpublished_with_auth_not_organizer(user, client, hidden_event):
-    """ Test that an unpublished page can not be accessed if the user
+    """Test that an unpublished page can not be accessed if the user
     is not an organizer"""
 
     client.force_login(user)
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
-    assert 'city' and 'past' in resp.context
+    assert "city" and "past" in resp.context
 
 
 def test_event_unpublished_with_auth_in_team(user, client, hidden_event):
-    """ Test that an unpublished page can be accessed if the user
+    """Test that an unpublished page can be accessed if the user
     is an organizer"""
     hidden_event.team.add(user)
 
     client.force_login(user)
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
-    assert hidden_event.page_title in resp.content.decode('utf-8')
+    assert hidden_event.page_title in resp.content.decode("utf-8")
 
 
 def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
-    """ Test that an unpublished page can be accessed if the user
+    """Test that an unpublished page can be accessed if the user
     is the main organizer"""
     hidden_event.main_organizer = user
 
     client.force_login(user)
-    url = reverse('core:event', kwargs={'page_url': hidden_event.page_url})
+    url = reverse("core:event", kwargs={"page_url": hidden_event.page_url})
     resp = client.get(url)
 
     assert resp.status_code == 200
-    assert hidden_event.page_title in resp.content.decode('utf-8')
+    assert hidden_event.page_title in resp.content.decode("utf-8")
 
 
 def test_coc_legacy(client):
     AVAILABLE_LANG = {
-        'en': '<h1>Code of Conduct</h1>',
-        'es': '<h1>Código de Conducta</h1>',
-        'fr': '<h1>Code de Conduite</h1>',
-        'ko': '<h1>준수 사항</h1>',
-        'pt-br': '<h1>Código de Conduta</h1>'
+        "en": "<h1>Code of Conduct</h1>",
+        "es": "<h1>Código de Conducta</h1>",
+        "fr": "<h1>Code de Conduite</h1>",
+        "ko": "<h1>준수 사항</h1>",
+        "pt-br": "<h1>Código de Conduta</h1>",
     }
     for lang, title in AVAILABLE_LANG.items():
         response = client.get(f"/coc/{lang}/")
-        assert title in response.content.decode('utf-8'), title
+        assert title in response.content.decode("utf-8"), title
 
 
 def test_coc_no_lang(client):
     title = "<h1>Code of Conduct</h1>"
 
     response = client.get("/coc/")
-    assert title in response.content.decode('utf-8'), title
+    assert title in response.content.decode("utf-8"), title
 
 
 def test_coc_invalid_lang(client):
-    response = client.get('/coc/pl/')
+    response = client.get("/coc/pl/")
     assert response.status_code == 404
 
 
 def test_coc(client):
-    url = reverse('core:coc')
+    url = reverse("core:coc")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_events(client):
-    url = reverse('core:events')
+    url = reverse("core:events")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_events_map(client):
-    url = reverse('core:events_map')
+    url = reverse("core:events_map")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_resources(client):
-    url = reverse('core:resources')
+    url = reverse("core:resources")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_events_icalendar_no_events(client):
-    url = reverse('core:icalendar')
+    url = reverse("core:icalendar")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_events_icalendar_events(client, events):
-    url = reverse('core:icalendar')
+    url = reverse("core:icalendar")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_newsletter(client):
-    url = reverse('core:newsletter')
+    url = reverse("core:newsletter")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_faq(client):
-    url = reverse('core:faq')
+    url = reverse("core:faq")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_foundation(client):
-    url = reverse('core:foundation')
+    url = reverse("core:foundation")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_foundation_gov_doc(client):
-    url = reverse('core:foundation-governing-document')
+    url = reverse("core:foundation-governing-document")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_year_2015(client):
-    url = reverse('core:year_2015')
+    url = reverse("core:year_2015")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_year_2016_17(client):
-    url = reverse('core:year_2016_2017')
+    url = reverse("core:year_2016_2017")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_terms(client):
-    url = reverse('core:terms-conditions')
+    url = reverse("core:terms-conditions")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_privacy_cookies(client):
-    url = reverse('core:privacy-cookies')
+    url = reverse("core:privacy-cookies")
     response = client.get(url)
     assert response.status_code == 200
 
 
 def test_server_error(client):
-    url = reverse('core:server_error')
+    url = reverse("core:server_error")
     response = client.get(url)
     assert response.status_code == 500
 
@@ -328,5 +319,5 @@ def test_crowdfunding_donors(client, visible_donors, hidden_donors):
 
 
 def test_robots_txt_view(client):
-    response = client.get(reverse('core:robots'))
+    response = client.get(reverse("core:robots"))
     assert response.status_code == 200

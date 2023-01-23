@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('organize', '0008_eventapplication_local_restrictions'),
+        ("organize", "0008_eventapplication_local_restrictions"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='eventapplication',
-            name='confirm_covid_19_protocols',
-            field=models.BooleanField(default=False, verbose_name='Confirmation that you will postpone or have a remote event if your government regulations for Covid-19 change.'),
+            model_name="eventapplication",
+            name="confirm_covid_19_protocols",
+            field=models.BooleanField(
+                default=False,
+                verbose_name="Confirmation that you will postpone or have a remote event if your government regulations for Covid-19 change.",
+            ),
         ),
     ]

@@ -2,8 +2,8 @@ from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import Group
 from django.db import models
 
-from .managers.user import UserManager
 from ..slack_client import user_invite
+from .managers.user import UserManager
 
 
 class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -42,8 +42,8 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
     def __str__(self):
         if not self.first_name and not self.last_name:
-            return f'{self.email}'
-        return f'{self.get_full_name()} ({self.email})'
+            return f"{self.email}"
+        return f"{self.get_full_name()} ({self.email})"
 
     def get_short_name(self):
         return self.first_name
