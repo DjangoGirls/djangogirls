@@ -2,7 +2,7 @@ from django.contrib import admin, messages
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ungettext
+from django.utils.translation import ngettext
 
 from .filters import PendingRewardsFilter
 from .models import FundraisingStatus, Patron, Payment, Reward
@@ -31,13 +31,13 @@ class PatronAdmin(admin.ModelAdmin):
     def payments_link(self, patron):
         link = reverse("admin:patreonmanager_payment_changelist") + "?patron_id__exact=%s" % patron.pk
         count = patron.payments.count()
-        return format_html('<a href="{}">{}</a>', link, ungettext("%d payment", "%d payments", count) % count)
+        return format_html('<a href="{}">{}</a>', link, ngettext("%d payment", "%d payments", count) % count)
 
     payments_link.short_description = _("Payments")
 
     def uncompleted_payments(self, patron):
         count = patron.payments.filter(completed=False).count()
-        return format_html("{}", ungettext("%d payment", "%d payments", count) % count)
+        return format_html("{}", ngettext("%d payment", "%d payments", count) % count)
 
     uncompleted_payments.short_description = _("Uncompleted payments")
 
@@ -67,7 +67,7 @@ class PaymentAdmin(admin.ModelAdmin):
 
     def mark_completed(self, request, queryset):
         updated = queryset.complete()
-        msg = ungettext("Marked %d payment as completed", "Marked %d payments as completed", updated)
+        msg = ngettext("Marked %d payment as completed", "Marked %d payments as completed", updated)
         messages.success(request, msg % updated)
 
     mark_completed.short_description = _("Mark selected payments as completed")
