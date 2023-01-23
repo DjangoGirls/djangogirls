@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import ContactEmail
 
 
+@admin.register(ContactEmail)
 class ContactEmailAdmin(admin.ModelAdmin):
     list_display = ("name", "sent_to", "event", "created_at", "sent_successfully")
     list_filter = ("sent_to",)
@@ -20,6 +21,3 @@ class ContactEmailAdmin(admin.ModelAdmin):
         "created_at",
         "sent_successfully",
     )
-
-
-admin.site.register(ContactEmail, ContactEmailAdmin)

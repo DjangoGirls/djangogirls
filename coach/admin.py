@@ -10,6 +10,7 @@ class CoachInline(admin.TabularInline):
     verbose_name_plural = "Coaches"
 
 
+@admin.register(Coach)
 class CoachAdmin(admin.ModelAdmin):
     list_display = ("name", "photo_display_for_admin", "twitter_handle", "url")
     search_fields = ("name", "twitter_handle", "url")
@@ -27,6 +28,3 @@ class CoachAdmin(admin.ModelAdmin):
                 qs = EventPageContent.objects.filter(event__team=request.user)
                 form.base_fields["eventpagecontent"].queryset = qs
         return form
-
-
-admin.site.register(Coach, CoachAdmin)

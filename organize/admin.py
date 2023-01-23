@@ -13,18 +13,14 @@ class InlineCoorganizerAdmin(admin.TabularInline):
     extra = 1
 
 
+@admin.action(description=_("Move selected application to on hold"))
 def change_status_to_on_hold(modeladmin, request, queryset):
     queryset.change_status_to(ON_HOLD)
 
 
-change_status_to_on_hold.short_description = _("Move selected application to on hold")
-
-
+@admin.action(description=_("Move selected application to in review"))
 def change_status_to_in_review(modeladmin, request, queryset):
     queryset.change_status_to(IN_REVIEW)
-
-
-change_status_to_in_review.short_description = _("Move selected application to in review")
 
 
 @admin.register(EventApplication)
