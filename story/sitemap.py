@@ -20,4 +20,4 @@ class BlogSiteMap(Sitemap):
         return obj.created
 
     def _urls(self, page, protocol, domain):
-        return super(BlogSiteMap, self)._urls(page=page, protocol="https", domain="")
+        return super()._urls(page=page, protocol="https", domain="")

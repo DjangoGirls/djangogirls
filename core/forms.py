@@ -63,7 +63,7 @@ class EventForm(forms.ModelForm):
     def save(self, commit=True):
         """Save the event and create default content in case of new instances"""
         created = not self.instance.pk
-        instance = super(EventForm, self).save(commit=commit)
+        instance = super().save(commit=commit)
         if commit and created:
             # create default content
             instance.add_default_content()

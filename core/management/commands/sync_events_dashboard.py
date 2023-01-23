@@ -79,7 +79,7 @@ def sync(events, token):
             card.fetch()
 
         if e.date != card.due_date.date():
-            print("Changing due date of {} to {}".format(e.city, e.date))
+            print(f"Changing due date of {e.city} to {e.date}")
             card.set_due(e.date)
 
         distance = (e.date - date_today).days
@@ -105,7 +105,7 @@ def card_id(card):
 
 
 def create_card(event, list):
-    print("Creating card {} ({})".format(event.city, event.date.isoformat()))
+    print(f"Creating card {event.city} ({event.date.isoformat()})")
     return list.add_card(name=event.city, desc=ADMIN_BASE_URL + event.id, due=event.date.isoformat())
 
 
@@ -117,11 +117,11 @@ def create_checklist(card):
 
 def ensure_checklist_in_card(card):
     if not card.checklists:
-        print("Adding checklist to {} card.".format(card.name))
+        print(f"Adding checklist to {card.name} card.")
         create_checklist(card)
 
 
 def ensure_card_in_list(card, list):
     if card.list_id != list.id:
-        print("Moving {} to {}".format(card.name, list.name))
+        print(f"Moving {card.name} to {list.name}")
         card.change_list(list.id)

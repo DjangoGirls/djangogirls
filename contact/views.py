@@ -17,4 +17,4 @@ class ContactView(FormView):
             messages.info(self.request, _("Thank you for your email. We will be in touch shortly."))
         else:
             messages.error(self.request, _("Ooops. We couldn't send your email :( Please try again later"))
-        return super(ContactView, self).form_valid(form)
+        return super().form_valid(form)

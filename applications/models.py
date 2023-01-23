@@ -163,7 +163,7 @@ class Application(models.Model):
         if self.pk is None:
             current_max = Application.objects.filter(form=self.form).aggregate(models.Max("number"))["number__max"]
             self.number = (current_max or 0) + 1
-        super(Application, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     @property
     def average_score(self):

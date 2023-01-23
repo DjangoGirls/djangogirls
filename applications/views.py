@@ -127,7 +127,7 @@ def applications_csv(request, page_url):
         score = app.average_score if app.is_scored_by_user(request.user) else "(hidden)"
         app_info = [app.number, app.state, app.rsvp_status, score]
         # get all answers for the application
-        answer_dict = dict([(a.question_id, a.answer) for a in app.answer_set.all()])
+        answer_dict = {a.question_id: a.answer for a in app.answer_set.all()}
         # find the answer corresponding to a question or empty string if not found
         # this keeps the csv columns correct if some applications have less
         # questions than others

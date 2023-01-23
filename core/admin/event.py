@@ -73,7 +73,7 @@ class EventAdmin(admin.ModelAdmin):
     form = EventForm
 
     def get_queryset(self, request):
-        qs = super(EventAdmin, self).get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(team=request.user)
@@ -92,7 +92,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def full_url(self, obj):
         url = reverse("core:event", kwargs={"page_url": obj.page_url})
-        url = "https://djangogirls.org{url}".format(url=url)
+        url = f"https://djangogirls.org{url}"
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
 
     full_url.short_description = _("page URL")
@@ -178,7 +178,7 @@ class EventAdmin(admin.ModelAdmin):
         ]
 
     def get_urls(self):
-        urls = super(EventAdmin, self).get_urls()
+        urls = super().get_urls()
         my_urls = [
             path(
                 "manage_organizers/",
@@ -282,7 +282,7 @@ class EventAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         created = not obj.pk
-        super(EventAdmin, self).save_model(request, obj, form, change)
+        super().save_model(request, obj, form, change)
         if created:
             obj.add_default_content()
             obj.add_default_menu()

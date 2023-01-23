@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import djclick as click
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -74,7 +73,7 @@ def command(short):
         click.secho("OOPS! Something went wrong!", fg="red")
         for field, errors in form.errors.items():
             for error in errors:
-                click.secho("    {field:10} {error}".format(error=error, field=field), fg="red")
+                click.secho(f"    {field:10} {error}", fg="red")
         return
     event = form.save()
 
@@ -87,7 +86,7 @@ def command(short):
 
     event.save()
 
-    click.secho("Website is ready here: http://djangogirls.org/{0}".format(url), fg="green")
+    click.secho(f"Website is ready here: http://djangogirls.org/{url}", fg="green")
     click.echo(DELIMITER)
 
     click.secho("Ok, now follow this:", fg="black", bg="green")
@@ -96,7 +95,7 @@ def command(short):
     click.echo(DELIMITER)
     click.secho("This is a ready, filled out mail to sent to organizers:", fg="green")
 
-    click.echo("SUBJECT: Django Girls {} setup".format(event.city))
+    click.echo(f"SUBJECT: Django Girls {event.city} setup")
     click.echo("TO: {}, {}, hello@djangogirls.org".format(", ".join([x.email for x in members]), event.email))
     click.echo("BODY:")
 

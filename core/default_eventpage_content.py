@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import random
 from functools import lru_cache
 

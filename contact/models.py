@@ -33,7 +33,7 @@ class ContactEmail(models.Model):
         ordering = ("-created_at",)
 
     def __str__(self):
-        return "%s to %s" % (self.email, self.sent_to)
+        return f"{self.email} to {self.sent_to}"
 
     def save(self, *args, **kwargs):
         self.sent_to = self._get_to_email()
@@ -50,7 +50,7 @@ class ContactEmail(models.Model):
         except SMTPException:
             self.sent_successfully = False
 
-        super(ContactEmail, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def _get_to_email(self):
         if self.event and self.event.email:

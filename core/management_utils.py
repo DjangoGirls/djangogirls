@@ -20,7 +20,7 @@ def get_main_organizer():
 
     team.append({"name": main_name, "email": main_email})
 
-    click.echo("All right, the main organizer is {0} ({1})".format(main_name, main_email))
+    click.echo(f"All right, the main organizer is {main_name} ({main_email})")
 
     return team
 

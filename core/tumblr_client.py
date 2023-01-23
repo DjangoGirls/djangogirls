@@ -1,7 +1,8 @@
 import datetime
 import logging
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Any, Iterator, Optional
+from typing import Any
 
 import requests
 from django.conf import settings
@@ -25,7 +26,7 @@ class RemoteStory:
         return [content_part["media"] for content_part in self.content_parts if content_part["type"] == "image"]
 
     @property
-    def banner_url(self) -> Optional[str]:
+    def banner_url(self) -> str | None:
         if not self.image_parts:
             return None
         # Each image part has multiple image sizes, we're picking the first

@@ -33,7 +33,7 @@ class UserAdmin(auth_admin.UserAdmin):
     )
 
     def get_queryset(self, request):
-        qs = super(UserAdmin, self).get_queryset(request)
+        qs = super().get_queryset(request)
         if request.user.is_superuser:
             return qs
         return qs.filter(pk=request.user.pk)

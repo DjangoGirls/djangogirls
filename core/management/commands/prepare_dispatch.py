@@ -14,7 +14,7 @@ def generate_html_content(event_list):
     for event in event_list:
         city = event.city
         url = event.page_url
-        html = "<a href='https://djangogirls.org/%s'>%s</a>" % (url, city)
+        html = f"<a href='https://djangogirls.org/{url}'>{city}</a>"
         result.append(html)
     return result
 
@@ -41,7 +41,7 @@ def command():
 
     if result_previous:
         click.echo(
-            "%s event%s happened since the last dispatch: " % (apnumber(num_events), "s" if num_events > 1 else "")
+            "{} event{} happened since the last dispatch: ".format(apnumber(num_events), "s" if num_events > 1 else "")
             + ", ".join(result_previous)
             + "."
         )
