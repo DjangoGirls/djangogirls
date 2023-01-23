@@ -1,4 +1,14 @@
+ci:
+    autofix_commit_msg: |
+        ci: auto fixes from pre-commit hooks
+
+        for more information, see https://pre-commit.ci
+    autofix_prs: true
+    autoupdate_commit_msg: 'ci: pre-commit autoupdate'
+    autoupdate_schedule: monthly
+
 fail_fast: true
+
 repos:
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.0.0
