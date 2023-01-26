@@ -11,6 +11,7 @@ class SponsorInline(admin.TabularInline):
     verbose_name_plural = "Sponsors"
 
 
+@admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "logo_display_for_admin", "url")
     list_per_page = 50
@@ -31,5 +32,4 @@ class SponsorAdmin(admin.ModelAdmin):
         return form
 
 
-admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Donor)

@@ -9,6 +9,7 @@ from core.models import Event
 from .models import Answer, Application, Email, Form, Question
 
 
+@admin.register(Form)
 class FormAdmin(admin.ModelAdmin):
     list_display = ("text_header", "event", "open_from", "open_until", "number_of_applications", "get_submissions_url")
 
@@ -40,13 +41,12 @@ class FormAdmin(admin.ModelAdmin):
             return redirect("applications:applications", form.event.page_url)
         return render(request, "admin/applications/form/view_submissions.html", {"forms": forms})
 
+    @admin.display(description="Applications")
     def get_submissions_url(self, obj):
         return format_html(
             '<a href="{}" target="_blank">See all submitted applications</a>',
             reverse("applications:applications", args=[obj.event.page_url]),
         )
-
-    get_submissions_url.short_description = "Applications"
 
 
 class FormFilter(admin.SimpleListFilter):
@@ -66,6 +66,7 @@ class FormFilter(admin.SimpleListFilter):
         return queryset
 
 
+@admin.register(Question)
 class QuestionAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("form", "title", "question_type", "is_required", "order")
     list_filter = (FormFilter,)
@@ -91,23 +92,19 @@ class AnswerInlineAdmin(admin.TabularInline):
     readonly_fields = ("question", "answer")
 
 
+@admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ("number", "form", "newsletter_optin", "email", "created")
     list_filter = ("form", "newsletter_optin")
     inlines = [AnswerInlineAdmin]
 
 
+@admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ("application", "question", "answer")
     raw_id_fields = ("question", "application")
 
 
+@admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
     list_display = ("form", "author", "subject", "recipients_group", "created", "sent")
-
-
-admin.site.register(Form, FormAdmin)
-admin.site.register(Question, QuestionAdmin)
-admin.site.register(Application, ApplicationAdmin)
-admin.site.register(Answer, AnswerAdmin)
-admin.site.register(Email, EmailAdmin)

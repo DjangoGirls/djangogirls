@@ -78,24 +78,25 @@ class EventAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(team=request.user)
 
+    @admin.display(
+        description=_("past event?"),
+        boolean=True,
+    )
     def is_past_event(self, obj):
         return not obj.is_upcoming()
 
-    is_past_event.boolean = True
-    is_past_event.short_description = _("past event?")
-
+    @admin.display(
+        description=_("has stats?"),
+        boolean=True,
+    )
     def has_stats(self, obj):
         return obj.has_stats
 
-    has_stats.boolean = True
-    has_stats.short_description = _("has stats?")
-
+    @admin.display(description=_("page URL"))
     def full_url(self, obj):
         url = reverse("core:event", kwargs={"page_url": obj.page_url})
         url = f"https://djangogirls.org{url}"
         return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
-
-    full_url.short_description = _("page URL")
 
     def get_readonly_fields(self, request, obj=None):
         fields = set(self.readonly_fields) | {"full_url"}
