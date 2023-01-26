@@ -74,7 +74,14 @@ Step into newly created `djangogirls` directory:
 cd djangogirls
 ```
 
+### Docker
+
+If you have Docker and Docker compose installed, run `docker-compose up`
+
+### Non Docker
+
 Create a new virtual environment (Python 3.10) if needed. Then, install all the required dependencies.
+
 The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
