@@ -61,7 +61,7 @@ def test_email_recipients(mailoutbox, send_kwargs, future_event, organizer_peter
 
     handle_emails.send_event_emails(**send_kwargs)
     assert len(mailoutbox) == 1
-    assert set(mailoutbox[0].to) == set([organizer_peter.email, organizer_julia.email])
+    assert set(mailoutbox[0].to) == {organizer_peter.email, organizer_julia.email}
 
 
 def test_email_template_rendering(mailoutbox, send_kwargs):

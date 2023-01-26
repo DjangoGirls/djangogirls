@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
@@ -25,7 +24,7 @@ def gather_information():
     while not event:
         event = get_event(click.prompt("Wrong ID! Try again"))
 
-    click.echo("Ok, we're copying {}, {}".format(event.city, event.country))
+    click.echo(f"Ok, we're copying {event.city}, {event.country}")
 
     number = click.prompt(
         click.style(
@@ -60,14 +59,14 @@ def command():
     number = int(number)
 
     # Change the name of previous event to {name} #{number-1}
-    event.name = "{} #{}".format(name, number - 1)
+    event.name = f"{name} #{number - 1}"
     event.save()
 
     # Copy event with a name {name} #{number}, new date and empty stats
     new_event = Event.objects.get(id=event.id)
     new_event.pk = None
-    new_event.name = "{} #{}".format(name, number)
-    new_event.page_title = "{} #{}".format(name, number)
+    new_event.name = f"{name} #{number}"
+    new_event.page_title = f"{name} #{number}"
     new_event.date = date
     new_event.is_page_live = False
     new_event.attendees_count = None
@@ -87,8 +86,8 @@ def command():
         new_event.team.set(organizers)
 
     # Change the title and url of previous event page
-    event.page_title = "{} #{}".format(name, number - 1)
-    event.page_url = "{}{}".format(event.page_url, number - 1)
+    event.page_title = f"{name} #{number - 1}"
+    event.page_url = f"{event.page_url}{number - 1}"
     event.save()
 
     # Copy all EventPageContent objects

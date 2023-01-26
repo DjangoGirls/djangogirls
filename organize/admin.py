@@ -143,7 +143,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
 
     def get_urls(self):
-        urls = super(EventApplicationAdmin, self).get_urls()
+        urls = super().get_urls()
         my_urls = [
             path(
                 "<int:application_id>/triage/<str:new_status>/",

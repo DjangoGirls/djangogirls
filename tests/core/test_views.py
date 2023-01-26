@@ -14,7 +14,7 @@ def test_index(client, future_event, past_event):
     assert "past_events" and "future_events" in resp.context
 
     # Only the future event is on the list
-    event_ids = set(event.pk for event in resp.context["future_events"])
+    event_ids = {event.pk for event in resp.context["future_events"]}
     assert event_ids == {future_event.pk}
 
 

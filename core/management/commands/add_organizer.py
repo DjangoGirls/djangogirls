@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import djclick as click
 
 from core.forms import AddOrganizerForm

@@ -41,7 +41,7 @@ class PaymentManager(models.Manager):
 
 
 class Payment(models.Model):
-    class STATUS(object):
+    class STATUS:
         DECLINED = "DECLINED"
         PROCESSED = "PROCESSED"
 

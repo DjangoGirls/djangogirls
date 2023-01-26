@@ -123,7 +123,7 @@ class Event(models.Model):
         event.add("dtend", event_date + timedelta(days=1))
         event.add("uid", self.ical_uid)
         event.add("summary", "Django Girls %s" % self.city)
-        event.add("location", "%s, %s" % (self.country, self.city))
+        event.add("location", f"{self.country}, {self.city}")
         return event
 
     def organizers(self):
