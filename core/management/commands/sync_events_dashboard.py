@@ -9,29 +9,30 @@ from trello import ResourceUnavailable, TrelloClient
 
 from core.models import Event
 
-
 # Create new command
 
+
 class Command(BaseCommand):
-    help = 'Syncs event in trello board. Need a token.'
+    help = "Syncs event in trello board. Need a token."
     missing_args_message = (
-        'You need to add a token! Get one here: '
-        'https://trello.com/1/authorize?key=01ab0348ca020573e7f728ae7400928a&scope=read%2Cwrite&'
-        'name=My+Application&expiration=1hour&response_type=token'
+        "You need to add a token! Get one here: "
+        "https://trello.com/1/authorize?key=01ab0348ca020573e7f728ae7400928a&scope=read%2Cwrite&"
+        "name=My+Application&expiration=1hour&response_type=token"
     )
 
     def add_arguments(self, parser):
-        parser.add_argument('trello_token', type=str)
+        parser.add_argument("trello_token", type=str)
 
     def handle(self, *args, **options):
-        token = options['trello_token']
+        token = options["trello_token"]
         events = event_list()
         sync(events, token)
+
 
 # Get data
 
 
-EventTuple = namedtuple('EventTuple', 'name id city date')
+EventTuple = namedtuple("EventTuple", "name id city date")
 
 
 def event_list():
@@ -45,15 +46,16 @@ def event_list():
         result.append(EventTuple(name, _id, city, date))
     return result
 
+
 # Sync to trello
 
 
-ADMIN_BASE_URL = 'https://djangogirls.org/admin/core/event/'
+ADMIN_BASE_URL = "https://djangogirls.org/admin/core/event/"
 
 
 def sync(events, token):
     trello = TrelloClient(api_key=settings.TRELLO_API_KEY, token=token)
-    board = trello.get_board('55f7167c46760fcb5d68b385')
+    board = trello.get_board("55f7167c46760fcb5d68b385")
 
     far_away, less_2_months, less_1_month, less_1_week, today, past = board.all_lists()
 
@@ -77,7 +79,7 @@ def sync(events, token):
             card.fetch()
 
         if e.date != card.due_date.date():
-            print('Changing due date of {} to {}'.format(e.city, e.date))
+            print("Changing due date of {} to {}".format(e.city, e.date))
             card.set_due(e.date)
 
         distance = (e.date - date_today).days
@@ -98,21 +100,19 @@ def sync(events, token):
 
 
 def card_id(card):
-    m = re.search(ADMIN_BASE_URL + r'(\d+)',
-                  card.desc)
+    m = re.search(ADMIN_BASE_URL + r"(\d+)", card.desc)
     return m.group(1)
 
 
 def create_card(event, list):
-    print('Creating card {} ({})'.format(event.city, event.date.isoformat()))
-    return list.add_card(name=event.city,
-                         desc=ADMIN_BASE_URL + event.id,
-                         due=event.date.isoformat())
+    print("Creating card {} ({})".format(event.city, event.date.isoformat()))
+    return list.add_card(name=event.city, desc=ADMIN_BASE_URL + event.id, due=event.date.isoformat())
 
 
 def create_checklist(card):
-    card.add_checklist("Things to do:", [
-                       "2 month check", "1 month check", "Thank you email and request for stats", "Stats obtained"])
+    card.add_checklist(
+        "Things to do:", ["2 month check", "1 month check", "Thank you email and request for stats", "Stats obtained"]
+    )
 
 
 def ensure_checklist_in_card(card):
@@ -123,6 +123,5 @@ def ensure_checklist_in_card(card):
 
 def ensure_card_in_list(card, list):
     if card.list_id != list.id:
-        print('Moving {} to {}'.format(
-            card.name, list.name))
+        print("Moving {} to {}".format(card.name, list.name))
         card.change_list(list.id)

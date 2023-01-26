@@ -2,8 +2,9 @@
 # Explanation
 # E722 - do not use bare 'except'
 # F841 - local variable is assigned to but never used  # TODO - address these
+# W503 - line break before binary operator  # Black adds this line break
 
-ignore = E722, F841
+ignore = E722, F841, W503
 exclude =
     .env,
     .git,
@@ -12,4 +13,4 @@ exclude =
     .venv,
     __pycache__,
     **/migrations/**
-max-line-length = 119
+max-line-length = 120

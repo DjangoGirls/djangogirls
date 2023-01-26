@@ -6,9 +6,9 @@ from core.models import Event
 
 
 class EventPageMenuAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'event', 'url', 'position')
+    list_display = ("title", "event", "url", "position")
     list_filter = (EventFilter,)
-    sortable = 'position'
+    sortable = "position"
 
     def get_queryset(self, request):
         qs = super(EventPageMenuAdmin, self).get_queryset(request)
@@ -19,10 +19,8 @@ class EventPageMenuAdmin(SortableAdminMixin, admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(EventPageMenuAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            if 'event' in form.base_fields:
-                form.base_fields['event'].queryset = Event.objects.filter(
-                    team=request.user
-                )
+            if "event" in form.base_fields:
+                form.base_fields["event"].queryset = Event.objects.filter(team=request.user)
         return form
 
     def get_readonly_fields(self, request, obj=None):

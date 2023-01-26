@@ -6,14 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('organize', '0005_eventapplication_additional'),
+        ("organize", "0005_eventapplication_additional"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='eventapplication',
-            name='diversity',
-            field=models.TextField(default='', verbose_name='Information about how you intend to ensure your workshop is inclusive and promotes diversity'),
+            model_name="eventapplication",
+            name="diversity",
+            field=models.TextField(
+                default="",
+                verbose_name="Information about how you intend to ensure your workshop is inclusive and promotes diversity",
+            ),
             preserve_default=False,
         ),
     ]

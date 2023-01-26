@@ -1,4 +1,4 @@
-from coach.models import Coach, DEFAULT_COACH_PHOTO
+from coach.models import DEFAULT_COACH_PHOTO, Coach
 
 
 def test_default_photo():

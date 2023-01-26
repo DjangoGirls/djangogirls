@@ -9,22 +9,31 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Coach',
+            name="Coach",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('twitter_handle', models.CharField(blank=True, help_text='No @, No http://, just username', max_length=200, null=True)),
-                ('photo', models.ImageField(blank=True, help_text='For best display keep it square', null=True, upload_to='event/coaches/')),
-                ('url', models.URLField(blank=True, null=True)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=200)),
+                (
+                    "twitter_handle",
+                    models.CharField(
+                        blank=True, help_text="No @, No http://, just username", max_length=200, null=True
+                    ),
+                ),
+                (
+                    "photo",
+                    models.ImageField(
+                        blank=True, help_text="For best display keep it square", null=True, upload_to="event/coaches/"
+                    ),
+                ),
+                ("url", models.URLField(blank=True, null=True)),
             ],
             options={
-                'verbose_name_plural': 'Coaches',
-                'ordering': ('name',),
+                "verbose_name_plural": "Coaches",
+                "ordering": ("name",),
             },
         ),
     ]

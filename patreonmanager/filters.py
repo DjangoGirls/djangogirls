@@ -6,16 +6,14 @@ from .models import Payment
 
 
 class PendingRewardsFilter(admin.SimpleListFilter):
-    title = 'Pending rewards'
-    parameter_name = 'pending_rewards'
+    title = "Pending rewards"
+    parameter_name = "pending_rewards"
 
     def lookups(self, request, model_admin):
-        return (
-            ('true', 'Show pending rewards for this month'),
-        )
+        return (("true", "Show pending rewards for this month"),)
 
     def queryset(self, request, queryset):
-        if self.value() == 'true':
+        if self.value() == "true":
             patron_pks = []
 
             # Fetch all regular payments that hasn't been rewarded yet
@@ -24,8 +22,7 @@ class PendingRewardsFilter(admin.SimpleListFilter):
                 completed=False,
                 reward__value__gte=10,
             )
-            c = Counter(payment.patron for payment
-                        in payments.select_related('patron'))
+            c = Counter(payment.patron for payment in payments.select_related("patron"))
             for patron, count in c.most_common():
                 # Gather pk-s of patrons who have at least 3 payments
                 if count >= 3:
@@ -38,8 +35,7 @@ class PendingRewardsFilter(admin.SimpleListFilter):
                 completed=False,
                 reward__name="Special Support Reward",
             )
-            c = Counter(payment.patron for payment
-                        in payments.select_related('patron'))
+            c = Counter(payment.patron for payment in payments.select_related("patron"))
             for patron, count in c.most_common():
                 patron_pks.append(patron.pk)
 

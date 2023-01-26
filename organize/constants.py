@@ -1,12 +1,12 @@
 from django.utils.translation import gettext_lazy as _
 
-
 INVOLVEMENT_CHOICES = (
     ("newcomer", _("I've never been to a Django Girls event")),
     ("attendee", _("I'm a former attendee")),
     ("coach", _("I'm a former coach")),
     ("organizer", _("I'm a former organizer")),
-    ("contributor", _("I contributed to the tutorial or translations")))
+    ("contributor", _("I contributed to the tutorial or translations")),
+)
 
 
 NEW = "new"  # event is freshly submitted by user
