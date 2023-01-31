@@ -1,22 +1,12 @@
 import pytest
 
-from jobboard.models import Company, Job
+from jobboard.models import Job
 
 
 @pytest.fixture
-def company(db):
-    return Company.objects.create(name="Django Girls Foundation", logo="django_girls.png")
-
-
-@pytest.fixture
-def company2(db):
-    return Company.objects.create(name="Django Software Foundation", logo="django.png")
-
-
-@pytest.fixture
-def job(db, company):
+def job(db, globalpartner):
     return Job.objects.create(
-        company=company,
+        company=globalpartner,
         role="Software Engineer",
         location="Remote - EMEA",
         summary="We are looking for a Full Stack Engineer.",
@@ -28,11 +18,11 @@ def job(db, company):
 
 
 @pytest.fixture
-def jobs(db, company, company2):
+def jobs(db, globalpartner, globalpartner2):
     jobs = Job.objects.bulk_create(
         [
             Job(
-                company=company,
+                company=globalpartner,
                 role="Full Stack Software Engineer",
                 location="Remote - EMEA",
                 summary="We are looking for a Full Stack Engineer.",
@@ -42,7 +32,7 @@ def jobs(db, company, company2):
                 apply="https://test.com/software_engineer/",
             ),
             Job(
-                company=company2,
+                company=globalpartner2,
                 role="Python Backend Software Engineer",
                 location="Remote - USA",
                 summary="We are looking for a Python Backend Software Engineer.",
@@ -52,7 +42,7 @@ def jobs(db, company, company2):
                 apply="https://test.com/backend_software_engineer/",
             ),
             Job(
-                company=company,
+                company=globalpartner,
                 role="DevOps Software Engineer",
                 location="New York, USA",
                 summary="We are looking for a DevOps Engineer.",
@@ -62,7 +52,7 @@ def jobs(db, company, company2):
                 apply="https://test.com/devops_engineer/",
             ),
             Job(
-                company=company2,
+                company=globalpartner2,
                 role="Site Reliability Engineering Systems Engineer",
                 location="London, UK",
                 summary="We are looking for a Site Reliability Engineering Systems  Engineer.",
@@ -77,9 +67,9 @@ def jobs(db, company, company2):
 
 
 @pytest.fixture
-def new_job(company2):
+def new_job(globalpartner2):
     return {
-        "company": company2,
+        "company": globalpartner2,
         "rol": "Site Reliability Engineering Systems Engineer",
         "location": "London, UK",
         "summary": "We are looking for a Site Reliability Engineering Systems  Engineer.",
@@ -88,13 +78,3 @@ def new_job(company2):
         "remuneration": "",
         "apply": "https://test.com/sre_systems_engineer/",
     }
-
-
-@pytest.fixture
-def new_company():
-    return {"name": "Canonical", "logo": "canonical.svg"}
-
-
-@pytest.fixture
-def edit_company():
-    return {"name": "Django Girls Foundation", "logo": "django_girls_foundation_logo.png"}

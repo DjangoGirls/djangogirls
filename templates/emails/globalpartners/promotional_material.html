@@ -1,0 +1,27 @@
+<html>
+    <p>Hello {{ contact_person.split.0 }},</p>
+
+    <p>Thank you for supporting our work.</p>
+
+    {% if sponsor_level == "Bronze" and prospective_sponsor %}
+    <p>May I please have your company logo and a short write-up for 
+        announcing you as our sponsor on social media, and any company pictures you may have?</p>
+    {% elif prospective_sponsor %} 
+    <p>May I please have your company logo, company pictures and a short write-up on your company so I can do a blog post 
+        announcing you as our global sponsor as well as for use in our periodic tweets on our sponsors?</p>
+    <p></p>
+    {% else %}
+    <p>For our existing sponsors, we can either announce them again or offer them the chance to publish a guest post on our blog.
+        If you have a post you would like featured on our blog, you can send it to me and we can post it on your behalf if it
+    meets our <a href="https://djangogirls.org/coc/en/">Code of Conduct</a>.</p>
+    {% endif %}
+
+    <p>Once again, thank you for supporting our work.</p>
+    
+    <p>Sparkles, cupcakes and high-fives, 🎉🎊🎉✨🍰👋</p>
+
+    <p>Anna Makarudze <br>
+        Fundraising Coordinator, <br>
+        Django Girls Foundation
+    </p>
+</html>
