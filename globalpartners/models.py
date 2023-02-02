@@ -11,7 +11,7 @@ from .emails import (
 PATREON_LEVELS = [
     (100, "$100/month"),
     (250, "$250/month"),
-    (500, 500),
+    (500, "$500/month"),
     (1000, 1000),
 ]
 
