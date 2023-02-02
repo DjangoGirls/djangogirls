@@ -11,12 +11,12 @@ class GlobalPartnerAdmin(admin.ModelAdmin):
     list_display = (
         "company_name",
         "patreon_sponsor",
-        "sponsor_level",
+        "sponsor_level_annual",
         "contacted",
         "date_contacted",
         "next_renewal_date",
     )
-    list_filter = ("company_name", "contact_person", "patreon_sponsor", "sponsor_level")
+    list_filter = ("company_name", "contact_person", "patreon_sponsor", "sponsor_level_annual")
     search_fields = ("company_name", "contact_person")
 
     def get_urls(self):

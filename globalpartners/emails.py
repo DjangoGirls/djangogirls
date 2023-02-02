@@ -31,7 +31,9 @@ def send_renewal_email(contact_person, contact_email):
     send_sponsor_email(contact_person, contact_email, template, subject)
 
 
-def send_promotional_material_email(contact_person, contact_email, prospective_sponsor, sponsor_level, errors=None):
+def send_promotional_material_email(
+    contact_person, contact_email, prospective_sponsor, sponsor_level_annual, errors=None
+):
     """Sends new sponsors/patreon sponsors asking them for materials to use in
     announcing/promoting the sponsor."""
     subject = "Promotional material for our social media and blog"
@@ -41,7 +43,7 @@ def send_promotional_material_email(contact_person, contact_email, prospective_s
         {
             "contact_person": contact_person,
             "prospective_sponsor": prospective_sponsor,
-            "sponsor_level": sponsor_level,
+            "sponsor_level": sponsor_level_annual,
             "errors": errors,
         },
     )

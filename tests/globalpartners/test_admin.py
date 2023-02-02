@@ -12,7 +12,7 @@ def test_edit_globalpartner_superuser(admin_client, globalpartner, global_partne
     response = admin_client.post(
         reverse("admin:globalpartners_globalpartner_change", args=(globalpartner.pk,)), data=global_partner_data
     )
-    assert response.status_code == 200
+    assert response.status_code == 302
 
 
 def test_view_globalpartners_superuser(admin_client):
