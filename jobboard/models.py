@@ -1,21 +1,11 @@
 from django.db import models
 from tinymce import models as tinymce_models
 
-
-class Company(models.Model):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField()
-    logo = models.ImageField()
-
-    class Meta:
-        verbose_name_plural = "companies"
-
-    def __str__(self):
-        return self.name
+from globalpartners.models import GlobalPartner
 
 
 class Job(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(GlobalPartner, on_delete=models.CASCADE)
     role = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     summary = models.TextField(max_length=300)

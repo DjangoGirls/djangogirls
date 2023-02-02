@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group, Permission
 
 from core.models import Event, User
 from core.tumblr_client import RemoteStory
+from globalpartners.models import GlobalPartner
 from pictures.models import StockPicture
 from sponsor.models import Donor
 
@@ -266,4 +267,18 @@ def remote_story():
             },
         ],
         created=datetime.utcnow(),
+    )
+
+
+@pytest.fixture
+def globalpartner(db):
+    return GlobalPartner.objects.create(
+        company_name="Django", contact_person="Jane Doe", contact_email="jane@djangoproject.com", logo="django.png"
+    )
+
+
+@pytest.fixture
+def globalpartner2(db):
+    return GlobalPartner.objects.create(
+        company_name="Caktus Group", contact_person="Jane Doe", contact_email="jane@caktus.com", logo="caktus.png"
     )

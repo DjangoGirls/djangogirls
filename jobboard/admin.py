@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import Company, Job
-
-
-@admin.register(Company)
-class CompanyAdmin(admin.ModelAdmin):
-    prepopulated_fields = {
-        "slug": ("name",),
-    }
-    search_fields = ("name",)
+from .models import Job
 
 
 @admin.register(Job)
