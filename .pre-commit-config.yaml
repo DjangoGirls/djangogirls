@@ -21,7 +21,7 @@ repos:
        -  id: pyupgrade
           args: ["--py310-plus"]
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.0.0
+    rev: v2.0.1
     hooks:
       - id: autoflake
         entry: bash -c 'autoflake "$@"; git add -u;' --
@@ -36,13 +36,13 @@ repos:
           ]
         files: \.py$
   - repo: https://github.com/pycqa/isort
-    rev: 5.11.4
+    rev: 5.12.0
     hooks:
       - id: isort
         name: isort
         entry: bash -c 'isort "$@"; git add -u;' --
   - repo: https://github.com/psf/black
-    rev: 22.12.0
+    rev: 23.1.0
     hooks:
       - id: black
         entry: bash -c 'black "$@"; git add -u;' --
