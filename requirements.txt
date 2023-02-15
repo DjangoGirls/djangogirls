@@ -45,7 +45,7 @@ distlib==0.3.6
     # via virtualenv
 dj-database-url==0.5.0
     # via -r requirements.in
-django==3.2.16
+django==3.2.18
     # via
     #   -r requirements.in
     #   django-admin-sortable2
@@ -75,7 +75,7 @@ django-debug-toolbar==3.8.1
     # via -r requirements.in
 django-extensions==3.2.1
     # via -r requirements.in
-django-formtools==2.3
+django-formtools==2.3.0
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
@@ -292,11 +292,6 @@ toml==0.10.2
     # via
     #   pytest
     #   pytest-cov
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   pyproject-hooks
 typing-extensions==4.4.0
     # via django-countries
 uritemplate==4.1.1
