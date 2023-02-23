@@ -2,6 +2,7 @@ import pytest
 
 from coach.models import Coach
 from core.models import EventPageContent, EventPageMenu
+from globalpartners.models import GlobalPartner
 from sponsor.models import Sponsor
 from story.models import Story
 
@@ -49,5 +50,70 @@ def blog_posts(db):
             Story(name="Post 3", content="Lorem ipsum dolor sit amet", is_story=False, post_url="post-3-url"),
             Story(name="Post 4", content="Lorem ipsum dolor sit amet", is_story=False, post_url="post-4-url"),
             Story(name="Post 5", content="Lorem ipsum dolor sit amet", is_story=False, post_url="post-5-url"),
+        ]
+    )
+
+
+@pytest.fixture
+def global_partners(db):
+    return GlobalPartner.objects.bulk_create(
+        [
+            GlobalPartner(
+                company_name="Django Software Foundation",
+                contact_person="DSF Board",
+                contact_email="dsfboard@djangoproject.com",
+                sponsor_level_annual=5000,
+                date_joined="2017-09-17",
+                logo="django.logo",
+                is_displayed=True,
+                website_url="https://www.djangoproject.com",
+                style="margin-top: 40px",
+            ),
+            GlobalPartner(
+                company_name="TorchBox",
+                contact_person="Jane Doe",
+                contact_email="jane@torchbox.com",
+                patreon_sponsor=True,
+                patreon_level_per_month=250,
+                sponsor_level_annual=2500,
+                date_joined="2018-09-19",
+                logo="torchbox.logo",
+                is_displayed=True,
+                website_url="https://torchbox.com",
+                style="margin-top: 50px",
+            ),
+            GlobalPartner(
+                company_name="Platform.sh",
+                contact_person="John Doe",
+                contact_email="john.doe@platform.sh",
+                sponsor_level_annual=10000,
+                date_joined="2023-02-02",
+                logo="platform.jpg",
+                is_displayed=True,
+                website_url="https://platform.sh",
+                style="margin-top: 25px",
+            ),
+            GlobalPartner(
+                company_name="SixFeetUp",
+                contact_person="Jane Doe",
+                contact_email="jane.doe@sixfeetup.com",
+                sponsor_level_annual=1000,
+                date_joined="2021-11-15",
+                logo="sixfeetup.png",
+                is_displayed=True,
+                website_url="https://sixfeetup.com",
+                style="margin-top: 50px",
+            ),
+            GlobalPartner(
+                company_name="Nexmo",
+                contact_person="John Doe",
+                contact_email="johndoe@vonage.com",
+                sponsor_level_annual=500,
+                date_joined="2018-11-15",
+                logo="nexmo.png",
+                is_displayed=False,
+                website_url="https://nexmo.com",
+                style="margin-top: 50px",
+            ),
         ]
     )

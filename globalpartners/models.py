@@ -16,7 +16,7 @@ PATREON_LEVELS = [
 ]
 
 ANNUAL_SPONSOR_LEVELS = [
-    (500, 500),
+    (500, "Bronze ($500)"),
     (1000, "Silver ($1000)"),
     (2500, "Gold ($2,500)"),
     (5000, "Platinum ($5,000)"),
