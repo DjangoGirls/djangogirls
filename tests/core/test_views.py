@@ -5,13 +5,18 @@ from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
 
-def test_index(client, future_event, past_event):
+def test_index(client, future_event, past_event, global_partners):
     # Access homepage
     resp = client.get(reverse("core:index"))
     assert resp.status_code == 200
 
     # Check if it returns a list of past and future events
     assert "past_events" and "future_events" in resp.context
+
+    # Check if it returns global_partners lists
+    assert "platinum" and "diamond" in resp.context
+    assert "gold" and "silver" in resp.context
+    assert "bronze" in resp.context
 
     # Only the future event is on the list
     event_ids = {event.pk for event in resp.context["future_events"]}
