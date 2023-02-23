@@ -1,0 +1,9 @@
+- name: deploy to 🐍anywhere 
+  uses: appleboy/ssh-action@v0.1.7
+  with:
+    host: ${{ secrets.HOST }}
+    username: ${{ secrets.USERNAME }}
+    key: ${{ secrets.KEY }}
+    port: ${{ secrets.PORT }}
+    script: |
+      ./deploy.sh
