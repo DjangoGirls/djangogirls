@@ -8,7 +8,14 @@
 {% block og_description %}{% trans "Thanks to the organizers, coaches, and volunteers in countries all over the world, 2016-2017 was an absolutely incredible year for Django Girls. Read all about our challenges and achievements from 2016-2017." %}{% endblock %}
 {% block og_image %}https://djangogirls.org/static/img/report-2015/report.jpg{% endblock %}
 
-{% block extra_js %}<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>{% endblock %}
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+{% endblock %}
+
+{% block extra_css %}
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
 
 {% block content %}
     <section id="annual-report">
@@ -78,7 +85,7 @@
             <div id="growth" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
               <h2>{% trans "Growth 📈" %}</h2>
               <div id="map"></div>
-              <small>{% trans "Map of Django Girls event from July 2014 to July 2017" %}</small>
+              <small>{% trans "Map of Django Girls events from January 2016 to July 2017" %}</small>
 
               <table>
                 <thead>
@@ -486,45 +493,9 @@
         </div>
     </section>
 
+    {% include "core/map.html" with events=events %}
 
     <script>
-          L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
-          var in2015 = L.layerGroup()
-          var in20162017 = L.layerGroup()
-          var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false, layers: [in2015, in20162017]}).setView([30, 0], 2);
-
-          {% for event in events_2015 %}
-              {% if event.latlng %}
-              L.marker([{{ event.latlng }}], {
-                  icon: L.mapbox.marker.icon({
-                      'marker-size': 'medium',
-                      'marker-symbol': 'heart',
-                      'marker-color': '#FF9400'
-                  })
-                }).addTo(
-                    in2015
-                ).bindPopup(
-                    '{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}'
-                );
-              {% endif %}
-          {% endfor %}
-
-          {% for event in events_20162017 %}
-              {% if event.latlng %}
-              L.marker([{{ event.latlng }}], {
-                  icon: L.mapbox.marker.icon({
-                      'marker-size': 'medium',
-                      'marker-symbol': 'heart',
-                      'marker-color': '#FF9400'
-                  })
-                }).addTo(
-                    in20162017
-                ).bindPopup(
-                    '{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}'
-                );
-              {% endif %}
-          {% endfor %}
-
           var ctx = document.getElementById('employment-chart').getContext('2d');
           new Chart(ctx, {
               type: 'pie',

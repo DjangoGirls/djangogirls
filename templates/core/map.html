@@ -1,0 +1,91 @@
+{% load static %}
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGphbmdvZ2lybHMiLCJhIjoiY2xjeWU1dm9iMG10cTNudGdrYTBkYm0ycSJ9.Ah4y76VVmBWqzVkw3kUzFQ'
+    const geojson = {
+        'type': 'FeatureCollection',
+        'features': [{% for event in events %}{% if event.lnglat %}
+            {
+                'type': 'Feature',
+                'geometry': {
+                    type: 'Point',
+                    coordinates: [{{event.lnglat}}]
+                },
+                properties: {
+                    city: "{{ event.city }}",
+                    date: "{{ event.date }}",
+                    url: "{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}"
+                }
+            },
+        {%endif%}{%endfor%}
+    ]};
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [10, 15],
+        zoom: 1.2,
+        projection: 'mercator', // starting projection
+    });
+
+
+    map.on('load', () => {
+        // Load an image from an external URL.
+        map.loadImage(
+            '{% static 'img/mapbox-icon.png' %}',
+            (error, image) => {
+                if (error) throw error;
+            
+                // Add the image to the map style.
+                map.addImage('pin-heart', image);
+                
+                // Add a data source containing events
+                map.addSource('event', {
+                    'type': 'geojson',
+                    'data': geojson
+                });
+                
+                // Add a layer to use the image to represent the data.
+                map.addLayer({
+                    'id': 'events',
+                    'type': 'symbol',
+                    'source': 'event', // reference the data source
+                    'layout': {
+                        'icon-image': 'pin-heart', // reference the image
+                        'icon-size': 0.40
+                    },
+                });
+
+                map.on('click', 'events', (e) => {
+                    // Copy coordinates array.
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const city = e.features[0].properties.city;
+                    const date = e.features[0].properties.date;
+                    const url = e.features[0].properties.url;
+
+                    
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                    }
+                    
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(url)
+                        .addTo(map);
+                    });
+                    
+                    // Change the cursor to a pointer when the mouse is over the events layer.
+                    map.on('mouseenter', 'events', () => {
+                        map.getCanvas().style.cursor = 'pointer';
+                    });
+                    
+                    // Change it back to a pointer when it leaves.
+                    map.on('mouseleave', 'events', () => {
+                        map.getCanvas().style.cursor = '';
+                    });
+            });
+    });
+
+</script>

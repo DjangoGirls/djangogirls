@@ -14,7 +14,6 @@ module.exports = {
         global: [
           './node_modules/bootstrap/dist/css/bootstrap.min.css',
           './static/source/vendor/css/sss.css',
-          './static/source/vendor/css/mapbox.min.css',
           './temp/global.css'
         ],
         event: [

@@ -109,6 +109,18 @@ class Event(models.Model):
             return True
         return False
 
+    @property
+    def lnglat(self):
+        if not self.latlng:
+            return ""
+
+        try:
+            lat, lng = self.latlng.split(", ")
+        except ValueError:
+            return ""
+
+        return f"{lng}, {lat}"
+
     def as_ical(self):
         """
         Return a representation of the current event as an icalendar.Event.

@@ -226,9 +226,6 @@ MARKDOWN_DEUX_STYLES = {
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 
-# Mapbox maps to use on the Events map
-MAPBOX_MAP_ID = "olasitarska.m8nged0f"
-
 APPEND_SLASH = True
 
 JOBS_EMAIL_USER = os.environ.get("JOBS_EMAIL_USER")
