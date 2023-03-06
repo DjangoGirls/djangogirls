@@ -1,7 +1,7 @@
 {% load static %}
 
 <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZGphbmdvZ2lybHMiLCJhIjoiY2xjeWU1dm9iMG10cTNudGdrYTBkYm0ycSJ9.Ah4y76VVmBWqzVkw3kUzFQ'
+    mapboxgl.accessToken = '{{ mapbox_access_token }}'
     const geojson = {
         'type': 'FeatureCollection',
         'features': [{% for event in events %}{% if event.lnglat %}
