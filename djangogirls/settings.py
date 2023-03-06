@@ -275,3 +275,5 @@ BLEACH_STRIP_COMMENTS = True
 TUMBLR_API_KEY = os.environ.get("TUMBLR_API_KEY")
 TUMBLR_API_BASE_URL = os.environ.get("TUMBLR_API_BASE_URL", "https://api.tumblr.com/v2")
 TUMBLR_BLOG_HOSTNAME = os.environ.get("TUMBLR_BLOG_HOSTNAME", "blog.djangogirls.org")
+
+MAPBOX_ACCESS_TOKEN = os.environ.get("MAPBOX_ACCESS_TOKEN")

@@ -1,4 +1,5 @@
 import icalendar
+from django.conf import settings
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import TemplateDoesNotExist
@@ -50,9 +51,7 @@ def events_map(request):
     return render(
         request,
         "core/events_map.html",
-        {
-            "events": Event.objects.public().order_by("date"),
-        },
+        {"events": Event.objects.public().order_by("date"), "mapbox_access_token": settings.MAPBOX_ACCESS_TOKEN},
     )
 
 
@@ -130,6 +129,7 @@ def year_2015(request):
         "core/2015.html",
         {
             "events": Event.objects.public().filter(date__lt="2016-01-01").order_by("date"),
+            "mapbox_access_token": settings.MAPBOX_ACCESS_TOKEN,
         },
     )
 
@@ -140,6 +140,7 @@ def year_2016_2017(request):
         "core/2016-2017.html",
         {
             "events": Event.objects.public().filter(date__lt="2017-08-01", date__gte="2016-01-01").order_by("date"),
+            "mapbox_access_token": settings.MAPBOX_ACCESS_TOKEN,
         },
     )
 

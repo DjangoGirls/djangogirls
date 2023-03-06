@@ -493,7 +493,7 @@
         </div>
     </section>
 
-    {% include "core/map.html" with events=events %}
+    {% include "core/map.html" with events=events mapbox_access_token=mapbox_access_token %}
 
     <script>
           var ctx = document.getElementById('employment-chart').getContext('2d');
