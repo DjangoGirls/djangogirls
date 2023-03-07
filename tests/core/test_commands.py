@@ -54,10 +54,6 @@ def test_add_organizer(click_runner, future_event):
 
 def test_new_event_with_one_organizer(click_runner, random_day, events, slack_mock, settings):
     settings.ENABLE_SLACK_NOTIFICATIONS = True
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d9c7a6 (Enable Slack mock for testing)
     assert Event.objects.count() == 4
 
     command_input = (
