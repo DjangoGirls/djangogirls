@@ -14,7 +14,7 @@
                 properties: {
                     city: "{{ event.city }}",
                     date: "{{ event.date }}",
-                    url: "{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}"
+                    url: '{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}'
                 }
             },
         {%endif%}{%endfor%}
