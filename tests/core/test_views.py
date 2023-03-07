@@ -168,6 +168,16 @@ def test_event_unpublished_with_auth_organizer(user, client, hidden_event):
     assert hidden_event.page_title in resp.content.decode("utf-8")
 
 
+def test_event_multiple_events_same_page_url(client, future_event, old_event):
+    # Check if event loads even if a past event has same page_url
+    url = reverse("core:event", kwargs={"page_url": future_event.page_url})
+    resp = client.get(url)
+    assert resp.status_code == 200
+
+    # Check if website is returning correct data
+    assert "event" and "menu" and "content" in resp.context
+
+
 def test_coc_legacy(client):
     AVAILABLE_LANG = {
         "en": "<h1>Code of Conduct</h1>",

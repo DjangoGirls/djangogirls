@@ -1,7 +1,7 @@
 import pytest
 
 from coach.models import Coach
-from core.models import EventPageContent, EventPageMenu
+from core.models import Event, EventPageContent, EventPageMenu
 from globalpartners.models import GlobalPartner
 from sponsor.models import Sponsor
 from story.models import Story
@@ -117,3 +117,20 @@ def global_partners(db):
             ),
         ]
     )
+
+
+@pytest.fixture
+def old_event(organizer_peter):
+    event = Event.objects.create(
+        email="bonn@djangogirls.org",
+        city="Bonn",
+        name="Django Girls Bonn",
+        country="the Neverlands",
+        is_on_homepage=True,
+        main_organizer=organizer_peter,
+        date="2023-01-01",
+        page_url="bonn",
+        is_page_live=True,
+    )
+    event.team.add(organizer_peter)
+    return event
