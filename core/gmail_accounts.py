@@ -52,18 +52,21 @@ def create_gmail_account(event):
     if not service:
         return None, None
 
-    service.users().insert(
-        body={
-            "primaryEmail": email,
-            "name": {
-                "fullName": event.name,
-                "givenName": "Django Girls",
-                "familyName": event.city,
-            },
-            "password": password,
-            "changePasswordAtNextLogin": True,
-        }
-    ).execute()
+    try:
+        service.users().insert(
+            body={
+                "primaryEmail": email,
+                "name": {
+                    "fullName": event.name,
+                    "givenName": "Django Girls",
+                    "familyName": event.city,
+                },
+                "password": password,
+                "changePasswordAtNextLogin": True,
+            }
+        ).execute()
+    except HttpError:
+        pass
 
     return email, password
 
