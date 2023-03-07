@@ -226,9 +226,6 @@ MARKDOWN_DEUX_STYLES = {
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 
-# Mapbox maps to use on the Events map
-MAPBOX_MAP_ID = "olasitarska.m8nged0f"
-
 APPEND_SLASH = True
 
 JOBS_EMAIL_USER = os.environ.get("JOBS_EMAIL_USER")
@@ -278,3 +275,5 @@ BLEACH_STRIP_COMMENTS = True
 TUMBLR_API_KEY = os.environ.get("TUMBLR_API_KEY")
 TUMBLR_API_BASE_URL = os.environ.get("TUMBLR_API_BASE_URL", "https://api.tumblr.com/v2")
 TUMBLR_BLOG_HOSTNAME = os.environ.get("TUMBLR_BLOG_HOSTNAME", "blog.djangogirls.org")
+
+MAPBOX_ACCESS_TOKEN = os.environ.get("MAPBOX_ACCESS_TOKEN")

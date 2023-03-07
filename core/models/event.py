@@ -109,6 +109,25 @@ class Event(models.Model):
             return True
         return False
 
+    @property
+    def lnglat(self):
+        """Returns X, Y coordinates.
+
+        In most cases on the page we are operating on latitude, longitude string.
+        This property returns the value in a swapped order of longitude, latitude
+        also called X, Y instead. This is a standard required for GeoJSON coordinates
+        required for the map JS library.
+        """
+        if not self.latlng:
+            return ""
+
+        try:
+            lat, lng = self.latlng.split(", ")
+        except ValueError:
+            return ""
+
+        return f"{lng}, {lat}"
+
     def as_ical(self):
         """
         Return a representation of the current event as an icalendar.Event.

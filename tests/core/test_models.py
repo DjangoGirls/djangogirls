@@ -94,3 +94,13 @@ def test_has_organizer_main_organizer(user, future_event):
     future_event.team.clear()
 
     assert future_event.has_organizer(user)
+
+
+def test_event_lnglat(future_event):
+    assert future_event.lnglat == ""
+
+    future_event.latlng = "39.4747112, -0.3798073"
+    assert future_event.lnglat == "-0.3798073, 39.4747112"
+
+    future_event.latlng = "sddasdasda"
+    assert future_event.lnglat == ""
