@@ -66,7 +66,7 @@ def create_gmail_account(event):
             }
         ).execute()
     except HttpError:
-        pass
+        return None, None
 
     return email, password
 
