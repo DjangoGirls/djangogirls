@@ -62,7 +62,11 @@ def resources(request):
 def event(request, page_url):
     now = timezone.now()
     now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
-    event_obj = get_object_or_404(Event, page_url=page_url.lower())
+
+    try:
+        event_obj = get_object_or_404(Event, page_url=page_url.lower())
+    except Event.MultipleObjectsReturned:
+        event_obj = Event.objects.filter(page_url=page_url.lower()).order_by("-date").first()
 
     user = request.user
     user_is_organizer = user.is_authenticated and event_obj.has_organizer(user)
