@@ -2,8 +2,8 @@ import djclick as click
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-from .forms import AddOrganizerForm
-from .slack_client import slack
+from core.forms import AddOrganizerForm
+from core.slack_client import post_message_to_slack
 
 # "Get organizers info" functions used in 'new_event' and 'copy_event' management commands.
 
@@ -72,4 +72,4 @@ def brag_on_slack_bang(city, country, team):
             f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
         )
 
-        slack.chat.post_message(channel="#general", text=text, username="Django Girls", icon_emoji=":django_heart:")
+        post_message_to_slack("#general", text)

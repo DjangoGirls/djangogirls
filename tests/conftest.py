@@ -9,6 +9,16 @@ from globalpartners.models import GlobalPartner
 from pictures.models import StockPicture
 from sponsor.models import Donor
 
+from tests.mocks import *  # noqa
+
+
+@pytest.fixture(autouse=True)
+def default_mocks(slack_mock):
+    """
+    Add mocks that should be accessible for all tests in this function signature.
+    """
+    pass
+
 
 @pytest.fixture(autouse=True)
 def enable_db_access_for_all_tests(db):

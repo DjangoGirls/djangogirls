@@ -2,8 +2,8 @@ from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import Group
 from django.db import models
 
-from ..slack_client import user_invite
-from .managers.user import UserManager
+from core.models.managers.user import UserManager
+from core.slack_client import invite_user_to_slack
 
 
 class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -24,7 +24,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         verbose_name_plural = "Organizers"
 
     def invite_to_slack(self):
-        user_invite(self.email, self.first_name)
+        invite_user_to_slack(self.email, self.first_name)
 
     def generate_password(self):
         password = User.objects.make_random_password()

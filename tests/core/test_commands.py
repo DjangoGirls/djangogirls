@@ -1,6 +1,5 @@
 import random
 from datetime import date
-from unittest import mock
 
 import pytest
 import vcr
@@ -43,8 +42,7 @@ def test_update_coordinates(click_runner, past_event):
     assert past_event.latlng == latlng
 
 
-@mock.patch("core.models.user_invite")
-def test_add_organizer(_, click_runner, future_event):
+def test_add_organizer(click_runner, future_event):
     assert future_event.team.count() == 1
 
     command_input = f"{future_event.pk}\n" "Jan Kowalski\n" "jan@kowalski.example.org\n" "N\n"
@@ -54,8 +52,8 @@ def test_add_organizer(_, click_runner, future_event):
     assert future_event.team.count() == 2
 
 
-@vcr.use_cassette("tests/core/vcr/new_event_with_one_organizer.yaml")
-def test_new_event_with_one_organizer(click_runner, random_day, events):
+def test_new_event_with_one_organizer(click_runner, random_day, events, slack_mock, settings):
+    settings.ENABLE_SLACK_NOTIFICATIONS = True
     assert Event.objects.count() == 4
 
     command_input = (
@@ -66,10 +64,12 @@ def test_new_event_with_one_organizer(click_runner, random_day, events):
     assert Event.objects.count() == 5
     event = Event.objects.order_by("pk").last()
     assert event.team.count() == 1
+    slack_mock.chat_postMessage.assert_called_once()
 
 
-@vcr.use_cassette("tests/core/vcr/new_event_with_two_organizers.yaml")
-def test_new_event_with_two_organizers(click_runner, random_day, events):
+def test_new_event_with_two_organizers(click_runner, random_day, events, slack_mock, settings):
+    settings.ENABLE_SLACK_NOTIFICATIONS = True
+
     assert Event.objects.count() == 4
 
     command_input = (
@@ -90,10 +90,12 @@ def test_new_event_with_two_organizers(click_runner, random_day, events):
     assert Event.objects.count() == 5
     event = Event.objects.order_by("pk").last()
     assert event.team.count() == 2
+    slack_mock.chat_postMessage.assert_called_once()
 
 
-@vcr.use_cassette("tests/core/vcr/new_event_short.yaml")
-def test_new_event_short(click_runner, random_day, events, stock_pictures):
+def test_new_event_short(click_runner, random_day, events, stock_pictures, slack_mock, settings):
+    settings.ENABLE_SLACK_NOTIFICATIONS = True
+
     assert Event.objects.count() == 4
 
     command_input = (
@@ -104,6 +106,7 @@ def test_new_event_short(click_runner, random_day, events, stock_pictures):
     assert Event.objects.count() == 5
     short_email_body = "Event e-mail is: oz@djangogirls.org\n" "Event website address is: https://djangogirls.org/oz"
     assert short_email_body in result.output
+    slack_mock.chat_postMessage.assert_called_once()
 
 
 def test_copy_event(click_runner, random_day, events, past_event):
