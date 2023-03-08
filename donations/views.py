@@ -59,9 +59,12 @@ def success(request, currency, amount):
 
 
 def error(request):
-
     if "stripe_message" in request.session:
         error_message = request.session.get("stripe_message")
         del request.session["stripe_message"]
 
     return render(request, "donations/error.html", {"stripe_message": error_message})
+
+
+def sponsors(request):
+    return render(request, "donations/sponsors.html")

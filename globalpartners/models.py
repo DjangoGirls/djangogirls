@@ -37,6 +37,7 @@ class GlobalPartner(models.Model):
     date_contacted = models.DateField(blank=True, null=True)
     next_renewal_date = models.DateField(blank=True, null=True)
     logo = models.ImageField(upload_to="uploads", blank=True, null=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
     is_displayed = models.BooleanField(default=False)
     website_url = models.URLField(blank=True, null=True)
     style = models.CharField(max_length=50, blank=True, null=True)

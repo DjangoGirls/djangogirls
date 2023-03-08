@@ -9,7 +9,7 @@
 {% for partner in diamond %}
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-md-3">
-    <a href="{{ partner.website_url}}">
+    <a href="{{ partner.website_url}}" target="_blank">
         <img class="img-responsive center-block" src="{{ partner.logo.url }}"
            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
@@ -28,7 +28,7 @@
 {% for partner in platinum %}
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-md-3">
-    <a href="{{ partner.website_url}}">
+    <a href="{{ partner.website_url}}" target="_blank">
         <img class="img-responsive center-block" src="{{ partner.logo.url }}"
            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
@@ -47,7 +47,7 @@
 {% for partner in gold %}
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-md-3">
-    <a href="{{ partner.website_url}}">
+    <a href="{{ partner.website_url}}" target="_blank">
         <img class="img-responsive center-block" src="{{ partner.logo.url }}"
            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
@@ -66,7 +66,7 @@
 {% for partner in silver %}
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-md-3">
-    <a href="{{ partner.website_url}}">
+    <a href="{{ partner.website_url}}" target="_blank">
         <img class="img-responsive center-block" src="{{ partner.logo.url }}"
            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
@@ -85,7 +85,7 @@
 {% for partner in bronze %}
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-md-3">
-    <a href="{{ partner.website_url}}">
+    <a href="{{ partner.website_url}}" target="_blank">
         <img class="img-responsive center-block" src="{{ partner.logo.url }}"
            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
