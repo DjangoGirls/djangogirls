@@ -11,7 +11,7 @@ fail_fast: true
 
 repos:
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.12.0'
+    rev: '1.13.0'
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
