@@ -3,6 +3,7 @@ import os
 import pytest
 from django.test import override_settings
 from django.urls import reverse
+from pytest_django.asserts import assertContains
 from stripe.error import StripeError
 
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "test_public")
@@ -54,3 +55,10 @@ def test_charge_post_invalid_keys(client):
         with pytest.raises(StripeError):
             # This is missing stripe data
             client.post(reverse("donations:charge"), data=charge_data)
+
+
+def test_sponsors(client, globalpartner, globalpartner2):
+    resp = client.get(reverse("donations:sponsors"))
+    assert resp.status_code == 200
+    assertContains(resp, "Django Software Foundation")
+    assertContains(resp, "Caktus Group")

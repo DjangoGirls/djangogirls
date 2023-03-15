@@ -17,6 +17,7 @@ def statistics(request):
     gold = global_partners.filter(sponsor_level_annual=2500)
     platinum = global_partners.filter(sponsor_level_annual=5000)
     silver = global_partners.filter(sponsor_level_annual=1000)
+    bronze = global_partners.filter(sponsor_level_annual=500)
 
     return {
         "past_events_count": past_events.count(),
@@ -31,4 +32,5 @@ def statistics(request):
         "gold": gold,
         "platinum": platinum,
         "silver": silver,
+        "bronze": bronze,
     }

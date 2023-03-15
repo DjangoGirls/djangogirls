@@ -8,7 +8,6 @@ from core.tumblr_client import RemoteStory
 from globalpartners.models import GlobalPartner
 from pictures.models import StockPicture
 from sponsor.models import Donor
-
 from tests.mocks import *  # noqa
 
 
@@ -17,7 +16,6 @@ def default_mocks(slack_mock):
     """
     Add mocks that should be accessible for all tests in this function signature.
     """
-    pass
 
 
 @pytest.fixture(autouse=True)
@@ -283,12 +281,22 @@ def remote_story():
 @pytest.fixture
 def globalpartner(db):
     return GlobalPartner.objects.create(
-        company_name="Django", contact_person="Jane Doe", contact_email="jane@djangoproject.com", logo="django.png"
+        company_name="Django Software Foundation",
+        contact_person="Jane Doe",
+        contact_email="jane@djangoproject.com",
+        logo="django.png",
+        is_displayed=True,
+        sponsor_level_annual=5000,
     )
 
 
 @pytest.fixture
 def globalpartner2(db):
     return GlobalPartner.objects.create(
-        company_name="Caktus Group", contact_person="Jane Doe", contact_email="jane@caktus.com", logo="caktus.png"
+        company_name="Caktus Group",
+        contact_person="Jane Doe",
+        contact_email="jane@caktus.com",
+        logo="caktus.png",
+        is_displayed=True,
+        sponsor_level_annual=2500,
     )
