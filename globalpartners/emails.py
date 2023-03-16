@@ -8,7 +8,6 @@ year = date.year
 
 
 def send_sponsor_email(contact_person, contact_email, template, subject, errors=None):
-
     content = render_to_string(template, {"contact_person": contact_person, "errors": errors})
 
     send_email(content, subject, [contact_email])
@@ -26,7 +25,7 @@ def send_renewal_email(contact_person, contact_email):
     """Sends annual sponsors email asking if they are interested in supporting
     our work in the new year.
     """
-    subject = f"Will you be supporting us again in {year}?"
+    subject = "Will you be supporting us again in 2023?"
     template = "emails/globalpartners/renewal_email.html"
     send_sponsor_email(contact_person, contact_email, template, subject)
 
