@@ -28,7 +28,7 @@ def get_event(page_url, is_user_authenticated, is_preview):
     except Event.DoesNotExist:
         return None
     except Event.MultipleObjectsReturned:
-        event = Event.objects.filter(page_url=page_url).first()
+        event = Event.objects.filter(page_url=page_url).order_by("-date").first()
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
         past = event.date <= now_approx
