@@ -284,7 +284,7 @@ six==1.16.0
     #   vcrpy
 slack-sdk==3.19.5
     # via -r requirements.in
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via
     #   django
     #   django-debug-toolbar
@@ -298,11 +298,6 @@ toml==0.10.2
     # via
     #   pytest
     #   pytest-cov
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   pyproject-hooks
 typing-extensions==4.5.0
     # via django-countries
 uritemplate==4.1.1
