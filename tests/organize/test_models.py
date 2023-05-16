@@ -43,7 +43,6 @@ def test_deploy_event_from_previous_event(get_or_create_gmail, base_application,
 
 @mock.patch("organize.models.gmail_accounts.get_or_create_gmail")
 def test_send_deployed_email(get_or_create_gmail, base_application, mailoutbox, stock_pictures):
-
     get_or_create_gmail.return_value = (f"{base_application.city}@djangogirls.org", "asd123ASD")
 
     base_application.create_event()
@@ -108,3 +107,15 @@ def test_application_fails_if_event_dates_not_six_months_apart(data_dict, previo
 def test_event_application_manager_create_method(data_dict):
     event = EventApplication.object.create(**data_dict)
     assert event.city == "Harare"
+
+
+def test_previous_deployed_event_years_apart_is_successful(data_dict, previous_deployed_event):
+    assert EventApplication.object.count() == 1
+    EventApplication.object.create(**data_dict)
+    assert EventApplication.object.count() == 2
+
+
+def test_previous_application_with_approximate_date(data_dict, previous_application_approximate_date):
+    assert EventApplication.object.count() == 1
+    EventApplication.object.create(**data_dict)
+    assert EventApplication.object.count() == 2

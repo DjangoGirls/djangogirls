@@ -49,17 +49,29 @@ class EventApplicationManager(models.Manager):
         )
 
         if previous_event:
-            event_date = data_dict["date"]
-            if date(event_date.year, event_date.month, event_date.day) - date(
-                previous_event.date.year, previous_event.date.month, previous_event.date.day
-            ) < timedelta(days=180):
-                raise ValidationError(
-                    {
-                        "date": _(
-                            "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
-                        )
-                    }
-                )
+            try:
+                event_date = data_dict["date"]
+                if date(event_date.year, event_date.month, event_date.day) - date(
+                    previous_event.date.year, previous_event.date.month, previous_event.date.day
+                ) < timedelta(days=180):
+                    raise ValidationError(
+                        {
+                            "date": _(
+                                "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
+                            )
+                        }
+                    )
+            except ValueError:
+                if date(event_date.year, event_date.month, event_date.day) - date(
+                    previous_event.date.year, previous_event.date.month, 1
+                ) < timedelta(days=180):
+                    raise ValidationError(
+                        {
+                            "date": _(
+                                "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
+                            )
+                        }
+                    )
         return super().create(**data_dict)
 
 

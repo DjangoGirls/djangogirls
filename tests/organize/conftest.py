@@ -454,3 +454,31 @@ def workshop_form_invalid_no_link():
         "confirm_covid_19_protocols": True,
     }
     return data
+
+
+@pytest.fixture
+def previous_deployed_event():
+    return EventApplication.objects.create(
+        city="Zanzibar",
+        country="Tanzania",
+        date="2070-10-10",
+        created_at=datetime.now() - timedelta(days=181),
+        main_organizer_email="test@example.com",
+        main_organizer_first_name="Anna",
+        main_organizer_last_name="Smith",
+        status="deployed",
+    )
+
+
+@pytest.fixture
+def previous_application_approximate_date():
+    return EventApplication.objects.create(
+        city="Zanzibar",
+        country="Tanzania",
+        date="2070-10-0",
+        created_at=datetime.now() - timedelta(days=181),
+        main_organizer_email="test@example.com",
+        main_organizer_first_name="Anna",
+        main_organizer_last_name="Smith",
+        status="deployed",
+    )
