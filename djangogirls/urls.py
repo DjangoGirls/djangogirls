@@ -16,8 +16,8 @@ urlpatterns = [
     path("pages/coc-es-la/", RedirectView.as_view(url="/coc/es/", permanent=True)),
     path("pages/coc-fr/", RedirectView.as_view(url="/coc/fr/", permanent=True)),
     path("pages/coc-kr/", RedirectView.as_view(url="/coc/ko/", permanent=True)),
-    path("pages/coc-pt-br/", RedirectView.as_view(url="/coc/pt-br/", permanent=True)),
-    path("pages/coc/rec/", RedirectView.as_view(url="/coc/pt-br/", permanent=True)),
+    path("pages/coc-pt_BR/", RedirectView.as_view(url="/coc/pt_BR/", permanent=True)),
+    path("pages/coc/rec/", RedirectView.as_view(url="/coc/pt_BR/", permanent=True)),
 ]
 
 urlpatterns += i18n_patterns(
