@@ -28,29 +28,28 @@ class AddOrganizerForm(forms.Form):
     to Slack and receive e-mail notification with instructions to login
     (including password).
     """
+
     event = forms.ModelChoiceField(queryset=Event.objects.all())
     name = forms.CharField(label=_("Organizer's first and last name"))
-    email = forms.CharField(label=_("E-mail address"),
-                            validators=[validate_email])
+    email = forms.CharField(label=_("E-mail address"), validators=[validate_email])
 
     def __init__(self, *args, **kwargs):
-        event_choices = kwargs.pop('event_choices', None)
+        event_choices = kwargs.pop("event_choices", None)
         super().__init__(*args, **kwargs)
         if event_choices is not None:
-            self.fields['event'].queryset = event_choices
+            self.fields["event"].queryset = event_choices
 
     def save(self, *args, **kwargs):
         assert self.is_valid()
         self._errors = []
-        email = self.cleaned_data['email']
-        event = self.cleaned_data['event']
-        first_name, _, last_name = self.cleaned_data['name'].partition(' ')
+        email = self.cleaned_data["email"]
+        event = self.cleaned_data["event"]
+        first_name, _, last_name = self.cleaned_data["name"].partition(" ")
         user = event.add_organizer(email, first_name, last_name)
         return user
 
 
 class EventChoiceField(forms.ModelChoiceField):
-
     def label_from_instance(self, obj):
         return f"{obj.city}, {obj.country}"
 
@@ -58,16 +57,13 @@ class EventChoiceField(forms.ModelChoiceField):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = [
-            'city', 'country', 'date', 'email', 'latlng', 'name',
-            'page_title', 'page_url'
-        ]
+        fields = ["city", "country", "date", "email", "latlng", "name", "page_title", "page_url"]
 
     @transaction.atomic
     def save(self, commit=True):
         """Save the event and create default content in case of new instances"""
         created = not self.instance.pk
-        instance = super(EventForm, self).save(commit=commit)
+        instance = super().save(commit=commit)
         if commit and created:
             # create default content
             instance.add_default_content()

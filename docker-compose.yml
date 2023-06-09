@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: djangogirls-app
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    init: true
+    environment:
+      - POSTGRES_USER=djangogirls
+      - POSTGRES_PASSWORD=djangogirls
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=djangogirls
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "${APP_PORT:-8000}:8000"
+
+  db:
+    container_name: djangogirls-db
+    image: postgres:15.1
+    environment:
+      POSTGRES_USER: djangogirls
+      POSTGRES_PASSWORD: djangogirls
+      POSTGRES_DB: djangogirls
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+
+volumes:
+  pgdata:

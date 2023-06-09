@@ -1,11 +1,7 @@
 from datetime import date
 
 from coach.models import Coach
-from core.deploy_event import (
-    copy_content_from_previous_event,
-    copy_event,
-    copy_menu_from_previous_event,
-)
+from core.deploy_event import copy_content_from_previous_event, copy_event, copy_menu_from_previous_event
 from core.models import Event
 from sponsor.models import Sponsor
 

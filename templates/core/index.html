@@ -54,15 +54,15 @@
                     <p>
                     {% url 'core:events_map' as event_map_url %}
                       {% blocktrans trimmed %}
-                        Since 2014, an army of <span class="highlighted-number">{{ organizers_count|default_if_none:'0' }} volunteers</span> in the
-                        Django Girls community organized <span class="highlighted-number">{{ all_events_count|default_if_none:'0' }} events.</span>
-                        We've been to <span class="highlighted-number">{{ cities_count|default_if_none:'0' }} cities</span> in
-                        <span class="highlighted-number">{{ country_count|default_if_none:'0' }} countries</span> (<a href="{{ event_map_url }}">see them all on a map</a>).
+                        Since 2014, an army of <span class="highlighted-number">{{ organizers_count }} volunteers</span> in the
+                        Django Girls community organized <span class="highlighted-number">{{ all_events_count }} events.</span>
+                        We've been to <span class="highlighted-number">{{ cities_count }} cities</span> in
+                        <span class="highlighted-number">{{ country_count }} countries</span> (<a href="{{ event_map_url }}">see them all on a map</a>).
                       {% endblocktrans %}
                     </p>
                     <p>
                       {% blocktrans trimmed %}
-                        A total of <span class="highlighted-number">{{ attendees_sum|default_if_none:'0' }} incredible women attended</span>
+                        A total of <span class="highlighted-number">{{ attendees_sum }} incredible women attended</span>
                         events organized by members of our community.
                       {% endblocktrans %}
                     </p>
@@ -76,7 +76,7 @@
                       {% blocktrans trimmed %}
                         We open sourced the <a href="http://organize.djangogirls.org/">Organizer Manual</a> that provides
                         you with all information required to organize Django Girls workshop. By volunteering to organize,
-                        you're joining a vibrant and supportive community of {{ organizers_count|default_if_none:'0' }} organizers all over the world!
+                        you're joining a vibrant and supportive community of {{ organizers_count }} organizers all over the world!
                       {% endblocktrans %}
                     </p>
                     <p><a class="btn" href="{% url 'organize:index' %}">{% trans "Apply to organize a workshop" %}</a></p>
@@ -141,11 +141,11 @@
                     <p>{% trans "Django Girls is a volunteer run organization, and we depend on your support to make it happen." %}</p>
                     <p class="support-stats">
                       {% blocktrans trimmed %}
-                        <span class="highlighted-number">$806</span> of <span class="highlighted-number">$1,500</span> monthly goal pledged
+                        <span class="highlighted-number">$1,661</span> of <span class="highlighted-number">$2,500</span> monthly goal pledged
                       {% endblocktrans %}
                     </p>
                     <div class="support-bar">
-                      <div class="pledge" style="width: 53%">53%</div>
+                      <div class="pledge" style="width: 66%">66%</div>
                     </div>
                     <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
                     <p class="partnership">
@@ -178,6 +178,20 @@
 
                     <p>
                         <a href="{% url 'core:newsletter' %}">{% trans "See the Django Girls Dispatch archives" %} »</a>
+                    </p>
+
+                    <h2>{% trans  "Check out our podcast!" %}</h2>
+                    <p>
+                      {% blocktrans trimmed %}
+                        We have a new <a href="https://anchor.fm/djangogirls">podcast</a> that is being hosted by trustees 
+                        <a href="http://blog.djangogirls.org/post/138923168468"> Aisha</a> and <a href="http://blog.djangogirls.org/post/172001842084">Leona</a> 
+                        where they talk with many awesome people from our community. Check out the <a href="https://anchor.fm/s/7aa83714/podcast/rss">RSS Feed</a> 
+                        for the <a href="https://anchor.fm/djangogirls">podcast</a> which is available on multiple platforms such as 
+                        <a href="https://podcasts.apple.com/us/podcast/django-girls-podcast/id1602881437">Apple Pod</a>, 
+                        <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy83YWE4MzcxNC9wb2RjYXN0L3Jzcw?ep=14">Google Pod</a>, 
+                        <a href="https://music.amazon.ca/podcasts/afe571fc-bc45-4fcb-871f-3b5a4bb4560f/django-girls-podcast?ref=dm_sh_pXP60O3XBTy3Vb5o5JmSB1coQ">Amazon Music</a>, 
+                        and <a href="https://open.spotify.com/show/5sHA8wy4ttUtPgwXHL2lf5">Spotify</a> . 
+                      {% endblocktrans %}
                     </p>
                 </div>
             </div>

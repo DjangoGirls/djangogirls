@@ -1,7 +1,6 @@
 import datetime
 
 import pytest
-
 from django.utils.timezone import make_aware
 
 from patreonmanager.models import Patron, Payment, Reward
@@ -10,9 +9,8 @@ from patreonmanager.models import Patron, Payment, Reward
 @pytest.fixture
 def patron(db):
     return Patron.objects.create(
-        name="Jan Kowalski",
-        email="jan@kowalski.extra",
-        since=make_aware(datetime.datetime(2016, 1, 20)))
+        name="Jan Kowalski", email="jan@kowalski.extra", since=make_aware(datetime.datetime(2016, 1, 20))
+    )
 
 
 @pytest.fixture
@@ -28,5 +26,5 @@ def payment(db, patron, reward):
         reward=reward,
         patron=patron,
         pledge="20.00",
-        month=datetime.date(2016, 1, 20)
+        month=datetime.date(2016, 1, 20),
     )

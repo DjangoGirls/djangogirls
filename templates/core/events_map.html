@@ -1,38 +1,21 @@
 {% extends 'global/base.html' %}
 {% load i18n static %}
 
+{% block extra_css %}
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
+{% block extra_js %}
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+{% endblock %}
+
 {% block content %}
 
     <div class="container">
         <h2>{% trans "Django Girls events" %}</h2>
         <div id="map"></div>
     </div>
-   
-    <script>
-        L.mapbox.accessToken = 'pk.eyJ1Ijoib2xhc2l0YXJza2EiLCJhIjoiZGUzZjUyNjUxYWNkOGU1ODBkYjcxNzc4MTllNGRlMjcifQ.t0yuSZmW5FvragLmVgJXNQ';
-        var past = L.layerGroup()
-        var future = L.layerGroup()
-        var map = L.mapbox.map('map', '{{ mapbox_map_id }}', {scrollWheelZoom: false, layers: [past, future]}).setView([30, 0], 2);
-        L.control.layers(null, {
-          'Upcoming': future,
-          'Past': past,
-        }).addTo(map);
 
-        {% for event in events %}
-            {% if event.latlng %}
-            L.marker([{{ event.latlng }}], {
-                icon: L.mapbox.marker.icon({
-                    'marker-size': 'medium',
-                    'marker-symbol': 'heart',
-                    'marker-color': '#{{ event.page_main_color }}'
-                })
-              }).addTo(
-                  {% if event.is_upcoming %}future{% else %}past{% endif %}
-              ).bindPopup(
-                  '{% if event.is_page_live %}<a href="/{{ event.page_url }}">{% endif %}{{ event.city }}, {{ event.country }}{% if event.is_page_live %}</a>{% endif %}'
-              );
-            {% endif %}
-        {% endfor %}
-    </script>
+    {% include "core/map.html" with events=events mapbox_access_token=mapbox_access_token %}
 
 {% endblock %}

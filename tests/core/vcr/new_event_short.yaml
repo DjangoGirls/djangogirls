@@ -1,90 +1,213 @@
 interactions:
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.12.4]
-    method: GET
-    uri: https://nominatim.openstreetmap.org/search?format=json&q=Oz%2C+Neverland
-  response:
-    body: {string: '[]'}
-    headers:
-      Access-Control-Allow-Methods: ['OPTIONS,GET']
-      Access-Control-Allow-Origin: ['*']
-      Connection: [close]
-      Content-Type: [application/json; charset=UTF-8]
-      Date: ['Sat, 07 Jan 2017 16:24:31 GMT']
-      Server: [Apache/2.4.18 (Ubuntu)]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      User-Agent: [python-requests/2.12.4]
-    method: POST
-    uri: https://slack.com/api/users.admin.invite?email=jan%40kowalski.example.org&first_name=Jan&set_active=True
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWys9WskpLzClO1VFKLSrKL1KyUsrLL4lPLC3JSE1RqgUA9xsXwyEAAAA=
-    headers:
-      Access-Control-Allow-Origin: ['*']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Length: ['53']
-      Content-Security-Policy: [referrer no-referrer;]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 07 Jan 2017 16:24:31 GMT']
-      Server: [Apache]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
-      Vary: [Accept-Encoding]
-      Via: [1.1 fa9c1b753397f77263517fcc9fcbad17.cloudfront.net (CloudFront)]
-      X-Accepted-OAuth-Scopes: [client]
-      X-Amz-Cf-Id: [gzs2bpnmMUMbz-bK9MXtnleFNqSKzd4FMgrMG4ql2Tx7kZ14gKR_Nw==]
-      X-Cache: [Miss from cloudfront]
-      X-Content-Type-Options: [nosniff]
-      X-Slack-Backend: [h]
-      X-Slack-Req-Id: [deb94121-c101-424f-b762-b383a703c9dd]
-      X-XSS-Protection: ['0']
-    status: {code: 200, message: OK}
-- request:
-    body: channel=%23general&text=%3Adjango_pony%3A+%3Azap%3A+Woohoo%21+%3Atada%3A+New+Django+Girls+alert%21+Welcome+Django+Girls+Oz%2C+Neverland.+Congrats+Jan++Kowalski%21&username=Django+Girls&icon_emoji=%3Adjango_heart%3A
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['214']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-requests/2.12.4]
-    method: POST
-    uri: https://slack.com/api/chat.postMessage
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWys9WskpLzClO1VFKLSrKL1KyUsrLL4lPLC3JSE1RqgUA9xsXwyEAAAA=
-    headers:
-      Access-Control-Allow-Origin: ['*']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Length: ['53']
-      Content-Security-Policy: [referrer no-referrer;]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 07 Jan 2017 16:24:31 GMT']
-      Server: [Apache]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
-      Vary: [Accept-Encoding]
-      Via: [1.1 4bb318ea28b336329e91675457ce5c60.cloudfront.net (CloudFront)]
-      X-Accepted-OAuth-Scopes: ['chat:write:user']
-      X-Amz-Cf-Id: [Ytz_BCvk7FNV3TPqIaLW2__9K_sLukfSWgeqVIOHULwyM4GsO7bESA==]
-      X-Cache: [Miss from cloudfront]
-      X-Content-Type-Options: [nosniff]
-      X-Slack-Backend: [h]
-      X-Slack-Req-Id: [2a035699-c1a6-41ed-b7d6-7b189134158c]
-      X-XSS-Protection: ['0']
-    status: {code: 200, message: OK}
+  - request:
+      body: null
+      headers:
+        Accept:
+          - "*/*"
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        User-Agent:
+          - python-requests/2.26.0
+      method: GET
+      uri: https://nominatim.openstreetmap.org/search?format=json&q=Oz%2C+Neverland
+    response:
+      body:
+        string: "[]"
+      headers:
+        Access-Control-Allow-Methods:
+          - OPTIONS,GET
+        Access-Control-Allow-Origin:
+          - "*"
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Sun, 01 Jan 2023 02:18:09 GMT
+        Keep-Alive:
+          - timeout=20
+        Server:
+          - nginx
+        Transfer-Encoding:
+          - chunked
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: first_name=Jan&set_active=1&team_id=T024ABSJLVD&email=jan%40kowalski.example.org&channel_ids=C024ABSJZGF
+      headers:
+        Authorization:
+          - Bearer xoxb-2146400632999-2167340908708-XWFmLgkYBBV8kGqz72DELJIc
+        Connection:
+          - close
+        Content-Length:
+          - "104"
+        Content-Type:
+          - application/x-www-form-urlencoded
+        Host:
+          - www.slack.com
+        User-Agent:
+          - Python/3.10.4 slackclient/3.19.5 Darwin/22.2.0
+      method: POST
+      uri: https://www.slack.com/api/admin.users.invite
+    response:
+      body:
+        string: '{"ok":false,"error":"not_allowed_token_type"}'
+      headers:
+        access-control-allow-headers:
+          - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+            x-b3-sampled, x-b3-flags
+        access-control-allow-origin:
+          - "*"
+        access-control-expose-headers:
+          - x-slack-req-id, retry-after
+        cache-control:
+          - private, no-cache, no-store, must-revalidate
+        connection:
+          - close
+        content-type:
+          - application/json; charset=utf-8
+        date:
+          - Sun, 01 Jan 2023 02:18:10 GMT
+        expires:
+          - Mon, 26 Jul 1997 05:00:00 GMT
+        pragma:
+          - no-cache
+        referrer-policy:
+          - no-referrer
+        server:
+          - Apache
+        strict-transport-security:
+          - max-age=31536000; includeSubDomains; preload
+        transfer-encoding:
+          - chunked
+        vary:
+          - Accept-Encoding
+        via:
+          - envoy-www-iad-wb0c, envoy-edge-gru-kyzn
+        x-backend:
+          - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+            main_control_with_overflow main_bedrock_control_with_overflow
+        x-content-type-options:
+          - nosniff
+        x-edge-backend:
+          - envoy-www
+        x-envoy-upstream-service-time:
+          - "242"
+        x-powered-by:
+          - HHVM/4.153.1
+        x-robots-tag:
+          - noindex,nofollow
+        x-server:
+          - slack-www-hhvm-main-iad-cnht
+        x-slack-backend:
+          - r
+        x-slack-edge-shared-secret-outcome:
+          - no-match
+        x-slack-req-id:
+          - 8eeb67aede023aed40c034d26ba7ce87
+        x-slack-shared-secret-outcome:
+          - no-match
+        x-slack-unique-id:
+          - Y7DtYhvyTi6SVSdz7cnfNgAAACs
+        x-xss-protection:
+          - "0"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body:
+        '{"channel": "#general", "text": ":django_pony: :zap: Woohoo! :tada: New
+        Django Girls alert! Welcome Django Girls Oz, Neverland. Congrats Jan Kowalski!",
+        "icon_emoji": ":django_heart:", "username": "Django Girls"}'
+      headers:
+        Authorization:
+          - Bearer xoxb-2146400632999-2167340908708-XWFmLgkYBBV8kGqz72DELJIc
+        Connection:
+          - close
+        Content-Length:
+          - "212"
+        Content-Type:
+          - application/json;charset=utf-8
+        Host:
+          - www.slack.com
+        User-Agent:
+          - Python/3.10.4 slackclient/3.19.5 Darwin/22.2.0
+      method: POST
+      uri: https://www.slack.com/api/chat.postMessage
+    response:
+      body:
+        string:
+          '{"ok":true,"channel":"C024ABSJZGF","ts":"1672539490.915939","message":{"type":"message","subtype":"bot_message","text":":django_pony:
+          :zap: Woohoo! :tada: New Django Girls alert! Welcome Django Girls Oz, Neverland.
+          Congrats Jan Kowalski!","ts":"1672539490.915939","username":"Django Girls","icons":{"emoji":":django_heart:"},"bot_id":"B024R555BFC","app_id":"A024ABWABGX","blocks":[{"type":"rich_text","block_id":"PYg","elements":[{"type":"rich_text_section","elements":[{"type":"emoji","name":"django_pony"},{"type":"text","text":"
+          "},{"type":"emoji","name":"zap","unicode":"26a1"},{"type":"text","text":"
+          Woohoo! "},{"type":"emoji","name":"tada","unicode":"1f389"},{"type":"text","text":"
+          New Django Girls alert! Welcome Django Girls Oz, Neverland. Congrats Jan Kowalski!"}]}]}]}}'
+      headers:
+        access-control-allow-headers:
+          - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+            x-b3-sampled, x-b3-flags
+        access-control-allow-origin:
+          - "*"
+        access-control-expose-headers:
+          - x-slack-req-id, retry-after
+        cache-control:
+          - private, no-cache, no-store, must-revalidate
+        connection:
+          - close
+        content-type:
+          - application/json; charset=utf-8
+        date:
+          - Sun, 01 Jan 2023 02:18:10 GMT
+        expires:
+          - Mon, 26 Jul 1997 05:00:00 GMT
+        pragma:
+          - no-cache
+        referrer-policy:
+          - no-referrer
+        server:
+          - Apache
+        strict-transport-security:
+          - max-age=31536000; includeSubDomains; preload
+        transfer-encoding:
+          - chunked
+        vary:
+          - Accept-Encoding
+        via:
+          - envoy-www-iad-s5op, envoy-edge-gru-a7hg
+        x-accepted-oauth-scopes:
+          - chat:write
+        x-backend:
+          - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+            main_control_with_overflow main_bedrock_control_with_overflow
+        x-content-type-options:
+          - nosniff
+        x-edge-backend:
+          - envoy-www
+        x-envoy-upstream-service-time:
+          - "285"
+        x-oauth-scopes:
+          - chat:write,chat:write.public,channels:read,bookmarks:read,chat:write.customize
+        x-powered-by:
+          - HHVM/4.153.1
+        x-server:
+          - slack-www-hhvm-main-iad-cvrr
+        x-slack-backend:
+          - r
+        x-slack-edge-shared-secret-outcome:
+          - no-match
+        x-slack-req-id:
+          - 0b6e9e82b19067763838cbcb6ac8416b
+        x-slack-shared-secret-outcome:
+          - no-match
+        x-slack-unique-id:
+          - Y7DtYmScXRpfLQZ0A8Q_SAAAAAs
+        x-xss-protection:
+          - "0"
+      status:
+        code: 200
+        message: OK
 version: 1

@@ -5,8 +5,10 @@ from django.utils.translation import gettext_lazy as _
 class Sponsor(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     logo = models.ImageField(
-        upload_to="event/sponsors/", null=True, blank=True,
-        help_text=_("Make sure logo is not bigger than 200 pixels wide")
+        upload_to="event/sponsors/",
+        null=True,
+        blank=True,
+        help_text=_("Make sure logo is not bigger than 200 pixels wide"),
     )
     url = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
@@ -19,7 +21,7 @@ class Sponsor(models.Model):
 
     def logo_display_for_admin(self):
         if self.logo:
-            return f"<a href=\"{self.logo.url}\" target=\"_blank\"><img src=\"{self.logo.url}\" width=\"100\" /></a>"
+            return f'<a href="{self.logo.url}" target="_blank"><img src="{self.logo.url}" width="100" /></a>'
         else:
             return _("No logo")
 

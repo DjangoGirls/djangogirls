@@ -1,77 +1,96 @@
-
 {% load static %}
 
+{% if diamond %}
 <div class="row">
-  <div class="col-md-3">
-      <a href="https://www.djangoproject.com/">
-          <img class="img-responsive center-block" src="{% static 'img/global/supporters/django.png' %}"
-               alt="Django Software Foundation" style="margin-top: 25px"/>
-      </a>
-  </div>
-  <div class="col-md-3">
-      <a href="http://lincolnloop.com/">
-          <img class="img-responsive center-block" src="{% static 'img/global/supporters/lincolnloop.png' %}"
-               alt="Lincoln Loop" style="margin-top: 25px" />
-      </a>
-  </div>
-    <div class="col-md-3">
-        <a href="https://www.torchbox.com/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/torchbox.png' %}"
-                 alt="Torchbox" style="margin-top: 25px">
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="https://www.sherpany.com/en/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/sherpany.png' %}"
-                 alt="Sherpany" style="margin-top: 50px" />
-        </a>
-    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1><strong>Diamond 💞✨</strong></h1></div>
+    <div class="col-md-4"></div>
 </div>
-
-<div class="row">
-  <div class="col-md-3">
-      <a href="http://oddbird.net/">
-        <img class="img-responsive center-block" src="{% static 'img/global/supporters/oddlogo.png' %}"
-             alt="OddBird" style="margin-top: 50px" />
+{% for partner in diamond %}
+{% if forloop.first %}<div class="row">{% endif %}
+<div class="col-md-3">
+    <a href="{{ partner.website_url}}" target="_blank">
+        <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+           alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
     </a>
-  </div>
-  <div class="col-md-3">
-    <a href="http://pythonanywhere.com/">
-          <img class="img-responsive center-block" src="{% static 'img/global/supporters/pythonanywhere.png' %}"
-               alt="Python Anywhere" style="margin-top: 50px" />
-      </a>
-    </div>
-    <div class="col-md-3">
-        <a href="https://www.linode.co/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/linode.png' %}"
-                 alt="Linode" style="margin-top: 50px" />
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="https://www.niteo.co/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/niteo.png' %}"
-                 alt="Niteo" style="margin-top: 25px" />
-        </a>
-    </div>
 </div>
+{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %}
+{% endif %}
 
+{% if platinum %}
 <div class="row">
-    <div class="col-md-3">
-        <a href="https://www.caktusgroup.com/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/caktus-logo.png' %}"
-                 alt="Caktus Group" style="margin-top: 25px" />
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="https://p.ota.to/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/potato.png' %}"
-                 alt="Potato" style="margin-top: 25px" />
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="https://www.webucator.com/">
-            <img class="img-responsive center-block" src="{% static 'img/global/supporters/webucator.png' %}"
-                 alt="Webucator" style="margin-top: 50px" />
-        </a>
-    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1><strong>Platinum 💝✨</strong></h1></div>
+    <div class="col-md-4"></div>
 </div>
+{% for partner in platinum %}
+{% if forloop.first %}<div class="row">{% endif %}
+<div class="col-md-3">
+    <a href="{{ partner.website_url}}" target="_blank">
+        <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+           alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+    </a>
+</div>
+{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if gold %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1><strong>Gold 💖✨</strong></h1></div>
+    <div class="col-md-4"></div>
+</div>
+{% for partner in gold %}
+{% if forloop.first %}<div class="row">{% endif %}
+<div class="col-md-3">
+    <a href="{{ partner.website_url}}" target="_blank">
+        <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+           alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+    </a>
+</div>
+{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if silver %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1><strong>Silver 💗✨</strong></h1></div>
+    <div class="col-md-4"></div>
+</div>
+{% for partner in silver %}
+{% if forloop.first %}<div class="row">{% endif %}
+<div class="col-md-3">
+    <a href="{{ partner.website_url}}" target="_blank">
+        <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+           alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+    </a>
+</div>
+{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if bronze %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1><strong>Bronze 💓✨</strong></h1></div>
+    <div class="col-md-4"></div>
+</div>
+{% for partner in bronze %}
+{% if forloop.first %}<div class="row">{% endif %}
+<div class="col-md-3">
+    <a href="{{ partner.website_url}}" target="_blank">
+        <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+           alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+    </a>
+</div>
+{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+{% if forloop.last %}</div>{% endif %}
+{% endfor %}
+{% endif %}

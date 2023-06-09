@@ -14,6 +14,9 @@ class Story(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return self.post_url
+
     class Meta:
         verbose_name = _("story")
         verbose_name_plural = _("stories")

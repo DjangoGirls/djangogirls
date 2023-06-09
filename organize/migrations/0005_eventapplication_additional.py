@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('organize', '0004_auto_20201028_1923'),
+        ("organize", "0004_auto_20201028_1923"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='eventapplication',
-            name='additional',
-            field=models.TextField(blank=True, verbose_name='Any additional information you think may help your application'),
+            model_name="eventapplication",
+            name="additional",
+            field=models.TextField(
+                blank=True, verbose_name="Any additional information you think may help your application"
+            ),
         ),
     ]
