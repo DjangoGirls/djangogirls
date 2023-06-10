@@ -184,7 +184,7 @@ def test_coc_legacy(client):
         "es": "<h1>Código de Conducta</h1>",
         "fr": "<h1>Code de Conduite</h1>",
         "ko": "<h1>준수 사항</h1>",
-        "pt_BR": "<h1>Código de Conduta</h1>",
+        "pt-br": "<h1>Código de Conduta</h1>",
     }
     for lang, title in AVAILABLE_LANG.items():
         response = client.get(f"/coc/{lang}/")
@@ -300,8 +300,8 @@ def test_server_error(client):
 #         'coc-es-la/': '/coc/es/',
 #         'coc-fr/': '/coc/fr/',
 #         'coc-kr/': '/coc/ko/',
-#         'coc-pt_BR/': '/coc/pt_BR/',
-#         'coc/rec/': '/coc/pt_BR/',
+#         'coc-pt-br/': '/coc/pt-br/',
+#         'coc/rec/': '/coc/pt-br/',
 #     }
 #     for old_url_name, new_url in REDIRECTS.items():
 #         old_url = reverse('django.contrib.flatpages.views.flatpage', args=[old_url_name])
