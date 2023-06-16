@@ -15,18 +15,17 @@ def organiser_only(function):
 
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        city = kwargs.get('city')
+        page_url = kwargs.get("page_url")
 
-        if not city:
-            raise ValueError(
-                _('"City" slug must be present to user this decorator.')
-            )
+        if not page_url:
+            raise ValueError(_('"page_url" slug must be present to user this decorator.'))
 
         if not request.user.is_authenticated:
-            return redirect('core:event', city)
+            return redirect("core:event", page_url)
 
-        event = get_event(city, request.user.is_authenticated, False)
+        event = get_event(page_url, request.user.is_authenticated, False)
         if event and (request.user in event.team.all() or request.user.is_superuser):
             return function(request, *args, **kwargs)
         return HttpResponseNotFound()
+
     return decorator

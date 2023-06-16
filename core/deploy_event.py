@@ -3,21 +3,18 @@ from core.models import Event
 
 def copy_event(previous_event, event_date):
     """
-        Copy event from the previous one. This does the following steps:
-        - change name of previous event to {name} #{number}, i.e.
-          Django Girls London #1
-        - create new event based on previous event
-        - copy content and menu from previous event
+    Copy event from the previous one. This does the following steps:
+    - change name of previous event to {name} #{number}, i.e.
+      Django Girls London #1
+    - create new event based on previous event
+    - copy content and menu from previous event
     """
-    number = Event.objects.filter(
-        city=previous_event.city,
-        country=previous_event.country
-    ).count()
+    number = Event.objects.filter(city=previous_event.city, country=previous_event.country).count()
 
     previous_event_id = previous_event.pk
     # If event is already Django Girls City #2, remove #2 from it
-    if '#' in previous_event.name:
-        generic_event_name = previous_event.name.split(' #')[0]
+    if "#" in previous_event.name:
+        generic_event_name = previous_event.name.split(" #")[0]
     else:
         generic_event_name = previous_event.name
 
@@ -50,7 +47,7 @@ def copy_event(previous_event, event_date):
 
 def copy_content_from_previous_event(previous_event, new_event):
     """
-        Copies page content from the previous event
+    Copies page content from the previous event
     """
     previous_event.refresh_from_db()
     for obj in previous_event.content.all():
@@ -62,7 +59,7 @@ def copy_content_from_previous_event(previous_event, new_event):
 
 def copy_menu_from_previous_event(previous_event, new_event):
     """
-        Copies page menu from the previous event
+    Copies page menu from the previous event
     """
     for obj in previous_event.menu.all():
         new_obj = obj

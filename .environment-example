@@ -37,3 +37,12 @@ export GAPPS_PRIVATE_KEY=""
 
 export STRIPE_PUBLIC_KEY=""
 export STRIPE_SECRET_KEY=""
+
+export FLICKR_DJANGO_GIRLS_USER_ID="128162583@N08"
+export FLICKR_API_KEY=""
+
+export TUMBLR_API_KEY=""
+export TUMBLR_API_BASE_URL="https://api.tumblr.com/v2"
+export TUMBLR_BLOG_HOSTNAME="blog.djangogirls.org"
+
+export MAPBOX_ACCESS_TOKEN="pk.eyJ1IjoiZGphbmdvZ2lybHMiLCJhIjoiY2xjeWU1dm9iMG10cTNudGdrYTBkYm0ycSJ9.Ah4y76VVmBWqzVkw3kUzFQ"

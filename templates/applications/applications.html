@@ -69,7 +69,7 @@
                                value="{{ app.id }}"
                                id="application-{{ app.id }}-box" />
                       </td>
-                      <td><a href="{% url 'applications:application_detail' city=app.form.event.page_url app_number=app.number %}">{{ app.number }}</a></td>
+                      <td><a href="{% url 'applications:application_detail' page_url=app.form.event.page_url app_number=app.number %}">{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>
                           <div class="dropdown">
@@ -125,7 +125,7 @@
                           {% endif %}
                       </td>
                       <td class="text-right">
-                          <a href="{% url 'applications:application_detail' city=app.form.event.page_url app_number=app.number %}" class="btn">{% trans "View Application" %}</a>
+                          <a href="{% url 'applications:application_detail' page_url=app.form.event.page_url app_number=app.number %}" class="btn">{% trans "View Application" %}</a>
                       </td>
                   </tr>
                   {% endfor %}

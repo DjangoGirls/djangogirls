@@ -1,0 +1,64 @@
+{% load static %}
+
+<div class="container">
+
+    <h3 class="text-center"><strong>They already support The Django Girls Foundation ✨✨</strong></h3>
+    <br>
+
+    {% if diamond %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h3><strong>Diamond 💞✨</strong></h3></div>
+        <div class="col-md-4"></div>
+    </div>
+    {% for partner in diamond %}
+    {% if forloop.first %}<div class="row">{% endif %}
+    <div class="col-md-3">
+        <a href="{{ partner.website_url}}">
+            <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+        </a>
+    </div>
+    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if platinum %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h3><strong>Platinum 💝✨</strong></h3></div>
+        <div class="col-md-4"></div>
+    </div>
+    {% for partner in platinum %}
+    {% if forloop.first %}<div class="row">{% endif %}
+    <div class="col-md-3">
+        <a href="{{ partner.website_url}}">
+            <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+        </a>
+    </div>
+    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if gold %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h3><strong>Gold 💖✨</strong></h3></div>
+        <div class="col-md-4"></div>
+    </div>
+    {% for partner in gold %}
+    {% if forloop.first %}<div class="row">{% endif %}
+    <div class="col-md-3">
+        <a href="{{ partner.website_url}}">
+            <img class="img-responsive center-block" src="{{ partner.logo.url }}"
+            alt="{{ partner.company_name }}" style="{{ partner.style }}"/>
+        </a>
+    </div>
+    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+    {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+    {% endif %}    
+</div>

@@ -1,27 +1,25 @@
-from httplib2 import Http
-
 from django.conf import settings
-from django.utils.crypto import get_random_string
 from django.utils import timezone
-from apiclient.errors import HttpError
-from apiclient.discovery import build
+from django.utils.crypto import get_random_string
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from httplib2 import Http
 from oauth2client.service_account import ServiceAccountCredentials
 
 from core.models import Event
-
 
 GAPPS_JSON_CREDENTIALS = {
     "type": "service_account",
     "project_id": "djangogirls-website",
     "private_key_id": settings.GAPPS_PRIVATE_KEY_ID,
-    "private_key": settings.GAPPS_PRIVATE_KEY.replace('\\n', '\n'),
+    "private_key": settings.GAPPS_PRIVATE_KEY.replace("\\n", "\n"),
     "client_email": "django-girls-website@djangogirls-website.iam.gserviceaccount.com",
     "client_id": "114585708723701029855",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://accounts.google.com/o/oauth2/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/"
-                            "django-girls-website%40djangogirls-website.iam.gserviceaccount.com"
+    "django-girls-website%40djangogirls-website.iam.gserviceaccount.com",
 }
 
 
@@ -30,19 +28,18 @@ def get_gapps_client():
         return None
 
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(
-        GAPPS_JSON_CREDENTIALS,
-        scopes=settings.GAPPS_ADMIN_SDK_SCOPES
+        GAPPS_JSON_CREDENTIALS, scopes=settings.GAPPS_ADMIN_SDK_SCOPES
     )
 
-    delegated_credentials = credentials.create_delegated('hello@djangogirls.org')
+    delegated_credentials = credentials.create_delegated("hello@djangogirls.org")
     http_auth = delegated_credentials.authorize(Http())
 
-    return build('admin', 'directory_v1', http=http_auth)
+    return build("admin", "directory_v1", http=http_auth)
 
 
 def make_email(slug):
     """Get the email address for the given slug"""
-    return f'{slug}@djangogirls.org'
+    return f"{slug}@djangogirls.org"
 
 
 def create_gmail_account(event):
@@ -55,16 +52,21 @@ def create_gmail_account(event):
     if not service:
         return None, None
 
-    service.users().insert(body={
-        "primaryEmail": email,
-        "name": {
-            "fullName": event.name,
-            "givenName": "Django Girls",
-            "familyName": event.city,
-        },
-        "password": password,
-        "changePasswordAtNextLogin": True,
-    }).execute()
+    try:
+        service.users().insert(
+            body={
+                "primaryEmail": email,
+                "name": {
+                    "fullName": event.name,
+                    "givenName": "Django Girls",
+                    "familyName": event.city,
+                },
+                "password": password,
+                "changePasswordAtNextLogin": True,
+            }
+        ).execute()
+    except HttpError:
+        return None, None
 
     return email, password
 
@@ -74,11 +76,7 @@ def migrate_gmail_account(new_event, slug):
     Change the name of an account
     """
     old_email = make_email(slug)
-    old_event = Event.objects.exclude(
-        id=new_event.id
-    ).filter(
-        email=old_email
-    ).order_by('-id').first()
+    old_event = Event.objects.exclude(id=new_event.id).filter(email=old_email).order_by("-id").first()
 
     if old_event:
         new_email = make_email(slug + str(old_event.date.month) + str(old_event.date.year))

@@ -1,0 +1,121 @@
+{% extends 'global/base.html' %}
+{% load i18n static %}
+
+{% block content %}
+{% url 'contact:landing' as contact_url %}
+
+<div class="container">
+    <h1 class="text-center">{% trans "Our Global Partners" %}</h1>
+
+    <div>
+        {% blocktrans trimmed %}
+            Our global partners are companies who are supporting our work by donating to us either monthly through 
+            <a href="https://www.patreon.com/djangogirls" target="_blank">Patreon</a> or through annual sponsorships.
+            Want to join these amazing companies in sponsoring us?
+            Our <a href="https://drive.google.com/file/d/1T2jL9tnu5ZkNvkQRAxd7jlt_BnX7VCLE/view?usp=sharing">corporate sponsorships</a>
+            start at 100 USD per month. <a href="{{ contact_url }}">Contact us!</a> 📨
+        {% endblocktrans %}
+    </div>
+
+    {% if diamond %}
+    <h2 class="text-center">{% trans "Diamond - $10,000+ per year 💞✨" %}</h2>
+
+    {% for sponsor in diamond %}
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{{ sponsor.website_url }}" target="_blank"><h4>{{ sponsor.company_name }}</h4></a>
+            {% if sponsor.description %}
+            <p>{{ sponsor.description| safe }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <a href="{{ sponsor.website_url }}" target="_blank"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.company_name }}"
+                style="margin-top: 50px;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if platinum %}
+    <h2 class="text-center">{% trans "Platinum - $5,000+ per year 💝✨" %}</h2>
+
+    {% for sponsor in platinum %}
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{{ sponsor.website_url }}" target="_blank"><h4>{{ sponsor.company_name }}</h4></a>
+            {% if sponsor.description %}
+            <p>{{ sponsor.description| safe }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <a href="{{ sponsor.website_url }}" target="_blank"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.company_name }}"
+                style="margin-top: 50px;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if gold %}
+    <h2 class="text-center">{% trans "Gold - $2,500+ per year 💖✨" %}</h2>
+
+    {% for sponsor in gold %}
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{{ sponsor.website_url }}" target="_blank"><h4>{{ sponsor.company_name }}</h4></a>
+            {% if sponsor.description %}
+            <p>{{ sponsor.description| safe }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <a href="{{ sponsor.website_url }}" target="_blank"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.company_name }}"
+                style="margin-top: 50px;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if silver %}
+    <h2 class="text-center">{% trans "Silver - $1,000+ per year 💗✨" %}</h2>
+
+    {% for sponsor in silver %}
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{{ sponsor.website_url }}" target="_blank"><h4>{{ sponsor.company_name }}</h4></a>
+            {% if sponsor.description %}
+            <p>{{ sponsor.description| safe }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <a href="{{ sponsor.website_url }}" target="_blank"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.company_name }}" 
+                style="margin-top: 50px;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if bronze %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h2>{% block trans %}Bronze - $500+ per year 💓✨{% endblock %}</h2></div>
+        <div class="col-md-4"></div>
+    </div>
+
+    {% for sponsor in bronze %}
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{{ sponsor.website_url }}" target="_blank"><h4>{{ sponsor.company_name }}</h4></a>
+            {% if sponsor.description %}
+            <p>{{ sponsor.description| safe }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <a href="{{ sponsor.website_url }}" target="_blank"><img src="{{ sponsor.logo.url }}" alt="{{ sponsor.company_name }}"
+                style="margin-top: 50px;"></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+     
+</div>
+
+{% endblock %}

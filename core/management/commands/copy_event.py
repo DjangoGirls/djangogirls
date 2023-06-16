@@ -1,8 +1,7 @@
-# -*- encoding: utf-8 -*-
 import djclick as click
 
 from core.command_helpers import gather_event_date_from_prompt
-from core.management_utils import get_main_organizer, get_team, create_users, brag_on_slack_bang
+from core.management_utils import brag_on_slack_bang, create_users, get_main_organizer, get_team
 from core.models import Event
 
 
@@ -17,37 +16,32 @@ def gather_information():
     click.echo("Hello there sunshine! We're gonna copy an event website now.")
 
     event = get_event(
-        click.prompt(click.style(
-            "First, give me the latest ID of the Event "
-            "object you want to copy",
-            bold=True,
-            fg='yellow'
-        ))
+        click.prompt(
+            click.style("First, give me the latest ID of the Event " "object you want to copy", bold=True, fg="yellow")
+        )
     )
 
     while not event:
         event = get_event(click.prompt("Wrong ID! Try again"))
 
-    click.echo("Ok, we're copying {}, {}".format(
-        event.city, event.country))
+    click.echo(f"Ok, we're copying {event.city}, {event.country}")
 
-    number = click.prompt(click.style(
-        "What is the number of the event in this city? "
-        "If this is a second event, write 2. If third, then 3. You got it",
-        bold=True,
-        fg='yellow'
-    ))
+    number = click.prompt(
+        click.style(
+            "What is the number of the event in this city? "
+            "If this is a second event, write 2. If third, then 3. You got it",
+            bold=True,
+            fg="yellow",
+        )
+    )
 
     date = gather_event_date_from_prompt()
 
-    click.echo("The current team is: " + ", ".join(
-        str(organizer) for organizer in event.team.all()))
+    click.echo("The current team is: " + ", ".join(str(organizer) for organizer in event.team.all()))
 
-    new_team = click.confirm(click.style(
-        "Do you need to change the whole team?",
-        bold=True,
-        fg='yellow'
-    ), default=False)
+    new_team = click.confirm(
+        click.style("Do you need to change the whole team?", bold=True, fg="yellow"), default=False
+    )
 
     return event, number, date, new_team
 
@@ -61,18 +55,18 @@ def command():
     organizers = event.team.all()
 
     # Remove #{no} from name:
-    name = event.name.split('#')[0].strip()
+    name = event.name.split("#")[0].strip()
     number = int(number)
 
     # Change the name of previous event to {name} #{number-1}
-    event.name = "{} #{}".format(name, number - 1)
+    event.name = f"{name} #{number - 1}"
     event.save()
 
     # Copy event with a name {name} #{number}, new date and empty stats
     new_event = Event.objects.get(id=event.id)
     new_event.pk = None
-    new_event.name = "{} #{}".format(name, number)
-    new_event.page_title = "{} #{}".format(name, number)
+    new_event.name = f"{name} #{number}"
+    new_event.page_title = f"{name} #{number}"
     new_event.date = date
     new_event.is_page_live = False
     new_event.attendees_count = None
@@ -87,13 +81,13 @@ def command():
         members = create_users(team, new_event)
         new_event.main_organizer = members[0]
         # Edit previous email account
-        event.email = "{}{:02d}{}@djangogirls.org".format(event.email.split('@')[0], event.date.month, event.date.year)
+        event.email = "{}{:02d}{}@djangogirls.org".format(event.email.split("@")[0], event.date.month, event.date.year)
     else:
         new_event.team.set(organizers)
 
     # Change the title and url of previous event page
-    event.page_title = "{} #{}".format(name, number - 1)
-    event.page_url = "{}{}".format(event.page_url, number - 1)
+    event.page_title = f"{name} #{number - 1}"
+    event.page_url = f"{event.page_url}{number - 1}"
     event.save()
 
     # Copy all EventPageContent objects
@@ -116,8 +110,7 @@ def command():
     # Brag on Slack
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
-    click.echo(click.style(
-        f"Website is ready here: https://djangogirls.org/{new_event.page_url}",
-        bold=True, fg="green"
-    ))
+    click.echo(
+        click.style(f"Website is ready here: https://djangogirls.org/{new_event.page_url}", bold=True, fg="green")
+    )
     click.echo("Congrats on yet another event!")

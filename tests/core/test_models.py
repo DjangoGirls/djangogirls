@@ -46,12 +46,7 @@ def test_add_default_menu(future_event):
 
 def test_invite_organizer_to_team(future_event):
     assert future_event.team.count() == 1
-    user = User.objects.create(
-        first_name="Alice",
-        last_name="Smith",
-        is_staff=True,
-        is_active=True
-    )
+    user = User.objects.create(first_name="Alice", last_name="Smith", is_staff=True, is_active=True)
     future_event.invite_organizer_to_team(user, is_new_user=True, password="pass")
     assert future_event.team.count() == 2
 
@@ -60,13 +55,9 @@ def test_is_upcoming():
     now = timezone.now()
     now_event = Event(date=ApproximateDate(now.year, now.month, now.day))
     yesterday = now - timedelta(days=1)
-    yesterday_event = Event(date=ApproximateDate(
-        yesterday.year, yesterday.month, yesterday.day
-    ))
+    yesterday_event = Event(date=ApproximateDate(yesterday.year, yesterday.month, yesterday.day))
     tomorrow = now + timedelta(days=1)
-    tomorrow_event = Event(date=ApproximateDate(
-        tomorrow.year, tomorrow.month, tomorrow.day
-    ))
+    tomorrow_event = Event(date=ApproximateDate(tomorrow.year, tomorrow.month, tomorrow.day))
     assert now_event.is_upcoming()
     assert not yesterday_event.is_upcoming()
     assert tomorrow_event.is_upcoming()
@@ -103,3 +94,13 @@ def test_has_organizer_main_organizer(user, future_event):
     future_event.team.clear()
 
     assert future_event.has_organizer(user)
+
+
+def test_event_lnglat(future_event):
+    assert future_event.lnglat == ""
+
+    future_event.latlng = "39.4747112, -0.3798073"
+    assert future_event.lnglat == "-0.3798073, 39.4747112"
+
+    future_event.latlng = "sddasdasda"
+    assert future_event.lnglat == ""
