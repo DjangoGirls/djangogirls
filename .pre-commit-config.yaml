@@ -11,17 +11,17 @@ fail_fast: true
 
 repos:
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.13.0'
+    rev: '1.14.0'
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
   -  repo: https://github.com/asottile/pyupgrade
-     rev: v3.4.0
+     rev: v3.8.0
      hooks:
        -  id: pyupgrade
           args: ["--py310-plus"]
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.1.1
+    rev: v2.2.0
     hooks:
       - id: autoflake
         entry: bash -c 'autoflake "$@"; git add -u;' --
