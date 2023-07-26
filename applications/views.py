@@ -142,7 +142,9 @@ def application_detail(request, page_url, app_number):
     """
     Display the details of a single application.
     """
-    application = Application.object.filter(number=app_number).order_by("-created").first()
+    application = (
+        Application.object.filter(number=app_number).filter(form__event__page_url=page_url).order_by("-created").first()
+    )
     try:
         score = Score.objects.get(user=request.user, application=application)
     except Score.DoesNotExist:
