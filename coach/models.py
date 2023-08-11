@@ -1,4 +1,5 @@
-from django.db import models
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError, models
 from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -21,6 +22,7 @@ class Coach(models.Model):
     class Meta:
         ordering = ("name",)
         verbose_name_plural = _("Coaches")
+        unique_together = ["name", "twitter_handle"]
 
     def __str__(self):
         return self.name
@@ -43,3 +45,12 @@ class Coach(models.Model):
                 return DEFAULT_COACH_PHOTO
 
         return DEFAULT_COACH_PHOTO
+
+    def save(self, *args, **kwargs):
+        try:
+            super().save(*args, **kwargs)
+        except IntegrityError:
+            raise ValidationError(
+                {"name": _(f"Coach with name {self.name} and twitter_handle {self.twitter_handle} " "already exists.")}
+            )
+        return self
