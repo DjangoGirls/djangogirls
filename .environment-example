@@ -26,12 +26,6 @@ export TRELLO_API_KEY=""
 
 export SENTRY_DSN=""
 
-export JOBS_EMAIL_USER=""
-export JOBS_EMAIL_PASSWORD=""
-
-export MEETUPS_EMAIL_USER=""
-export MEETUPS_EMAIL_PASSWORD=""
-
 export GAPPS_PRIVATE_KEY_ID=""
 export GAPPS_PRIVATE_KEY=""
 

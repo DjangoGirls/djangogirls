@@ -97,7 +97,7 @@ DATABASES["default"] = dj_database_url.config(
     default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 )
 
-DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -197,8 +197,6 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
 
-STORE_DISCOUNT_CODE = os.environ.get("STORE_DISCOUNT_CODE")
-
 TRELLO_API_KEY = os.environ.get("TRELLO_API_KEY")
 
 NOSE_ARGS = []
@@ -229,12 +227,6 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 
 APPEND_SLASH = True
-
-JOBS_EMAIL_USER = os.environ.get("JOBS_EMAIL_USER")
-JOBS_EMAIL_PASSWORD = os.environ.get("JOBS_EMAIL_PASSWORD")
-
-MEETUPS_EMAIL_USER = os.environ.get("MEETUPS_EMAIL_USER")
-MEETUPS_EMAIL_PASSWORD = os.environ.get("MEETUPS_EMAIL_PASSWORD")
 
 GAPPS_ADMIN_SDK_SCOPES = "https://www.googleapis.com/auth/admin.directory.user"
 GAPPS_PRIVATE_KEY_ID = os.environ.get("GAPPS_PRIVATE_KEY_ID", "")
