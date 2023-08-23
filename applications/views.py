@@ -1,6 +1,7 @@
 import csv
 
 from django.contrib import messages
+from django.db import IntegrityError
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import striptags
@@ -36,20 +37,34 @@ def apply(request, page_url):
     menu = EventPageMenu.objects.filter(event=event)
 
     form = ApplicationForm(request.POST or None, form=form_obj)
-
     if form.is_valid():
-        form.save()
-        messages.success(request, _("Yay! Your application has been saved. You'll hear from us soon!"))
+        try:
+            form.save()
+            messages.success(request, _("Yay! Your application has been saved. You'll hear from us soon!"))
 
-        return render(
-            request,
-            "applications/apply.html",
-            {
-                "event": event,
-                "menu": menu,
-                "form_obj": form_obj,
-            },
-        )
+            return render(
+                request,
+                "applications/apply.html",
+                {
+                    "event": event,
+                    "menu": menu,
+                    "form_obj": form_obj,
+                },
+            )
+        except IntegrityError:
+            # getting email for the form as email is defind as question 2
+            email = request.POST.get("question_2", "")
+            # this email is already exist for the particulur event
+            messages.error(request, f"Application with email address {email} already exists for this event.")
+            return render(
+                request,
+                "applications/apply.html",
+                {
+                    "event": event,
+                    "menu": menu,
+                    "form_obj": form_obj,
+                },
+            )
 
     number_of_email_questions = Question.objects.filter(question_type="email", form=form_obj).count()
 
