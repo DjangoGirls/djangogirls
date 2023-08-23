@@ -3,7 +3,10 @@ from django.db.models import Exists, OuterRef
 from applications.models import Application, Event, Score
 from core.models import User
 
-
+def get_default(order):
+    ind = order.find(",")
+    order = order[:ind]
+    return order
 def get_applications_for_event(event, state=None, rsvp_status=None, order=None, user: User = None):
     """
     Return a QuerySet of Application objects for a given event.
@@ -37,7 +40,7 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
                 reverse=is_reversed,
             )
         else:
-            applications = sorted(applications, key=lambda app: getattr(app, order), reverse=is_reversed)
+            applications = sorted(applications, key=lambda app: getattr(app, order, get_default(order)), reverse=is_reversed)
 
     return applications
 
