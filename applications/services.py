@@ -7,6 +7,7 @@ def get_default(order):
     ind = order.find(",")
     order = order[:ind]
     return order
+
 def get_applications_for_event(event, state=None, rsvp_status=None, order=None, user: User = None):
     """
     Return a QuerySet of Application objects for a given event.
