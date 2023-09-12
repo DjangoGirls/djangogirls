@@ -4,6 +4,11 @@ from applications.models import Application, Event, Score
 from core.models import User
 
 def get_default(order):
+    '''
+    Gets the selected order and checks whether it contains more than one way of ordering.
+    If it does, this returns the first order selected. 
+    This is to ensure that only one way of ordering is selected.
+    '''
     ind = order.find(",")
     order = order[:ind]
     return order
