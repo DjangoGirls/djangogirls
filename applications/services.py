@@ -3,15 +3,17 @@ from django.db.models import Exists, OuterRef
 from applications.models import Application, Event, Score
 from core.models import User
 
+
 def get_default(order):
-    '''
+    """
     Gets the selected order and checks whether it contains more than one way of ordering.
-    If it does, this returns the first order selected. 
+    If it does, this returns the first order selected.
     This is to ensure that only one way of ordering is selected.
-    '''
+    """
     ind = order.find(",")
     order = order[:ind]
     return order
+
 
 def get_applications_for_event(event, state=None, rsvp_status=None, order=None, user: User = None):
     """
@@ -46,7 +48,9 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
                 reverse=is_reversed,
             )
         else:
-            applications = sorted(applications, key=lambda app: getattr(app, order, get_default(order)), reverse=is_reversed)
+            applications = sorted(
+                applications, key=lambda app: getattr(app, order, get_default(order)), reverse=is_reversed
+            )
 
     return applications
 

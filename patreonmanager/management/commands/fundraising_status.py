@@ -6,7 +6,6 @@ from django.core.management.base import BaseCommand
 from slack_sdk.errors import SlackApiError
 
 from core.slack_client import post_message_to_slack
-
 from patreonmanager.models import FundraisingStatus
 
 DJANGOGIRLS_USER_ID = 483065

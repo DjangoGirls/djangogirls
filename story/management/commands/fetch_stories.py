@@ -18,7 +18,6 @@ class Command(BaseCommand):
     help = "Fetch Django Girls stories from our blog"
 
     def handle(self, *args, **options):
-
         rss_url = "http://blog.djangogirls.org/rss"
 
         response = requests.get(rss_url)
