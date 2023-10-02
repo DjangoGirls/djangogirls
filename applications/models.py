@@ -91,12 +91,12 @@ class Question(models.Model):
         blank=True,
         default="",
         verbose_name=_("List all available options, separated with semicolon (;)"),
-        help_text=_("Used only with 'Choices' question type"),
+        help_text=_('Used only with "Choices" question type'),
     )
     is_multiple_choice = models.BooleanField(
         default=False,
         verbose_name=_("Are there multiple choices allowed?"),
-        help_text=_("Used only with 'Choices' question type"),
+        help_text=_('Used only with "Choices" question type'),
     )
     order = models.PositiveIntegerField(help_text=_("Position of the question"))
 
