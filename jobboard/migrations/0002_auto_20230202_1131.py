@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("globalpartners", "0001_initial"),
         ("jobboard", "0001_initial"),

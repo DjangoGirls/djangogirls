@@ -8,7 +8,6 @@ class Command(BaseCommand):
     help = "Update coordinates of event cities"
 
     def handle(self, *args, **options):
-
         events = Event.objects.all()
 
         for event in events:

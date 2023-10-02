@@ -79,7 +79,6 @@ def test_event_not_live(client, hidden_event):
 
 
 def test_application_form_valid(client, future_event_form, future_event):
-
     question_data = {
         "question_1": "Bill Smith",
         "question_2": "bill.smith@djangogirls.org",
