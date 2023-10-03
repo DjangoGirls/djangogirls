@@ -306,7 +306,7 @@ uritools==4.0.1
     # via urlextract
 urlextract==1.8.0
     # via -r requirements.in
-urllib3==1.26.14
+urllib3==1.26.17
     # via
     #   botocore
     #   requests
