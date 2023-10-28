@@ -183,11 +183,11 @@ pluggy==1.0.0
     # via pytest
 pre-commit==2.21.0
     # via -r requirements.in
-protobuf==4.22.0
+protobuf==4.24.4
     # via
     #   google-api-core
     #   googleapis-common-protos
-psycopg2-binary==2.8.3
+psycopg2-binary==2.9.9
     # via -r requirements.in
 py==1.11.0
     # via pytest

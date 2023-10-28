@@ -104,3 +104,7 @@ def prerequisites(request):
 
 def suspend(request):
     return render(request, "organize/suspend.html", {})
+
+
+def event_funding(request):
+    return render(request, "organize/event_funding.html", {})

@@ -106,3 +106,8 @@ def test_organize_form_wizard_workshops_too_close(client, previous_organizer_in_
                 response["form.errors"] == "Your workshops should be at least 6 months apart. "
                 "Please read our Organizer Manual."
             )
+
+
+def test_event_funding(client):
+    response = client.get(reverse("organize:event_funding"))
+    assert response.status_code == 200
