@@ -27,7 +27,6 @@ def statistics(request):
         "attendees_sum": attendees["attendees"],
         "applicants_sum": attendees["applicants"],
         "organizers_count": organizers.count(),
-        "bronze": bronze,
         "diamond": diamond,
         "gold": gold,
         "platinum": platinum,

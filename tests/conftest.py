@@ -8,7 +8,7 @@ from core.tumblr_client import RemoteStory
 from globalpartners.models import GlobalPartner
 from pictures.models import StockPicture
 from sponsor.models import Donor
-from tests.mocks import *  # noqa
+from tests.mocks import *  # noqa: F403
 
 
 @pytest.fixture(autouse=True)
@@ -28,7 +28,7 @@ def user(db, django_user_model, django_username_field):
     """This is a copy from pytest-django prepared for usage with e-mail instead
     of username.
     """
-    UserModel = django_user_model
+    UserModel = django_user_model  # noqa: N806
     username_field = django_username_field
 
     try:
@@ -44,7 +44,7 @@ def admin_user(db, django_user_model, django_username_field):
     """This is a copy from pytest-django prepared for usage with e-mail instead
     of username.
     """
-    UserModel = django_user_model
+    UserModel = django_user_model  # noqa: N806
     username_field = django_username_field
 
     try:

@@ -49,12 +49,8 @@ def test_download_applications_list_with_question_added(
 
     # now create a new application with answer to the new question
     new_application = Application.objects.create(form=future_event_form, state="submitted")
-    new_application_questionx_answer = Answer.objects.create(  # NOQA
-        application=new_application, question=questionx, answer="answer to questionx for app 5"
-    )
-    new_application_5_last_answer = Answer.objects.create(  # NOQA
-        application=new_application, question=last_question, answer="answer to last for app 5"
-    )
+    Answer.objects.create(application=new_application, question=questionx, answer="answer to questionx for app 5")
+    Answer.objects.create(application=new_application, question=last_question, answer="answer to last for app 5")
 
     resp = admin_client.get(applications_url)
 

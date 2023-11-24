@@ -4,7 +4,7 @@ import requests
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
-from pyquery import PyQuery as pq
+from pyquery import PyQuery as pq  # noqa: N813
 
 from story.models import Story
 
@@ -34,9 +34,9 @@ class Command(BaseCommand):
 
             if not Story.objects.filter(name=name).exists():
                 post_url = post.find("link").text
-                post = pq(post.find("description").text)
-                image_url = post("img").attr.src
-                story = Story(name=name, post_url=post_url, content=post, is_story=is_story)
+                _post = pq(post.find("description").text)
+                image_url = _post("img").attr.src
+                story = Story(name=name, post_url=post_url, content=_post, is_story=is_story)
 
                 if image_url:
                     img = NamedTemporaryFile(delete=True)

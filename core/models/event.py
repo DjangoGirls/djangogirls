@@ -76,20 +76,24 @@ class Event(models.Model):
         blank=True,
     )
 
-    objects = EventManager()
-    all_objects = models.Manager()  # This includes deleted objects
-
     # Flags for email states
     thank_you_email_sent = models.DateTimeField(null=True, blank=True)
     submit_information_email_sent = models.DateTimeField(null=True, blank=True)
     offer_help_email_sent = models.DateTimeField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.name}, {self.date}"
+    all_objects = models.Manager()  # This includes deleted objects
+    objects = EventManager()
 
     class Meta:
         ordering = ("-date",)
         verbose_name_plural = "List of events"
+
+    def __str__(self):
+        return f"{self.name}, {self.date}"
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True
+        self.save()
 
     def is_upcoming(self):
         now = timezone.now()
@@ -157,10 +161,6 @@ class Event(models.Model):
     @property
     def has_stats(self):
         return bool(self.applicants_count and self.attendees_count)
-
-    def delete(self, using=None, keep_parents=False):
-        self.is_deleted = True
-        self.save()
 
     def add_default_content(self):
         """Populate EventPageContent with default layout"""
@@ -265,12 +265,12 @@ class EventPageContent(models.Model):
     coaches = models.ManyToManyField(to="coach.Coach", verbose_name="Coaches")
     sponsors = models.ManyToManyField(to="sponsor.Sponsor", verbose_name="Sponsors")
 
-    def __str__(self):
-        return f"{self.name} at {self.event}"
-
     class Meta:
         ordering = ("position",)
         verbose_name = "Website Content"
+
+    def __str__(self):
+        return f"{self.name} at {self.event}"
 
 
 class EventPageMenu(models.Model):
@@ -279,9 +279,9 @@ class EventPageMenu(models.Model):
     url = models.CharField(max_length=255, help_text="http://djangogirls.org/city/<the value you enter here>")
     position = models.PositiveIntegerField(help_text="Order of menu")
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         ordering = ("position",)
         verbose_name = "Website Menu"
+
+    def __str__(self):
+        return self.title

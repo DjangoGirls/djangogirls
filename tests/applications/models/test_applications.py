@@ -24,8 +24,8 @@ def test_number_of_applications(form):
 def test_average_score(application, user, another_user):
     assert application.average_score != 4
 
-    score_1 = Score.objects.create(user=user, application=application, score=3)
-    score_2 = Score.objects.create(user=another_user, application=application, score=5)
+    Score.objects.create(user=user, application=application, score=3)
+    Score.objects.create(user=another_user, application=application, score=5)
 
     assert application.average_score == 4
 
@@ -68,7 +68,7 @@ def test_is_accepted(application):
         application.state = state[0]
         application.save()
 
-        is_accepted = True if state[0] == "accepted" else False
+        is_accepted = state[0] == "accepted"
         assert application.is_accepted == is_accepted
 
 

@@ -37,7 +37,7 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
         applications = applications.filter(state__in=state)
 
     if order:
-        is_reversed = True if order[0] == "-" else False
+        is_reversed = order[0] == "-"
         order = order[1:] if order[0] == "-" else order
         if order == "average_score":
             # here is an exception for the average_score, because we also want to get
