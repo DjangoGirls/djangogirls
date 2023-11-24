@@ -3,7 +3,7 @@ from unittest import mock
 
 from freezegun import freeze_time
 
-from core.utils import NOMINATIM_URL, get_coordinates_for_city, next_deadline
+from core.utils import NOMINATIM_URL, get_coordinates_for_city, get_event, next_deadline
 
 
 @mock.patch("requests.get")
@@ -87,3 +87,18 @@ def test_day_before_deadline():  # noqa: F811
     result = next_deadline()
 
     assert result == date(2016, 10, 30)
+
+
+def test_get_event_past(old_event):
+    result = get_event("bonn", False, False)
+    assert result == ("bonn", True)
+
+
+def test_get_event_not_past(future_event):
+    result = get_event("bonn", False, False)
+    assert result == future_event
+
+
+def test_get_event_not_past_user_authenticated(future_event):
+    result = get_event("bonn", True, False)
+    assert result == future_event

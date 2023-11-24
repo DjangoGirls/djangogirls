@@ -130,7 +130,7 @@ def old_event(organizer_peter):
         main_organizer=organizer_peter,
         date="2023-01-01",
         page_url="bonn",
-        is_page_live=True,
+        is_page_live=False,
     )
     event.team.add(organizer_peter)
     return event
