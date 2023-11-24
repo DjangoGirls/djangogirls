@@ -1,6 +1,7 @@
 import pytest
 from django.template.loader import render_to_string
 from django.urls import reverse
+from pytest_django.asserts import assertTemplateUsed
 
 
 def test_form_thank_you(client):
@@ -111,3 +112,4 @@ def test_organize_form_wizard_workshops_too_close(client, previous_organizer_in_
 def test_event_funding(client):
     response = client.get(reverse("organize:event_funding"))
     assert response.status_code == 200
+    assertTemplateUsed(response, "organize/event_funding.html")
