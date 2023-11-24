@@ -134,3 +134,20 @@ def old_event(organizer_peter):
     )
     event.team.add(organizer_peter)
     return event
+
+
+@pytest.fixture
+def old_event_no_date(organizer_peter):
+    event = Event.objects.create(
+        email="bonn@djangogirls.org",
+        city="Bonn",
+        name="Django Girls Bonn",
+        country="the Neverlands",
+        is_on_homepage=True,
+        main_organizer=organizer_peter,
+        date="",
+        page_url="bonn",
+        is_page_live=False,
+    )
+    event.team.add(organizer_peter)
+    return event
