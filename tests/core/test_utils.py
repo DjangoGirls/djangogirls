@@ -102,3 +102,13 @@ def test_get_event_not_past(future_event):
 def test_get_event_not_past_user_authenticated(future_event):
     result = get_event("bonn", True, False)
     assert result == future_event
+
+
+def test_get_event_multiple_events(old_event, future_event):
+    result = get_event("bonn", True, False)
+    assert result == future_event
+
+
+def test_get_event_none_exists():
+    result = get_event("bonn", True, False)
+    assert result is None
