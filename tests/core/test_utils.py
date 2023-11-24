@@ -112,3 +112,8 @@ def test_get_event_multiple_events(old_event, future_event):
 def test_get_event_none_exists():
     result = get_event("bonn", True, False)
     assert result is None
+
+
+def test_get_event_no_date(old_event_no_date):
+    result = get_event("bonn", False, False)
+    assert result == ("bonn", True)
