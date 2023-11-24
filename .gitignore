@@ -13,7 +13,8 @@ __pycache__
 /src
 /include
 .coverage
-.venv
+.venv/
+venv/
 static/media
 .idea/*
 .vscode

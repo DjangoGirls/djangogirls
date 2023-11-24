@@ -31,7 +31,10 @@ def get_event(page_url, is_user_authenticated, is_preview):
         event = Event.objects.filter(page_url=page_url).order_by("-date").first()
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
-        past = event.date <= now_approx
+        try:
+            past = event.date <= now_approx
+        except AttributeError:
+            past = True
         return page_url, past
 
     return event
