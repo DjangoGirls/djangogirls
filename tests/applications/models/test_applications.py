@@ -80,3 +80,9 @@ def test_is_scored_by_user(application, user, another_user):
 
     Score.objects.create(user=another_user, application=application, score=0)
     assert application.is_scored_by_user(another_user) is False
+
+
+def test_score_str(application, user, another_user):
+    score = Score.objects.create(user=user, application=application, score=3)
+
+    assert str(score) == f"{score.user} - {score.application}. Score {score.score}"

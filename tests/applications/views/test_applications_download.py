@@ -74,3 +74,13 @@ def test_download_applications_list_with_question_added(
     # column
     assert csv_list[5][17] == "answer to last for app 5"
     assert csv_list[5][18] == "answer to questionx for app 5"
+
+
+def test_answer_str(admin_client, application_submitted, future_event, future_event_form, applications):
+    last_question = future_event_form.question_set.last()
+
+    new_application = Application.objects.create(form=future_event_form, state="submitted")
+    answer = Answer.objects.create(
+        application=new_application, question=last_question, answer="answer to last for app 5"
+    )
+    assert str(answer) == f"{answer.application} - {answer.question}"

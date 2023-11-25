@@ -163,3 +163,8 @@ def test_unfreeze_events_action(admin_client, future_event):
     assert response.status_code == 200
     assert Event.objects.filter(is_frozen=False).count() == 1
     assert Event.objects.filter(is_on_homepage=True).count() == 1
+
+
+def test_event_str(admin_client, events):
+    event = events[0]
+    assert str(event) == f"{event.name}, {event.date}"
