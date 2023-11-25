@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 from core.models import Event
 from organize.constants import DEPLOYED, ON_HOLD, REJECTED
-from organize.models import EventApplication
+from organize.models import Coorganizer, EventApplication
 
 
 def test_comment_required_for_on_hold_application(base_application):
@@ -119,3 +119,10 @@ def test_previous_application_with_approximate_date(data_dict, previous_applicat
     assert EventApplication.object.count() == 1
     EventApplication.object.create(**data_dict)
     assert EventApplication.object.count() == 2
+
+
+def test_coorganizer_str(base_application):
+    org = Coorganizer.objects.create(
+        event_application=base_application, email="anna@example.com", first_name="Anna", last_name="Smith"
+    )
+    assert str(org) == f"{org.first_name} {org.last_name} <{org.email}>"
