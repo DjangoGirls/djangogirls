@@ -60,4 +60,3 @@ jobs:
           py.test --cov
         env:
           POSTGRES_PASSWORD: postgres
-

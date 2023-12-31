@@ -79,23 +79,23 @@ def test_event_not_live(client, hidden_event):
 
 
 def test_application_form_valid(client, future_event_form, future_event):
-    question_data = {
-        "question_1": "Bill Smith",
-        "question_2": "bill.smith@djangogirls.org",
-        "question_3": "0123445689",
-        "question_4": "London, United Kingdom",
-        "question_5": "",  # Not required
-        "question_6": "Mac OS X",
-        "question_7": "I work as a programmer",
-        "question_8": "",
-        "question_9": "Developer",
-        "question_10": "To test things",
-        "question_11": "test",
-        "question_12": "Facebook",
-        "question_13": "Yes",
-        "question_14": "I've read and understood the Django Girls Code of Conduct",
-        "newsletter_optin": True,
-    }
+    # question_data = {
+    #     "question_1": "Bill Smith",
+    #     "question_2": "bill.smith@djangogirls.org",
+    #     "question_3": "0123445689",
+    #     "question_4": "London, United Kingdom",
+    #     "question_5": "",  # Not required
+    #     "question_6": "Mac OS X",
+    #     "question_7": "I work as a programmer",
+    #     "question_8": "",
+    #     "question_9": "Developer",
+    #     "question_10": "To test things",
+    #     "question_11": "test",
+    #     "question_12": "Facebook",
+    #     "question_13": "Yes",
+    #     "question_14": "I've read and understood the Django Girls Code of Conduct",
+    #     "newsletter_optin": True,
+    # }
 
     # TODO: Need to find a way to get the question numbers as they aren't always 1-14
 

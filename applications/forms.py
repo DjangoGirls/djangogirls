@@ -61,7 +61,7 @@ class ApplicationForm(forms.Form):
                     else:
                         application.newsletter_optin = False
 
-            value = ", ".join(value) if type(value) == list else value
+            value = ", ".join(value) if isinstance(value, list) else value
 
             if question:
                 answers.append(Answer(question=question, answer=value))
@@ -96,9 +96,9 @@ class ApplicationForm(forms.Form):
                 ],
             )
             msg.content_subtype = "html"
-            try:
+            try:  # noqa: SIM105
                 msg.send()
-            except:
+            except:  # noqa: E722
                 # TODO: what should we do when sending fails?
                 pass
 

@@ -27,7 +27,7 @@ DEFAULT_BACKGROUND_PHOTOS = {
 def get_random_photo(section):
     if section in DEFAULT_BACKGROUND_PHOTOS:
         photos = DEFAULT_BACKGROUND_PHOTOS[section]
-        return UploadedFile(open(photos[random.randint(0, len(photos) - 1)], "rb"))
+        return UploadedFile(open(photos[random.randint(0, len(photos) - 1)], "rb"))  # noqa: SIM115
     return None
 
 

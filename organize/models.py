@@ -61,7 +61,7 @@ class EventApplicationManager(models.Manager):
                             )
                         }
                     )
-            except ValueError:
+            except ValueError as err:
                 if date(event_date.year, event_date.month, event_date.day) - date(
                     previous_event.date.year, previous_event.date.month, 1
                 ) < timedelta(days=180):
@@ -71,7 +71,7 @@ class EventApplicationManager(models.Manager):
                                 "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
                             )
                         }
-                    )
+                    ) from err
         return super().create(**data_dict)
 
 
@@ -205,10 +205,7 @@ class EventApplication(models.Model):
             Event.objects.filter(city=self.city, country=self.get_country_display()).order_by("-date").first()
         )
 
-        if previous_event:
-            event = copy_event(previous_event, self.date)
-        else:
-            event = self.create_event()
+        event = copy_event(previous_event, self.date) if previous_event else self.create_event()
 
         # add main organizer of the Event
         main_organizer = event.add_organizer(
@@ -264,7 +261,7 @@ class EventApplication(models.Model):
         - changes status to REJECTED
         - sends a rejection email
         """
-        if not self.status == REJECTED:
+        if self.status != REJECTED:
             self.change_status_to(REJECTED)
             send_application_rejection_email(event_application=self)
 
@@ -280,3 +277,6 @@ class Coorganizer(models.Model):
     class Meta:
         verbose_name = _("Co-organizer")
         verbose_name_plural = _("Co-organizers")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} <{self.email}>"

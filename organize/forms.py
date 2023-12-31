@@ -16,7 +16,7 @@ from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
     (True, _("Yes, I organized Django Girls")),
-    (False, _("No, it’s my first time organizing Django Girls")),
+    (False, _("No, it's my first time organizing Django Girls")),
 )
 
 WORKSHOP_CHOICES = ((True, _("Remote")), (False, _("In-Person")))
@@ -93,7 +93,7 @@ OrganizersFormSet = forms.formset_factory(
 class WorkshopForm(forms.Form):
     date = ApproximateDateFormField(widget=forms.TextInput(attrs={"class": "compact-input"}))
     city = forms.CharField(required=True, max_length=200, widget=forms.TextInput(attrs={"class": "compact-input"}))
-    country = LazyTypedChoiceField(choices=[(None, "Choose country")] + list(countries))
+    country = LazyTypedChoiceField(choices=[(None, _("Choose country")), *list(countries)])
     venue = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     sponsorship = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     coaches = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
@@ -125,7 +125,7 @@ class WorkshopForm(forms.Form):
 class RemoteWorkshopForm(forms.Form):
     date = ApproximateDateFormField(widget=forms.TextInput(attrs={"class": "compact-input"}))
     city = forms.CharField(required=True, max_length=200, widget=forms.TextInput(attrs={"class": "compact-input"}))
-    country = LazyTypedChoiceField(choices=[(None, _("Choose country"))] + list(countries))
+    country = LazyTypedChoiceField(choices=[(None, _("Choose country")), *list(countries)])
     sponsorship = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     coaches = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     tools = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))

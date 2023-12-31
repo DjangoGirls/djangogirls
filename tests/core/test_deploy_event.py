@@ -2,7 +2,7 @@ from datetime import date
 
 from coach.models import Coach
 from core.deploy_event import copy_content_from_previous_event, copy_event, copy_menu_from_previous_event
-from core.models import Event
+from core.models import Event, EventPageContent, EventPageMenu
 from sponsor.models import Sponsor
 
 
@@ -38,7 +38,7 @@ def test_copy_event(past_event):
 
     new_event = copy_event(past_event, new_date)
 
-    # we need to refetch the event as we changed id of the object
+    # we need to re-fetch the event as we changed id of the object
     # inside copy_event method
     past_event = Event.objects.get(pk=previous_event_id)
 
@@ -50,3 +50,20 @@ def test_copy_event(past_event):
     assert past_event.country == new_event.country
     assert past_event.latlng == new_event.latlng
     assert past_event.main_organizer == new_event.main_organizer
+
+
+def test_eventpagecontent_str(past_event):
+    event_content = EventPageContent.objects.create(
+        name="coach",
+        content="<div><h2>Be a Mentor!</h2></div>",
+        background="event/backgrounds/photo0_cBUZ8zp.jpg",
+        is_public=True,
+        position=40,
+        event=past_event,
+    )
+    assert str(event_content) == f"{event_content.name} at {event_content.event}"
+
+
+def test_eventpagemenu_str(past_event):
+    menu = EventPageMenu.objects.create(url="#values", position=1, event=past_event, title="About")
+    assert str(menu) == f"{menu.title}"

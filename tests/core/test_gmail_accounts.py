@@ -54,4 +54,4 @@ def test_migrate_gmail_account(second_veryrandom_event, veryrandom_event):
     veryrandom_event.refresh_from_db()
 
     assert old_email == veryrandom_event.email
-    assert "veryrandom12017@djangogirls.org" == second_veryrandom_event.email
+    assert second_veryrandom_event.email == "veryrandom12017@djangogirls.org"

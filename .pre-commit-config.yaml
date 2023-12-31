@@ -35,19 +35,14 @@ repos:
             "--ignore-init-module-imports",
           ]
         files: \.py$
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: isort
-        entry: bash -c 'isort "$@"; git add -u;' --
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
         entry: bash -c 'black "$@"; git add -u;' --
         language_version: python3.10
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.280"
     hooks:
-      - id: flake8
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]

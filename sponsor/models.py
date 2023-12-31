@@ -13,11 +13,11 @@ class Sponsor(models.Model):
     url = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         ordering = ("name",)
+
+    def __str__(self):
+        return self.name
 
     def logo_display_for_admin(self):
         if self.logo:
@@ -33,8 +33,8 @@ class Donor(models.Model):
     amount = models.FloatField()
     visible = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         ordering = ("amount",)
+
+    def __str__(self):
+        return self.name

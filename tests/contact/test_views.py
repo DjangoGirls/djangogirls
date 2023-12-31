@@ -18,7 +18,7 @@ def test_form_sends_email_to_support(client, mailoutbox):
         "contact_type": ContactEmail.SUPPORT,
         "g-recaptcha-response": "PASSED",
     }
-    resp = client.post(reverse(CONTACT_URL), data=post_data)
+    client.post(reverse(CONTACT_URL), data=post_data)
 
     assert len(mailoutbox) == 1
     email = mailoutbox[0]

@@ -109,9 +109,10 @@ def applications_csv(request, page_url):
     rsvp_status = request.GET.getlist("rsvp_status", None)
     event = get_event(page_url, request.user.is_authenticated, False)
     order = request.GET.get("order", None)
+    # TODO: what's the exception here?
     try:
         applications = get_applications_for_event(event, state, rsvp_status, order)
-    except:  # TODO: what's the exception here?
+    except:  # noqa: E722
         return redirect("core:event", page_url=page_url)
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = f'attachment; filename="{page_url}.csv"'

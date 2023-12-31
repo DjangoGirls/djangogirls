@@ -32,7 +32,7 @@ def send_event_emails(
         if ignore_approximate_events and event.date_is_approximate:
             continue
 
-        recipients = list(set([event.email] + list(event.team.all().values_list("email", flat=True))))
+        recipients = list(set([event.email] + list(event.team.all().values_list("email", flat=True))))  # noqa: RUF005
         context = {
             "event": event,
             "settings": settings,

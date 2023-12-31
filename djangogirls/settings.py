@@ -19,10 +19,7 @@ BASE_URL = "https://djangogirls.org"
 
 DEBUG = os.getenv("DJANGO_DEBUG") != "FALSE"
 
-if DEBUG:
-    SECRET_KEY = "hello!"
-else:
-    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = "hello!" if DEBUG else os.getenv("DJANGO_SECRET_KEY")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 ALLOWED_HOSTS = ["*"]

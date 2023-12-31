@@ -18,7 +18,7 @@ def test_get_queryset_for_organizer(client, organizer_peter, future_event, past_
     # flattens the list of lists
     # FIXME
     results = "".join(sum(resp.context["results"], []))
-    assert all([x.name in results for x in [future_event, past_event]])
+    assert all(x.name in results for x in [future_event, past_event])
 
 
 def test_manage_organizers_view_for_superuser(admin_client, events):
@@ -27,7 +27,7 @@ def test_manage_organizers_view_for_superuser(admin_client, events):
     # Only upcoming events are listed
     expected_events = Event.objects.filter(date__gte=datetime.now().strftime("%Y-%m-%d")).order_by("name")
     assert len(resp.context["all_events"]) == expected_events.count()
-    assert all([x.is_upcoming() for x in resp.context["all_events"]])
+    assert all(x.is_upcoming() for x in resp.context["all_events"])
 
     # First event is selected automatically
     assert resp.context["event"] == expected_events[0]
@@ -38,12 +38,11 @@ def test_manage_organizers_view_for_organizers(client, organizer_peter, events):
     client.force_login(organizer_peter)
     resp = client.get(reverse("admin:core_event_manage_organizers"))
     assert len(resp.context["all_events"]) == expected_events.count()
-    assert all([x.is_upcoming() for x in resp.context["all_events"]])
+    assert all(x.is_upcoming() for x in resp.context["all_events"])
 
 
 @mock.patch("core.models.User.invite_to_slack")
 def test_adding_organizer_as_superuser(invite_to_slack, admin_client, future_event, hidden_event, django_user_model):
-    add_organizers_url = reverse("admin:core_event_add_organizers")
     total_count = django_user_model.objects.filter(is_staff=True).count()
     team_count = future_event.team.count()
     data = {"event": future_event.pk, "name": "New organizer", "email": "new-superuser@organizer.com"}
@@ -164,3 +163,8 @@ def test_unfreeze_events_action(admin_client, future_event):
     assert response.status_code == 200
     assert Event.objects.filter(is_frozen=False).count() == 1
     assert Event.objects.filter(is_on_homepage=True).count() == 1
+
+
+def test_event_str(admin_client, events):
+    event = events[0]
+    assert str(event) == f"{event.name}, {event.date}"

@@ -179,14 +179,14 @@ def test_event_multiple_events_same_page_url(client, future_event, old_event):
 
 
 def test_coc_legacy(client):
-    AVAILABLE_LANG = {
+    available_lang = {
         "en": "<h1>Code of Conduct</h1>",
         "es": "<h1>Código de Conducta</h1>",
         "fr": "<h1>Code de Conduite</h1>",
         "ko": "<h1>준수 사항</h1>",
         "pt-br": "<h1>Código de Conduta</h1>",
     }
-    for lang, title in AVAILABLE_LANG.items():
+    for lang, title in available_lang.items():
         response = client.get(f"/coc/{lang}/")
         assert title in response.content.decode("utf-8"), title
 
