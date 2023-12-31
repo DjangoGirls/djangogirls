@@ -49,10 +49,19 @@
                 </li>
             </ul>
         </p>
-
-        <p>{% trans "To apply for DSF funding, please fill in 
-            <a href="https://docs.google.com/forms/d/1KBQKnwY0uFBB0R7HOJIA3VAr9PsUywnp-9yX9El9-Wk/viewform">this form</a>." %}
+        <p>
+            {% blocktrans trimmed %}
+            In your application, please share your budget and if your budget requirements are more than the funding the DSF can provide,
+            also share your other funding sources and how you wish to offset the deficit. Funding from the DSF will only be approved once
+            we are sure that the event will indeed take place because your event has adequate funding. The DSF will only fund events whose
+            costs are appropriate, realistic and have a solid plan for the remaining funds.
+            {% endblocktrans %}
         </p>
+        <p>{% blocktrans trimmed %}To apply for DSF funding, please fill in 
+            <a href="https://docs.google.com/forms/d/1KBQKnwY0uFBB0R7HOJIA3VAr9PsUywnp-9yX9El9-Wk/viewform">this form</a>."
+            {% endblocktrans %}
+        </p>
+
     </div>
 </div>
 {% endblock %}
