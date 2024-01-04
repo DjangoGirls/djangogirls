@@ -129,8 +129,7 @@ class EventApplication(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.latlng:
-            latlng_coord = get_coordinates_for_city(self.city, self.get_country_display())
-            self.latlng = latlng_coord[:30]  # Truncate to 30 characters to match the database field limit
+            self.latlng = get_coordinates_for_city(self.city, self.get_country_display())
 
         super().save(*args, **kwargs)
 
