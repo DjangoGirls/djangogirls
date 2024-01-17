@@ -9,7 +9,6 @@ from core.validators import (
     validate_approximatedate,
     validate_event_date,
     validate_future_date,
-    validate_local_restrictions,
 )
 
 from .constants import INVOLVEMENT_CHOICES
@@ -97,11 +96,8 @@ class WorkshopForm(forms.Form):
     venue = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     sponsorship = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     coaches = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
-    local_restrictions = forms.CharField(required=True, widget=forms.Textarea(attrs={"class": "compact-input"}))
-    safety = forms.CharField(required=True, widget=forms.Textarea(attrs={"class": "compact-input"}))
     diversity = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     additional = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
-    confirm_covid_19_protocols = forms.BooleanField()
 
     def clean_date(self):
         date = self.cleaned_data.get("date")
@@ -114,12 +110,6 @@ class WorkshopForm(forms.Form):
 
     def get_data_for_saving(self):
         return self.cleaned_data
-
-    def clean_local_restrictions(self):
-        local_restrictions = self.cleaned_data.get("local_restrictions")
-        # Check if organizer provides link to government website
-        validate_local_restrictions(local_restrictions)
-        return local_restrictions
 
 
 class RemoteWorkshopForm(forms.Form):

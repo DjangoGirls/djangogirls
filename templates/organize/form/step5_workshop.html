@@ -154,43 +154,6 @@
                     </section>
 
                     <section class="form-section">
-                        <label class="form-section-heading{% if form.local_restrictions.field.required %} required{% endif %}">{% trans "What are your current local restrictions?" %}</label>
-                        <p class="form-section-subhead">{% trans "Please also provide a link to your government website outlining this." %}</p>
-
-                        <ul class="row">
-                            <li class="col-sm-12 col-md-9">
-                                {{ wizard.form.local_restrictions }}
-                                {% if wizard.form.local_restrictions.errors %}
-                                    <ul class="error-list">
-                                        {% for error in wizard.form.local_restrictions.errors %}
-                                            <li class="error">{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </section>
-
-
-                    <section class="form-section">
-                        <label class="form-section-heading{% if form.safety.field.required %} required{% endif %}">{% trans "How will you host your in-person workshop during the Covid-19 pandemic?" %}</label>
-                        <p class="form-section-subhead">{% trans "Please provide information on how you plan to ensure safety for attendees and coaches for your in-person workshop during the Covid-19 pandemic." %}</p>
-
-                        <ul class="row">
-                            <li class="col-sm-12 col-md-9">
-                                {{ wizard.form.safety }}
-                                {% if wizard.form.safety.errors %}
-                                    <ul class="error-list">
-                                        {% for error in wizard.form.safety.errors %}
-                                            <li class="error">{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section class="form-section">
                         <label class="form-section-heading{% if form.diversity.field.required %} required{% endif %}">{% trans "How do you intent to make your workshop inclusive and promote diversity?" %}</label>
                         <p class="form-section-subhead">{% trans "Please tell us how you intend to make sure your workshop is inclusive to people from marginalised communities and promote diversity." %}</p>
 
@@ -218,27 +181,6 @@
                                 {% if wizard.form.additional.errors %}
                                     <ul class="error-list">
                                         {% for error in wizard.form.additional.errors %}
-                                            <li class="error">{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section class="form-section">
-                        <label class="form-section-heading{% if form.confirm_covid_19_protocols.field.required %} required{% endif %}">{% trans "Will you change your workshop to remote or postpone if the situation changes in your country?" %}</label>
-                        <p class="form-section-subhead">{% trans "Confirm you will postpone or host remote workshop if Covid-19 situation changes in your city." %}</p>
-
-                        <ul class="row">
-                            <li class="col-sm-12 col-md-9 checkbox-wrapper">
-                                {{ wizard.form.confirm_covid_19_protocols }} 
-                                <label>
-                                    {% trans " I confirm that should my local restrictions change to prevent the workshop from going ahead in person safely, I will change to a remote workshop, or postpone until restrictions are lifted and it is safe to go ahead." %}
-                                </label>
-                                {% if wizard.form.confirm_covid_19_protocols.errors %}
-                                    <ul class="error-list">
-                                        {% for error in wizard.form.confirm_covid_19_protocols.errors %}
                                             <li class="error">{{ error }}</li>
                                         {% endfor %}
                                     </ul>
