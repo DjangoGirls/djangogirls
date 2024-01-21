@@ -15,9 +15,9 @@ def get_coordinates_for_city(city, country):
 
     try:
         data = req.json()[0]
-        formatted_lat = "{:.6f}".format(float(data["lat"]))
-        formatted_lon = "{:.6f}".format(float(data["lon"]))
-        return f'{formatted_lat}, {formatted_lon}'
+        formatted_lat = "{:.7f}".format(float(data["lat"]))
+        formatted_lon = "{:.7f}".format(float(data["lon"]))
+        return f"{formatted_lat}, {formatted_lon}"
     except (IndexError, KeyError):
         return None
 
