@@ -13,6 +13,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_blacklisted = models.BooleanField(default=False)
 
     objects = UserManager()
 

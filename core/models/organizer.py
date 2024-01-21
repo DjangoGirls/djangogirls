@@ -1,6 +1,7 @@
 from django.db import models
-from models.event import Event
-from models.user import User
+
+from .event import Event
+from .user import User
 
 
 class OrganizerIssue(models.Model):
