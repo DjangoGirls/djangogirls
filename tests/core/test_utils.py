@@ -24,7 +24,9 @@ def test_get_coordinates_for_city(mock_get):
             "q": "London, UK",
         },
     )
-    assert result == "1.23, 4.56"
+    expected_lat = "{:.7f}".format(float("1.23"))
+    expected_lon = "{:.7f}".format(float("4.56"))
+    assert result == f"{expected_lat}, {expected_lon}"
 
 
 @mock.patch("requests.get")
