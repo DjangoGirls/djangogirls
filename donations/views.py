@@ -27,11 +27,17 @@ def charge(request):
         if form.is_valid():
             amount = int(request.POST["amount"])
             currency = request.POST["currency"]
-
+            # key = ""
             try:
                 customer = stripe.Customer.create(
-                    email=request.POST["email"], name=request.POST["name"], source=request.POST["stripeToken"]
+                    email=request.POST["email"],
+                    name=request.POST["name"],
+                    source=request.POST["stripeToken"],
+                    # idempotency_key=key,
                 )
+            except stripe.error.APIConnectionError as err:
+                request.session["stripe_message"] = err.user_message
+                return redirect(reverse("donations:error"))
             except CardError as err:
                 request.session["stripe_message"] = err.user_message
                 return redirect(reverse("donations:error"))
