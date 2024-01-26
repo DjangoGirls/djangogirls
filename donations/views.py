@@ -1,3 +1,5 @@
+import uuid
+
 import stripe
 from django.conf import settings
 from django.http import HttpResponseForbidden
@@ -27,13 +29,13 @@ def charge(request):
         if form.is_valid():
             amount = int(request.POST["amount"])
             currency = request.POST["currency"]
-            # key = ""
+            key = uuid.uuid4().hex
             try:
                 customer = stripe.Customer.create(
                     email=request.POST["email"],
                     name=request.POST["name"],
-                    source=request.POST["stripeToken"],
-                    # idempotency_key=key,
+                    source=request.POST.get("stripeToken"),
+                    idempotency_key=key,
                 )
             except stripe.error.APIConnectionError as err:
                 request.session["stripe_message"] = err.user_message
