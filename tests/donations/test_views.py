@@ -1,10 +1,11 @@
 import os
+from unittest.mock import patch
 
 import pytest
 from django.test import override_settings
 from django.urls import reverse
 from pytest_django.asserts import assertContains
-from stripe.error import StripeError
+from stripe.error import APIConnectionError, StripeError
 
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "test_public")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "test_public")
@@ -62,3 +63,26 @@ def test_sponsors(client, globalpartner, globalpartner2):
     assert resp.status_code == 200
     assertContains(resp, "Django Software Foundation")
     assertContains(resp, "Caktus Group")
+
+
+@pytest.mark.django_db
+def test_charge_post_api_connection_error(client):
+    # Mock the stripe.Customer.create method to simulate an API connection error
+    with patch("stripe.Customer.create", side_effect=APIConnectionError("A Network Connection error occured.")):
+        form_data = {
+            "name": "Paul Smith",
+            "email": "paul.smith@djangogirls.org",
+            "currency": "usd",
+            "amount": "10",
+            "stripeToken": "test_code",
+        }
+
+        response = client.post(reverse("donations:charge"), data=form_data)
+
+        # Check if the response redirects to the error view
+        assert response.status_code == 302  # 302 is the status code for a redirect
+        assert response.url == reverse("donations:error")
+
+        # Check if the expected session variable is set
+        assert "stripe_message" in client.session
+        assert client.session["stripe_message"] == "A Network Connection error occured."

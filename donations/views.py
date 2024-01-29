@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from stripe.error import CardError, StripeError
+from stripe.error import APIConnectionError, CardError, StripeError
 
 from patreonmanager.models import FundraisingStatus
 
@@ -37,7 +37,7 @@ def charge(request):
                     source=request.POST.get("stripeToken"),
                     idempotency_key=key,
                 )
-            except stripe.error.APIConnectionError as err:
+            except APIConnectionError as err:
                 request.session["stripe_message"] = err.user_message
                 return redirect(reverse("donations:error"))
             except CardError as err:
