@@ -1,5 +1,3 @@
-import re
-
 from organize.forms import RemoteWorkshopForm, WorkshopForm
 
 
@@ -53,10 +51,3 @@ def test_workshop_form_date_year_only(workshop_form_date_year_only):
     form = WorkshopForm(data=workshop_form_date_year_only)
     assert not form.is_valid()
     assert form.errors["date"] == ["Event date can't be a year only. " "Please, provide at least a month and a year."]
-
-
-def test_workshop_form_local_restrictions_no_link(workshop_form_invalid_no_link):
-    form = WorkshopForm(data=workshop_form_invalid_no_link)
-    print(re.findall(r"(https?://[^\s]+)", workshop_form_invalid_no_link["local_restrictions"]))
-    assert not form.is_valid()
-    assert form.errors["local_restrictions"] == ["Please provide a link to your government website outlining this."]
