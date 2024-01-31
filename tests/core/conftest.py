@@ -2,6 +2,7 @@ import pytest
 
 from coach.models import Coach
 from core.models import Event, EventPageContent, EventPageMenu
+from core.models.organizerissue import OrganizerIssue
 from globalpartners.models import GlobalPartner
 from sponsor.models import Sponsor
 from story.models import Story
@@ -151,3 +152,39 @@ def old_event_no_date(organizer_peter):
     )
     event.team.add(organizer_peter)
     return event
+
+
+@pytest.fixture
+def organizer_issue(organizer_peter, old_event, admin_user):
+    issue = OrganizerIssue.objects.create(
+        organizer=organizer_peter,
+        event=old_event,
+        date_reported="2023-10-12",
+        reported_by="Jane Doe",
+        reporter_email="jane@doe.com",
+        issue="He was rude and disrespectful.",
+        issue_handled=True,
+        issue_handled_by=admin_user,
+        findings="He was rude indeed.",
+        comments="He should be blacklisted from organizing more events.",
+    )
+    return issue
+
+
+@pytest.fixture
+def reverse_blacklisting(organizer_julia, old_event, admin_user):
+    organizer_julia.is_blacklisted = True
+    organizer_julia.save()
+    issue = OrganizerIssue.objects.create(
+        organizer=organizer_julia,
+        event=old_event,
+        date_reported="2023-10-12",
+        reported_by="John Doe",
+        reporter_email="johne@doe.com",
+        issue="She was very arrogant.",
+        issue_handled=True,
+        issue_handled_by=admin_user,
+        findings="She was not polite.",
+        comments="It was just a misunderstanding.",
+    )
+    return issue

@@ -3,7 +3,7 @@ from datetime import date, datetime, timedelta
 import pytest
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import Event
+from core.models import Event, User
 from organize.constants import ON_HOLD
 from organize.models import Coorganizer, EventApplication
 
@@ -482,3 +482,40 @@ def previous_application_approximate_date():
         main_organizer_last_name="Smith",
         status="deployed",
     )
+
+
+@pytest.fixture
+def main_organizer_is_blacklisted():
+    main_organizer = User.objects.create(
+        first_name="Anna",
+        last_name="Smith",
+        email="test@example.com",
+        password="password",
+        is_active=True,
+        is_superuser=False,
+        is_staff=True,
+        is_blacklisted=True,
+    )
+    return main_organizer
+
+
+@pytest.fixture
+def data_dict_new_organizer():
+    return {
+        "about_you": "I am a volunteer in my local meet-up.",
+        "why": "There are a few women who know how to code in our meet-up.",
+        "involvement": "coach",
+        "experience": "I have volunteered at my local meet-up.",
+        "main_organizer_email": "test@example.com",
+        "main_organizer_first_name": "Anna",
+        "main_organizer_last_name": "Smith",
+        "remote": True,
+        "date": ApproximateDate(2081, 3, 10),
+        "city": "Harare",
+        "country": "ZW",
+        "sponsorship": "Yes",
+        "coaches": "Yes",
+        "tools": "Zoom",
+        "diversity": "Reach out",
+        "additional": "No",
+    }
