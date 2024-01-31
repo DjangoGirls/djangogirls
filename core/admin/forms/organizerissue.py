@@ -1,7 +1,8 @@
 from django import forms
-from models.event import Event
-from models.organizer import OrganizerIssue
-from models.user import User
+
+from core.models.event import Event
+from core.models.organizerissue import OrganizerIssue
+from core.models.user import User
 
 
 class OrganizerIssueForm(forms.ModelForm):
@@ -21,5 +22,4 @@ class OrganizerIssueForm(forms.ModelForm):
             "issue_handled_by",
             "findings",
             "comments",
-            "last_updated",
         )

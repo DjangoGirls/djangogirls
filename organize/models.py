@@ -10,7 +10,7 @@ from django_extensions.db.fields import AutoSlugField
 
 from core import gmail_accounts
 from core.deploy_event import copy_event
-from core.models import Event
+from core.models import Event, User
 from core.utils import get_coordinates_for_city
 from core.validators import validate_approximatedate
 
@@ -21,8 +21,16 @@ from .managers import EventApplicationQuerySet
 
 class EventApplicationManager(models.Manager):
     def create(self, **data_dict):
+        main_organizer_email = data_dict["main_organizer_email"]
+        try:
+            main_organizer = User.objects.get(email=main_organizer_email)
+            if main_organizer.is_blacklisted:
+                data_dict["organizer_blacklisted"] = True
+        except User.DoesNotExist:
+            pass
+
         previous_application = (
-            EventApplication.objects.filter(main_organizer_email=data_dict["main_organizer_email"], status=NEW)
+            EventApplication.objects.filter(main_organizer_email=main_organizer_email, status=NEW)
             .order_by("-created_at")
             .first()
         )
@@ -43,7 +51,7 @@ class EventApplicationManager(models.Manager):
                 )
 
         previous_event = (
-            EventApplication.objects.filter(main_organizer_email=data_dict["main_organizer_email"], status=DEPLOYED)
+            EventApplication.objects.filter(main_organizer_email=main_organizer_email, status=DEPLOYED)
             .order_by("-date")
             .first()
         )
@@ -90,6 +98,9 @@ class EventApplication(models.Model):
     main_organizer_email = models.EmailField()
     main_organizer_first_name = models.CharField(max_length=30)
     main_organizer_last_name = models.CharField(max_length=30, blank=True, default="")
+    organizer_blacklisted = models.BooleanField(
+        default=False, verbose_name="Main organizer or co-organizer(s) blacklisted"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     # application fields
