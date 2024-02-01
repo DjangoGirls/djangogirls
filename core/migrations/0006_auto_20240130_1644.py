@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                     "organizer",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="oganizer",
+                        related_name="organizer",
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
