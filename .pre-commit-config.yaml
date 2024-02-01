@@ -23,10 +23,6 @@ repos:
      hooks:
        -  id: pyupgrade
           args: ["--py310-plus"]
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.1.0
-    hooks:
-      - id: codespell
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.14
     hooks:
