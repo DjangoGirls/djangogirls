@@ -31,4 +31,4 @@ class OrganizerIssue(models.Model):
     def reverse_blacklist_organizer(self):
         user = User.objects.get(id=self.organizer.id)
         user.is_blacklisted = False
-        user.save()
+        user.save(update_fields=["is_blacklisted"])
