@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from formtools.wizard.views import NamedUrlSessionWizardView
 
+from core.models import User
+
 from .emails import send_application_confirmation, send_application_notification
 from .forms import (
     ApplicationForm,
@@ -50,6 +52,13 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
             application = EventApplication.object.create(**data_dict)
             for organizer in organizers_data:
                 application.coorganizers.create(**organizer)
+                try:
+                    user = User.objects.get(email=organizer["email"])
+                    if user.is_blacklisted:
+                        application.organizer_blacklisted = True
+                        application.save()
+                except User.DoesNotExist:
+                    pass
             send_application_confirmation(application)
             send_application_notification(application)
         except ValidationError as error:

@@ -104,3 +104,7 @@ def test_event_lnglat(future_event):
 
     future_event.latlng = "sddasdasda"
     assert future_event.lnglat == ""
+
+
+def test_organizerissue_string_representation(organizer_issue):
+    assert str(organizer_issue) == f"{organizer_issue.organizer.get_full_name()} - {organizer_issue.event}"

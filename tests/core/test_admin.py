@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.urls import reverse
 
-from core.models import Event
+from core.models import Event, User
 
 
 def test_get_queryset_for_superuser(admin_client, events):
@@ -168,3 +168,15 @@ def test_unfreeze_events_action(admin_client, future_event):
 def test_event_str(admin_client, events):
     event = events[0]
     assert str(event) == f"{event.name}, {event.date}"
+
+
+def test_blacklist_organizer(organizer_issue, admin_client):
+    response = admin_client.get(reverse("admin:core_organizerissue_blacklist", args=(organizer_issue.pk,)))
+    assert response.status_code == 302
+    assert User.objects.filter(is_blacklisted=True).count() == 1
+
+
+def test_reverse_blacklist(reverse_blacklisting, admin_client):
+    response = admin_client.get(reverse("admin:core_organizerissue_reverse_blacklist", args=(reverse_blacklisting.pk,)))
+    assert response.status_code == 302
+    assert User.objects.filter(is_blacklisted=True).count() == 0

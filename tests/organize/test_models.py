@@ -126,3 +126,19 @@ def test_coorganizer_str(base_application):
         event_application=base_application, email="anna@example.com", first_name="Anna", last_name="Smith"
     )
     assert str(org) == f"{org.first_name} {org.last_name} <{org.email}>"
+
+
+def test_main_organizer_is_blacklisted(data_dict, main_organizer_is_blacklisted):
+    event = EventApplication.object.create(**data_dict)
+    assert event.organizer_blacklisted is True
+    assert EventApplication.object.count() == 1
+
+
+def test_main_organizer_is_not_blacklisted(data_dict):
+    EventApplication.object.create(**data_dict)
+    assert EventApplication.object.count() == 1
+
+
+def test_new_organizer(data_dict_new_organizer):
+    EventApplication.object.create(**data_dict_new_organizer)
+    assert EventApplication.object.count() == 1
