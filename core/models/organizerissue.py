@@ -6,7 +6,7 @@ from core.models.user import User
 
 class OrganizerIssue(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    organizer = models.ForeignKey(User, related_name="oganizer", on_delete=models.deletion.CASCADE)
+    organizer = models.ForeignKey(User, related_name="organizer", on_delete=models.deletion.CASCADE)
     event = models.ForeignKey(to=Event, null=True, blank=True, related_name="event", on_delete=models.deletion.SET_NULL)
     date_reported = models.DateField()
     reported_by = models.CharField(max_length=100)
