@@ -1,0 +1,3 @@
+[codespell]
+ignore-words-list = BA,FO,PTD
+skip = package-lock.json,*.js,*.js.html,*.po,./node_modules/*,./.idea/*,./.env/*,./.venv/*,templates/core/coc/fr.html
