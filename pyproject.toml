@@ -1,7 +1,3 @@
-[tool.black]
-line-length = 120
-target-version = ["py310"]
-
 [tool.ruff]
 # https://beta.ruff.rs/docs/configuration/
 line-length = 120
@@ -29,19 +25,20 @@ select = [
   "RUF"
 ]
 
-exclude = [
+extend-exclude = [
   ".eggs",
   ".git",
   ".mypy_cache",
   ".ruff_cache",
   ".env",
   ".venv",
+  "**locale/**",
   "**migrations/**",
   "node_modules",
   "venv",
 ]
 
-ignore = [
+extend-ignore = [
   "B006",  # Do not use mutable data structures for argument defaults
   "B011",  # tests use assert False
   "B019",  # Use of `functools.lru_cache` or `functools.cache` on methods can lead to memory leaks
@@ -87,3 +84,9 @@ known-first-party = [
   "story",
 ]
 extra-standard-library = ["dataclasses"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 80
