@@ -65,7 +65,7 @@ lint.extend-ignore = [
 "djangogirls/urls.py" = [
   "RUF005"  # Consider iterable unpacking instead of concatenation
 ]
-"djangogirls/tests/core/test_admin.py" = [
+"tests/core/test_admin.py" = [
   "RUF017"  # Avoid quadratic list summation
 ]
 
