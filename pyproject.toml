@@ -25,7 +25,7 @@ lint.select = [
   "RUF"
 ]
 
-lint.extend-exclude = [
+extend-exclude = [
   ".eggs",
   ".git",
   ".mypy_cache",
@@ -38,7 +38,7 @@ lint.extend-exclude = [
   "venv",
 ]
 
-extend-ignore = [
+lint.extend-ignore = [
   "B006",  # Do not use mutable data structures for argument defaults
   "B011",  # tests use assert False
   "B019",  # Use of `functools.lru_cache` or `functools.cache` on methods can lead to memory leaks
