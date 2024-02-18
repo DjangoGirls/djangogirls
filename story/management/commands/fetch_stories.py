@@ -39,10 +39,13 @@ class Command(BaseCommand):
                 story = Story(name=name, post_url=post_url, content=_post, is_story=is_story)
 
                 if image_url:
-                    img = NamedTemporaryFile(delete=True)
-                    img.write(urlopen(image_url).read())
-                    img.flush()
-                    story.image.save(image_url.split("/")[-1], File(img))
+                    try:
+                        with NamedTemporaryFile(delete=True) as img:
+                            img.write(urlopen(image_url).read())
+                            img.flush()
+                            story.image.save(image_url.split("/")[-1], File(img))
+                    except Exception as e:
+                        print(f"Failed to fetch image from {image_url}: {e}")
 
                 story.save()
 
