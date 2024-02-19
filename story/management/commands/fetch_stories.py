@@ -1,3 +1,4 @@
+from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
 
 import requests
@@ -5,7 +6,6 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
 from pyquery import PyQuery as pq  # noqa: N813
-from urllib.error import URLError, HTTPError
 
 from story.models import Story
 
