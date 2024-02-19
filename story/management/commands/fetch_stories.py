@@ -1,4 +1,4 @@
-from urllib.error import URLError, HTTPError
+from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
 
 import requests
