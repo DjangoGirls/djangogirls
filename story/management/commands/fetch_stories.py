@@ -5,6 +5,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
 from pyquery import PyQuery as pq  # noqa: N813
+from urllib.error import URLError, HTTPError
 
 from story.models import Story
 
@@ -44,7 +45,7 @@ class Command(BaseCommand):
                             img.write(urlopen(image_url).read())
                             img.flush()
                             story.image.save(image_url.split("/")[-1], File(img))
-                    except Exception as e:
+                    except (HTTPError, URLError, Exception) as e:
                         print(f"Failed to fetch image from {image_url}: {e}")
 
                 story.save()
