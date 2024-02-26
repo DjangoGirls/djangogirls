@@ -14,13 +14,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         today = date.today()
-        year = date.year()
-        if today == f"12/12/{year}":
+        year = today.year
+        if today == date(year, 12, 12):
             try:
-                sponsors = GlobalPartner.objects.exclude(sponsor_level_annual="").filter(is_displayed=True)
+                sponsors = GlobalPartner.objects.exclude(is_active=False).filter(is_displayed=True)
                 for sponsor in sponsors:
                     send_thank_you_email(sponsor.contact_person, sponsor.contact_email)
                     sponsor.contacted = False
                     sponsor.save(update_fields=["contacted"])
             except GlobalPartner.DoesNotExist:
-                self.stdout.write(self.style.error("No sponsor renewal emails to email at this point."))
+                self.stdout.write(self.style.error("No thank you emails to send at this point."))

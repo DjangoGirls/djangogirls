@@ -12,8 +12,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            sponsors = GlobalPartner.objects.exclude(sponsor_level_annual="").filter(
-                promotional_materials_requested=False
+            sponsors = (
+                GlobalPartner.objects.exclude(prospective_sponsor=True)
+                .filter(promotional_materials_requested=False)
+                .filter(is_active=True)
             )
             for sponsor in sponsors:
                 send_promotional_material_email(

@@ -25,13 +25,17 @@ def send_renewal_email(contact_person, contact_email):
     """Sends annual sponsors email asking if they are interested in supporting
     our work in the new year.
     """
-    subject = "Will you be supporting us again in 2023?"
+    subject = f"Will you be supporting us again in {year}?"
     template = "emails/globalpartners/renewal_email.html"
     send_sponsor_email(contact_person, contact_email, template, subject)
 
 
 def send_promotional_material_email(
-    contact_person, contact_email, prospective_sponsor, sponsor_level_annual, errors=None
+    contact_person,
+    contact_email,
+    prospective_sponsor,
+    sponsor_level_annual,
+    errors=None,
 ):
     """Sends new sponsors/patreon sponsors asking them for materials to use in
     announcing/promoting the sponsor."""
