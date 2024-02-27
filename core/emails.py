@@ -22,6 +22,7 @@ def notify_new_user(user, event, password, errors=None):
             "user": user,
             "event": event,
             "password": password,
+            "slack_invite_link": settings.SLACK_INVITE_LINK,
             "errors": errors,
         },
     )

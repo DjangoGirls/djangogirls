@@ -36,8 +36,10 @@ class GlobalPartner(models.Model):
     contacted = models.BooleanField(default=False)
     date_contacted = models.DateField(blank=True, null=True)
     next_renewal_date = models.DateField(blank=True, null=True)
+    promotional_materials_requested = models.BooleanField(default=False)
     logo = models.ImageField(upload_to="uploads", blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True, null=True)
+    is_active = models.BooleanField(default=False)
     is_displayed = models.BooleanField(default=False)
     website_url = models.URLField(blank=True, null=True)
     style = models.CharField(max_length=50, blank=True, null=True)
@@ -60,7 +62,10 @@ class GlobalPartner(models.Model):
 
     def send_promotional_material_email(self):
         send_promotional_material_email(
-            self.contact_person, self.contact_email, self.prospective_sponsor, self.sponsor_level_annual
+            self.contact_person,
+            self.contact_email,
+            self.prospective_sponsor,
+            self.sponsor_level_annual,
         )
         self.update_details()
 

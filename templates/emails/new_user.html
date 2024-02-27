@@ -29,7 +29,12 @@
 {% endblocktrans %}
 </p>
 
-<p>{% trans "We also invited you to Django Girls Slack, where we chat, communicate and meet each other!" %}</p>
+<p>
+  {% blocktrans trimmed %}
+    Click <a href="{{ slack_invite_link }}">this link</a> to join <a href="{{ slack_invite_link }}">Django Girls Slack</a>, 
+    where we chat, communicate and meet each other!
+  {% endblocktrans %}
+  </p>
 
 <p>
 {% blocktrans trimmed %}
