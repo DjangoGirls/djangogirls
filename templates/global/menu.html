@@ -1,39 +1,56 @@
 {% load i18n static %}
 
-<div class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-white" role="navigation">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="logo">
-                <a href="{% url 'core:index' %}">
-                    <img src="{% static 'img/global/logo.png' %}" alt="Django Girls" />
+        <a class="navbar-brand logo" href="{% url 'core:index' %}"><img src="{% static 'img/global/logo.png' %}" alt="Django Girls" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle px-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% trans "Support us" %} <span class="caret"></span>
                 </a>
-            </div>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'core:events' %}">{% trans "Events" %}</a></li>
-                <li><a href="{% url 'core:resources' %}">{% trans "Resources" %}</a></li>
-                <li><a href="{% url 'organize:index' %}">{% trans "Organize" %}</a></li>
-                <li><a href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
-                <li><a href="https://blog.djangogirls.org/">{% trans "Blog" %}</a></li>
-                <li><a href="{% url 'jobboard:index' %}">{% trans "Jobs" %}</a></li>
-                <li><a href="{% url 'core:contribute' %}">{% trans "Contribute" %}</a></li>
-                
-                 <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Donate to us 💕" %} <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                         <li><a href="{% url 'donations:index' %}">{% trans "Donate" %}</a></li>
-                         <li><a href="https://www.patreon.com/djangogirls">{% trans "Our Patreon page" %}</a></li>
-                         <li><a href="{% url 'donations:sponsors' %}">{% trans "Our Sponsors" %}</a></li>
-                     </ul>
-                 </li>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'donations:index' %}">{% trans "Corporate Sponsorships" %}</a></li>
+                    <li><a class="dropdown-item" href="#">{% trans "Donate to us" %}</a></li>
+                    <li><a class="dropdown-item" href="https://www.patreon.com/djangogirls">{% trans "Our Patreon page" %}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'donations:sponsors' %}">{% trans "Our Global Partners" %}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown px-4">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% trans "Volunteer" %} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'organize:index' %}">{% trans "Organize a workshop" %}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'core:contribute' %}">{% trans "Contribute" %}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item"href="{% url 'core:resources' %}">{% trans "Resources" %}</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item px-4">
+            <a class="nav-link" href="{% url 'jobboard:index' %}">{% trans "Tech Jobs Board" %}</a>
+            </li>
+            <li class="nav-item dropdown px-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% trans "What's new?" %}  <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'core:events' %}">{% trans "Events" %}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
+                <li><a class="dropdown-item" href="https://blog.djangogirls.org/">{% trans "Our blog" %}</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
+            </li>
+            <li class="nav-item px-4">
+                <a class="nav-link" href="{% url 'contact:landing' %}">{% trans "Contact us" %}</a>
+            </li>
+        </ul>
+        
+        </div>
     </div>
-</div>
+    </nav>

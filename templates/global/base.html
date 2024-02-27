@@ -22,13 +22,14 @@
   <meta property="og:description" content="{% block og_description %}{% trans "Join us and become a female developer! Build your first website in Python and Django in a friendly, safe environment." %}{% endblock %}" />
   <meta property="og:image" content="{% block og_image %}https://raw.githubusercontent.com/olasitarska/djangogirls/gh-pages/resources/graphics/logo_square.png{% endblock %}" />
 
-  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Lora:400,700,400i,700i/Roboto:300,400,300i,400i">
-  {% block main_stylesheet %}<link rel="stylesheet" type="text/css" href="{% static_rev 'css/global.css' %}" media="screen">{% endblock %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+  {% block main_stylesheet %}<link rel="stylesheet" type="text/css" href="{% static_rev 'bootstrap5/css/bootstrap.min.css' %}" media="screen">{% endblock %}
   {% block extra_css %}{% endblock %}
 
-  <script type="text/javascript" src="{% static 'vendor/js/jquery.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vendor/js/bootstrap.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vendor/js/sss.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+
   {% block extra_js %}{% endblock %}
 </head>
 <body>
