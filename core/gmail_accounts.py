@@ -99,7 +99,7 @@ def migrate_gmail_account(new_event, slug):
         # The old email address is kept as an alias to the new one, but we don't want this.
         service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
     except HttpError:
-        return create_gmail_account(new_event)
+        pass
 
     if old_event:
         old_event.email = new_email
