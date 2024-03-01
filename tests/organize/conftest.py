@@ -506,3 +506,18 @@ def data_dict_new_organizer():
         "diversity": "Reach out",
         "additional": "No",
     }
+
+
+@pytest.fixture
+def workshop_form_invalid_date():
+    data = {
+        "date": "2060-03-00",
+        "city": "Gaberone",
+        "country": "BW",
+        "venue": "Baixa Mall",
+        "sponsorship": "We have a few local companies we can approach.",
+        "coaches": "We have many Python developers here.",
+        "diversity": "Promote on social media and use videos",
+        "additional": "None",
+    }
+    return data

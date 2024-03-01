@@ -51,3 +51,9 @@ def test_workshop_form_date_year_only(workshop_form_date_year_only):
     form = WorkshopForm(data=workshop_form_date_year_only)
     assert not form.is_valid()
     assert form.errors["date"] == ["Event date can't be a year only. " "Please, provide at least a month and a year."]
+
+
+def test_workshop_form_invalid_date(workshop_form_invalid_date):
+    form = WorkshopForm(data=workshop_form_invalid_date)
+    assert not form.is_valid()
+    assert form.errors["date"] == ["Please enter a valid date."]

@@ -9,6 +9,8 @@ today = date.today()
 def validate_approximatedate(e_date):
     if e_date.month == 0:
         raise ValidationError(_("Event date can't be a year only. " "Please, provide at least a month and a year."))
+    if e_date.day == 0:
+        raise ValidationError(_("Please enter a valid date, which is at least 3 months (90 days) from now."))
 
 
 def validate_event_date(e_date):
