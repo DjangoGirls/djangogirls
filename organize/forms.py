@@ -103,7 +103,10 @@ class WorkshopForm(forms.Form):
         date = self.cleaned_data.get("date")
         validate_approximatedate(date)
         # Check if the event is in the future
-        validate_future_date(date)
+        try:
+            validate_future_date(date)
+        except ValueError:
+            return ValueError(_("Please enter a valid date, which is at least 3 months (90 days) from now."))
         # Check if date is 3 months away
         validate_event_date(date)
         return date
