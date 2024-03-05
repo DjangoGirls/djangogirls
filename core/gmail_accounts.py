@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -86,15 +88,18 @@ def migrate_gmail_account(new_event, slug):
     if not service:
         return None
 
-    service.users().patch(
-        userKey=old_email,
-        body={
-            "primaryEmail": new_email,
-        },
-    ).execute()
+    try:
+        service.users().patch(
+            userKey=old_email,
+            body={
+                "primaryEmail": new_email,
+            },
+        ).execute()
 
-    # The old email address is kept as an alias to the new one, but we don't want this.
-    service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
+        # The old email address is kept as an alias to the new one, but we don't want this.
+        service.users().aliases().delete(userKey=new_email, alias=old_email).execute()
+    except HttpError:
+        pass
 
     if old_event:
         old_event.email = new_email
@@ -123,12 +128,14 @@ def get_or_create_gmail(event_application, event):
     """
     if get_gmail_account(event_application.website_slug) or get_gmail_account(event.page_url):
         # account exists, do we need to migrate?
+        p = re.compile(r"\W\d+")
+        slug = p.sub(event_application.website_slug)
         if event_application.has_past_team_members(event):
             # has old organizers, so no need to do anything
-            return make_email(event_application.website_slug), None
+            return make_email(slug), None
         else:
             # migrate old email
-            migrate_gmail_account(event, event_application.website_slug)
+            migrate_gmail_account(event, slug)
             # create new account
             return create_gmail_account(event)
     else:
