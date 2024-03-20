@@ -12,12 +12,10 @@ attrs==22.2.0
     # via pytest
 autoflake==1.4
     # via -r requirements.in
-black==22.3.0
+black==24.3.0
     # via -r requirements.in
 bleach[css]==5.0.1
-    # via
-    #   bleach
-    #   django-bleach
+    # via django-bleach
 boto3==1.26.85
     # via django-storages
 botocore==1.29.85
@@ -92,9 +90,7 @@ django-recaptcha==3.0.0
 django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
-    # via
-    #   -r requirements.in
-    #   django-storages
+    # via -r requirements.in
 django-tinymce==3.5.0
     # via -r requirements.in
 django-unused-media==0.1.13
@@ -168,6 +164,7 @@ oauthlib==3.2.2
     # via requests-oauthlib
 packaging==23.0
     # via
+    #   black
     #   build
     #   pytest
 pathspec==0.11.0
@@ -308,7 +305,9 @@ tomli==2.0.1
     #   build
     #   pyproject-hooks
 typing-extensions==4.5.0
-    # via django-countries
+    # via
+    #   black
+    #   django-countries
 uritemplate==4.1.1
     # via google-api-python-client
 uritools==4.0.1
