@@ -117,3 +117,7 @@ def suspend(request):
 
 def event_funding(request):
     return render(request, "organize/event_funding.html", {})
+
+
+def slack(request):
+    return render(request, "organize/slack.html")

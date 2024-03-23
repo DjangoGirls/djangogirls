@@ -2,40 +2,40 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white" role="navigation">
     <div class="container">
-        <a class="navbar-brand logo" href="{% url 'core:index' %}"><img src="{% static 'img/global/logo.png' %}" alt="Django Girls" /></a>
+        <a class="navbar-brand logo" href="{% url 'core:index' %}"><img src="{% static 'img/global/logo+.png' %}" alt="Django Girls" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle px-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {% trans "Support us" %} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{% url 'donations:index' %}">{% trans "Corporate Sponsorships" %}</a></li>
-                    <li><a class="dropdown-item" href="#">{% trans "Donate to us" %}</a></li>
-                    <li><a class="dropdown-item" href="https://www.patreon.com/djangogirls">{% trans "Our Patreon page" %}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'donations:donate' %}">{% trans "Donate to us" %}</a></li>
+                    <li><a class="dropdown-item" href="https://www.patreon.com/djangogirls">{% trans "Our Patreon Page" %}</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'donations:sponsors' %}">{% trans "Our Global Partners" %}</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown px-4">
+            <li class="nav-item dropdown px-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {% trans "Volunteer" %} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'organize:index' %}">{% trans "Organize a workshop" %}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'organize:index' %}">{% trans "Organize a Workshop" %}</a></li>
                     <li><a class="dropdown-item" href="{% url 'core:contribute' %}">{% trans "Contribute" %}</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item"href="{% url 'core:resources' %}">{% trans "Resources" %}</a></li>
                 </ul>
             </li>
 
-            <li class="nav-item px-4">
+            <li class="nav-item px-2">
             <a class="nav-link" href="{% url 'jobboard:index' %}">{% trans "Tech Jobs Board" %}</a>
             </li>
-            <li class="nav-item dropdown px-4">
+            <li class="nav-item dropdown px-2">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% trans "What's new?" %}  <span class="caret"></span>
             </a>
@@ -46,7 +46,7 @@
                 <li><a class="dropdown-item" href="https://blog.djangogirls.org/">{% trans "Our blog" %}</a></li>
             </ul>
             </li>
-            <li class="nav-item px-4">
+            <li class="nav-item px-2">
                 <a class="nav-link" href="{% url 'contact:landing' %}">{% trans "Contact us" %}</a>
             </li>
         </ul>
