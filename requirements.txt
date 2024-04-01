@@ -15,9 +15,7 @@ autoflake==1.4
 black==22.3.0
     # via -r requirements.in
 bleach[css]==5.0.1
-    # via
-    #   bleach
-    #   django-bleach
+    # via django-bleach
 boto3==1.26.85
     # via django-storages
 botocore==1.29.85
@@ -49,7 +47,7 @@ distlib==0.3.6
     # via virtualenv
 dj-database-url==0.5.0
     # via -r requirements.in
-django==3.2.23
+django==3.2.25
     # via
     #   -r requirements.in
     #   django-admin-sortable2
@@ -92,9 +90,7 @@ django-recaptcha==3.0.0
 django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
-    # via
-    #   -r requirements.in
-    #   django-storages
+    # via -r requirements.in
 django-tinymce==3.5.0
     # via -r requirements.in
 django-unused-media==0.1.13
