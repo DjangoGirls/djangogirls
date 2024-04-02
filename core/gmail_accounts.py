@@ -129,7 +129,7 @@ def get_or_create_gmail(event_application, event):
     if get_gmail_account(event_application.website_slug) or get_gmail_account(event.page_url):
         # account exists, do we need to migrate?
         p = re.compile(r"\W\d+")
-        slug = p.sub(event_application.website_slug)
+        slug = p.sub("", event_application.website_slug)
         if event_application.has_past_team_members(event):
             # has old organizers, so no need to do anything
             return make_email(slug), None
