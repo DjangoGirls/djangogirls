@@ -95,7 +95,7 @@ class EventAdmin(admin.ModelAdmin):
     @admin.display(description=_("page URL"))
     def full_url(self, obj):
         url = reverse("core:event", kwargs={"page_url": obj.page_url})
-        url = f"https://djangogirls.org{url}"  # noqa: E231
+        url = f"https://djangogirls.org{url}"
         return mark_safe(f'<a href="{url}">{url}</a>')
 
     def get_readonly_fields(self, request, obj=None):

@@ -91,7 +91,7 @@ POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 
 DATABASES = {}
 DATABASES["default"] = dj_database_url.config(
-    default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}"  # noqa: E231
+    default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}"
     f"/{POSTGRES_DB}"
 )
 
