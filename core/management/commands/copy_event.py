@@ -111,6 +111,8 @@ def command():
     brag_on_slack_bang(new_event.city, new_event.country, new_event.team.all())
 
     click.echo(
-        click.style(f"Website is ready here: https://djangogirls.org/{new_event.page_url}", bold=True, fg="green")
+        click.style(
+            f"Website is ready here: https://djangogirls.org/{new_event.page_url}", bold=True, fg="green"
+        )
     )
     click.echo("Congrats on yet another event!")

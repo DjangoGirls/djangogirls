@@ -2,6 +2,7 @@ import pytest
 from django.db import connection
 from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
+from django.utils import translation
 
 from applications.models import Application, Score
 from applications.views import application_list
@@ -35,6 +36,7 @@ def test_organiser_only_decorator_without_page_url(rf, user, future_event):
 
 
 def test_organiser_menu_in_applications_list(admin_client, future_event):
+    translation.activate("en")
     applications_url = reverse("applications:applications", kwargs={"page_url": future_event.page_url})
     resp = admin_client.get(applications_url)
     messaging_url = reverse("applications:communication", kwargs={"page_url": future_event.page_url})
