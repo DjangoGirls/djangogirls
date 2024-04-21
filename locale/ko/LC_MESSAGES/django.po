@@ -649,7 +649,7 @@ msgstr ""
 #: patreonmanager/admin.py:36 patreonmanager/admin.py:41
 msgid "%d payment"
 msgid_plural "%d payments"
-msgstr[other] ""
+msgstr[0] ""
 
 #: patreonmanager/admin.py:32
 msgid "Payments"
@@ -666,7 +666,7 @@ msgstr ""
 #: patreonmanager/admin.py:71
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
-msgstr[other] ""
+msgstr[0] ""
 
 #: patreonmanager/admin.py:68
 msgid "Mark selected payments as completed"
@@ -763,7 +763,7 @@ msgid "\n"
 msgid_plural "\n"
 "                %(counter)s payments\n"
 "            "
-msgstr[other] ""
+msgstr[0] ""
 
 #: pictures/models.py:25
 msgid "Event cover (356 x 210px)"
