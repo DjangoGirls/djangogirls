@@ -296,7 +296,7 @@ class Email(models.Model):
         return self.subject
 
     def get_rsvp_link(self, code):
-        return f"http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}"
+        return f"http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}"  # noqa: E231
 
     def add_rsvp_links(self, body, application):
         body = body.replace("[rsvp-url-yes]", self.get_rsvp_link(application.get_rsvp_yes_code()))
