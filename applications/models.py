@@ -53,7 +53,7 @@ class Form(models.Model):
         return f"Application form for {self.event.name}"
 
     def save(self, *args, **kwargs):
-        is_form_new = False if self.pk else True
+        is_form_new = not self.pk
         super().save(*args, **kwargs)
 
         if is_form_new:
@@ -91,12 +91,12 @@ class Question(models.Model):
         blank=True,
         default="",
         verbose_name=_("List all available options, separated with semicolon (;)"),
-        help_text=_("Used only with 'Choices' question type"),
+        help_text=_('Used only with "Choices" question type'),
     )
     is_multiple_choice = models.BooleanField(
         default=False,
         verbose_name=_("Are there multiple choices allowed?"),
-        help_text=_("Used only with 'Choices' question type"),
+        help_text=_('Used only with "Choices" question type'),
     )
     order = models.PositiveIntegerField(help_text=_("Position of the question"))
 
@@ -158,6 +158,9 @@ class Application(models.Model):
                 name="unique_form_email_email_not_null",
             )
         ]
+
+    def __str__(self):
+        return str(self.pk)
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -231,9 +234,6 @@ class Application(models.Model):
         """
         return self.scores.filter(user=user, score__gt=0).exists()
 
-    def __str__(self):
-        return str(self.pk)
-
 
 class Answer(models.Model):
     application = models.ForeignKey(Application, null=False, blank=False, on_delete=models.deletion.PROTECT)
@@ -242,6 +242,9 @@ class Answer(models.Model):
 
     class Meta:
         ordering = ("question__order",)
+
+    def __str__(self):
+        return f"{self.application} - {self.question}"
 
 
 class Score(models.Model):
@@ -263,6 +266,9 @@ class Score(models.Model):
             "user",
             "application",
         )
+
+    def __str__(self):
+        return f"{self.user} - {self.application}. Score {self.score}"
 
 
 class Email(models.Model):
@@ -326,10 +332,11 @@ class Email(models.Model):
 
                 msg = EmailMessage(self.subject, body, self.sent_from, [recipient.email])
                 msg.content_subtype = "html"
+                # TODO: What's the possible exception here? Catch specifics
                 try:
                     msg.send()
                     successfuly_sent.append(recipient.email)
-                except:  # TODO: What's the possible exception here? Catch specifics
+                except:  # noqa: E722
                     failed_to_sent.append(recipient.email)
 
         self.sent = timezone.now()

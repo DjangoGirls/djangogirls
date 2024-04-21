@@ -1,0 +1,24 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+{% endblock %}
+
+{% block object-tools %}
+{% if original %}
+<div class="row mb-3">
+    <h4 class="italic-title">{% trans "Triaging" %}</h4>     
+        <div class="box save-box">      
+            <a class="btn btn-outline-danger" href="{% url 'admin:core_organizerissue_blacklist' original.pk %}">
+              {% trans "Blacklist Organizer" %}
+            </a>
+            <a class="btn btn-outline-success" href="{% url 'admin:core_organizerissue_reverse_blacklist' original.pk %}">
+              {% trans "Reverse Blacklisting Organizer" %}
+            </a>
+      </div>
+    </div>
+{% endif %}
+{{ block.super }}
+{% endblock %}

@@ -18,7 +18,7 @@ def organiser_only(function):
         page_url = kwargs.get("page_url")
 
         if not page_url:
-            raise ValueError(_('"page_url" slug must be present to user this decorator.'))
+            raise ValueError(_('"page_url" slug must be present to use this decorator.'))
 
         if not request.user.is_authenticated:
             return redirect("core:event", page_url)

@@ -11,4 +11,5 @@ urlpatterns = [
     path("form/<slug:step>/", views.organize_form_wizard, name="form_step"),
     # path('remote_or_in_person/', views.remote_or_in_person, name='remote_or_in_person'),
     path("suspend/", views.suspend, name="suspend"),
+    path("event_funding/", views.event_funding, name="event_funding"),
 ]

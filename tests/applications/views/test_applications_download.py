@@ -51,12 +51,8 @@ def test_download_applications_list_with_question_added(
 
     # now create a new application with answer to the new question
     new_application = Application.objects.create(form=future_event_form, state="submitted")
-    new_application_questionx_answer = Answer.objects.create(  # NOQA
-        application=new_application, question=questionx, answer="answer to questionx for app 5"
-    )
-    new_application_5_last_answer = Answer.objects.create(  # NOQA
-        application=new_application, question=last_question, answer="answer to last for app 5"
-    )
+    Answer.objects.create(application=new_application, question=questionx, answer="answer to questionx for app 5")
+    Answer.objects.create(application=new_application, question=last_question, answer="answer to last for app 5")
 
     resp = admin_client.get(applications_url)
 
@@ -80,3 +76,13 @@ def test_download_applications_list_with_question_added(
     # column
     assert csv_list[5][17] == "answer to last for app 5"
     assert csv_list[5][18] == "answer to questionx for app 5"
+
+
+def test_answer_str(admin_client, application_submitted, future_event, future_event_form, applications):
+    last_question = future_event_form.question_set.last()
+
+    new_application = Application.objects.create(form=future_event_form, state="submitted")
+    answer = Answer.objects.create(
+        application=new_application, question=last_question, answer="answer to last for app 5"
+    )
+    assert str(answer) == f"{answer.application} - {answer.question}"

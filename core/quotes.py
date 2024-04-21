@@ -12,7 +12,7 @@ DONOR_QUOTES = [
     },
     {
         "text": "Django Girls Lagos brought about the creation of a Nigerian Python community that "
-        "didn’t exist before. It brought together a lot of great minds who are passionate "
+        "didn't exist before. It brought together a lot of great minds who are passionate "
         "about promoting the use of Python in Nigeria.",
         "name": "Aisha Bello",
         "url": "http://blog.djangogirls.org/post/138923168468/your-django-story-meet-aisha-bello",
@@ -27,7 +27,7 @@ DONOR_QUOTES = [
         "url": "http://blog.djangogirls.org/post/170349070483/your-django-story-meet-muriel-green",
     },
     {
-        "text": "Don’t get scared, get started. Almost everything is doable by anyone. Most of the"
+        "text": "Don't get scared, get started. Almost everything is doable by anyone. Most of the"
         " things are easy to learn. So start doing what you like. There are lot of things"
         " on the web to help you out. Just be truthful to yourself.",
         "name": "Tapasweni Pathak",
@@ -48,7 +48,7 @@ DONOR_QUOTES = [
         "url": "http://blog.djangogirls.org/post/137758290583/your-django-story-meet-p%C3%A4ivi-suomela",
     },
     {
-        "text": "You don’t have know everything, you just have to be open to learning anything.",
+        "text": "You don't have know everything, you just have to be open to learning anything.",
         "name": "Heather Bryant",
         "url": "http://blog.djangogirls.org/post/137097700508/your-django-story-meet-heather-bryant",
     },

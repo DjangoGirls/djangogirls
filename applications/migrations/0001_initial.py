@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []
@@ -154,7 +153,7 @@ class Migration(migrations.Migration):
                     models.TextField(
                         blank=True,
                         default="",
-                        help_text="Used only with 'Choices' question type",
+                        help_text='Used only with "Choices" question type',
                         verbose_name="List all available options, separated with semicolon (;)",
                     ),
                 ),
@@ -162,7 +161,7 @@ class Migration(migrations.Migration):
                     "is_multiple_choice",
                     models.BooleanField(
                         default=False,
-                        help_text="Used only with 'Choices' question type",
+                        help_text='Used only with "Choices" question type',
                         verbose_name="Are there multiple choices allowed?",
                     ),
                 ),

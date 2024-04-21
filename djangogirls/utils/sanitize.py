@@ -74,7 +74,7 @@ def sanitize_bool(value, strict=False):
     elif isinstance(value, int):
         return value > 0
 
-    if isinstance(value, (list, tuple)) and len(value) == 1:
+    if isinstance(value, list | tuple) and len(value) == 1:
         # recurse
         return sanitize_bool(value[0], strict=strict)
 

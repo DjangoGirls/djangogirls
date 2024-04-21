@@ -47,7 +47,7 @@ distlib==0.3.6
     # via virtualenv
 dj-database-url==0.5.0
     # via -r requirements.in
-django==3.2.20
+django==3.2.25
     # via
     #   -r requirements.in
     #   django-admin-sortable2
@@ -95,7 +95,7 @@ django-tinymce==3.5.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
-dnspython==2.3.0
+dnspython==2.6.1
     # via -r requirements.in
 easy-thumbnails==2.8.5
     # via -r requirements.in
@@ -168,7 +168,7 @@ packaging==23.0
     #   pytest
 pathspec==0.11.0
     # via black
-pillow==9.3.0
+pillow==10.2.0
     # via
     #   -r requirements.in
     #   easy-thumbnails
@@ -183,7 +183,7 @@ pluggy==1.0.0
     # via pytest
 pre-commit==2.21.0
     # via -r requirements.in
-protobuf==4.22.0
+protobuf==4.24.4
     # via
     #   google-api-core
     #   googleapis-common-protos
@@ -284,7 +284,7 @@ six==1.16.0
     #   vcrpy
 slack-sdk==3.19.5
     # via -r requirements.in
-sqlparse==0.4.3
+sqlparse==0.5.0
     # via
     #   django
     #   django-debug-toolbar
@@ -298,6 +298,11 @@ toml==0.10.2
     # via
     #   pytest
     #   pytest-cov
+tomli==2.0.1
+    # via
+    #   black
+    #   build
+    #   pyproject-hooks
 typing-extensions==4.5.0
     # via django-countries
 uritemplate==4.1.1
@@ -306,7 +311,7 @@ uritools==4.0.1
     # via urlextract
 urlextract==1.8.0
     # via -r requirements.in
-urllib3==1.26.14
+urllib3==1.26.18
     # via
     #   botocore
     #   requests

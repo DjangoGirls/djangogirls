@@ -72,11 +72,7 @@ def event(request, page_url):
     user_is_organizer = user.is_authenticated and event_obj.has_organizer(user)
     is_preview = "preview" in request.GET
     can_preview = user.is_superuser or user_is_organizer or is_preview
-
-    if event_obj.date:
-        is_past = event_obj.date <= now_approx
-    else:
-        is_past = False
+    is_past = event_obj.date <= now_approx if event_obj.date else False
 
     if not (event_obj.is_page_live or can_preview) or event_obj.is_frozen:
         return render(
@@ -177,8 +173,8 @@ def coc_legacy(request, lang=None):
     template_name = f"core/coc/{lang}.html"
     try:
         return render(request, template_name)
-    except TemplateDoesNotExist:
-        raise Http404(_("No translation for language %(lang)s") % {"lang": lang})
+    except TemplateDoesNotExist as err:
+        raise Http404(_("No translation for language %(lang)s") % {"lang": lang}) from err
 
 
 # This view's URL is commented out, so avoid coverage hit by commenting out the view also

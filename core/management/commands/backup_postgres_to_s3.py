@@ -10,10 +10,10 @@ class Command(BaseCommand):
     help = "Backs up PostgreSQL database to AWS S3"
 
     def handle(self, *args, **options):
-        AWS_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")
-        AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY")
-        AWS_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME")
-        AWS_BUCKET_NAME = os.environ.get("AWS_S3_BUCKET_NAME")
+        AWS_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")  # noqa: N806
+        AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY")  # noqa: N806
+        AWS_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME")  # noqa: N806
+        AWS_BUCKET_NAME = os.environ.get("AWS_S3_BUCKET_NAME")  # noqa: N806
 
         session = Session(
             aws_access_key_id=AWS_ACCESS_KEY_ID,

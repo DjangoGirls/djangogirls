@@ -9,14 +9,13 @@ from core.validators import (
     validate_approximatedate,
     validate_event_date,
     validate_future_date,
-    validate_local_restrictions,
 )
 
 from .constants import INVOLVEMENT_CHOICES
 
 PREVIOUS_ORGANIZER_CHOICES = (
     (True, _("Yes, I organized Django Girls")),
-    (False, _("No, it’s my first time organizing Django Girls")),
+    (False, _("No, it's my first time organizing Django Girls")),
 )
 
 WORKSHOP_CHOICES = ((True, _("Remote")), (False, _("In-Person")))
@@ -93,21 +92,21 @@ OrganizersFormSet = forms.formset_factory(
 class WorkshopForm(forms.Form):
     date = ApproximateDateFormField(widget=forms.TextInput(attrs={"class": "compact-input"}))
     city = forms.CharField(required=True, max_length=200, widget=forms.TextInput(attrs={"class": "compact-input"}))
-    country = LazyTypedChoiceField(choices=[(None, "Choose country")] + list(countries))
+    country = LazyTypedChoiceField(choices=[(None, _("Choose country")), *list(countries)])
     venue = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     sponsorship = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     coaches = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
-    local_restrictions = forms.CharField(required=True, widget=forms.Textarea(attrs={"class": "compact-input"}))
-    safety = forms.CharField(required=True, widget=forms.Textarea(attrs={"class": "compact-input"}))
     diversity = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     additional = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
-    confirm_covid_19_protocols = forms.BooleanField()
 
     def clean_date(self):
         date = self.cleaned_data.get("date")
         validate_approximatedate(date)
         # Check if the event is in the future
-        validate_future_date(date)
+        try:
+            validate_future_date(date)
+        except ValueError:
+            return ValueError(_("Please enter a valid date, which is at least 3 months (90 days) from now."))
         # Check if date is 3 months away
         validate_event_date(date)
         return date
@@ -115,17 +114,11 @@ class WorkshopForm(forms.Form):
     def get_data_for_saving(self):
         return self.cleaned_data
 
-    def clean_local_restrictions(self):
-        local_restrictions = self.cleaned_data.get("local_restrictions")
-        # Check if organizer provides link to government website
-        validate_local_restrictions(local_restrictions)
-        return local_restrictions
-
 
 class RemoteWorkshopForm(forms.Form):
     date = ApproximateDateFormField(widget=forms.TextInput(attrs={"class": "compact-input"}))
     city = forms.CharField(required=True, max_length=200, widget=forms.TextInput(attrs={"class": "compact-input"}))
-    country = LazyTypedChoiceField(choices=[(None, _("Choose country"))] + list(countries))
+    country = LazyTypedChoiceField(choices=[(None, _("Choose country")), *list(countries)])
     sponsorship = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     coaches = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))
     tools = forms.CharField(widget=forms.Textarea(attrs={"class": "compact-input"}))

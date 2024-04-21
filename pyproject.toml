@@ -1,22 +1,95 @@
-[tool.black]
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
 line-length = 120
-target-version = ["py310"]
-
-[tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-ensure_newline_before_comments = true
-line_length = 120
-skip = [
-    ".git",
-    ".venv",
-    ".github",
-    "mediafiles",
-    "static",
-    "templates",
-    "locale",
-    "gulp",
-    "node_modules",
+lint.select = [
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "FBT",  # flake8-boolean-trap
+  "B",    # flake8-bugbear
+  "C",    # flake8-comprehensions
+  "DJ",   # flake8-django
+  "INT",  # flake8-gettext
+  "PIE",  # flake8-pie
+  "Q",    # flake8-quotes
+  "SIM",  # flake8-simplify
+  "PGH",  # pygrep-hooks
+  "PLE",  # pylint error
+  "PLR",  # pylint refactor
+  "PLW",  # pylint warning
+  "UP",   # pyupgrade
+  "C901", # mccabe
+  "N",    # pep8-naming
+  "YTT",  # flake8-2020,
+  "RUF"
 ]
+
+extend-exclude = [
+  ".eggs",
+  ".git",
+  ".mypy_cache",
+  ".ruff_cache",
+  ".env",
+  ".venv",
+  "**locale/**",
+  "**migrations/**",
+  "node_modules",
+  "venv",
+]
+
+lint.extend-ignore = [
+  "B006",  # Do not use mutable data structures for argument defaults
+  "B011",  # tests use assert False
+  "B019",  # Use of `functools.lru_cache` or `functools.cache` on methods can lead to memory leaks
+  "B905",  # `zip()` without an explicit `strict=` parameter
+  "C901",  # too complex functions
+  "DJ001", # Avoid using `null=True` on string-based fields such as CharField
+  "E402",  # module level import not at top of file
+  "E731",  # do not assign a lambda expression, use a def
+  "FBT002",   # Boolean default value in function definition
+  "FBT003",   # Boolean positional value in function call
+  "PLR0911",  # Too many return statements
+  "PLR0912",  # Too many branches
+  "PLR0913",  # Too many arguments to function call
+  "PLR0915",  # Too many statements
+  "PLR2004",  # Magic value used in comparison, consider replacing with a constant variable
+  "RUF012",   # Mutable class attributes should be annotated with `typing.ClassVar`
+  "SIM102",   # Use a single `if` statement instead of nested `if` statements
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+  "F401"  # unused-import
+]
+"djangogirls/urls.py" = [
+  "RUF005"  # Consider iterable unpacking instead of concatenation
+]
+"tests/core/test_admin.py" = [
+  "RUF017"  # Avoid quadratic list summation
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = [
+  "applications",
+  "coach",
+  "contact",
+  "core",
+  "djangogirls",
+  "donations",
+  "globalpartners",
+  "jobboard",
+  "organize",
+  "patreonmanager",
+  "pictures",
+  "sponsor",
+  "story",
+]
+extra-standard-library = ["dataclasses"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 80

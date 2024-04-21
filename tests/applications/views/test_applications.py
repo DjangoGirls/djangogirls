@@ -14,7 +14,7 @@ def test_access_applications_view(client, user_client, admin_client, future_even
     resp = client.get(applications_url)
     assert resp.status_code == 302
 
-    # as logged in user, but not orgarniser of given event
+    # as logged in user, but not organiser of given event
     resp = user_client.get(applications_url)
     assert resp.status_code == 404
 
@@ -125,6 +125,10 @@ def get_filtered_applications_list(
     resp.self.client.get(f"{applications_url}?state=waitlisted")
     assert len(resp.context["applications"]) == 1
     assert resp.context["applications"] == [application_waitlisted]
+
+
+def test_application_str(admin_client, future_event, application_submitted):
+    assert str(application_submitted.id) == str(application_submitted)
 
 
 def test_changing_application_status(admin_client, future_event, application_submitted):

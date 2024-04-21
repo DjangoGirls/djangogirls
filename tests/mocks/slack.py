@@ -8,7 +8,7 @@ from core.slack_client import slack_client
 def slack_mock(mocker):
     mocks = EasyDict()
 
-    mocks.chat_postMessage = mocker.patch.object(slack_client, 'chat_postMessage')
-    mocks.admin_users_invite = mocker.patch.object(slack_client, 'admin_users_invite')
+    mocks.chat_postMessage = mocker.patch.object(slack_client, "chat_postMessage")
+    mocks.admin_users_invite = mocker.patch.object(slack_client, "admin_users_invite")
 
     return mocks

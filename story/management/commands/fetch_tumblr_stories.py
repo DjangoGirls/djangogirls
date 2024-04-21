@@ -12,7 +12,8 @@ from story.models import Story
 def download_image(url: str) -> tuple[str, File]:
     image_name = urlparse(url).path.split("/")[-1]
     content = urlretrieve(url)
-    return image_name, File(open(content[0], "rb"))
+    # TODO: could this be done differently without opening the file here?
+    return image_name, File(open(content[0], "rb"))  # noqa: SIM115
 
 
 class Command(BaseCommand):

@@ -3,7 +3,7 @@ from unittest import mock
 
 from freezegun import freeze_time
 
-from core.utils import NOMINATIM_URL, get_coordinates_for_city, next_deadline
+from core.utils import NOMINATIM_URL, get_coordinates_for_city, get_event, next_deadline
 
 
 @mock.patch("requests.get")
@@ -24,7 +24,9 @@ def test_get_coordinates_for_city(mock_get):
             "q": "London, UK",
         },
     )
-    assert result == "1.23, 4.56"
+    expected_lat = "{:.7f}".format(float("1.23"))
+    expected_lon = "{:.7f}".format(float("4.56"))
+    assert result == f"{expected_lat}, {expected_lon}"
 
 
 @mock.patch("requests.get")
@@ -75,15 +77,45 @@ def test_day_before_deadline():
     assert result == date(2016, 10, 16)
 
 
-@freeze_time("2016-10-16")  # noqa: F811
+@freeze_time("2016-10-16")
 def test_day_before_deadline():  # noqa: F811
     result = next_deadline()
 
     assert result == date(2016, 10, 16)
 
 
-@freeze_time("2016-10-17")  # noqa: F811
+@freeze_time("2016-10-17")
 def test_day_before_deadline():  # noqa: F811
     result = next_deadline()
 
     assert result == date(2016, 10, 30)
+
+
+def test_get_event_past(old_event):
+    result = get_event("bonn", False, False)
+    assert result == ("bonn", True)
+
+
+def test_get_event_not_past(future_event):
+    result = get_event("bonn", False, False)
+    assert result == future_event
+
+
+def test_get_event_not_past_user_authenticated(future_event):
+    result = get_event("bonn", True, False)
+    assert result == future_event
+
+
+def test_get_event_multiple_events(old_event, future_event):
+    result = get_event("bonn", True, False)
+    assert result == future_event
+
+
+def test_get_event_none_exists():
+    result = get_event("bonn", True, False)
+    assert result is None
+
+
+def test_get_event_no_date(old_event_no_date):
+    result = get_event("bonn", False, False)
+    assert result == ("bonn", True)

@@ -96,7 +96,7 @@ class EventAdmin(admin.ModelAdmin):
     def full_url(self, obj):
         url = reverse("core:event", kwargs={"page_url": obj.page_url})
         url = f"https://djangogirls.org{url}"  # noqa: E231
-        return mark_safe('<a href="{url}">{url}</a>'.format(url=url))
+        return mark_safe(f'<a href="{url}">{url}</a>')
 
     def get_readonly_fields(self, request, obj=None):
         fields = set(self.readonly_fields) | {"full_url"}
@@ -228,13 +228,12 @@ class EventAdmin(admin.ModelAdmin):
             user = User.objects.get(id=request.GET["remove"])
             if user == request.user:
                 messages.error(request, _("You cannot remove yourself from a team."))
-            else:
-                if user in event.team.all():
-                    event.team.remove(user)
-                    messages.success(
-                        request, _("Organizer %(user_name)s has been removed") % {"user_name": user.get_full_name()}
-                    )
-                    return HttpResponseRedirect(reverse("admin:core_event_manage_organizers") + f"?event_id={event.id}")
+            elif user in event.team.all():
+                event.team.remove(user)
+                messages.success(
+                    request, _("Organizer %(user_name)s has been removed") % {"user_name": user.get_full_name()}
+                )
+                return HttpResponseRedirect(reverse("admin:core_event_manage_organizers") + f"?event_id={event.id}")
 
         return render(
             request,

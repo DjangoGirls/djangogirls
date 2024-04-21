@@ -1,8 +1,7 @@
 from django.contrib import admin, messages
 from django.urls import reverse
 from django.utils.html import format_html
-from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ngettext
+from django.utils.translation import gettext_lazy as _, ngettext
 
 from .filters import PendingRewardsFilter
 from .models import FundraisingStatus, Patron, Payment, Reward

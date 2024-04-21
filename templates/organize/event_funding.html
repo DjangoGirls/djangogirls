@@ -1,0 +1,67 @@
+{% extends "global/base.html" %}
+{% load i18n rev static %}
+
+{% block content %}
+<div class="container">
+    <h2>{% trans "Apply for Sponsorship from our Global Partners" %}</h2>
+
+    <p>{% blocktrans trimmed %}
+        Some of our global partners also fund Django Girls workshops. However, they prefer that Django Girls Foundation handle
+        the sponsorship application process and they only handle sending the money to the workshop organizers. Django Girls has
+        done this in the past with GitHub sponsorships though that is no longer available.
+        {% endblocktrans %}
+    </p>
+
+    <p>{% blocktrans trimmed %}
+        Starting November 2023, Django Girls will be handling sponsorship applications for workshops. The organisations Django 
+        Girls are handling the sponsorship process are listed below with the terms and conditions of the sponsorship.
+        {% endblocktrans %}
+    </p>
+
+    <div>
+        <h3><a href="https://www.djangoproject.com" target="_blank">Django Software Foundation</a></h3>
+        <p>{% blocktrans trimmed %}
+            Starting November 2023, sponsorship applications to the DSF will be handled by Django Girls Foundation. The terms
+            and conditions of this sponsorship as laid out by the DSF are as follows:
+            {% endblocktrans %}
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                    The DSF has set aside a limited budget for Django Girls workshops sponsorship spread out through the year. 
+                    For this reason, they will only sponsorship only one event per city per year (within 12 months).
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                    The typical DSF sponsorship will be $300 per event, or $500 when the assumption is that the group has large needs 
+                    and difficulty fundraising or events outside of the US or Western Europe.
+                    {% endblocktrans %}
+                </li>
+                <li>{% blocktrans trimmed %}
+                    The DSF funds events, not long term boot camps therefore this application form should only be used for Django Girls 
+                    workshop applications only.
+                    {% endblocktrans %}
+                </li>
+                <li>{% trans "The DSF's support has to be publicly recognised and acknowledged." %}</li>
+                <li>{% blocktrans trimmed %}The DSF has to receive a report of the event via their email <a href="mailto:dsfboard@googlegroups.com">dsfboard@googlegroups.com</a>
+                    which should be copied to <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>.
+                    {% endblocktrans %}
+                </li>
+            </ul>
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+            In your application, please share your budget and if your budget requirements are more than the funding the DSF can provide,
+            also share your other funding sources and how you wish to offset the deficit. Funding from the DSF will only be approved once
+            we are sure that the event will indeed take place because your event has adequate funding. The DSF will only fund events whose
+            costs are appropriate, realistic and have a solid plan for the remaining funds.
+            {% endblocktrans %}
+        </p>
+        <p>{% blocktrans trimmed %}To apply for DSF funding, please fill in 
+            <a href="https://docs.google.com/forms/d/1KBQKnwY0uFBB0R7HOJIA3VAr9PsUywnp-9yX9El9-Wk/viewform">this form</a>."
+            {% endblocktrans %}
+        </p>
+
+    </div>
+</div>
+{% endblock %}

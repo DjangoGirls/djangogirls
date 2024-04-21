@@ -88,7 +88,7 @@ def _get_datetime_from_title(title):
     match = NEW_MONTH_TITLE_RE.search(title.strip())
     try:
         assert match is not None
-    except:
+    except:  # noqa: E722
         match = MONTH_TITLE_RE.search(title.strip())
         assert match is not None
 

@@ -19,10 +19,7 @@ BASE_URL = "https://djangogirls.org"
 
 DEBUG = os.getenv("DJANGO_DEBUG") != "FALSE"
 
-if DEBUG:
-    SECRET_KEY = "hello!"
-else:
-    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = "hello!" if DEBUG else os.getenv("DJANGO_SECRET_KEY")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 ALLOWED_HOSTS = ["*"]
@@ -192,6 +189,7 @@ ENABLE_SLACK_NOTIFICATIONS = sanitize(os.environ.get("ENABLE_SLACK_NOTIFICATIONS
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 SLACK_TEAM_ID = os.environ.get("SLACK_TEAM_ID")
 SLACK_INVITE_CHANNEL_IDS = os.environ.get("SLACK_INVITE_CHANNEL_IDS", "").split(",")
+SLACK_INVITE_LINK = os.environ.get("SLACK_INVITE_LINK", "")
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "")
 RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")

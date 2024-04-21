@@ -11,12 +11,12 @@ class Story(models.Model):
     # False means a regular blogpost, not a story
     is_story = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name = _("story")
+        verbose_name_plural = _("stories")
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return self.post_url
-
-    class Meta:
-        verbose_name = _("story")
-        verbose_name_plural = _("stories")

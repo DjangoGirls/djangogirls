@@ -3,7 +3,7 @@ from datetime import date, datetime, timedelta
 import pytest
 from django_date_extensions.fields import ApproximateDate
 
-from core.models import Event
+from core.models import Event, User
 from organize.constants import ON_HOLD
 from organize.models import Coorganizer, EventApplication
 
@@ -158,11 +158,8 @@ def previous_organizer_in_person(past_event):
         "workshop-venue": "Beira Hall",
         "workshop-sponsorship": "My employer will sponsor the event.",
         "workshop-coaches": "My colleagues will coach at the event.",
-        "workshop-local_restrictions": "All restrictions relaxed. https://somegov.gov",
-        "workshop-safety": "Social distancing",
         "workshop-diversity": "Promote on social media and use videos",
         "workshop-additional": "None",
-        "workshop-confirm_covid_19_protocols": True,
         "organize_form_wizard-current_step": "workshop",
     }
 
@@ -209,11 +206,8 @@ def new_organizer_in_person():
         "workshop-venue": "Baixa Mall",
         "workshop-sponsorship": "We have a few local companies we can approach.",
         "workshop-coaches": "We have many Python developers here.",
-        "workshop-local_restrictions": "All restrictions relaxed. https://somegov.gov",
-        "workshop-safety": "We will practise social distancing, wear masks and sanitize hands,",
         "workshop-diversity": "Promote on social media and use videos",
         "workshop-additional": "None",
-        "workshop-confirm_covid_19_protocols": True,
         "organize_form_wizard-current_step": "workshop",
     }
 
@@ -237,11 +231,8 @@ def workshop_form_valid_date():
         "venue": "Baixa Mall",
         "sponsorship": "We have a few local companies we can approach.",
         "coaches": "We have many Python developers here.",
-        "local_restrictions": "Maximum number of attendees is 50. https://somegovt.com/",
-        "safety": "We will practise social distancing, wear masks and sanitize hands,",
         "diversity": "Promote on social media and use videos",
         "additional": "None",
-        "confirm_covid_19_protocols": True,
     }
     return data
 
@@ -334,7 +325,6 @@ def workshop_form_date_year_only():
         "venue": "Baixa Mall",
         "sponsorship": "We have a few local companies we can approach.",
         "coaches": "We have many Python developers here.",
-        "safety": "We will practise social distancing, wear masks and sanitize hands,",
         "diversity": "Promote on social media and use videos",
         "additional": "None",
     }
@@ -447,11 +437,8 @@ def workshop_form_invalid_no_link():
         "venue": "Baixa Mall",
         "sponsorship": "We have a few local companies we can approach.",
         "coaches": "We have many Python developers here.",
-        "local_restrictions": "Maximum number of attendees is 50 and social distancing of 1.5m apart.",
-        "safety": "We will practise social distancing, wear masks and sanitize hands,",
         "diversity": "Promote on social media and use videos",
         "additional": "None",
-        "confirm_covid_19_protocols": True,
     }
     return data
 
@@ -482,3 +469,40 @@ def previous_application_approximate_date():
         main_organizer_last_name="Smith",
         status="deployed",
     )
+
+
+@pytest.fixture
+def main_organizer_is_blacklisted():
+    main_organizer = User.objects.create(
+        first_name="Anna",
+        last_name="Smith",
+        email="test@example.com",
+        password="password",
+        is_active=True,
+        is_superuser=False,
+        is_staff=True,
+        is_blacklisted=True,
+    )
+    return main_organizer
+
+
+@pytest.fixture
+def data_dict_new_organizer():
+    return {
+        "about_you": "I am a volunteer in my local meet-up.",
+        "why": "There are a few women who know how to code in our meet-up.",
+        "involvement": "coach",
+        "experience": "I have volunteered at my local meet-up.",
+        "main_organizer_email": "test@example.com",
+        "main_organizer_first_name": "Anna",
+        "main_organizer_last_name": "Smith",
+        "remote": True,
+        "date": ApproximateDate(2081, 3, 10),
+        "city": "Harare",
+        "country": "ZW",
+        "sponsorship": "Yes",
+        "coaches": "Yes",
+        "tools": "Zoom",
+        "diversity": "Reach out",
+        "additional": "No",
+    }

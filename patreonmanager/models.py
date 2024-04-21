@@ -66,6 +66,9 @@ class Payment(models.Model):
         verbose_name_plural = _("payments")
         unique_together = (("patron", "month"),)
 
+    def __str__(self):
+        return f"{self.patron}, {self.month}"
+
     def get_month_display(self):
         return self.month.strftime("%B %Y")
 
@@ -79,6 +82,9 @@ class FundraisingStatus(models.Model):
 
     class Meta:
         ordering = ("-date_updated",)
+
+    def __str__(self):
+        return f"{self.id} updated {self.date_updated}, raised {self.amount_raised}"
 
     @property
     def percentage_of_goal(self):

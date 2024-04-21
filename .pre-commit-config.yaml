@@ -7,47 +7,25 @@ ci:
     autoupdate_commit_msg: 'ci: pre-commit autoupdate'
     autoupdate_schedule: monthly
 
+default_language_version:
+  python: python3.10
+
 fail_fast: true
 
 repos:
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.14.0'
+    rev: '1.15.0'
     hooks:
       - id: django-upgrade
         args: [--target-version, "3.2"]
   -  repo: https://github.com/asottile/pyupgrade
-     rev: v3.8.0
+     rev: v3.15.0
      hooks:
        -  id: pyupgrade
           args: ["--py310-plus"]
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v2.2.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.2.0
     hooks:
-      - id: autoflake
-        entry: bash -c 'autoflake "$@"; git add -u;' --
-        language: python
-        args:
-          [
-            "--in-place",
-            "--remove-all-unused-imports",
-            "--remove-unused-variables",
-            "--expand-star-imports",
-            "--ignore-init-module-imports",
-          ]
-        files: \.py$
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: isort
-        entry: bash -c 'isort "$@"; git add -u;' --
-  - repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-      - id: black
-        entry: bash -c 'black "$@"; git add -u;' --
-        language_version: python3.10
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format

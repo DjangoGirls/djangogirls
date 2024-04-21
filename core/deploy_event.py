@@ -13,10 +13,8 @@ def copy_event(previous_event, event_date):
 
     previous_event_id = previous_event.pk
     # If event is already Django Girls City #2, remove #2 from it
-    if "#" in previous_event.name:
-        generic_event_name = previous_event.name.split(" #")[0]
-    else:
-        generic_event_name = previous_event.name
+
+    generic_event_name = previous_event.name.split(" #")[0] if "#" in previous_event.name else previous_event.name
 
     previous_event_name = f"{generic_event_name} #{number}"
     event_name = f"{generic_event_name} #{number + 1}"

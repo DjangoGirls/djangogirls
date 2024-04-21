@@ -36,7 +36,7 @@ class PendingRewardsFilter(admin.SimpleListFilter):
                 reward__name="Special Support Reward",
             )
             c = Counter(payment.patron for payment in payments.select_related("patron"))
-            for patron, count in c.most_common():
+            for patron, _ in c.most_common():
                 patron_pks.append(patron.pk)
 
             return queryset.filter(pk__in=set(patron_pks))

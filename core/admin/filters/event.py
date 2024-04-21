@@ -11,7 +11,7 @@ class EventFilter(admin.SimpleListFilter):
         qs = Event.objects.all()
         if not request.user.is_superuser:
             qs = qs.filter(team__in=[request.user])
-        return map(lambda x: (x.id, str(x)), qs)
+        return map(lambda x: (x.id, str(x)), qs)  # noqa: C417
 
     def queryset(self, request, queryset):
         if self.value():

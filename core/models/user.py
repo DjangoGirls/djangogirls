@@ -13,6 +13,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_blacklisted = models.BooleanField(default=False)
 
     objects = UserManager()
 
@@ -41,9 +42,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         self.groups.add(group)
 
     def __str__(self):
+        status = "- (Organizer is Blacklisted)" if self.is_blacklisted else ""
+
         if not self.first_name and not self.last_name:
-            return f"{self.email}"
-        return f"{self.get_full_name()} ({self.email})"
+            return f"{self.email} {status}"
+        return f"{self.get_full_name()} ({self.email}) {status}"
 
     def get_short_name(self):
         return self.first_name

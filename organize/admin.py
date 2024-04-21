@@ -50,6 +50,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         "status",
         "created_at",
         "status_changed_at",
+        "organizer_blacklisted",
         "about_you",
         "why",
         "involvement",
@@ -126,7 +127,12 @@ class EventApplicationAdmin(admin.ModelAdmin):
         (
             _("Main organizer"),
             {
-                "fields": ["main_organizer_email", "main_organizer_first_name", "main_organizer_last_name"],
+                "fields": [
+                    "main_organizer_email",
+                    "main_organizer_first_name",
+                    "main_organizer_last_name",
+                    "organizer_blacklisted",
+                ],
                 "classes": (
                     "suit-tab",
                     "suit-tab-organizers",

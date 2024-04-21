@@ -69,7 +69,7 @@ def brag_on_slack_bang(city, country, team):
         text = (
             f":django_pony: :zap: Woohoo! :tada: New Django Girls alert! "  # noqa: E203, E231
             f"Welcome Django Girls {city}, {country}. "
-            f"Congrats {', '.join(['{} {}'.format(x.first_name, x.last_name) for x in team])}!"
+            f"Congrats {', '.join([f'{x.first_name} {x.last_name}' for x in team])}!"
         )
 
         post_message_to_slack("#general", text)

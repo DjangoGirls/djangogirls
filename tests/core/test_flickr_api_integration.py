@@ -274,35 +274,30 @@ def test_get_photo_files_when_bad_request(mock_get):
 
 
 def test_get_photo_files_when_empty_object():
-
     result = get_photo_files([{}])
 
     assert result is None
 
 
 def test_get_photo_files_when_dict_passed():
-
     result = get_photo_files({})
 
     assert result is None
 
 
 def test_get_photo_files_when_string_passed():
-
     result = get_photo_files("some string")
 
     assert result is None
 
 
 def test_get_photo_files_when_int_passed():
-
     result = get_photo_files(3)
 
     assert result is None
 
 
 def test_get_photo_files_when_none_passed():
-
     result = get_photo_files(None)
 
     assert result is None
