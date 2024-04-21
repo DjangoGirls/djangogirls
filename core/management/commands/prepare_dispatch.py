@@ -14,7 +14,7 @@ def generate_html_content(event_list):
     for event in event_list:
         city = event.city
         url = event.page_url
-        html = f"<a href='https://djangogirls.org/{url}'>{city}</a>"
+        html = f"<a href='https://djangogirls.org/{url}'>{city}</a>"  # noqa: E231
         result.append(html)
     return result
 

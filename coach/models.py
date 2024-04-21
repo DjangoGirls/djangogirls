@@ -32,7 +32,7 @@ class Coach(models.Model):
         return f"""
             <a href=\"{coach_change_url}\" target=\"_blank\">
                 <img src=\"{self.photo_url}\" width=\"100\" />
-            </a>"""
+            </a>"""  # noqa: E221, E222
 
     photo_display_for_admin.allow_tags = True
 
