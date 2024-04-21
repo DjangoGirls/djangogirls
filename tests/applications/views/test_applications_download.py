@@ -2,11 +2,13 @@ import csv
 from io import StringIO
 
 from django.urls import reverse
+from django.utils import translation
 
 from applications.models import Answer, Application, Question
 
 
 def test_download_applications_list(admin_client, future_event, future_event_form, applications):
+    translation.activate("en")
     applications_url = reverse("applications:applications_csv", kwargs={"page_url": future_event.page_url})
     resp = admin_client.get(applications_url)
     assert resp.status_code == 200
