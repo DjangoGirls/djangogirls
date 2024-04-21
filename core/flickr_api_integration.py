@@ -41,7 +41,7 @@ def get_photo_files(photo_list):
         for photo in photo_list:
             request = requests.get(
                 f'https://live.staticflickr.com/{photo["server"]}/' f'{photo["id"]}_{photo["secret"]}_b.jpg'
-            )
+            )  # noqa: E231
             photo_file = ImageFile(io.BytesIO(request.content), name=f'{photo["id"]}.jpg')
             photo_files_list.append(photo_file)
         return photo_files_list if len(photo_files_list) else None

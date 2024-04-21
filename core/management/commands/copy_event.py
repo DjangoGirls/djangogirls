@@ -112,5 +112,5 @@ def command():
 
     click.echo(
         click.style(f"Website is ready here: https://djangogirls.org/{new_event.page_url}", bold=True, fg="green")
-    )
+    )  # noqa: E231
     click.echo("Congrats on yet another event!")

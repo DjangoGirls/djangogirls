@@ -73,7 +73,7 @@ def command(short):
         click.secho("OOPS! Something went wrong!", fg="red")
         for field, errors in form.errors.items():
             for error in errors:
-                click.secho(f"    {field:10} {error}", fg="red")
+                click.secho(f"    {field:10} {error}", fg="red")  # noqa: E231
         return
     event = form.save()
 
@@ -86,7 +86,7 @@ def command(short):
 
     event.save()
 
-    click.secho(f"Website is ready here: http://djangogirls.org/{url}", fg="green")
+    click.secho(f"Website is ready here: http://djangogirls.org/{url}", fg="green")  # noqa: E231
     click.echo(DELIMITER)
 
     click.secho("Ok, now follow this:", fg="black", bg="green")
