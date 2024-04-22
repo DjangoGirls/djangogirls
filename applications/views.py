@@ -115,7 +115,7 @@ def applications_csv(request, page_url):
     except:  # noqa: E722
         return redirect("core:event", page_url=page_url)
     response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = f'attachment; filename="{page_url}.csv"'  # noqa: E702
+    response["Content-Disposition"] = f'attachment; filename="{page_url}.csv"'
     writer = csv.writer(response)
     csv_header = [_("Application Number"), _("Application State"), _("RSVP Status"), _("Average Score")]
     question_set = event.form.question_set

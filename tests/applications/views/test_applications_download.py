@@ -12,7 +12,7 @@ def test_download_applications_list(admin_client, future_event, future_event_for
     applications_url = reverse("applications:applications_csv", kwargs={"page_url": future_event.page_url})
     resp = admin_client.get(applications_url)
     assert resp.status_code == 200
-    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'  # noqa: E702
+    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'
     csv_file = StringIO(resp.content.decode("utf-8"))
     reader = csv.reader(csv_file)
     csv_list = list(reader)
@@ -32,7 +32,7 @@ def test_download_applications_list_uses_query_parameters_to_filter_applications
     applications_url = reverse("applications:applications_csv", kwargs={"page_url": future_event.page_url})
     resp = admin_client.get(applications_url + "?state=submitted&state=accepted")
     assert resp.status_code == 200
-    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'  # noqa: E702
+    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'
     csv_file = StringIO(resp.content.decode("utf-8"))
     reader = csv.reader(csv_file)
     csv_list = list(reader)
@@ -57,7 +57,7 @@ def test_download_applications_list_with_question_added(
     resp = admin_client.get(applications_url)
 
     assert resp.status_code == 200
-    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'  # noqa: E702
+    assert resp.get("Content-Disposition") == f'attachment; filename="{future_event.page_url}.csv"'
     csv_file = StringIO(resp.content.decode("utf-8"))
     reader = csv.reader(csv_file)
     csv_list = list(reader)
