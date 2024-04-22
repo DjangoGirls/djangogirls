@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-09 23:21+0000\n"
+"POT-Creation-Date: 2024-04-22 18:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -336,43 +336,50 @@ msgstr ""
 msgid "Average Score"
 msgstr ""
 
-#: applications/views.py:248 applications/views.py:274
+#: applications/views.py:253 applications/views.py:279
 msgid "Missing parameters"
 msgstr ""
 
-#: applications/views.py:259 applications/views.py:282
+#: applications/views.py:264 applications/views.py:287
 msgid "Applications have been updated"
 msgstr ""
 
-#: applications/views.py:299
+#: applications/views.py:304
 #, python-format
 msgid ""
 "Something went wrong with your RSVP link. Please contact us at %(email)s "
 "with your name."
 msgstr ""
 
-#: applications/views.py:309
+#: applications/views.py:314
 msgid ""
 "Your participation in the workshop has been confirmed! We can't wait to meet "
 "you. We will be in touch with details soon."
 msgstr ""
 
-#: applications/views.py:315
+#: applications/views.py:320
 msgid ""
 "Your answer has been saved, thanks for letting us know. Your spot will be "
 "assigned to another person on the waiting list."
 msgstr ""
 
-#: coach/models.py:14
+#: coach/models.py:15
 msgid "No @, No http://, just username"
 msgstr ""
 
-#: coach/models.py:17
+#: coach/models.py:18
 msgid "For best display keep it square"
 msgstr ""
 
-#: coach/models.py:23
+#: coach/models.py:24
 msgid "Coaches"
+msgstr ""
+
+#: coach/models.py:54
+#, python-brace-format
+msgid ""
+"Coach with name {self.name} and twitter_handle {self.twitter_handle} already "
+"exists."
 msgstr ""
 
 #: contact/forms.py:15
@@ -563,39 +570,39 @@ msgstr ""
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:108
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:109
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:110
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:110
+#: djangogirls/settings.py:111
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:111
+#: djangogirls/settings.py:112
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:112
+#: djangogirls/settings.py:113
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:113
+#: djangogirls/settings.py:114
 msgid "Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:114
+#: djangogirls/settings.py:115
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:115
+#: djangogirls/settings.py:116
 msgid "Spanish"
 msgstr ""
 
@@ -738,85 +745,85 @@ msgid ""
 "open event application."
 msgstr ""
 
-#: organize/models.py:59
+#: organize/models.py:60 organize/models.py:71
 msgid ""
 "Your workshops should be at least 6 months apart. Please read our Organizer "
 "Manual."
 msgstr ""
 
-#: organize/models.py:84
+#: organize/models.py:96
 msgid "About organizer"
 msgstr ""
 
-#: organize/models.py:85
+#: organize/models.py:97
 msgid "Motivations to organize"
 msgstr ""
 
-#: organize/models.py:86
+#: organize/models.py:98
 msgid "Involvement in Django Girls"
 msgstr ""
 
-#: organize/models.py:87
+#: organize/models.py:99
 msgid "Experience with organizing other events"
 msgstr ""
 
-#: organize/models.py:88
+#: organize/models.py:100
 msgid "Information about your potential venue"
 msgstr ""
 
-#: organize/models.py:89
+#: organize/models.py:101
 msgid "Information about your potential sponsorship"
 msgstr ""
 
-#: organize/models.py:90
+#: organize/models.py:102
 msgid "Information about your potential coaches"
 msgstr ""
 
-#: organize/models.py:92
+#: organize/models.py:104
 msgid "Information about how you will host your remote workshop"
 msgstr ""
 
-#: organize/models.py:94
+#: organize/models.py:106
 msgid ""
 "Information about local restrictions for physical restrictions due to "
 "Covid-19 pandemic."
 msgstr ""
 
-#: organize/models.py:97
+#: organize/models.py:109
 msgid ""
 "Information about how you will ensure participants' and coaches' safety "
 "during the Covid-19 pandemic"
 msgstr ""
 
-#: organize/models.py:101
+#: organize/models.py:113
 msgid ""
 "Information about how you intend to ensure your workshop is inclusive and "
 "promotes diversity"
 msgstr ""
 
-#: organize/models.py:103
+#: organize/models.py:115
 msgid "Any additional information you think may help your application"
 msgstr ""
 
-#: organize/models.py:106
+#: organize/models.py:118
 msgid ""
 "Confirmation that you will postpone or have a remote event if your "
 "governmentregulations for Covid-19 change."
 msgstr ""
 
-#: organize/models.py:125
+#: organize/models.py:137
 msgid "Can accept Organize Applications"
 msgstr ""
 
-#: organize/models.py:224
+#: organize/models.py:236
 msgid "This field is required."
 msgstr ""
 
-#: organize/models.py:269
+#: organize/models.py:281
 msgid "Co-organizer"
 msgstr ""
 
-#: organize/models.py:270
+#: organize/models.py:282
 msgid "Co-organizers"
 msgstr ""
 
@@ -1043,7 +1050,7 @@ msgid "Remove event organizers"
 msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:6
-msgid "Here you can remove exisiting event organizers."
+msgid "Here you can remove existing event organizers."
 msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:9
@@ -4714,7 +4721,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Are you a company interested in sponsoring us? Our <a href=\"https://drive."
-"google.com/file/d/1T2jL9tnu5ZkNvkQRAxd7jlt_BnX7VCLE/view?"
+"google.com/file/d/1cp774iWVbU5_GcpsUG4Ya9F-RAN8EWiT/view?"
 "usp=sharing\">corporate sponsorships</a> start at 100 USD per month. <a "
 "href=\"%(contact_url)s\">Contact us!</a> 📨"
 msgstr ""
@@ -4980,9 +4987,9 @@ msgid "Thanks and congrats yet again, you're awesome!"
 msgstr ""
 
 #: templates/emails/event_thank_you.html:58
-#: templates/emails/existing_user.html:43 templates/emails/new_user.html:45
+#: templates/emails/existing_user.html:39 templates/emails/new_user.html:41
 #: templates/emails/organize/application_confirmation.html:36
-#: templates/emails/organize/event_deployed.html:95
+#: templates/emails/organize/event_deployed.html:94
 #: templates/emails/submit_information_email.html:16
 msgid "Hugs, rainbows and sunshines!"
 msgstr ""
@@ -5025,14 +5032,11 @@ msgid ""
 "    for password and instructions to access it.\n"
 msgstr ""
 
-#: templates/emails/existing_user.html:33 templates/emails/new_user.html:35
+#: templates/emails/existing_user.html:33
 msgid ""
-"You can contact hello@ if you need assistance but it’s usually faster to "
-"check our <a href=\"https://faq-organizers.djangogirls.org/\">FAQ</a> or to "
-"post questions to the <a href=\"https://groups.google.com/forum/#!forum/"
-"django-girls-organizers\"> Google Group of Django Girls Organizers</a> or <a "
-"href=\"https://djangogirls.slack.com/messages/general/\"> Slack channel</a> "
-"- there are more people that can help you! :)"
+"You can contact hello@ if you need assistance but it's usually faster to "
+"check <a href=\"https://djangogirls.slack.com/messages/general/\">Slack "
+"channel</a> - there are more people that can help you! :)"
 msgstr ""
 
 #: templates/emails/new_user.html:5
@@ -5069,6 +5073,13 @@ msgstr ""
 msgid ""
 "We also invited you to Django Girls Slack, where we chat, communicate and "
 "meet each other!"
+msgstr ""
+
+#: templates/emails/new_user.html:35
+msgid ""
+"You can contact hello@ if you need assistance but it's usually faster to "
+"check <a href=\"https://djangogirls.slack.com/messages/general/\">Slack "
+"channel</a> - there are more people that can help you! :)*"
 msgstr ""
 
 #: templates/emails/offer_help_email.html:3
@@ -5315,38 +5326,39 @@ msgstr ""
 
 #: templates/emails/organize/event_deployed.html:67
 msgid ""
-"Django Girls has a growing community of more than 300 organizers. You should "
-"receive an invitation to join a private group on Google Groups and Slack -- "
-"this is where you can chat with other organisers, ask for their help or "
-"advice. Use it wisely and plenty!"
+"Django Girls has a growing community of more than 2346 organizers. If you "
+"are a new organizer and not already Django Girls Slack, please reach out to "
+"hello@djangogirls.org and we will invite you to join -- this is where you "
+"can chat with other organisers, ask for their help or advice. Use it wisely "
+"and plenty!"
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:74
+#: templates/emails/organize/event_deployed.html:73
 msgid "4) Postponing or canceling"
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:77
+#: templates/emails/organize/event_deployed.html:76
 msgid ""
 "If you need to cancel or postpone your event, it’s not a problem at all! "
 "Please let us know by sending an email and we’ll help."
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:83
+#: templates/emails/organize/event_deployed.html:82
 msgid "5) Need more help?"
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:86
+#: templates/emails/organize/event_deployed.html:85
 msgid ""
 "Don’t forget about Organiser’s FAQ, Manual or to post questions to our "
 "Google Group of Django Girls Organizers or Slack channel - there are always "
 "more people there that can help you! :)"
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:92
+#: templates/emails/organize/event_deployed.html:91
 msgid "Good luck!"
 msgstr ""
 
-#: templates/emails/organize/event_deployed.html:96
+#: templates/emails/organize/event_deployed.html:95
 msgid "Django Girls team"
 msgstr ""
 
