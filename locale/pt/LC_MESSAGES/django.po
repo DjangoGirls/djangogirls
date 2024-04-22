@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangogirls\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-22 18:59+0100\n"
+"POT-Creation-Date: 2024-04-22 20:51+0100\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applications/decorators.py:21
-msgid "\"page_url\" slug must be present to user this decorator."
+msgid "\"page_url\" slug must be present to use this decorator."
 msgstr ""
 
 #: applications/forms.py:42
@@ -87,7 +87,7 @@ msgid "List all available options, separated with semicolon (;)"
 msgstr ""
 
 #: applications/models.py:94 applications/models.py:99
-msgid "Used only with 'Choices' question type"
+msgid "Used only with \"Choices\" question type"
 msgstr ""
 
 #: applications/models.py:98
@@ -147,27 +147,27 @@ msgstr ""
 msgid "RSVP status"
 msgstr ""
 
-#: applications/models.py:255
+#: applications/models.py:258
 msgid "5 being the most positive, 1 being the most negative."
 msgstr ""
 
-#: applications/models.py:259
+#: applications/models.py:262
 msgid "Any extra comments?"
 msgstr ""
 
-#: applications/models.py:273
+#: applications/models.py:279
 msgid "Content of the email"
 msgstr ""
 
-#: applications/models.py:274
+#: applications/models.py:280
 msgid "You can use HTML syntax in this message. Preview on the right."
 msgstr ""
 
-#: applications/models.py:279 templates/applications/communication.html:22
+#: applications/models.py:285 templates/applications/communication.html:22
 msgid "Recipients"
 msgstr "Destinatários"
 
-#: applications/models.py:280
+#: applications/models.py:286
 msgid "Only people assigned to chosen group will receive this email."
 msgstr ""
 
@@ -312,44 +312,44 @@ msgstr ""
 msgid "Yay! Your application has been saved. You'll hear from us soon!"
 msgstr ""
 
-#: applications/views.py:119
+#: applications/views.py:120
 msgid "Application Number"
 msgstr ""
 
-#: applications/views.py:119
+#: applications/views.py:120
 msgid "Application State"
 msgstr ""
 
-#: applications/views.py:119
+#: applications/views.py:120
 msgid "RSVP Status"
 msgstr ""
 
-#: applications/views.py:119
+#: applications/views.py:120
 msgid "Average Score"
 msgstr ""
 
-#: applications/views.py:253 applications/views.py:279
+#: applications/views.py:254 applications/views.py:280
 msgid "Missing parameters"
 msgstr ""
 
-#: applications/views.py:264 applications/views.py:287
+#: applications/views.py:265 applications/views.py:288
 msgid "Applications have been updated"
 msgstr ""
 
-#: applications/views.py:304
+#: applications/views.py:305
 #, python-format
 msgid ""
 "Something went wrong with your RSVP link. Please contact us at %(email)s "
 "with your name."
 msgstr ""
 
-#: applications/views.py:314
+#: applications/views.py:315
 msgid ""
 "Your participation in the workshop has been confirmed! We can't wait to meet "
 "you. We will be in touch with details soon."
 msgstr ""
 
-#: applications/views.py:320
+#: applications/views.py:321
 msgid ""
 "Your answer has been saved, thanks for letting us know. Your spot will be "
 "assigned to another person on the waiting list."
@@ -367,11 +367,9 @@ msgstr ""
 msgid "Coaches"
 msgstr ""
 
-#: coach/models.py:54
-#, python-brace-format
-msgid ""
-"Coach with name {self.name} and twitter_handle {self.twitter_handle} already "
-"exists."
+#: coach/models.py:36
+#, python-format
+msgid "Coach with name %s and twitter_handle %s already exists."
 msgstr ""
 
 #: contact/forms.py:15
@@ -418,7 +416,7 @@ msgstr ""
 msgid "page URL"
 msgstr ""
 
-#: core/admin/event.py:115 core/admin/event.py:155 organize/admin.py:86
+#: core/admin/event.py:115 core/admin/event.py:155 organize/admin.py:87
 msgid "Event info"
 msgstr ""
 
@@ -442,23 +440,23 @@ msgstr ""
 msgid "You cannot remove yourself from a team."
 msgstr ""
 
-#: core/admin/event.py:235
+#: core/admin/event.py:234
 #, python-format
 msgid "Organizer %(user_name)s has been removed"
 msgstr ""
 
-#: core/admin/event.py:245
+#: core/admin/event.py:244
 msgid "Remove organizers"
 msgstr ""
 
-#: core/admin/event.py:263
+#: core/admin/event.py:262
 #, python-format
 msgid ""
 "%(user_name)s has been added to your event, yay! They've been also invited "
 "to Slack and should receive credentials to login in an e-mail."
 msgstr ""
 
-#: core/admin/event.py:280
+#: core/admin/event.py:279
 msgid "Add organizers"
 msgstr ""
 
@@ -480,6 +478,17 @@ msgstr ""
 
 #: core/admin/forms/user.py:15
 msgid "Enter the same password as above, for verification."
+msgstr ""
+
+#: core/admin/organizerissue.py:55
+#, python-format
+msgid "Organizer %(organizer)s, of %(event)s has been blacklisted."
+msgstr ""
+
+#: core/admin/organizerissue.py:65
+#, python-format
+msgid ""
+"Blacklisting for organizer %(organizer)s, of %(event)s has been reversed."
 msgstr ""
 
 #: core/admin/user.py:12 core/admin/user.py:18
@@ -534,67 +543,63 @@ msgstr ""
 msgid "Let's talk about the team. First the main organizer:"
 msgstr ""
 
-#: core/validators.py:12
+#: core/validators.py:11
 msgid ""
 "Event date can't be a year only. Please, provide at least a month and a year."
 msgstr ""
 
-#: core/validators.py:18
+#: core/validators.py:17
 msgid ""
 "Your event date is too close. Workshop date should be at least 3 months (90 "
 "days) from now."
 msgstr ""
 
-#: core/validators.py:24
+#: core/validators.py:23
 msgid "Event date should be in the future"
 msgstr ""
 
-#: core/validators.py:30
-msgid "Please provide a link to your government website outlining this."
-msgstr ""
-
-#: core/views.py:100
+#: core/views.py:96
 msgid "List of Django Girls events around the world"
 msgstr ""
 
-#: core/views.py:181
+#: core/views.py:177
 #, python-format
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:104
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:105
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:110
+#: djangogirls/settings.py:106
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:111
+#: djangogirls/settings.py:107
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:112
+#: djangogirls/settings.py:108
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:113
+#: djangogirls/settings.py:109
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:114
+#: djangogirls/settings.py:110
 msgid "Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:115
+#: djangogirls/settings.py:111
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:116
+#: djangogirls/settings.py:112
 msgid "Spanish"
 msgstr ""
 
@@ -631,28 +636,28 @@ msgstr ""
 msgid "Move selected application to in review"
 msgstr ""
 
-#: organize/admin.py:76
+#: organize/admin.py:77
 msgid "Application info"
 msgstr ""
 
-#: organize/admin.py:102
+#: organize/admin.py:103
 #: templates/emails/organize/application_notification.html:34
 msgid "Application"
 msgstr ""
 
-#: organize/admin.py:127
+#: organize/admin.py:128
 msgid "Main organizer"
 msgstr ""
 
-#: organize/admin.py:159
+#: organize/admin.py:165
 msgid "The application is already deployed"
 msgstr ""
 
-#: organize/admin.py:179
+#: organize/admin.py:185
 msgid "Invalid status provided for application"
 msgstr ""
 
-#: organize/admin.py:184
+#: organize/admin.py:190
 #, python-format
 msgid "Application for %(city)s, %(country)s has been moved to %(status)s"
 msgstr ""
@@ -701,152 +706,158 @@ msgstr ""
 msgid "Deployed"
 msgstr ""
 
-#: organize/forms.py:18
+#: organize/forms.py:17
 msgid "Yes, I organized Django Girls"
 msgstr ""
 
-#: organize/forms.py:19
-msgid "No, it’s my first time organizing Django Girls"
+#: organize/forms.py:18
+msgid "No, it's my first time organizing Django Girls"
 msgstr ""
 
-#: organize/forms.py:22
+#: organize/forms.py:21
 msgid "Remote"
 msgstr ""
 
-#: organize/forms.py:22
+#: organize/forms.py:21
 msgid "In-Person"
 msgstr ""
 
-#: organize/forms.py:34 organize/forms.py:36
+#: organize/forms.py:33 organize/forms.py:35
 #: templates/organize/form/step1_previous_event.html:75
 msgid "Choose event"
 msgstr ""
 
-#: organize/forms.py:43
+#: organize/forms.py:42
 msgid "You have to choose an event."
 msgstr ""
 
-#: organize/forms.py:128 templates/organize/form/step5_workshop.html:79
+#: organize/forms.py:95 organize/forms.py:121
+#: templates/organize/form/step5_workshop.html:79
 #: templates/organize/form/step5_workshop_remote.html:79
 msgid "Choose country"
 msgstr ""
 
-#: organize/models.py:39
+#: organize/forms.py:109
+msgid ""
+"Please enter a valid date, which is at least 3 months (90 days) from now."
+msgstr ""
+
+#: organize/models.py:47
 msgid ""
 "You cannot apply to organize another event when you already have another "
 "open event application."
 msgstr ""
 
-#: organize/models.py:60 organize/models.py:71
+#: organize/models.py:68 organize/models.py:79
 msgid ""
 "Your workshops should be at least 6 months apart. Please read our Organizer "
 "Manual."
 msgstr ""
 
-#: organize/models.py:96
+#: organize/models.py:107
 msgid "About organizer"
 msgstr ""
 
-#: organize/models.py:97
+#: organize/models.py:108
 msgid "Motivations to organize"
 msgstr ""
 
-#: organize/models.py:98
+#: organize/models.py:109
 msgid "Involvement in Django Girls"
 msgstr ""
 
-#: organize/models.py:99
+#: organize/models.py:110
 msgid "Experience with organizing other events"
 msgstr ""
 
-#: organize/models.py:100
+#: organize/models.py:111
 msgid "Information about your potential venue"
 msgstr ""
 
-#: organize/models.py:101
+#: organize/models.py:112
 msgid "Information about your potential sponsorship"
 msgstr ""
 
-#: organize/models.py:102
+#: organize/models.py:113
 msgid "Information about your potential coaches"
 msgstr ""
 
-#: organize/models.py:104
+#: organize/models.py:115
 msgid "Information about how you will host your remote workshop"
 msgstr ""
 
-#: organize/models.py:106
+#: organize/models.py:117
 msgid ""
 "Information about local restrictions for physical restrictions due to "
 "Covid-19 pandemic."
 msgstr ""
 
-#: organize/models.py:109
+#: organize/models.py:120
 msgid ""
 "Information about how you will ensure participants' and coaches' safety "
 "during the Covid-19 pandemic"
 msgstr ""
 
-#: organize/models.py:113
+#: organize/models.py:124
 msgid ""
 "Information about how you intend to ensure your workshop is inclusive and "
 "promotes diversity"
 msgstr ""
 
-#: organize/models.py:115
+#: organize/models.py:126
 msgid "Any additional information you think may help your application"
 msgstr ""
 
-#: organize/models.py:118
+#: organize/models.py:129
 msgid ""
 "Confirmation that you will postpone or have a remote event if your "
 "governmentregulations for Covid-19 change."
 msgstr ""
 
-#: organize/models.py:137
+#: organize/models.py:148
 msgid "Can accept Organize Applications"
 msgstr ""
 
-#: organize/models.py:236
+#: organize/models.py:244
 msgid "This field is required."
 msgstr ""
 
-#: organize/models.py:281
+#: organize/models.py:289
 msgid "Co-organizer"
 msgstr ""
 
-#: organize/models.py:282
+#: organize/models.py:290
 msgid "Co-organizers"
 msgstr ""
 
-#: patreonmanager/admin.py:24
+#: patreonmanager/admin.py:23
 msgid "Twitter"
 msgstr ""
 
-#: patreonmanager/admin.py:32
+#: patreonmanager/admin.py:31
 msgid "Payments"
 msgstr ""
 
-#: patreonmanager/admin.py:36 patreonmanager/admin.py:41
+#: patreonmanager/admin.py:35 patreonmanager/admin.py:40
 #, python-format
 msgid "%d payment"
 msgid_plural "%d payments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: patreonmanager/admin.py:38
+#: patreonmanager/admin.py:37
 msgid "Uncompleted payments"
 msgstr ""
 
-#: patreonmanager/admin.py:61
+#: patreonmanager/admin.py:60
 msgid "Patron"
 msgstr ""
 
-#: patreonmanager/admin.py:68
+#: patreonmanager/admin.py:67
 msgid "Mark selected payments as completed"
 msgstr ""
 
-#: patreonmanager/admin.py:71
+#: patreonmanager/admin.py:70
 #, python-format
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
@@ -976,11 +987,11 @@ msgstr ""
 msgid "No logo"
 msgstr ""
 
-#: story/models.py:21
+#: story/models.py:15
 msgid "story"
 msgstr ""
 
-#: story/models.py:22
+#: story/models.py:16
 msgid "stories"
 msgstr ""
 
@@ -1077,9 +1088,18 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: templates/admin/core/organizerissue/change_form.html:12
 #: templates/admin/globalpartners/globalpartner/change_form.html:12
 #: templates/admin/organize/eventapplication/change_form.html:11
 msgid "Triaging"
+msgstr ""
+
+#: templates/admin/core/organizerissue/change_form.html:15
+msgid "Blacklist Organizer"
+msgstr ""
+
+#: templates/admin/core/organizerissue/change_form.html:18
+msgid "Reverse Blacklisting Organizer"
 msgstr ""
 
 #: templates/admin/globalpartners/globalpartner/change_form.html:16
@@ -3105,7 +3125,7 @@ msgstr ""
 
 #: templates/core/index.html:143
 msgid ""
-"<span class=\"highlighted-number\">$1,661</span> of <span "
+"<span class=\"highlighted-number\">$1,060</span> of <span "
 "class=\"highlighted-number\">$2,500</span> monthly goal pledged"
 msgstr ""
 
@@ -4713,7 +4733,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Are you a company interested in sponsoring us? Our <a href=\"https://drive."
-"google.com/file/d/1cp774iWVbU5_GcpsUG4Ya9F-RAN8EWiT/view?"
+"google.com/file/d/1fAmyAiEyLGiE0s6_z3PzgLByHNKzEVHB/view?"
 "usp=sharing\">corporate sponsorships</a> start at 100 USD per month. <a "
 "href=\"%(contact_url)s\">Contact us!</a> 📨"
 msgstr ""
@@ -4979,7 +4999,7 @@ msgid "Thanks and congrats yet again, you're awesome!"
 msgstr ""
 
 #: templates/emails/event_thank_you.html:58
-#: templates/emails/existing_user.html:39 templates/emails/new_user.html:41
+#: templates/emails/existing_user.html:39 templates/emails/new_user.html:46
 #: templates/emails/organize/application_confirmation.html:36
 #: templates/emails/organize/event_deployed.html:94
 #: templates/emails/submit_information_email.html:16
@@ -5061,13 +5081,15 @@ msgid ""
 "password and instructions to access it."
 msgstr ""
 
-#: templates/emails/new_user.html:32
+#: templates/emails/new_user.html:33
+#, python-format
 msgid ""
-"We also invited you to Django Girls Slack, where we chat, communicate and "
-"meet each other!"
+"Click <a href=\"%(slack_invite_link)s\">this link</a> to join <a "
+"href=\"%(slack_invite_link)s\">Django Girls Slack</a>, where we chat, "
+"communicate and meet each other!"
 msgstr ""
 
-#: templates/emails/new_user.html:35
+#: templates/emails/new_user.html:40
 msgid ""
 "You can contact hello@ if you need assistance but it's usually faster to "
 "check <a href=\"https://djangogirls.slack.com/messages/general/\">Slack "
@@ -5414,11 +5436,11 @@ msgid ""
 "world! :)"
 msgstr ""
 
-#: templates/event/base.html:7 templates/global/base.html:7
+#: templates/event/base.html:15 templates/global/base.html:15
 msgid "Django Girls - start your journey with programming"
 msgstr ""
 
-#: templates/event/base.html:8
+#: templates/event/base.html:16
 msgid ""
 "Django Girls is a one-day workshop about programming in Python and Django "
 "tailored for women."
@@ -5428,19 +5450,19 @@ msgstr ""
 msgid "Toggle navigation"
 msgstr ""
 
-#: templates/global/base.html:8
+#: templates/global/base.html:16
 msgid ""
 "Django Girls is a one-day workshop about programming in Python and Django "
 "for women."
 msgstr ""
 
-#: templates/global/base.html:12
+#: templates/global/base.html:20
 msgid ""
 "Django Girls is a one-day workshop about programming in Python and Django "
 "for women"
 msgstr ""
 
-#: templates/global/base.html:14
+#: templates/global/base.html:22
 msgid ""
 "Join us and become a female developer! Build your first website in Python "
 "and Django in a friendly, safe environment."
@@ -5749,6 +5771,84 @@ msgstr ""
 msgid "Good luck and see you on Slack 👋<br />Django Girls Team"
 msgstr ""
 
+#: templates/organize/event_funding.html:6
+msgid "Apply for Sponsorship from our Global Partners"
+msgstr ""
+
+#: templates/organize/event_funding.html:8
+msgid ""
+"Some of our global partners also fund Django Girls workshops. However, they "
+"prefer that Django Girls Foundation handle the sponsorship application "
+"process and they only handle sending the money to the workshop organizers. "
+"Django Girls has done this in the past with GitHub sponsorships though that "
+"is no longer available."
+msgstr ""
+
+#: templates/organize/event_funding.html:15
+msgid ""
+"Starting November 2023, Django Girls will be handling sponsorship "
+"applications for workshops. The organisations Django Girls are handling the "
+"sponsorship process are listed below with the terms and conditions of the "
+"sponsorship."
+msgstr ""
+
+#: templates/organize/event_funding.html:23
+msgid ""
+"Starting November 2023, sponsorship applications to the DSF will be handled "
+"by Django Girls Foundation. The terms and conditions of this sponsorship as "
+"laid out by the DSF are as follows:"
+msgstr ""
+
+#: templates/organize/event_funding.html:29
+msgid ""
+"The DSF has set aside a limited budget for Django Girls workshops "
+"sponsorship spread out through the year. For this reason, they will only "
+"sponsorship only one event per city per year (within 12 months)."
+msgstr ""
+
+#: templates/organize/event_funding.html:35
+msgid ""
+"The typical DSF sponsorship will be $300 per event, or $500 when the "
+"assumption is that the group has large needs and difficulty fundraising or "
+"events outside of the US or Western Europe."
+msgstr ""
+
+#: templates/organize/event_funding.html:40
+msgid ""
+"The DSF funds events, not long term boot camps therefore this application "
+"form should only be used for Django Girls workshop applications only."
+msgstr ""
+
+#: templates/organize/event_funding.html:45
+msgid "The DSF's support has to be publicly recognised and acknowledged."
+msgstr ""
+
+#: templates/organize/event_funding.html:46
+msgid ""
+"The DSF has to receive a report of the event via their email <a "
+"href=\"mailto:dsfboard@googlegroups.com\">dsfboard@googlegroups.com</a> "
+"which should be copied to <a href=\"mailto:hello@djangogirls."
+"org\">hello@djangogirls.org</a>."
+msgstr ""
+
+#: templates/organize/event_funding.html:53
+msgid ""
+"In your application, please share your budget and if your budget "
+"requirements are more than the funding the DSF can provide, also share your "
+"other funding sources and how you wish to offset the deficit. Funding from "
+"the DSF will only be approved once we are sure that the event will indeed "
+"take place because your event has adequate funding. The DSF will only fund "
+"events whose costs are appropriate, realistic and have a solid plan for the "
+"remaining funds."
+msgstr ""
+
+#: templates/organize/event_funding.html:60
+msgid ""
+"To apply for DSF funding, please fill in <a href=\"https://docs.google.com/"
+"forms/d/1KBQKnwY0uFBB0R7HOJIA3VAr9PsUywnp-9yX9El9-Wk/viewform\">this form</"
+"a>.\""
+msgstr ""
+
 #: templates/organize/form/step1_previous_event.html:31
 #: templates/organize/form/step2_application.html:25
 msgid "Application to organize a workshop"
@@ -5917,68 +6017,31 @@ msgid ""
 msgstr ""
 
 #: templates/organize/form/step5_workshop.html:157
-msgid "What are your current local restrictions?"
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:158
-msgid "Please also provide a link to your government website outlining this."
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:176
-msgid "How will you host your in-person workshop during the Covid-19 pandemic?"
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:177
-msgid ""
-"Please provide information on how you plan to ensure safety for attendees "
-"and coaches for your in-person workshop during the Covid-19 pandemic."
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:194
 #: templates/organize/form/step5_workshop_remote.html:157
 msgid ""
 "How do you intent to make your workshop inclusive and promote diversity?"
 msgstr ""
 
-#: templates/organize/form/step5_workshop.html:195
+#: templates/organize/form/step5_workshop.html:158
 #: templates/organize/form/step5_workshop_remote.html:158
 msgid ""
 "Please tell us how you intend to make sure your workshop is inclusive to "
 "people from marginalised communities and promote diversity."
 msgstr ""
 
-#: templates/organize/form/step5_workshop.html:212
+#: templates/organize/form/step5_workshop.html:175
 #: templates/organize/form/step5_workshop_remote.html:175
 msgid "Any additional you may want to share with us?"
 msgstr ""
 
-#: templates/organize/form/step5_workshop.html:213
+#: templates/organize/form/step5_workshop.html:176
 #: templates/organize/form/step5_workshop_remote.html:176
 msgid ""
 "Please provide any additional information you may want to share with us and "
 "may think may help your application."
 msgstr ""
 
-#: templates/organize/form/step5_workshop.html:230
-msgid ""
-"Will you change your workshop to remote or postpone if the situation changes "
-"in your country?"
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:231
-msgid ""
-"Confirm you will postpone or host remote workshop if Covid-19 situation "
-"changes in your city."
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:237
-msgid ""
-" I confirm that should my local restrictions change to prevent the workshop "
-"from going ahead in person safely, I will change to a remote workshop, or "
-"postpone until restrictions are lifted and it is safe to go ahead."
-msgstr ""
-
-#: templates/organize/form/step5_workshop.html:258
+#: templates/organize/form/step5_workshop.html:200
 #: templates/organize/form/step5_workshop_remote.html:200
 msgid "Finish!"
 msgstr ""
@@ -6138,10 +6201,14 @@ msgid "Django Girls Workshop Tutorial"
 msgstr ""
 
 #: templates/organize/index.html:108
+msgid "Apply for Event Sponsorship"
+msgstr ""
+
+#: templates/organize/index.html:111
 msgid "Private mailing list &amp; Slack"
 msgstr ""
 
-#: templates/organize/index.html:121
+#: templates/organize/index.html:124
 msgid ""
 "Django Girls helped me gain more self-confidence and gave me a boost to keep "
 "learning. I’ve created my own blog and then prepared workshops and taught "
@@ -6149,15 +6216,15 @@ msgid ""
 "people!"
 msgstr ""
 
-#: templates/organize/index.html:127
+#: templates/organize/index.html:130
 msgid "Agata Grdal, organizer of Django Girls Wrocław"
 msgstr ""
 
-#: templates/organize/index.html:134
+#: templates/organize/index.html:137
 msgid "Experiences of Django Girls organizers"
 msgstr ""
 
-#: templates/organize/index.html:142
+#: templates/organize/index.html:145
 msgid ""
 "Organizers of Django Girls Windhoek, Namibia share their experience of "
 "organizing an event in Africa. <a href=\"http://blog.djangogirls.org/"
@@ -6165,7 +6232,7 @@ msgid ""
 "more&nbsp;»</a>"
 msgstr ""
 
-#: templates/organize/index.html:151
+#: templates/organize/index.html:154
 msgid ""
 "A Toolkit of Awesome: tips &amp; tricks from seasoned Django Girls "
 "organizers in Budapest, Hungary. <a href=\"http://blog.djangogirls.org/"
@@ -6173,7 +6240,7 @@ msgid ""
 "more&nbsp;»</a>"
 msgstr ""
 
-#: templates/organize/index.html:160
+#: templates/organize/index.html:163
 msgid ""
 "Learn how Django Girls Seoul built a local tech community using events as "
 "their main tool. <a href=\"http://blog.djangogirls.org/post/152858499038/"
