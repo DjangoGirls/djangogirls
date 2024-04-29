@@ -43,7 +43,10 @@ def test_deploy_event_from_previous_event(get_or_create_gmail, base_application,
 
 @mock.patch("organize.models.gmail_accounts.get_or_create_gmail")
 def test_send_deployed_email(get_or_create_gmail, base_application, mailoutbox, stock_pictures):
-    get_or_create_gmail.return_value = (f"{base_application.city}@djangogirls.org", "asd123ASD")
+    get_or_create_gmail.return_value = (
+        f"{base_application.city}@djangogirls.org",
+        "asd123ASD",
+    )
 
     base_application.create_event()
     event = base_application.deploy()
@@ -123,7 +126,10 @@ def test_previous_application_with_approximate_date(data_dict, previous_applicat
 
 def test_coorganizer_str(base_application):
     org = Coorganizer.objects.create(
-        event_application=base_application, email="anna@example.com", first_name="Anna", last_name="Smith"
+        event_application=base_application,
+        email="anna@example.com",
+        first_name="Anna",
+        last_name="Smith",
     )
     assert str(org) == f"{org.first_name} {org.last_name} <{org.email}>"
 

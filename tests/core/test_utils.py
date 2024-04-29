@@ -1,3 +1,4 @@
+import json
 from datetime import date
 from unittest import mock
 
@@ -60,6 +61,14 @@ def test_returns_none_when_invalid_results(mock_get):
             "q": "PretendTown, UK",
         },
     )
+    assert result is None
+
+
+@mock.patch("requests.get")
+def test_get_coordinates_for_city_invalid_response(mock_get):
+    # Raise JSONDecodeError when trying to parse the response
+    mock_get.return_value.json.side_effect = json.JSONDecodeError("error", "doc", 0)
+    result = get_coordinates_for_city("Prague", "Czechia")
     assert result is None
 
 
