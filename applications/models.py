@@ -80,7 +80,12 @@ class Form(models.Model):
 
 class Question(models.Model):
     TEXT = "text"
-    QUESTION_TYPES = (("paragraph", "Paragraph"), (TEXT, "Long text"), ("choices", "Choices"), ("email", "Email"))
+    QUESTION_TYPES = (
+        ("paragraph", "Paragraph"),
+        (TEXT, "Long text"),
+        ("choices", "Choices"),
+        ("email", "Email"),
+    )
 
     form = models.ForeignKey(to=Form, null=False, blank=False, on_delete=models.deletion.CASCADE)
     title = models.TextField(verbose_name=_("Question"))
@@ -145,7 +150,10 @@ class Application(models.Model):
     newsletter_optin = models.BooleanField(default=False)
 
     rsvp_status = models.CharField(
-        max_length=50, choices=RSVP_STATUSES, verbose_name=_("RSVP status"), default=RSVP_WAITING
+        max_length=50,
+        choices=RSVP_STATUSES,
+        verbose_name=_("RSVP status"),
+        default=RSVP_WAITING,
     )
     rsvp_yes_code = models.CharField(max_length=24, null=True, blank=True)
     rsvp_no_code = models.CharField(max_length=24, null=True, blank=True)
@@ -189,7 +197,7 @@ class Application(models.Model):
             return 0
         ss = sum((x - c) ** 2 for x in data)
         ss -= sum((x - c) for x in data) ** 2 / len(data)
-        assert not ss < 0, "negative sum of square deviations: %f" % ss
+        assert not ss < 0, f"negative sum of square deviations: {ss}"
         return ss / (n - 1)
 
     def stdev(self):
