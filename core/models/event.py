@@ -23,7 +23,10 @@ class Event(models.Model):
     country = models.CharField(max_length=200)
     latlng = models.CharField(verbose_name="latitude and longitude", max_length=30, null=True, blank=True)
     photo = models.ImageField(
-        upload_to="event/cities/", null=True, blank=True, help_text="The best would be 356 x 210px"
+        upload_to="event/cities/",
+        null=True,
+        blank=True,
+        help_text="The best would be 356 x 210px",
     )
     photo_credit = models.CharField(
         max_length=200,
@@ -36,7 +39,11 @@ class Event(models.Model):
     photo_link = models.URLField(verbose_name="photo URL", null=True, blank=True)
     email = models.EmailField(verbose_name="event email", max_length=75, null=True, blank=True)
     main_organizer = models.ForeignKey(
-        to=User, null=True, blank=True, related_name="main_organizer", on_delete=models.deletion.SET_NULL
+        to=User,
+        null=True,
+        blank=True,
+        related_name="main_organizer",
+        on_delete=models.deletion.SET_NULL,
     )
     team = models.ManyToManyField(to=User, blank=True)
     is_on_homepage = models.BooleanField(verbose_name="visible on homepage?", default=True)
@@ -144,7 +151,7 @@ class Event(models.Model):
         event.add("dtstart", event_date)
         event.add("dtend", event_date + timedelta(days=1))
         event.add("uid", self.ical_uid)
-        event.add("summary", "Django Girls %s" % self.city)
+        event.add("summary", f"Django Girls {self.city}")
         event.add("location", f"{self.country}, {self.city}")
         return event
 
@@ -200,7 +207,12 @@ class Event(models.Model):
         are the best place for this logic. Maybe we should move it back to
         the models.
         """
-        defaults = {"first_name": first_name, "last_name": last_name, "is_staff": True, "is_active": True}
+        defaults = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "is_staff": True,
+            "is_active": True,
+        }
         user, created = User.objects.get_or_create(email=email, defaults=defaults)
         password = None
         if created:
@@ -253,12 +265,19 @@ class Event(models.Model):
 
 class EventPageContent(models.Model):
     event = models.ForeignKey(
-        to=Event, null=False, blank=False, related_name="content", on_delete=models.deletion.CASCADE
+        to=Event,
+        null=False,
+        blank=False,
+        related_name="content",
+        on_delete=models.deletion.CASCADE,
     )
     name = models.CharField(max_length=100)
     content = models.TextField(help_text="HTML allowed")
     background = models.ImageField(
-        upload_to="event/backgrounds/", null=True, blank=True, help_text="Optional background photo"
+        upload_to="event/backgrounds/",
+        null=True,
+        blank=True,
+        help_text="Optional background photo",
     )
     position = models.PositiveIntegerField(help_text="Position of the block on the website")
     is_public = models.BooleanField(default=False)
@@ -274,9 +293,18 @@ class EventPageContent(models.Model):
 
 
 class EventPageMenu(models.Model):
-    event = models.ForeignKey(to=Event, null=False, blank=False, related_name="menu", on_delete=models.deletion.CASCADE)
+    event = models.ForeignKey(
+        to=Event,
+        null=False,
+        blank=False,
+        related_name="menu",
+        on_delete=models.deletion.CASCADE,
+    )
     title = models.CharField(max_length=255)
-    url = models.CharField(max_length=255, help_text="http://djangogirls.org/city/<the value you enter here>")
+    url = models.CharField(
+        max_length=255,
+        help_text="http://djangogirls.org/city/<the value you enter here>",
+    )
     position = models.PositiveIntegerField(help_text="Order of menu")
 
     class Meta:

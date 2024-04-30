@@ -55,6 +55,6 @@ class Command(BaseCommand):
                 story.save()
 
                 if is_story:
-                    print("Story of %s has been fetched" % name)
+                    print(f"Story of {name} has been fetched")
                 else:
-                    print('Blogpost "%s" has been fetched' % name)
+                    print(f'Blogpost "{name}" has been fetched')
