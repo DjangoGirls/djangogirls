@@ -6170,7 +6170,7 @@ msgstr ""
 #: templates/organize/form/step3_organizers.html:114
 #: templates/organize/form/step3_organizers.html:154
 msgid "Email address"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: templates/organize/form/step3_organizers.html:85
 msgid "Your organizing team"
