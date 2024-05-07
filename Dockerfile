@@ -20,7 +20,7 @@ WORKDIR /var/www/app
 
 COPY requirements.txt ./requirements.txt
 
-RUN pip install pip-tools \
+RUN pip install --upgrade pip pip-tools \
     && pip-sync
 
 COPY package.json ./package.json
