@@ -255,7 +255,7 @@ pyyaml==6.0
     # via
     #   pre-commit
     #   vcrpy
-requests==2.31.0
+requests==2.32.0
     # via
     #   google-api-core
     #   py-trello
