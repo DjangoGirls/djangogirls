@@ -28,9 +28,10 @@
   <meta property="og:title" content="{{ event.page_title }} on {{ event.date }}" />
   <meta property="og:description" content="{{ event.page_description }}" />
 
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Lora:400,700,400i,700i/Roboto:300,400,300i,400i">
   <link rel="stylesheet" type="text/css" href="{% static_rev 'css/event.css' %}">
-  <script type="text/javascript" src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'vendor/js/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
   <script type="text/javascript" src="{% static_rev 'js/event.js' %}"></script>
 
   {% if event.page_main_color %}
