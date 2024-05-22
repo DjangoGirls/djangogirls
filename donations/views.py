@@ -16,7 +16,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def index(request):
     context = {
-        "patreon_stats": FundraisingStatus.objects.all().first(),  # TODO: This isn't used
+        "patreon_stats": FundraisingStatus.objects.first(),  # TODO: This isn't used
     }
     return render(request, "donations/corporate_sponsorships.html", context)
 
