@@ -1,6 +1,6 @@
 {% load core_tags i18n static %}
 
-<div class="navbar navbar-expand-lg" role="navigation">
+<div class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
@@ -14,9 +14,9 @@
       </div>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="navbar-nav navbar-default ms-auto mb-2 mb-lg-0">
+      <ul class="nav navbar-nav">
         {% for item in menu %}
-        <li class="nav-item px-2"><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
+        <li><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>
     </div><!--/.nav-collapse -->
