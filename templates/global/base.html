@@ -25,7 +25,9 @@
   {% block main_stylesheet %}<link rel="stylesheet" type="text/css" href="{% static_rev 'css/global.css' %}" media="screen">{% endblock %}
   {% block extra_css %}{% endblock %}
 
+  <script type="text/javascript" src="{% static 'vendor/js/jquery.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vendor/js/sss.min.js' %}"></script>
 
   {% block extra_js %}{% endblock %}
 </head>
