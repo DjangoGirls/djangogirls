@@ -11,19 +11,24 @@ STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "test_public")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "test_public")
 
 
-def test_index_no_stripe_keys(client):
+def test_index(client):
+    resp = client.get(reverse("donations:index"))
+    assert resp.status_code == 200
+
+
+def test_donate_no_stripe_keys(client):
     with override_settings(STRIPE_PUBLIC_KEY=None, STRIPE_SECRET_KEY=None):
         # Access donations
-        resp = client.get(reverse("donations:index"))
+        resp = client.get(reverse("donations:donate"))
         assert resp.status_code == 200
 
         # Check if it returns a list of past and future events
         assert "form" and "STRIPE_PUBLIC_KEY" not in resp.context
 
 
-def test_index(client):
+def test_donate(client):
     with override_settings(STRIPE_PUBLIC_KEY=STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY=STRIPE_SECRET_KEY):
-        resp = client.get(reverse("donations:index"))
+        resp = client.get(reverse("donations:donate"))
         assert resp.status_code == 200
 
         # Check if it returns a list of past and future events

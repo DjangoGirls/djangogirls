@@ -1,0 +1,186 @@
+{% extends 'global/base.html' %}
+{% load i18n static %}
+
+{% block content %}
+    {% url 'contact:landing' as contact_url %}
+    {% url 'donations:donate' as donate_url %}
+
+	<script src="https://js.stripe.com/v3/"></script>
+
+    <div class="container">
+        <section>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h2>{% trans "Why give to the Django Girls Foundation?" %}</h2>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <h3>{% trans "Our mission:" %}</h3>
+                    <p>
+                        {% url 'core:foundation' as foundation_url %}
+                        {% blocktrans trimmed %}
+                            Django Girls is a volunteer-run <a href="{{ foundation_url }}">registered charity</a>.
+                            We use your generous donations to teach thousands of women to build websites
+                            using Python and Django by providing resources and tools volunteer organizers all over the world.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Since July 2014, our workshops have reached {{ attendees_sum|default_if_none:'0' }} women
+                            in {{ countries_count|default_if_none:'0' }} countries
+                            and our <a href="https://tutorial.djangogirls.org/">online tutorial</a> has been read by more than 3,958,285 people.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Our focus and mission for this year is in improving diversity and inclusion in Django
+                            Girls, ensuring our workshops are accessible to all, specifically including those from
+                            marginalised groups.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                    {% url 'core:year_2016_2017' as sixteen_seventeen_url %}
+                        {% blocktrans trimmed %}
+                            We're transparent about our finances. See our <a href="{{ sixteen_seventeen_url }}">Annual Report for 2016-2017</a>
+                            to see how we spend donations and what impact they made.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive center-block" alt="{% trans 'A woman looking at her laptop during Django Girls Lagos 2016.' %}" src="{% static 'img/global/donate/lagos.jpg' %}">
+                </div>
+            </div>
+        </section>
+
+        <section id="support">
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h2>{% trans "Start supporting Django Girls Foundation today 💕" %}</h2>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-md-6">
+                    <h3>{% trans "Monthly donations" %}</h3>
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you would like to setup a recurring donation, we encourage you to do so via our
+                            <a href="https://www.patreon.com/djangogirls" target="_blank">Patreon page</a>.
+                            Our corporate pledges start at 100 USD per month.
+                        {% endblocktrans %}
+                    </p>
+                    {# TODO: Can this data be dynamic? #}
+                    <p>
+                        <span class="highlighted-number">$1,060</span> of <span class="highlighted-number">$2,500</span> monthly goal pledged</p>
+                        <div class="support-bar">
+                            <div class="pledge" style="width: 42%">42%
+                            </div>
+                        </div>
+                        <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
+                </div>
+                <div class="col-md-6">
+                    <h3>{% trans "Annual sponsorships" %}</h3>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Are you a company interested in annual sponsorships?
+                            Our <a href="https://drive.google.com/file/d/1fAmyAiEyLGiE0s6_z3PzgLByHNKzEVHB/view?usp=sharing">corporate sponsorships</a>
+                            start at 500 USD per year. <a href="{{ contact_url }}">Contact us!</a> 📨
+                        {% endblocktrans %}
+                    </p>
+                    <h3>{% trans "One-time donations" %}</h3>
+                    <p>
+                        {% blocktrans trimmed %}
+                            You can send us a one-time donation via PayPal to
+                            <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a> or 
+                            <a href="{{ donate_url }}">donate to us now</a>.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you would like to discuss a bigger partnership or a corporate sponsorship,
+                            <a href="{{ contact_url }}">please get in touch.</a>
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+        <br>
+
+        <section id="sponsors">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{% trans "They already sponsor us! 💕" %}</h2>
+                    <p>
+                      {% blocktrans trimmed %}
+                        These incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br />
+                        If you wish to join them, support us on <a href="https://www.patreon.com/djangogirls">Patreon</a>
+                        or <a href="{{ contact_url }}">drop us a line</a>.
+                      {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+
+            {% include 'includes/_main_sponsors.html' %}
+        </section>
+
+        <section>
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    <h2>{% trans "Our current projects that will benefit from your help" %}</h2>
+                    <h3>{% trans "Staff Costs" %}</h3>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Since the first Django Girls workshop in July 2014, we grew unexpectedly fast and we could not sustain 
+                            thatgrowth without some help. 
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            In 2015, we introduced a part-time paid position of Awesomeness Ambassador to help provide support to
+                            hundreds of volunteers all over the world.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            In 2017, we also introduced the part-time paid position of Fundraising Coordinator to help us raise 
+                            funds to run our activities. In 2023, we introduced the part-time paid position of Communications 
+                            Officer to help us increase outreach following the pandemic and increase the number of workshops. 
+                            We also introduced the Chief Emoji Officer (Managing Director) role, increasing the number of our paid 
+                            staff to 4.
+                        {% endblocktrans %}
+                    </p>
+
+                    <h3>{% trans "Django Girls Bootcamp:" %}</h3>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Our upcoming initiative, a 12 to 16-week coding bootcamp, is an ambitious extension of this mission. 
+                            This program, tailored specifically for women, is designed to provide comprehensive training in web 
+                            development; covering HTML, CSS, JavaScript, Python, and Django. In addition to technical skills, 
+                            the bootcamp will focus on professional development, allowing participants to work on personal and 
+                            open-source projects. 
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Our vision is to create an inclusive, supportive environment that teaches coding and empowers women 
+                            to transition into their first programming roles. By sponsoring this project, you're not just funding 
+                            a bootcamp; you are investing in the future of technology, making it more diverse, inclusive, and 
+                            innovative.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}

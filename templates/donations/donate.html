@@ -7,55 +7,6 @@
 	<script src="https://js.stripe.com/v3/"></script>
 
     <div class="container">
-        <section>
-            <div class="row clearfix">
-                <div class="col-md-12">
-                    <h2>{% trans "Why give to the Django Girls Foundation?" %}</h2>
-                </div>
-            </div>
-
-            <div class="row clearfix">
-                <div class="col-md-6">
-                    <h3>{% trans "Our mission:" %}</h3>
-                    <p>
-                        {% url 'core:foundation' as foundation_url %}
-                        {% blocktrans trimmed %}
-                            Django Girls is a volunteer-run <a href="{{ foundation_url }}">registered charity</a>.
-                            We use your generous donations to teach thousands of women to build websites
-                            using Python and Django by providing resources and tools volunteer organizers all over the world.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            Since July 2014, our workshops have reached {{ attendees_sum|default_if_none:'0' }} women
-                            in {{ countries_count|default_if_none:'0' }} countries
-                            and our <a href="https://tutorial.djangogirls.org/">online tutorial</a> has been read by more than 3,958,285 people.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            Our focus and mission for this year is in improving diversity and inclusion in Django
-                            Girls, ensuring our workshops are accessible to all, specifically including those from
-                            marginalised groups.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>
-                    {% url 'core:year_2016_2017' as sixteen_seventeen_url %}
-                        {% blocktrans trimmed %}
-                            We're transparent about our finances. See our <a href="{{ sixteen_seventeen_url }}">Annual Report for 2016-2017</a>
-                            to see how we spend donations and what impact they made.
-                        {% endblocktrans %}
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <img class="img-responsive center-block" alt="{% trans 'A woman looking at her laptop during Django Girls Lagos 2016.' %}" src="{% static 'img/global/donate/lagos.jpg' %}">
-                </div>
-            </div>
-        </section>
-
         <section id="support">
             <div class="row clearfix">
                 <div class="col-md-12">
@@ -78,14 +29,6 @@
                             Our pledges start at 5 USD per month.
                         {% endblocktrans %}
                     </p>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            Are you a company interested in sponsoring us?
-                            Our <a href="https://drive.google.com/file/d/1fAmyAiEyLGiE0s6_z3PzgLByHNKzEVHB/view?usp=sharing">corporate sponsorships</a>
-                            start at 100 USD per month. <a href="{{ contact_url }}">Contact us!</a> 📨
-                        {% endblocktrans %}
-                    </p>
                 </div>
 
                 <div class="col-md-6">
@@ -99,50 +42,74 @@
                         <a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>
                 </div>
             </div>
-
             <div class="row clearfix">
                 <div class="col-md-6">
                     <h3>{% trans "One-time donations" %}</h3>
-                    <p>
-                        {% blocktrans trimmed %}
-                            You can send us a one-time donation via PayPal to
-                            <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>
-                        {% endblocktrans %}
-                    </p>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
 
-                    <p>
-                        {% blocktrans trimmed %}
-                            If you would like to discuss a bigger partnership or a corporate sponsorship,
-                            <a href="{{ contact_url }}">please get in touch.</a>
-                        {% endblocktrans %}
-                    </p>
+            <div class="row clearfix">
+                <div class="col-md-6 card">
+                    <div class="card-body">
+                        <h4>{% trans "Donate via PayPal" %}</h4>
+                    
+                        <script src="https://www.paypal.com/sdk/js?client-id=BAA4vJvR54JI4G6VRKvNkHsjQOajbjxANAqiNokKuIIOLqJ-NgFccsh9TurITWeo_jTrSnhlTW2aYIHYQQ&components=hosted-buttons&disable-funding=venmo&currency=GBP"></script>
+                        <div id="paypal-container-BFWVAQTRKD55J"></div>
+                        <script>
+                            paypal.HostedButtons({
+                                hostedButtonId: "BFWVAQTRKD55J",
+                            }).render("#paypal-container-BFWVAQTRKD55J")
+                        </script>
 
-                    {% if STRIPE_PUBLIC_KEY %}
-                        <h4>{% trans "Donate now" %}</h4>
+                        <p>
+                            {% blocktrans trimmed %}
+                                You can send us a one-time donation via PayPal to
+                                <a href="mailto:hello@djangogirls.org">hello@djangogirls.org</a>
+                            {% endblocktrans %}
+                        </p>
 
-                        <form id="payment-form" action="{% url 'donations:charge' %}" method="post">
-                            {% csrf_token %}
-
-                            {% include 'includes/_form.html' %}
-
-                            <div class="form-row">
-                                <label for="card-element">
-                                    {% trans "Credit or debit card" %}
-                                </label>
-                                <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'>
-                                    <!-- A Stripe Element will be inserted here. -->
-                                </div>
-
-                                <!-- Used to display form errors. -->
-                                <div id="card-errors" role="alert"></div>
-                            </div>
-
-                            <input class="btn" style="margin-top: 25px" type="submit" value="Submit Payment">
-                        </form>
-                    {% endif %}
+                        <p>
+                            {% blocktrans trimmed %}
+                                If you would like to discuss a bigger partnership or a corporate sponsorship,
+                                <a href="{{ contact_url }}">please get in touch.</a>
+                            {% endblocktrans %}
+                        </p>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if STRIPE_PUBLIC_KEY %}
+                            <h4>{% trans "Donate now" %}</h4>
+
+                            <form id="payment-form" action="{% url 'donations:charge' %}" method="post">
+                                {% csrf_token %}
+
+                                {% include 'includes/_form.html' %}
+
+                                <div class="form-row">
+                                    <label for="card-element">
+                                        {% trans "Credit or debit card" %}
+                                    </label>
+                                    <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'>
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+
+                                <input class="btn" style="margin-top: 25px" type="submit" value="Submit Payment">
+                            </form>
+                    {% endif %}
+
+                        </div>
+                    </div>
+                    
+                    <br>
+
                     <h3>{% trans "Other ways of supporting us" %}</h3>
                     <h4>{% trans "Humble Bundle Store" %}</h4>
                     <p>
@@ -155,78 +122,6 @@
             </div>
         </section>
 
-        <section id="supporters">
-            <div class="row clearfix">
-                <div class="col-md-12">
-                    <h2>{% trans "They already support us:" %}</h2>
-                        {% include 'includes/_main_sponsors.html' %}
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="row clearfix">
-                <div class="col-md-12">
-                    <h2>{% trans "Our current projects that will benefit from your help" %}</h2>
-                    <h3>{% trans "Django Girls Awesomeness Ambassador:" %}</h3>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            In September 2015, <a href="http://blog.djangogirls.org/post/127160095788/meet-our-awesomeness-ambassador-lucie">the
-                            Foundation hired a part-time contractor</a> to help with the daily operations of the organization. After year and a half,
-                            Django Girls’ 1st Awesomeness Ambassador <a href="http://blog.djangogirls.org/post/128559723068/your-django-story-meet-lucie-daeye">
-                                Lucie Daeye</a> resigned to start her new adventure as Systems Engineer at Mapbox.
-                        {% endblocktrans %}
-                    </p>
-                    <p>
-                        {% blocktrans trimmed %}
-                            In June 2017, <a href="https://blog.djangogirls.org/post/161441111423/claire-wicher-joins-django-girls-as-awesomeness">
-                            Claire Wicher</a> joined us as our Awesomeness Ambassador to take over from where Lucie left.
-                            <a href="https://blog.djangogirls.org/post/161441111423/claire-wicher-joins-django-girls-as-awesomeness">Claire Wicher</a> as
-                            our Awesomeness Ambassador, is in charge of responding to organizer's requests, handling our mail, improving our processes,
-                            doing administrative tasks, updating the blog and newsletter, and maintaining the website and resources.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>{% trans "Your donations will help us make her position secure." %}</p>
-
-                    <h3>{% trans "Django Girls Fundraising Coordinator:" %}</h3>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            In June 2017, we introduced the role of <a href="https://blog.djangogirls.org/post/162673547790/anna-makarudze-joins-as-the-django-girls">
-                            Fundraising Coordinator</a> to help with coordinating the fundraising activities of the organization.
-                            <a href="https://blog.djangogirls.org/post/162673547790/anna-makarudze-joins-as-the-django-girls">Anna Makarudze</a> as our
-                            Fundraising Coordinator engages sponsors and the community to get funding to ensure the organization remains sustainable.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            In August 2020, we also asked her to help us by providing technical support for our website, and
-                            help maintain and keep our website up-to-date.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>{% trans "Your donations will help us make her position secure." %}</p>
-
-                    <h3>{% trans "Django Girls Summit:" %}</h3>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            Django Girls Summit is a two days unconference where organizers will meet and share their
-                            experiences about Django Girls workshops.
-                        {% endblocktrans %}
-                    </p>
-
-                    <p>
-                        {% blocktrans trimmed %}
-                            Your donations will help us organize this event and give financial assistance to conference's attendees who need it.
-                        {% endblocktrans %}
-                    </p>
-                </div>
-            </div>
-        </section>
     </div>
 
     <script>
