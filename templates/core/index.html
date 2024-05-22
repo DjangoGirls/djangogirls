@@ -117,11 +117,8 @@
                 <div class="row-container">
                     <div class="row">
                     {% for event in future_events %}
-                      {% if forloop.first %}<div class="row">{% endif %}
-                        <div class="col-md-3">
-                        {% include 'includes/_event.html' with event=event %}</div>
-                        {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
-                        {% if forloop.last %}</div>{% endif %}
+                        {% include 'includes/_event.html' with event=event %}
+                        {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
                     {% endfor %}
                     </div>
                 </div>
