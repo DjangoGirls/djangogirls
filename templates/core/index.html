@@ -97,12 +97,13 @@
 
             <div class="upcoming-events">
                 <div class="row-container">
-                    <div class="row">
                     {% for event in future_events %}
-                        {% include 'includes/_event.html' with event=event %}
+                      {% if forloop.first %}<div class="row">{% endif %}
+                      <div class="col event">
+                        {% include 'includes/_event.html' with event=event %}</div>
                         {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-                    {% endfor %}
-                    </div>
+                          {% if forloop.last %}</div>{% endif %}
+                    {% endfor %}    
                 </div>
                 <div class="show-more"><a href="javascript:;">
                     {% blocktrans %}Show all {{ future_events_count }} upcoming events{% endblocktrans %} »
@@ -116,12 +117,13 @@
                     <h2>{% trans "Badass Django Ladies" %}</h2>
                     <p>{% trans "Each week we try to introduce one badass lady who uses Python or Django and highlight her work:" %}</p>
 
-                    <div class="row">
                     {% for story in stories %}
-                        {% include 'includes/_story.html' with story=story %}
+                    {% if forloop.first %}<div class="row">{% endif %}
+                      <div class="col story">
+                        {% include 'includes/_story.html' with story=story %}</div>
+                      {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+                      {% if forloop.last %}</div>{% endif %}
                     {% endfor %}
-                    </div>
-
                     <p><a href="{% url 'story:stories' %}">{% trans "Read all Django Stories" %} »</a></p>
                 </div>
                 <div class="col-md-6">
