@@ -12,4 +12,5 @@ urlpatterns = [
     # path('remote_or_in_person/', views.remote_or_in_person, name='remote_or_in_person'),
     path("suspend/", views.suspend, name="suspend"),
     path("event_funding/", views.event_funding, name="event_funding"),
+    path("slack/", views.slack, name="slack"),
 ]

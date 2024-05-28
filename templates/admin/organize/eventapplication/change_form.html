@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block object-tools %}
+  {% if original %}
     <div class="row mb-3">
         <h4 class="italic-title">{% trans "Triaging" %}</h4>
         <div class="box save-box">
@@ -30,5 +31,6 @@
           {% endif %}
         </div>
     </div>
+    {% endif %}
     {{ block.super }}
 {% endblock %}

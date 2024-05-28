@@ -1,22 +1,16 @@
 {% load core_tags i18n static %}
 
-<div class="navbar navbar-default" role="navigation">
+<div class="navbar navbar-expand-lg navbar-default" role="navigation">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">{% trans "Toggle navigation" %}</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand" href="/">
-          <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Django Girls" /></a>
-      </div>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
+    <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Django Girls" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">{% trans "Toggle navigation" %}
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         {% for item in menu %}
-        <li><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
+        <li class="nav-item px-2"><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>
     </div><!--/.nav-collapse -->

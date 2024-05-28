@@ -3,6 +3,7 @@
 This is run via a scheduled task every hour and checks if there are any emails that need sending.
 
 """
+
 import logging
 from smtplib import SMTPException
 
