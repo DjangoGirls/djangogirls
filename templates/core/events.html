@@ -14,12 +14,13 @@
                 </div>
             </div>
 
-            <div class="row">
-                {% for event in future_events %}
-                    {% include 'includes/_event.html' with event=event %}
-                    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-                {% endfor %}
-            </div>
+            {% for event in future_events %}
+                {% if forloop.first %}<div class="row">{% endif %}
+                <div class="col event">
+                    {% include 'includes/_event.html' with event=event %}</div>
+                {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+                {% if forloop.last %}</div>{% endif %}
+            {% endfor %} 
 
             <section id="organize">
                 {% include 'includes/_no_event.html' %}
@@ -31,12 +32,13 @@
                 </div>
             </div>
 
-            <div class="row">
                 {% for event in past_events %}
-                    {% include 'includes/_event.html' with event=event %}
+                    {% if forloop.first %}<div class="row">{% endif %}
+                    <div class="col event">
+                        {% include 'includes/_event.html' with event=event %}</div>
                     {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-                {% endfor %}
-            </div>
+                    {% if forloop.last %}</div>{% endif %}
+                {% endfor %} 
         </section>
     </div>
 {% endblock %}

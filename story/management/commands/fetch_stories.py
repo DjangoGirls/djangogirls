@@ -1,3 +1,4 @@
+from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
 
 import requests
@@ -39,14 +40,21 @@ class Command(BaseCommand):
                 story = Story(name=name, post_url=post_url, content=_post, is_story=is_story)
 
                 if image_url:
-                    img = NamedTemporaryFile(delete=True)
-                    img.write(urlopen(image_url).read())
-                    img.flush()
-                    story.image.save(image_url.split("/")[-1], File(img))
+                    try:
+                        with NamedTemporaryFile(delete=True) as img:
+                            img.write(urlopen(image_url).read())
+                            img.flush()
+                            story.image.save(image_url.split("/")[-1], File(img))
+                    except HTTPError as e:
+                        print(f"HTTP error when fetching image from {image_url}: {e.code} {e.reason}")
+                    except URLError as e:
+                        print(f"URL error when fetching image from {image_url}: {e.reason}")
+                    except Exception as e:
+                        print(f"Unexpected error when fetching image from {image_url}: {e}")
 
                 story.save()
 
                 if is_story:
-                    print("Story of %s has been fetched" % name)
+                    print(f"Story of {name} has been fetched")
                 else:
-                    print('Blogpost "%s" has been fetched' % name)
+                    print(f'Blogpost "{name}" has been fetched')

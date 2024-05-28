@@ -14,7 +14,14 @@ class InlinePaymentAdmin(admin.StackedInline):
 
 @admin.register(Patron)
 class PatronAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "twitter_link", "since", "uncompleted_payments", "payments_link")
+    list_display = (
+        "name",
+        "email",
+        "twitter_link",
+        "since",
+        "uncompleted_payments",
+        "payments_link",
+    )
     list_filter = ["since", PendingRewardsFilter]
     search_fields = ["name", "email", "twitter"]
     inlines = (InlinePaymentAdmin,)
@@ -30,9 +37,13 @@ class PatronAdmin(admin.ModelAdmin):
 
     @admin.display(description=_("Payments"))
     def payments_link(self, patron):
-        link = reverse("admin:patreonmanager_payment_changelist") + "?patron_id__exact=%s" % patron.pk
+        link = reverse("admin:patreonmanager_payment_changelist") + f"?patron_id__exact={patron.pk}"
         count = patron.payments.count()
-        return format_html('<a href="{}">{}</a>', link, ngettext("%d payment", "%d payments", count) % count)
+        return format_html(
+            '<a href="{}">{}</a>',
+            link,
+            ngettext("%d payment", "%d payments", count) % count,
+        )
 
     @admin.display(description=_("Uncompleted payments"))
     def uncompleted_payments(self, patron):
@@ -48,7 +59,14 @@ class RewardAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ("get_month_display", "linked_patron", "reward", "pledge", "status", "completed")
+    list_display = (
+        "get_month_display",
+        "linked_patron",
+        "reward",
+        "pledge",
+        "status",
+        "completed",
+    )
     list_filter = ["reward", "status", "completed"]
     list_select_related = ["patron", "reward"]
     date_hierarchy = "month"

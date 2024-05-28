@@ -2,25 +2,34 @@ FROM python:3.10.9-bullseye
 
 RUN apt-get update \
     && apt-get upgrade -yq \
+    && apt-get -y install locales \
+    && apt-get -y install gettext \
+    && apt-get -y install poedit \
     && apt-get install -yq --no-install-recommends \
         nodejs \
-        npm
+        npm \
+    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-ENV APP_DIR=/var/www/app
-WORKDIR ${APP_DIR}
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && sed -i -e 's/# en_US ISO-8859-1/en_US ISO-8859-1/' /etc/locale.gen \
+    && sed -i -e 's/# en_US.ISO-8859-15 ISO-8859-15/en_US.ISO-8859-15 ISO-8859-15/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale
 
-COPY requirements.txt ${APP_DIR}/requirements.txt
+WORKDIR /var/www/app
 
-RUN pip install pip-tools \
+COPY requirements.txt ./requirements.txt
+
+RUN pip install --upgrade pip pip-tools \
     && pip-sync
 
-COPY package.json ${APP_DIR}/package.json
+COPY package.json ./package.json
 
 RUN npm install \
     && npm install -g gulp
 
 COPY rootfs /
-COPY . ${APP_DIR}
+COPY . .
 
 RUN gulp local
 

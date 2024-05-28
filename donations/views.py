@@ -16,7 +16,14 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def index(request):
     context = {
-        "patreon_stats": FundraisingStatus.objects.all().first(),  # TODO: This isn't used
+        "patreon_stats": FundraisingStatus.objects.first(),  # TODO: This isn't used
+    }
+    return render(request, "donations/corporate_sponsorships.html", context)
+
+
+def donate(request):
+    context = {
+        "patreon_stats": FundraisingStatus.objects.first(),  # TODO: This isn't used
     }
     if settings.STRIPE_PUBLIC_KEY:
         context.update({"form": StripeForm(), "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY})

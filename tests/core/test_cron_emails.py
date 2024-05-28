@@ -1,4 +1,5 @@
 """Tests for cron-emails sent out by the handle_emails management command."""
+
 import pytest
 from click.testing import CliRunner
 from django.utils import timezone
