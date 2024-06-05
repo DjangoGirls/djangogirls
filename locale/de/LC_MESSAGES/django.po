@@ -471,21 +471,90 @@ msgstr "Das Datum sollte in der Zukunft liegen"
 msgid "List of Django Girls events around the world"
 msgstr "Liste von Django Girls Veranstaltungen weltweit"
 
-#: djangogirls/settings.py:104
+#: core/views.py:177
+#, python-format
+msgid "No translation for language %(lang)s"
+msgstr "Keine Übersetzung für Sprache %(lang)s"
+
+#: djangogirls/settings.py:105
 msgid "English"
 msgstr "Englisch"
 
 #: djangogirls/settings.py:106
+msgid "Brazilian Portuguese"
+msgstr "Brasilianisches Portugiesisch"
+
+#: djangogirls/settings.py:107
+msgid "Dutch"
+msgstr ""
+
+#: djangogirls/settings.py:108
 msgid "French"
 msgstr "Französisch"
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:109
 msgid "German"
 msgstr "Deutsch"
 
 #: djangogirls/settings.py:110
+msgid "Hebrew"
+msgstr ""
+
+#: djangogirls/settings.py:111
+msgid "Korean"
+msgstr "Koreanisch"
+
+#: djangogirls/settings.py:112
+msgid "Persian"
+msgstr "Persisch"
+
+#: djangogirls/settings.py:113
 msgid "Portuguese"
-msgstr "Portugiesisch"
+msgstr "Portugisisch"
+
+#: djangogirls/settings.py:114
+msgid "Russian"
+msgstr "Russisch"
+
+#: djangogirls/settings.py:115
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: globalpartners/admin.py:53
+#, python-format
+msgid ""
+"Introduction email for %(contact_person)s, of %(company_name)s has been sent."
+msgstr ""
+"Die Einführungs-E-Mail für %(contact_person)s, von %(company_name)s wurde "
+"gesendet."
+
+#: globalpartners/admin.py:64
+#, python-format
+msgid ""
+"Renewal email for %(contact_person)s, of %(company_name)s has been sent."
+msgstr ""
+"Die Verlängerungs-E-Mail für %(contact_person)s, von %(company_name)s wurde "
+"gesendet."
+
+#: globalpartners/admin.py:75
+#, fuzzy, python-format
+#| msgid ""
+#| "Request for promotional material email for %(contact_person)s, of "
+#| "%(company_name)s has been sent."
+msgid ""
+"Request for promotional material email for %(contact_person)s, of "
+"%(company_name)s has been sent."
+msgstr ""
+"Anforderung von Werbematerial per E-Mail für %(Kontaktperson)s, von "
+"%(Firmenname)s wurde gesendet."
+
+#: globalpartners/admin.py:86
+#, python-format
+msgid ""
+"Thank you email for %(contact_person)s, of %(company_name)s has been sent."
+msgstr ""
+"Die Dankes-E-Mail für %(contact_person)s, von %(company_name)s wurde "
+"gesendet."
 
 #: organize/admin.py:16
 msgid "Move selected application to on hold"
@@ -660,15 +729,16 @@ msgstr "Co-Organisatoren"
 msgid "Twitter"
 msgstr "Twitter"
 
+#: patreonmanager/admin.py:38
+msgid "Payments"
+msgstr "Zahlungen"
+
 #: patreonmanager/admin.py:45 patreonmanager/admin.py:51
+#, python-format
 msgid "%d payment"
 msgid_plural "%d payments"
 msgstr[0] "%d Zahlung"
 msgstr[1] "%d Zahlungen"
-
-#: patreonmanager/admin.py:38
-msgid "Payments"
-msgstr "Zahlungen"
 
 #: patreonmanager/admin.py:48
 msgid "Uncompleted payments"
@@ -678,7 +748,12 @@ msgstr "Unvollständige Zahlungen"
 msgid "Patron"
 msgstr "Schirmherr"
 
+#: patreonmanager/admin.py:85
+msgid "Mark selected payments as completed"
+msgstr "Markieren Sie ausgewählte Zahlungen als abgeschlossen"
+
 #: patreonmanager/admin.py:88
+#, python-format
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
 msgstr[0] "%d Zahlung als abgeschlossen markiert"
@@ -779,9 +854,13 @@ msgid "\n"
 msgid_plural "\n"
 "                %(counter)s payments\n"
 "            "
-msgstr[0] "%(counter)s Zahlung\n"
+msgstr[0] ""
+"\n"
+"%(counter)s Zahlung\n"
 "            "
-msgstr[1] "%(counter)s Zahlungen"
+msgstr[1] ""
+"\n"
+"%(counter)s Zahlungen"
 
 #: pictures/models.py:25
 msgid "Event cover (356 x 210px)"
@@ -840,6 +919,17 @@ msgid "To see applications that have been submitted to your workshop, choose an 
 msgstr "Um eingereichte Bewerbungen zu deinem Workshop einzusehen, wähle eine Veranstaltung aus der Liste unten:"
 
 #: templates/admin/applications/form/view_submissions.html:16
+#, python-format
+msgid ""
+"To see submitted applications, you need to <a href=\"%(add_url)s\">add an "
+"application form</a> first."
+msgstr ""
+"Um eingereichte Bewerbungen zu sehen, musst du zuerst <a href=\"%(add_url)s"
+"\">ein Bewerbungsformular hinzufügen</a>."
+
+#: templates/admin/base_site.html:5
+msgid "Django Girls admin"
+msgstr "Django Girls admin"
 msgid "To see submitted applications, you need to <a href=\"%(add_url)s\">add an application form</a> first."
 msgstr "Um eingereichte Bewerbungen zu sehen, musst du zuerst <a href=\"%(add_url)s\">ein Bewerbungsformular hinzufügen</a>."
 
@@ -897,6 +987,33 @@ msgstr "Entfernen"
 msgid "Triaging"
 msgstr "Triagierung"
 
+#: templates/admin/core/organizerissue/change_form.html:15
+#, fuzzy
+#| msgid "Main organizer"
+msgid "Blacklist Organizer"
+msgstr "Hauptorganisator"
+
+#: templates/admin/core/organizerissue/change_form.html:18
+msgid "Reverse Blacklisting Organizer"
+msgstr ""
+
+#: templates/admin/globalpartners/globalpartner/change_form.html:16
+msgid "Send Prospective Sponsor email"
+msgstr "E-Mail an potenziellen Sponsor senden"
+
+#: templates/admin/globalpartners/globalpartner/change_form.html:19
+msgid "Send Renewal email"
+msgstr "Erneuerung per E-Mail senden"
+
+#: templates/admin/globalpartners/globalpartner/change_form.html:23
+msgid "Send Promotional Material email"
+msgstr "Werbematerial per E-Mail versenden"
+
+#: templates/admin/globalpartners/globalpartner/change_form.html:26
+msgid "Send Thank You email"
+msgstr "Dankes-E-Mail senden"
+
+#: templates/admin/organize/eventapplication/change_form.html:16
 #: templates/admin/organize/eventapplication/change_form.html:16
 msgid "Accept application"
 msgstr "Bewerbung akzeptieren"
@@ -913,6 +1030,11 @@ msgstr "Zum Halten bewegen"
 msgid "Reject application"
 msgstr "Bewerbung ablehnen"
 
+#: templates/admin/organize/eventapplication/change_form.html:28
+msgid "Application deployed."
+msgstr "Die Anwendung wird eingesetzt."
+
+#: templates/admin/organize/eventapplication/change_form.html:30
 #: templates/admin/organize/eventapplication/change_form.html:30
 msgid "Application closed."
 msgstr "Bewerbung geschlossen."
