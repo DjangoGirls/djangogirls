@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 10:27+0000\n"
+"POT-Creation-Date: 2024-06-05 21:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -576,12 +576,16 @@ msgstr ""
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:105
+#: djangogirls/settings.py:104
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:106
+#: djangogirls/settings.py:105
 msgid "Brazilian Portuguese"
+msgstr ""
+
+#: djangogirls/settings.py:106
+msgid "Dutch"
 msgstr ""
 
 #: djangogirls/settings.py:107

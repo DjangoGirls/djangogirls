@@ -1,13 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: djangogirls\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-05 21:42+0000\n"
-"Language: pt-br\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applications/decorators.py:21
@@ -16,7 +24,7 @@ msgstr ""
 
 #: applications/forms.py:42
 msgid "Application for this e-mail already exists."
-msgstr "Uma inscrição para este endereço de e-mail já existe."
+msgstr ""
 
 #: applications/forms.py:80
 #, python-format
@@ -25,7 +33,7 @@ msgstr ""
 
 #: applications/models.py:19
 msgid "Apply for a spot at Django Girls [City]!"
-msgstr "Aplique para uma vaga no Django Girls [City]!"
+msgstr ""
 
 #: applications/models.py:22
 msgid ""
@@ -37,12 +45,6 @@ msgid ""
 "post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</"
 "a>. Good luck!"
 msgstr ""
-"Yay! Estamos muito felizes que você quer ser parte do nosso workshop. Enviar "
-"o formulário abaixo não garante a vaga, mas uma chance de obtê-la. As "
-"aplicações ficarão abertas de {INSERT DATE} a {INSERT DATE}. Caso quiser "
-"saber um pouco sobre os critérios utilizados para escolher candidatos, você "
-"poder ler sobre no <a href='http://blog.djangogirls.org/post/91067112853/"
-"djangogirls-how-we-scored-applications'>blog do Django Girls</a>. Boa sorte!"
 
 #: applications/models.py:35
 msgid ""
@@ -63,50 +65,34 @@ msgid ""
 "Hugs, cupcakes and high-fives!\n"
 "Django Girls"
 msgstr ""
-"Olá!\n"
-"\n"
-"Essa é uma confirmação de sua inscrição para <a href=\"http://djangogirls."
-"org/{city}\">Django Girls {CITY}</a>. Yay! Esse é um grande passo, estamos "
-"orgulhosas por você!\n"
-"\n"
-"Lembre-se que isso não é uma confirmação de participação no evento, e sim de "
-"que nós recebemos a sua inscrição.\n"
-"\n"
-"Você irá receber um email do time que organiza Django Girls {CITY} em breve. "
-"Você sempre poderá contatá-las respondendo a esse email ou enviando uma "
-"mensagem para {your event mail}.\n"
-"Para sua referência, estamos anexando suas respostas abaixo.\n"
-"\n"
-"Abraços, cupcakes e high-fives!\n"
-"Django Girls"
 
 #: applications/models.py:49
 msgid "Application process is open from"
-msgstr "Processo de inscrição disponível de"
+msgstr ""
 
 #: applications/models.py:50
 msgid "Application process is open until"
-msgstr "Processo de inscrição disponível até"
+msgstr ""
 
 #: applications/models.py:91
 msgid "Question"
-msgstr "Pergunta"
+msgstr ""
 
 #: applications/models.py:92
 msgid "Additional help text to the question?"
-msgstr "Texto de ajuda adicional para a pergunta?"
+msgstr ""
 
 #: applications/models.py:93
 msgid "Type of the question"
-msgstr "Tipo de pergunta"
+msgstr ""
 
 #: applications/models.py:94
 msgid "Is the answer to the question required?"
-msgstr "A resposta para a pergunta é obrigatória?"
+msgstr ""
 
 #: applications/models.py:98
 msgid "List all available options, separated with semicolon (;)"
-msgstr "Liste todas opções válidas, separadas com ponto-e-vírgula (;)"
+msgstr ""
 
 #: applications/models.py:99 applications/models.py:104
 msgid "Used only with \"Choices\" question type"
@@ -114,151 +100,146 @@ msgstr ""
 
 #: applications/models.py:103
 msgid "Are there multiple choices allowed?"
-msgstr "Múltipla escolha permitida?"
+msgstr ""
 
 #: applications/models.py:106
 msgid "Position of the question"
-msgstr "Posição da pergunta"
+msgstr ""
 
 #: applications/models.py:116
 msgid "You can only get choices for fields that have question_type == choices."
 msgstr ""
-"Você pode apenas ter alternativas para campos que têm question_type == "
-"choices."
 
 #: applications/models.py:123 templates/applications/applications.html:37
 #: templates/applications/applications.html:86
 msgid "Application submitted"
-msgstr "Inscrição enviada"
+msgstr ""
 
 #: applications/models.py:124 templates/applications/applications.html:38
 #: templates/applications/applications.html:87
 msgid "Application accepted"
-msgstr "Inscrição recebida"
+msgstr ""
 
 #: applications/models.py:125 templates/applications/applications.html:39
 #: templates/applications/applications.html:88
 msgid "Application rejected"
-msgstr "Inscrição rejeitada"
+msgstr ""
 
 #: applications/models.py:126 templates/applications/applications.html:40
 #: templates/applications/applications.html:89
 msgid "Application on waiting list"
-msgstr "Inscrição na lista de espera"
+msgstr ""
 
 #: applications/models.py:127 templates/applications/applications.html:41
 #: templates/applications/applications.html:90
 msgid "Applicant declined"
-msgstr "Aplicante recusado"
+msgstr ""
 
 #: applications/models.py:134
 msgid "RSVP: Waiting for response"
-msgstr "RSVP: Aguardando resposta"
+msgstr ""
 
 #: applications/models.py:135
 msgid "RSVP: Confirmed attendance"
-msgstr "RSVP: Presença confirmada"
+msgstr ""
 
 #: applications/models.py:136
 msgid "RSVP: Rejected invitation"
-msgstr "RSVP: Convite rejeitado"
+msgstr ""
 
 #: applications/models.py:143
 msgid "State of the application"
-msgstr "Estado da inscrição"
+msgstr ""
 
 #: applications/models.py:155
 msgid "RSVP status"
-msgstr "Status do RSVP"
+msgstr ""
 
 #: applications/models.py:266
 msgid "5 being the most positive, 1 being the most negative."
-msgstr "5 sendo o mais positivo, e 1 o mais negativo."
+msgstr ""
 
 #: applications/models.py:270
 msgid "Any extra comments?"
-msgstr "Algum comentário extra?"
+msgstr ""
 
 #: applications/models.py:287
 msgid "Content of the email"
-msgstr "Conteúdo do email"
+msgstr ""
 
 #: applications/models.py:288
 msgid "You can use HTML syntax in this message. Preview on the right."
 msgstr ""
-"Você pode usar sintaxe HTML nessa mensagem. Pré-visualização no lado direito."
 
 #: applications/models.py:293 templates/applications/communication.html:22
 msgid "Recipients"
-msgstr "Destinatários"
+msgstr ""
 
 #: applications/models.py:294
 msgid "Only people assigned to chosen group will receive this email."
-msgstr "Apenas pessoas assinaladas ao grupo escolhido receberão esse email."
+msgstr ""
 
 #: applications/questions.py:13
 msgid "Applications"
-msgstr "Aplicações"
+msgstr ""
 
 #: applications/questions.py:14
 msgid "Messaging"
-msgstr "Mensagens"
+msgstr ""
 
 #: applications/questions.py:53
 msgid "Do you want to receive news from the Django Girls team?"
-msgstr "Você quer receber notícias do time Django Girls?"
+msgstr ""
 
 #: applications/questions.py:55
 msgid ""
 "No spam, pinky swear! Only helpful programming tips and latest news from the "
 "Django Girls world. We send it once every two weeks."
 msgstr ""
-"Sem spam, prometemos! Apenas dicas úteis de programação e as últimas "
-"notícias do mundo Django Girls. Enviamos uma vez a cada duas semanas."
 
 #: applications/questions.py:59
 msgid "Yes, please!"
-msgstr "Sim, por favor!"
+msgstr ""
 
 #: applications/questions.py:59
 msgid "No, thank you."
-msgstr "Não, obrigada."
+msgstr ""
 
 #: applications/questions.py:67
 msgid "What's your name?"
-msgstr "Qual o seu nome?"
+msgstr ""
 
 #: applications/questions.py:71
 msgid "Your e-mail address:"
-msgstr "Seu e-mail:"
+msgstr ""
 
 #: applications/questions.py:75
 msgid "Your phone number:"
-msgstr "Seu número de telefone:"
+msgstr ""
 
 #: applications/questions.py:76
 msgid "Include your country prefix"
-msgstr "Inclua o seu prefixo de país"
+msgstr ""
 
 #: applications/questions.py:80
 msgid "Where are you from?"
-msgstr "De de você é?"
+msgstr ""
 
 #: applications/questions.py:81
 msgid "City, Country"
-msgstr "Cidade, País"
+msgstr ""
 
 #: applications/questions.py:85
 msgid "How old are you?"
-msgstr "Quantos anos você tem?"
+msgstr ""
 
 #: applications/questions.py:90
 msgid "Which operating system do you use?"
-msgstr "Qual sistema operacional você usa?"
+msgstr ""
 
 #: applications/questions.py:96
 msgid "What is your current level of experience with programming?"
-msgstr "Qual o seu nível de experiência atual em programação?"
+msgstr ""
 
 #: applications/questions.py:99
 msgid ""
@@ -266,37 +247,32 @@ msgid ""
 "or CSS before; I've tried some JavaScript before; I've done a few lessons of "
 "Python; I've built a website before; I work as a programmer"
 msgstr ""
-"Eu sou totalmente iniciante, não sei nada sobre isso; Eu mexi um pouco com "
-"HTML ou CSS antes; Eu mexi com JavaScript antes; Eu fiz algumas lições de "
-"Python; Eu já construí um website; Eu trabalho como programadora"
 
 #: applications/questions.py:108
 msgid ""
 "If you checked anything other than beginner, could you tell us a bit more "
 "about your programming knowledge?"
 msgstr ""
-"Se você seleciona qualquer outra coisa além de iniciante, poderia nos falar "
-"um pouco mais sobre seus conhecimentos de programação?"
 
 #: applications/questions.py:115
 msgid "What is your current occupation?"
-msgstr "Qual a sua ocupação atual?"
+msgstr ""
 
 #: applications/questions.py:116
 msgid "What is your current job? Are you a student?"
-msgstr "Qual é o seu emprego atual? Você é estudante?"
+msgstr ""
 
 #: applications/questions.py:120
 msgid "Why do you want to attend the workshop?"
-msgstr "Por que você quer participar do workshop?"
+msgstr ""
 
 #: applications/questions.py:121
 msgid "Tell us about your motivations and aspirations."
-msgstr "Nos fale sobre suas motivações e aspirações."
+msgstr ""
 
 #: applications/questions.py:125
 msgid "How are you planning to share what you've learnt with others?"
-msgstr "Como você planeja compartilhar o que você aprendeu com os outros?"
+msgstr ""
 
 #: applications/questions.py:127
 msgid ""
@@ -306,23 +282,16 @@ msgid ""
 "organising a Django Girls event in your city, talking about Django Girls on "
 "your local meetups, writing a blog or simply teaching your friends."
 msgstr ""
-"Django Girls é uma organização voluntária e procuramos por pessoas que podem "
-"ativamente nos ajudar a trazer mais mulheres para o setor. Queremos que você "
-"compartilhe o que aprender no workshop de diferentes formas: organizando um "
-"evento Django Girls em sua cidade, falando sobre Django Girls em encontros "
-"locais, escrevendo em blogs ou simplesmente ensinando amigas."
 
 #: applications/questions.py:138
 msgid "How did you hear about Django Girls?"
-msgstr "Como você ouviu falar sobre Django Girls?"
+msgstr ""
 
 #: applications/questions.py:145
 msgid ""
 "I acknowledge that some of my data will be used on Third Party Sites and "
 "Services."
 msgstr ""
-"Reconheço que alguns dos meus dados serão usados em sites e serviços de "
-"terceiros."
 
 #: applications/questions.py:147
 msgid ""
@@ -335,40 +304,37 @@ msgstr ""
 
 #: applications/questions.py:155
 msgid "Yes"
-msgstr "Sim"
+msgstr ""
 
 #: applications/questions.py:161
 msgid ""
 "It is important that all attendees comply with the <a href='/coc/'>Django "
 "Girls Code of Conduct</a>"
 msgstr ""
-"É importante que todos as participantes cumpram o <a href='/coc/'>Código de "
-"Conduta das Django Girls</a>"
 
 #: applications/questions.py:164
 msgid "I've read and understood the Django Girls Code of Conduct"
-msgstr "Eu li e compreendi o Código de Conduta das Django Girls"
+msgstr ""
 
 #: applications/views.py:42
 msgid "Yay! Your application has been saved. You'll hear from us soon!"
 msgstr ""
-"Yay! Sua inscrição foi salva. Você receberá notícias da gente em breve!"
 
 #: applications/views.py:120
 msgid "Application Number"
-msgstr "Número de Inscrição"
+msgstr ""
 
 #: applications/views.py:120
 msgid "Application State"
-msgstr "Estado da Inscrição"
+msgstr ""
 
 #: applications/views.py:120
 msgid "RSVP Status"
-msgstr "Status do RSVP"
+msgstr ""
 
 #: applications/views.py:120
 msgid "Average Score"
-msgstr "Nota média"
+msgstr ""
 
 #: applications/views.py:254 applications/views.py:280
 msgid "Missing parameters"
@@ -399,15 +365,15 @@ msgstr ""
 
 #: coach/models.py:15
 msgid "No @, No http://, just username"
-msgstr "Sem @, sem http://, apenas nome do usuário"
+msgstr ""
 
 #: coach/models.py:18
 msgid "For best display keep it square"
-msgstr "Para melhor exibição, mantenha-o quadrado"
+msgstr ""
 
 #: coach/models.py:24
 msgid "Coaches"
-msgstr "Coaches"
+msgstr ""
 
 #: coach/models.py:36
 #, python-format
@@ -416,73 +382,71 @@ msgstr ""
 
 #: contact/forms.py:15
 msgid "Django Girls workshop in..."
-msgstr "Workshop Django Girls em..."
+msgstr ""
 
 #: contact/forms.py:42
 msgid "Please select the event"
-msgstr "Por favor selecione o evento"
+msgstr ""
 
 #: contact/models.py:11
 msgid "Django Girls Local Organizers"
-msgstr "Organizadoras locais Django Girls"
+msgstr ""
 
 #: contact/models.py:12
 msgid "Django Girls HQ (Support Team)"
-msgstr "QG do Django Girls (equipe de suporte)"
+msgstr ""
 
 #: contact/models.py:21
 msgid "required for contacting a chapter"
-msgstr "requerido para contatar um capítulo"
+msgstr ""
 
 #: contact/models.py:27
 msgid "Who do you want to contact?"
-msgstr "Quem você quer contatar?"
+msgstr ""
 
 #: contact/views.py:17
 msgid "Thank you for your email. We will be in touch shortly."
-msgstr "Obrigado por seu email. Entraremos em contato em breve."
+msgstr ""
 
 #: contact/views.py:19
 msgid "Ooops. We couldn't send your email :( Please try again later"
 msgstr ""
-"Ooops. Não conseguimos mandar o seu email :( Por favor tente de novo mais "
-"tarde"
 
 #: core/admin/event.py:82
 msgid "past event?"
-msgstr "evento passado?"
+msgstr ""
 
 #: core/admin/event.py:89
 msgid "has stats?"
-msgstr "tem estatísticas?"
+msgstr ""
 
 #: core/admin/event.py:95
 msgid "page URL"
-msgstr "URL da página"
+msgstr ""
 
 #: core/admin/event.py:115 core/admin/event.py:155 organize/admin.py:87
 msgid "Event info"
-msgstr "Informações do evento"
+msgstr ""
 
 #: core/admin/event.py:130 core/admin/event.py:157
 msgid "Event main picture"
-msgstr "Imagem principal do evento"
+msgstr ""
 
 #: core/admin/event.py:131
 msgid "Team"
-msgstr "Time"
+msgstr ""
 
 #: core/admin/event.py:133 core/admin/event.py:167
 msgid "Event website"
-msgstr "Site do evento"
+msgstr ""
 
 #: core/admin/event.py:145 core/admin/event.py:171
 msgid "Statistics"
-msgstr "Estatísticas"
+msgstr ""
 
 #: core/admin/event.py:230
 msgid "You cannot remove yourself from a team."
-msgstr "Você não pode se remover de um time."
+msgstr ""
 
 #: core/admin/event.py:234
 #, python-format
@@ -491,7 +455,7 @@ msgstr ""
 
 #: core/admin/event.py:244
 msgid "Remove organizers"
-msgstr "Remover organizadores"
+msgstr ""
 
 #: core/admin/event.py:262
 #, python-format
@@ -506,23 +470,23 @@ msgstr ""
 
 #: core/admin/flat_page.py:9
 msgid "Change this only if you know what you are doing"
-msgstr "Altere isso apenas se você souber o que está fazendo"
+msgstr ""
 
 #: core/admin/forms/user.py:9
 msgid "The two password fields didn't match."
-msgstr "Os dois campos de senha não coincidem."
+msgstr ""
 
 #: core/admin/forms/user.py:11
 msgid "Password"
-msgstr "Senha"
+msgstr ""
 
 #: core/admin/forms/user.py:13
 msgid "Password confirmation"
-msgstr "Confirmação de senha"
+msgstr ""
 
 #: core/admin/forms/user.py:15
 msgid "Enter the same password as above, for verification."
-msgstr "Entre a mesma senha que acima, para verificação."
+msgstr ""
 
 #: core/admin/organizerissue.py:55
 #, python-format
@@ -537,78 +501,74 @@ msgstr ""
 
 #: core/admin/user.py:12 core/admin/user.py:18
 msgid "Personal info"
-msgstr "Informação pessoal"
+msgstr ""
 
 #: core/admin/user.py:13
 msgid "Permissions"
-msgstr "Permissões"
+msgstr ""
 
 #: core/admin/user.py:19
 msgid "Important dates"
-msgstr "Datas importantes"
+msgstr ""
 
 #: core/default_eventpage_content.py:60
 msgid "About"
-msgstr "Sobre"
+msgstr ""
 
 #: core/default_eventpage_content.py:61
 msgid "Apply for a pass!"
-msgstr "Solicite um passe!"
+msgstr ""
 
 #: core/default_eventpage_content.py:62 templates/global/footer.html:9
 msgid "FAQ"
-msgstr "Perguntas frequentes"
+msgstr ""
 
 #: core/default_eventpage_content.py:63
 msgid "Become a coach"
-msgstr "Torne-se uma coach"
+msgstr ""
 
 #: core/default_eventpage_content.py:64
 msgid "Partners"
-msgstr "Parceiros"
+msgstr ""
 
 #: core/filters.py:7
 msgid "Open registration"
-msgstr "Inscrições abertas"
+msgstr ""
 
 #: core/filters.py:11
 msgid "Show events with open registration"
-msgstr "Mostrar eventos com inscrições abertas"
+msgstr ""
 
 #: core/forms.py:33
 msgid "Organizer's first and last name"
-msgstr "Primeiro e último nome da organizadora"
+msgstr ""
 
 #: core/forms.py:34
 msgid "E-mail address"
-msgstr "Endereço de e-mail"
+msgstr ""
 
 #: core/management_utils.py:17
 msgid "Let's talk about the team. First the main organizer:"
-msgstr "Vamos falar sobre o time. Primeiro, a organizadora principal:"
+msgstr ""
 
 #: core/validators.py:11
 msgid ""
 "Event date can't be a year only. Please, provide at least a month and a year."
 msgstr ""
-"Data do evento não pode ser apenas o ano. Por favor forneça ao menos o mês e "
-"ano."
 
 #: core/validators.py:17
 msgid ""
 "Your event date is too close. Workshop date should be at least 3 months (90 "
 "days) from now."
 msgstr ""
-"A data do seu evento é muito próxima. A data deve ser pelo menos 3 meses (90 "
-"dias) a partir de hoje."
 
 #: core/validators.py:23
 msgid "Event date should be in the future"
-msgstr "Data do evento deve ser no futuro."
+msgstr ""
 
 #: core/views.py:96
 msgid "List of Django Girls events around the world"
-msgstr "Lista de Django Girls pelo mundo"
+msgstr ""
 
 #: core/views.py:177
 #, python-format
@@ -617,11 +577,11 @@ msgstr ""
 
 #: djangogirls/settings.py:104
 msgid "English"
-msgstr "Inglês"
+msgstr ""
 
 #: djangogirls/settings.py:105
 msgid "Brazilian Portuguese"
-msgstr "Português Brasileiro"
+msgstr ""
 
 #: djangogirls/settings.py:106
 msgid "Dutch"
@@ -629,11 +589,11 @@ msgstr ""
 
 #: djangogirls/settings.py:107
 msgid "French"
-msgstr "Francês"
+msgstr ""
 
 #: djangogirls/settings.py:108
 msgid "German"
-msgstr "Alemão"
+msgstr ""
 
 #: djangogirls/settings.py:109
 msgid "Hebrew"
@@ -641,23 +601,23 @@ msgstr ""
 
 #: djangogirls/settings.py:110
 msgid "Korean"
-msgstr "Coreano"
+msgstr ""
 
 #: djangogirls/settings.py:111
 msgid "Persian"
-msgstr "Persa"
+msgstr ""
 
 #: djangogirls/settings.py:112
 msgid "Portuguese"
-msgstr "Português"
+msgstr ""
 
 #: djangogirls/settings.py:113
 msgid "Russian"
-msgstr "Russo"
+msgstr ""
 
 #: djangogirls/settings.py:114
 msgid "Spanish"
-msgstr "Espanhol"
+msgstr ""
 
 #: globalpartners/admin.py:53
 #, python-format
@@ -686,24 +646,24 @@ msgstr ""
 
 #: organize/admin.py:16
 msgid "Move selected application to on hold"
-msgstr "Marcar a inscrição selecionada como em espera"
+msgstr ""
 
 #: organize/admin.py:21
 msgid "Move selected application to in review"
-msgstr "Mover inscrição selecionadas como em revisão"
+msgstr ""
 
 #: organize/admin.py:77
 msgid "Application info"
-msgstr "Informação da inscrição"
+msgstr ""
 
 #: organize/admin.py:103
 #: templates/emails/organize/application_notification.html:34
 msgid "Application"
-msgstr "Inscrição"
+msgstr ""
 
 #: organize/admin.py:128
 msgid "Main organizer"
-msgstr "Organizadora principal"
+msgstr ""
 
 #: organize/admin.py:165
 msgid "The application is already deployed"
@@ -711,7 +671,7 @@ msgstr ""
 
 #: organize/admin.py:185
 msgid "Invalid status provided for application"
-msgstr "Status inválido fornecido para inscrição"
+msgstr ""
 
 #: organize/admin.py:190
 #, python-format
@@ -720,51 +680,51 @@ msgstr ""
 
 #: organize/constants.py:4
 msgid "I've never been to a Django Girls event"
-msgstr "Eu nunca estive em um evento Django Girls"
+msgstr ""
 
 #: organize/constants.py:5
 msgid "I'm a former attendee"
-msgstr "Eu já participei anteriormente"
+msgstr ""
 
 #: organize/constants.py:6
 msgid "I'm a former coach"
-msgstr "Eu já fui coach anteriormente"
+msgstr ""
 
 #: organize/constants.py:7
 msgid "I'm a former organizer"
-msgstr "Eu já fui organizadora anteriormente"
+msgstr ""
 
 #: organize/constants.py:8
 msgid "I contributed to the tutorial or translations"
-msgstr "Eu contribuí com o tutorial ou traduções"
+msgstr ""
 
 #: organize/constants.py:20 templates/jobboard/index.html:25
 msgid "New"
-msgstr "Novo"
+msgstr ""
 
 #: organize/constants.py:21
 msgid "In review"
-msgstr "Em revisão"
+msgstr ""
 
 #: organize/constants.py:22
 msgid "On hold"
-msgstr "Em espera"
+msgstr ""
 
 #: organize/constants.py:23 templates/applications/applications.html:25
 msgid "Accepted"
-msgstr "Aceitado"
+msgstr ""
 
 #: organize/constants.py:24 templates/applications/applications.html:26
 msgid "Rejected"
-msgstr "Rejeitado"
+msgstr ""
 
 #: organize/constants.py:25
 msgid "Deployed"
-msgstr "Publicado"
+msgstr ""
 
 #: organize/forms.py:17
 msgid "Yes, I organized Django Girls"
-msgstr "Sim, eu organizei Django Girls"
+msgstr ""
 
 #: organize/forms.py:18
 msgid "No, it's my first time organizing Django Girls"
@@ -772,26 +732,26 @@ msgstr ""
 
 #: organize/forms.py:21
 msgid "Remote"
-msgstr "Remoto"
+msgstr ""
 
 #: organize/forms.py:21
 msgid "In-Person"
-msgstr "Pessoalmente"
+msgstr ""
 
 #: organize/forms.py:33 organize/forms.py:35
 #: templates/organize/form/step1_previous_event.html:75
 msgid "Choose event"
-msgstr "Escolha evento"
+msgstr ""
 
 #: organize/forms.py:42
 msgid "You have to choose an event."
-msgstr "Você precisa escolher um evento."
+msgstr ""
 
 #: organize/forms.py:95 organize/forms.py:121
 #: templates/organize/form/step5_workshop.html:79
 #: templates/organize/form/step5_workshop_remote.html:79
 msgid "Choose country"
-msgstr "Escolha o país"
+msgstr ""
 
 #: organize/forms.py:109
 msgid ""
@@ -803,48 +763,44 @@ msgid ""
 "You cannot apply to organize another event when you already have another "
 "open event application."
 msgstr ""
-"Você não pode submeter para organizar um evento quando já tem outro evento "
-"aberto submetido."
 
 #: organize/models.py:68 organize/models.py:79
 msgid ""
 "Your workshops should be at least 6 months apart. Please read our Organizer "
 "Manual."
 msgstr ""
-"Seus workshops devem ter ao menos 6 meses de diferença. Por favor leia nosso "
-"Manual do Organizador."
 
 #: organize/models.py:107
 msgid "About organizer"
-msgstr "Sobre organizador"
+msgstr ""
 
 #: organize/models.py:108
 msgid "Motivations to organize"
-msgstr "Motivações para organizar"
+msgstr ""
 
 #: organize/models.py:109
 msgid "Involvement in Django Girls"
-msgstr "Envolvimento na Django Girls"
+msgstr ""
 
 #: organize/models.py:110
 msgid "Experience with organizing other events"
-msgstr "Experiência organizando outros eventos"
+msgstr ""
 
 #: organize/models.py:111
 msgid "Information about your potential venue"
-msgstr "Informações sobre o possível local"
+msgstr ""
 
 #: organize/models.py:112
 msgid "Information about your potential sponsorship"
-msgstr "Informações sobre seu possível patrocínio"
+msgstr ""
 
 #: organize/models.py:113
 msgid "Information about your potential coaches"
-msgstr "Informações sobre seus possíveis coaches"
+msgstr ""
 
 #: organize/models.py:115
 msgid "Information about how you will host your remote workshop"
-msgstr "Informações sobre como você irá hospedar seu workshop remoto"
+msgstr ""
 
 #: organize/models.py:117
 msgid ""
@@ -857,21 +813,16 @@ msgid ""
 "Information about how you will ensure participants' and coaches' safety "
 "during the Covid-19 pandemic"
 msgstr ""
-"Informações sobre como você irá garantir a segurança dos participantes e "
-"coaches durante a pandemia de Covid-19"
 
 #: organize/models.py:124
 msgid ""
 "Information about how you intend to ensure your workshop is inclusive and "
 "promotes diversity"
 msgstr ""
-"Informações sobre você pretende garantir que seu workshop seja inclusivo e "
-"promova diversidade"
 
 #: organize/models.py:126
 msgid "Any additional information you think may help your application"
 msgstr ""
-"Alguma informação adicional que você acredite que possa ajudar sua inscrição"
 
 #: organize/models.py:129
 msgid ""
@@ -881,137 +832,137 @@ msgstr ""
 
 #: organize/models.py:148
 msgid "Can accept Organize Applications"
-msgstr "Pode aceitar Organizar Aplicações"
+msgstr ""
 
 #: organize/models.py:244
 msgid "This field is required."
-msgstr "Este campo é obrigatório."
+msgstr ""
 
 #: organize/models.py:289
 msgid "Co-organizer"
-msgstr "Co-organizadora"
+msgstr ""
 
 #: organize/models.py:290
 msgid "Co-organizers"
-msgstr "Co-organizadoras"
+msgstr ""
 
 #: patreonmanager/admin.py:30
 msgid "Twitter"
-msgstr "Twitter"
+msgstr ""
 
 #: patreonmanager/admin.py:38
 msgid "Payments"
-msgstr "Pagamentos"
+msgstr ""
 
 #: patreonmanager/admin.py:45 patreonmanager/admin.py:51
 #, python-format
 msgid "%d payment"
 msgid_plural "%d payments"
-msgstr[0] "%d pagamento"
-msgstr[1] "%d pagamentos"
+msgstr[0] ""
+msgstr[1] ""
 
 #: patreonmanager/admin.py:48
 msgid "Uncompleted payments"
-msgstr "Pagamentos incompletos"
+msgstr ""
 
 #: patreonmanager/admin.py:78
 msgid "Patron"
-msgstr "Patrono"
+msgstr ""
 
 #: patreonmanager/admin.py:85
 msgid "Mark selected payments as completed"
-msgstr "Marcar pagamentos selecionados como efetuados"
+msgstr ""
 
 #: patreonmanager/admin.py:88
 #, python-format
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
-msgstr[0] "Marcou pagamento %d como efetuado"
-msgstr[1] "Marcou pagamentos %d como efetuados"
+msgstr[0] ""
+msgstr[1] ""
 
 #: patreonmanager/apps.py:7
 msgid "Patreon Manager"
-msgstr "Gerenciador de Apoidores"
+msgstr ""
 
 #: patreonmanager/models.py:7 patreonmanager/models.py:23
 msgid "name"
-msgstr "nome"
+msgstr ""
 
 #: patreonmanager/models.py:8
 msgid "email"
-msgstr "email"
+msgstr ""
 
 #: patreonmanager/models.py:9
 msgid "twitter"
-msgstr "twitter"
+msgstr ""
 
 #: patreonmanager/models.py:10
 msgid "address"
-msgstr "endereço"
+msgstr ""
 
 #: patreonmanager/models.py:11
 msgid "patron since"
-msgstr "apoiador desde"
+msgstr ""
 
 #: patreonmanager/models.py:12
 msgid "last update"
-msgstr "ultima atualização"
+msgstr ""
 
 #: patreonmanager/models.py:15 patreonmanager/models.py:54
 msgid "patron"
-msgstr "apoiador"
+msgstr ""
 
 #: patreonmanager/models.py:16
 msgid "patrons"
-msgstr "apoiadores"
+msgstr ""
 
 #: patreonmanager/models.py:24
 msgid "description"
-msgstr "descrição"
+msgstr ""
 
 #: patreonmanager/models.py:25
 msgid "value"
-msgstr "valor"
+msgstr ""
 
 #: patreonmanager/models.py:28 patreonmanager/models.py:57
 msgid "reward"
-msgstr "recompensa"
+msgstr ""
 
 #: patreonmanager/models.py:29
 msgid "rewards"
-msgstr "recompensas"
+msgstr ""
 
 #: patreonmanager/models.py:49
 msgid "declined"
-msgstr "recusado"
+msgstr ""
 
 #: patreonmanager/models.py:50
 msgid "processed"
-msgstr "processado"
+msgstr ""
 
 #: patreonmanager/models.py:56
 msgid "month"
-msgstr "mês"
+msgstr ""
 
 #: patreonmanager/models.py:58
 msgid "pledge"
-msgstr "compromisso"
+msgstr ""
 
 #: patreonmanager/models.py:59
 msgid "status"
-msgstr "situação"
+msgstr ""
 
 #: patreonmanager/models.py:60
 msgid "completed"
-msgstr "completado"
+msgstr ""
 
 #: patreonmanager/models.py:65
 msgid "payment"
-msgstr "pagamento"
+msgstr ""
 
 #: patreonmanager/models.py:66
 msgid "payments"
-msgstr "pagamentos"
+msgstr ""
 
 #: patreonmanager/templates/admin/patreonmanager/patron/change_form.html:9
 #, python-format
@@ -1024,62 +975,54 @@ msgid_plural ""
 "                %(counter)s payments\n"
 "            "
 msgstr[0] ""
-"\n"
-"%(counter)s pagamento\n"
-"              "
 msgstr[1] ""
-"\n"
-"%(counter)s pagamentos\n"
-"            "
 
 #: pictures/models.py:25
 msgid "Event cover (356 x 210px)"
-msgstr "Capa do evento (356 X 210px)"
+msgstr ""
 
 #: pictures/models.py:26
 msgid "Section background"
-msgstr "Imagem de fundo da seção"
+msgstr ""
 
 #: pictures/models.py:34
 msgid ""
 "Only use pictures with a <a href='https://creativecommons.org/"
 "licenses/'>Creative Commons license</a>."
 msgstr ""
-"Use apenas imagens com uma <a href='https://creativecommons.org/"
-"licenses/'>licença Creative Commons</a>."
 
 #: pictures/models.py:39
 msgid "photo URL"
-msgstr "URL da foto"
+msgstr ""
 
 #: sponsor/models.py:11
 msgid "Make sure logo is not bigger than 200 pixels wide"
-msgstr "Garanta que o logotipo não seja maior "
+msgstr ""
 
 #: sponsor/models.py:26
 msgid "No logo"
-msgstr "Sem logotipo"
+msgstr ""
 
 #: story/models.py:15
 msgid "story"
-msgstr "estória"
+msgstr ""
 
 #: story/models.py:16
 msgid "stories"
-msgstr "estórias"
+msgstr ""
 
 #: templates/404.html:8
 msgid "Page not found"
-msgstr "Página não encontrada"
+msgstr ""
 
 #: templates/404.html:10
 msgid "Sorry! The page you're looking for isn't available."
-msgstr "Sentimos muito, a página que você está procurando não está disponível."
+msgstr ""
 
 #: templates/404.html:13
 #, python-format
 msgid "See all <a href=\"%(events_url)s\">upcoming events</a>."
-msgstr "Veja todos <a href=\"%(events_url)s\">próximos eventos</a>."
+msgstr ""
 
 #: templates/404.html:17
 #, python-format
@@ -1087,20 +1030,16 @@ msgid ""
 "<a href=\"%(organise_url)s\">Find out</a> about organizing a Django Girls "
 "workshop in your city."
 msgstr ""
-"<a href=\"%(organise_url)s\">Descubra</a> como organizar um evento Django "
-"Girls na sua cidade."
 
 #: templates/admin/applications/form/view_submissions.html:5
 msgid "Submitted applications"
-msgstr "Aplicações enviadas"
+msgstr ""
 
 #: templates/admin/applications/form/view_submissions.html:7
 msgid ""
 "To see applications that have been submitted to your workshop, choose an "
 "event from the list below:"
 msgstr ""
-"Para ver suas aplicações que foram enviadas para seu workshop, escolha um "
-"evento da lista abaixo:"
 
 #: templates/admin/applications/form/view_submissions.html:16
 #, python-format
@@ -1108,8 +1047,6 @@ msgid ""
 "To see submitted applications, you need to <a href=\"%(add_url)s\">add an "
 "application form</a> first."
 msgstr ""
-"Para ver as aplicações enviadas, <a href=\"%(add_url)s\">adicione um "
-"formulário de inscrição</a> primeiro."
 
 #: templates/admin/base_site.html:5
 msgid "Django Girls admin"
@@ -1117,19 +1054,19 @@ msgstr ""
 
 #: templates/admin/core/event/view_add_organizers.html:6
 msgid "Add a new organizer to your event"
-msgstr "Adicione um novo organizador para seu evento"
+msgstr ""
 
 #: templates/admin/core/event/view_add_organizers.html:7
 msgid "We will send them access instructions through automated email."
-msgstr "Nós vamos enviá-los instruções de acesso por email."
+msgstr ""
 
 #: templates/admin/core/event/view_add_organizers.html:33
 msgid "Add organizer"
-msgstr "Adicionar organizadora"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:5
 msgid "Remove event organizers"
-msgstr "Remover organizadores do evento"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:6
 msgid "Here you can remove existing event organizers."
@@ -1137,24 +1074,24 @@ msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:9
 msgid "To get started, choose an event:"
-msgstr "Para começar, escolha um evento:"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:20
 #, python-format
 msgid "Organizers of %(event_name)s"
-msgstr "Organizadores do %(event_name)s"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:28
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:29
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:30
 msgid "Action"
-msgstr "Ação"
+msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:38
 #, python-format
@@ -1165,13 +1102,13 @@ msgstr ""
 
 #: templates/admin/core/event/view_manage_organizers.html:38
 msgid "Remove"
-msgstr "Remover"
+msgstr ""
 
 #: templates/admin/core/organizerissue/change_form.html:12
 #: templates/admin/globalpartners/globalpartner/change_form.html:12
 #: templates/admin/organize/eventapplication/change_form.html:12
 msgid "Triaging"
-msgstr "Triagem"
+msgstr ""
 
 #: templates/admin/core/organizerissue/change_form.html:15
 msgid "Blacklist Organizer"
@@ -1199,19 +1136,19 @@ msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:16
 msgid "Accept application"
-msgstr "Aceitar inscrição"
+msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:19
 msgid "Move to In Review"
-msgstr "Mover para Em Revisão"
+msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:22
 msgid "Move to Hold"
-msgstr "Mover para Espera"
+msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:25
 msgid "Reject application"
-msgstr "Rejeitar inscrição"
+msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:28
 msgid "Application deployed."
@@ -1219,7 +1156,7 @@ msgstr ""
 
 #: templates/admin/organize/eventapplication/change_form.html:30
 msgid "Application closed."
-msgstr "Inscrição fechada."
+msgstr ""
 
 #: templates/admin/organize/eventapplication/view_change_status.html:9
 #, python-format
@@ -1228,9 +1165,6 @@ msgid ""
 "                Approve %(app_city)s, %(app_country)s application?\n"
 "            "
 msgstr ""
-"\n"
-"                Aprovar inscrição %(app_city)s, %(app_country)s?\n"
-"␣␣␣␣␣␣␣␣␣␣␣␣"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:14
 #, python-format
@@ -1240,15 +1174,11 @@ msgid ""
 "%(application.country)s application?\n"
 "            "
 msgstr ""
-"\n"
-"                Você tem certeza que quer aprovar a inscrição de "
-"%(application.city)s, %(application.country)s?\n"
-"␣␣␣␣␣␣␣␣␣␣␣␣"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:19
 #: templates/admin/organize/eventapplication/view_change_status.html:34
 msgid "Yes, I'm sure"
-msgstr "Sim, tenho certeza"
+msgstr ""
 
 #: templates/admin/organize/eventapplication/view_change_status.html:24
 #, python-format
@@ -1258,10 +1188,6 @@ msgid ""
 "application?\n"
 "            "
 msgstr ""
-"\n"
-"                Rejeitar a inscrição de %(application.city)s, "
-"%(application.country)s?\n"
-"            "
 
 #: templates/admin/organize/eventapplication/view_change_status.html:29
 #, python-format
@@ -1271,45 +1197,41 @@ msgid ""
 "%(application.country)s application?\n"
 "            "
 msgstr ""
-"\n"
-"                Você tem certeza que quer rejeitar a inscrição de "
-"%(application.city)s, %(application.country)s?\n"
-"␣␣␣␣␣␣␣␣␣␣␣␣"
 
 #: templates/applications/application_detail.html:29
 msgid "Scores"
-msgstr "Pontuações"
+msgstr ""
 
 #: templates/applications/application_detail.html:32
 #, python-format
 msgid "Average score: %(avg_score)s"
-msgstr "Média de pontuação: %(avg_score)s"
+msgstr ""
 
 #: templates/applications/application_detail.html:37
 #, python-format
 msgid "Your score: %(user_score.score)s"
-msgstr "Sua pontuação: %(user_score.score)s"
+msgstr ""
 
 #: templates/applications/application_detail.html:44
 msgid "Person"
-msgstr "Pessoa"
+msgstr ""
 
 #: templates/applications/application_detail.html:45
 #: templates/applications/applications.html:58
 msgid "Score"
-msgstr "Pontuação"
+msgstr ""
 
 #: templates/applications/application_detail.html:46
 msgid "Comment"
-msgstr "Comentário"
+msgstr ""
 
 #: templates/applications/application_detail.html:64
 msgid "Save"
-msgstr "Salvar"
+msgstr ""
 
 #: templates/applications/application_detail.html:65
 msgid "Save & draw next"
-msgstr "Salvar e desenhar o próximo"
+msgstr ""
 
 #: templates/applications/applications.html:20
 #, python-format
@@ -1318,79 +1240,79 @@ msgstr ""
 
 #: templates/applications/applications.html:23
 msgid "All"
-msgstr "Todos"
+msgstr ""
 
 #: templates/applications/applications.html:24
 msgid "Submitted"
-msgstr "Enviados"
+msgstr ""
 
 #: templates/applications/applications.html:27
 msgid "Waiting list"
-msgstr "Lista de espera"
+msgstr ""
 
 #: templates/applications/applications.html:28
 msgid "Declined"
-msgstr "Recusado"
+msgstr ""
 
 #: templates/applications/applications.html:29
 msgid "RSVP: waiting"
-msgstr "RSVP: aguardando"
+msgstr ""
 
 #: templates/applications/applications.html:30
 msgid "RSVP: confirmed"
-msgstr "RSVP: confirmado"
+msgstr ""
 
 #: templates/applications/applications.html:31
 msgid "RSVP: rejected"
-msgstr "RSVP: rejeitado"
+msgstr ""
 
 #: templates/applications/applications.html:34
 msgid "Change the status of selected applications to:"
-msgstr "Alterar o status das aplicações selecionadas para:"
+msgstr ""
 
 #: templates/applications/applications.html:36
 msgid "Choose status"
-msgstr "Escolha status"
+msgstr ""
 
 #: templates/applications/applications.html:43
 msgid "Apply"
-msgstr "Aplicar"
+msgstr ""
 
 #: templates/applications/applications.html:45
 msgid "Download to csv"
-msgstr "Baixar CSV"
+msgstr ""
 
 #: templates/applications/applications.html:55
 msgid "E-mail"
-msgstr "E-mail"
+msgstr ""
 
 #: templates/applications/applications.html:56
 msgid "Application status"
-msgstr "Status da inscrição"
+msgstr ""
 
 #: templates/applications/applications.html:57
 msgid "RSVP"
-msgstr "RSVP"
+msgstr ""
 
 #: templates/applications/applications.html:107
 msgid "Waiting for response"
-msgstr "Aguardando resposta"
+msgstr ""
 
 #: templates/applications/applications.html:108
 msgid "Confirmed attendance"
-msgstr "Presença cormirmada"
+msgstr ""
 
 #: templates/applications/applications.html:109
 msgid "Rejected invitation"
-msgstr "Convite rejeitado"
+msgstr ""
 
 #: templates/applications/applications.html:128
 msgid "View Application"
-msgstr "Ver inscrição"
+msgstr ""
 
 #: templates/applications/applications.html:135
 msgid "Nothing to see here..."
-msgstr "Nada para ver aqui..."
+msgstr ""
 
 #: templates/applications/apply.html:26
 msgid ""
@@ -1416,20 +1338,6 @@ msgid ""
 "the top part of your admin interface). Sorry 😓\n"
 "            "
 msgstr ""
-"\n"
-"Olá! Se você vir esta mensagem, significa que as pessoas não podem se "
-"inscrever no seu evento.\n"
-"                 Caso queira abrir inscrições, acesse\n"
-"                 <a href=\"/admin/applications/form/%(form_obj.pk)s/change/"
-"\">seu formulário na interface administrativa</a> e\n"
-"                 certifique-se de que os campos \"Processo de inscrição\" "
-"estejam configurados corretamente. Obs: temos um\n"
-"                 <a href=\"https://github.com/DjangoGirls/djangogirls/"
-"issues/240\">problema de fuso horário</a>! Para ter certeza de que seu\n"
-"                 formulário estiver aberto, utilize o tempo fornecido pelo "
-"nosso servidor (disponível na parte superior da sua interface "
-"administrativa). Desculpe 😓\n"
-"            "
 
 #: templates/applications/apply.html:56
 msgid "Submit your application"
@@ -1496,7 +1404,7 @@ msgstr ""
 
 #: templates/applications/compose_email.html:36
 msgid "Email preview"
-msgstr "Visualizar email"
+msgstr ""
 
 #: templates/applications/compose_email.html:40
 #, python-format
@@ -1509,11 +1417,11 @@ msgstr ""
 
 #: templates/applications/compose_email.html:45
 msgid "Successfully sent emails:"
-msgstr "E-mails enviados com sucesso:"
+msgstr ""
 
 #: templates/applications/compose_email.html:48
 msgid "Emails that failed to sent:"
-msgstr "E-mails que falharam no envio:"
+msgstr ""
 
 #: templates/applications/event_not_live.html:11
 #, python-format
@@ -1546,24 +1454,23 @@ msgstr ""
 
 #: templates/applications/rsvp.html:9
 msgid "Your answer has been saved!"
-msgstr "Sua resposta foi salva!"
+msgstr ""
 
 #: templates/contact/contact.html:4
 msgid "Django Girls Contact"
-msgstr "Contato Django Girls"
+msgstr ""
 
 #: templates/contact/contact.html:10
 msgid "Contact Django Girls"
-msgstr "Contate Django Girls"
+msgstr ""
 
 #: templates/contact/contact.html:14
 msgid "Hi! We would love to hear from you!"
-msgstr "Olá! Nós adoraríamos ouvir de você!"
+msgstr ""
 
 #: templates/contact/contact.html:16
 msgid "To be sure your email reach the right person, check this FAQ first!"
 msgstr ""
-"Garanta que seu email chegue na pessoa certa, confira nosso FAQ primeiro!"
 
 #: templates/contact/contact.html:22
 #, python-format
@@ -1577,11 +1484,11 @@ msgstr ""
 
 #: templates/contact/contact.html:53
 msgid "Send"
-msgstr "Enviar"
+msgstr ""
 
 #: templates/core/2015.html:5 templates/core/2015.html:7
 msgid "Django Girls Annual Report 2015"
-msgstr "Relatório Anual Django Girls 2015"
+msgstr ""
 
 #: templates/core/2015.html:6 templates/core/2015.html:8
 msgid ""
@@ -1589,21 +1496,18 @@ msgid ""
 "world, 2015 was an absolutely incredible year for Django Girls. Read all "
 "about our challenges and achievements from 2015."
 msgstr ""
-"Graças às organizadoras, coaches e voluntárias em países por todo o mundo, "
-"2015 foi um ano 6 incrível para Django Girls. Leia tudo sobre nossos "
-"desafios e conquistas de 2015."
 
 #: templates/core/2015.html:25
 msgid "Annual Report 2015"
-msgstr "Relatório Anual 2015"
+msgstr ""
 
 #: templates/core/2015.html:36
 msgid "Numbers 📈🗺"
-msgstr "Números 📈🗺"
+msgstr ""
 
 #: templates/core/2015.html:50
 msgid "Financial Transparency 💰🔍"
-msgstr "Transparência Financeira 💰🔍"
+msgstr ""
 
 #: templates/core/2015.html:52
 msgid ""
@@ -1704,7 +1608,7 @@ msgstr ""
 
 #: templates/core/2015.html:122
 msgid "Income"
-msgstr "Receita"
+msgstr ""
 
 #: templates/core/2015.html:124
 #, python-format
@@ -6067,7 +5971,7 @@ msgstr ""
 
 #: templates/organize/form/step4_workshop_type.html:31
 msgid "Remote or In-Person?"
-msgstr "Remoto ou Presencial?"
+msgstr ""
 
 #: templates/organize/form/step4_workshop_type.html:32
 msgid "Will your workshop be Remote or In-Person?"
@@ -6089,7 +5993,7 @@ msgstr ""
 #: templates/organize/form/step5_workshop.html:46
 #: templates/organize/form/step5_workshop_remote.html:46
 msgid "Where?"
-msgstr "Onde?"
+msgstr ""
 
 #: templates/organize/form/step5_workshop.html:47
 #: templates/organize/form/step5_workshop_remote.html:47
@@ -6099,17 +6003,17 @@ msgstr ""
 #: templates/organize/form/step5_workshop.html:52
 #: templates/organize/form/step5_workshop_remote.html:52
 msgid "City"
-msgstr "Cidade"
+msgstr ""
 
 #: templates/organize/form/step5_workshop.html:64
 #: templates/organize/form/step5_workshop_remote.html:64
 msgid "Country"
-msgstr "País"
+msgstr ""
 
 #: templates/organize/form/step5_workshop.html:84
 #: templates/organize/form/step5_workshop_remote.html:84
 msgid "When?"
-msgstr "Onde?"
+msgstr ""
 
 #: templates/organize/form/step5_workshop.html:85
 #: templates/organize/form/step5_workshop_remote.html:85
@@ -6407,7 +6311,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:69
 msgid "Frequently Asked Questions"
-msgstr "Perguntas Frequentes"
+msgstr ""
 
 #: templates/organize/prerequisites.html:76
 msgid "Confirm that you meet following requirements to organize a workshop:"
@@ -6581,29 +6485,3 @@ msgid ""
 "Story” (or would like to nominate yourself!), please <a href=\"mailto:"
 "story@djangogirls.org\">contact us!</a>"
 msgstr ""
-
-#~ msgid "\"City\" slug must be present to user this decorator."
-#~ msgstr "Slug \"City\" deve estar presente para usar este decorator."
-
-#~ msgid "Used only with 'Choices' question type"
-#~ msgstr "Usada apenas com perguntas do tipo 'Choice'"
-
-#~ msgid ""
-#~ "Data collected through this form is used only for the purpose of Django "
-#~ "Girls events. We're using Third Party Sites and Services to make it "
-#~ "happen: for example, we're using Mandrill to send you emails. Don't "
-#~ "worry: We don't share your data with spammers, and we don't sell it! More "
-#~ "info on our Privacy policy <a href='/privacy-cookies/'>here</a>."
-#~ msgstr ""
-#~ "Dados coletados neste formulário são usados apenas para o propósito de "
-#~ "eventos Django Girls. Estamos usando sites e serviços de terceiros para "
-#~ "que isso aconteça: por exemplo, usamos Mandrill para enviar emails. Não "
-#~ "se preocupe: nós não compartilhamos seus dados com spammers, e não "
-#~ "vendemos! Mais informações sobre nossa Política de Privacidade <a href='/"
-#~ "privacy-cookies/'>aqui</a>."
-
-#~ msgid "No, it’s my first time organizing Django Girls"
-#~ msgstr "Não, é minha primeira vez organizando Django Girls"
-
-#~ msgid "Here you can remove exisiting event organizers."
-#~ msgstr "Aqui você pode remover organizadores do evento existentes."
