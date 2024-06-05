@@ -520,42 +520,6 @@ msgstr "Russisch"
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: globalpartners/admin.py:53
-#, python-format
-msgid ""
-"Introduction email for %(contact_person)s, of %(company_name)s has been sent."
-msgstr ""
-"Die Einführungs-E-Mail für %(contact_person)s, von %(company_name)s wurde "
-"gesendet."
-
-#: globalpartners/admin.py:64
-#, python-format
-msgid ""
-"Renewal email for %(contact_person)s, of %(company_name)s has been sent."
-msgstr ""
-"Die Verlängerungs-E-Mail für %(contact_person)s, von %(company_name)s wurde "
-"gesendet."
-
-#: globalpartners/admin.py:75
-#, fuzzy, python-format
-#| msgid ""
-#| "Request for promotional material email for %(contact_person)s, of "
-#| "%(company_name)s has been sent."
-msgid ""
-"Request for promotional material email for %(contact_person)s, of "
-"%(company_name)s has been sent."
-msgstr ""
-"Anforderung von Werbematerial per E-Mail für %(Kontaktperson)s, von "
-"%(Firmenname)s wurde gesendet."
-
-#: globalpartners/admin.py:86
-#, python-format
-msgid ""
-"Thank you email for %(contact_person)s, of %(company_name)s has been sent."
-msgstr ""
-"Die Dankes-E-Mail für %(contact_person)s, von %(company_name)s wurde "
-"gesendet."
-
 #: organize/admin.py:16
 msgid "Move selected application to on hold"
 msgstr "Ausgewählte Anwendung in die Warteschleife verschieben"
@@ -759,10 +723,6 @@ msgid_plural "Marked %d payments as completed"
 msgstr[0] "%d Zahlung als abgeschlossen markiert"
 msgstr[1] "%d Zahlungen als abgeschlossen markiert"
 
-#: patreonmanager/admin.py:85
-msgid "Mark selected payments as completed"
-msgstr "Markieren Sie ausgewählte Zahlungen als abgeschlossen"
-
 #: patreonmanager/apps.py:7
 msgid "Patreon Manager"
 msgstr "Patreon-Manager"
@@ -941,10 +901,6 @@ msgstr "Füge einen neuen Organisator zu deiner Veranstaltung hinzu"
 msgid "We will send them access instructions through automated email."
 msgstr "Wir werden ihnen per automatisierter E-Mail Anweisungen für den Zugang zukommen lassen."
 
-#: templates/admin/core/event/view_add_organizers.html:33
-msgid "Add organizer"
-msgstr "Organisator hinzufügen"
-
 #: templates/admin/core/event/view_manage_organizers.html:5
 msgid "Remove event organizers"
 msgstr "Organisatoren löschen"
@@ -988,30 +944,8 @@ msgid "Triaging"
 msgstr "Triagierung"
 
 #: templates/admin/core/organizerissue/change_form.html:15
-#, fuzzy
-#| msgid "Main organizer"
 msgid "Blacklist Organizer"
 msgstr "Hauptorganisator"
-
-#: templates/admin/core/organizerissue/change_form.html:18
-msgid "Reverse Blacklisting Organizer"
-msgstr ""
-
-#: templates/admin/globalpartners/globalpartner/change_form.html:16
-msgid "Send Prospective Sponsor email"
-msgstr "E-Mail an potenziellen Sponsor senden"
-
-#: templates/admin/globalpartners/globalpartner/change_form.html:19
-msgid "Send Renewal email"
-msgstr "Erneuerung per E-Mail senden"
-
-#: templates/admin/globalpartners/globalpartner/change_form.html:23
-msgid "Send Promotional Material email"
-msgstr "Werbematerial per E-Mail versenden"
-
-#: templates/admin/globalpartners/globalpartner/change_form.html:26
-msgid "Send Thank You email"
-msgstr "Dankes-E-Mail senden"
 
 #: templates/admin/organize/eventapplication/change_form.html:16
 #: templates/admin/organize/eventapplication/change_form.html:16
@@ -1029,10 +963,6 @@ msgstr "Zum Halten bewegen"
 #: templates/admin/organize/eventapplication/change_form.html:25
 msgid "Reject application"
 msgstr "Bewerbung ablehnen"
-
-#: templates/admin/organize/eventapplication/change_form.html:28
-msgid "Application deployed."
-msgstr "Die Anwendung wird eingesetzt."
 
 #: templates/admin/organize/eventapplication/change_form.html:30
 #: templates/admin/organize/eventapplication/change_form.html:30
@@ -4851,7 +4781,7 @@ msgstr "Die Verlängerungs-E-Mail für %(contact_person)s, von %(company_name)s 
 
 #: globalpartners/admin.py:75
 msgid "Request for promotional material email for %(contact_person)s, of %(company_name)s has been sent."
-msgstr "Anforderung von Werbematerial per E-Mail für %(Kontaktperson)s, von %(Firmenname)s wurde gesendet."
+msgstr "Anforderung von Werbematerial per E-Mail für %(contact_person)s, von %(company_name)s wurde gesendet."
 
 #: globalpartners/admin.py:86
 msgid "Thank you email for %(contact_person)s, of %(company_name)s has been sent."
@@ -5063,10 +4993,6 @@ msgstr ""
 
 #: organize/forms.py:109
 msgid "Please enter a valid date, which is at least 3 months (90 days) from now."
-msgstr ""
-
-#: templates/admin/core/organizerissue/change_form.html:15
-msgid "Blacklist Organizer"
 msgstr ""
 
 #: templates/admin/core/organizerissue/change_form.html:18

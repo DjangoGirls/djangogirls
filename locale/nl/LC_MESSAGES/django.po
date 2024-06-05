@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 19:57+0000\n"
+"POT-Creation-Date: 2024-06-05 20:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -575,47 +575,47 @@ msgstr ""
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:105
+#: djangogirls/settings.py:104
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:106
+#: djangogirls/settings.py:105
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:106
 msgid "Dutch"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:107
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:108
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:110
+#: djangogirls/settings.py:109
 msgid "Hebrew"
 msgstr ""
 
-#: djangogirls/settings.py:111
+#: djangogirls/settings.py:110
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:112
+#: djangogirls/settings.py:111
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:113
+#: djangogirls/settings.py:112
 msgid "Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:114
+#: djangogirls/settings.py:113
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:115
+#: djangogirls/settings.py:114
 msgid "Spanish"
 msgstr ""
 
