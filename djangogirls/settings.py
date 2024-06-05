@@ -105,6 +105,7 @@ LANGUAGES = [
     ("pt-br", gettext("Brazilian Portuguese")),
     ("fr", gettext("French")),
     ("de", gettext("German")),
+    ("he", gettext("Hebrew")),
     ("ko", gettext("Korean")),
     ("fa", gettext("Persian")),
     ("pt", gettext("Portuguese")),
@@ -151,7 +152,10 @@ AUTH_USER_MODEL = "core.User"
 
 THUMBNAIL_PRESERVE_EXTENSIONS = True
 THUMBNAIL_ALIASES = {
-    "": {"coach": {"size": (160, 160), "crop": "smart"}, "sponsor": {"size": (204, 204), "crop": False}},
+    "": {
+        "coach": {"size": (160, 160), "crop": "smart"},
+        "sponsor": {"size": (204, 204), "crop": False},
+    },
 }
 
 STATIC_URL = "/static/"
