@@ -15,7 +15,7 @@
                 </p>
             {% else %}
                 <p>
-                    {% blocktrans %}
+                    {% blocktrans trimmed %}
                         The event page for {{ city|title }} will be coming soon.
                     {% endblocktrans %}
                 </p>
@@ -28,7 +28,7 @@
             </p>
 
             {% url 'core:events' as events_url %}
-            <h3>{% blocktrans %}See all other <a href="{{ events_url }}">upcoming events</a>.{% endblocktrans %}</h3>
+            <h3>{% blocktrans trimmed %}See all other <a href="{{ events_url }}">upcoming events</a>.{% endblocktrans %}</h3>
         </div>
     </div>
 {% endblock content %}

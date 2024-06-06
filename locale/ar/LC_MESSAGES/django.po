@@ -1,14 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: djangogirls\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-06 11:20+0000\n"
-"Language: ko\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: applications/decorators.py:21
 msgid "\"page_url\" slug must be present to use this decorator."
@@ -855,6 +864,7 @@ msgstr ""
 msgid "%d payment"
 msgid_plural "%d payments"
 msgstr[0] ""
+msgstr[1] ""
 
 #: patreonmanager/admin.py:48
 msgid "Uncompleted payments"
@@ -873,6 +883,7 @@ msgstr ""
 msgid "Marked %d payment as completed"
 msgid_plural "Marked %d payments as completed"
 msgstr[0] ""
+msgstr[1] ""
 
 #: patreonmanager/apps.py:7
 msgid "Patreon Manager"
@@ -963,6 +974,7 @@ msgstr ""
 msgid "%(counter)s payment"
 msgid_plural "%(counter)s payments"
 msgstr[0] ""
+msgstr[1] ""
 
 #: pictures/models.py:25
 msgid "Event cover (356 x 210px)"
