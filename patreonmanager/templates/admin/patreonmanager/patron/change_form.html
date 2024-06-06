@@ -6,7 +6,7 @@
     {{ block.super }}
     <li>
         <a href="{% url 'admin:patreonmanager_payment_changelist' %}?patron_id__exact={{ original.pk }}">
-            {% blocktrans count counter=original.payments.count %}
+            {% blocktrans trimmed count counter=original.payments.count %}
                 {{ counter }} payment
             {% plural %}
                 {{ counter }} payments

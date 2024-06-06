@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<p>{% blocktrans with city=event.city %}Hello team {{ city }}!{% endblocktrans %}</p>
+<p>{% blocktrans trimmed with city=event.city %}Hello team {{ city }}!{% endblocktrans %}</p>
 
 <p>{% trans "Congratulations on running your own Django Girls event! We're super proud and so so so happy for you :)" %}</p>
 

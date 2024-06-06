@@ -19,7 +19,7 @@
 
         {% url 'core:faq' as faq_url %}
         <p>
-          {% blocktrans %}
+          {% blocktrans trimmed %}
             If you didn't find what you wanted, please check our extended <a href="{{ faq_url }}">FAQ section</a>
             or use the form below. :)
           {% endblocktrans %}

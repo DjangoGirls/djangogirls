@@ -32,10 +32,10 @@
 
     {% if request.user and not form_obj.application_open %}
         <div class="alert alert-info" role="alert">
-            {% blocktrans %}
+            {% blocktrans trimmed with form_id=form_obj.pk %}
                 Hi there! If you can see this message, it means people can't register to your event.
                 If you want to open registrations, go to
-                <a href="/admin/applications/form/{{ form_obj.pk }}/change/">your form in the admin interface</a> and
+                <a href="/admin/applications/form/{{ form_id }}/change/">your form in the admin interface</a> and
                 make sure "Application process" fields are correctly configured. Note: we have a
                 <a href="https://github.com/DjangoGirls/djangogirls/issues/240">timezone problem</a>! To be sure your
                 form is open, use the time given by our server (available in the top part of your admin interface). Sorry 😓
