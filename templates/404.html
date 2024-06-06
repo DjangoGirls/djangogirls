@@ -10,7 +10,7 @@
                 <p>{% trans "Sorry! The page you're looking for isn't available." %}</p>
 
                 {% url 'core:events' as events_url %}
-                <h3>{% blocktrans %}See all <a href="{{ events_url }}">upcoming events</a>.{% endblocktrans %}</h3>
+                <h3>{% blocktrans trimmed %}See all <a href="{{ events_url }}">upcoming events</a>.{% endblocktrans %}</h3>
 
                 {% url 'organize:index' as organise_url %}
                 <p>

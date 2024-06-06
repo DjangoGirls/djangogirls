@@ -102,6 +102,7 @@ LANGUAGE_CODE = "en"
 
 LANGUAGES = [
     ("en", gettext("English")),
+    ("ar", gettext("Arabic")),
     ("pt-br", gettext("Brazilian Portuguese")),
     ("nl", gettext("Dutch")),
     ("fr", gettext("French")),

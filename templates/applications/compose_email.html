@@ -37,7 +37,7 @@
               <div id="preview" style="white-space: pre-wrap;">{{ email.text|safe }}</div>
           {% else %}
               <p>
-                  {% blocktrans with sent=email.sent author=email.author num_rec=email.number_of_recipients %}
+                  {% blocktrans trimmed with sent=email.sent author=email.author num_rec=email.number_of_recipients %}
                       This email was sent on {{ sent }} by {{ author }} to {{ num_rec }} recipients.
                   {% endblocktrans %}
               </p>

@@ -6,12 +6,12 @@
       {% if new_status == 'accepted' %}
       <div class="alert alert-block alert-success">
         <h4 class="alert-heading">
-            {% blocktrans with app_city=application.city app_country=application.country %}
+            {% blocktrans trimmed with app_city=application.city app_country=application.country %}
                 Approve {{ app_city }}, {{ app_country }} application?
             {% endblocktrans %}
         </h4>
         <p>
-            {% blocktrans with app_city=application.city app_country=application.country %}
+            {% blocktrans trimmed with app_city=application.city app_country=application.country %}
                 Are you sure you want to approve the {{ application.city }}, {{ application.country }} application?
             {% endblocktrans %}
         </p>
@@ -21,12 +21,12 @@
       {% elif new_status == 'rejected' %}
       <div class="alert alert-block alert-error">
         <h4 class="alert-heading">
-            {% blocktrans with app_city=application.city app_country=application.country %}
+            {% blocktrans trimmed with app_city=application.city app_country=application.country %}
                 Reject {{ application.city }}, {{ application.country }} application?
             {% endblocktrans %}
         </h4>
         <p>
-            {% blocktrans with app_city=application.city app_country=application.country %}
+            {% blocktrans trimmed with app_city=application.city app_country=application.country %}
                 Are you sure you want to reject the {{ application.city }}, {{ application.country }} application?
             {% endblocktrans %}
         </p>
