@@ -9,13 +9,23 @@
         <div class="col-md-12">
             <h1>{% trans "FAQ: Frequently Asked Questions" %}</h1>
 
-            <p>
-              {% url 'contact:landing' as contact_url %}
-              {% blocktrans trimmed %}
-                Django Girls events have been happening all over the world for a while now, and we get some repeat
-                questions. If you need more help: <a href="{{ contact_url }}">contact us</a>!
-              {% endblocktrans %}
-            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <p>
+                  {% url 'contact:landing' as contact_url %}
+                  {% blocktrans trimmed %}
+                    Django Girls events have been happening all over the world for a while now, and we get some repeat
+                    questions. If you need more help: <a href="{{ contact_url }}">contact us</a>!
+                  {% endblocktrans %}
+                </p>
+              </div>
+              <div class="col-md-6">
+                <iframe src="//player.vimeo.com/video/112325567?title=0&amp;byline=0&amp;portrait=0&amp;color=ff9933" width="585" height="329" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              </div>
+
+            </div>
+
+            
 
             <h2>{% trans "Django Girls workshops" %}</h2>
             {% include 'includes/_faq.html' %}
@@ -25,7 +35,7 @@
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_sexist">
+                        <a class="accordion-toggle" data-bs-toggle="collapse" data-parent="#accordion" href="#Django_Girls_sexist">
                             <strong>{% trans "Q: Isn't Django Girls sexist?" %}</strong>
                         </a>
                     </div>
@@ -105,7 +115,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_trans_inclusive">
+                   <a class="accordion-toggle" data-bs-toggle="collapse" data-parent="#accordion" href="#Django_Girls_trans_inclusive">
                        <strong>{% trans "Q: Are Django Girls events trans-inclusive?" %}</strong>
                    </a>
                 </div>
@@ -134,7 +144,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#Django_Girls_for_men"><strong>Q: Is there a Django Girls for men?</strong></a>
+                    <a class="accordion-toggle" data-bs-toggle="collapse" data-parent="#accordion" href="#Django_Girls_for_men"><strong>Q: Is there a Django Girls for men?</strong></a>
                 </div>
                 <div id="Django_Girls_for_men" class="panel-collapse collapse">
                     <div class="panel-body">
