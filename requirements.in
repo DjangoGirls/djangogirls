@@ -33,7 +33,7 @@ pre-commit==2.21.0
 
 # Linting / Formatting
 autoflake==1.4
-black==22.3.0
+black==24.3.0
 flake8==4.0.1
 isort==5.8.0
 
