@@ -642,7 +642,7 @@ msgstr "Weitere Informationen, um deine Bewerbung voranzubringen"
 #. Is "Organize Application" an entity / a specific type of application?
 #: organize/models.py:148
 msgid "Can accept Organize Applications"
-msgstr "Kann Bewerbungen annehmen Organisieren"
+msgstr "Kann Organisationsanwendungen annehmen"
 
 #: organize/models.py:244
 msgid "This field is required."

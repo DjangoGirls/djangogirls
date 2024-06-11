@@ -984,11 +984,11 @@ msgstr ""
 
 #: templates/applications/applications.html:23
 msgid "All"
-msgstr ""
+msgstr "Tou(te)s"
 
 #: templates/applications/applications.html:24
 msgid "Submitted"
-msgstr ""
+msgstr "Soumis"
 
 #: templates/applications/applications.html:27
 msgid "Waiting list"
@@ -1100,7 +1100,7 @@ msgstr "Envoyé"
 
 #: templates/applications/communication.html:34
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #: templates/applications/communication.html:36
 msgid "View message"
@@ -1124,15 +1124,15 @@ msgstr ""
 
 #: templates/applications/compose_email.html:21
 msgid "What's that?"
-msgstr ""
+msgstr "Qu'est ce que c'est?"
 
 #: templates/applications/compose_email.html:29
 msgid "Save for later"
-msgstr ""
+msgstr "Sauvegarder pour plus tard"
 
 #: templates/applications/compose_email.html:30
 msgid "Save & send to recipients"
-msgstr ""
+msgstr "Sauvegarder et envoyer aux destinataires"
 
 #: templates/applications/compose_email.html:36
 msgid "Email preview"
@@ -1270,7 +1270,7 @@ msgstr "Fête d'anniversaire"
 
 #: templates/core/2015.html:93
 msgid "EuroPython Grants sponsored by Divio"
-msgstr ""
+msgstr "Subventions EuroPython sponsorisées par Divio"
 
 #: templates/core/2015.html:96
 msgid "Total expenses"
@@ -1354,7 +1354,7 @@ msgstr ""
 
 #: templates/core/2015.html:175
 msgid "We're planning to organize our first Django Girls Summit: a two days unconference where organizers could meet and share their experiences about Django Girls workshops. 👭👫"
-msgstr ""
+msgstr "Nous prévoyons d'organiser notre premier Django Girls Summit : une non-conférence de deux jours où les organisateurs pourraient se rencontrer et partager leurs expériences sur les ateliers Django Girls. 👭👫"
 
 #: templates/core/2015.html:187
 msgid "Achievements & Events in 2015 🏆🏅"
@@ -1494,39 +1494,39 @@ msgstr ""
 
 #: templates/core/2015.html:479
 msgid "Thank you for constant support and love we receive from you!"
-msgstr ""
+msgstr "Merci pour le soutien constant et l’amour que nous recevons de votre part !"
 
 #: templates/core/2015.html:486 templates/core/2016-2017.html:422
 msgid "Sponsors 📢️"
-msgstr ""
+msgstr "Sponsors 📢️"
 
 #: templates/core/2015.html:488 templates/core/2016-2017.html:424
 msgid "Again, we would like to thank amazing sponsors of Django Girls and of the individual Django Girls workshops all over the world. They help us make Django Girls sustainable and more importantly, they help local organizers keep their events free. We want Django Girls to be accessible to many people as possible, and that couldn't happen without them."
-msgstr ""
+msgstr "Encore une fois, nous tenons à remercier les incroyables sponsors de Django Girls et des ateliers individuels Django Girls partout dans le monde. Ils nous aident à rendre les Django Girls durables et, plus important encore, ils aident les organisateurs locaux à maintenir la gratuité de leurs événements. Nous voulons que Django Girls soit accessible au plus grand nombre, et cela ne pourrait pas arriver sans eux."
 
 #: templates/core/2015.html:496 templates/core/2016-2017.html:432
 msgid "Known for Elasticsearch, Kibana, Beats, and Logstash, Elastic creates products to to search, analyze, and visualize your data, allowing you to get actionable insight in real time. Before becoming one of our biggest sponsors, they also sponsored several local events. Thanks <3"
-msgstr ""
+msgstr "Connu pour Elasticsearch, Kibana, Beats et Logstash, Elastic crée des produits pour rechercher, analyser et visualiser vos données, vous permettant d'obtenir des informations exploitables en temps réel. Avant de devenir l'un de nos plus gros sponsors, ils ont également sponsorisé plusieurs événements locaux. Merci <3"
 
 #: templates/core/2015.html:503 templates/core/2016-2017.html:439
 msgid "The Django Software Foundation (DSF) is a non-profit organization created to promote, support, and advance the development of Django. They've helped many Django Girls events that had problems finding local sponsors. Thanks <3"
-msgstr ""
+msgstr "La Django Software Foundation (DSF) est une organisation à but non lucratif créée pour promouvoir, soutenir et faire progresser le développement de Django. Ils ont aidé de nombreux événements Django Girls qui avaient du mal à trouver des sponsors locaux. Merci <3"
 
 #: templates/core/2015.html:509 templates/core/2016-2017.html:446
 msgid "The Python Software Foundation (PSF) is a non-profit organization that holds the intellectual property rights behind the Python programming language. They are one of the biggest sponsors for local events. Thanks <3"
-msgstr ""
+msgstr "La Python Software Foundation (PSF) est une organisation à but non lucratif qui détient les droits de propriété intellectuelle sur le langage de programmation Python. Ils sont l'un des plus grands sponsors des événements locaux. Merci <3"
 
 #: templates/core/2015.html:515 templates/core/2016-2017.html:453
 msgid "GitHub is a Git repository hosting service. They have sponsored many Django Girls events, and they provide useful materials for new learners like cheat-sheets. Thanks <3"
-msgstr ""
+msgstr "GitHub est un service d'hébergement de gestionnaire de version Git. Ils ont sponsorisé de nombreux événements Django Girls et fournissent du matériel utile aux nouveaux apprenants, comme des aide-mémoire. Merci <3"
 
 #: templates/core/2015.html:521 templates/core/2016-2017.html:460
 msgid "Divio, that created Django CMS and Aldryn, uses Python and Django to provide support for website installation, maintenance, troubleshooting, and development. They sponsored many local events and joined as Patreon supporters in June 2015. Thanks <3"
-msgstr ""
+msgstr "Divio, qui a créé Django CMS et Aldryn, utilise Python et Django pour prendre en charge l'installation, la maintenance, le dépannage et le développement de sites Web. Ils ont sponsorisé de nombreux événements locaux et ont rejoint Patreon en juin 2015. Merci <3"
 
 #: templates/core/2015.html:527 templates/core/2016-2017.html:467
 msgid "Lincoln Loop is a full service web studio offering user experience and development based on the Django Web Framework. They joined our Patreon campaign in April 2015, and have contributed to local events. Thanks <3"
-msgstr ""
+msgstr "Lincoln Loop est un studio Web à service complet offrant une expérience utilisateur et un développement basés sur le framework Web Django. Ils ont rejoint notre campagne Patreon en avril 2015 et ont contribué à des événements locaux. Merci <3"
 
 #: templates/core/2015.html:533 templates/core/2016-2017.html:474
 msgid "Since May, Django Girls has been hosted on PythonAnywhere! They host, run, and code Python in the cloud, and have made the lives of our attendees much easier by being really simple and pleasant to use. Thanks <3"
@@ -1646,7 +1646,7 @@ msgstr ""
 
 #: templates/core/2016-2017.html:119
 msgid "🌎 Maintenance & translation of our free online resources"
-msgstr ""
+msgstr "🌎 Maintenance & traduction de nos ressources en ligne gratuites"
 
 #: templates/core/2016-2017.html:122
 msgid "The curriculum we developed Django Girls Tutorial is used in our workshops to introduce attendees to web development using Python and Django. The tutorial has been published online for free to allow everyone to learn without the need to attend an in-person workshop.<br /> We are proud that the <span>tutorial has been now translated into 14 languages</span> We are thankful to all the volunteers who have made this possible."
@@ -1662,7 +1662,7 @@ msgstr ""
 
 #: templates/core/2016-2017.html:148
 msgid "🎁 Organiser Starter Kits"
-msgstr ""
+msgstr "🎁 Kits de démarrage pour organisateurs"
 
 #: templates/core/2016-2017.html:150
 msgid "We realised that there are certain things such as room decorations and swag (stickers, buttons and tattoos) that are needed by all event organisers. We lowered the costs of decorations and swag for each event by ordering them in bulk from suppliers and stock them in the Django Girls shop. Organisers then order the Organizer Starter Kit from our shop for a small donation, and we donated a number of them to events organised in developing countries. We are super excited that we managed to introduce the Django Girls Starter Kit in 2016."
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: templates/core/2016-2017.html:169
 msgid "💰 Fundraising"
-msgstr ""
+msgstr "💰 Collecte de fonds"
 
 #: templates/core/2016-2017.html:171
 msgid "Most of our funds were generated through corporate and individual donations through Patreon, an online donation management system. In 2016, we also managed to introduce Django Girls shop where we sell swag such as t-shirts, socks and tote bags as a way of making the charity sustainable. Details of how much was raised in 2016 are shown in the table below:"
@@ -1698,11 +1698,11 @@ msgstr ""
 
 #: templates/core/2016-2017.html:190
 msgid "Django Girls Store"
-msgstr ""
+msgstr "Boutique de Django Girls"
 
 #: templates/core/2016-2017.html:191
 msgid "Organiser Starter Kits"
-msgstr ""
+msgstr "Kits de démarrage pour organisateurs"
 
 #: templates/core/2016-2017.html:202
 msgid "Participants Survey"

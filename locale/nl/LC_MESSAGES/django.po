@@ -10,19 +10,19 @@ msgstr ""
 
 #: applications/decorators.py:22
 msgid "\"City\" slug must be present to user this decorator."
-msgstr ""
+msgstr "De \"City\" slug moet aanwezig zijn om deze decorator te kunnen gebruiken."
 
 #: applications/forms.py:42
 msgid "Application for this e-mail already exists."
-msgstr ""
+msgstr "Er bestaat al een aanvraag met dit email adres."
 
 #: applications/models.py:19
 msgid "Apply for a spot at Django Girls [City]!"
-msgstr ""
+msgstr "Schrijf je in voor Django Girls [City]!"
 
 #: applications/models.py:22
 msgid "Yay! We're so excited you want to be a part of our workshop. Please mind that filling out the form below does not give you a place on the workshop, but a chance to get one. The application process is open from {INSERT DATE} until {INSERT DATE}. If you're curious about the criteria we use to choose applicants, you can read about it on <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Good luck!"
-msgstr "Yay! We zijn superenthousiast dat je je wilt aanmelden voor onze workshop. Wees je er van bewust dat het invullen van onderstaand formulier geen recht geeft op een plek bij de workshop, maar een kans op een plek. Het aanmeldingsproces kan doorlopen worden van {INSERT DATE} tot {INSERT DATE}. Als je benieuwd bent naar de selectiecriteria die gebruikt worden, kun je hier meer over lezen op <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Veel succes!"
+msgstr "Yay! We zijn superenthousiast dat je je wilt aanmelden voor onze workshop. Wees je er van bewust dat het invullen van onderstaand formulier geen recht geeft op een plek bij de workshop, maar een kans op een plek. Het aanmeldingsproces kan doorlopen worden van {INSERT DATE} tot {INSERT DATE}. Als je benieuwd bent naar de selectiecriteria die gebruikt worden, kun je hier meer over lezen op de <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Veel succes!"
 
 #: applications/models.py:35
 msgid "Hi there!\n"
@@ -36,15 +36,25 @@ msgid "Hi there!\n"
 "\n"
 "Hugs, cupcakes and high-fives!\n"
 "Django Girls"
-msgstr ""
+msgstr "Hallo!\n"
+"\n"
+"Dit is een bevestiging van je aanvraag voor  <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. Yay! Het is al een enorme stap die je hebt gezet, wij zijn trots op je! \n"
+"\n"
+"Let op dat dit geen bevestiging is van deelname aan het evenement, maar een bevestiging van de ontvangst van je aanvraag. \n"
+"\n"
+"Binnenkort krijg je een e-mail van het team dat Django Girls {CITY} organiseert. Je kunt ze altijd bereiken door op deze e-mail te antwoorden of door er een te sturen naar {your event mail}.\n"
+"Ter referentie hebben we je antwoorden hieronder bijgevoegd.\n"
+"\n"
+"Hugs, cupcakes en high-fives!\n"
+"Django Girls"
 
 #: applications/models.py:49
 msgid "Application process is open from"
-msgstr ""
+msgstr "De inschrijving opent op"
 
 #: applications/models.py:50
 msgid "Application process is open until"
-msgstr ""
+msgstr "De inschrijving sluit op"
 
 #: applications/models.py:91
 msgid "Question"
@@ -52,116 +62,116 @@ msgstr "Vraag"
 
 #: applications/models.py:92
 msgid "Additional help text to the question?"
-msgstr ""
+msgstr "Extra helptekst bij de vraag?"
 
 #: applications/models.py:93
 msgid "Type of the question"
-msgstr ""
+msgstr "Soort vraag"
 
 #: applications/models.py:94
 msgid "Is the answer to the question required?"
-msgstr ""
+msgstr "Is het antwoord op de vraag verplicht?"
 
 #: applications/models.py:98
 msgid "List all available options, separated with semicolon (;)"
-msgstr ""
+msgstr "Maak een lijst van beschikbare keuzes, gescheiden door puntkomma's (;)"
 
 #: applications/models.py:94 applications/models.py:99
 msgid "Used only with 'Choices' question type"
-msgstr ""
+msgstr "Alleen gebruikt bij een vraag van type 'Choices'"
 
 #: applications/models.py:103
 msgid "Are there multiple choices allowed?"
-msgstr ""
+msgstr "Zijn er meerdere keuzes toegestaan?"
 
 #: applications/models.py:106
 msgid "Position of the question"
-msgstr ""
+msgstr "Positie van de vraag"
 
 #: applications/models.py:116
 msgid "You can only get choices for fields that have question_type == choices."
-msgstr ""
+msgstr "Je kunt alleen keuzes krijgen voor velden die als question_type == choices."
 
 #: applications/models.py:123 templates/applications/applications.html:37
 #: templates/applications/applications.html:86
 msgid "Application submitted"
-msgstr ""
+msgstr "Aanvraag ingediend"
 
 #: applications/models.py:124 templates/applications/applications.html:38
 #: templates/applications/applications.html:87
 msgid "Application accepted"
-msgstr ""
+msgstr "Aanvraag geaccepteerd"
 
 #: applications/models.py:125 templates/applications/applications.html:39
 #: templates/applications/applications.html:88
 msgid "Application rejected"
-msgstr ""
+msgstr "Aanvraag afgewezen"
 
 #: applications/models.py:126 templates/applications/applications.html:40
 #: templates/applications/applications.html:89
 msgid "Application on waiting list"
-msgstr ""
+msgstr "Aanvraag op wachtlijst"
 
 #: applications/models.py:127 templates/applications/applications.html:41
 #: templates/applications/applications.html:90
 msgid "Applicant declined"
-msgstr ""
+msgstr "Aanvrager afgewezen"
 
 #: applications/models.py:134
 msgid "RSVP: Waiting for response"
-msgstr ""
+msgstr "RSVP: Wachtend op antwoord"
 
 #: applications/models.py:135
 msgid "RSVP: Confirmed attendance"
-msgstr ""
+msgstr "RSVP: Deelname bevestigd"
 
 #: applications/models.py:136
 msgid "RSVP: Rejected invitation"
-msgstr ""
+msgstr "RSVP: Uitnodiging afgewezen"
 
 #: applications/models.py:143
 msgid "State of the application"
-msgstr ""
+msgstr "Status van de aanvraag"
 
 #: applications/models.py:155
 msgid "RSVP status"
-msgstr ""
+msgstr "RSVP status"
 
 #: applications/models.py:266
 msgid "5 being the most positive, 1 being the most negative."
-msgstr ""
+msgstr "5 het meest positief, 1 het meest negatief."
 
 #: applications/models.py:270
 msgid "Any extra comments?"
-msgstr ""
+msgstr "Overige opmerkingen?"
 
 #: applications/models.py:287
 msgid "Content of the email"
-msgstr ""
+msgstr "Inhoud van de e-mail"
 
 #: applications/models.py:288
 msgid "You can use HTML syntax in this message. Preview on the right."
-msgstr ""
+msgstr "Je kunt HTML syntax in dit bericht gebruiken. Preview aan de rechterkant."
 
 #: applications/models.py:293 templates/applications/communication.html:22
 msgid "Recipients"
-msgstr ""
+msgstr "Ontvangers"
 
 #: applications/models.py:294
 msgid "Only people assigned to chosen group will receive this email."
-msgstr ""
+msgstr "Alleen personen in de geselecteerde groep zullen deze e-mail ontvangen."
 
 #: applications/questions.py:13
 msgid "Applications"
-msgstr ""
+msgstr "Aanvragen"
 
 #: applications/questions.py:14
 msgid "Messaging"
-msgstr ""
+msgstr "Berichtgeving"
 
 #: applications/questions.py:53
 msgid "Do you want to receive news from the Django Girls team?"
-msgstr ""
+msgstr "Vind je het leuk om nieuwtjes te ontvangen van het Django Girls team?"
 
 #: applications/questions.py:55
 msgid "No spam, pinky swear! Only helpful programming tips and latest news from the Django Girls world. We send it once every two weeks."
@@ -1803,8 +1813,9 @@ msgid "There are many ways to contribute to Django Girls: you can organize an ev
 msgstr ""
 
 #: templates/core/contribute.html:22
+#, fuzzy
 msgid "Support us!"
-msgstr ""
+msgstr "Steun ons!"
 
 #: templates/core/contribute.html:31
 msgid "Django Girls is a <a href=\"http://apps.charitycommission.gov.uk/Showcharity/RegisterOfCharities/CharityFramework.aspx?RegisteredCharityNumber=1163260&SubsidiaryNumber=0\">Registered Charity</a> and is volunteer run. If you're an individual or a company and want to support us, you can make a <a href=\"https://www.patreon.com/djangogirls\">monthly donation</a>. You can send one-time donations to our <a href=\"%(donation_url)s\">PayPal account</a> or <a href=\"%(donation_url)s\">donate via credit card</a>."
@@ -2075,13 +2086,14 @@ msgstr ""
 msgid "Read our Annual Report to learn about the impact we make"
 msgstr ""
 
+#. I'm in doubt how to translate city, what if you want to bring it to your village? Can I use "locatie" which means location or should it be city which will be "stad".
 #: templates/core/index.html:73 templates/includes/_no_event.html:25
 msgid "Bring Django Girls to your city!"
-msgstr ""
+msgstr "Breng Django Girls naar jouw stad!"
 
 #: templates/core/index.html:74
 msgid "Is there no Django Girls event in your city? You can help make it happen!"
-msgstr ""
+msgstr "Is er geen Django Girls workshop in jouw stad? Je kunt er een organiseren!"
 
 #: templates/core/index.html:76
 msgid "We open sourced the <a href=\"http://organize.djangogirls.org/\">Organizer Manual</a> that provides you with all information required to organize Django Girls workshop. By volunteering to organize, you're joining a vibrant and supportive community of %(organizers_count|default_if_none:'0')s organizers all over the world!"
@@ -3792,7 +3804,7 @@ msgstr ""
 
 #: templates/global/footer.html:20 templates/global/menu.html:13
 msgid "Support us"
-msgstr ""
+msgstr "Steun ons"
 
 #: templates/global/footer.html:22
 msgid "Make a donation"
@@ -3860,7 +3872,7 @@ msgstr ""
 
 #: templates/global/menu.html:28
 msgid "Support us 💕"
-msgstr ""
+msgstr "Steun ons 💕"
 
 #: templates/global/menu.html:31
 msgid "Donate"
