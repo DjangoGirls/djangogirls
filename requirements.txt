@@ -59,6 +59,7 @@ django==3.2.25
     #   django-recaptcha
     #   django-sendgrid-v5
     #   django-storages
+    #   django-tinymce
     #   django-unused-media
     #   easy-thumbnails
 django-admin-sortable2==1.0.4
@@ -91,7 +92,7 @@ django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
     # via -r requirements.in
-django-tinymce==3.5.0
+django-tinymce==4.1.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
