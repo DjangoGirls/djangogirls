@@ -115,9 +115,7 @@ class Event(models.Model):
     def date_is_approximate(self):
         if not self.date:
             return True
-        if not all((self.date.year, self.date.month, self.date.day)):
-            return True
-        return False
+        return not all((self.date.year, self.date.month, self.date.day))
 
     @property
     def lnglat(self):

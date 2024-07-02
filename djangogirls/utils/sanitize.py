@@ -11,9 +11,9 @@ def sanitize(value, output_type):
     """
     # pylint: disable=no-else-return
 
-    if output_type == bool:
+    if output_type is bool:
         return sanitize_bool(value)
-    elif output_type == int:
+    elif output_type is int:
         return sanitize_int(value)
     # pylint: enable=no-else-return
     # unrecognised/unsupported output_type. just return what we got..
