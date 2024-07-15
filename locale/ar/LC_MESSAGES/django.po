@@ -10,19 +10,19 @@ msgstr ""
 
 #: applications/decorators.py:22
 msgid "\"City\" slug must be present to user this decorator."
-msgstr ""
+msgstr "\"المدينة\" الداله يجب أن تكون موجودة لمستخدم هذا الديكور"
 
 #: applications/forms.py:42
 msgid "Application for this e-mail already exists."
-msgstr ""
+msgstr "التطبيق لهذا البريد الإلكتروني موجود بالفعل."
 
 #: applications/models.py:19
 msgid "Apply for a spot at Django Girls [City]!"
-msgstr ""
+msgstr "تقدم بطلب للحصول على مكان في Django Girls [City]!"
 
 #: applications/models.py:22
 msgid "Yay! We're so excited you want to be a part of our workshop. Please mind that filling out the form below does not give you a place on the workshop, but a chance to get one. The application process is open from {INSERT DATE} until {INSERT DATE}. If you're curious about the criteria we use to choose applicants, you can read about it on <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'>Django Girls blog</a>. Good luck!"
-msgstr ""
+msgstr "ياي! نحن متحمسون للغاية لأنك تريد أن تكون جزءًا من ورشة العمل لدينا. يرجى ملاحظة أن ملء النموذج أدناه لا يمنحك مكانًا في ورشة العمل، بل فرصة للحصول على مكان. عملية التقديم مفتوحة من {INSERT DATE} حتى {INSERT DATE}. إذا كنت مهتمًا بالمعايير التي نستخدمها لاختيار المتقدمين، فيمكنك القراءة عنها على <a href='http://blog.djangogirls.org/post/91067112853/djangogirls-how-we-scored-applications'> مدونة جانغو جيرلز</a>. حظ سعيد!"
 
 #: applications/models.py:35
 msgid "Hi there!\n"
@@ -36,71 +36,81 @@ msgid "Hi there!\n"
 "\n"
 "Hugs, cupcakes and high-fives!\n"
 "Django Girls"
-msgstr ""
+msgstr "أهلاً!\n"
+"\n"
+"هذا تأكيد لطلبك للانضمام إلى <a href=\"http://djangogirls.org/{city}\">Django Girls {CITY}</a>. ياي! هذه خطوة كبيرة بالفعل، نحن فخورون بك!\n"
+"\n"
+"ضع في اعتبارك أن هذا ليس تأكيدًا للمشاركة في الحدث، ولكنه تأكيد على أننا تلقينا طلبك.\n"
+"\n"
+"ستتلقى بريدًا إلكترونيًا من الفريق الذي ينظم Django Girls {CITY} قريبًا. يمكنك دائمًا الوصول إليهم عن طريق الرد على هذه الرسالة الإلكترونية أو عن طريق الكتابة إلى {your events mail}.\n"
+"كمرجع لك، نرفق إجاباتك أدناه.\n"
+"\n"
+"العناق والكعك والخمسات!\n"
+"بنات جانجو"
 
 #: applications/models.py:49
 msgid "Application process is open from"
-msgstr ""
+msgstr "عملية التقديم مفتوحة من"
 
 #: applications/models.py:50
 msgid "Application process is open until"
-msgstr ""
+msgstr "عملية التقديم مفتوحة حتى"
 
 #: applications/models.py:91
 msgid "Question"
-msgstr ""
+msgstr "سؤال"
 
 #: applications/models.py:92
 msgid "Additional help text to the question?"
-msgstr ""
+msgstr "نص تعليمات إضافي للسؤال؟"
 
 #: applications/models.py:93
 msgid "Type of the question"
-msgstr ""
+msgstr "نوع السؤال"
 
 #: applications/models.py:94
 msgid "Is the answer to the question required?"
-msgstr ""
+msgstr "هل إجابة السؤال مطلوبة؟"
 
 #: applications/models.py:98
 msgid "List all available options, separated with semicolon (;)"
-msgstr ""
+msgstr "قم بإدراج كافة الخيارات المتاحة، مفصولة بفاصلة منقوطة (;)"
 
 #: applications/models.py:94 applications/models.py:99
 msgid "Used only with 'Choices' question type"
-msgstr ""
+msgstr "يُستخدم فقط مع نوع  \"الاختيارات\" من الاسئله"
 
 #: applications/models.py:103
 msgid "Are there multiple choices allowed?"
-msgstr ""
+msgstr "هل هناك خيارات متعددة مسموح بها؟"
 
 #: applications/models.py:106
 msgid "Position of the question"
-msgstr ""
+msgstr "موضع السؤال"
 
 #: applications/models.py:116
 msgid "You can only get choices for fields that have question_type == choices."
-msgstr ""
+msgstr "يمكنك فقط الحصول على اختيارات للحقول التي تحتوي على اختيارات question_type =="
 
 #: applications/models.py:123 templates/applications/applications.html:37
 #: templates/applications/applications.html:86
 msgid "Application submitted"
-msgstr ""
+msgstr "تم تقديم الطلب"
 
 #: applications/models.py:124 templates/applications/applications.html:38
 #: templates/applications/applications.html:87
 msgid "Application accepted"
-msgstr ""
+msgstr "تم قبول الطلب"
 
 #: applications/models.py:125 templates/applications/applications.html:39
 #: templates/applications/applications.html:88
 msgid "Application rejected"
-msgstr ""
+msgstr "تم رفض الطلب"
 
 #: applications/models.py:126 templates/applications/applications.html:40
 #: templates/applications/applications.html:89
 msgid "Application on waiting list"
-msgstr ""
+msgstr "التطبيق على قائمة الانتظار"
 
 #: applications/models.py:127 templates/applications/applications.html:41
 #: templates/applications/applications.html:90
