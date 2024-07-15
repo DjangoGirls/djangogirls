@@ -12,7 +12,7 @@ attrs==22.2.0
     # via pytest
 autoflake==1.4
     # via -r requirements.in
-black==22.3.0
+black==24.3.0
     # via -r requirements.in
 bleach[css]==5.0.1
     # via django-bleach
@@ -133,7 +133,7 @@ icalendar==4.0.3
     # via -r requirements.in
 identify==2.5.18
     # via pre-commit
-idna==3.4
+idna==3.7
     # via
     #   requests
     #   urlextract
@@ -164,11 +164,12 @@ oauthlib==3.2.2
     # via requests-oauthlib
 packaging==23.0
     # via
+    #   black
     #   build
     #   pytest
 pathspec==0.11.0
     # via black
-pillow==10.2.0
+pillow==10.3.0
     # via
     #   -r requirements.in
     #   easy-thumbnails
@@ -255,7 +256,7 @@ pyyaml==6.0
     # via
     #   pre-commit
     #   vcrpy
-requests==2.31.0
+requests==2.32.0
     # via
     #   google-api-core
     #   py-trello
@@ -304,7 +305,9 @@ tomli==2.0.1
     #   build
     #   pyproject-hooks
 typing-extensions==4.5.0
-    # via django-countries
+    # via
+    #   black
+    #   django-countries
 uritemplate==4.1.1
     # via google-api-python-client
 uritools==4.0.1
