@@ -91,3 +91,8 @@ def test_charge_post_api_connection_error(client):
         # Check if the expected session variable is set
         assert "stripe_message" in client.session
         assert client.session["stripe_message"] == "A Network Connection error occured."
+
+
+def test_crowdfunding_page(client):
+    response = client.get(reverse("donations:crowdfunding"))
+    assert response.status_code == 200
