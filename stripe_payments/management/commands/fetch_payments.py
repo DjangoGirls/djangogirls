@@ -2,6 +2,7 @@
 # and store them in the database as StripeCharge objects.
 
 import logging
+from datetime import datetime
 
 import stripe
 from django.conf import settings
@@ -35,10 +36,11 @@ class Command(BaseCommand):
         # stripe.api_version = settings.STRIPE_API_VERSION
 
         # Fetch the Stripe charges.
+        begin = datetime(2024, 8, 1)
 
         stripe_charges = stripe.Charge.list(
             limit=100,
-            created={"gt": int(last_fetched.timestamp())} if last_fetched else None,
+            created={"gt": int(last_fetched.timestamp())} if last_fetched else {"gt": int(begin.timestamp())},
             expand=[
                 "data.customer",
             ],
