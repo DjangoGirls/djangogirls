@@ -14,6 +14,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{% url 'donations:index' %}">{% trans "Corporate Sponsorships" %}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'donations:crowdfunding' %}" target="_blank">{% trans "Crowdfunding" %}</a></li>
                     <li><a class="dropdown-item" href="{% url 'donations:donate' %}">{% trans "Donate to us" %}</a></li>
                     <li><a class="dropdown-item" href="https://www.patreon.com/djangogirls">{% trans "Our Patreon Page" %}</a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -42,6 +43,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url 'core:events' %}">{% trans "Events" %}</a></li>
                 <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'donations:crowdfunding' %}" target="_blank">{% trans "Crowdfunding" %}</a></li>
                 <li><a class="dropdown-item" href="https://django-girls.myspreadshop.co.uk" target="_blank">{% trans "Shop" %}</a></li>
                 <li><a class="dropdown-item" href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
                 <li><a class="dropdown-item" href="https://blog.djangogirls.org/">{% trans "Our blog" %}</a></li>

@@ -1,0 +1,78 @@
+{% extends "global/base.html" %}
+{% load i18n static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <h2>{% trans "🎉🎁🎈🎊 We are 10 years old now and crowdfunding 🎂🥂🍾💕!" %}" </h2>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <h3>{% blocktrans trimmed %}
+                <span class="highlighted-number">${{ total_raised }}</span> of <span class="highlighted-number">$30,000</span> raised.
+                {% endblocktrans %}
+            </h3>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row clearfix">
+        <div class="col-md-6">
+            {% blocktrans trimmed %}
+                <p>We are 10 years now, yay and we are fundraising!</p>
+                <p>Since the first Django Girls workshop in July 2014, we grew unexpectedly fast and we could not sustain that growth without some help.</p>
+
+                <p>In 2015, we introduced a part-time paid position of Awesomeness Ambassador to help provide support to hundreds of volunteers all over 
+                    the world.</p>
+                   
+                <p>In 2017, we also introduced the part-time paid position of Fundraising Coordinator to help us raise funds to run our activities. 
+                    In 2023, we introduced the part-time paid position of Communications Officer to help us increase outreach following the pandemic 
+                    and increase the number of workshops. We also introduced the Chief Emoji Officer (Managing Director) role, increasing the number 
+                    of our paid staff.</p>
+
+                <p>Our mission for 2024 is to improve outreach and visibility following the pandemic which saw a reduction in the number of 
+                    workshops being organized per year. We have therefore introduced a new part-time Communications Officer to help us achieve 
+                    this. We will also continue working with the advisory board to tackle diversity and inclusion issues in our systems and 
+                    workshop guidance to ensure that voices of all people, especially those from marginalized communities, can contribute to 
+                    our future. 
+                </p>
+                <p>
+                    Help us see this through. Support our work!
+                </p>
+            {% endblocktrans %} 
+        </div>
+        <div class="col-md-6">
+            <img class="img-responsive center-block" src="{% static 'img/photos/crowdfunding.jpg' %}" alt="Django Girls Hohoe">
+            <br>
+            <p><a class="btn" href="https://donate.stripe.com/14kdTJ8PT6Fa3CwaEF">Donate now</a> or scan the QR code to donate to us <img class="img-responsive center-block" style="width: 100px;" src="{% static 'img/global/donate/qr_code.png' %}" alt="Stripe QR Code">
+            </p>
+            <hr>
+            <h3>Recent donations</h3>
+            
+            {% for donor in donors %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="{% static 'img/global/donate/django_crowdfunding_heart.png' %}" alt="Donor" style="width: 50px;"> 
+                            </div>
+                            <div class="col-md-10">
+                                <h4><strong>{{ donor.payment_data.customer.name }}</strong> - ${{ donor.amount}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -26,7 +26,7 @@ build==0.10.0
     # via pip-tools
 cachetools==5.3.0
     # via google-auth
-certifi==2023.7.22
+certifi==2024.7.4
     # via
     #   requests
     #   sentry-sdk
@@ -59,6 +59,7 @@ django==3.2.25
     #   django-recaptcha
     #   django-sendgrid-v5
     #   django-storages
+    #   django-tinymce
     #   django-unused-media
     #   easy-thumbnails
 django-admin-sortable2==1.0.4
@@ -91,7 +92,7 @@ django-sendgrid-v5==0.8.1
     # via -r requirements.in
 django-storages[boto3]==1.7.1
     # via -r requirements.in
-django-tinymce==3.5.0
+django-tinymce==4.1.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
@@ -272,7 +273,7 @@ s3transfer==0.6.0
     # via boto3
 sendgrid==6.9.7
     # via django-sendgrid-v5
-sentry-sdk==1.16.0
+sentry-sdk==2.8.0
     # via -r requirements.in
 six==1.16.0
     # via
@@ -314,7 +315,7 @@ uritools==4.0.1
     # via urlextract
 urlextract==1.8.0
     # via -r requirements.in
-urllib3==1.26.18
+urllib3==1.26.19
     # via
     #   botocore
     #   requests
