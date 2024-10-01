@@ -8,6 +8,7 @@ from django.urls import reverse
 from stripe.error import APIConnectionError, CardError, StripeError
 
 from patreonmanager.models import FundraisingStatus
+from stripe_payments.models import StripeCharge
 
 from .forms import StripeForm
 
@@ -83,3 +84,9 @@ def error(request):
 
 def sponsors(request):
     return render(request, "donations/sponsors.html")
+
+
+def crowdfunding(request):
+    total_raised = StripeCharge.objects.running_total()["total"]
+    recent_donors = StripeCharge.objects.all().order_by("-charge_created")[:5]
+    return render(request, "donations/crowdfunding.html", {"total_raised": total_raised, "donors": recent_donors})

@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "donations",
     "jobboard",
     "globalpartners",
+    "stripe_payments",
     "django.contrib.sitemaps",
 ]
 
