@@ -1,11 +1,13 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: djangogirls\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-01 23:54+0000\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: djangogirls\n"
-"Language: fa\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: applications/decorators.py:21
@@ -566,51 +568,51 @@ msgstr ""
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:104
+#: djangogirls/settings.py:105
 msgid "English"
 msgstr ""
 
-#: djangogirls/settings.py:105
+#: djangogirls/settings.py:106
 msgid "Arabic"
 msgstr ""
 
-#: djangogirls/settings.py:106
+#: djangogirls/settings.py:107
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:108
 msgid "Dutch"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:109
 msgid "French"
 msgstr ""
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:110
 msgid "German"
 msgstr ""
 
-#: djangogirls/settings.py:110
+#: djangogirls/settings.py:111
 msgid "Hebrew"
 msgstr ""
 
-#: djangogirls/settings.py:111
+#: djangogirls/settings.py:112
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:112
+#: djangogirls/settings.py:113
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:113
+#: djangogirls/settings.py:114
 msgid "Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:114
+#: djangogirls/settings.py:115
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:115
+#: djangogirls/settings.py:116
 msgid "Spanish"
 msgstr ""
 
@@ -2603,7 +2605,7 @@ msgid ""
 msgstr ""
 
 #: templates/core/contribute.html:9 templates/global/footer.html:24
-#: templates/global/menu.html:29
+#: templates/global/menu.html:30
 msgid "Contribute"
 msgstr ""
 
@@ -3625,7 +3627,7 @@ msgid ""
 msgstr ""
 
 #: templates/core/resources.html:9 templates/global/footer.html:39
-#: templates/global/menu.html:31
+#: templates/global/menu.html:32
 msgid "Resources"
 msgstr ""
 
@@ -4020,7 +4022,7 @@ msgid ""
 "will be able to achieve any specific outcome."
 msgstr ""
 
-#: templates/core/terms_conditions.html:158 templates/global/menu.html:43
+#: templates/core/terms_conditions.html:158 templates/global/menu.html:44
 msgid "Events"
 msgstr ""
 
@@ -4799,6 +4801,39 @@ msgid ""
 "and innovative."
 msgstr ""
 
+#: templates/donations/crowdfunding.html:9
+msgid "🎉🎁🎈🎊 We are 10 years old now and crowdfunding 🎂🥂🍾💕!"
+msgstr ""
+
+#: templates/donations/crowdfunding.html:17
+#, python-format
+msgid ""
+"<span class=\"highlighted-number\">$%(total_raised)s</span> of <span class="
+"\"highlighted-number\">$30,000</span> raised."
+msgstr ""
+
+#: templates/donations/crowdfunding.html:28
+msgid ""
+"<p>We are 10 years now, yay and we are fundraising!</p> <p>Since the first "
+"Django Girls workshop in July 2014, we grew unexpectedly fast and we could "
+"not sustain that growth without some help.</p> <p>In 2015, we introduced a "
+"part-time paid position of Awesomeness Ambassador to help provide support to "
+"hundreds of volunteers all over the world.</p> <p>In 2017, we also "
+"introduced the part-time paid position of Fundraising Coordinator to help us "
+"raise funds to run our activities. In 2023, we introduced the part-time paid "
+"position of Communications Officer to help us increase outreach following "
+"the pandemic and increase the number of workshops. We also introduced the "
+"Chief Emoji Officer (Managing Director) role, increasing the number of our "
+"paid staff.</p> <p>Our mission for 2024 is to improve outreach and "
+"visibility following the pandemic which saw a reduction in the number of "
+"workshops being organized per year. We have therefore introduced a new part-"
+"time Communications Officer to help us achieve this. We will also continue "
+"working with the advisory board to tackle diversity and inclusion issues in "
+"our systems and workshop guidance to ensure that voices of all people, "
+"especially those from marginalized communities, can contribute to our "
+"future. </p> <p> Help us see this through. Support our work! </p>"
+msgstr ""
+
 #: templates/donations/donate.html:26
 msgid ""
 "If you would like to setup a recurring donation, we encourage you to do so "
@@ -4851,7 +4886,7 @@ msgstr ""
 msgid "Back to donation page"
 msgstr ""
 
-#: templates/donations/sponsors.html:8 templates/global/menu.html:20
+#: templates/donations/sponsors.html:8 templates/global/menu.html:21
 msgid "Our Global Partners"
 msgstr ""
 
@@ -5456,7 +5491,7 @@ msgstr ""
 msgid "Foundation"
 msgstr ""
 
-#: templates/global/footer.html:11 templates/global/menu.html:46
+#: templates/global/footer.html:11 templates/global/menu.html:48
 msgid "Newsletter"
 msgstr ""
 
@@ -5545,39 +5580,43 @@ msgstr ""
 msgid "Corporate Sponsorships"
 msgstr ""
 
-#: templates/global/menu.html:17
-msgid "Donate to us"
+#: templates/global/menu.html:17 templates/global/menu.html:46
+msgid "Crowdfunding"
 msgstr ""
 
 #: templates/global/menu.html:18
+msgid "Donate to us"
+msgstr ""
+
+#: templates/global/menu.html:19
 msgid "Our Patreon Page"
 msgstr ""
 
-#: templates/global/menu.html:25
+#: templates/global/menu.html:26
 msgid "Volunteer"
 msgstr ""
 
-#: templates/global/menu.html:28
+#: templates/global/menu.html:29
 msgid "Organize a Workshop"
 msgstr ""
 
-#: templates/global/menu.html:36
+#: templates/global/menu.html:37
 msgid "Tech Jobs Board"
 msgstr ""
 
-#: templates/global/menu.html:40
+#: templates/global/menu.html:41
 msgid "What's new?"
 msgstr ""
 
-#: templates/global/menu.html:45
+#: templates/global/menu.html:47
 msgid "Shop"
 msgstr ""
 
-#: templates/global/menu.html:47
+#: templates/global/menu.html:49
 msgid "Our blog"
 msgstr ""
 
-#: templates/global/menu.html:51
+#: templates/global/menu.html:53
 msgid "Contact us"
 msgstr ""
 
