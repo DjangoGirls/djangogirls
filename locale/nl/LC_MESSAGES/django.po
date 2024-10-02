@@ -1,11 +1,13 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: djangogirls\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-01 23:54+0000\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: djangogirls\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applications/decorators.py:21
@@ -69,8 +71,8 @@ msgstr ""
 "org/{city}\">Django Girls {CITY}</a>. Yay! Het is al een enorme stap die je "
 "hebt gezet, wij zijn trots op je! \n"
 "\n"
-"Let op dat dit geen bevestiging is van deelname aan deze activiteit, maar "
-"een bevestiging van de ontvangst van je aanvraag. \n"
+"Let op dat dit geen bevestiging is van deelname aan dit evenement, maar een "
+"bevestiging van de ontvangst van je aanvraag. \n"
 "\n"
 "Binnenkort krijg je een e-mail van het team dat Django Girls {CITY} "
 "organiseert. Je kunt ze altijd bereiken door op deze e-mail te antwoorden of "
@@ -310,7 +312,7 @@ msgstr ""
 "Django Girls is een vrijwilligersorganisatie en we zijn op zoek naar mensen "
 "die actief zijn en die ons kunnen helpen meer vrouwen in het werkveld te "
 "krijgen. We zien graag dat je wat je tijdens de workshop leert met anderen "
-"deelt: door een Django Girls-activiteit bij jou in de buurt te organiseren, "
+"deelt: door een Django Girls-evenement bij jou in de buurt te organiseren, "
 "door over Django Girls te praten tijdens meetups die je bezoekt, door een "
 "blog te schrijven of gewoon door het er met je vrienden over te hebben."
 
@@ -334,6 +336,12 @@ msgid ""
 "share your data with spammers, and we don't sell it! More info on our "
 "Privacy policy <a href='/privacy-cookies/'>here</a>."
 msgstr ""
+"De gegevens die in dit formulier worden ingevuld worden alleen gebruikt voor "
+"Django Girls-evenementen. We maken gebruik van websites en diensten van "
+"derden om dit mogelijk te maken: voor het sturen van e-mails maken we "
+"bijvoorbeeld gebruik van Mandrill. Wees gerust: we delen je data niet met "
+"spammers en we zullen ze nooit verkopen! Meer informatie over ons "
+"privacybeleid <a href='/privacy-cookies/'>hier</a>."
 
 #: applications/questions.py:155
 msgid "Yes"
@@ -421,11 +429,11 @@ msgstr "Django Girls workshop in..."
 
 #: contact/forms.py:42
 msgid "Please select the event"
-msgstr "Selecteer de activiteit"
+msgstr "Selecteer het evenement"
 
 #: contact/models.py:11
 msgid "Django Girls Local Organizers"
-msgstr "Django Girls organisatoren op locatie"
+msgstr "Django Girls organisatoren"
 
 #: contact/models.py:12
 msgid "Django Girls HQ (Support Team)"
@@ -451,7 +459,7 @@ msgstr ""
 
 #: core/admin/event.py:82
 msgid "past event?"
-msgstr "eerdere activiteit?"
+msgstr "vorig evenement?"
 
 #: core/admin/event.py:89
 msgid "has stats?"
@@ -463,11 +471,11 @@ msgstr "pagina-URL"
 
 #: core/admin/event.py:115 core/admin/event.py:155 organize/admin.py:87
 msgid "Event info"
-msgstr "Informatie over de activiteit"
+msgstr "Informatie over het evenement"
 
 #: core/admin/event.py:130 core/admin/event.py:157
 msgid "Event main picture"
-msgstr "Belangrijkste foto bij de activiteit"
+msgstr "Belangrijkste foto bij het evenement"
 
 #: core/admin/event.py:131
 msgid "Team"
@@ -475,7 +483,7 @@ msgstr "Team"
 
 #: core/admin/event.py:133 core/admin/event.py:167
 msgid "Event website"
-msgstr "Website van de activiteit"
+msgstr "Website van het evenement"
 
 #: core/admin/event.py:145 core/admin/event.py:171
 msgid "Statistics"
@@ -574,7 +582,7 @@ msgstr "Inschrijving openen"
 
 #: core/filters.py:11
 msgid "Show events with open registration"
-msgstr "Toon activiteiten met een open inschrijving"
+msgstr "Toon evenementen met een open inschrijving"
 
 #: core/forms.py:33
 msgid "Organizer's first and last name"
@@ -592,7 +600,7 @@ msgstr "Laten we het over het team hebben. Als eerste de hoofdorganisator:"
 msgid ""
 "Event date can't be a year only. Please, provide at least a month and a year."
 msgstr ""
-"De datum van een activiteit kan niet alleen een jaar zijn. Geef ten minste "
+"De datum van een evenement kan niet alleen een jaar zijn. Geef ten minste "
 "een maand en een jaar op."
 
 #: core/validators.py:17
@@ -605,62 +613,62 @@ msgstr ""
 
 #: core/validators.py:23
 msgid "Event date should be in the future"
-msgstr "De datum van de activiteit moet in de toekomst liggen"
+msgstr "De datum van het evenement moet in de toekomst liggen"
 
 #: core/views.py:96
 msgid "List of Django Girls events around the world"
-msgstr "Overzicht van Django Girls activiteiten in de wereld"
+msgstr "Overzicht van Django Girls-evenementen in de wereld"
 
 #: core/views.py:177
 #, python-format
 msgid "No translation for language %(lang)s"
 msgstr ""
 
-#: djangogirls/settings.py:104
+#: djangogirls/settings.py:105
 msgid "English"
 msgstr "Engels"
 
-#: djangogirls/settings.py:105
+#: djangogirls/settings.py:106
 msgid "Arabic"
 msgstr ""
 
-#: djangogirls/settings.py:106
+#: djangogirls/settings.py:107
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: djangogirls/settings.py:107
+#: djangogirls/settings.py:108
 msgid "Dutch"
 msgstr ""
 
-#: djangogirls/settings.py:108
+#: djangogirls/settings.py:109
 msgid "French"
 msgstr "Frans"
 
-#: djangogirls/settings.py:109
+#: djangogirls/settings.py:110
 msgid "German"
 msgstr "Duits"
 
-#: djangogirls/settings.py:110
+#: djangogirls/settings.py:111
 msgid "Hebrew"
 msgstr ""
 
-#: djangogirls/settings.py:111
+#: djangogirls/settings.py:112
 msgid "Korean"
 msgstr ""
 
-#: djangogirls/settings.py:112
+#: djangogirls/settings.py:113
 msgid "Persian"
 msgstr ""
 
-#: djangogirls/settings.py:113
+#: djangogirls/settings.py:114
 msgid "Portuguese"
 msgstr "Portugees"
 
-#: djangogirls/settings.py:114
+#: djangogirls/settings.py:115
 msgid "Russian"
 msgstr ""
 
-#: djangogirls/settings.py:115
+#: djangogirls/settings.py:116
 msgid "Spanish"
 msgstr ""
 
@@ -725,7 +733,7 @@ msgstr ""
 
 #: organize/constants.py:4
 msgid "I've never been to a Django Girls event"
-msgstr "Ik ben nog nooit bij een Django Girls activiteit geweest"
+msgstr "Ik ben nog nooit bij een Django Girls-evenement geweest"
 
 #: organize/constants.py:5
 msgid "I'm a former attendee"
@@ -786,11 +794,11 @@ msgstr "Op locatie"
 #: organize/forms.py:33 organize/forms.py:35
 #: templates/organize/form/step1_previous_event.html:75
 msgid "Choose event"
-msgstr "Kies een activiteit"
+msgstr "Kies een evenement"
 
 #: organize/forms.py:42
 msgid "You have to choose an event."
-msgstr "Je moet een activiteit kiezen."
+msgstr "Je moet een evenement kiezen."
 
 #: organize/forms.py:95 organize/forms.py:121
 #: templates/organize/form/step5_workshop.html:79
@@ -808,8 +816,8 @@ msgid ""
 "You cannot apply to organize another event when you already have another "
 "open event application."
 msgstr ""
-"Je kunt je niet aanmelden voor het organiseren van een activiteit als je je "
-"al voor een ander activiteit hebt aangemeld."
+"Je kunt je niet aanmelden voor het organiseren van een evenement als je je "
+"al voor een ander evenement hebt aangemeld."
 
 #: organize/models.py:68 organize/models.py:79
 msgid ""
@@ -833,7 +841,7 @@ msgstr "Betrokkenheid bij Django Girls"
 
 #: organize/models.py:110
 msgid "Experience with organizing other events"
-msgstr "Ervaring met het organiseren van andere activiteiten"
+msgstr "Ervaring met het organiseren van andere evenementen"
 
 #: organize/models.py:111
 msgid "Information about your potential venue"
@@ -1028,7 +1036,7 @@ msgstr[1] "%d betalingen"
 
 #: pictures/models.py:25
 msgid "Event cover (356 x 210px)"
-msgstr "Activiteit cover (356 x 210px)"
+msgstr "Evenement cover (356 x 210px)"
 
 #: pictures/models.py:26
 msgid "Section background"
@@ -1073,7 +1081,7 @@ msgstr "Het spijt ons! De pagina die je zoekt is niet beschikbaar."
 #: templates/404.html:13
 #, python-format
 msgid "See all <a href=\"%(events_url)s\">upcoming events</a>."
-msgstr "Bekijk alle <a href=\"%(events_url)s\">geplande activiteiten</a>."
+msgstr "Bekijk alle <a href=\"%(events_url)s\">geplande evenementen</a>."
 
 #: templates/404.html:17
 #, python-format
@@ -1093,7 +1101,7 @@ msgid ""
 "To see applications that have been submitted to your workshop, choose an "
 "event from the list below:"
 msgstr ""
-"Kies een activiteit uit de onderstaande lijst, om de aanmeldingen voor jouw "
+"Kies een evenement uit de onderstaande lijst, om de aanmeldingen voor jouw "
 "workshop te bekijken:"
 
 #: templates/admin/applications/form/view_submissions.html:16
@@ -1111,7 +1119,7 @@ msgstr ""
 
 #: templates/admin/core/event/view_add_organizers.html:6
 msgid "Add a new organizer to your event"
-msgstr "Voeg een nieuwe organisator toe aan jouw activiteit"
+msgstr "Voeg een nieuwe organisator toe aan jouw evenement"
 
 #: templates/admin/core/event/view_add_organizers.html:7
 msgid "We will send them access instructions through automated email."
@@ -1123,15 +1131,15 @@ msgstr "Organisator toevoegen"
 
 #: templates/admin/core/event/view_manage_organizers.html:5
 msgid "Remove event organizers"
-msgstr "Activiteit-organisatoren verwijderen"
+msgstr "Evenement-organisatoren verwijderen"
 
 #: templates/admin/core/event/view_manage_organizers.html:6
 msgid "Here you can remove existing event organizers."
-msgstr ""
+msgstr "Hier kun je organisatoren van het evenement verwijderen."
 
 #: templates/admin/core/event/view_manage_organizers.html:9
 msgid "To get started, choose an event:"
-msgstr "Om te beginnen, kies een activiteit:"
+msgstr "Om te beginnen, kies een evenement:"
 
 #: templates/admin/core/event/view_manage_organizers.html:20
 #, python-format
@@ -1156,7 +1164,7 @@ msgid ""
 "'Are you sure that you want to remove organizer %(org_email)s from event "
 "%(event_name)s?'"
 msgstr ""
-"'Weet je zeker dat je organisator %(org_email)s van de activiteit "
+"'Weet je zeker dat je organisator %(org_email)s van het evenement "
 "%(event_name)s wilt verwijderen?'"
 
 #: templates/admin/core/event/view_manage_organizers.html:38
@@ -1218,32 +1226,18 @@ msgid "Application closed."
 msgstr "Aanmelding afgesloten."
 
 #: templates/admin/organize/eventapplication/view_change_status.html:9
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                Approve %(app_city)s, %(app_country)s application?\n"
-#| "            "
+#, python-format
 msgid "Approve %(app_city)s, %(app_country)s application?"
-msgstr ""
-"\n"
-"                Aanmelding van %(app_city)s, %(app_country)s goedkeuren?\n"
-"            "
+msgstr "Aanmelding van %(app_city)s, %(app_country)s goedkeuren?"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:14
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                Are you sure you want to approve the "
-#| "%(application.city)s, %(application.country)s application?\n"
-#| "            "
+#, python-format
 msgid ""
 "Are you sure you want to approve the %(application.city)s, "
 "%(application.country)s application?"
 msgstr ""
-"\n"
-"                Weet je zeker dat je de aanmelding van %(application.city)s, "
-"%(application.country)s wilt goedkeuren?\n"
-"            "
+"Weet je zeker dat je de aanmelding van %(application.city)s, "
+"%(application.country)s wilt goedkeuren?"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:19
 #: templates/admin/organize/eventapplication/view_change_status.html:34
@@ -1251,33 +1245,18 @@ msgid "Yes, I'm sure"
 msgstr "Ja, ik weet het zeker"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:24
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                Reject %(application.city)s, %(application.country)s "
-#| "application?\n"
-#| "            "
+#, python-format
 msgid "Reject %(application.city)s, %(application.country)s application?"
-msgstr ""
-"\n"
-"                Aanmelding van %(app_city)s, %(app_country)s afwijzen?\n"
-"            "
+msgstr "Aanmelding van %(application.city)s, %(application.country)s afwijzen?"
 
 #: templates/admin/organize/eventapplication/view_change_status.html:29
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                Are you sure you want to reject the %(application.city)s, "
-#| "%(application.country)s application?\n"
-#| "            "
+#, python-format
 msgid ""
 "Are you sure you want to reject the %(application.city)s, "
 "%(application.country)s application?"
 msgstr ""
-"\n"
-"                Weet je zeker dat je de aanmelding van %(application.city)s, "
-"%(application.country)s wilt afwijzen?\n"
-"            "
+"Weet je zeker dat je de aanmelding van %(application.city)s, "
+"%(application.country)s wilt afwijzen?"
 
 #: templates/applications/application_detail.html:29
 msgid "Scores"
@@ -1541,7 +1520,7 @@ msgid ""
 "The event for %(city|title)s has already happened and the webpage is no "
 "longer live."
 msgstr ""
-"De activiteit %(city|title)s is al geweest en de webpagina is niet meer "
+"Het evenement %(city|title)s is al geweest en de webpagina is niet meer "
 "beschikbaar."
 
 #: templates/applications/event_not_live.html:18
@@ -1564,7 +1543,7 @@ msgid ""
 "<a href=\"mailto:%(page_url)s@djangogirls.org\">"
 "%(page_url|lower)s@djangogirls.org</a>"
 msgstr ""
-"Als je contact op wilt nemen met de organisatoren van deze activiteit, stuur "
+"Als je contact op wilt nemen met de organisatoren van dit evenement, stuur "
 "dan een mail naar <a href=\"mailto:%(page_url)s@djangogirls.org\">"
 "%(page_url|lower)s@djangogirls.org</a>"
 
@@ -1572,7 +1551,7 @@ msgstr ""
 #, python-format
 msgid "See all other <a href=\"%(events_url)s\">upcoming events</a>."
 msgstr ""
-"Bekijk alle andere <a href=\"%(events_url)s\">toekomstige activiteiten</a>."
+"Bekijk alle andere <a href=\"%(events_url)s\">toekomstige evenementen</a>."
 
 #: templates/applications/rsvp.html:9
 msgid "Your answer has been saved!"
@@ -1597,22 +1576,13 @@ msgstr ""
 "juiste persoon!"
 
 #: templates/contact/contact.html:22
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            If you didn't find what you wanted, please check our extended "
-#| "<a href=\"%(faq_url)s\">FAQ section</a>\n"
-#| "            or use the form below. :)\n"
-#| "          "
+#, python-format
 msgid ""
 "If you didn't find what you wanted, please check our extended <a href="
 "\"%(faq_url)s\">FAQ section</a> or use the form below. :)"
 msgstr ""
-"\n"
-"            Als je niet hebt gevonden wat je zocht, kijk dan een bij onze\n"
-"uitgebreide <a href=\"%(faq_url)s\">FAQ pagina</a> of gebruik het volgende "
-"formulier. :)\n"
-"          "
+"Als je niet hebt gevonden wat je zocht, kijk dan een bij onze uitgebreide <a "
+"href=\"%(faq_url)s\">FAQ pagina</a> of gebruik het volgende formulier. :)"
 
 #: templates/contact/contact.html:53
 msgid "Send"
@@ -1844,15 +1814,15 @@ msgid ""
 "organizations with a fundraising deck, and establishing a permanent online "
 "merchandise store. (T-shirts all the time! 👕)"
 msgstr ""
-"Maak de Django Girls Foundation duurzaam door onze maandelijks terugkerende "
-"inkomsten te laten groeien om terugkerende kosten te dekken. Momenteel "
-"hebben we minimaal $ 1.500 per maand nodig om de kosten van de boekhouding, "
-"het salaris van de ambassadeur en de kosten van andere diensten die we "
-"gebruiken om de website te onderhouden, te dekken. We willen deze inkomsten "
-"vergroten door meer inspanningen te leveren op onze <a href=\"https://www."
-"patreon.com/djangogirls\">Patreon-campagne</a>, meer organisaties te "
-"bereiken met een fondsenwervingsplatform en een permanente online "
-"merchandise winkel. (T-shirts all the time! 👕)"
+"Maak de Django Girls Foundation toekomstbestendig door onze maandelijks "
+"terugkerende inkomsten te laten groeien om terugkerende kosten te dekken. "
+"Momenteel hebben we minimaal $ 1.500 per maand nodig om de kosten van de "
+"boekhouding, het salaris van de ambassadeur en de kosten van andere diensten "
+"die we gebruiken om de website te onderhouden, te dekken. We willen deze "
+"inkomsten vergroten door meer inspanningen te leveren op onze <a href="
+"\"https://www.patreon.com/djangogirls\">Patreon-campagne</a>, meer "
+"organisaties te bereiken met een fondsenwervingsplatform en een permanente "
+"online merchandise winkel. (T-shirts all the time! 👕)"
 
 #: templates/core/2015.html:165
 msgid ""
@@ -1890,7 +1860,7 @@ msgstr ""
 
 #: templates/core/2015.html:187
 msgid "Achievements & Events in 2015 🏆🏅"
-msgstr "Mijlpalen & Activiteiten in 2015 🏆🏅"
+msgstr "Mijlpalen & Evenementen in 2015 🏆🏅"
 
 #: templates/core/2015.html:188
 msgid ""
@@ -1915,7 +1885,7 @@ msgstr ""
 "blog.djangogirls.org/post/108268319658/django-girls-core-team uit -grows"
 "\">Ania & Baptiste uit om een ​​Support Team te vormen</a> (toen nog Core Team "
 "genoemd). Dit is het moment waarop de eerste formele processen voor het "
-"creëren van nieuwe activiteiten, het toevoegen van nieuwe organisatoren en "
+"creëren van nieuwe evenementen, het toevoegen van nieuwe organisatoren en "
 "het nemen van beslissingen werd opgezet. We begonnen deze processen te "
 "documenteren in een kleine <a href=\"https://github.com/DjangoGirls/wiki"
 "\">wiki</a>."
@@ -2153,10 +2123,10 @@ msgstr ""
 "genereus door Megiteam werd geleverd, naar Google Apps, wat voor ons gratis "
 "werd zodra we ons officieel registreerden als liefdadigheidsinstelling. Dit "
 "bleek een behoorlijk project: het verplaatsen van meer dan 100 e-"
-"mailaccounts en tienduizenden e-mails zonder iemands activiteit te "
-"verstoren! Dit zou totaal niet soepel zijn verlopen zonder Adria Richards, "
-"die zich vrijwillig aanmeldde en ons gratis haar kennis en ervaring aanbood. "
-"Bedankt, Adria!"
+"mailaccounts en tienduizenden e-mails zonder iemands evenement te verstoren! "
+"Dit zou totaal niet soepel zijn verlopen zonder Adria Richards, die zich "
+"vrijwillig aanmeldde en ons gratis haar kennis en ervaring aanbood. Bedankt, "
+"Adria!"
 
 #: templates/core/2015.html:337
 msgid ""
@@ -2233,6 +2203,12 @@ msgid ""
 "built around strong values, very welcoming. It encouraged me to keep looking "
 "into this field and I am now studying it full time!"
 msgstr ""
+"Ik zat midden in een loopbaanomschakeling toen ik Django Girls tegenkwam, en "
+"het was mijn allereerste kennismaking met de programmeerwereld. Het was "
+"geweldig! Het leren programmeren was intens en spannend, en de community,  "
+"gebouwd op sterke kernwaarden, was zeer gastvrij. Django Girls moedigde mij "
+"aan om dit vakgebied te blijven onderzoeken en ik bestudeer programmeren nu "
+"fulltime!"
 
 #: templates/core/2015.html:409
 msgid ""
@@ -2244,6 +2220,14 @@ msgid ""
 "programming problems in Python. Most recently she also got involved in the "
 "organization of the Krakow Python User Group and DjangoCon Europe 2016."
 msgstr ""
+"Maria Lowas-Rzechonek is 32 jaar oud en woont in Kraków, Polen. Sinds "
+"december 2015 kan ze met trots \"Junior Django Developer\" op haar "
+"curriculum vitae zetten. Ze hielp ook mee met de organisatie van Django "
+"Girls Kraków 2014 en was coach bij Django Girls Kraków 2015. Afgelopen lente "
+"organiseerde ze gedurende twee maanden een wekelijkse workshop voor "
+"beginners voor het oplossen van eenvoudige programmeer opdrachten in Python. "
+"Onlangs deed ze ook mee aan de organisatie van de Kraków Python User Group "
+"en DjangoCon Europe 2016."
 
 #: templates/core/2015.html:417
 msgid ""
@@ -2257,6 +2241,16 @@ msgid ""
 "me in touch with people looking for junior developers. Learning how to "
 "program is a dangerous journey to go alone."
 msgstr ""
+"Ik zou niet zijn waar ik nu ben zonder Django Girls. Ik zou niet zo "
+"gemotiveerd zijn om door te gaan met het verder leren van programmeren als "
+"ik niet had meegedaan aan Django Girls tijdens EuroPython 2014. Ik zou niet "
+"zo'n fantastische ervaring met de Django/Python community hebben gehad, "
+"waardoor ik dan ook niet had meegedaan aan plaatselijke meetups. Ik zou niet "
+"de geweldige kans hebben gekregen om te oefenen en om mijn code publiek te "
+"maken, als er geen Django Girls Winter of Code was geweest. En tenslotte zou "
+"ik zonder Django Girls, niet al deze aardige mensen hebben ontmoet, die me "
+"in contact brachten met mensen die naar junior ontwikkelaars op zoek waren. "
+"Leren programmeren is een gevaarlijke reis om alleen af te leggen."
 
 #: templates/core/2015.html:437
 msgid ""
@@ -2269,6 +2263,14 @@ msgid ""
 "about.html\">microbit worldtour project</a> about writing Python for BBC "
 "Micro:Bit and enjoyed that a lot."
 msgstr ""
+"Päivi Suomela is 30 jaar oud en woont in Sheffield, Verenigd Koninkrijk. Na "
+"het bijwonen van Django Girls London 2015 kreeg ze een baan als Junior Full-"
+"Stack Developer en nu werkt ze dagelijks met Django, Python, C# en "
+"JavaScript! In de herfst organiseerde ze Django Girls Coventry op PyCon UK "
+"2015 en ze staat op het punt Django Girls Sheffield te leiden, wat zal "
+"plaatsvinden in februari 2016. Ze is ook betrokken geweest bij het <a href="
+"\"https://microworldtour.github.io/about.html\">microbit worldtour project</"
+"a> over het schrijven van Python voor de BBC Micro:Bit en vond dat erg leuk."
 
 #: templates/core/2015.html:445
 msgid ""
@@ -2283,6 +2285,18 @@ msgid ""
 "of nice people through Django Girls and heard about different opportunities "
 "that I might not have been aware of otherwise."
 msgstr ""
+"Ik hoorde voor het eerst over Django Girls toen het net begon en ik heb me "
+"aangemeld voor de allereerste workshop, maar werd destijds niet "
+"geselecteerd. Ik heb me opnieuw aangemeld toen de workshop in maart 2015 in "
+"Londen was en deze keer mocht ik meedoen. Ik had zelf leren programmeren, "
+"maar de workshop gaf me het zetje dat ik nodig had om er serieuzer mee aan "
+"de slag te gaan en daadwerkelijk aan het werk te gaan als software "
+"ontwikkelaar. Het was geweldig om verhalen te horen van andere vrouwen die "
+"ontwikkelaars waren geworden, ondanks dat ze geen informatica aan de "
+"universiteit hadden gestudeerd en al tijd lang op een ander vakgebied hadden "
+"gewerkt. Het deed mij beseffen dat ik het ook kon! Ik heb ook veel leuke "
+"mensen ontmoet via Django Girls en gehoord over verschillende mogelijkheden "
+"waar ik anders misschien niet van op de hoogte was geweest."
 
 #: templates/core/2015.html:461
 msgid "Summary 👍"
@@ -2298,12 +2312,18 @@ msgid ""
 "Django Girls Foundation and hired one person to work exclusively on Django "
 "Girls."
 msgstr ""
+"Van een kleine organisatie in 2014 zijn we uitgegroeid tot de Django Girls "
+"Foundation en hebben we zelfs één persoon aangenomen om exclusief aan Django "
+"Girls te werken."
 
 #: templates/core/2015.html:466
 msgid ""
 "We are incredibly proud of how much the Django Girls community achieved in "
 "the past year, and we hope that 2016 will be even better and more exciting!"
 msgstr ""
+"We zijn ongelooflijk trots op hoeveel de Django Girls-community het "
+"afgelopen jaar heeft bereikt, en we hopen dat 2016 nog beter en opwindender "
+"zal worden!"
 
 #: templates/core/2015.html:469
 msgid ""
@@ -2319,6 +2339,18 @@ msgid ""
 "contact/\">email us</a> to discuss corporate sponsorship. We promise you "
 "won't regret it!"
 msgstr ""
+"Om Django Girls toekomstbestendig te maken en verdere groei mogelijk te "
+"maken, <span><b>hebben we jouw hulp nodig</b></span>. Een van onze doelen "
+"voor 2016 is het veiligstellen van de positie van Awesomeness Ambassador "
+"voor de toekomst en het verhogen van de inkomsten via <a href=\"https://www."
+"patreon.com/djangogirls\">Patreon</a> om de daaraan verbonden kosten te "
+"dekken. We hopen dat we de komende maanden, met de hulp van de geweldige "
+"community rond Django Girls, de liefde voor programmeren over de hele wereld "
+"kunnen blijven verspreiden. Om ons te helpen ons doel te bereiken, kun je "
+"overwegen om maandelijks een bijdrage te leveren aan <a href=\"https://www."
+"patreon.com/djangogirls\">onze Patreon-campagne</a>, of <a href=\"https:// "
+"djangogirls.org/contact/\">e-mail ons</a> om bedrijfssponsoring te "
+"bespreken. Wij beloven dat u er geen spijt van zult krijgen!"
 
 #: templates/core/2015.html:479
 msgid "Thank you for constant support and love we receive from you!"
@@ -2337,6 +2369,12 @@ msgid ""
 "keep their events free. We want Django Girls to be accessible to many people "
 "as possible, and that couldn't happen without them."
 msgstr ""
+"Nogmaals willen we de geweldige sponsors van Django Girls en van de "
+"individuele Django Girls-workshops over de hele wereld bedanken. Ze helpen "
+"ons Django Girls toekomstbestendig te maken en nog belangrijker, ze helpen "
+"organisatoren om hun workshops gratis te houden. Wij willen dat Django Girls "
+"voor zoveel mogelijk mensen toegankelijk is, en dat zou zonder hen niet "
+"mogelijk zijn."
 
 #: templates/core/2015.html:496 templates/core/2016-2017.html:432
 msgid ""
@@ -2345,6 +2383,11 @@ msgid ""
 "actionable insight in real time. Before becoming one of our biggest "
 "sponsors, they also sponsored several local events. Thanks <3"
 msgstr ""
+"Elastic is bekend van Elasticsearch, Kibana, Beats en Logstash en maakt "
+"producten waarmee je je gegevens kunt doorzoeken, analyseren en "
+"visualiseren, zodat je in realtime bruikbare inzichten krijgt. Voordat ze "
+"een van onze grootste sponsors werden, sponsorden ze ook verschillende "
+"lokale evenementen. Bedankt <3"
 
 #: templates/core/2015.html:503 templates/core/2016-2017.html:439
 msgid ""
@@ -2352,6 +2395,10 @@ msgid ""
 "promote, support, and advance the development of Django. They've helped many "
 "Django Girls events that had problems finding local sponsors. Thanks <3"
 msgstr ""
+"De Django Software Foundation (DSF) is een non-profitorganisatie die is "
+"opgericht om de ontwikkeling van Django te promoten, te ondersteunen en te "
+"bevorderen. Ze hebben veel Django Girls-organisatoren geholpen die problemen "
+"hadden met het vinden van lokale sponsors. Bedankt <3"
 
 #: templates/core/2015.html:509 templates/core/2016-2017.html:446
 msgid ""
@@ -2359,6 +2406,9 @@ msgid ""
 "the intellectual property rights behind the Python programming language. "
 "They are one of the biggest sponsors for local events. Thanks <3"
 msgstr ""
+"De Python Software Foundation (PSF) is een non-profitorganisatie die de "
+"intellectuele eigendomsrechten van de programmeertaal Python bezit. Ze zijn "
+"een van de grootste sponsors van lokale evenementen. Bedankt <3"
 
 #: templates/core/2015.html:515 templates/core/2016-2017.html:453
 msgid ""
@@ -2366,6 +2416,9 @@ msgid ""
 "Girls events, and they provide useful materials for new learners like cheat-"
 "sheets. Thanks <3"
 msgstr ""
+"GitHub is een Git-repository-hostingservice. Ze hebben veel Django Girls-"
+"evenementen gesponsord en ze bieden nuttig materiaal voor nieuwe leerlingen, "
+"zoals cheat-sheets. Bedankt <3"
 
 #: templates/core/2015.html:521 templates/core/2016-2017.html:460
 msgid ""
@@ -2374,6 +2427,11 @@ msgid ""
 "development. They sponsored many local events and joined as Patreon "
 "supporters in June 2015. Thanks <3"
 msgstr ""
+"Divio, dat Django CMS en Aldryn heeft gemaakt, gebruikt Python en Django om "
+"ondersteuning te bieden bij de installatie, het onderhoud, het oplossen van "
+"problemen en de ontwikkeling van websites. Ze sponsorden veel lokale "
+"evenementen en meldden zich in juni 2015 aan als Patreon-supporters. Bedankt "
+"<3"
 
 #: templates/core/2015.html:527 templates/core/2016-2017.html:467
 msgid ""
@@ -2381,6 +2439,10 @@ msgid ""
 "development based on the Django Web Framework. They joined our Patreon "
 "campaign in April 2015, and have contributed to local events. Thanks <3"
 msgstr ""
+"Lincoln Loop is een full-service webstudio die gebruikerservaring en "
+"ontwikkeling biedt op basis van het Django Web Framework. Ze sloten zich in "
+"april 2015 aan bij onze Patreon-campagne en hebben bijgedragen aan lokale "
+"evenementen. Bedankt <3"
 
 #: templates/core/2015.html:533 templates/core/2016-2017.html:474
 msgid ""
@@ -2388,6 +2450,10 @@ msgid ""
 "and code Python in the cloud, and have made the lives of our attendees much "
 "easier by being really simple and pleasant to use. Thanks <3"
 msgstr ""
+"Sinds mei wordt Django Girls gehost op PythonAnywhere! Ze hosten, draaien en "
+"coderen Python in de cloud, en hebben het leven van onze bezoekers veel "
+"gemakkelijker gemaakt door heel eenvoudig en prettig in gebruik te zijn. "
+"Bedankt <3"
 
 #: templates/core/2015.html:539 templates/core/2016-2017.html:481
 msgid ""
@@ -2395,6 +2461,9 @@ msgid ""
 "supporting our emails since September 2015 and have also sponsored local "
 "events. Thanks <3"
 msgstr ""
+"Mandrill is een transactional e-mailplatform van MailChimp. Ze ondersteunen "
+"onze e-mails sinds september 2015 en hebben ook lokale evenementen "
+"gesponsord. Bedankt <3"
 
 #: templates/core/2015.html:545 templates/core/2016-2017.html:488
 msgid ""
@@ -2402,6 +2471,9 @@ msgid ""
 "patreon.com/djangogirls\">Patreon</a>: your commitment to help us every "
 "month is amazing. Thanks <3"
 msgstr ""
+"We willen ook graag onze vaste donateurs van <a href=\"https://www.patreon."
+"com/djangogirls\">Patreon</a> bedanken: jullie inzet om ons elke maand te "
+"helpen is geweldig. Bedankt <3"
 
 #: templates/core/2016-2017.html:5 templates/core/2016-2017.html:7
 msgid "Django Girls Impact Report 2016-2017"
@@ -2413,6 +2485,9 @@ msgid ""
 "world, 2016-2017 was an absolutely incredible year for Django Girls. Read "
 "all about our challenges and achievements from 2016-2017."
 msgstr ""
+"Dankzij de organisatoren, coaches en vrijwilligers in landen over de hele "
+"wereld was 2016-2017 een absoluut ongelooflijk jaar voor Django Girls. Lees "
+"alles over onze uitdagingen en mijlpalen van 2016-2017."
 
 #: templates/core/2016-2017.html:26
 msgid "Impact Report 2016-2017"
@@ -2429,6 +2504,16 @@ msgid ""
 "time paid staff members and the support team (six awesome ladies who are "
 "also volunteers) to help provide support to all other volunteers."
 msgstr ""
+"Django Girls Foundation is een initiatief dat tot doel heeft vrouwen en "
+"meisjes die nog nooit eerder hebben geprogrammeerd, kennis te laten maken "
+"met de wereld van de technologie en de diversiteit van de tech-industrie te "
+"vergroten. Dit bereiken we door eendaagse workshops te organiseren en "
+"vrouwen uit te nodigen om te komen leren hoe ze het internet kunnen bouwen "
+"met HTML, CSS, Python en Django. Django Girls is een door vrijwilligers "
+"gerunde organisatie met vrijwilligers over de hele wereld. Django Girls "
+"heeft twee parttime betaalde medewerkers en het ondersteuningsteam (zes "
+"geweldige dames die ook vrijwilligers zijn) om alle andere vrijwilligers te "
+"ondersteunen."
 
 #: templates/core/2016-2017.html:38
 msgid ""
@@ -2439,6 +2524,13 @@ msgid ""
 "Django Girls Foundation actually achieves the goal of our mission: to bring "
 "more women into tech industry!"
 msgstr ""
+"Dit Impact rapport heeft tot doel de prestaties van de Django Girls-"
+"community in de afgelopen twee jaar te vieren en de ongelooflijke groei van "
+"de organisatie te laten zien. Voor de eerste keer ooit presenteren we ook de "
+"resultaten van een onderzoek dat we hebben uitgevoerd onder bijna 600 "
+"voormalige Django Girls-bezoekers om te zien of de Django Girls Foundation "
+"daadwerkelijk het doel van onze missie bereikt: meer vrouwen naar de tech-"
+"industrie brengen!"
 
 #: templates/core/2016-2017.html:50
 msgid "✨ Highlights ✨"
@@ -2450,6 +2542,10 @@ msgid ""
 "organised <span>377 free workshops</span> with <span>102 more</span> being "
 "currently planned. That's more than 3000 hours of happy coding!"
 msgstr ""
+"👭👫👬 De Django Girls-community groeide uit tot <span>1069 vrijwilligers</"
+"span> die <span>377 gratis workshops</span> hebben georganiseerd en "
+"momenteel staan ​​er nog <span>102 workshops</span> gepland. Dat is meer dan "
+"3000 uur programmeer-plezier!"
 
 #: templates/core/2016-2017.html:57
 #, python-format
@@ -2458,6 +2554,9 @@ msgid ""
 "tech</span> after attending Django Girls workshop. <a href=\"#employment-"
 "stats\">👉</a>"
 msgstr ""
+"👩‍💻 <span>21%%</span> van de deelnemers aan onze enquête <span>begon te "
+"werken in de tech-industrie</span> na het bijwonen van de Django Girls-"
+"workshop. <a href=\"#employment-stats\">👉</a>"
 
 #: templates/core/2016-2017.html:62
 msgid ""
@@ -2467,12 +2566,19 @@ msgid ""
 "effort, shipped <span>146 organizer kits</span> and more.  <a href="
 "\"#tutorial\">👉</a>"
 msgstr ""
+"💯 In de afgelopen 2 jaar hebben we onze tools verbeterd om de groei van de "
+"organisatie te ondersteunen, om onze gratis online bronnen onderhouden (onze "
+"tutorial bestaat nu in <span>14 talen!</span>), Django Girls Store is "
+"gestart als fondsenwervingsactie, en heeft <span>146 organisatorkits</span> "
+"en meer verzonden.  <a href=\"#tutorial\">👉</a>"
 
 #: templates/core/2016-2017.html:67
 msgid ""
 "📈🎉 In July 2017, on our 3rd birthday, we also celebrated our <span>10,000th "
 "workshop attendee</span> <a href=\"#growth\">👉</a>"
 msgstr ""
+"📈🎉 In juli 2017, op onze 3e verjaardag, vierden we ook onze <span>10.000ste "
+"deelnemer aan de workshop</span> <a href=\"#growth\">👉</a>"
 
 #: templates/core/2016-2017.html:72
 #, python-format
@@ -2481,12 +2587,17 @@ msgid ""
 "learning programming</span> after the workshop. <a href=\"#learning-stats\">👉"
 "</a>"
 msgstr ""
+"🎓 We hebben ontdekt dat <span>79%%</span> van de Django Girls-alumni "
+"<span>na de workshop doorgaat met het leren programmeren</span>. <a href="
+"\"#learning-stats\">👉</a>"
 
 #: templates/core/2016-2017.html:77
 msgid ""
 "📚 <span>693,524 people</span> used our free online <a href=\"https://"
 "tutorial.djangogirls.org\">tutorial</a> in the last year"
 msgstr ""
+"📚 <span>693.524 mensen</span> hebben het afgelopen jaar onze gratis online "
+"<a href=\"https://tutorial.djangogirls.org\">tutorial</a> gebruikt"
 
 #: templates/core/2016-2017.html:86
 msgid "Growth 📈"
@@ -2514,39 +2625,39 @@ msgstr "Aantal Django Girls workshops"
 
 #: templates/core/2016-2017.html:101
 msgid "Number of participants"
-msgstr ""
+msgstr "Aantal deelnemers"
 
 #: templates/core/2016-2017.html:102
 msgid "Number of cities"
-msgstr ""
+msgstr "Aantal locaties"
 
 #: templates/core/2016-2017.html:103
 msgid "Number of new cities"
-msgstr ""
+msgstr "Aantal nieuwe locaties"
 
 #: templates/core/2016-2017.html:104
 msgid "Number of countries"
-msgstr ""
+msgstr "Aantal landen"
 
 #: templates/core/2016-2017.html:105
 msgid "Number of new countries"
-msgstr ""
+msgstr "Aantal nieuwe landen"
 
 #: templates/core/2016-2017.html:106
 msgid "Unique users reading our Tutorial"
-msgstr ""
+msgstr "Unieke gebruikers van onze Tutorial"
 
 #: templates/core/2016-2017.html:109
 msgid "* Gathering events data on number of participants is delayed."
-msgstr ""
+msgstr "* Het verzamelen van data over het aantal deelnemers is vertraagd."
 
 #: templates/core/2016-2017.html:116
 msgid "Foundation's Activities 👩‍💻👩‍💻👩‍💻"
-msgstr ""
+msgstr "Activiteiten van de Foundation 👩‍💻👩‍💻👩‍💻"
 
 #: templates/core/2016-2017.html:119
 msgid "🌎 Maintenance & translation of our free online resources"
-msgstr ""
+msgstr "🌎 Onderhoud & vertaling van onze gratis online resources"
 
 #: templates/core/2016-2017.html:122
 msgid ""
@@ -2557,6 +2668,13 @@ msgid ""
 "the <span>tutorial has been now translated into 14 languages</span> We are "
 "thankful to all the volunteers who have made this possible."
 msgstr ""
+"De door ons ontwikkelde Django Girls Tutorial wordt in onze workshops "
+"gebruikt om deelnemers kennis te laten maken met web development "
+"ontwikkeling met behulp van Python en Django. De tutorial is gratis online "
+"beschikbaar, zodat iedereen ervan kan leren zonder dat een persoonlijke "
+"workshop te hoeven bijwonen.<br /> We zijn er trots op dat de <span>tutorial "
+"nu in 14 talen is vertaald</span>. Dank aan alle vrijwilligers die dit "
+"mogelijk hebben gemaakt."
 
 #: templates/core/2016-2017.html:130
 #, python-format
@@ -2567,10 +2685,15 @@ msgid ""
 "increase in the last year. Since the tutorial as been published, it's been "
 "<span>read by 1,068,995 of people!</span>"
 msgstr ""
+"De populariteit van de online tutorial blijft aanzienlijk sneller groeien "
+"dan die van de workshops op locatie. In het tweede jaar werd er een stijging "
+"van 328,95%% behaald in het aantal unieke gebruikers dat gebruik maakte van "
+"de tutorial, met een stijging van 121,53%% in het afgelopen jaar. Sinds de "
+"tutorial is gepubliceerd, is deze <span>gelezen door 1.068.995 mensen!</span>"
 
 #: templates/core/2016-2017.html:144 templates/core/workshop_box.html:20
 msgid "Your browser does not support the video tag."
-msgstr ""
+msgstr "Uw browser ondersteunt de videotag niet."
 
 #: templates/core/2016-2017.html:148
 msgid "🎁 Organiser Starter Kits"
@@ -2587,6 +2710,15 @@ msgid ""
 "super excited that we managed to introduce the Django Girls Starter Kit in "
 "2016."
 msgstr ""
+"We realiseerden ons dat bepaalde dingen, zoals versiering en swag (stickers, "
+"buttons en plakplaatjes), nodig zijn voor alle organisatoren van "
+"evenementen. We hebben de kosten van decoraties en swag per evenement kunnen "
+"verlagen door deze in bulk te bestellen bij leveranciers en ze op te slaan "
+"in de Django Girls shop. Organisatoren bestellen vervolgens tegen een kleine "
+"bijdrage de Organisator Starter Kit in onze shop, en een aantal pakketten "
+"hebben wij gedoneerd aan evenementen die in ontwikkelingslanden worden "
+"georganiseerd. We zijn super enthousiast dat we er in 2016 in zijn geslaagd "
+"om de Django Girls Starter Kit te introduceren."
 
 #: templates/core/2016-2017.html:160
 msgid ""
@@ -2594,6 +2726,10 @@ msgid ""
 "span> which has helped them make their events awesome! Out of those, 28 were "
 "donated for free for events in need."
 msgstr ""
+"Sinds de introductie hebben <span>146 evenementen hun starter kits "
+"ontvangen</span>, wat hen heeft geholpen hun evenementen fantastisch te "
+"maken! Hiervan werden er 28 gratis gedoneerd voor evenementen in die dat "
+"zeer goed konden gebruiken."
 
 #: templates/core/2016-2017.html:169
 msgid "💰 Fundraising"
@@ -2607,6 +2743,12 @@ msgid ""
 "socks and tote bags as a way of making the charity sustainable. Details of "
 "how much was raised in 2016 are shown in the table below:"
 msgstr ""
+"Het grootste deel van onze donaties werd gegenereerd via zakelijke en "
+"individuele donaties via Patreon, een online donatiebeheersysteem. In 2016 "
+"zijn we er ook in geslaagd om de Django Girls shop te introduceren, waar we "
+"swag zoals t-shirts, sokken en draagtassen verkopen als een manier om het "
+"goede doel toekomstbestendig te maken. Details van het bedrag dat in 2016 is "
+"opgehaald, zijn weergegeven in de onderstaande tabel:"
 
 #: templates/core/2016-2017.html:183
 msgid "Activity"
@@ -2614,7 +2756,7 @@ msgstr "Activiteit"
 
 #: templates/core/2016-2017.html:185
 msgid "Notes"
-msgstr ""
+msgstr "Opmerkingen"
 
 #: templates/core/2016-2017.html:189
 msgid "Patreon donations"
@@ -2622,7 +2764,7 @@ msgstr "Patreon donaties"
 
 #: templates/core/2016-2017.html:189
 msgid "Patreon donation have been steadly decreasing in the last months"
-msgstr ""
+msgstr "Patreon-donaties zijn de afgelopen maanden gestaag afgenomen"
 
 #: templates/core/2016-2017.html:190
 msgid "Django Girls Store"
@@ -2634,7 +2776,7 @@ msgstr "Organisator Starter Kits"
 
 #: templates/core/2016-2017.html:202
 msgid "Participants Survey"
-msgstr ""
+msgstr "Deelnemers Enqûete"
 
 #: templates/core/2016-2017.html:204
 msgid ""
@@ -2645,6 +2787,12 @@ msgid ""
 "shared with us their experiences with Django Girls and how attending the "
 "workshop changed their lives."
 msgstr ""
+"We hebben gevierd dat we onze mijlpaal van 10.000 workshop-deelnemers hebben "
+"bereikt door een enquête uit te voeren om te zien hoe Django Girls-alumni "
+"het doen na het bijwonen van de workshop. We namen contact op met onze "
+"voormalige deelnemers en kregen een overweldigende <span>reactie van 519 "
+"geweldige vrouwen</span> die hun ervaringen met Django Girls met ons deelden "
+"en hoe het bijwonen van de workshop hun leven veranderde."
 
 #: templates/core/2016-2017.html:212
 #, python-format
@@ -2663,10 +2811,15 @@ msgid ""
 "active in the tech industry after attending our workshops and hence the "
 "results could be positively skewed."
 msgstr ""
+"De leeftijden van de <span>respondenten varieerden van 14 tot 65 jaar</"
+"span>, waarbij 71%% jonger was dan 30 jaar. Dit laat zien dat de Django "
+"Girls-workshops open en toegankelijk zijn voor vrouwen en meisjes, ongeacht "
+"hun leeftijd, zolang ze interesse hebben in technologie en het leren "
+"programmeren"
 
 #: templates/core/2016-2017.html:227
 msgid "Participants’ Involvement in Tech Activities"
-msgstr ""
+msgstr "Betrokkenheid van deelnemers bij technische activiteiten"
 
 #: templates/core/2016-2017.html:231
 msgid ""
@@ -2676,6 +2829,12 @@ msgid ""
 "workshops, teaching or working in tech, working on coding projects and "
 "enrolling for programming courses."
 msgstr ""
+"We vroegen de deelnemers aan de enquête of ze na de workshop betrokken waren "
+"geraakt bij tech-gerelateerde activiteiten. De tech-activiteiten omvatten "
+"het bijwonen van tech-evenementen, het organiseren van Django Girls en "
+"soortgelijke tech-activiteiten, coaching bij Django Girls-workshops, "
+"lesgeven of werken in tech, werken aan ontwikkelprojecten en het inschrijven "
+"voor programmeercursussen."
 
 #: templates/core/2016-2017.html:239
 #, python-format
@@ -2684,7 +2843,7 @@ msgid ""
 "tech-related activities</b> after the event."
 msgstr ""
 "We waren blij om te horen dat <b>73%% van de respondenten nog steeds "
-"betrokken is bij tech-gerelateerde activiteiten</b> na de activiteit."
+"betrokken is bij tech-gerelateerde activiteiten</b> na de workshop."
 
 #: templates/core/2016-2017.html:247
 msgid ""
@@ -2695,6 +2854,13 @@ msgid ""
 "that Django Girls workshops have been a successful intervention</b> to "
 "increase the number of women involved in engineering and programming."
 msgstr ""
+"Uit deze statistieken blijkt dat onze workshops interesse in technologie en "
+"programmeren opwekken bij de deelnemers. Deze interesse resulteert er "
+"vervolgens in dat ze soms zelf workshops en tech-evenementen organiseren en "
+"dat ze soms ook andere tech-evenementen bijwonen. Deze bevindingen "
+"<b>bewijzen dat Django Girls-workshops een succesvolle interventie zijn "
+"geweest</b> om het aantal vrouwen dat betrokken is bij techniek en "
+"programmeren te vergroten."
 
 #: templates/core/2016-2017.html:258
 msgid "Participants’ learning to code after the workshop"
@@ -2705,6 +2871,8 @@ msgid ""
 "We were also interested in finding out whether our former participants "
 "continued learning programming after attending the workshop."
 msgstr ""
+"We waren ook benieuwd of de deelnemers na het bijwonen van de workshop "
+"doorgingen met programmeren."
 
 #: templates/core/2016-2017.html:268
 #, python-format
@@ -2712,6 +2880,8 @@ msgid ""
 "79%% of women attending Django Girls workshop continued learning programming "
 "after and 7%% were planning to continue learning"
 msgstr ""
+"79%% van de vrouwen die de Django Girls-workshop bijwoonden, bleef daarna "
+"programmeren en 7%% was van plan om verder te gaan met leren"
 
 #: templates/core/2016-2017.html:273
 #, python-format
@@ -2719,6 +2889,8 @@ msgid ""
 "1%% of participants had tried and given up while 13%% had not continued "
 "learning programming after the workshop."
 msgstr ""
+"1%% van de deelnemers had het geprobeerd en opgegeven, terwijl 13%% na de "
+"workshop niet verder was gegaan met het leren programmeren."
 
 #: templates/core/2016-2017.html:280
 msgid ""
@@ -2729,10 +2901,19 @@ msgid ""
 "increasing the number of women in the programming field, who will one day be "
 "employed as programmers after they have developed their programming skills."
 msgstr ""
+"De meerderheid van de vrouwen die de Django Girls-workshops bijwonen bleek "
+"hierna door te gaan met het leren coderen. De vrouwen bleven op "
+"verschillende manieren leren; soms op eigen houtje, soms schreven ze zich in "
+"voor online programmeercursussen en soms schreven ze zich in bij de "
+"universiteit. Deze bevindingen laten zien dat Django Girls inderdaad het "
+"aantal vrouwen in de programmeerwereld vergroot, dat ooit als developer gaat "
+"werken nadat ze hun programmeervaardigheden verder hebben ontwikkeld."
 
 #: templates/core/2016-2017.html:291
 msgid "Participants’ Employment in Tech after attending workshops"
 msgstr ""
+"Arbeidsparticipatie van deelnemers in de techniek na het bijwonen van "
+"workshops"
 
 #: templates/core/2016-2017.html:298
 msgid ""
@@ -2749,6 +2930,9 @@ msgid ""
 "We were impressed to learn that <b>21%% of Django Girls' former attendees "
 "are now hired as developers</b> after attending the workshop!"
 msgstr ""
+"Het maakte grote indruk toen we er achter kwamen dat <b>21%% van de "
+"voormalige deelnemers van Django Girls-workshop nu als ontwikkelaars aan de "
+"slag zijn</b>!"
 
 #: templates/core/2016-2017.html:307
 #, python-format
@@ -2759,6 +2943,12 @@ msgid ""
 "developing their skills so they could get jobs in the future while the "
 "remaining 40%% had not got tech jobs and did not indicate their future plans."
 msgstr ""
+"Het was ook interessant om te merken dat 15%% van de aanwezigen al in de "
+"technologiesector werkte en dat hun nieuw verworven vaardigheden hun baan "
+"daarom verbeterden. Ongeveer 23%% had nog geen baan als software developer, "
+"maar was nog steeds bezig met het ontwikkelen van hun vaardigheden, zodat ze "
+"in de toekomst een baan konden krijgen, terwijl de resterende 40%% nog geen "
+"technische baan had en hun toekomstplannen niet kenbaar maakte."
 
 #: templates/core/2016-2017.html:317
 msgid ""
@@ -2768,6 +2958,12 @@ msgid ""
 "developers</span> after attending the workshop. This is a big achievement "
 "which we are happy about!</strong>"
 msgstr ""
+"Dit bevestigde dat ons werk een positief effect heeft gehad op de levens van "
+"de vrouwen die we kennis hebben laten maken met programmeren, evenals op de "
+"technologie-industrie die deze vrouwen inhuurt. <strong>We zijn er trots op "
+"dat minstens <span>109 vrouwen nu als ontwikkelaars werken</span> na het "
+"volgen van de workshop. Dit is een grote prestatie waar we blij mee zijn!</"
+"strong>"
 
 #: templates/core/2016-2017.html:326
 msgid "Impact of Django Girls workshops on Participants’ lives"
@@ -2778,6 +2974,8 @@ msgid ""
 "We were also interested in learning other ways the participants had been "
 "impacted by attending a Django Girls workshop."
 msgstr ""
+"We waren ook geïnteresseerd in andere vlakken waarop de deelnemers beïnvloed "
+"waren door het bijwonen van een Django Girls-workshop."
 
 #: templates/core/2016-2017.html:338
 #, fuzzy, python-format
@@ -2799,9 +2997,25 @@ msgid ""
 "events and attending other tech events. Many of these women were so inspired "
 "to learn that the tech industry and programming are for women as well."
 msgstr ""
+"Uit het onderzoek bleek dat ongeveer 43%% van de vrouwen geïnspireerd was "
+"geraakt door het ontmoeten van andere vrouwen in de technologiesector, "
+"waardoor zij meer bij de technologie betrokken raakten door het organiseren "
+"van tech-evenementen en het bijwonen van andere tech-evenementen. Veel van "
+"deze vrouwen waren op deze manier geïnspireerd toen ze ontdekten dat de "
+"technologie-industrie en programmeren ook voor vrouwen zijn."
 
 #: templates/core/2016-2017.html:350
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "About 25%% had been excited that learnt new knowledge about technology, "
+#| "programming and web development; gained experienced and experienced "
+#| "personal growth. About 14%% of the participants had been happy to have "
+#| "been able to meet new friends and new connections within the tech "
+#| "industry whom they have kept in touch with since the workshop. About 11%% "
+#| "of the participants had changed their career path and became interested "
+#| "in a career in the tech industry prompting them to continue learning to "
+#| "code so they could one day become developers. Only 7%% said there was no "
+#| "remarkable impact on their lives due to participation in the workshop."
 msgid ""
 "About 25%% had been excited that learnt new knowledge about technology, "
 "programming and web development; gained experienced and experienced personal "
@@ -2813,6 +3027,16 @@ msgid ""
 "become developers. Only 7%% said there was no remarkable impact on their "
 "lives due to participation in the workshop."
 msgstr ""
+"Ongeveer 25%% was enthousiast over de nieuwe kennis op het gebied van "
+"technologie, programmeren en web development; het opdoen van ervaring en de "
+"persoonlijke groei. Ongeveer 14% van de deelnemers was blij dat ze nieuwe "
+"vrienden en nieuwe connecties binnen de technologie-industrie hadden kunnen "
+"maken, met wie ze sinds de workshop contact hebben gehouden. Ongeveer 11%% "
+"van de deelnemers had hun carrièrepad veranderd en raakte geïnteresseerd in "
+"een carrière in de technische industrie, wat hen ertoe aanzette door te gaan "
+"met leren programmeren, zodat ze op een dag ontwikkelaars konden worden. "
+"Slechts 7%% zei dat deelname aan de workshop geen opmerkelijke impact op hun "
+"leven had."
 
 #: templates/core/2016-2017.html:362
 msgid "Summary"
@@ -2831,6 +3055,18 @@ msgid ""
 "connections, fostering the beauty of the Django community which strives to "
 "be welcoming and diverse."
 msgstr ""
+"<b>De bevindingen laten zien dat Django Girls succesvol is geweest in het "
+"inspireren van vrouwen om verliefd te worden op programmeren, omdat "
+"deelnemers binnen hun eigen community in contact komen met vrouwen die zich "
+"in de programmeerwereld bevinden.</b> De vriendelijke omgeving die Django "
+"Girls-workshops bieden stelt vrouwen die nog nooit eerder hebben "
+"geprogrammeerd in staat om te leren programmeren, waardoor interesse in "
+"technologie wordt gewekt en <b>veel van deze vrouwen ertoe worden aangezet "
+"een carrièreswitch te maken en in de technologie-industrie te willen gaan "
+"werken</b>. De  omgeving creëert ook een prettige sfeer voor het maken van "
+"nieuwe vrienden en het creëren van nieuwe relaties, waardoor de schoonheid "
+"van de Django-community wordt bevorderd, die ernaar streeft inclusief en "
+"divers te zijn."
 
 #: templates/core/2016-2017.html:382
 msgid ""
@@ -2838,6 +3074,9 @@ msgid ""
 "ways Django Girls impacted their lives. The response we received was "
 "overwhelmingly positive:"
 msgstr ""
+"Op onze derde verjaardag vroegen we onze Twitter-community om ons te "
+"vertellen over de manieren waarop Django Girls hun leven beïnvloedde. De "
+"reacties die we kregen waren overweldigend positief:"
 
 #: templates/core/2016-2017.html:413
 msgid "See more success stories"
@@ -2968,7 +3207,7 @@ msgid ""
 msgstr ""
 
 #: templates/core/contribute.html:9 templates/global/footer.html:24
-#: templates/global/menu.html:29
+#: templates/global/menu.html:30
 msgid "Contribute"
 msgstr "Bijdragen"
 
@@ -2980,6 +3219,12 @@ msgid ""
 "com/djangogirls\">Patreon</a> or <a href=\"https://www.paypal.com/uk/webapps/"
 "mpp/search-cause?charityId=129929&s=3\">PayPal Giving Funds</a>."
 msgstr ""
+"Er zijn veel manieren om bij te dragen aan Django Girls: je kunt een "
+"evenement organiseren, coachen, aan de tutorial werken en helpen op Gitter. "
+"Als u ons liever financieel wilt steunen, kunt u dit doen op <a href="
+"\"https://www.patreon.com/djangogirls\">Patreon</a> of <a href=\"https://"
+"www. paypal.com/uk/webapps/mpp/search-cause?charityId=129929&s=3\">PayPal "
+"Giving Funds</a>."
 
 #: templates/core/contribute.html:22
 #, fuzzy
@@ -2998,12 +3243,23 @@ msgid ""
 "\"%(donation_url)s\">PayPal account</a> or <a href=\"%(donation_url)s"
 "\">donate via credit card</a>."
 msgstr ""
+"Django Girls is een <a href=\"http://apps.charitycommission.gov.uk/"
+"Showcharity/RegisterOfCharities/CharityFramework.aspx?"
+"RegisteredCharityNumber=1163260&SubsidiaryNumber=0\">geregistreerde non-"
+"profit instelling</a> en wordt door vrijwilligers gerund. Als u een individu "
+"of een bedrijf bent en ons wilt steunen, kunt u een <a href=\"https://www."
+"patreon.com/djangogirls\">maandelijkse donatie</a> doen. U kunt eenmalige "
+"donaties naar ons <a href=\"%(donation_url)s\">PayPal-account</a> sturen of "
+"<a href=\"%(donation_url)s\">doneren met een creditcard</a>."
 
 #: templates/core/contribute.html:39
 msgid ""
 "If you want to help an <a href=\"http://djangogirls.org/events\">event</a> "
 "in particular, you can contact the local organization team to sponsor them."
 msgstr ""
+"Als je een specifieke <a href=\"http://djangogirls.org/events\">Django Girls-"
+"evenement</a> wilt steunen, kun je contact opnemen met het lokale "
+"organisatieteam om sponsoring te bespreken."
 
 #: templates/core/contribute.html:46
 msgid "Organize!"
@@ -3015,6 +3271,10 @@ msgid ""
 "HTML, CSS, Python and Django. A typical workshop takes 8 hours and people "
 "work in small, 3-person groups with a coach dedicated to each group."
 msgstr ""
+"Elk Django Girls-evenement is een gratis ééndaagse workshop voor 30-60 "
+"personen over HTML, CSS, Python en Django. Een workshop duurt meestal 8 uur "
+"en er wordt in kleine groepen van drie personen gewerkt, met voor elke groep "
+"een coach."
 
 #: templates/core/contribute.html:61
 msgid ""
@@ -3022,6 +3282,9 @@ msgid ""
 "\">Organizer's Manual</a> and <a href=\"https://djangogirls.org/organize/"
 "\">bring Django Girls to your city!</a>"
 msgstr ""
+"Kun je niet wachten? Bekijk onze <a href=\"https://organize.djangogirls.org/"
+"\">Organisatiehandleiding</a> en <a href=\"https://djangogirls.org/organize/"
+"\">breng Django Girls naar jouw locatie! </a>"
 
 #: templates/core/contribute.html:72
 msgid "Coach!"
@@ -3033,6 +3296,9 @@ msgid ""
 "Contact the local <a href=\"http://djangogirls.org/events\">organizing team</"
 "a> and ask if they need more coaches!"
 msgstr ""
+"Heb je gehoord dat er bij jou in de buurt een evenement plaatsvindt en wil "
+"je helpen? Neem contact op met het lokale <a href=\"http://djangogirls.org/"
+"events\">organisatieteam</a> en vraag of ze meer coaches nodig hebben!"
 
 #: templates/core/contribute.html:86
 msgid ""
@@ -3040,6 +3306,9 @@ msgid ""
 "event and guide them through our <a href=\"https://tutorial.djangogirls.org/"
 "\">tutorial</a>."
 msgstr ""
+"Je helpt een groep van drie mensen met het installeren van wat ze nodig "
+"hebben voor het evenement en je begeleidt ze bij het doorlopen van onze <a "
+"href=\"https://tutorial.djangogirls.org/\">tutorial</a>."
 
 #: templates/core/contribute.html:92
 msgid ""
@@ -3087,12 +3356,18 @@ msgid ""
 "the tutorial by making a pull request to our <a href=\"https://github.com/"
 "DjangoGirls/tutorial\">GitHub repository</a>."
 msgstr ""
+"Is er iets niet duidelijk in de tutorial, of heb je een typo gevonden? Je "
+"kunt de tutorial verbeteren door een pull-request in te dienen bij onze <a "
+"href=\"https://github.com/DjangoGirls/tutorial\">GitHub-repository</a>."
 
 #: templates/core/contribute.html:136
 msgid ""
 "You just finished our tutorial and want to help? Making pull requests to fix "
 "typo is a great way to use your new Git skills!"
 msgstr ""
+"Heb je net onze tutorial afgerond en wil je helpen? Het maken van pull-"
+"requests om typo's te herstellen is een geweldige manier om je nieuwe Git-"
+"vaardigheden toe te passen!"
 
 #: templates/core/contribute.html:140
 msgid "Translate the tutorial!"
@@ -3109,6 +3384,10 @@ msgid ""
 "those translations. Or you can help us translating the tutorial into a new "
 "language!"
 msgstr ""
+"Onze tutorial is al vertaald in <a href=\"https://tutorial.djangogirls.org/"
+"\">19 talen</a>, maar we kunnen altijd hulp gebruiken bij het onderhouden "
+"van die vertalingen. Je kunt ons ook helpen om de tutorial naar een nieuwe "
+"taal te vertalen!"
 
 #: templates/core/contribute.html:155
 msgid ""
@@ -3116,6 +3395,10 @@ msgid ""
 "girls-tutorial\">translation team</a> or launch a new translation, <a href="
 "\"mailto:translations@djangogirls.org\">contact us</a>."
 msgstr ""
+"Als je lid wilt worden van een bestaand <a href=\"https://crowdin.com/"
+"project/django-girls-tutorial\">vertaalteam</a> of een nieuwe vertaling wilt "
+"lanceren, <a href=\"mailto:translations@ djangogirls.org\">neem dan contact "
+"met ons op</a>."
 
 #: templates/core/contribute.html:166
 msgid "Help on Gitter!"
@@ -3141,6 +3424,10 @@ msgid ""
 "<a href=\"https://djangogirls.org/pages/coc/\">Code of Conduct</a> also "
 "applies there."
 msgstr ""
+"Deze <a href=\"https://gitter.im/DjangoGirls/tutorial\">Gitter-room</a> is "
+"bedoeld als een vriendelijke plek, vooral voor beginners. Houd er rekening "
+"mee dat onze <a href=\"https://djangogirls.org/pages/coc/\">Gedragscode</a> "
+"daar ook van toepassing is."
 
 #: templates/core/contribute.html:188
 msgid "Want to do more?"
@@ -3148,7 +3435,7 @@ msgstr "Wil je meer doen?"
 
 #: templates/core/contribute.html:191
 msgid "A pile a tattoo."
-msgstr ""
+msgstr "Een stapel plakplaatjes."
 
 #: templates/core/contribute.html:196
 msgid ""
@@ -3156,6 +3443,9 @@ msgid ""
 "href=\"https://trello.com/b/q7p6jcfg/django-girls\">Trello board</a> and "
 "propose new projects to work on."
 msgstr ""
+"Wil je een steentje bijdragen op een manier die hier niet wordt vermeld? Je "
+"kunt ons <a href=\"https://trello.com/b/q7p6jcfg/django-girls\">Trello-bord</"
+"a> bekijken en nieuwe projecten voorstellen om aan te werken."
 
 #: templates/core/contribute.html:201
 msgid ""
@@ -3178,6 +3468,11 @@ msgid ""
 "reach our target goal. We managed to raise a total of $13,314 - 133%% of our "
 "goal!"
 msgstr ""
+"Dit jaar (2018) hebben we van 29 januari tot 29 maart een "
+"crowdfundingcampagne gevoerd op de website van Indiegogo met als doel US $ "
+"10.000 op te halen. We zijn al onze geweldige supporters die hebben geholpen "
+"ons doel te bereiken echt enorm dankbaar. We zijn erin geslaagd om in totaal "
+"$ 13.314 op te halen - 133%% van ons doel!"
 
 #: templates/core/crowdfunding_donors.html:31
 msgid "Our awesome supporters ✨"
@@ -3190,6 +3485,9 @@ msgid ""
 "want to make it public, go to <a href=\"%(event_url)s\">your website section "
 "in the admin</a> and click on 'Website is ready'."
 msgstr ""
+"Hallo daar! Je kunt deze pagina zien omdat je bent ingelogd als admin. Als "
+"je de pagina wilt publiceren, ga dan naar de <a href=\"%(event_url)s\">jouw "
+"website sectie in de admin</a> en klik op 'Website is klaar'."
 
 #: templates/core/event.html:48
 #, python-format
@@ -3208,7 +3506,7 @@ msgstr ""
 
 #: templates/core/events.html:10 templates/core/index.html:91
 msgid "Upcoming events"
-msgstr "Toekomstige activiteiten"
+msgstr "Toekomstige evenementen"
 
 #: templates/core/events.html:12 templates/core/index.html:93
 msgid "MAP"
@@ -3216,11 +3514,11 @@ msgstr "MAP"
 
 #: templates/core/events.html:31
 msgid "Past events"
-msgstr "Eerdere activiteiten"
+msgstr "Eerdere evenementen"
 
 #: templates/core/events_map.html:15
 msgid "Django Girls events"
-msgstr "Django Girls activiteiten"
+msgstr "Django Girls-evenementen"
 
 #: templates/core/faq.html:4
 msgid "Django Girls FAQ"
@@ -3237,6 +3535,9 @@ msgid ""
 "and we get some repeat questions. If you need more help: <a href="
 "\"%(contact_url)s\">contact us</a>!"
 msgstr ""
+"Django Girls evenementen vinden al een behoorlijke tijd plaats overal ter "
+"wereld, en we krijgen regelmatig dezelfde vragen. Als je meer hulp nodig "
+"hebt:  <a href=\"%(contact_url)s\">neem contact op met ons</a>!"
 
 #: templates/core/faq.html:30
 msgid "Django Girls workshops"
@@ -3316,7 +3617,7 @@ msgstr ""
 
 #: templates/core/faq.html:119
 msgid "Q: Are Django Girls events trans-inclusive?"
-msgstr "V: Zijn Django Girls activiteiten trans-inclusief?"
+msgstr "V: Zijn Django Girls-evenementen trans-inclusief?"
 
 #: templates/core/faq.html:124
 msgid ""
@@ -3372,6 +3673,9 @@ msgid ""
 "Django Girls organize free Python and Django workshops, create open sourced "
 "online tutorials and curate amazing first experiences with technology."
 msgstr ""
+"Django Girls organiseert gratis Python en Django workshops, verzorgt open "
+"source online tutorials en maakt geweldige eerste ervaringen met technologie "
+"mogelijk."
 
 #: templates/core/index.html:29
 msgid "What is Django Girls?"
@@ -3454,7 +3758,7 @@ msgstr ""
 
 #: templates/core/index.html:117
 msgid "Badass Django Ladies"
-msgstr "Stoere DJango Dames"
+msgstr "Stoere Django Dames"
 
 #: templates/core/index.html:118
 msgid ""
@@ -3605,7 +3909,7 @@ msgstr "Eerdere edities"
 
 #: templates/core/privacy_cookies.html:4 templates/core/privacy_cookies.html:11
 msgid "Cookie and Privacy Policies of Django Girls Website"
-msgstr ""
+msgstr "Cookie en Privacy Policies van de Django Girls Website"
 
 #: templates/core/privacy_cookies.html:5 templates/core/privacy_cookies.html:25
 msgid ""
@@ -3625,7 +3929,7 @@ msgstr ""
 
 #: templates/core/privacy_cookies.html:23
 msgid "<b>Site</b> djangogirls.org"
-msgstr ""
+msgstr "<b>Website</b> djangogirls.org"
 
 #: templates/core/privacy_cookies.html:27
 msgid "Definitions and Interpretation"
@@ -3713,7 +4017,7 @@ msgstr "geboortedatum;"
 
 #: templates/core/privacy_cookies.html:81
 msgid "gender;"
-msgstr ""
+msgstr "gender;"
 
 #: templates/core/privacy_cookies.html:82
 msgid "contact information such as email addresses and telephone numbers;"
@@ -3830,7 +4134,7 @@ msgstr ""
 
 #: templates/core/privacy_cookies.html:142
 msgid "Links to Other Websites"
-msgstr ""
+msgstr "Links naar andere websites"
 
 #: templates/core/privacy_cookies.html:145
 msgid ""
@@ -3869,19 +4173,19 @@ msgstr ""
 
 #: templates/core/privacy_cookies.html:167
 msgid "use of Data for direct marketing purposes; and"
-msgstr ""
+msgstr "gebruik van gegevens voor directe marketingdoeleinden; en"
 
 #: templates/core/privacy_cookies.html:168
 msgid "sharing Data with third parties."
-msgstr ""
+msgstr "het delen van Data met third parties."
 
 #: templates/core/privacy_cookies.html:170
 msgid "We do not use any of your data to profile you."
-msgstr ""
+msgstr "We maken geen gebruik van je gegevens om je te profileren."
 
 #: templates/core/privacy_cookies.html:172
 msgid "Your Right to Withhold Information"
-msgstr ""
+msgstr "Je Recht op Privacy"
 
 #: templates/core/privacy_cookies.html:174
 msgid ""
@@ -3971,6 +4275,8 @@ msgstr ""
 #: templates/core/privacy_cookies.html:201
 msgid "You can choose to enable or disable Cookies in your internet browser."
 msgstr ""
+"Je kunt er voor kiezen om Cookies in je internet browser in of uit te "
+"schakelen."
 
 #: templates/core/privacy_cookies.html:202
 msgid ""
@@ -4000,7 +4306,7 @@ msgstr ""
 
 #: templates/core/privacy_cookies.html:214
 msgid "Changes to this Policy"
-msgstr ""
+msgstr "Wijzigingen in deze Policy"
 
 #: templates/core/privacy_cookies.html:217
 msgid ""
@@ -4011,9 +4317,9 @@ msgid ""
 msgstr ""
 
 #: templates/core/resources.html:9 templates/global/footer.html:39
-#: templates/global/menu.html:31
+#: templates/global/menu.html:32
 msgid "Resources"
-msgstr ""
+msgstr "Bronnen"
 
 #: templates/core/resources.html:11
 msgid ""
@@ -4025,11 +4331,11 @@ msgstr ""
 
 #: templates/core/resources.html:22
 msgid "Django Tutorial"
-msgstr ""
+msgstr "Django Tutorial"
 
 #: templates/core/resources.html:25
 msgid "Tutorial Django Girls"
-msgstr ""
+msgstr "Tutorial Django Girls"
 
 #: templates/core/resources.html:30
 msgid ""
@@ -4109,11 +4415,11 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:18
 msgid "<b>Site</b> is djangogirls.org"
-msgstr ""
+msgstr "<b>Website</b> is djangogirls.org"
 
 #: templates/core/terms_conditions.html:19
 msgid "<b>You</b> are a visitor to our Site"
-msgstr ""
+msgstr "<b>Jij</b> bent een bezoeker van onze Website"
 
 #: templates/core/terms_conditions.html:29
 msgid "By entering our site you are accepting these T&Cs"
@@ -4128,7 +4434,7 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:39
 msgid "Agreement"
-msgstr ""
+msgstr "Overeenkomst"
 
 #: templates/core/terms_conditions.html:41
 msgid ""
@@ -4138,11 +4444,11 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:44
 msgid "Definition"
-msgstr ""
+msgstr "Definitie"
 
 #: templates/core/terms_conditions.html:45
 msgid "There are some definitions at the bottom of the page."
-msgstr ""
+msgstr "Een aantal definities is onder aan de pagina te vinden."
 
 #: templates/core/terms_conditions.html:47
 msgid "You promise us:"
@@ -4409,7 +4715,7 @@ msgid ""
 "will be able to achieve any specific outcome."
 msgstr ""
 
-#: templates/core/terms_conditions.html:158 templates/global/menu.html:43
+#: templates/core/terms_conditions.html:158 templates/global/menu.html:44
 msgid "Events"
 msgstr ""
 
@@ -4487,7 +4793,7 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:184
 msgid "Linking"
-msgstr ""
+msgstr "Linking"
 
 #: templates/core/terms_conditions.html:186
 msgid ""
@@ -4528,11 +4834,11 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:199
 msgid "the link mustn’t damage our reputation;"
-msgstr ""
+msgstr "de link mag onze reputatie niet beschadigen;"
 
 #: templates/core/terms_conditions.html:200
 msgid "the link must be fair and legal;"
-msgstr ""
+msgstr "de link moet onberispelijk en legaal zijn;"
 
 #: templates/core/terms_conditions.html:201
 msgid "you can only link from a site that you own;"
@@ -4680,7 +4986,7 @@ msgstr ""
 
 #: templates/core/terms_conditions.html:253
 msgid "<b>T&Cs</b> means these terms and conditions."
-msgstr ""
+msgstr "<b>Algemene Voorwaarden</b> betekent deze algemene voorwaarden."
 
 #: templates/core/terms_conditions.html:255
 msgid ""
@@ -4689,7 +4995,7 @@ msgstr ""
 
 #: templates/core/workshop_box.html:9
 msgid "Order Django Girls Workshop Box for your event!"
-msgstr ""
+msgstr "Bestel een Django Girls Workshop Box voor jouw evenement!"
 
 #: templates/core/workshop_box.html:11
 msgid ""
@@ -4744,23 +5050,23 @@ msgstr "Een aantal stickers van onze global partners"
 
 #: templates/core/workshop_box.html:53
 msgid "Gold letters DJANGOGIRLS balloons, 16 inches tall"
-msgstr ""
+msgstr "Gouden DJANGOGIRLS ballonnen van 40 cm"
 
 #: templates/core/workshop_box.html:54
 msgid "Orange Django Girls logo buttons"
-msgstr ""
+msgstr "Oranje buttons met Django Girls logo"
 
 #: templates/core/workshop_box.html:55
 msgid "Little surprise, sometimes, maybe? 😄"
-msgstr ""
+msgstr "Verrassinkje, soms, misschien? 😄"
 
 #: templates/core/workshop_box.html:60
 msgid "How much is it?"
-msgstr ""
+msgstr "Hoeveel kost het?"
 
 #: templates/core/workshop_box.html:61
 msgid "The price will depend of your workshop's size. For example:"
-msgstr ""
+msgstr "De kosten hangen af van de grootte van je workshop. Bijvoorbeeld:"
 
 #: templates/core/workshop_box.html:63
 msgid "£30 GBP for 30 people"
@@ -4844,7 +5150,7 @@ msgstr ""
 
 #: templates/default/apply.html:5
 msgid "Applications are now open!"
-msgstr ""
+msgstr "Je kunt je nu aanmelden!"
 
 #: templates/default/apply.html:7
 msgid ""
@@ -4916,7 +5222,7 @@ msgstr ""
 
 #: templates/default/faq.html:31
 msgid "Should I bring my own laptop?"
-msgstr ""
+msgstr "Moet ik mijn eigen laptop meenemen?"
 
 #: templates/default/faq.html:34
 msgid ""
@@ -4956,6 +5262,8 @@ msgstr "Wordt er voor eten gezorgd?"
 msgid ""
 "Yes. Thanks to EuroPython, snacks and lunch will be served during workshops."
 msgstr ""
+"Zeker. Met dank aan EuroPython, wordt er voor snacks en lunch gezorgd "
+"tijdens de workshops."
 
 #: templates/default/footer.html:39
 msgid ""
@@ -5020,13 +5328,14 @@ msgstr ""
 
 #: templates/default/values.html:43
 msgid "As a workshop attendee you will:"
-msgstr ""
+msgstr "Als deelnemer aan de workshop zul je:"
 
 #: templates/default/values.html:46
 msgid ""
 "attend a one-day Django workshop during which you will create your first "
 "website"
 msgstr ""
+"een ééndaagse Django workshop bijwonen waar je je eerste website zult creëren"
 
 #: templates/default/values.html:48
 msgid "be fed by us: during our event, food is provided"
@@ -5044,7 +5353,7 @@ msgstr ""
 
 #: templates/donations/corporate_sponsorships.html:20
 msgid "Our mission:"
-msgstr ""
+msgstr "Onze missie:"
 
 #: templates/donations/corporate_sponsorships.html:23
 #, python-format
@@ -5082,7 +5391,7 @@ msgstr ""
 
 #: templates/donations/corporate_sponsorships.html:55
 msgid "A woman looking at her laptop during Django Girls Lagos 2016."
-msgstr ""
+msgstr "Een vrouw die naar haar laptop kijkt tijdens Django Girls Lagos 2016."
 
 #: templates/donations/corporate_sponsorships.html:63
 #: templates/donations/donate.html:13
@@ -5092,7 +5401,7 @@ msgstr ""
 #: templates/donations/corporate_sponsorships.html:69
 #: templates/donations/donate.html:19
 msgid "Monthly donations"
-msgstr ""
+msgstr "Maandelijkse donaties"
 
 #: templates/donations/corporate_sponsorships.html:71
 msgid ""
@@ -5117,7 +5426,7 @@ msgstr ""
 #: templates/donations/corporate_sponsorships.html:95
 #: templates/donations/donate.html:47
 msgid "One-time donations"
-msgstr ""
+msgstr "Eenmalige donaties"
 
 #: templates/donations/corporate_sponsorships.html:97
 #, python-format
@@ -5137,7 +5446,7 @@ msgstr ""
 
 #: templates/donations/corporate_sponsorships.html:135
 msgid "Our current projects that will benefit from your help"
-msgstr ""
+msgstr "De huidige projecten die gebaat zijn bij jouw hulp"
 
 #: templates/donations/corporate_sponsorships.html:136
 msgid "Staff Costs"
@@ -5188,6 +5497,39 @@ msgid ""
 "and innovative."
 msgstr ""
 
+#: templates/donations/crowdfunding.html:9
+msgid "🎉🎁🎈🎊 We are 10 years old now and crowdfunding 🎂🥂🍾💕!"
+msgstr ""
+
+#: templates/donations/crowdfunding.html:17
+#, python-format
+msgid ""
+"<span class=\"highlighted-number\">$%(total_raised)s</span> of <span class="
+"\"highlighted-number\">$30,000</span> raised."
+msgstr ""
+
+#: templates/donations/crowdfunding.html:28
+msgid ""
+"<p>We are 10 years now, yay and we are fundraising!</p> <p>Since the first "
+"Django Girls workshop in July 2014, we grew unexpectedly fast and we could "
+"not sustain that growth without some help.</p> <p>In 2015, we introduced a "
+"part-time paid position of Awesomeness Ambassador to help provide support to "
+"hundreds of volunteers all over the world.</p> <p>In 2017, we also "
+"introduced the part-time paid position of Fundraising Coordinator to help us "
+"raise funds to run our activities. In 2023, we introduced the part-time paid "
+"position of Communications Officer to help us increase outreach following "
+"the pandemic and increase the number of workshops. We also introduced the "
+"Chief Emoji Officer (Managing Director) role, increasing the number of our "
+"paid staff.</p> <p>Our mission for 2024 is to improve outreach and "
+"visibility following the pandemic which saw a reduction in the number of "
+"workshops being organized per year. We have therefore introduced a new part-"
+"time Communications Officer to help us achieve this. We will also continue "
+"working with the advisory board to tackle diversity and inclusion issues in "
+"our systems and workshop guidance to ensure that voices of all people, "
+"especially those from marginalized communities, can contribute to our "
+"future. </p> <p> Help us see this through. Support our work! </p>"
+msgstr ""
+
 #: templates/donations/donate.html:26
 msgid ""
 "If you would like to setup a recurring donation, we encourage you to do so "
@@ -5207,15 +5549,15 @@ msgstr ""
 
 #: templates/donations/donate.html:85
 msgid "Donate now"
-msgstr ""
+msgstr "Doneer nu"
 
 #: templates/donations/donate.html:94
 msgid "Credit or debit card"
-msgstr ""
+msgstr "Credit of debit card"
 
 #: templates/donations/donate.html:113
 msgid "Other ways of supporting us"
-msgstr ""
+msgstr "Andere manieren om ons te sponsoren"
 
 #: templates/donations/donate.html:114
 msgid "Humble Bundle Store"
@@ -5230,17 +5572,17 @@ msgstr ""
 
 #: templates/donations/error.html:7
 msgid "Error"
-msgstr ""
+msgstr "Fout"
 
 #: templates/donations/error.html:9
 msgid "Sorry, an error has occurred"
-msgstr ""
+msgstr "Het spijt ons, er is iets fout gegaan"
 
 #: templates/donations/error.html:15 templates/donations/success.html:13
 msgid "Back to donation page"
-msgstr ""
+msgstr "Terug naar de donatie-pagina"
 
-#: templates/donations/sponsors.html:8 templates/global/menu.html:20
+#: templates/donations/sponsors.html:8 templates/global/menu.html:21
 msgid "Our Global Partners"
 msgstr ""
 
@@ -5275,12 +5617,12 @@ msgstr ""
 #: templates/donations/success.html:8
 #, python-format
 msgid "Thank you for your contribution of %(currency)s%(amount)s!"
-msgstr ""
+msgstr "Dank je wel voor je bijdrage van %(currency)s%(amount)s!"
 
 #: templates/emails/event_thank_you.html:3
 #, python-format
 msgid "Hello team %(city)s!"
-msgstr ""
+msgstr "Hallo team %(city)s!"
 
 #: templates/emails/event_thank_you.html:5
 msgid ""
@@ -5290,7 +5632,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:8
 msgid "Numbers"
-msgstr ""
+msgstr "Aantallen"
 
 #: templates/emails/event_thank_you.html:10
 #, python-format
@@ -5303,7 +5645,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:17
 msgid "Tell us how it went!"
-msgstr ""
+msgstr "Vertel ons hoe het ging!"
 
 #: templates/emails/event_thank_you.html:18
 msgid ""
@@ -5314,7 +5656,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:22
 msgid "Share your experiences"
-msgstr ""
+msgstr "Deel je ervaringen"
 
 #: templates/emails/event_thank_you.html:23
 msgid ""
@@ -5327,7 +5669,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:27
 msgid "Upload your photos"
-msgstr ""
+msgstr "Upload je foto's"
 
 #: templates/emails/event_thank_you.html:28
 msgid ""
@@ -5338,7 +5680,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:32
 msgid "Donation"
-msgstr ""
+msgstr "Donatie"
 
 #: templates/emails/event_thank_you.html:34
 #, python-format
@@ -5350,7 +5692,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:41
 msgid "Discount in our store"
-msgstr ""
+msgstr "Korting in onze winkel"
 
 #: templates/emails/event_thank_you.html:42
 #, python-format
@@ -5378,12 +5720,12 @@ msgstr ""
 #: templates/emails/organize/event_deployed.html:94
 #: templates/emails/submit_information_email.html:16
 msgid "Hugs, rainbows and sunshines!"
-msgstr ""
+msgstr "Knuffels, regenbogen en zonnestralen!"
 
 #: templates/emails/existing_user.html:3 templates/emails/new_user.html:3
 #: templates/emails/organize/event_deployed.html:3
 msgid "Hi there!"
-msgstr ""
+msgstr "Hallo!"
 
 #: templates/emails/existing_user.html:5
 #, python-format
@@ -5477,7 +5819,7 @@ msgstr ""
 
 #: templates/emails/offer_help_email.html:5
 msgid "How are you? We hope you are doing fantastic! :)"
-msgstr ""
+msgstr "Hoe gaat het er mee? We hopen dat het geweldig goed gaat! :)"
 
 #: templates/emails/offer_help_email.html:8
 #, python-format
@@ -5559,60 +5901,60 @@ msgstr ""
 #: templates/emails/organize/application_notification.html:3
 #: templates/emails/organize/application_notification.html:64
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
 #: templates/emails/organize/application_notification.html:4
 #: templates/emails/organize/application_notification.html:65
 msgid "See application"
-msgstr ""
+msgstr "Aanmelding bekijken"
 
 #: templates/emails/organize/application_notification.html:6
 msgid "Event information"
-msgstr ""
+msgstr "Informatie over het evenement"
 
 #: templates/emails/organize/application_notification.html:8
 msgid "Previously organized event:"
-msgstr ""
+msgstr "Eerder georganiseerd evenement:"
 
 #: templates/emails/organize/application_notification.html:12
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #: templates/emails/organize/application_notification.html:16
 msgid "Location:"
-msgstr ""
+msgstr "Locatie:"
 
 #: templates/emails/organize/application_notification.html:20
 msgid "Organizers"
-msgstr ""
+msgstr "Organisatoren"
 
 #: templates/emails/organize/application_notification.html:22
 msgid "Lead organizer:"
-msgstr ""
+msgstr "Hoofdorganisator:"
 
 #: templates/emails/organize/application_notification.html:26
 msgid "Team:"
-msgstr ""
+msgstr "Team:"
 
 #: templates/emails/organize/application_notification.html:36
 #: templates/organize/form/step2_application.html:38
 msgid "Who are you?"
-msgstr ""
+msgstr "Wie zijn jullie?"
 
 #: templates/emails/organize/application_notification.html:40
 #: templates/organize/form/step2_application.html:55
 msgid "Why do you want to organize a Django Girls workshop?"
-msgstr ""
+msgstr "Waarom willen jullie een Django Girls-workshop organiseren?"
 
 #: templates/emails/organize/application_notification.html:44
 #: templates/organize/form/step2_application.html:72
 msgid "Have you been involved in Django Girls before?"
-msgstr ""
+msgstr "Heb je ooit eerder iets gedaan voor Django Girls?"
 
 #: templates/emails/organize/application_notification.html:48
 #: templates/organize/form/step2_application.html:94
 msgid "Have you organized any other event before?"
-msgstr ""
+msgstr "Heb je ooit iets ander georganiseerd?"
 
 #: templates/emails/organize/application_notification.html:52
 #: templates/organize/form/step5_workshop.html:103
@@ -5659,7 +6001,7 @@ msgstr ""
 
 #: templates/emails/organize/event_deployed.html:22
 msgid "Password:"
-msgstr ""
+msgstr "Wachtwoord:"
 
 #: templates/emails/organize/event_deployed.html:24
 msgid ""
@@ -5679,7 +6021,7 @@ msgstr ""
 
 #: templates/emails/organize/event_deployed.html:39
 msgid "2) Website"
-msgstr ""
+msgstr "2) Website"
 
 #: templates/emails/organize/event_deployed.html:42
 #, python-format
@@ -5732,7 +6074,7 @@ msgstr ""
 
 #: templates/emails/organize/event_deployed.html:82
 msgid "5) Need more help?"
-msgstr ""
+msgstr "5) Meer hulp nodig?"
 
 #: templates/emails/organize/event_deployed.html:85
 msgid ""
@@ -5743,15 +6085,15 @@ msgstr ""
 
 #: templates/emails/organize/event_deployed.html:91
 msgid "Good luck!"
-msgstr ""
+msgstr "Veel geluk!"
 
 #: templates/emails/organize/event_deployed.html:95
 msgid "Django Girls team"
-msgstr ""
+msgstr "Django Girls team"
 
 #: templates/emails/organize/rejection.html:3
 msgid "Hello there,"
-msgstr ""
+msgstr "Hallo,"
 
 #: templates/emails/organize/rejection.html:6
 #, python-format
@@ -5858,7 +6200,7 @@ msgstr ""
 msgid "Foundation"
 msgstr ""
 
-#: templates/global/footer.html:11 templates/global/menu.html:46
+#: templates/global/footer.html:11 templates/global/menu.html:48
 msgid "Newsletter"
 msgstr ""
 
@@ -5868,7 +6210,7 @@ msgstr ""
 
 #: templates/global/footer.html:14
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: templates/global/footer.html:15 templates/jobboard/index.html:7
 msgid "Job Board"
@@ -5880,15 +6222,15 @@ msgstr "Steun ons"
 
 #: templates/global/footer.html:22
 msgid "Make a donation"
-msgstr ""
+msgstr "Doneer"
 
 #: templates/global/footer.html:23
 msgid "Donate on Patreon"
-msgstr ""
+msgstr "Doneer via Patreon"
 
 #: templates/global/footer.html:25
 msgid "Sponsor us"
-msgstr ""
+msgstr "Sponsor ons"
 
 #: templates/global/footer.html:26
 msgid "Our Sponsors"
@@ -5896,15 +6238,15 @@ msgstr ""
 
 #: templates/global/footer.html:30
 msgid "Community"
-msgstr ""
+msgstr "Community"
 
 #: templates/global/footer.html:41
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #: templates/global/footer.html:43
 msgid "Coaching Guide"
-msgstr ""
+msgstr "Gids voor coaches"
 
 #: templates/global/footer.html:45
 msgid "Graphics"
@@ -5912,74 +6254,78 @@ msgstr ""
 
 #: templates/global/footer.html:52
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Algemene voorwaarden"
 
 #: templates/global/footer.html:53
 msgid "Privacy & Cookies"
-msgstr ""
+msgstr "Privacy & Cookies"
 
 #: templates/global/footer.html:60
 #, python-format
 msgid "<b>%(future_events_count)s</b> upcoming events"
-msgstr ""
+msgstr "<b>%(future_events_count)s</b> toekomstige evenementen"
 
 #: templates/global/footer.html:61
 #, python-format
 msgid "<b>%(past_events_count)s</b> past events"
-msgstr ""
+msgstr "<b>%(past_events_count)s</b> eerdere evenementen"
 
 #: templates/global/footer.html:62
 #, python-format
 msgid "<b>%(applicants_sum)s</b> applicants"
-msgstr ""
+msgstr "<b>%(applicants_sum)s</b> aanvragers"
 
 #: templates/global/footer.html:63
 #, python-format
 msgid "<b>%(attendees_sum)s</b> attendees"
-msgstr ""
+msgstr "<b>%(attendees_sum)s</b> deelnemers"
 
 #: templates/global/footer.html:64
 #, python-format
 msgid "<b>%(countries_count)s</b> countries"
-msgstr ""
+msgstr "<b>%(countries_count)s</b> landen"
 
 #: templates/global/menu.html:16
 msgid "Corporate Sponsorships"
 msgstr ""
 
-#: templates/global/menu.html:17
-msgid "Donate to us"
+#: templates/global/menu.html:17 templates/global/menu.html:46
+msgid "Crowdfunding"
 msgstr ""
 
 #: templates/global/menu.html:18
+msgid "Donate to us"
+msgstr ""
+
+#: templates/global/menu.html:19
 msgid "Our Patreon Page"
 msgstr ""
 
-#: templates/global/menu.html:25
+#: templates/global/menu.html:26
 msgid "Volunteer"
 msgstr ""
 
-#: templates/global/menu.html:28
+#: templates/global/menu.html:29
 msgid "Organize a Workshop"
 msgstr ""
 
-#: templates/global/menu.html:36
+#: templates/global/menu.html:37
 msgid "Tech Jobs Board"
 msgstr ""
 
-#: templates/global/menu.html:40
+#: templates/global/menu.html:41
 msgid "What's new?"
 msgstr ""
 
-#: templates/global/menu.html:45
+#: templates/global/menu.html:47
 msgid "Shop"
 msgstr ""
 
-#: templates/global/menu.html:47
+#: templates/global/menu.html:49
 msgid "Our blog"
 msgstr ""
 
-#: templates/global/menu.html:51
+#: templates/global/menu.html:53
 msgid "Contact us"
 msgstr ""
 
@@ -5999,7 +6345,7 @@ msgid ""
 "an email to the local organizers of the workshop you want to attend."
 msgstr ""
 "A: Wil je meedoen aan een workshop die bij jou in de buurt georganiseerd "
-"gaat worden? Cool! Je kunt je inschrijven op de website van de activiteit. "
+"gaat worden? Cool! Je kunt je inschrijven op de website van het evenement. "
 "Als er geen website, dan betekent dat dat de inschrijving nog niet is "
 "geopend. Probeer het een paar dagen later nog eens of stuur een e-mail aan "
 "de organisatoren van de workshop die je bij wilt wonen."
@@ -6007,6 +6353,7 @@ msgstr ""
 #: templates/includes/_faq.html:23
 msgid "Q: I missed the deadline! Can I still apply to a workshop?"
 msgstr ""
+"V: Ik heb de deadline gemist! Kan ik me nog aanmelden voor een workshop?"
 
 #: templates/includes/_faq.html:29
 #, python-format
@@ -6016,15 +6363,19 @@ msgid ""
 "subscribe to our <a href=\"%(newsletter_url)s\">newsletter</a> to know where "
 "the next events are planed."
 msgstr ""
+"A: Helaas, je kunt je niet meer opgeven: evenementen ontvangen veel "
+"aanvragen en hebben al een wachtlijst voor het geval een deelnemer moet "
+"afzeggen. Je kunt je inschrijven voor onze  <a href=\"%(newsletter_url)s"
+"\">nieuwsbrief</a> om op de hoogte te blijven over  toekomstige evenementen."
 
 #: templates/includes/_faq.html:41
 msgid "Q: I want to coach or sponsor an event!"
-msgstr ""
+msgstr "V: Ik wil coach of sponsor worden van een evenement!"
 
 #: templates/includes/_faq.html:45
 msgid ""
 "A: You rock! Just send an email to the local organizers of the workshop!"
-msgstr ""
+msgstr "A: You rock! Stuur een e-mail naar de organisatoren van de workshop!"
 
 #: templates/includes/_faq.html:52
 msgid ""
@@ -6272,7 +6623,7 @@ msgstr ""
 #: templates/organize/form/step2_application.html:111
 #: templates/organize/form/step3_organizers.html:185
 msgid "Go to next step"
-msgstr ""
+msgstr "Ga verder"
 
 #: templates/organize/form/step2_application.html:39
 msgid ""
@@ -6298,37 +6649,37 @@ msgstr ""
 
 #: templates/organize/form/step3_organizers.html:25
 msgid "Who is going to organize this workshop?"
-msgstr ""
+msgstr "Wie gaan de workshop organiseren?"
 
 #: templates/organize/form/step3_organizers.html:43
 msgid "Lead organizer"
-msgstr ""
+msgstr "Hoofdorganisator"
 
 #: templates/organize/form/step3_organizers.html:44
 msgid "This is probably you! :)"
-msgstr ""
+msgstr "Waarschijnlijk ben jij dit! :)"
 
 #: templates/organize/form/step3_organizers.html:49
 #: templates/organize/form/step3_organizers.html:92
 #: templates/organize/form/step3_organizers.html:132
 msgid "First name"
-msgstr ""
+msgstr "Voornaam"
 
 #: templates/organize/form/step3_organizers.html:60
 #: templates/organize/form/step3_organizers.html:103
 #: templates/organize/form/step3_organizers.html:143
 msgid "Last name"
-msgstr ""
+msgstr "Achternaam"
 
 #: templates/organize/form/step3_organizers.html:71
 #: templates/organize/form/step3_organizers.html:114
 #: templates/organize/form/step3_organizers.html:154
 msgid "Email address"
-msgstr ""
+msgstr "E-mailadres"
 
 #: templates/organize/form/step3_organizers.html:85
 msgid "Your organizing team"
-msgstr ""
+msgstr "Jullie organiserend team"
 
 #: templates/organize/form/step3_organizers.html:86
 msgid ""
@@ -6351,41 +6702,41 @@ msgstr ""
 
 #: templates/organize/form/step4_workshop_type.html:36
 msgid "Workshop Type"
-msgstr ""
+msgstr "Type Workshop"
 
 #: templates/organize/form/step4_workshop_type.html:49
 msgid "Proceed!"
-msgstr ""
+msgstr "Ga verder!"
 
 #: templates/organize/form/step5_workshop.html:32
 #: templates/organize/form/step5_workshop_remote.html:32
 msgid "Tell us all about your Django Girls event!"
-msgstr ""
+msgstr "Vertel ons alles over je Django Girls-evenement!"
 
 #: templates/organize/form/step5_workshop.html:46
 #: templates/organize/form/step5_workshop_remote.html:46
 msgid "Where?"
-msgstr ""
+msgstr "Waar?"
 
 #: templates/organize/form/step5_workshop.html:47
 #: templates/organize/form/step5_workshop_remote.html:47
 msgid "In which city do you want to organize a workshop?"
-msgstr ""
+msgstr "In welke plaats wil je een workshop gaan organiseren?"
 
 #: templates/organize/form/step5_workshop.html:52
 #: templates/organize/form/step5_workshop_remote.html:52
 msgid "City"
-msgstr ""
+msgstr "Plaats"
 
 #: templates/organize/form/step5_workshop.html:64
 #: templates/organize/form/step5_workshop_remote.html:64
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: templates/organize/form/step5_workshop.html:84
 #: templates/organize/form/step5_workshop_remote.html:84
 msgid "When?"
-msgstr ""
+msgstr "Wanneer?"
 
 #: templates/organize/form/step5_workshop.html:85
 #: templates/organize/form/step5_workshop_remote.html:85
@@ -6398,7 +6749,7 @@ msgstr ""
 #: templates/organize/form/step5_workshop.html:89
 #: templates/organize/form/step5_workshop_remote.html:89
 msgid "Date of your event"
-msgstr ""
+msgstr "Datum van je evenement"
 
 #: templates/organize/form/step5_workshop.html:104
 msgid "Tell us about your ideas on where to host the event in your city."
@@ -6449,7 +6800,7 @@ msgstr ""
 #: templates/organize/form/step5_workshop.html:200
 #: templates/organize/form/step5_workshop_remote.html:200
 msgid "Finish!"
-msgstr ""
+msgstr "Einde!"
 
 #: templates/organize/form/step5_workshop_remote.html:139
 msgid "How will you host your workshop remotely?"
@@ -6504,7 +6855,7 @@ msgstr ""
 
 #: templates/organize/index.html:9
 msgid "Organize Django Girls workshop"
-msgstr ""
+msgstr "Django Girls-workshop organiseren"
 
 #: templates/organize/index.html:16
 msgid ""
@@ -6518,7 +6869,7 @@ msgstr ""
 
 #: templates/organize/index.html:24
 msgid "In-Person Workshops"
-msgstr ""
+msgstr "In-Person Workshops"
 
 #: templates/organize/index.html:27
 msgid ""
@@ -6543,7 +6894,7 @@ msgstr ""
 
 #: templates/organize/index.html:47
 msgid "Remote Workshops"
-msgstr ""
+msgstr "Remote Workshops"
 
 #: templates/organize/index.html:50
 msgid ""
@@ -6588,7 +6939,7 @@ msgstr ""
 
 #: templates/organize/index.html:92
 msgid "Resources for organizers"
-msgstr ""
+msgstr "Bronnen voor organisatoren"
 
 #: templates/organize/index.html:96
 msgid "Django Girls Organizer’s Manual"
@@ -6596,15 +6947,15 @@ msgstr "Django Girls Handleiding voor Organisatoren"
 
 #: templates/organize/index.html:99
 msgid "Django Girls Coaching Guide"
-msgstr ""
+msgstr "Django Girls Coaching Gids"
 
 #: templates/organize/index.html:102
 msgid "Media resources"
-msgstr ""
+msgstr "Media resources"
 
 #: templates/organize/index.html:105
 msgid "Django Girls Workshop Tutorial"
-msgstr ""
+msgstr "Django Girls Workshop Tutorial"
 
 #: templates/organize/index.html:108
 msgid "Apply for Event Sponsorship"
@@ -6628,7 +6979,7 @@ msgstr ""
 
 #: templates/organize/index.html:137
 msgid "Experiences of Django Girls organizers"
-msgstr ""
+msgstr "Ervaringen van Django Girls organisatoren"
 
 #: templates/organize/index.html:145
 msgid ""
@@ -6655,7 +7006,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:29
 msgid "Prerequisities to organize a Django Girls workshop"
-msgstr ""
+msgstr "Voorwaarden om een Django Girls-workshop te mogen organiseren"
 
 #: templates/organize/prerequisites.html:32
 msgid ""
@@ -6670,6 +7021,8 @@ msgid ""
 "Confirm that you’ve read the following chapters of our <a href=\"http://"
 "organize.djangogirls.org/\">Organizer's Manual</a>:"
 msgstr ""
+"Bevestig dat je begrijpt dat we op dit moment alleen aanmeldingen voor "
+"workshops op afstand accepteren:"
 
 #: templates/organize/prerequisites.html:51
 msgid "Introduction to Organizer’s Manual"
@@ -6685,7 +7038,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:69
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Frequently Asked Questions"
 
 #: templates/organize/prerequisites.html:76
 msgid "Confirm that you meet following requirements to organize a workshop:"
@@ -6693,7 +7046,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:81
 msgid "You’re at least 18 years old"
-msgstr ""
+msgstr "Je bent ouder dan 18 jaar"
 
 #: templates/organize/prerequisites.html:87
 msgid ""
@@ -6713,7 +7066,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:111
 msgid "Get started!"
-msgstr ""
+msgstr "Aan de slag!"
 
 #: templates/organize/suspend.html:9
 msgid "Suspension of In-Person Workshop Applications"
@@ -6733,7 +7086,7 @@ msgstr ""
 
 #: templates/registration/password_reset_complete.html:4
 msgid "Password Reset Complete"
-msgstr ""
+msgstr "Wachtwoordherstel voltooid"
 
 #: templates/registration/password_reset_complete.html:8
 #, python-format
@@ -6744,7 +7097,7 @@ msgstr ""
 
 #: templates/registration/password_reset_confirm.html:4
 msgid "Password Reset"
-msgstr ""
+msgstr "Wachtwoordherstel"
 
 #: templates/registration/password_reset_confirm.html:7
 msgid ""
@@ -6759,7 +7112,7 @@ msgstr ""
 #: templates/registration/password_reset_done.html:5
 msgctxt "Followed by mailbox icon, check your inbox or email"
 msgid "Check Your"
-msgstr ""
+msgstr "Check je"
 
 #: templates/registration/password_reset_done.html:12
 #, python-format
@@ -6771,7 +7124,7 @@ msgstr ""
 
 #: templates/registration/password_reset_form.html:4
 msgid "Forget your password?"
-msgstr ""
+msgstr "Wachtwoord vergeten? "
 
 #: templates/registration/password_reset_form.html:7
 msgid ""
@@ -6830,7 +7183,7 @@ msgstr ""
 
 #: templates/story/stories.html:9
 msgid "Django Girls Story"
-msgstr ""
+msgstr "Django Girls Story"
 
 #: templates/story/stories.html:11
 msgid ""
@@ -6859,6 +7212,17 @@ msgid ""
 "Story” (or would like to nominate yourself!), please <a href=\"mailto:"
 "story@djangogirls.org\">contact us!</a>"
 msgstr ""
+
+#~ msgid "Map of Django Girls event from July 2014 to July 2017"
+#~ msgstr ""
+#~ "Overzichtskaart van Django Girls-workshops van juli 2014 tot juli 2017"
+
+#~ msgid ""
+#~ "Please know that we are only accepting applications for remote workshops "
+#~ "at this time."
+#~ msgstr ""
+#~ "Op dit moment nemen we alleen aanvragen voor workshops op afstand in "
+#~ "behandeling."
 
 #~ msgid "\"City\" slug must be present to user this decorator."
 #~ msgstr ""
