@@ -7382,12 +7382,7 @@ msgstr ""
 "bewerben?"
 
 #: templates/includes/_faq.html:29
-#, fuzzy, python-format
-#| msgid ""
-#| "A: Sadly, you won't be able to apply: events receive many applications "
-#| "and already have a waiting list in case an attendee has to cancel. You "
-#| "can subscribe to our <a href=\"%(newsletter_url)s\">newsletter</a> to "
-#| "know where the next events are planed."
+#, python-format
 msgid ""
 "A: Sadly, you won't be able to apply: events receive many applications and "
 "already have a waiting list in case an attendee has to cancel. You can "
