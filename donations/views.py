@@ -88,5 +88,5 @@ def sponsors(request):
 
 def crowdfunding(request):
     total_raised = StripeCharge.objects.running_total()["total"]
-    recent_donors = StripeCharge.objects.all().order_by("-charge_created")[:5]
+    recent_donors = StripeCharge.objects.all().order_by("-charge_created")[:10]
     return render(request, "donations/crowdfunding.html", {"total_raised": total_raised, "donors": recent_donors})

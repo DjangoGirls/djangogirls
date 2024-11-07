@@ -28,7 +28,7 @@ class StripeCharge(models.Model):
     Fetched via the API. Used to populate the Invoice.
     """
 
-    charge_id = models.CharField(max_length=255, unique=True)
+    charge_id = models.CharField(max_length=255, unique=True, editable=False)
     amount = models.FloatField()
     payment_data = models.JSONField()
     charge_created = models.DateTimeField()
