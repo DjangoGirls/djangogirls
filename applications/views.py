@@ -345,7 +345,7 @@ def rsvp(request, page_url, code):
                 "please contact us at %(email)s with your name."
             ) % {"email": event.email}
         else:
-            _message = _(
+            message = _(
                 "Something went wrong with your RSVP link. Please contact us at %(email)s with your name."
             ) % {"email": event.email}
 
