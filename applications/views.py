@@ -22,7 +22,11 @@ def apply(request, page_url):
     if not event:
         raise Http404
     elif isinstance(event, tuple):
-        return render(request, "applications/event_not_live.html", {"city": event[0], "past": event[1]})
+        return render(
+            request,
+            "applications/event_not_live.html",
+            {"city": event[0], "past": event[1]},
+        )
 
     form_obj = Form.objects.filter(event=event).first()
     if form_obj is None:
@@ -39,7 +43,10 @@ def apply(request, page_url):
 
     if form.is_valid():
         form.save()
-        messages.success(request, _("Yay! Your application has been saved. You'll hear from us soon!"))
+        messages.success(
+            request,
+            _("Yay! Your application has been saved. You'll hear from us soon!"),
+        )
 
         return render(
             request,
@@ -51,7 +58,9 @@ def apply(request, page_url):
             },
         )
 
-    number_of_email_questions = Question.objects.filter(question_type="email", form=form_obj).count()
+    number_of_email_questions = Question.objects.filter(
+        question_type="email", form=form_obj
+    ).count()
 
     return render(
         request,
@@ -81,7 +90,9 @@ def application_list(request, page_url):
     active_query_string = "?" + request.META.get("QUERY_STRING", "")
 
     try:
-        applications = get_applications_for_event(event, state, rsvp_status, order, user=request.user)
+        applications = get_applications_for_event(
+            event, state, rsvp_status, order, user=request.user
+        )
     except Application.DoesNotExist:
         return redirect("core:event", page_url=page_url)
 
@@ -91,7 +102,9 @@ def application_list(request, page_url):
         {
             "event": event,
             "applications": applications,
-            "all_applications_count": Application.objects.filter(form__event=event).count(),
+            "all_applications_count": Application.objects.filter(
+                form__event=event
+            ).count(),
             "active_query_string": active_query_string,
             "order": order,
             "menu": get_organiser_menu(page_url),
@@ -117,7 +130,12 @@ def applications_csv(request, page_url):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = f'attachment; filename="{page_url}.csv"'
     writer = csv.writer(response)
-    csv_header = [_("Application Number"), _("Application State"), _("RSVP Status"), _("Average Score")]
+    csv_header = [
+        _("Application Number"),
+        _("Application State"),
+        _("RSVP Status"),
+        _("Average Score"),
+    ]
     question_set = event.form.question_set
 
     question_titles = question_set.values_list("title", flat=True)
@@ -170,7 +188,9 @@ def application_detail(request, page_url, app_number):
             # Go to a new random application.
             new_app = get_random_application(request.user, event, application)
             if new_app:
-                return redirect("applications:application_detail", page_url, new_app.number)
+                return redirect(
+                    "applications:application_detail", page_url, new_app.number
+                )
             return redirect("applications:applications", page_url)
 
     return render(
@@ -215,9 +235,17 @@ def compose_email(request, page_url, email_id=None):
     """
     event = get_event(page_url, request.user.is_authenticated, False)
     form_obj = get_object_or_404(Form, event=event)
-    emailmsg = None if not email_id else get_object_or_404(Email, form__event=event, id=email_id)
+    emailmsg = (
+        None
+        if not email_id
+        else get_object_or_404(Email, form__event=event, id=email_id)
+    )
 
-    form = EmailForm(request.POST or None, instance=emailmsg, initial={"author": request.user, "form": form_obj})
+    form = EmailForm(
+        request.POST or None,
+        instance=emailmsg,
+        initial={"author": request.user, "form": form_obj},
+    )
     if form.is_valid() and request.method == "POST":
         obj = form.save(commit=False)
         obj.author = request.user
@@ -262,7 +290,9 @@ def change_state(request, page_url):
     ids = applications.values_list("id", flat=True)
     ids = [str(_id) for _id in ids]
 
-    return JsonResponse({"message": _("Applications have been updated"), "updated": ids})
+    return JsonResponse(
+        {"message": _("Applications have been updated"), "updated": ids}
+    )
 
 
 @organiser_only
@@ -285,7 +315,9 @@ def change_rsvp(request, page_url):
     ids = applications.values_list("id", flat=True)
     ids = [str(_id) for _id in ids]
 
-    return JsonResponse({"message": _("Applications have been updated"), "updated": ids})
+    return JsonResponse(
+        {"message": _("Applications have been updated"), "updated": ids}
+    )
 
 
 def rsvp(request, page_url, code):
@@ -293,17 +325,33 @@ def rsvp(request, page_url, code):
     if not event:
         raise Http404
     elif isinstance(event, tuple):
-        return render(request, "applications/event_not_live.html", {"city": event[0], "past": event[1]})
+        return render(
+            request,
+            "applications/event_not_live.html",
+            {"city": event[0], "past": event[1]},
+        )
 
     application, rsvp = Application.get_by_rsvp_code(code, event)
     if not application:
         return redirect(f"/{event.page_url}/")
 
     if application.rsvp_status != Application.RSVP_WAITING:
+        if application.rsvp_status == Application.RSVP_YES:
+            message = _("You have already confirmed your attendance.")
+        elif application.rsvp_status == Application.RSVP_NO:
+            message = _(
+                "You have already declined the invitation. "
+                "If you want to change your RSVP, "
+                "please contact us at %(email)s with your name."
+            ) % {"email": event.email}
+        else:
+            _message = _(
+                "Something went wrong with your RSVP link. Please contact us at %(email)s with your name."
+            ) % {"email": event.email}
+
         messages.error(
             request,
-            _("Something went wrong with your RSVP link. Please contact us at %(email)s with your name.")
-            % {"email": event.email},
+            message,
         )
         return redirect(f"/{event.page_url}/")
 
@@ -324,4 +372,8 @@ def rsvp(request, page_url, code):
 
     menu = EventPageMenu.objects.filter(event=event)
 
-    return render(request, "applications/rsvp.html", {"event": event, "menu": menu, "message": message})
+    return render(
+        request,
+        "applications/rsvp.html",
+        {"event": event, "menu": menu, "message": message},
+    )
