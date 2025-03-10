@@ -16,8 +16,7 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     help = (
-        "Fetch Stripe charges from the API since the last fetch and store them in the "
-        "database as StripeCharge objects."
+        "Fetch Stripe charges from the API since the last fetch and store them in the database as StripeCharge objects."
     )
 
     def handle(self, *args, **options):

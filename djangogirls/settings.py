@@ -92,7 +92,7 @@ POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 
 DATABASES = {}
 DATABASES["default"] = dj_database_url.config(
-    default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}" f"/{POSTGRES_DB}"
+    default=f"postgres://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 )
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

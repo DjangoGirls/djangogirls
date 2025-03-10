@@ -30,10 +30,7 @@ class StockPicture(models.Model):
     photo_credit = models.CharField(
         max_length=200,
         help_text=mark_safe_lazy(
-            _(
-                "Only use pictures with a "
-                "<a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."
-            )
+            _("Only use pictures with a <a href='https://creativecommons.org/licenses/'>Creative Commons license</a>.")
         ),
     )
     photo_link = models.URLField(_("photo URL"))
