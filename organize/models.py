@@ -65,7 +65,7 @@ class EventApplicationManager(models.Manager):
                     raise ValidationError(
                         {
                             "date": _(
-                                "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
+                                "Your workshops should be at least 6 months apart. Please read our Organizer Manual."
                             )
                         }
                     )
@@ -76,7 +76,7 @@ class EventApplicationManager(models.Manager):
                     raise ValidationError(
                         {
                             "date": _(
-                                "Your workshops should be at least 6 months apart. " "Please read our Organizer Manual."
+                                "Your workshops should be at least 6 months apart. Please read our Organizer Manual."
                             )
                         }
                     ) from err
@@ -121,7 +121,7 @@ class EventApplication(models.Model):
         blank=True,
     )
     diversity = models.TextField(
-        _("Information about how you intend to ensure your workshop is inclusive " "and promotes diversity")
+        _("Information about how you intend to ensure your workshop is inclusive and promotes diversity")
     )
     additional = models.TextField(_("Any additional information you think may help your application"), blank=True)
     confirm_covid_19_protocols = models.BooleanField(

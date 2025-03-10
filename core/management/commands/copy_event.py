@@ -17,7 +17,7 @@ def gather_information():
 
     event = get_event(
         click.prompt(
-            click.style("First, give me the latest ID of the Event " "object you want to copy", bold=True, fg="yellow")
+            click.style("First, give me the latest ID of the Event object you want to copy", bold=True, fg="yellow")
         )
     )
 
