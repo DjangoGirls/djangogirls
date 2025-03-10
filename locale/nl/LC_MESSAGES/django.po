@@ -1401,7 +1401,7 @@ msgstr "Het hele jaar door bleven we stoere Django-ontwikkelaars promoten door <
 
 #: templates/core/2015.html:236
 msgid "We focused on improving our organizer's tools. Thanks to the hard work of our volunteers, we've seen some incredible contributions to our <a href=\"http://organize.djangogirls.org/\">Organizer's Manual</a>. We also built an Applications tool for organizers that finally allows them to receive and score applications through the Django Girls website, instead of Google Forms and Spreadsheets. Phew!"
-msgstr "We richtten ons op het verbeteren van de tools die onze organisatoren gebruiken. Dankzij het harde werk van onze vrijwilligers hebben we een aantal ongelooflijke bijdragen gezien aan onze <a href=\"http://organize.djangogirls.org/\">Organisatorhandleiding</a>. We hebben ook een Applicatietool gebouwd voor organisatoren waarmee ze  aanmeldingen kunnen ontvangen en beoordelen via de Django Girls-website, in plaats van met Google Forms en Spreadsheets. Pfieuw!"
+msgstr "We richtten ons op het verbeteren van de tools die onze organisatoren gebruiken. Dankzij het harde werk van onze vrijwilligers hebben we een aantal ongelooflijke bijdragen gezien aan onze <a href=\"http://organize.djangogirls.org/\">Handleiding voor de Organisator</a>. We hebben ook een Applicatietool gebouwd voor organisatoren waarmee ze  aanmeldingen kunnen ontvangen en beoordelen via de Django Girls-website, in plaats van met Google Forms en Spreadsheets. Pfieuw!"
 
 #: templates/core/2015.html:243
 msgid "More people joined the Support Team: we welcomed <a href=\"http://blog.djangogirls.org/post/120136694238/welcome-kasia-and-geoffrey-to-django-girls-core\"> Kasia and Geoffrey</a>. This also kicked off a process of increasing our transparency efforts. We spent a significant amount of time writing new documentation and improving current internal docs, and then open sourced it in a form of the <a href=\"https://github.com/DjangoGirls/wiki\">Support Team Wiki</a>. From now on, everything about what we believe and how we work is open and public."
@@ -1863,7 +1863,7 @@ msgstr "Elk Django Girls-evenement is een gratis ééndaagse workshop voor 30-60
 
 #: templates/core/contribute.html:61
 msgid "Want to get started? Check our <a href=\"https://organize.djangogirls.org/\">Organizer's Manual</a> and <a href=\"https://djangogirls.org/organize/\">bring Django Girls to your city!</a>"
-msgstr "Kun je niet wachten? Bekijk onze <a href=\"https://organize.djangogirls.org/\">Organisatiehandleiding</a> en <a href=\"https://djangogirls.org/organize/\">breng Django Girls naar jouw locatie! </a>"
+msgstr "Kun je niet wachten? Bekijk onze <a href=\"https://organize.djangogirls.org/\">Handleiding voor de Organisator</a> en <a href=\"https://djangogirls.org/organize/\">breng Django Girls naar jouw locatie! </a>"
 
 #: templates/core/contribute.html:72
 msgid "Coach!"
@@ -2023,39 +2023,40 @@ msgstr "Django Girls in het algemeen"
 
 #: templates/core/faq.html:39
 msgid "Q: Isn't Django Girls sexist?"
-msgstr "V: Is Django Girls niet seksistisch?"
+msgstr "Q: Is Django Girls niet seksistisch?"
 
 #: templates/core/faq.html:45
 msgid "A: It really isn't, but we can understand why people might feel that way. We've found that by having a women-only space for learning Python and Django, women are more comfortable participating. See <a href=\"http://jennifermann.ghost.io/minority-groups-in-tech-is-it-just-reverse-sexism/\" target=\"_blank\">this essay</a> on \"<a href=\"http://geekfeminism.wikia.com/wiki/Reverse_sexism\" target=\"_blank\">reverse sexism</a>\" and Rails Girls to see what we mean. If you're having the knee-jerk reaction that reaching out specifically to women hurts men, or hurts diversity efforts in other areas, we encourage you to read <a href=\"https://hynek.me/articles/how-i-stopped-worrying-and-started-loving-pyladies/\" target=\"_blank\">How I Stopped Worrying and Started Loving Pyladies</a> by Hynek Schlawack. One particularly relevant quote is this:"
-msgstr ""
+msgstr "A: Dat is het echt niet, maar we kunnen begrijpen waarom mensen zich zo voelen. We hebben ontdekt dat vrouwen zich meer op hun gemak voelen als ze een ruimte hebben waar alleen vrouwen Python en Django kunnen leren. Zie <a href=\"http://jennifermann.ghost.io/minority-groups-in-tech-is-it-just-reverse-sexism/\" target=\"_blank\">dit essay over</a> \"<a href=\"http://geekfeminism.wikia.com/wiki/Reverse_sexism\" target=\"_blank\">omgekeerd seksisme</a>\" en Rails Girls om te zien wat we bedoelen. Als je ervaart dat specifiek contact zoeken met vrouwen mannen schaadt, of diversiteitsinspanningen op andere gebieden schaadt, raden we je aan <a href=\"https://hynek.me/articles/how-i-stopped-worrying-and-started-loving-pyladies/\" target=\"_blank\">Hoe ik stopte met piekeren en van Pyladies begon te houden</a> door Hynek Schlawack te lezen. Een bijzonder relevant citaat is dit:"
 
 #: templates/core/faq.html:62
 msgid "Outreach programs don't divide our community. They incubate people which aren't comfortable to cope with us from the beginning on and grow our community in the long term."
-msgstr ""
+msgstr "Outreach-programma's verdelen onze community niet. Ze koesteren mensen die er nog niet klaar voor zijn om met ons om te gaan en ze laten onze community op de lange termijn groeien."
 
 #: templates/core/faq.html:70
 msgid "It doesn't really matter whose fault the initial discomfort is. Whether they're being over-sensitive (hint: <a href=\"http://therealkatie.net/blog/2012/mar/21/lighten-up/\" target=\"_blank\">they aren't</a>) or whether we're a bunch of a**holes (I know you aren't). The facts are these: if we want underrepresented people to enrich our community, we have to look for pragmatic ways to get them in. Even if the methods don't seem sound to us on the first sight to us."
-msgstr ""
+msgstr "Het maakt niet echt uit wiens schuld het aanvankelijke ongemak is. Of ze overgevoelig zijn (hint: <a href=\"http://therealkatie.net/blog/2012/mar/21/lighten-up/\" target=\"_blank\">dat zijn ze niet</a >) of dat we een stelletje klootzakken zijn (ik weet dat jij dat niet bent). De feiten zijn: als we willen dat ondervertegenwoordigde mensen onze community verrijken, moeten we op zoek gaan naar pragmatische manieren om ze binnen te krijgen. Zelfs als de methoden ons op het eerste gezicht niet gezond lijken."
 
 #: templates/core/faq.html:81
 msgid "\"Yes, but...\" discussion don't help. PyLadies – and similar outreach groups – found a way that works. So be thankful to their organizers for doing this! And again: if you know of a better way, stop sh*tting on their approach and go for it! The world isn't binary; the more approaches, the more diversity, the better."
-msgstr ""
+msgstr "De 'Ja, maar...' discussie helpt niet. PyLadies – en soortgelijke outreach-groepen – hebben een manier gevonden die werkt. Wees de organisatoren dus dankbaar dat ze dit doen! En nogmaals: als je een betere manier weet, ga ervoor! De wereld is niet binair; hoe meer manieren, hoe meer diversiteit, hoe beter."
 
 #: templates/core/faq.html:91
 msgid "Also, not all Django Girls events are exclusive to women. Our organizer's manual encourages organizers to use our materials to put on workshops for women <em>and</em> for mixed-gender groups. We've also open-sourced all of our content, so if you like our tutorial but don't want to put on a Django Girls event with it, feel free to fork it, credit us for the content, but rebrand it into something that works for your goals."
-msgstr ""
+msgstr "Bovendien zijn niet alle Django Girls-activiteiten exclusief voor vrouwen. Onze Handleiding voor Organisatoren moedigt organisatoren aan om ons materiaal te gebruiken om workshops voor vrouwen <em>en</em> voor groepen van gemengd geslacht te organiseren. We hebben ook al onze inhoud open source gemaakt, dus als je onze tutorial leuk vindt, maar er geen Django Girls-evenement mee wilt organiseren, voel je vrij om deze te forken, ons credits te geven voor de inhoud, maar er iets van te maken voor je eigen doeleinden."
 
 #: templates/core/faq.html:102
 msgid "We don't want to get men <em>out</em> of programming; we just want to bring more women <em>in</em>. There are already a lot of other bootcamps, workshops, meetups, and groups that are \"mixed gender,\" but are really mostly men. We've found that by limiting our workshop to a majority of women participants, women are more comfortable signing up, asking questions, getting involved, and even staying involved later on. And that's a good thing!"
-msgstr ""
+msgstr "We willen mannen niet <em>uit</em> uit het programmeren halen; we willen gewoon meer vrouwen <em>binnen</em> halen. Er zijn al veel andere bootcamps, workshops, meetups en groepen die voor 'gemengd geslacht' zijn, maar eigenlijk vooral voor mannen zijn. We hebben ontdekt dat door onze workshop te beperken tot een meerderheid van vrouwelijke deelnemers, vrouwen zich meer op hun gemak voelen bij het aanmelden, het stellen van vragen, het meedoen en zelfs later nog betrokken blijven. En daar is helemaal niks mis mee!\n"
+""
 
 #: templates/core/faq.html:119
 msgid "Q: Are Django Girls events trans-inclusive?"
-msgstr "V: Zijn Django Girls-evenementen trans-inclusief?"
+msgstr "Q: Zijn Django Girls-evenementen trans-inclusief?"
 
 #: templates/core/faq.html:124
 msgid "A: Yes! We encourage you to make this explicit on your website. Some events have used this wording:"
-msgstr ""
+msgstr "A: Ja! We raden je aan om dit expliciet op de website te vermelden. Sommige evenementen hebben deze bewoording gebruikt:"
 
 #: templates/core/faq.html:127
 msgid "We are trans-inclusive and welcome applications from all women."
@@ -2063,11 +2064,11 @@ msgstr "We zijn trans-inclusief en verwelkomen uitnodigingen van alle vrouwen."
 
 #: templates/core/faq.html:131
 msgid "You can add this to your FAQ, or to your event description on your event website. If you'd like to learn more about trans people, you might want to take a look at <a href=\"http://www.thegenderbook.com/\" target=\"_blank\">this illustrated book about gender</a>, <a href=\"http://www.roostertailscomic.com/comic/queer-101-third-edition/\" target=\"_blank\">this comic</a>, or any of the many other introductions to trans issues on the internet. Thanks to the <a href=\"http://kit.pyladies.com/en/latest/faqs.html\" target=\"_blank\">PyLadies FAQ</a> for pointing us to these excellent resources."
-msgstr ""
+msgstr "Je kunt dit toevoegen aan je FAQ of aan de omschrijving van je evenement op de website. Als je meer wilt weten over transgenders, kun je misschien eens kijken naar <a href=\"http://www.thegenderbook.com/\" target=\"_blank\">dit geïllustreerde boek over gender</a >, <a href=\"http://www.roostertailscomic.com/comic/queer-101-third-edition/\" target=\"_blank\">deze strip</a>, of een van de vele andere transgender introducties op internet. Dank aan de <a href=\"http://kit.pyladies.com/en/latest/faqs.html\" target=\"_blank\">PyLadies FAQ</a> voor het verwijzen naar deze uitstekende bronnen."
 
 #: templates/core/faq.html:152
 msgid "A: There doesn't seem to be a need for Django Boys at the moment. But all of our content, including our tutorial and this manual, is open sourced, so if you'd like to start a workshop aimed at another audience, we encourage you to do so! We support you starting an organization that reaches an audience you care about. All the resources we've created, including the tutorial and this manual, are open sourced under Creative Commons Attribution 4.0 International (CC BY 4). This means that you can modify, distribute and use commercially, but you cannot sublicense and you have to give us credit and include copyright."
-msgstr ""
+msgstr "A: Er lijkt op dit moment geen behoefte te zijn aan Django Boys. Maar al onze inhoud, inclusief onze tutorial en deze handleiding, is open source, dus als je een workshop wilt starten die gericht is op een ander publiek, moedigen we je aan om dat te doen! Wij helpen je bij het starten van een organisatie die een doelgroep bereikt die je belangrijk vindt. Al het materiaal dat we hebben gemaakt, inclusief de tutorial en deze handleiding, zijn open source onder Creative Commons Attribution 4.0 International (CC BY 4). Dit betekent dat je de inhoud mag wijzigen, distribueren en commercieel gebruiken, maar dat je geen sublicentie kunt geven en dat je ons credit moet geven en het auteursrecht moet vermelden."
 
 #: templates/core/foundation.html:4 templates/core/foundation.html:10
 msgid "Django Girls Foundation"
@@ -2092,7 +2093,7 @@ msgstr "Wat is Django Girls?"
 
 #: templates/core/index.html:32
 msgid "Django Girls is a <a href=\"%(foundation_url)s\">non-profit organization</a> and a community that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. We are a volunteer run organization with hundreds of people contributing to bring more amazing women into the world of technology. We are making technology more approachable by creating resources designed with empathy."
-msgstr ""
+msgstr "Django Girls is een <a href=\"%(foundation_url)s\">non-profitorganisatie</a> en een community die vrouwen in staat stelt en helpt bij het organiseren van gratis ééndaagse programmeerworkshops met tools, resources en ondersteuning. Wij zijn een door vrijwilligers gerunde organisatie met honderden mensen die er aan bijdragen om meer geweldige vrouwen in de wereld van de technologie te brengen. We maken technologie toegankelijker door resources te creëren die met empathie zijn ontworpen."
 
 #: templates/core/index.html:40
 msgid "During each of our events, 30-60 women build their first web application using HTML, CSS, Python and Django."
@@ -2104,15 +2105,15 @@ msgstr "Django Girls impact"
 
 #: templates/core/index.html:56
 msgid "Since 2014, an army of <span class=\"highlighted-number\">%(organizers_count|default_if_none:'0')s volunteers</span> in the Django Girls community organized <span class=\"highlighted-number\">%(all_events_count|default_if_none:'0')s events.</span> We've been to <span class=\"highlighted-number\">%(cities_count|default_if_none:'0')s cities</span> in <span class=\"highlighted-number\">%(country_count|default_if_none:'0')s countries</span> (<a href=\"%(event_map_url)s\">see them all on a map</a>)."
-msgstr ""
+msgstr "Sinds 2014 organiseerde een collectief van <span class=\"highlighted-number\">%(organizers_count|default_if_none:'0')s vrijwilligers</span> in de Django Girls-community <span class=\"highlighted-number\">%( all_events_count|default_if_none:'0')s evenementen.</span> We zijn naar <span class=\"highlighted-number\">%(cities_count|default_if_none:'0')s plaatsen geweest</span> in <span class=\"highlighted-number\">%(country_count|default_if_none:'0')s landen</span > (<a href=\"%(event_map_url)s\">bekijk ze allemaal op de kaart</a>)."
 
 #: templates/core/index.html:64
 msgid "A total of <span class=\"highlighted-number\">%(attendees_sum|default_if_none:'0')s incredible women attended</span> events organized by members of our community."
-msgstr ""
+msgstr "Een totaal van <span class=\"highlighted-number\">%(attendees_sum|default_if_none:'0')s geweldige vrouwen woonden</span> evenementen bij die werden georganiseerd door leden van onze community."
 
 #: templates/core/index.html:69
 msgid "Read our Annual Report to learn about the impact we make"
-msgstr ""
+msgstr "Lees ons jaarverslag en ontdek welke impact we maken"
 
 #. I'm in doubt how to translate city, what if you want to bring it to your village? Can I use "locatie" which means location or should it be city which will be "stad".
 #: templates/core/index.html:73 templates/includes/_no_event.html:25
@@ -2125,7 +2126,7 @@ msgstr "Is er geen Django Girls workshop bij jou in de buurt? Je kunt er een org
 
 #: templates/core/index.html:76
 msgid "We open sourced the <a href=\"http://organize.djangogirls.org/\">Organizer Manual</a> that provides you with all information required to organize Django Girls workshop. By volunteering to organize, you're joining a vibrant and supportive community of %(organizers_count|default_if_none:'0')s organizers all over the world!"
-msgstr ""
+msgstr "We hebben de <a href=\"http://organize.djangogirls.org/\">Handleiding voor Organisatoren</a> beschikbaar gesteld, die alle informatie bevat die nodig is om een Django Girls-workshop te organiseren. Door dit evenement vrijwillig te organiseren, sluit je je aan bij een levendige en ondersteunende community van %(organizers_count|default_if_none:'0')s organisatoren over de hele wereld!"
 
 #: templates/core/index.html:82 templates/organize/index.html:89
 msgid "Apply to organize a workshop"
@@ -2133,7 +2134,7 @@ msgstr "Schrijf je in om een workshop te organiseren"
 
 #: templates/core/index.html:109
 msgid "Show all %(future_events_count)s upcoming events"
-msgstr ""
+msgstr "Toon alle %(future_events_count)s aankomende evenementen"
 
 #: templates/core/index.html:117
 msgid "Badass Django Ladies"
@@ -2141,7 +2142,7 @@ msgstr "Stoere Django Dames"
 
 #: templates/core/index.html:118
 msgid "Each week we try to introduce one badass lady who uses Python or Django and highlight her work:"
-msgstr "Elke week proberen we één stoere dam te introduceren die Python of Django gebruikt en haar werk onder de aandacht te brengen:"
+msgstr "Elke week proberen we één stoere dame te introduceren die Python of Django gebruikt en haar werk onder de aandacht te brengen:"
 
 #: templates/core/index.html:127
 msgid "Read all Django Stories"
@@ -2161,7 +2162,7 @@ msgstr "Steun ons werk"
 
 #: templates/core/index.html:143
 msgid "Django Girls is a volunteer run organization, and we depend on your support to make it happen."
-msgstr ""
+msgstr "Django Girls is een vrijwilligersorganisatie en we zijn afhankelijk van jouw steun om dit mogelijk te maken."
 
 #: templates/core/index.html:152
 #: templates/donations/corporate_sponsorships.html:84
@@ -2171,7 +2172,7 @@ msgstr "Doneer regelmatig met Patreon"
 
 #: templates/core/index.html:156
 msgid "You can also send us a one <a href=\"%(donations_url)s\">time donation</a>. If you would like to discuss a bigger partnership, <a href=\"%(contact_url)s\">please get in touch</a>."
-msgstr ""
+msgstr "Je kunt ons ook een <a href=\"%(donations_url)s\"> eenmalige donatie</a> doen. Als er behoefte is om een groter partnership te bespreken, <a href=\"%(contact_url)s\">neem dan contact met ons op</a>."
 
 #: templates/core/index.html:164
 msgid "Stay up to date!"
@@ -2179,7 +2180,7 @@ msgstr "Blijf op de hoogte!"
 
 #: templates/core/index.html:166
 msgid "Subscribe to Django Girls Dispatch to receive the latest and greatest from our community every two weeks, straight to your inbox!"
-msgstr ""
+msgstr "Abonneer je op Django Girls Dispatch om elke twee weken het nieuwste en beste van onze community rechtstreeks in je inbox te ontvangen!"
 
 #: templates/core/index.html:173 templates/core/newsletter.html:35
 msgid "email address"
@@ -2201,7 +2202,7 @@ msgstr "Zij steunen ons al! 💕"
 #: templates/core/index.html:207
 #: templates/donations/corporate_sponsorships.html:120
 msgid "These incredible companies made a pledge to diversity and are actively helping us to change the ratio in the tech industry. <br /> If you wish to join them, support us on <a href=\"https://www.patreon.com/djangogirls\">Patreon</a> or <a href=\"%(contact_url)s\">drop us a line</a>."
-msgstr ""
+msgstr "Deze geweldige bedrijven hebben steunen ons actief om diversiteit te bevorderen en om de verhoudingen in de technologie-industrie te veranderen. <br /> Als je je bij hen wilt aansluiten, steun ons dan op <a href=\"https://www.patreon.com/djangogirls\">Patreon</a> of <a href=\"%(contact_url)s\"> stuur ons een bericht</a>."
 
 #: templates/core/newsletter.html:4
 msgid "Django Girls Dispatch - Newsletter"
@@ -2213,11 +2214,11 @@ msgstr "Django Girls Dispatch"
 
 #: templates/core/newsletter.html:13
 msgid "We're sending a biweekly newsletter to friends and strangers who support us and are curious how we're doing."
-msgstr ""
+msgstr "We sturen tweewekelijks een nieuwsbrief naar vrienden en onbekenden die ons steunen en interesse hebben in hoe het met ons gaat."
 
 #: templates/core/newsletter.html:25
 msgid "We don't send advertisements or spam, and we won't share your email with anyone. <br /> We just send a biweekly dispatch and awesome announcements about things we're proud of."
-msgstr ""
+msgstr "We sturen geen advertenties of spam en we delen je e-mailadres met niemand. <br /> We sturen gewoon tweewekelijks een bericht met geweldige aankondigingen over dingen waar we trots op zijn."
 
 #: templates/core/newsletter.html:49
 msgid "Past editions"
@@ -2229,15 +2230,15 @@ msgstr "Cookie en Privacy Policies van de Django Girls Website"
 
 #: templates/core/privacy_cookies.html:5 templates/core/privacy_cookies.html:25
 msgid "This Policy applies to our use of any and all Data collected by us in relation to your use of the Site."
-msgstr ""
+msgstr "Deze Policy is van toepassing op het gebruik door ons van alle Data die door ons zijn verzameld in verband met je gebruik van de site."
 
 #: templates/core/privacy_cookies.html:14
 msgid "<b>We, Us, Our</b> Django Girls Foundation, Registered Charity Number 1163260 whose address is United House, North Road, London N7 9DP"
-msgstr ""
+msgstr "<b>Wij, Ons, Onze</b> Django Girls Foundation, met geregistreerd liefdadigheidsnummer 1163260 en  adres United House, North Road, Londen N7 9DP"
 
 #: templates/core/privacy_cookies.html:20
 msgid "<b>You, Your</b> Are a visitor to the Site"
-msgstr ""
+msgstr "<b>Je, Jij, Jouw</b> Bent een bezoeker van de Site"
 
 #: templates/core/privacy_cookies.html:23
 msgid "<b>Site</b> djangogirls.org"
@@ -2249,27 +2250,27 @@ msgstr "Definities en Interpretatie"
 
 #: templates/core/privacy_cookies.html:29
 msgid "In this Policy the following terms shall have the following meanings:"
-msgstr ""
+msgstr "In deze Policy hebben de volgende termen de volgende betekenis:"
 
 #: templates/core/privacy_cookies.html:33
 msgid "<b>Data</b> means all the information you submit to us via the Site. This definition, where appropriate, incorporates the definitions provided in the Data Protection Act 1998."
-msgstr ""
+msgstr "Met <b>Data</b> bedoelen we alle informatie die je via de Site aan ons verstrekt. Deze definitie, waar van toepassing, omvat de definities die zijn opgenomen in de Data Protection Act 1998. "
 
 #: templates/core/privacy_cookies.html:38
 msgid "<b>Cookie</b> means a small text file placed on your computer by this Site when you visit certain parts of the Site and/or when you use certain features of the Site."
-msgstr ""
+msgstr "Een <b>Cookie</b> is een tekstbestandje dat door deze Site op je computer wordt geplaatst wanneer je bepaalde delen van de Site bezoekt en/of wanneer je bepaalde functies van de Site gebruikt."
 
 #: templates/core/privacy_cookies.html:43
 msgid "<b>UK and EU Cookie law</b> means the Privacy and Electronic Communications (EC Directive) Regulations 2003 as amended by the Privacy and Electronic Communications (EC Directive) (Amendment) Regulations 2011."
-msgstr ""
+msgstr "<b>De Britse en EU-cookiewetgeving</b> is de Privacy and Electronic Communications (EC Directive) Regulations 2003, zoals gewijzigd door de Privacy and Electronic Communications (EC Directive) (Amendment) Regulations 2011."
 
 #: templates/core/privacy_cookies.html:48
 msgid "<b>EU GDPR, GDPR</b> means The General Data Protection Regulation 2016/679, a regulation in EU law on data protection and privacy for all individuals within the European Union and the European Economic Area."
-msgstr ""
+msgstr "<b>EU AVG, AVG</b> is de Algemene Verordening Gegevensbescherming 2016/679, een verordening in de EU-wetgeving over gegevensbescherming en privacy voor alle individuen binnen de Europese Unie en de Europese Economische Ruimte."
 
 #: templates/core/privacy_cookies.html:53
 msgid "<b>User</b> means you or anyone who uses the Site."
-msgstr ""
+msgstr "<b>Gebruiker</b> ben jij of iedereen die de Site gebruikt."
 
 #: templates/core/privacy_cookies.html:59
 msgid "Scope of this Policy"
@@ -2277,15 +2278,15 @@ msgstr "Scope van deze Policy"
 
 #: templates/core/privacy_cookies.html:61
 msgid "This Policy applies only to the actions of you and us when using the Site. It does not extend to:"
-msgstr ""
+msgstr "Deze Policy is alleen van toepassing op acties van jou en ons tijdens het  gebruik van de Site. Het strekt zich niet uit tot:"
 
 #: templates/core/privacy_cookies.html:64
 msgid "any Event which you may attend as the organisers of those events are responsible for complying with the data protection legislation which applies in their jurisdiction. Despite this, the organisers of all events are required to follow the policies laid out below as part of their agreement with us and we hereby grant you the right to pursue them for any breach of these policies; or"
-msgstr ""
+msgstr "elk Evenement dat je bijwoont, omdat de organisatoren van die evenementen verantwoordelijk zijn voor het naleven van de wetgeving inzake gegevensbescherming die in hun rechtsgebied van toepassing is. De organisatoren van alle evenementen zijn verplicht om het onderstaande beleid te volgen als onderdeel van hun overeenkomst met ons en wij verlenen je hierbij het recht om hen te vervolgen voor elke overtreding van dit beleid; of"
 
 #: templates/core/privacy_cookies.html:71
 msgid "any websites that can be accessed from this Site including, but not limited to, any links we might provide."
-msgstr ""
+msgstr "alle websites die toegankelijk zijn vanaf deze Site, inclusief, maar niet beperkt tot, de links die we aanbieden."
 
 #: templates/core/privacy_cookies.html:74
 msgid "Data Collected"
@@ -2293,7 +2294,7 @@ msgstr "Verzamelde data"
 
 #: templates/core/privacy_cookies.html:76
 msgid "Without limitation, all or any of the following Data may be collected by the Site from time to time:"
-msgstr ""
+msgstr "Zonder beperking kunnen alle of een deel van de volgende Gegevens zo nu en dan door de Site worden verzameld:"
 
 #: templates/core/privacy_cookies.html:79
 msgid "name;"
@@ -2309,11 +2310,11 @@ msgstr "gender;"
 
 #: templates/core/privacy_cookies.html:82
 msgid "contact information such as email addresses and telephone numbers;"
-msgstr ""
+msgstr "contactgegevens zoals e-mailadressen en telefoonnummers;"
 
 #: templates/core/privacy_cookies.html:83
 msgid "demographic information such as post code, preferences and interests;"
-msgstr ""
+msgstr "demografische informatie zoals postcode, voorkeuren en interesses;"
 
 #: templates/core/privacy_cookies.html:84
 msgid "IP address (automatically collected);"
@@ -2321,15 +2322,15 @@ msgstr "IP-adres (automatisch verzameld);"
 
 #: templates/core/privacy_cookies.html:85
 msgid "web browser type and version (automatically collected);"
-msgstr ""
+msgstr "type en versie van webbrowser (automatisch verzameld);"
 
 #: templates/core/privacy_cookies.html:86
 msgid "operating system (automatically collected); and"
-msgstr ""
+msgstr "besturingssysteem (automatisch verzameld); En"
 
 #: templates/core/privacy_cookies.html:87
 msgid "a list of URLs starting with a referring site, your activity on the Site, and the site you exit to (automatically collected)."
-msgstr ""
+msgstr "een lijst met URL's die beginnen met een verwijzende site, je activiteit op de Site en de website waar je naartoe gaat (automatisch verzameld)."
 
 #: templates/core/privacy_cookies.html:90
 msgid "Our Use of Data"
@@ -2337,63 +2338,63 @@ msgstr "Ons Datagebruik"
 
 #: templates/core/privacy_cookies.html:92
 msgid "We will keep any personal Data you submit for 60 months."
-msgstr ""
+msgstr "We bewaren alle persoonlijke Data die je verstrekt voor een periode van 60 maanden."
 
 #: templates/core/privacy_cookies.html:95
 msgid "Unless we are obliged or allowed by law, and subject to “Third Party Sites and Services” below, we will not disclose your Data to third parties.  This does not include the companies which form part of our group."
-msgstr ""
+msgstr "Tenzij we daartoe verplicht zijn of het recht daartoe hebben, en in overeenstemming met “Sites en diensten van derden” hieronder, zullen we je Data niet met derden delen.  Hieronder vallen niet de bedrijven die deel uitmaken van onze groep."
 
 #: templates/core/privacy_cookies.html:101
 msgid "All personal Data is stored securely in accordance with the principles of the Data Protection Act 1998 and the EU GDPR."
-msgstr ""
+msgstr "Alle persoonlijke Data wordt veilig opgeslagen in overeenstemming met de Data Protection Act 1998 en de EU AVG."
 
 #: templates/core/privacy_cookies.html:106
 msgid "We use your Data so as to give you the best possible service and experience when using the Site."
-msgstr ""
+msgstr "We gebruiken je Data om je de best mogelijke service en ervaring te bieden tijdens het gebruik van de Site."
 
 #: templates/core/privacy_cookies.html:108
 msgid "Specifically, Data may be used by us for the following reasons:"
-msgstr ""
+msgstr "Meer specifiek kan Data door ons gebruikt worden voor het volgende:"
 
 #: templates/core/privacy_cookies.html:110
 msgid "internal record keeping;"
-msgstr ""
+msgstr "interne administratie;"
 
 #: templates/core/privacy_cookies.html:111
 msgid "improvement of our products / services;"
-msgstr ""
+msgstr "verbetering van onze producten/diensten;"
 
 #: templates/core/privacy_cookies.html:112
 msgid "transmission by email of promotional materials that may be of interest to you;"
-msgstr ""
+msgstr "verzending per e-mail van promotiemateriaal dat interessant voor je kan zijn;"
 
 #: templates/core/privacy_cookies.html:113
 msgid "contact for market research purposes which may be done using email, telephone, fax or mail;"
-msgstr ""
+msgstr "contact voor marktonderzoeksdoeleinden via e-mail, telefoon, fax of post;"
 
 #: templates/core/privacy_cookies.html:114
 msgid "the organisation of an Event for which you have applied or in which you have expressed interest; or"
-msgstr ""
+msgstr "de organisatie van een Evenement waarvoor je je hebt aangemeld of waarvoor je interesse hebt getoond; of"
 
 #: templates/core/privacy_cookies.html:115
 msgid "to customise or update the Site."
-msgstr ""
+msgstr "om de Site aan te passen of bij te werken."
 
 #: templates/core/privacy_cookies.html:118
 msgid "Third Party Sites and Services"
-msgstr ""
+msgstr "Websites en diensten van derden"
 
 #: templates/core/privacy_cookies.html:121
 msgid "We may, from time to time, use other parties for dealing with matters that may include, but are not limited to, payment processing, delivery of purchased items, search engine facilities, advertising and marketing. The providers of such services have access to some of your Data."
-msgstr ""
+msgstr "We kunnen af en toe andere partijen gebruiken voor het afhandelen van zaken die het volgende kunnen omvatten, maar die niet beperkt zijn tot, betalingsverwerking, levering van gekochte artikelen, zoekmachinefaciliteiten, reclame en marketing. De aanbieders van dergelijke diensten hebben toegang tot sommige van je gegevens."
 
 #: templates/core/privacy_cookies.html:129
 msgid "Any Data used by such parties is used only to the extent required by them to perform the services that we’ve requested. Any use for other purposes is strictly prohibited."
-msgstr ""
+msgstr "Alle Data die door dergelijke partijen worden gebruikt, worden alleen gebruikt voor zover zij dit nodig hebben om de door ons gevraagde diensten uit te voeren. Elk gebruik voor andere doeleinden is ten strengste verboden."
 
 #: templates/core/privacy_cookies.html:136
 msgid "Any Data that is processed by third parties will be processed within the terms of this Policy and in accordance with the Data Protection Act 1998 and the EU GDPR."
-msgstr ""
+msgstr "Alle Data die door derden worden verwerkt, worden verwerkt binnen de voorwaarden van deze Policy en in overeenstemming met de Data Protection Act 1998 en de EU AVG."
 
 #: templates/core/privacy_cookies.html:142
 msgid "Links to Other Websites"
@@ -2401,31 +2402,31 @@ msgstr "Links naar andere websites"
 
 #: templates/core/privacy_cookies.html:145
 msgid "We may, from time to time, provide links to other websites. We have no control over such websites and can’t be responsible for their content. This Policy does not extend to those websites and we suggest that you read the privacy policy or statement on those websites before using them."
-msgstr ""
+msgstr "Wij zullen zo nu en dan links naar andere websites aanbieden. Wij hebben geen controle over dergelijke websites en kunnen niet verantwoordelijk gehouden worden voor de inhoud ervan. Deze Policy is niet van toepassing op die websites en wij raden je aan het privacybeleid of de privacyverklaring op die websites te lezen voordat je deze gebruikt."
 
 #: templates/core/privacy_cookies.html:151
 msgid "Changes of Business Ownership and Control"
-msgstr ""
+msgstr "Veranderingen in bedrijfseigendom en zeggenschap"
 
 #: templates/core/privacy_cookies.html:154
 msgid "We may, from time to time, expand or reduce our business and that may mean that the people who control our business change. If we do that your Data will, if relevant, be transferred to the people who then control the business. They will have the same rights and obligations as we have under the terms of this Policy."
-msgstr ""
+msgstr "We kunnen af en toe onze activiteiten uitbreiden of inkrimpen en dat kan betekenen dat de leiding over de activiteiten aan andere mensen kan wordt doorgegeven. Als dat gebeurt, worden je Data, indien relevant, overgedragen aan de mensen die op dat moment de leiding hebben. Zij hebben dezelfde rechten en plichten als wij onder de voorwaarden van deze Policy."
 
 #: templates/core/privacy_cookies.html:161
 msgid "If we do transfer Data for this reason we will not tell you in advance."
-msgstr ""
+msgstr "Als we om deze reden Data overdragen, zullen we je dit niet van tevoren meedelen."
 
 #: templates/core/privacy_cookies.html:163
 msgid "Controlling Use of Your Data"
-msgstr ""
+msgstr "Controle over het gebruik van je Data"
 
 #: templates/core/privacy_cookies.html:164
 msgid "If we ask for Data from you, you will be given options to restrict our use of that Data.  This may include the following:"
-msgstr ""
+msgstr "Als we je om Data vragen, krijg je opties om het gebruik van die Data door ons te beperken.  Dit kan het volgende omvatten:"
 
 #: templates/core/privacy_cookies.html:167
 msgid "use of Data for direct marketing purposes; and"
-msgstr "gebruik van gegevens voor directe marketingdoeleinden; en"
+msgstr "gebruik van Data voor directe marketingdoeleinden; en"
 
 #: templates/core/privacy_cookies.html:168
 msgid "sharing Data with third parties."
@@ -2441,11 +2442,11 @@ msgstr "Je Recht op Privacy"
 
 #: templates/core/privacy_cookies.html:174
 msgid "You may access certain areas of the Site without providing any Data at all but to use all features and functions available on the Site you may be required to submit certain Data."
-msgstr ""
+msgstr "Je hebt toegang tot bepaalde delen van de Site zonder dat je Data hoeft te verstrekken, maar om alle op de Site beschikbare features en functionaliteiten te kunnen gebruiken, moet je mogelijk bepaalde Data verstrekken."
 
 #: templates/core/privacy_cookies.html:176
 msgid "You may restrict your internet browser’s use of Cookies – we suggest that you look at the “Tools” setting for your internet browser.  See below under “Cookies” for more information."
-msgstr ""
+msgstr "Je kunt het gebruik van Cookies door je internetbrowser beperken - we raden je aan om bij de instelling ‘Extra’ van je internetbrowser te kijken.  Hieronder bij “Cookies” vind je meer informatie."
 
 #: templates/core/privacy_cookies.html:178
 msgid "Accessing Your Own Data"
@@ -2453,7 +2454,7 @@ msgstr "Toegang tot je eigen data"
 
 #: templates/core/privacy_cookies.html:180
 msgid "You have the right to ask for a copy of any of your personal Data which we hold on payment of a small fee which will not exceed £10."
-msgstr ""
+msgstr "Je hebt het recht om een kopie te vragen van al je persoonlijke gegevens die wij bewaren, tegen betaling van een kleine vergoeding van maximaal  £10."
 
 #: templates/core/privacy_cookies.html:182
 msgid "Security"
@@ -2461,7 +2462,7 @@ msgstr "Veiligheid"
 
 #: templates/core/privacy_cookies.html:184
 msgid "Data security is of great importance to us and to protect your Data we have put in place various physical, electronic and managerial procedures to safeguard and secure Data collected via the Site."
-msgstr ""
+msgstr "We vinden data security heel belangrijk en om je Data te beschermen hebben we verschillende fysieke, electronische en organisatorische procedures ingevoerd om Data die we verzamelen via de Site te beschermen en te beveiligen."
 
 #: templates/core/privacy_cookies.html:186
 msgid "Cookies"
@@ -2469,27 +2470,27 @@ msgstr "Cookies"
 
 #: templates/core/privacy_cookies.html:188
 msgid "The Site may place and access certain Cookies on your computer.  These are first party Cookies and we place them via the Site and only we use them.  We use Cookies to improve your experience of using the Site and to improve our range of products and/or services.  We choose the Cookies we use carefully and have taken steps to make sure that your privacy is always protected and respected."
-msgstr ""
+msgstr "De Site kan bepaalde Cookies op je computer plaatsen en gebruiken. Dit zijn first party Cookies en wij plaatsen ze via de Site en wij zijn de enigen die er gebruik van maken. Wij gebruiken Cookies om je ervaring met het gebruik van de Site te verbeteren en om onze producten en/of diensten te verbeteren. Wij kiezen de Cookies die wij gebruiken zorgvuldig en zorgen er voor dat je privacy altijd wordt beschermd en gerespecteerd."
 
 #: templates/core/privacy_cookies.html:190
 msgid "All Cookies used by the Site are used in accordance with current UK and EU Cookie Law."
-msgstr ""
+msgstr "Alle cookies die door de site worden gebruikt, worden gebruikt in overeenstemming met de huidige Britse en EU cookie-wetgeving."
 
 #: templates/core/privacy_cookies.html:192
 msgid "Certain features of the Site need Cookies for those features to work.  UK and EU Cookie Law deems these Cookies to be “strictly necessary”.  In those cases, we don’t ask for your consent to place them but you can still block these Cookies by changing your internet browser’s settings as detailed below."
-msgstr ""
+msgstr "Bepaalde functies van de Site hebben Cookies nodig om die functies te laten werken. De Britse en EU-cookiewetgeving beschouwt deze Cookies als “strikt noodzakelijk”. In die gevallen vragen we niet om je toestemming om ze te plaatsen, maar je kunt deze Cookies nog steeds blokkeren door de instellingen van je internetbrowser te wijzigen zoals hieronder beschreven."
 
 #: templates/core/privacy_cookies.html:194
 msgid "The Site uses analytics services provided by Google and others.  “Analytics” is a set of tools used to collect and analyse how the Site is used which then helps us understand the needs of our Users.  This, in turn, means that we can improve the Site and the products and/or services offered through it."
-msgstr ""
+msgstr "De Site maakt gebruik van analytics services die worden geleverd door Google en anderen. “Analytics” is een set tools die wordt gebruikt om te verzamelen en analyseren hoe de Site wordt gebruikt, wat ons vervolgens helpt om de behoeften van onze Gebruikers te begrijpen. En dit leidt er weer toe dat we de Site en de producten en/of services die via de Site worden aangeboden, kunnen verbeteren."
 
 #: templates/core/privacy_cookies.html:196
 msgid "You don’t have to let us use these analytic Cookies but when we use them your privacy and safe use of the Site are not at risk."
-msgstr ""
+msgstr "Je hoeft ons deze analytische cookies niet te laten gebruiken, maar als we ze gebruiken, lopen je privacy en het veilige gebruik van de site geen gevaar."
 
 #: templates/core/privacy_cookies.html:198
 msgid "The analytics service may place Cookies on your device immediately you visit the Site and it may not be possible to obtain your consent before it does.  You can remove these Cookies and prevent future use of them by following the steps set out below:"
-msgstr ""
+msgstr "De analytics service kan cookies op je device plaatsen zodra je de site bezoekt en het is mogelijk dat je daarvoor geen toestemming kunt geven. Je kunt deze cookies verwijderen en toekomstig gebruik ervan voorkomen door de onderstaande stappen te volgen:"
 
 #: templates/core/privacy_cookies.html:201
 msgid "You can choose to enable or disable Cookies in your internet browser."
@@ -2497,19 +2498,19 @@ msgstr "Je kunt er voor kiezen om Cookies in je internet browser in of uit te sc
 
 #: templates/core/privacy_cookies.html:202
 msgid "Most internet browsers enable you to choose whether you wish to disable all Cookies or only third party Cookies."
-msgstr ""
+msgstr "Bij de meeste internetbrowsers kun je kiezen of je alle cookies of alleen cookies van derden wilt uitschakelen."
 
 #: templates/core/privacy_cookies.html:203
 msgid "By default, most internet browsers accept Cookies but this can be changed. For further details, please consult the help menu in your internet browser."
-msgstr ""
+msgstr "Standaard accepteren de meeste internetbrowsers cookies, maar dit kan worden gewijzigd. Raadpleeg voor meer informatie het help menu in uw internetbrowser."
 
 #: templates/core/privacy_cookies.html:204
 msgid "You can choose to delete Cookies at any time but if you do you may lose any information that enables you to access the Site quickly and efficiently and you may lose your personal settings."
-msgstr ""
+msgstr "Je kunt er op elk gewenst moment voor kiezen om Cookies te verwijderen, maar als je dat doet, loopt je het risico dat je alle informatie verliest die je in staat stelt om snel en efficiënt toegang te krijgen tot de Site. Ook kunnen je persoonlijke instellingen verloren gaan."
 
 #: templates/core/privacy_cookies.html:208
 msgid "We recommend that you make sure that your internet browser is up-to-date and that if you are not sure about anything you look at the help and guidance provided by your internet browser."
-msgstr ""
+msgstr "Wij adviseren je ervoor te zorgen dat je internetbrowser up-to-date is en dat je, als je ergens niet zeker van bent, de hulp en begeleiding van je internetbrowser raadpleegt."
 
 #: templates/core/privacy_cookies.html:214
 msgid "Changes to this Policy"
@@ -2517,7 +2518,7 @@ msgstr "Wijzigingen in deze Policy"
 
 #: templates/core/privacy_cookies.html:217
 msgid "We have the right to change this Policy as and when we decide from time to time or as may be required by law. Any changes will be immediately posted on the Site and you are deemed to have accepted the terms of this Policy on your first use of the Site following those changes."
-msgstr ""
+msgstr "Wij hebben het recht om dit Beleid te wijzigen wanneer wij dat besluiten of als de wet de vereist. Alle wijzigingen worden onmiddellijk op de Site geplaatst en je wordt geacht de voorwaarden van dit Beleid te hebben geaccepteerd bij je eerste gebruik van de Site na die wijzigingen."
 
 #: templates/core/resources.html:9 templates/global/footer.html:39
 #: templates/global/menu.html:32
@@ -2526,7 +2527,7 @@ msgstr "Bronnen"
 
 #: templates/core/resources.html:11
 msgid "All the resources we've created are open sourced under Creative Commons Attribution 4.0 International (CC BY 4). This means that you can modify, distribute and use commercially, but you cannot sublicense and you have to give us credit and include copyright."
-msgstr ""
+msgstr "Alle bronnen die we hebben gecreëerd zijn open source onder Creative Commons Naamsvermelding 4.0 Internationaal (CC BY 4). Dit betekent dat je ze mag aanpassen, verspreiden en commercieel mag gebruiken, maar je mag geen sublicentie verlenen en je moet ons credits geven en copyright vermelden."
 
 #: templates/core/resources.html:22
 msgid "Django Tutorial"
@@ -2538,16 +2539,16 @@ msgstr "Tutorial Django Girls"
 
 #: templates/core/resources.html:30
 msgid "The tutorial we're using for all of our workshops. It's a very beginner-friendly tutorial with introductions to the command line, Python, Django, HTML and CSS."
-msgstr ""
+msgstr "De tutorial die we gebruiken voor al onze workshops. Het is een toegankelijke tutorial met introducties voor de command line, Python, Django, HTML en CSS."
 
 #: templates/core/resources.html:35 templates/core/resources.html:55
 #: templates/core/resources.html:77 templates/core/resources.html:97
 msgid "Read it"
-msgstr ""
+msgstr "Lezen"
 
 #: templates/core/resources.html:42 templates/global/footer.html:42
 msgid "Organizer's Manual"
-msgstr ""
+msgstr "Handleiding voor de Organisator"
 
 #: templates/core/resources.html:45
 msgid "Organize Django Girls"
@@ -2555,7 +2556,7 @@ msgstr "Organiseer Django Girls"
 
 #: templates/core/resources.html:50
 msgid "We have written down everything we know about organizing workshops like Django Girls. It's a handbook for organizers of local events, but can be used to organize any kind of workshop."
-msgstr ""
+msgstr "We hebben alles wat we weten over het organiseren van workshops zoals Django Girls opgeschreven. Het is een handboek voor organisatoren van lokale evenementen, maar kan worden gebruikt om elk soort workshop te organiseren."
 
 #: templates/core/resources.html:67
 msgid "Coaching Guide Django Girls"
@@ -2563,7 +2564,7 @@ msgstr "Coaching Gids DJango Girls"
 
 #: templates/core/resources.html:72
 msgid "A good coaching approach is the most important part of Django Girls events. Learn how to be a good coach, what the rules are and what we believe in. This can be used for coaching any event -- not only Django Girls workshops."
-msgstr ""
+msgstr "Een goede coaching aanpak is het belangrijkste onderdeel van Django Girls-evenementen. Leer hoe je een goede coach kunt zijn, wat de regels zijn en waar we in geloven. Dit kan worden gebruikt voor het coachen van elk evenement -- niet alleen Django Girls-workshops."
 
 #: templates/core/resources.html:84 templates/global/footer.html:44
 msgid "Tutorial Extensions"
@@ -2580,16 +2581,16 @@ msgstr "Dit boek bevat extra opgaven en tutorials die kunnen worden gedaan na he
 #: templates/core/terms_conditions.html:4
 #: templates/core/terms_conditions.html:11
 msgid "Terms and Conditions of use of Django Girls Website"
-msgstr ""
+msgstr "Algemene gebruiksvoorwaarden van de Django Girls-website"
 
 #: templates/core/terms_conditions.html:5
 #: templates/core/terms_conditions.html:22
 msgid "Welcome to our terms and conditions page. We’ve tried to make it easy to follow so that you know exactly where you stand when you order from us. Please read it through and, if there is anything you don’t understand, get in touch and we’ll do our best to explain."
-msgstr ""
+msgstr "Welkom op onze pagina met algemene voorwaarden. We hebben geprobeerd zo gemakkelijk mogelijk te maken, zodat je precies weet waar je aan toe bent als je bij ons bestelt. Lees het door en als er iets is dat je niet begrijpt, neem dan contact met ons op en we zullen ons best doen om het uit te leggen."
 
 #: templates/core/terms_conditions.html:14
 msgid "<b>We</b> are Django Girls Foundation, Registered Charity Number 1163260 whose address is United House, North Road, London N7 9DP"
-msgstr ""
+msgstr "<b>Wij</b> zijn de Django Girls Foundation, geregistreerd liefdadigheidsnummer 1163260 met als adres United House, North Road, London N7 9DP"
 
 #: templates/core/terms_conditions.html:18
 msgid "<b>Site</b> is djangogirls.org"
@@ -2601,11 +2602,11 @@ msgstr "<b>Jij</b> bent een bezoeker van onze Website"
 
 #: templates/core/terms_conditions.html:29
 msgid "By entering our site you are accepting these T&Cs"
-msgstr ""
+msgstr "Door onze site te bezoeken, accepteert u deze algemene voorwaarden"
 
 #: templates/core/terms_conditions.html:33
 msgid "One other thing we need to say is that we do change these T&Cs from time to time and so you <b>must</b> always visit this page to see what changes we’ve made – we’ll assume that you have each time you contact us."
-msgstr ""
+msgstr "Er is nog iets anders. We wijzigen deze Algemene Voorwaarden van tijd tot tijd en daarom <b>moet</b> je altijd deze pagina bezoeken om te zien welke wijzigingen we hebben doorgevoerd - we gaan ervan uit dat je dit hebt gedaan telkens wanneer je contact met ons opneemt."
 
 #: templates/core/terms_conditions.html:39
 msgid "Agreement"
@@ -2613,7 +2614,7 @@ msgstr "Overeenkomst"
 
 #: templates/core/terms_conditions.html:41
 msgid "This page is meant to form the basis of the relationship between us and both you and we agree to be bound by what it says."
-msgstr ""
+msgstr "Deze pagina is bedoeld om de basis te leggen van de relatie tussen ons beiden en we komen overeen om ons te binden aan de inhoud."
 
 #: templates/core/terms_conditions.html:44
 msgid "Definition"
@@ -2629,35 +2630,35 @@ msgstr "Jij belooft ons:"
 
 #: templates/core/terms_conditions.html:49
 msgid "That you have the right to agree these T&Cs with us and that you are over the age of 18 years."
-msgstr ""
+msgstr "Dat je het recht hebt om deze Algemene Voorwaarden met ons overeen te komen en dat je ouder bent dan 18 jaar."
 
 #: templates/core/terms_conditions.html:50
 msgid "That if you follow any links we have on the Site, you will read the terms and conditions on the sites we link you to."
-msgstr ""
+msgstr "Dat als je op de links op de Site klikt, je de algemene voorwaarden op de sites waarnaar wij linken leest."
 
 #: templates/core/terms_conditions.html:51
 msgid "That you won’t use robots, spiders, scrapers or similar things on the Site."
-msgstr ""
+msgstr "Dat je geen robots, spiders, scrapers of soortgelijke dingen op de Site loslaat."
 
 #: templates/core/terms_conditions.html:52
 msgid "That you won’t try to get around any things we put on the Site to stop or limit access to parts of it."
-msgstr ""
+msgstr "Dat je niet zult proberen om de dingen die wij op de Site plaatsen te omzeilen om de toegang tot delen ervan te blokkeren of te beperken."
 
 #: templates/core/terms_conditions.html:53
 msgid "That you won’t do anything that might cause our systems to crash."
-msgstr ""
+msgstr "Dat je niets doet waardoor onze systemen zouden kunnen crashen."
 
 #: templates/core/terms_conditions.html:54
 msgid "That you won’t steal, borrow, copy or otherwise obtain the Site or any part of it for use in any other site or application for any use which conflicts with the aims and ideals which we publish from time to time on the Site."
-msgstr ""
+msgstr "Dat u de Site of enig deel daarvan niet zult stelen, lenen, kopiëren of op een andere manier zult verkrijgen voor gebruik op een andere site of toepassing voor enig gebruik dat in strijd is met de doelen en idealen die wij bij tijd en wijle op de Site publiceren."
 
 #: templates/core/terms_conditions.html:55
 msgid "That you won’t try to modify, translate, adapt, edit, decompile, disassemble or reverse engineer any programs we use in connection with the Site or the services it offers for any purpose which is inconsistent with the aims and ideals which we publish from time to time on the Site."
-msgstr ""
+msgstr "Dat je niet zult proberen om programma's die wij gebruiken in verband met de Site of de diensten die deze aanbiedt te wijzigen, vertalen, aanpassen, bewerken, decompileren, demonteren of reverse engineeren voor enig doel dat onverenigbaar is met de doelen en idealen die wij bij tijd en wijle op de Site publiceren."
 
 #: templates/core/terms_conditions.html:56
 msgid "That you won’t copy, imitate or use the trademarks and/or designs and/or layout or anything else which would usually amount to intellectual property and which we own."
-msgstr ""
+msgstr "Dat je de handelsmerken en/of ontwerpen en/of lay-out of iets anders dat normaal gesproken neerkomt op intellectueel eigendom en dat wij bezitten, niet zult kopiëren, imiteren of gebruiken."
 
 #: templates/core/terms_conditions.html:59
 msgid "Intellectual property"
@@ -2665,83 +2666,83 @@ msgstr "Intellectueel eigendom"
 
 #: templates/core/terms_conditions.html:60
 msgid "Either we or third parties own all of the information and intellectual property on the Site."
-msgstr ""
+msgstr "Alle informatie en intellectuele eigendommen op de Site behoren aan ons of aan derden."
 
 #: templates/core/terms_conditions.html:63
 msgid "We’re quite happy for you to use information or intellectual property on the Site which belongs to us provided that you ask for our permission (in writing) first.  We may impose conditions on your use of that information or intellectual property. If you want to use any of our information or intellectual property as an Organiser then you must comply with our Organiser terms and conditions which you can view <a href=\"http://organize.djangogirls.org/\">here</a>."
-msgstr ""
+msgstr "We zijn heel blij dat je op de Site informatie of intellectueel eigendommen gebruikt die aan ons toebehoort, op voorwaarde dat je eerst om onze toestemming (schriftelijk) vraagt.  Wij kunnen voorwaarden stellen aan het gebruik van die informatie of intellectuele eigendommen. Als je als Organisator gebruik wilt maken van onze informatie of intellectueel eigendommen moet je voldoen aan onze Organisator-voorwaarden, die je <a href=\"http://organize.djangogirls.org/\">hier</a> kunt bekijken."
 
 #: templates/core/terms_conditions.html:71
 msgid "Price and payment"
-msgstr ""
+msgstr "Tarieven en betaling"
 
 #: templates/core/terms_conditions.html:73
 msgid "We make no charge for the service we offer to individuals through the Site and most other services we offer are free of charge."
-msgstr ""
+msgstr "We brengen geen kosten in rekening voor de service die we via de Site aan individuen aanbieden en de meeste andere services die we aanbieden zijn ook gratis."
 
 #: templates/core/terms_conditions.html:80
 msgid "If you wish to make a donation for the use of any of our services, go to our <a href=\"https://www.patreon.com/djangogirls\">Patreon page</a> or <a href=\"%(donations_url)s\">our donate page</a>."
-msgstr ""
+msgstr "Als je een donatie wilt doen voor het gebruik van een van onze diensten, ga dan naar onze <a href=\"https://www.patreon.com/djangogirls\">Patreon-pagina</a> of <a href=\"%(donations_url)s\">onze donatie pagina</a>."
 
 #: templates/core/terms_conditions.html:86
 msgid "Use of communications facilities"
-msgstr ""
+msgstr "Gebruik van communicatiefaciliteiten"
 
 #: templates/core/terms_conditions.html:88
 msgid "When submitting content for us to publish on the Site or using any forums or chat rooms on the Site and/or any other similar system on the Site and when using Facebook, Wordpress or any other external communication system to contact us, you must do so in accordance with the following rules:"
-msgstr ""
+msgstr "Wanneer je content bij ons indient om op de Site te publiceren of wanneer je forums of chatrooms  of soortgelijke systemen op de Site gebruikt en wanneer je Facebook, Wordpress of een ander extern communicatiesysteem gebruikt om contact met ons op te nemen, moet je dit doen in overeenstemming met de volgende regels:"
 
 #: templates/core/terms_conditions.html:90
 msgid "you must not use language that may be offensive to other Users;"
-msgstr ""
+msgstr "je mag geen taal gebruiken die kwetsend kan zijn voor andere Gebruikers;"
 
 #: templates/core/terms_conditions.html:91
 msgid "you must not submit Content that is unlawful or otherwise objectionable.  This includes, but is not limited to, Content that is abusive, threatening, harassing, defamatory, ageist, sexist or racist;"
-msgstr ""
+msgstr "je mag geen inhoud indienen die onwettig of anderszins aanstootgevend is.  Dit omvat, maar is niet beperkt tot, inhoud die beledigend, bedreigend, intimiderend, lasterlijk, aan leeftijdsgebonden, seksistisch of racistisch is;"
 
 #: templates/core/terms_conditions.html:92
 msgid "you must submit no Content that is intended to promote or incite violence;"
-msgstr ""
+msgstr "je mag geen Content indienen die bedoeld is om geweld te bevorderen of er toe aan te zetten;"
 
 #: templates/core/terms_conditions.html:93
 msgid "Content must be posted, and communications with us must be made, using the English language;"
-msgstr ""
+msgstr "Voor alle content en communicatie met ons wordt gebruik gemaakt van de Engelse taal;"
 
 #: templates/core/terms_conditions.html:94
 msgid "you must not post links to other sites containing any of the above types of Content;"
-msgstr ""
+msgstr "je mag geen links plaatsen naar andere sites die een van de bovengenoemde soorten inhoud bevatten;"
 
 #: templates/core/terms_conditions.html:95
 msgid "the means by which you identify yourself must not violate these T&Cs or any applicable laws;"
-msgstr ""
+msgstr "de middelen waarmee je je identificeert mogen deze Algemene Voorwaarden of andere wettelijke bepalingen niet schenden;"
 
 #: templates/core/terms_conditions.html:96
 msgid "you must not engage in any form of commercial advertising. This does not prohibit references to businesses for non-promotional purposes including references where advertising may be incidental;"
-msgstr ""
+msgstr "je mag je niet bezighouden met enige vorm van commerciële reclame. Dit verbiedt geen verwijzingen naar bedrijven voor niet-promotionele doeleinden, inclusief verwijzingen waarbij reclame incidenteel kan zijn;"
 
 #: templates/core/terms_conditions.html:97
 msgid "you give us the right to publish the material you have submitted to us anywhere and for whatever reason we choose and we don’t have to pay you a fee or acknowledge you as the author;"
-msgstr ""
+msgstr "je geeft ons het recht om het materiaal dat je bij ons hebt ingediend overal en om welke reden dan ook te publiceren en wij hoeven je geen vergoeding te betalen of je als auteur te erkennen;"
 
 #: templates/core/terms_conditions.html:98
 msgid "you must not impersonate other people, particularly our employees and representatives and those of our affiliates; and"
-msgstr ""
+msgstr "je mag zich niet voordoen als iemand anders, met name niet als een van onze werknemers en vertegenwoordigers en die van onze dochterondernemingen; En"
 
 #: templates/core/terms_conditions.html:99
 msgid "you must not use our System for unauthorised mass communication such as “spam” or “junk mail”."
-msgstr ""
+msgstr "je mag ons Systeem niet gebruiken voor ongeoorloofde massacommunicatie zoals “spam” of “junkmail”."
 
 #: templates/core/terms_conditions.html:102
 msgid "You acknowledge that we have the right to monitor any and all communications made to us or using our System."
-msgstr ""
+msgstr "Je erkent dat wij het recht hebben om alle communicatie aan ons of via ons Systeem te monitoren."
 
 #: templates/core/terms_conditions.html:104
 msgid "You acknowledge that we may retain copies of any and all communications made to us or using our System."
-msgstr ""
+msgstr "Je erkent dat wij kopieën kunnen bewaren van alle communicatie die aan ons is gericht of die binnen ons Systeem is gebruikt."
 
 #: templates/core/terms_conditions.html:107
 msgid "You agree that we can modify any information you send to us in any way and you agree that you have no moral right to be identified as the author of that information. Unless we have agreed them with you in advance, we don’t have to comply with any restrictions you put on our use of that information."
-msgstr ""
+msgstr "Je gaat ermee akkoord dat wij alle informatie die je ons stuurt op welke manier dan ook kunnen wijzigen en je gaat ermee akkoord dat je geen moreel recht hebt om geïdentificeerd te worden als de auteur van die informatie. Tenzij we dit van tevoren met je hebben afgesproken, hoeven we niet te voldoen aan eventuele beperkingen die je oplegt aan ons gebruik van die informatie."
 
 #: templates/core/terms_conditions.html:114
 msgid "Privacy and cookies"
@@ -2749,7 +2750,7 @@ msgstr "Privacy en cookies"
 
 #: templates/core/terms_conditions.html:118
 msgid "We and you both agree that <a href=\"%(cookies_url)s\">our Privacy and Cookie Policy</a> forms part of these T&Cs."
-msgstr ""
+msgstr "Wij zijn het er allebei over eens dat <a href=\"%(cookies_url)s\">ons privacy- en cookiebeleid</a> deel uitmaakt van deze algemene voorwaarden."
 
 #: templates/core/terms_conditions.html:123
 msgid "Disclaimers"
@@ -2757,27 +2758,27 @@ msgstr "Disclaimers"
 
 #: templates/core/terms_conditions.html:125
 msgid "We have tried to make sure of the following things:"
-msgstr ""
+msgstr "We hebben geprobeerd om voor de volgende zaken te zorgen:"
 
 #: templates/core/terms_conditions.html:128
 msgid "that the Site will meet your needs;"
-msgstr ""
+msgstr "dat de Site aan je behoeften zal voldoen;"
 
 #: templates/core/terms_conditions.html:129
 msgid "that all the information we publish is correct, up to date and not misleading;"
-msgstr ""
+msgstr "dat alle informatie die wij publiceren juist, actueel en niet misleidend is;"
 
 #: templates/core/terms_conditions.html:130
 msgid "that the Site always works properly;"
-msgstr ""
+msgstr "dat de Site altijd goed werkt;"
 
 #: templates/core/terms_conditions.html:131
 msgid "that the Site is fit for the purpose you need;"
-msgstr ""
+msgstr "dat de Site geschikt is voor het doel dat je nodig hebt;"
 
 #: templates/core/terms_conditions.html:132
 msgid "that the Site doesn’t infringe the rights of others;"
-msgstr ""
+msgstr "dat de Site geen inbreuk maakt op de rechten van anderen;"
 
 #: templates/core/terms_conditions.html:133
 msgid "that the Site will work with all systems; and"
@@ -2789,31 +2790,31 @@ msgstr "dat de Site veilig is,"
 
 #: templates/core/terms_conditions.html:137
 msgid "but we can’t guarantee those things and, by agreeing to these T&Cs you are confirming that you accept that situation."
-msgstr ""
+msgstr "maar we kunnen deze zaken niet garanderen en door akkoord te gaan met deze Algemene Voorwaarden bevestig je dat je deze situatie accepteert."
 
 #: templates/core/terms_conditions.html:140
 msgid "We take all reasonable effort to test material before placing it on the Site. In the very unlikely event of any loss, disruption or damage caused by material on the Site, we cannot be held responsible for any loss, disruption or damage to your data or computer system which may occur."
-msgstr ""
+msgstr "Wij doen ons best om materiaal te testen voordat we het op de Site plaatsen. In het zeer onwaarschijnlijke geval van verlies, verstoring of schade veroorzaakt door materiaal op de Site, kunnen wij niet aansprakelijk worden gesteld voor verlies, verstoring of schade aan je gegevens of computersysteem."
 
 #: templates/core/terms_conditions.html:147
 msgid "The only rights you have under these T&Cs are those mentioned within them. If a right is not mentioned (unless it is a right given to you under the laws of England and Wales) then it does not exist."
-msgstr ""
+msgstr "De enige rechten die je hebt onder deze Algemene voorwaarden zijn de rechten die erin worden genoemd. Als een recht niet wordt genoemd (tenzij het een recht is dat onder de wetten van Engeland en Wales valt), dan bestaat het niet."
 
 #: templates/core/terms_conditions.html:150
 msgid "If you find an error, problem or bug when using any of the services or facilities we provide on the Site you agree either to notify us by submitting a pull request to the following <a href=\"https://github.com/DjangoGirls/djangogirls/\">address</a> or to open an issue with us using the Site facilities. Whilst we will always endeavour to resolve any of the issues referred to in this paragraph we do not make any warranty that we will be able to achieve any specific outcome."
-msgstr ""
+msgstr "Als je een fout, probleem of bug vindt bij het gebruik van een van de diensten die wij op de Site aanbieden, stem je ermee in om ons hiervan op de hoogte te stellen door een pull request in te dienen op het volgende <a href=\"https://github.com/DjangoGirls/djangogirls/\">adres</a> of om een ​​probleem bij ons te melden via de Site. Hoewel wij er altijd naar zullen streven om elk van de problemen waarnaar in deze paragraaf wordt verwezen op te lossen, geven wij geen enkele garantie dat wij een specifiek resultaat zullen kunnen bereiken."
 
 #: templates/core/terms_conditions.html:158 templates/global/menu.html:44
 msgid "Events"
-msgstr ""
+msgstr "Evenementen"
 
 #: templates/core/terms_conditions.html:160
 msgid "Events organised through the Site are usually organised by third parties and not by us. Although we set out guidelines for all organisers to follow we have no control over whether those guidelines are followed or not. For this reason and to the maximum extent permitted by law, we accept no liability for any direct or indirect loss or damage, foreseeable or otherwise, including any indirect, consequential, special or exemplary damages arising from your booking or attendance at an Event or from anything arising from it."
-msgstr ""
+msgstr "Evenementen die via de Site worden georganiseerd, worden doorgaans georganiseerd door derden en niet door ons. Hoewel we richtlijnen opstellen die alle organisatoren moeten volgen, hebben we geen controle over de vraag of die richtlijnen wel of niet worden gevolgd. Om deze reden en voor zover maximaal toegestaan ​​door de wet, aanvaarden wij geen aansprakelijkheid voor enig direct of indirect verlies of schade, voorzienbaar of anderszins, inclusief enige indirecte, gevolg-, speciale of exemplarische schade die voortvloeit uit je boeking of aanwezigheid bij een Evenement of uit iets dat daaruit voortvloeit."
 
 #: templates/core/terms_conditions.html:162
 msgid "You accept that all issues arising relating to an Event must be addressed to the Event Organiser."
-msgstr ""
+msgstr "Je gaat ermee akkoord dat alle problemen die zich voordoen met betrekking tot een Evenement, moeten worden voorgelegd aan de organisator van het Evenement."
 
 #: templates/core/terms_conditions.html:164
 msgid "Problems"
@@ -2821,11 +2822,11 @@ msgstr "Problemen"
 
 #: templates/core/terms_conditions.html:166
 msgid "We do our very best to make sure that you do not experience any problems when using the Site but if you do, you must tell us straight away."
-msgstr ""
+msgstr "Wij doen ons uiterste best om ervoor te zorgen dat je geen problemen ondervindt bij het gebruik van de Site. Mocht dit toch het geval zijn, laat dat ons dit direct weten."
 
 #: templates/core/terms_conditions.html:168
 msgid "We will do what we can to resolve the problem as quickly as we can and without charge to you if we agree that you have a problem."
-msgstr ""
+msgstr "Als wij erkennen dat er sprake is van een probleem, zullen wij er alles aan doen om het probleem zo snel mogelijk en kosteloos voor je op te lossen."
 
 #: templates/core/terms_conditions.html:170
 msgid "Availability of the site"
@@ -2833,27 +2834,27 @@ msgstr "Beschikbaarheid van de site"
 
 #: templates/core/terms_conditions.html:172
 msgid "We never guarantee that the Site will be available all the time and if it’s not available for any reason we cannot be held responsible for anything you lose as a result."
-msgstr ""
+msgstr "Wij garanderen niet dat de Site altijd beschikbaar zal zijn en als de Site om welke reden dan ook niet beschikbaar is, kunnen wij niet aansprakelijk worden gesteld voor enig verlies dat je als gevolg daarvan lijdt."
 
 #: templates/core/terms_conditions.html:174
 msgid "We have the right to change the Site and the services it offers, suspend it or stop it at any time."
-msgstr ""
+msgstr "Wij hebben het recht om de Site en de diensten die daarop worden aangeboden te allen tijde te wijzigen, op te schorten of stop te zetten."
 
 #: templates/core/terms_conditions.html:176
 msgid "Limitation of liability"
-msgstr ""
+msgstr "Beperking van aansprakelijkheid"
 
 #: templates/core/terms_conditions.html:178
 msgid "To the maximum extent permitted by law, we accept no liability for any direct or indirect loss or damage, foreseeable or otherwise, including any indirect, consequential, special or exemplary damages arising from your use of the Site or any information contained in it."
-msgstr ""
+msgstr "Voor zover maximaal toegestaan ​​door de wet, aanvaarden wij geen aansprakelijkheid voor enige directe of indirecte schade of verlies, voorzienbaar of anderszins, met inbegrip van enige indirecte, gevolg-, speciale of exemplarische schade die voortvloeit uit uw gebruik van de Site of de informatie die daarop is opgenomen."
 
 #: templates/core/terms_conditions.html:180
 msgid "You use the Site and its Content at your own risk."
-msgstr ""
+msgstr "Je gebruikt de Site en haar Content op eigen risico."
 
 #: templates/core/terms_conditions.html:182
 msgid "Nothing in these T&Cs excludes or restricts our liability for death or personal injury resulting from any negligence or fraud on our part."
-msgstr ""
+msgstr "Niets in deze Algemene Voorwaarden sluit onze aansprakelijkheid uit of beperkt deze voor overlijden of persoonlijk letsel als gevolg van nalatigheid of fraude van onze kant."
 
 #: templates/core/terms_conditions.html:184
 msgid "Linking"
@@ -2861,27 +2862,27 @@ msgstr "Linking"
 
 #: templates/core/terms_conditions.html:186
 msgid "We don’t control any of the websites we link to and so we can’t be responsible for the content of such websites and we disclaim liability for any losses which come out of you using them."
-msgstr ""
+msgstr "Wij hebben geen controle over de websites waar we naar linken en kunnen daarom niet verantwoordelijk worden gehouden voor de inhoud van dergelijke websites. Wij wijzen ook elke aansprakelijkheid af voor enig verlies dat voortvloeit uit je gebruik van deze websites."
 
 #: templates/core/terms_conditions.html:188
 msgid "Just because we link to a site does not mean that we endorse or recommend that site."
-msgstr ""
+msgstr "Het feit dat wij naar een site linken, betekent niet dat wij die site onderschrijven of aanbevelen."
 
 #: templates/core/terms_conditions.html:190
 msgid "We can never guarantee that a link will work."
-msgstr ""
+msgstr "We kunnen niet garanderen dat een link werkt."
 
 #: templates/core/terms_conditions.html:192
 msgid "If you find any link we offer to be offensive, please let us know and we will consider removing it."
-msgstr ""
+msgstr "Als je een link vindt op de Site die kwetsend is, laat het ons weten en we zullen overwegen om hem te verwijderen."
 
 #: templates/core/terms_conditions.html:194
 msgid "If you link to any other site using the Site then you understand that separate conditions will apply to those sites and that we have no control over those conditions – so you agree that you will read and understand them before using those sites."
-msgstr ""
+msgstr "Als je via de Site naar een andere site linkt, begrijp je dat er voor die sites aparte voorwaarden gelden en dat wij geen controle hebben over die voorwaarden. Je stemt er dus mee in dat je deze voorwaarden leest en begrijpt voordat je die sites gebruikt."
 
 #: templates/core/terms_conditions.html:196
 msgid "If you wish to link to the Site you may link to our Home page on the following conditions:"
-msgstr ""
+msgstr "Als je een link naar de Site wilt plaatsen, mag je een link naar onze Homepage plaatsen onder de volgende voorwaarden:"
 
 #: templates/core/terms_conditions.html:199
 msgid "the link mustn’t damage our reputation;"
@@ -2897,27 +2898,27 @@ msgstr "je kunt alleen linken vanaf een site waar je eigenaar van bent;"
 
 #: templates/core/terms_conditions.html:202
 msgid "you can’t suggest that we are associated with you, endorse you and approve of you in any way; and"
-msgstr ""
+msgstr "Je mag niet de indruk wekken dat wij op enigerlei wijze met je verbonden zijn, je onderschrijven en je goedkeuren; en"
 
 #: templates/core/terms_conditions.html:203
 msgid "you mustn’t frame our Site on any other site."
-msgstr ""
+msgstr "je mag onze Site niet op een andere site plaatsen."
 
 #: templates/core/terms_conditions.html:206
 msgid "We always have the right to break any link you make even if we can’t give a reason for our decision."
-msgstr ""
+msgstr "Wij hebben altijd het recht om een ​​link die je plaatst te verbreken, ook als wij geen reden voor onze beslissing kunnen geven."
 
 #: templates/core/terms_conditions.html:208
 msgid "Modifications to these T&Cs & the site"
-msgstr ""
+msgstr "Wijzigingen in deze Algemene Voorwaarden en de site"
 
 #: templates/core/terms_conditions.html:211
 msgid "We’ve already said this, but we need to make it clear that these T&Cs will change from time to time and we don’t have the resources to let all our visitors know about the changes. As a result you MUST come back to this page to make sure that we haven’t changed these T&Cs and whenever you access the Site, you are confirming to us that you are aware of any changes."
-msgstr ""
+msgstr "We hebben dit al gezegd, maar we moeten duidelijk maken dat deze Algemene Voorwaarden van tijd tot tijd veranderen en we hebben niet de middelen om al onze bezoekers op de hoogte te stellen van de veranderingen. Daarom MOET je terugkomen naar deze pagina om er zeker van te zijn dat we deze Algemene Voorwaarden niet hebben veranderd en wanneer je de Site bezoekt, bevestig je aan ons dat je op de hoogte bent van eventuele veranderingen."
 
 #: templates/core/terms_conditions.html:219
 msgid "We’ve also got the right to change the Site as and when we want to, but these T&Cs will still apply to any changes we make."
-msgstr ""
+msgstr "We hebben ook het recht om de Site te wijzigen wanneer we dat willen, maar deze Algemene Voorwaarden zijn nog steeds van toepassing op alle wijzigingen die we aanbrengen."
 
 #: templates/core/terms_conditions.html:221
 msgid "General stuff"
@@ -2925,39 +2926,39 @@ msgstr "Algemene zaken"
 
 #: templates/core/terms_conditions.html:224
 msgid "<i>Operative Law</i> – these T&Cs are made under the laws of England and Wales and that is the only jurisdiction which can govern it."
-msgstr ""
+msgstr "<i>Toepasselijk recht</i> – deze Algemene Voorwaarden zijn opgesteld volgens de wetten van Engeland en Wales en dat is de enige jurisdictie die hierop van toepassing is."
 
 #: templates/core/terms_conditions.html:225
 msgid "<i>Partnership/Joint Ventures</i> – we and you agree that the agreement between us does not form the basis of any partnership or co-venture."
-msgstr ""
+msgstr "<i>Partnerschap/Joint Ventures</i> – wij komen met jou overeen dat de overeenkomst tussen ons geen basis vormt voor een partnerschap of gezamenlijke onderneming."
 
 #: templates/core/terms_conditions.html:226
 msgid "<i>Effect of Agreement</i> – the current agreement between us and you supersedes any previous agreement in relation to the matters dealt with and represents the entire understanding between us and you"
-msgstr ""
+msgstr "<i>Integrale overeenkomst</i> – de huidige overeenkomst vervangt alle eerdere overeenkomsten tussen ons met betrekking tot de behandelde zaken en vertegenwoordigt de volledige overeenkomst tussen jou en ons"
 
 #: templates/core/terms_conditions.html:227
 msgid "<i>Time of the Essence</i> – time will not be of the essence in any part of the agreement between us and you."
-msgstr ""
+msgstr "<i>Essentie van tijd</i> – tijd is in geen enkel deel van de overeenkomst tussen jou en ons van essentieel belang."
 
 #: templates/core/terms_conditions.html:228
 msgid "<i>Warranties</i> – all parties acknowledge and agree that they have not entered into thie agreement between us and you in reliance on anything said or promised by the other which is not in these T&Cs."
-msgstr ""
+msgstr "<i>Garanties</i> – alle partijen erkennen en stemmen ermee in dat zij de overeenkomst tussen jou en ons niet zijn aangegaan op basis van iets dat door de ander is gezegd of beloofd en dat niet in deze Algemene Voorwaarden staat."
 
 #: templates/core/terms_conditions.html:229
 msgid "<i>Force Majeure</i> – if something outside our control happens and that prevents us from performing our services then you accept that we are not liable for the consequences of that failure (this includes such things as strikes, riots, fires, explosions, war, floods and so on). If such an event does happen we will tell you as soon as we are able and resume the service as soon as we can. If we cannot perform the service within a reasonable time, we can cancel it and if we do we will refund to you a fair and reasonable proportion of any payment you have made to us."
-msgstr ""
+msgstr "<i>Overmacht</i> – als er iets gebeurt buiten onze controle en dat ons verhindert onze diensten uit te voeren, dan accepteer je dat wij niet aansprakelijk zijn voor de gevolgen van dat falen (dit omvat zaken als stakingen, rellen, branden, explosies, oorlog, overstromingen, enzovoort). Als een dergelijke gebeurtenis zich voordoet, zullen wij je dit zo snel mogelijk laten weten en de dienst zo snel mogelijk hervatten. Als wij de dienst niet binnen een redelijke termijn kunnen uitvoeren, kunnen wij deze annuleren en als we dat doen, zullen wij je een eerlijk en redelijk deel van elke betaling die je aan ons hebt gedaan, terugbetalen."
 
 #: templates/core/terms_conditions.html:230
 msgid "<i>Unenforceability</i> – if a Court or other body says that any part of these T&Cs is unenforceable, the rest of them will stand."
-msgstr ""
+msgstr "<i>Niet-afdwingbaarheid</i> – als een rechtbank of een ander orgaan zegt dat een deel van deze Algemene Voorwaarden niet-afdwingbaar is, blijft de rest van de voorwaarden van kracht."
 
 #: templates/core/terms_conditions.html:231
 msgid "<i>Notices</i> – if either you or we need to give formal notice to the other it must be done by email to the address that each of us gives to the other from time to time."
-msgstr ""
+msgstr "<i>Kennisgevingen</i> – als wij elkaar formeel op de hoogte moeten stellen, moet dit per e-mail worden gedaan naar het adres dat we elkaar van tijd tot tijd verstrekken."
 
 #: templates/core/terms_conditions.html:232
 msgid "<i>Entire Agreement</i> – these T&Cs contain the entire understanding between us."
-msgstr ""
+msgstr "<i>Volledige overeenkomst</i> – deze algemene voorwaarden bevatten de volledige overeenkomst tussen ons."
 
 #: templates/core/terms_conditions.html:235
 msgid "The Schedule"
@@ -2969,23 +2970,24 @@ msgstr "Definities"
 
 #: templates/core/terms_conditions.html:239
 msgid "<b>Consumer legislation</b> means the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013."
-msgstr ""
+msgstr "<b>Consumentenwetgeving</b> betekent de Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013."
 
 #: templates/core/terms_conditions.html:240
 msgid "<b>Content</b> means any text, graphics, images, audio, video, software, data compilations and any other form of information capable of being stored in a computer that appears on or forms part of the Site."
-msgstr ""
+msgstr "Onder <b>Inhoud</b> wordt verstaan ​​alle tekst, afbeeldingen, grafieken, audio, video, software, gegevensverzamelingen en elke andere vorm van informatie die op een computer kan worden opgeslagen en die op de Site verschijnt of er deel van uitmaakt."
 
 #: templates/core/terms_conditions.html:242
 msgid "<b>Event</b> means any event organised by an Organiser using the material we offer on the Site."
-msgstr ""
+msgstr "<b>Evenement</b> betekent elk evenement dat door een Organisator wordt georganiseerd met gebruikmaking van het materiaal dat wij op de Site aanbieden."
 
 #: templates/core/terms_conditions.html:244
 msgid "<b>Organiser</b> means the organiser or promoter of an Event."
-msgstr ""
+msgstr "<b>Organisator</b> is de organisator of promotor van een Evenement."
 
+#. Duplication in the translatable
 #: templates/core/terms_conditions.html:247
 msgid "<b>System</b> means the communications and other system or systems we use in connection with the Site. means the communications and other system or systems we use in connection with the Site."
-msgstr ""
+msgstr "<b>Systeem</b> betekent de communicatie en andere systemen die wij gebruiken in verband met de Site."
 
 #: templates/core/terms_conditions.html:253
 msgid "<b>T&Cs</b> means these terms and conditions."
@@ -2993,7 +2995,7 @@ msgstr "<b>Algemene Voorwaarden</b> betekent deze algemene voorwaarden."
 
 #: templates/core/terms_conditions.html:255
 msgid "<b>User</b> means any person, firm or company using the Site for any purpose."
-msgstr ""
+msgstr "<b>Gebruiker</b> is iedere persoon, firma of bedrijf welke de Site voor welk doel dan ook gebruikt."
 
 #: templates/core/workshop_box.html:9
 msgid "Order Django Girls Workshop Box for your event!"
@@ -3001,7 +3003,7 @@ msgstr "Bestel een Django Girls Workshop Box voor jouw evenement!"
 
 #: templates/core/workshop_box.html:11
 msgid "Get a golden envelope full of Django Girls stickers, gold letter balloons, stickers of our partners, and buttons. <br /> Everything you need to make your workshop DjangoGirlsy! 🌸✨"
-msgstr ""
+msgstr "Wat dacht je van een gouden envelop vol met Django Girls stickers, gouden letterballonen, stickers van onze partners, and buttons? <br /> Alles wat je nodig hebt om je workshop DjangoGirlsy te maken! 🌸"
 
 #: templates/core/workshop_box.html:27
 msgid "How it works?"
@@ -3009,11 +3011,11 @@ msgstr "Hoe werkt het?"
 
 #: templates/core/workshop_box.html:29
 msgid "We purchased Django Girls goodies in bulk quantity, which massively lowered their price. It will save everyone time and money and you will be able to focus on more awesome things. The box can be sent to Django Girls workshops from all over the world: small goodies and swag won't drain your sponsor money anymore! YAY! ✨💰"
-msgstr ""
+msgstr "We kochten Django Girls goodies in bulk, wat de prijs enorm verlaagde. Het bespaart iedereen tijd en geld en jij kunt je richten op andere geweldige dingen. De box kan naar Django Girls workshops over de hele wereld worden gestuurd: kleine goodies en swag zullen je sponsorgeld niet meer opslokken! YAY! ✨💰"
 
 #: templates/core/workshop_box.html:37
 msgid "We calculated that one event of 30 people would need to pay around £150 GBP for all of those things, and sometimes they're hard to get. We're able to buy and ship them all for around $50."
-msgstr ""
+msgstr "We hebben berekend dat één evenement met 30 mensen ongeveer £150 GBP zou moeten betalen voor al die dingen, en soms zijn ze moeilijk te krijgen. We kunnen ze allemaal kopen en verzenden voor ongeveer $50."
 
 #: templates/core/workshop_box.html:44
 msgid "What's in the box?"
@@ -3061,23 +3063,23 @@ msgstr "De kosten hangen af van de grootte van je workshop. Bijvoorbeeld:"
 
 #: templates/core/workshop_box.html:63
 msgid "£30 GBP for 30 people"
-msgstr ""
+msgstr "£30 GBP voor 30 personen"
 
 #: templates/core/workshop_box.html:64
 msgid "£40 GBP for 50 people"
-msgstr ""
+msgstr "£40 GBP voor 50 personen"
 
 #: templates/core/workshop_box.html:65
 msgid "£65 GBP for 100 people"
-msgstr ""
+msgstr "£65 GBP voor 100 personen"
 
 #: templates/core/workshop_box.html:68
 msgid "You will also need to add shipping costs. 📮"
-msgstr ""
+msgstr "Je moet hier ook verzendkosten bij optellen. 📮"
 
 #: templates/core/workshop_box.html:71
 msgid "If your event is happening in a <a href=\"https://en.wikipedia.org/wiki/Developing_country#List_of_developing_economies\">developing country</a> or if you tried but can't find sponsors, you'll be able to apply for a free box (you'll need to pay for shipping)."
-msgstr ""
+msgstr "Als je evenement plaatsvindt in een <a href=\"https://en.wikipedia.org/wiki/Ontwikkelingsland\">ontwikkelingsland</a> of als je het geprobeerd hebt maar geen sponsors kunt vinden, kunt je een gratis doos aanvragen (je moet dan wel de verzendkosten betalen)."
 
 #: templates/core/workshop_box.html:78
 msgid "How to get one?"
@@ -3101,7 +3103,7 @@ msgstr "Je moet een locatie hebben voor je workshop"
 
 #: templates/core/workshop_box.html:90
 msgid "Application process for your event needs to be open"
-msgstr ""
+msgstr "De aanvraagprocedure voor je evenement moet open zijn"
 
 #: templates/core/workshop_box.html:91
 msgid "You need to order it at least 6 weeks before workshop to allow for shipping time"
@@ -3113,15 +3115,15 @@ msgstr ""
 
 #: templates/default/about.html:4
 msgid "Free programming workshop for women"
-msgstr ""
+msgstr "Gratis programmeer-workshop voor vrouwen"
 
 #: templates/default/about.html:5
 msgid "Build your first website at EuroPython 2014 in Berlin!"
-msgstr ""
+msgstr "Bouw je eerste website op EuroPython 2014 in Berlijn!"
 
 #: templates/default/about.html:6
 msgid "Learn more"
-msgstr ""
+msgstr "Leer meer"
 
 #: templates/default/apply.html:5
 msgid "Applications are now open!"
@@ -3161,7 +3163,7 @@ msgstr ""
 
 #: templates/default/faq.html:6
 msgid "Do I need to know anything about websites or programming?"
-msgstr ""
+msgstr "Moet ik iets weten over websites of programmeren?"
 
 #: templates/default/faq.html:9
 msgid "No! Workshops are for beginners. You don’t need to know anything about it. However, if you have a little bit of technical knowledge (i.e. you know what HTML or CSS are) you still can apply!"
@@ -3169,7 +3171,7 @@ msgstr ""
 
 #: templates/default/faq.html:18
 msgid "I am not living in Germany, can I attend?"
-msgstr ""
+msgstr "Ik woon niet in Duitsland, mag ik deelnemen? "
 
 #: templates/default/faq.html:21
 msgid "Of course! Workshops will be in English, so if you have no troubles with speaking and understanding English - you should apply. If you need financial aid to get to Berlin or you need assistance with booking flights or hotel in Berlin - let us know. We are willing to help you!"
@@ -3221,7 +3223,7 @@ msgstr ""
 
 #: templates/default/values.html:7
 msgid "If you are a woman and want to learn how to make websites, we have good news for you: we are holding a one-day workshop for beginners!"
-msgstr ""
+msgstr "Ben je een vrouw bent die wil leren hoe je websites kunt maken? Dan hebben wij goed nieuws voor je: wij organiseren een eendaagse workshop voor beginners!"
 
 #: templates/default/values.html:11
 msgid "It will take place on <strong>DAY, MONTH, YEAR</strong> at <strong>VENUE</strong> in <strong>CITY</strong>."
@@ -3237,7 +3239,7 @@ msgstr ""
 
 #: templates/default/values.html:33
 msgid "Apply for the workshop!"
-msgstr ""
+msgstr "Meld je aan voor de workshop!"
 
 #: templates/default/values.html:35
 msgid "If you are a woman, know English and have a laptop, you can apply for our event! You don't need to know any technical stuff &ndash; our workshop is for people who are new to programming."
@@ -3261,7 +3263,7 @@ msgstr ""
 
 #: templates/donations/corporate_sponsorships.html:14
 msgid "Why give to the Django Girls Foundation?"
-msgstr ""
+msgstr "Waarom doneren aan de Django Girls Foundation?"
 
 #: templates/donations/corporate_sponsorships.html:20
 msgid "Our mission:"
@@ -3290,7 +3292,7 @@ msgstr "Een vrouw die naar haar laptop kijkt tijdens Django Girls Lagos 2016."
 #: templates/donations/corporate_sponsorships.html:63
 #: templates/donations/donate.html:13
 msgid "Start supporting Django Girls Foundation today 💕"
-msgstr ""
+msgstr "Steun vandaag nog de Django Girls Foundation 💕"
 
 #: templates/donations/corporate_sponsorships.html:69
 #: templates/donations/donate.html:19
@@ -3333,7 +3335,7 @@ msgstr "Andere manieren om ons te sponsoren"
 
 #: templates/donations/donate.html:114
 msgid "Humble Bundle Store"
-msgstr ""
+msgstr "Humble Bundle Store"
 
 #: templates/donations/donate.html:116
 msgid "If you like video games, you can choose Django Girls as your designated charity in the <a href=\"https://www.humblebundle.com/store?charity=129929\">Humble Bundle Store</a>! 🎮"
@@ -3417,7 +3419,7 @@ msgstr "Hallo team %(city)s!"
 
 #: templates/emails/event_thank_you.html:5
 msgid "Congratulations on running your own Django Girls event! We're super proud and so so so happy for you :)"
-msgstr ""
+msgstr "Gefeliciteerd met het runnen van je eigen Django Girls-evenement! We zijn supertrots en heel, heel, heel erg blij voor je :)"
 
 #: templates/emails/event_thank_you.html:8
 msgid "Numbers"
@@ -3473,7 +3475,7 @@ msgstr ""
 
 #: templates/emails/event_thank_you.html:55
 msgid "Thanks and congrats yet again, you're awesome!"
-msgstr ""
+msgstr "Nogmaals bedankt en gefeliciteerd, je bent geweldig!"
 
 #: templates/emails/event_thank_you.html:58
 #: templates/emails/existing_user.html:39 templates/emails/new_user.html:46
@@ -3568,7 +3570,7 @@ msgstr ""
 
 #: templates/emails/organize/application_confirmation.html:3
 msgid "Hello,"
-msgstr ""
+msgstr "Hallo,"
 
 #: templates/emails/organize/application_confirmation.html:10
 msgid "We’re now going to review your application and get back to you in around a week. Django Girls is a volunteer-run charity, and we’re doing our best to respond in timely fashion. In the meantime, you can familiarise yourself with our free resources for organizers."
@@ -3576,7 +3578,7 @@ msgstr ""
 
 #: templates/emails/organize/application_confirmation.html:16
 msgid "There are three requirements for becoming an organizer of Django Girls:"
-msgstr ""
+msgstr "Je moet aan drie eisen voldoen om organisator van Django Girls  te worden:"
 
 #: templates/emails/organize/application_confirmation.html:18
 msgid "Being an awesome person - already done! :)"
@@ -3776,7 +3778,7 @@ msgstr ""
 
 #: templates/emails/submit_information_email.html:3
 msgid "Hello team %(event)s!"
-msgstr ""
+msgstr "Hallo team %(event)s!"
 
 #: templates/emails/submit_information_email.html:5
 msgid "Hope you’re all doing fantastic and took some well deserved rest after organizing your Django Girls workshop :)"
@@ -3812,15 +3814,15 @@ msgstr ""
 
 #: templates/global/footer.html:10
 msgid "Foundation"
-msgstr ""
+msgstr "Foundation"
 
 #: templates/global/footer.html:11 templates/global/menu.html:48
 msgid "Newsletter"
-msgstr ""
+msgstr "Nieuwbrief"
 
 #: templates/global/footer.html:12
 msgid "Chat with us!"
-msgstr ""
+msgstr "Chat met ons!"
 
 #: templates/core/coc.html:10 templates/global/footer.html:13
 msgid "Code of Conduct"
@@ -3924,7 +3926,7 @@ msgstr "A: Wil je meedoen aan een workshop die bij jou in de buurt georganiseerd
 
 #: templates/includes/_faq.html:23
 msgid "Q: I missed the deadline! Can I still apply to a workshop?"
-msgstr "V: Ik heb de deadline gemist! Kan ik me nog aanmelden voor een workshop?"
+msgstr "Q: Ik heb de deadline gemist! Kan ik me nog aanmelden voor een workshop?"
 
 #. planed -> planned
 #: templates/includes/_faq.html:29
@@ -3933,7 +3935,7 @@ msgstr "A: Helaas, je kunt je niet meer opgeven: evenementen ontvangen veel aanv
 
 #: templates/includes/_faq.html:41
 msgid "Q: I want to coach or sponsor an event!"
-msgstr "V: Ik wil coach of sponsor worden van een evenement!"
+msgstr "Q: Ik wil coach of sponsor worden van een evenement!"
 
 #: templates/includes/_faq.html:45
 msgid "A: You rock! Just send an email to the local organizers of the workshop!"
@@ -3941,7 +3943,7 @@ msgstr "A: You rock! Stuur een e-mail naar de organisatoren van de workshop!"
 
 #: templates/includes/_faq.html:52
 msgid "Q: I'm following Django Girls tutorial and something is not working in my code: can you help me debug it?"
-msgstr ""
+msgstr "Q: Ik volg de Django Girls tutorial en mijn code werkt niet zoals verwacht: kunnen jullie me helpen met debuggen?"
 
 #: templates/includes/_faq.html:57
 msgid "A: Sadly, Django Girls Support Team won't be able to help you: our work is to help other organizers plan their workshop. If you need assistance while doing the tutorial, go to <a href=\"https://gitter.im/DjangoGirls/tutorial/\">Django Girls Gitter room</a>: a group of volunteers is waiting for you there and will be happy to answer all your questions ;)"
@@ -3953,19 +3955,19 @@ msgstr ""
 
 #: templates/includes/_no_event.html:11
 msgid "Sign up for our newsletter"
-msgstr ""
+msgstr "Abonneer je op onze nieuwsbrief"
 
 #: templates/includes/_no_event.html:13
 msgid "Stay up to date with everything that's happening in Django Girls valley:"
-msgstr ""
+msgstr "Blijf op de hoogte van alles wat er gebeurt in de Django Girls wereld:"
 
 #: templates/includes/_no_event.html:16
 msgid "Your e-mail"
-msgstr ""
+msgstr "Je e-mailadres"
 
 #: templates/includes/_no_event.html:17
 msgid "Your city"
-msgstr ""
+msgstr "Je locatie"
 
 #: templates/includes/_no_event.html:27
 msgid "Everyone can organize their own Django Girls event and share it with their community."
@@ -3973,7 +3975,7 @@ msgstr ""
 
 #: templates/includes/_no_event.html:29
 msgid "Find out more"
-msgstr ""
+msgstr "Ontdek meer"
 
 #: templates/organize/commitment.html:20
 msgid "Django Girls Organizer Commitement"
@@ -4005,7 +4007,7 @@ msgstr ""
 
 #: templates/organize/confirmation-of-acceptance.html:10
 msgid "Welcome to Django Girls!"
-msgstr ""
+msgstr "Welkom bij Django Girls!"
 
 #: templates/organize/confirmation-of-acceptance.html:12
 msgid "We’re delighted to welcome you as a part of Django Girls family! We’ve deployed your event’s website now and an information pack with access details is on the way to your inbox right now."
@@ -4118,11 +4120,11 @@ msgstr ""
 
 #: templates/organize/form/step4_workshop_type.html:31
 msgid "Remote or In-Person?"
-msgstr ""
+msgstr "Remote of op locatie?"
 
 #: templates/organize/form/step4_workshop_type.html:32
 msgid "Will your workshop be Remote or In-Person?"
-msgstr ""
+msgstr "Organiseer je de workshop remote of op locatie?"
 
 #: templates/organize/form/step4_workshop_type.html:36
 msgid "Workshop Type"
@@ -4230,7 +4232,7 @@ msgstr "Einde!"
 
 #: templates/organize/form/step5_workshop_remote.html:139
 msgid "How will you host your workshop remotely?"
-msgstr ""
+msgstr "Hoe ga je je workshop remote organiseren?"
 
 #: templates/organize/form/step5_workshop_remote.html:140
 msgid "Please provide information on how you plan to host your workshop remotely, that is, what tools will you use."
@@ -4386,7 +4388,7 @@ msgstr ""
 
 #: templates/organize/prerequisites.html:42
 msgid "Confirm that you’ve read the following chapters of our <a href=\"http://organize.djangogirls.org/\">Organizer's Manual</a>:"
-msgstr "Bevestig dat je begrijpt dat we op dit moment alleen aanmeldingen voor workshops op afstand accepteren:"
+msgstr "Bevestig dat je de volgende hoofdstukken van onze  <a href=\"http://organize.djangogirls.org/\">Handleiding voor de Organisator</a> hebt gelezen:"
 
 #: templates/organize/prerequisites.html:51
 msgid "Introduction to Organizer’s Manual"
@@ -4394,7 +4396,7 @@ msgstr "Inleiding bij de Handleiding voor Organisatoren"
 
 #: templates/organize/prerequisites.html:57
 msgid "Organizing Django Girls workshop step by step"
-msgstr ""
+msgstr "Stap voor stap een Django Girls workshop organiseren"
 
 #: templates/organize/prerequisites.html:63
 msgid "Environment at Django Girls workshop"
