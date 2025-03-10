@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangogirls\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-10 22:40+0000\n"
+"POT-Creation-Date: 2025-03-10 22:43+0000\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -566,23 +566,23 @@ msgstr "Berechtigungen"
 msgid "Important dates"
 msgstr "Wichtige Daten"
 
-#: core/default_eventpage_content.py:60
+#: core/default_eventpage_content.py:80
 msgid "About"
 msgstr "Über"
 
-#: core/default_eventpage_content.py:61
+#: core/default_eventpage_content.py:81
 msgid "Apply for a pass!"
 msgstr "Beantragen Sie einen Pass!"
 
-#: core/default_eventpage_content.py:62 templates/global/footer.html:9
+#: core/default_eventpage_content.py:82 templates/global/footer.html:9
 msgid "FAQ"
 msgstr "FAQ"
 
-#: core/default_eventpage_content.py:63
+#: core/default_eventpage_content.py:83
 msgid "Become a coach"
 msgstr "Werde Trainer"
 
-#: core/default_eventpage_content.py:64
+#: core/default_eventpage_content.py:84
 msgid "Partners"
 msgstr "Partner"
 
@@ -1063,7 +1063,7 @@ msgstr "Umschlag für die Veranstaltung (356 x 210px)"
 msgid "Section background"
 msgstr "Hintergrund der Sektion"
 
-#: pictures/models.py:34
+#: pictures/models.py:33
 msgid ""
 "Only use pictures with a <a href='https://creativecommons.org/"
 "licenses/'>Creative Commons license</a>."
@@ -1071,7 +1071,7 @@ msgstr ""
 "Verwende nur Bilder unter der <a href='https://creativecommons.org/"
 "licenses/'>Creative Commons Lizenz</a>."
 
-#: pictures/models.py:39
+#: pictures/models.py:36
 msgid "photo URL"
 msgstr "Foto URL"
 
