@@ -33,7 +33,7 @@ class Event(models.Model):
         null=True,
         blank=True,
         help_text=mark_safe(
-            "Only use pictures with a " "<a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."
+            "Only use pictures with a <a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."
         ),
     )
     photo_link = models.URLField(verbose_name="photo URL", null=True, blank=True)
@@ -54,7 +54,7 @@ class Event(models.Model):
     page_description = models.TextField(
         verbose_name="description",
         blank=True,
-        default="Django Girls is a one-day workshop about programming " "in Python and Django tailored for women.",
+        default="Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
     )
     page_main_color = models.CharField(
         verbose_name="main color",

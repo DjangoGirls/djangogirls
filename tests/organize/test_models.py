@@ -102,8 +102,7 @@ def test_application_fails_if_event_dates_not_six_months_apart(data_dict, previo
     with pytest.raises(ValidationError) as error:
         EventApplication.object.create(**data_dict)
         assert (
-            error.value.args[0] == "Your workshops should be at least 6 months apart. "
-            "Please read our Organizer Manual."
+            error.value.args[0] == "Your workshops should be at least 6 months apart. Please read our Organizer Manual."
         )
 
 

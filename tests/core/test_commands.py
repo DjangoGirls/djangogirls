@@ -45,7 +45,7 @@ def test_update_coordinates(click_runner, past_event):
 def test_add_organizer(click_runner, future_event):
     assert future_event.team.count() == 1
 
-    command_input = f"{future_event.pk}\n" "Jan Kowalski\n" "jan@kowalski.example.org\n" "N\n"
+    command_input = f"{future_event.pk}\nJan Kowalski\njan@kowalski.example.org\nN\n"
 
     click_runner.invoke(add_organizer, input=command_input, catch_exceptions=False)
     future_event.refresh_from_db()
@@ -56,9 +56,7 @@ def test_new_event_with_one_organizer(click_runner, random_day, events, slack_mo
     settings.ENABLE_SLACK_NOTIFICATIONS = True
     assert Event.objects.count() == 4
 
-    command_input = (
-        "Oz\n" "Neverland\n" f"{random_day}\n" "oz\n" "oz\n" "Jan Kowalski\n" "jan@kowalski.example.org\n" "N\n"
-    )
+    command_input = f"Oz\nNeverland\n{random_day}\noz\noz\nJan Kowalski\njan@kowalski.example.org\nN\n"
 
     click_runner.invoke(new_event, input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
@@ -98,13 +96,11 @@ def test_new_event_short(click_runner, random_day, events, stock_pictures, slack
 
     assert Event.objects.count() == 4
 
-    command_input = (
-        "Oz\n" "Neverland\n" f"{random_day}\n" "oz\n" "oz\n" "Jan Kowalski\n" "jan@kowalski.example.org\n" "N\n"
-    )
+    command_input = f"Oz\nNeverland\n{random_day}\noz\noz\nJan Kowalski\njan@kowalski.example.org\nN\n"
 
     result = click_runner.invoke(new_event, args=["--short"], input=command_input, catch_exceptions=False)
     assert Event.objects.count() == 5
-    short_email_body = "Event e-mail is: oz@djangogirls.org\n" "Event website address is: https://djangogirls.org/oz"
+    short_email_body = "Event e-mail is: oz@djangogirls.org\nEvent website address is: https://djangogirls.org/oz"
     assert short_email_body in result.output
     slack_mock.chat_postMessage.assert_called_once()
 
@@ -113,7 +109,7 @@ def test_copy_event(click_runner, random_day, events, past_event):
     assert Event.objects.count() == 4
 
     new_event_number = 2
-    command_input = f"{past_event.pk}\n" f"{new_event_number}\n" f"{random_day}\n"
+    command_input = f"{past_event.pk}\n{new_event_number}\n{random_day}\n"
 
     click_runner.invoke(copy_event, input=command_input, catch_exceptions=False)
     old_event = past_event
@@ -138,7 +134,7 @@ def test_prepare_dispatch_with_data(click_runner):
     end_date = today.toordinal()
     random_past_day = date.fromordinal(random.randint(start_date, end_date))
 
-    command_input = f'{random_past_day.strftime("%Y-%m-%d")}\n'
+    command_input = f"{random_past_day.strftime('%Y-%m-%d')}\n"
 
     result = click_runner.invoke(prepare_dispatch, input=command_input, catch_exceptions=False)
     assert result.exception is None
@@ -149,7 +145,7 @@ def test_prepare_dispatch_without_data(click_runner):
     start_date = date.today().toordinal()
     random_past_day = date.fromordinal(random.randint(start_date, start_date))
 
-    command_input = f'{random_past_day.strftime("%Y-%m-%d")}\n'
+    command_input = f"{random_past_day.strftime('%Y-%m-%d')}\n"
 
     result = click_runner.invoke(prepare_dispatch, input=command_input, catch_exceptions=False)
     assert result.exception is None
@@ -160,7 +156,7 @@ def test_prepare_dispatch_wrong_date(click_runner):
     start_date = date.today().toordinal()
     random_past_day = date.fromordinal(random.randint(start_date, start_date))
 
-    command_input = f'{random_past_day.strftime("%Y/%m/%d")}\n'
+    command_input = f"{random_past_day.strftime('%Y/%m/%d')}\n"
 
     result = click_runner.invoke(prepare_dispatch, input=command_input)
     assert isinstance(result.exception, ValueError)

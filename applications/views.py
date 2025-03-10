@@ -302,7 +302,7 @@ def rsvp(request, page_url, code):
     if application.rsvp_status != Application.RSVP_WAITING:
         messages.error(
             request,
-            _("Something went wrong with your RSVP link. Please contact us at " "%(email)s with your name.")
+            _("Something went wrong with your RSVP link. Please contact us at %(email)s with your name.")
             % {"email": event.email},
         )
         return redirect(f"/{event.page_url}/")

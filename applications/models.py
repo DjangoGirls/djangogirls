@@ -113,7 +113,7 @@ class Question(models.Model):
 
     def get_choices_as_list(self):
         if self.question_type != "choices":
-            raise TypeError(_("You can only get choices for fields that have" " question_type == choices."))
+            raise TypeError(_("You can only get choices for fields that have question_type == choices."))
 
         return self.choices.split(";")
 
