@@ -19,8 +19,7 @@ class Command(BaseCommand):
 
         for patron, count in c.most_common():
             self.stdout.write(
-                "%s: %d month%s in a row"
-                % (
+                "{}: {} month{} in a row".format(
                     patron.name,
                     count,
                     "s" if count > 1 else "",  # plural mark
