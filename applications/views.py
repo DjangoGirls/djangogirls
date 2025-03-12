@@ -300,11 +300,24 @@ def rsvp(request, page_url, code):
         return redirect(f"/{event.page_url}/")
 
     if application.rsvp_status != Application.RSVP_WAITING:
+        if application.rsvp_status == Application.RSVP_YES:
+            message = _("You have already confirmed your attendance.")
+        elif application.rsvp_status == Application.RSVP_NO:
+            message = _(
+                "You have already declined the invitation. "
+                "If you want to change your RSVP, "
+                "please contact us at %(email)s with your name."
+            ) % {"email": event.email}
+        else:
+            message = _("Something went wrong with your RSVP link. Please contact us at %(email)s with your name.") % {
+                "email": event.email
+            }
+
         messages.error(
             request,
-            _("Something went wrong with your RSVP link. Please contact us at %(email)s with your name.")
-            % {"email": event.email},
+            message,
         )
+
         return redirect(f"/{event.page_url}/")
 
     application.rsvp_status = rsvp
