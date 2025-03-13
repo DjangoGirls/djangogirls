@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangogirls\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-10 22:43+0000\n"
+"POT-Creation-Date: 2025-03-13 00:41+0000\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,20 +336,31 @@ msgstr ""
 msgid "Applications have been updated"
 msgstr ""
 
-#: applications/views.py:305
+#: applications/views.py:304
+msgid "You have already confirmed your attendance."
+msgstr ""
+
+#: applications/views.py:307
+#, python-format
+msgid ""
+"You have already declined the invitation. If you want to change your RSVP, "
+"please contact us at %(email)s with your name."
+msgstr ""
+
+#: applications/views.py:312
 #, python-format
 msgid ""
 "Something went wrong with your RSVP link. Please contact us at %(email)s "
 "with your name."
 msgstr ""
 
-#: applications/views.py:315
+#: applications/views.py:328
 msgid ""
 "Your participation in the workshop has been confirmed! We can't wait to meet "
 "you. We will be in touch with details soon."
 msgstr ""
 
-#: applications/views.py:321
+#: applications/views.py:334
 msgid ""
 "Your answer has been saved, thanks for letting us know. Your spot will be "
 "assigned to another person on the waiting list."

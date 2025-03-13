@@ -108,9 +108,11 @@ In the `psql` shell, create a database and a role with the necessary permissions
 
 ```sql
 CREATE DATABASE djangogirls;
+CREATE DATABASE postgres;
 CREATE ROLE postgres;
 GRANT ALL privileges ON DATABASE djangogirls TO postgres;
 ALTER ROLE postgres WITH LOGIN;
+ALTER ROLE postgres WITH CREATEDB;
 ```
 
 Exit the `psql` shell:
@@ -146,6 +148,7 @@ npm install
 Compile CSS and JS files:
 
 ```bash
+npm install -g gulp
 gulp watch
 ```
 
