@@ -37,10 +37,9 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row_stories">
                 {% for story in stories %}
                     {% include 'includes/_story.html' with story=story %}
-                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
                 {% endfor %}
             </div>
 
