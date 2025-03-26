@@ -17,9 +17,10 @@
 {% endblock %}
 
 {% block content %}
+    <div class="container">
         <section id="annual-report">
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="col align-self-center">
                     <div class="report-head">
                         <a href="http://djangogirls.org/"><img src="{% static 'img/logo-bigger.png' %}" /></a>
                         <h1>{% trans "Annual Report 2015" %}</h1>
@@ -32,7 +33,7 @@
             </div>
             <div class="wrap">
                 <div class="row clearfix">
-                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="col align-self-center">
                       <h2>{% trans "Numbers 📈🗺" %}</h2>
                       <p>In 2015, the Django Girls community organized <span>89 events</span> - almost 6 times as much as year before. We've been to <span>77 cities</span> across <span>36 countries</span> and all 6 continents.</p>
                       <p>In 2015, <span>2785 women attended our events</span>, and more than 8,600 applied. All of those events were organized by volunteers: an army of <span>221 organizers</span> and <span>920 coaches</span> supported by <span>393 sponsors</span>.</p>
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="col align-self-center">
                   <h2>{% trans "Financial Transparency 💰🔍" %}</h2>
                   <p>
                     {% blocktrans trimmed %}
@@ -183,7 +184,7 @@
 
             <div class="wrap">
                 <div class="row clearfix">
-                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <div class="col align-self-center">
                     <h2>{% trans "Achievements & Events in 2015 🏆🏅" %}</h2>
                     <p>{% trans "2015 was a pretty exciting year for us. Here is a rundown of what happened, season by season." %}</p>
 
@@ -347,7 +348,7 @@
         </div>
 
         <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col align-self-center">
                   <h2>{% trans "Success stories 💖" %}</h2>
                   <p>
                     {% blocktrans trimmed %}
@@ -457,7 +458,7 @@
 
         <div class="wrap">
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="col align-self-center">
                   <h2>{% trans "Summary 👍" %}</h2>
                   <p>{% trans "2015 was an incredibly busy year for Django Girls." %}</p>
 
@@ -482,7 +483,7 @@
         </div>
 
         <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 sponsors col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col align-self-center">
                   <h2>{% trans "Sponsors 📢️" %}</h2>
                   <p>
                     {% blocktrans trimmed %}
@@ -549,6 +550,6 @@
                 </div>
             </div>
       </section>
-
+    </div>
       {% include "core/map.html" with events=events %}
 {% endblock %}
