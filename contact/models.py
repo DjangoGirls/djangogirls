@@ -4,6 +4,8 @@ from django.core.mail import EmailMessage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from organize.emails import FROM_EMAIL
+
 
 class ContactEmail(models.Model):
     CHAPTER, SUPPORT = "chapter", "support"
@@ -40,7 +42,7 @@ class ContactEmail(models.Model):
         email = EmailMessage(
             self._get_subject(),
             self.message,
-            "Django Girls Contact <hello@djangogirls.org>",
+            f"Django Girls Contact <{FROM_EMAIL}>",
             [self.sent_to],
             reply_to=[f"{self.name} <{self.email}>"],
             headers={"Reply-To": f"{self.name} <{self.email}>"},
@@ -55,7 +57,7 @@ class ContactEmail(models.Model):
     def _get_to_email(self):
         if self.event and self.event.email:
             return self.event.email
-        return "hello@djangogirls.org"
+        return
 
     def _get_subject(self):
         return f"{self.name} - from the djangogirls.org website"
