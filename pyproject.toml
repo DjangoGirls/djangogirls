@@ -57,6 +57,7 @@ lint.extend-ignore = [
   "RUF012",   # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102",   # Use a single `if` statement instead of nested `if` statements
   "SIM115", # Ignore open-file-with-context-handler 
+  "F403", # Import * instead of specifying modules
 ]
 
 [tool.ruff.lint.per-file-ignores]
