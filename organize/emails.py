@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 
 from core.emails import send_email
 
-FROM_EMAIL = settings.DEFAULT_FROM_EMAIL
+from_email = settings.DEFAULT_FROM_EMAIL
 
 
 def send_application_confirmation(event_application):
@@ -32,7 +32,7 @@ def send_application_notification(event_application):
             "application": event_application,
         },
     )
-    send_email(content, subject, [FROM_EMAIL], reply_to=[event_application.get_main_organizer_email()])
+    send_email(content, subject, [from_email], reply_to=[event_application.get_main_organizer_email()])
 
 
 def send_application_deployed_email(event_application, event, email_password):
