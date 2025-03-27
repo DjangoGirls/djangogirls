@@ -4,6 +4,8 @@ import dj_database_url
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+from .utils.sanitize import sanitize
+
 
 def gettext(s):
     """
@@ -189,7 +191,7 @@ SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = "hello@djangogirls.org"
 
-ENABLE_SLACK_NOTIFICATIONS = os.environ.get("ENABLE_SLACK_NOTIFICATIONS", "FALSE")
+ENABLE_SLACK_NOTIFICATIONS = sanitize(os.environ.get("ENABLE_SLACK_NOTIFICATIONS", False), bool)
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 SLACK_TEAM_ID = os.environ.get("SLACK_TEAM_ID")
 SLACK_INVITE_CHANNEL_IDS = os.environ.get("SLACK_INVITE_CHANNEL_IDS", "").split(",")
