@@ -1,2 +1,2 @@
 # flake8: noqa
-from .slack import *
+from .slack import *  # noqa: PGH004
