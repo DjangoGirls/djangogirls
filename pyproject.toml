@@ -71,7 +71,7 @@ lint.extend-ignore = [
   "RUF017"  # Avoid quadratic list summation
 ]
 "tests/mocks/__init__.py" = [
-  "F403" # import *
+  "PGH004" # import *
 ]
 "djangogirls/settings.py" = [
   "PLW1508", # Use boolean instead string for environment variable
