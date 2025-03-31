@@ -1,1 +1,1 @@
-from .slack import *  # noqa: F403
+from .slack import *
