@@ -56,6 +56,8 @@ lint.extend-ignore = [
   "PLR2004",  # Magic value used in comparison, consider replacing with a constant variable
   "RUF012",   # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102",   # Use a single `if` statement instead of nested `if` statements
+  "SIM115", # Ignore open-file-with-context-handler 
+  "F403", # Import * instead of specifying modules
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -71,6 +73,12 @@ lint.extend-ignore = [
 "tests/core/test_admin.py" = [
   "RUF017"  # Avoid quadratic list summation
 ]
+"tests/mocks/__init__.py" = [
+  "PGH004" # import *
+]
+"djangogirls/settings.py" = [
+  "PLW1508", # Use boolean instead string for environment variable
+]  
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
