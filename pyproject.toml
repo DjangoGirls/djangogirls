@@ -62,6 +62,9 @@ lint.extend-ignore = [
 "__init__.py" = [
   "F401"  # unused-import
 ]
+"djangogirls/settings.py" = [
+  "PLW1508"  # Checks for os.getenv calls with invalid default values
+]
 "djangogirls/urls.py" = [
   "RUF005"  # Consider iterable unpacking instead of concatenation
 ]
