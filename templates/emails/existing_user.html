@@ -23,7 +23,7 @@
 <p>{% trans "Here you can find instructions on editing website: https://organize.djangogirls.org/website/" %}</p>
 
 <p>
-{% blocktrans with email=event.email %}
+{% blocktrans trimmed with email=event.email %}
     Your event's email is {{ email }}. Ask the main organizer of you event
     for password and instructions to access it.
 {% endblocktrans %}
