@@ -399,23 +399,23 @@ msgstr "Wichtige Daten"
 msgid "Change this only if you know what you are doing"
 msgstr "Ändere dies nur, wenn du weißt, was du tust"
 
-#: core/default_eventpage_content.py:60
+#: core/default_eventpage_content.py:80
 msgid "About"
 msgstr "Über"
 
-#: core/default_eventpage_content.py:61
+#: core/default_eventpage_content.py:81
 msgid "Apply for a pass!"
 msgstr "Beantragen Sie einen Pass!"
 
-#: core/default_eventpage_content.py:62 templates/global/footer.html:9
+#: core/default_eventpage_content.py:82 templates/global/footer.html:9
 msgid "FAQ"
 msgstr "FAQ"
 
-#: core/default_eventpage_content.py:63
+#: core/default_eventpage_content.py:83
 msgid "Become a coach"
 msgstr "Werde Trainer"
 
-#: core/default_eventpage_content.py:64
+#: core/default_eventpage_content.py:84
 msgid "Partners"
 msgstr "Partner"
 
@@ -791,11 +791,11 @@ msgstr "Umschlag für die Veranstaltung (356 x 210px)"
 msgid "Section background"
 msgstr "Hintergrund der Sektion"
 
-#: pictures/models.py:34
+#: pictures/models.py:33
 msgid "Only use pictures with a <a href='https://creativecommons.org/licenses/'>Creative Commons license</a>."
 msgstr "Verwende nur Bilder unter der <a href='https://creativecommons.org/licenses/'>Creative Commons Lizenz</a>."
 
-#: pictures/models.py:39
+#: pictures/models.py:36
 msgid "photo URL"
 msgstr "Foto URL"
 
@@ -1942,19 +1942,19 @@ msgstr "Viele Leute machen unser Lernprogramm außerhalb eines Workshops. Manchm
 msgid "This <a href=\"https://gitter.im/DjangoGirls/tutorial\">Gitter room</a> is designed to be a friendly space, especially for beginners. Remember that our <a href=\"https://djangogirls.org/pages/coc/\">Code of Conduct</a> also applies there."
 msgstr "Dieser <a href=\"https://gitter.im/DjangoGirls/tutorial\">Gitterraum</a> soll ein freundlicher Raum sein, besonders für Anfänger. Denken Sie daran, dass unser <a href=\"https://djangogirls.org/pages/coc/\">Verhaltenskodex</a> auch dort gilt."
 
-#: templates/core/contribute.html:188
+#: templates/core/contribute.html:166
 msgid "Want to do more?"
 msgstr "Du möchtest mehr tun?"
 
-#: templates/core/contribute.html:191
+#: templates/core/contribute.html:169
 msgid "A pile a tattoo."
 msgstr "Ein Haufen ein Tattoo."
 
-#: templates/core/contribute.html:196
+#: templates/core/contribute.html:174
 msgid "Want to help out in a way that isn't listed here? You can look at our <a href=\"https://trello.com/b/q7p6jcfg/django-girls\">Trello board</a> and propose new projects to work on."
 msgstr "Möchten Sie auf eine Weise helfen, die hier nicht aufgeführt ist? Sie können sich unser <a href=\"https://trello.com/b/q7p6jcfg/django-girls\">Trello-Board</a> ansehen und neue Projekte vorschlagen, an denen Sie mitarbeiten möchten."
 
-#: templates/core/contribute.html:201
+#: templates/core/contribute.html:179
 msgid "Don't forget to read the rules described in the first column before adding a new card! ❤"
 msgstr "Vergessen Sie nicht, die in der ersten Spalte beschriebenen Regeln zu lesen, bevor Sie eine neue Karte hinzufügen! ❤"
 
@@ -2983,11 +2983,11 @@ msgstr "<b>Organisator</b> bezeichnet den Organisator oder Veranstalter einer Ve
 msgid "<b>System</b> means the communications and other system or systems we use in connection with the Site. means the communications and other system or systems we use in connection with the Site."
 msgstr "<b>System</b> bezeichnet das Kommunikations- und andere System oder Systeme, die wir in Verbindung mit der Website verwenden. bezeichnet das Kommunikations- und andere System oder Systeme, die wir in Verbindung mit der Website verwenden."
 
-#: templates/core/terms_conditions.html:253
+#: templates/core/terms_conditions.html:252
 msgid "<b>T&Cs</b> means these terms and conditions."
 msgstr "<b>T&Cs</b> bedeutet diese Bedingungen."
 
-#: templates/core/terms_conditions.html:255
+#: templates/core/terms_conditions.html:254
 msgid "<b>User</b> means any person, firm or company using the Site for any purpose."
 msgstr "<b>Nutzer</b> bezeichnet jede Person, Firma oder Gesellschaft, die die Website zu irgendeinem Zweck nutzt."
 
@@ -4650,15 +4650,15 @@ msgstr "Fehlende Parameter"
 msgid "Applications have been updated"
 msgstr "Die Anträge wurden aktualisiert"
 
-#: applications/views.py:305
+#: applications/views.py:312
 msgid "Something went wrong with your RSVP link. Please contact us at %(email)s with your name."
 msgstr "Bei Ihrem RSVP-Link ist ein Fehler aufgetreten. Bitte kontaktieren Sie uns unter %(email)s mit Ihrem Namen."
 
-#: applications/views.py:315
+#: applications/views.py:328
 msgid "Your participation in the workshop has been confirmed! We can't wait to meet you. We will be in touch with details soon."
 msgstr "Ihre Teilnahme an dem Workshop wurde bestätigt! Wir können es kaum erwarten, Sie zu treffen. Wir werden Sie in Kürze über die Einzelheiten informieren."
 
-#: applications/views.py:321
+#: applications/views.py:334
 msgid "Your answer has been saved, thanks for letting us know. Your spot will be assigned to another person on the waiting list."
 msgstr "Ihre Antwort wurde gespeichert. Vielen Dank, dass Sie uns Bescheid gegeben haben. Ihr Platz wird einer anderen Person auf der Warteliste zugewiesen."
 
@@ -5157,11 +5157,11 @@ msgstr ""
 msgid "🎉🎁🎈🎊 We are 10 years old now and crowdfunding 🎂🥂🍾💕!"
 msgstr ""
 
-#: templates/donations/crowdfunding.html:17
+#: templates/donations/crowdfunding.html:18
 msgid "<span class=\"highlighted-number\">$%(total_raised)s</span> of <span class=\"highlighted-number\">$30,000</span> raised."
 msgstr ""
 
-#: templates/donations/crowdfunding.html:28
+#: templates/donations/crowdfunding.html:30
 msgid "<p>We are 10 years now, yay and we are fundraising!</p> <p>Since the first Django Girls workshop in July 2014, we grew unexpectedly fast and we could not sustain that growth without some help.</p> <p>In 2015, we introduced a part-time paid position of Awesomeness Ambassador to help provide support to hundreds of volunteers all over the world.</p> <p>In 2017, we also introduced the part-time paid position of Fundraising Coordinator to help us raise funds to run our activities. In 2023, we introduced the part-time paid position of Communications Officer to help us increase outreach following the pandemic and increase the number of workshops. We also introduced the Chief Emoji Officer (Managing Director) role, increasing the number of our paid staff.</p> <p>Our mission for 2024 is to improve outreach and visibility following the pandemic which saw a reduction in the number of workshops being organized per year. We have therefore introduced a new part-time Communications Officer to help us achieve this. We will also continue working with the advisory board to tackle diversity and inclusion issues in our systems and workshop guidance to ensure that voices of all people, especially those from marginalized communities, can contribute to our future. </p> <p> Help us see this through. Support our work! </p>"
 msgstr ""
 
@@ -5179,5 +5179,18 @@ msgstr ""
 
 #: templates/jobboard/index.html:11
 msgid "Django Girls global partners are hiring! Want to see your job posted here? <a href=\"/contact/\">Contact us</a> about becoming a global partner for Django Girls and recruit the best talent for your organization."
+msgstr ""
+
+#: templates/core/terms_conditions.html:247
+#, fuzzy
+msgid "<b>System</b> means the communications and other system or systems we use in connection with the Site."
+msgstr "<b>System</b> bezeichnet das Kommunikations- und andere System oder Systeme, die wir in Verbindung mit der Website verwenden. bezeichnet das Kommunikations- und andere System oder Systeme, die wir in Verbindung mit der Website verwenden."
+
+#: applications/views.py:304
+msgid "You have already confirmed your attendance."
+msgstr ""
+
+#: applications/views.py:307
+msgid "You have already declined the invitation. If you want to change your RSVP, please contact us at %(email)s with your name."
 msgstr ""
 
