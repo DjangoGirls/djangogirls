@@ -18,9 +18,11 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+
     <section id="annual-report">
         <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col align-self-center">
                 <div class="report-head">
                     <a href="http://djangogirls.org/"><img src="{% static 'img/logo-bigger.png' %}" /></a>
                     <h1>{% trans "Impact Report 2016-2017" %}</h1>
@@ -46,7 +48,7 @@
         </div>
         <div class="wrap">
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="col align-self-center">
                   <h2>{% trans "✨ Highlights ✨" %}</h2>
                   <p>
                     {% blocktrans trimmed %}
@@ -82,7 +84,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <div id="growth" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div id="growth" class="col align-self-center">
               <h2>{% trans "Growth 📈" %}</h2>
               <div id="map"></div>
               <small>{% trans "Map of Django Girls events from January 2016 to July 2017" %}</small>
@@ -112,12 +114,12 @@
 
         <div class="wrap">
             <div class="row clearfix">
-                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="col align-self-center">
                 <h2>{% trans "Foundation's Activities 👩‍💻👩‍💻👩‍💻" %}</h2>
 
                 <div class="row" id="tutorial">
                     <div class="col-md-12"><h3>{% trans "🌎 Maintenance & translation of our free online resources" %}</h3></div>
-                    <div class="col-md-10">
+                    <div class="col align-self-center">
                         <p>
                           {% blocktrans trimmed %}
                             The curriculum we developed Django Girls Tutorial is used in our workshops to introduce attendees to web development
@@ -144,7 +146,7 @@
                           {% trans "Your browser does not support the video tag." %}
                         </video>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col align-self-center">
                         <h3>{% trans "🎁 Organiser Starter Kits" %}</h3>
                         <p>
                           {% blocktrans trimmed %}
@@ -165,7 +167,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col align-self-center">
                         <h3>{% trans "💰 Fundraising" %}</h3>
                         <p>
                           {% blocktrans trimmed %}
@@ -176,7 +178,7 @@
                           {% endblocktrans %}
                         </p>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col align-self-center">
                         <table>
                           <thead>
                             <tr>
@@ -198,7 +200,7 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="col align-self-center">
             <h2>{% trans "Participants Survey" %}</h2>
             <p>
               {% blocktrans trimmed %}
@@ -376,7 +378,7 @@
 
     <div class="wrap">
         <div class="row clearfix">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="col align-self-center">
               <h2>#IAmDjangoGirl</h2>
               <p>
                 {% blocktrans trimmed %}
@@ -384,7 +386,10 @@
                   impacted their lives. The response we received was overwhelmingly positive:
                 {% endblocktrans %}
               </p>
-              <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6">
                   <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> Thanks to Django Girls, I carved out a whole new career &amp; life for myself, and met some amazing people along the way! 🎉🎉</p>&mdash; Jen (@OuiDoll) <a href="https://twitter.com/OuiDoll/status/888380988711206912">July 21, 2017</a></blockquote>
                   <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">HBDay to <a href="https://twitter.com/hashtag/DjangoGirls?src=hash">#DjangoGirls</a> ! Its been an amazing journey with folks here in Korea.6 workshops already held and 1 more on the way <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/qMy4Xn4vfu">pic.twitter.com/qMy4Xn4vfu</a></p>&mdash; Hassan Abid (하산) (@hassanabidpk) <a href="https://twitter.com/hassanabidpk/status/888243828049584129">July 21, 2017</a></blockquote>
                   <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎉 Y&#39;all!! I used to be an awesome English teacher but now, because of <a href="https://twitter.com/djangogirls">@djangogirls</a>, I&#39;m an awesome django developer. <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> ❤ <a href="https://t.co/3C15jLGFeg">pic.twitter.com/3C15jLGFeg</a></p>&mdash; Rachell (@Rachell_Calhoun) <a href="https://twitter.com/Rachell_Calhoun/status/888465951917780993">July 21, 2017</a></blockquote>
@@ -408,17 +413,16 @@
                   <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/djangogirls">@djangogirls</a> taught me  a lot of being confident and awesome :).   Happy birthday ^^ <a href="https://twitter.com/hashtag/IAmADjangoGirl?src=hash">#IAmADjangoGirl</a> <a href="https://t.co/smm5Nwwqb7">pic.twitter.com/smm5Nwwqb7</a></p>&mdash; Aina Anjary Fenomamy (@anjania_catus) <a href="https://twitter.com/anjania_catus/status/888415616985706496">July 21, 2017</a></blockquote>
                   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
               </div>
+            </div>
               <div class="row">
-                  <div class="col-md-12" style="padding-top: 30px;">
+                  <div class="col align-self-center" style="padding-top: 30px;">
                       <center><big><a href="https://twitter.com/search?vertical=default&q=%23iamadjangogirl&src=typd">{% trans "See more success stories" %}</a> 👉</big></center>
                   </div>
               </div>
           </div>
-      </div>
-    </div>
 
     <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 sponsors col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="col align-self-center">
               <h2>{% trans "Sponsors 📢️" %}</h2>
               <p>
                 {% blocktrans trimmed %}
@@ -494,6 +498,7 @@
     </section>
 
     {% include "core/map.html" with events=events mapbox_access_token=mapbox_access_token %}
+  </div>
 
     <script>
           var ctx = document.getElementById('employment-chart').getContext('2d');

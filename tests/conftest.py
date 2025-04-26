@@ -8,7 +8,7 @@ from core.tumblr_client import RemoteStory
 from globalpartners.models import GlobalPartner
 from pictures.models import StockPicture
 from sponsor.models import Donor
-from tests.mocks import *  # noqa: F403
+from tests.mocks import *
 
 
 @pytest.fixture(autouse=True)

@@ -2,7 +2,6 @@ import os
 
 import dj_database_url
 import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
 from .utils.sanitize import sanitize
 
@@ -182,8 +181,12 @@ STATICFILES_FINDERS = (
 )
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
+
 if SENTRY_DSN:
-    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+    sentry_sdk.init(
+        dsn="https://a7bce239f0e8492391c9773fc49054f9@o950701.ingest.us.sentry.io/5899294",
+        traces_sample_rate=1.0,
+    )
 
 MAILCHIMP_API_KEY = os.environ.get("MAILCHIMP_APIKEY")
 

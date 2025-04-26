@@ -13,7 +13,7 @@
 <p>{% blocktrans with email=event.email %}Your e-mail is {{ email }}.{% endblocktrans %}</p>
 
 <p>
-{% blocktrans with email=event.email %}
+{% blocktrans trimmed with email=event.email %}
     You can login here: <a href="http://mail.djangogirls.org/">http://mail.djangogirls.org/</a><br/>
     Username: {{ email }} (@djangogirls.com works too!)<br/>
 {% endblocktrans %}

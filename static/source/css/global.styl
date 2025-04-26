@@ -432,10 +432,38 @@ span.highlighted-number
                     opacity: 1
 
 #stories
-    margin-top: 0
+    margin-top: 100px
 
-    .row
-        margin: 30px 0
+    .row_stories
+	    margin-top: 50px
+	    display: grid
+	    place-items: center
+	    gap: 12px
+	    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+
+	.girl
+            height: 255px
+            width: 255px
+            padding: 0
+            margin: 0
+            background-size: cover
+            background-position: center center
+            background-repeat: no-repeat
+            margin: 0 15px
+
+            .overlay
+                width: 100%
+                height: 100%
+                background: rgba(0,0,0,0.5)
+                padding-top: 45%
+                text-align: center
+                color: white
+                font-style: italic
+                font-size: 30px
+                opacity: 0
+
+                &:hover
+                    opacity: 1
 
 /*
 ------------------
@@ -894,7 +922,7 @@ footer
 */
 #annual-report
     margin: 60px 0 0 0
-    font-family: serif_font
+    font-family: sans_font
     font-size: 18px
     line-height: 180%
     color: black
@@ -958,7 +986,7 @@ footer
         padding-top: 30px
         padding-bottom: 30px
         .season
-            font-style: serif_font
+            font-style: sans_font
             font-size: 160px
             line-height: 160px
             padding: 20px 0 0 0
