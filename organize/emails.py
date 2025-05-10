@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.template.loader import render_to_string
 
 from core.emails import send_email
@@ -29,7 +30,7 @@ def send_application_notification(event_application):
             "application": event_application,
         },
     )
-    send_email(content, subject, ["hello@djangogirls.org"], reply_to=[event_application.get_main_organizer_email()])
+    send_email(content, subject, [settings.DEFAULT_FROM_EMAIL], reply_to=[event_application.get_main_organizer_email()])
 
 
 def send_application_deployed_email(event_application, event, email_password):

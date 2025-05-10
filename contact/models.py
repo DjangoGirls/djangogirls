@@ -1,5 +1,6 @@
 from smtplib import SMTPException
 
+from django.conf import settings
 from django.core.mail import EmailMessage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -40,7 +41,7 @@ class ContactEmail(models.Model):
         email = EmailMessage(
             self._get_subject(),
             self.message,
-            "Django Girls Contact <hello@djangogirls.org>",
+            f"Django Girls Contact <{settings.DEFAULT_FROM_EMAIL}>",
             [self.sent_to],
             reply_to=[f"{self.name} <{self.email}>"],
             headers={"Reply-To": f"{self.name} <{self.email}>"},
@@ -55,7 +56,7 @@ class ContactEmail(models.Model):
     def _get_to_email(self):
         if self.event and self.event.email:
             return self.event.email
-        return "hello@djangogirls.org"
+        return settings.DEFAULT_FROM_EMAIL
 
     def _get_subject(self):
         return f"{self.name} - from the djangogirls.org website"
