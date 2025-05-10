@@ -34,6 +34,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         "city",
         "country",
         "date",
+        "created_at",
         "main_organizer",
         "status",
         "comment",
