@@ -65,6 +65,7 @@ class EventAdmin(admin.ModelAdmin):
         "is_past_event",
         "has_stats",
         "is_frozen",
+        "created_at",
     )
     list_filter = (OpenRegistrationFilter,)
     search_fields = ("city", "country", "name")
