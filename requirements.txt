@@ -78,7 +78,7 @@ django-debug-toolbar==3.8.1
     # via -r requirements.in
 django-extensions==3.2.1
     # via -r requirements.in
-django-formtools==2.3.0
+django-formtools==2.3
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
@@ -257,7 +257,7 @@ pyyaml==6.0
     # via
     #   pre-commit
     #   vcrpy
-requests==2.32.0
+requests==2.32.4
     # via
     #   google-api-core
     #   py-trello
