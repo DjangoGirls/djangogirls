@@ -78,7 +78,7 @@ django-debug-toolbar==3.8.1
     # via -r requirements.in
 django-extensions==3.2.1
     # via -r requirements.in
-django-formtools==2.3.0
+django-formtools==2.3
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
@@ -185,7 +185,7 @@ pluggy==1.0.0
     # via pytest
 pre-commit==2.21.0
     # via -r requirements.in
-protobuf==4.24.4
+protobuf==4.25.8
     # via
     #   google-api-core
     #   googleapis-common-protos
