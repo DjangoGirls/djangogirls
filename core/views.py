@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_date_extensions.fields import ApproximateDate
 
+from applications.questions import get_organiser_menu
 from patreonmanager.models import FundraisingStatus
 from story.models import Story
 
@@ -85,7 +86,10 @@ def event(request, page_url):
         {
             "event": event_obj,
             "menu": event_obj.menu.all(),
+            "organizer_menu": get_organiser_menu(page_url),
             "content": event_obj.content.prefetch_related("coaches", "sponsors").filter(is_public=True),
+            "page_url": page_url,
+            "user": user,
         },
     )
 
