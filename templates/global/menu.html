@@ -14,7 +14,6 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{% url 'donations:index' %}">{% trans "Corporate Sponsorships" %}</a></li>
-                    <li><a class="dropdown-item" href="{% url 'donations:crowdfunding' %}" target="_blank">{% trans "Crowdfunding" %}</a></li>
                     <li><a class="dropdown-item" href="{% url 'donations:donate' %}">{% trans "Donate to us" %}</a></li>
                     <li><a class="dropdown-item" href="https://www.patreon.com/djangogirls">{% trans "Our Patreon Page" %}</a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -34,16 +33,16 @@
             </li>
 
             <li class="nav-item px-2">
-            <a class="nav-link" href="{% url 'jobboard:index' %}">{% trans "Tech Jobs Board" %}</a>
+            <a class="dropdown-item" href="{% url 'core:events' %}">{% trans "Events" %}</a>
             </li>
+
             <li class="nav-item dropdown px-2">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% trans "What's new?" %}  <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{% url 'core:events' %}">{% trans "Events" %}</a></li>
+                <li><a class="dropdown-item" href="{% url 'jobboard:index' %}">{% trans "Tech Jobs Board" %}</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'donations:crowdfunding' %}" target="_blank">{% trans "Crowdfunding" %}</a></li>
                 <li><a class="dropdown-item" href="https://django-girls.myspreadshop.co.uk" target="_blank">{% trans "Shop" %}</a></li>
                 <li><a class="dropdown-item" href="{% url 'core:newsletter' %}">{% trans "Newsletter" %}</a></li>
                 <li><a class="dropdown-item" href="https://blog.djangogirls.org/">{% trans "Our blog" %}</a></li>

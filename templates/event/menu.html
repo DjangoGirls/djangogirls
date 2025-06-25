@@ -12,6 +12,11 @@
         {% for item in menu %}
         <li class="nav-item px-2"><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
         {% endfor %}
+        {% if user.is_staff %}
+          {% for item in organizer_menu %}
+          <li class="nav-item px-2"><a href="{% build_menu_item_url item.url event.page_url %}">{{ item.title }}</a></li>
+          {% endfor %}
+        {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
