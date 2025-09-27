@@ -185,7 +185,7 @@ pluggy==1.0.0
     # via pytest
 pre-commit==2.21.0
     # via -r requirements.in
-protobuf==4.24.4
+protobuf==4.25.8
     # via
     #   google-api-core
     #   googleapis-common-protos
