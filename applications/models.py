@@ -25,7 +25,7 @@ class Form(models.Model):
             "one. The application process is open from {INSERT DATE} "
             "until {INSERT DATE}. If you're curious about the criteria "
             "we use to choose applicants, you can read about it on "
-            "<a href='http://blog.djangogirls.org/post/91067112853/"
+            "<a href='https://blog.djangogirls.org/post/91067112853/"
             "djangogirls-how-we-scored-applications'>Django Girls "
             "blog</a>. Good luck!"
         )
@@ -33,15 +33,18 @@ class Form(models.Model):
     confirmation_mail = models.TextField(
         default=_(
             "Hi there!\n\n"
-            'This is a confirmation of your application to <a href="http://djangogirls.org/{city}">'
-            "Django Girls {CITY}</a>. "
+            "This is a confirmation of your application to "
+            '<a href="https://djangogirls.org/{city}"> Django Girls {CITY}'
+            "</a>. "
             "Yay! That's a huge step already, we're proud of you!\n\n"
             "Mind that this is not a confirmation of participation in the event, but a confirmation that we received "
             "your application.\n\n"
             "You'll receive an email from the team that organizes Django Girls {CITY} soon."
             "You can always reach them by answering to this email or by writing to {your event mail}.\n\n"
-            "Please watch out for a confirmation email and add our email address to your address book, so that future emails do not go into spam."
-            "In the past, we have had many email invitations to the workshop go into spam and have had many applicants miss our invitation!"
+            "Please watch out for a confirmation email and add our email address to your address book, so that future "
+            "emails do not go into spam."
+            "In the past, we have had many email invitations to the workshop go into spam and have had many "
+            "applicants miss our invitation!"
             "We wouldn't want that to happen to you! \n\n"
             "For your reference, we're attaching your answers below.\n\n"
             "Hugs, cupcakes and high-fives!\n"
