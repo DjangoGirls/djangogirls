@@ -60,7 +60,9 @@ class EventApplicationManager(models.Manager):
             event_date = data_dict["date"]
             try:
                 if date(event_date.year, event_date.month, event_date.day) - date(
-                    previous_event.date.year, previous_event.date.month, previous_event.date.day
+                    previous_event.date.year,
+                    previous_event.date.month,
+                    previous_event.date.day,
                 ) < timedelta(days=180):
                     raise ValidationError(
                         {
@@ -114,7 +116,8 @@ class EventApplication(models.Model):
     remote = models.BooleanField(default=False)
     tools = models.TextField(_("Information about how you will host your remote workshop"), blank=True)
     local_restrictions = models.TextField(
-        _("Information about local restrictions for physical restrictions due to Covid-19 pandemic."), blank=True
+        _("Information about local restrictions for physical restrictions due to Covid-19 pandemic."),
+        blank=True,
     )
     safety = models.TextField(
         _("Information about how you will ensure participants' and coaches' safety during the Covid-19 pandemic"),
@@ -208,7 +211,7 @@ class EventApplication(models.Model):
         - send email about deployment
         """
         if self.status == DEPLOYED:  # we don't want to deploy twice
-            return
+            return None
 
         self.change_status_to(DEPLOYED)
 
@@ -234,7 +237,7 @@ class EventApplication(models.Model):
 
     def send_deployed_email(self, event):
         # sort out Gmail accounts
-        dummy_email, email_password = gmail_accounts.get_or_create_gmail(event_application=self, event=event)
+        _, email_password = gmail_accounts.get_or_create_gmail(event_application=self, event=event)
 
         # TODO: remove organizers, who are no longer in org team if cloned
         send_application_deployed_email(event_application=self, event=event, email_password=email_password)
