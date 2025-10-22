@@ -22,7 +22,11 @@ def apply(request, page_url):
     if not event:
         raise Http404
     elif isinstance(event, tuple):
-        return render(request, "applications/event_not_live.html", {"city": event[0], "past": event[1]})
+        return render(
+            request,
+            "applications/event_not_live.html",
+            {"city": event[0], "past": event[1]},
+        )
 
     form_obj = Form.objects.filter(event=event).first()
     if form_obj is None:
@@ -39,7 +43,10 @@ def apply(request, page_url):
 
     if form.is_valid():
         form.save()
-        messages.success(request, _("Yay! Your application has been saved. You'll hear from us soon!"))
+        messages.success(
+            request,
+            _("Yay! Your application has been saved. You'll hear from us soon!"),
+        )
 
         return render(
             request,
@@ -117,7 +124,12 @@ def applications_csv(request, page_url):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = f'attachment; filename="{page_url}.csv"'
     writer = csv.writer(response)
-    csv_header = [_("Application Number"), _("Application State"), _("RSVP Status"), _("Average Score")]
+    csv_header = [
+        _("Application Number"),
+        _("Application State"),
+        _("RSVP Status"),
+        _("Average Score"),
+    ]
     question_set = event.form.question_set
 
     question_titles = question_set.values_list("title", flat=True)
@@ -149,6 +161,8 @@ def application_detail(request, page_url, app_number):
         .order_by("-created")
         .first()
     )
+    # Get the related answers and questions to avoid N+1 queries in the template.
+    answers = application.answer_set.select_related("question").all()
     try:
         score = Score.objects.get(user=request.user, application=application)
     except Score.DoesNotExist:
@@ -177,13 +191,14 @@ def application_detail(request, page_url, app_number):
         request,
         "applications/application_detail.html",
         {
-            "event": event,
+            "answers": answers,
             "application": application,
+            "event": event,
             "form": application.form,
+            "menu": get_organiser_menu(page_url),
+            "score_form": score_form,
             "scores": all_scores,
             "user_score": score,
-            "score_form": score_form,
-            "menu": get_organiser_menu(page_url),
         },
     )
 
@@ -217,7 +232,11 @@ def compose_email(request, page_url, email_id=None):
     form_obj = get_object_or_404(Form, event=event)
     emailmsg = None if not email_id else get_object_or_404(Email, form__event=event, id=email_id)
 
-    form = EmailForm(request.POST or None, instance=emailmsg, initial={"author": request.user, "form": form_obj})
+    form = EmailForm(
+        request.POST or None,
+        instance=emailmsg,
+        initial={"author": request.user, "form": form_obj},
+    )
     if form.is_valid() and request.method == "POST":
         obj = form.save(commit=False)
         obj.author = request.user
@@ -293,7 +312,11 @@ def rsvp(request, page_url, code):
     if not event:
         raise Http404
     elif isinstance(event, tuple):
-        return render(request, "applications/event_not_live.html", {"city": event[0], "past": event[1]})
+        return render(
+            request,
+            "applications/event_not_live.html",
+            {"city": event[0], "past": event[1]},
+        )
 
     application, rsvp = Application.get_by_rsvp_code(code, event)
     if not application:
@@ -337,4 +360,8 @@ def rsvp(request, page_url, code):
 
     menu = EventPageMenu.objects.filter(event=event)
 
-    return render(request, "applications/rsvp.html", {"event": event, "menu": menu, "message": message})
+    return render(
+        request,
+        "applications/rsvp.html",
+        {"event": event, "menu": menu, "message": message},
+    )

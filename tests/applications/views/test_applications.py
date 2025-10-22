@@ -4,7 +4,7 @@ from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from django.utils import translation
 
-from applications.models import Application, Score
+from applications.models import Answer, Application, Question, Score
 from applications.views import application_list
 
 
@@ -203,12 +203,16 @@ def test_changing_application_status_errors(client, admin_client, future_event, 
 
     # lack of state parameter
     resp = admin_client.post(
-        reverse("applications:change_state", args=[future_event.page_url]), {"application": application_submitted.id}
+        reverse("applications:change_state", args=[future_event.page_url]),
+        {"application": application_submitted.id},
     )
     assert "error" in resp.json()
 
     # lack of application parameter
-    resp = admin_client.post(reverse("applications:change_state", args=[future_event.page_url]), {"state": "accepted"})
+    resp = admin_client.post(
+        reverse("applications:change_state", args=[future_event.page_url]),
+        {"state": "accepted"},
+    )
     assert "error" in resp.json()
 
 
@@ -222,13 +226,15 @@ def test_changing_application_rsvp_errors(client, admin_client, future_event, ap
 
     # lack of rsvp_status parameter
     resp = admin_client.post(
-        reverse("applications:change_rsvp", args=[future_event.page_url]), {"application": application_submitted.id}
+        reverse("applications:change_rsvp", args=[future_event.page_url]),
+        {"application": application_submitted.id},
     )
     assert "error" in resp.json()
 
     # lack of application parameter
     resp = admin_client.post(
-        reverse("applications:change_rsvp", args=[future_event.page_url]), {"rsvp_status": Application.RSVP_YES}
+        reverse("applications:change_rsvp", args=[future_event.page_url]),
+        {"rsvp_status": Application.RSVP_YES},
     )
     assert "error" in resp.json()
 
@@ -238,7 +244,10 @@ def test_changing_application_status_in_bulk(admin_client, future_event, applica
     assert application_rejected.state == "rejected"
     resp = admin_client.post(
         reverse("applications:change_state", args=[future_event.page_url]),
-        {"state": "accepted", "application": [application_submitted.id, application_rejected.id]},
+        {
+            "state": "accepted",
+            "application": [application_submitted.id, application_rejected.id],
+        },
     )
     assert resp.status_code == 200
     application_submitted = Application.objects.get(id=application_submitted.id)
@@ -258,3 +267,52 @@ def test_application_scores_is_queried_once(admin_client, future_event, scored_a
 
     # The first query is for the annotation in get_applications_for_event, the second is for the scores themselves
     assert len(score_queries) == 2
+
+
+def test_application_detail_queries_optimized(admin_client, future_event, application_submitted, future_event_form):
+    """Regression test to ensure application_detail view doesn't have N+1 query problem with answers/questions."""
+    # Create multiple questions and answers for the application
+    questions = []
+    for i in range(5):
+        question = Question.objects.create(
+            form=future_event_form,
+            title=f"Test Question {i}",
+            question_type="text",
+            order=i,
+        )
+        questions.append(question)
+        Answer.objects.create(
+            application=application_submitted,
+            question=question,
+            answer=f"Test Answer {i}",
+        )
+
+    application_detail_url = reverse(
+        "applications:application_detail",
+        kwargs={
+            "page_url": future_event.page_url,
+            "app_number": application_submitted.number,
+        },
+    )
+
+    with CaptureQueriesContext(connection) as queries:
+        resp = admin_client.get(application_detail_url)
+        assert resp.status_code == 200
+
+    # Check that we're not making separate queries for each question
+    question_table_name = Question._meta.db_table
+    answer_table_name = Answer._meta.db_table
+
+    question_queries = [q for q in queries.captured_queries if question_table_name in q["sql"]]
+    answer_queries = [q for q in queries.captured_queries if answer_table_name in q["sql"]]
+
+    # With select_related, we should have only 1 query that joins answers and questions
+    # The query should join both tables, so it will appear in both lists
+    # We're checking that there's at most 1 query involving answers (with joined questions)
+    assert len(answer_queries) <= 1, f"Expected at most 1 answer query, got {len(answer_queries)}"
+
+    # Verify that if there are question queries, they're part of the joined query with answers
+    # There should not be 5 separate queries (one per question)
+    assert len(question_queries) <= 1, (
+        f"Expected at most 1 question query (joined with answers), got {len(question_queries)}"
+    )
