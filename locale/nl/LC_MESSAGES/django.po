@@ -6478,6 +6478,7 @@ msgid ""
 "    Your event's email is %(email)s. Ask the main organizer of you event\n"
 "    for password and instructions to access it.\n"
 msgstr ""
+"\n"
 "Het e-mailadres van uw evenement is %(email)s. Vraag de hoofdorganisator van "
 "je evenement om het wachtwoord en instructies om toegang te krijgen."
 
