@@ -12,7 +12,7 @@ attrs==22.2.0
     # via pytest
 autoflake==1.4
     # via -r requirements.in
-black==24.3.0
+black==26.3.1
     # via -r requirements.in
 bleach[css]==5.0.1
     # via django-bleach
@@ -168,7 +168,7 @@ packaging==23.0
     #   black
     #   build
     #   pytest
-pathspec==0.11.0
+pathspec==1.0.4
     # via black
 pillow==10.3.0
     # via
@@ -248,6 +248,8 @@ python-http-client==3.3.7
     # via
     #   django-sendgrid-v5
     #   sendgrid
+pytokens==0.4.1
+    # via black
 pytz==2022.7.1
     # via
     #   django
