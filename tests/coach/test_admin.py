@@ -17,12 +17,8 @@ def test_get_queryset_for_organizer_no_duplicates(client, organizer_peter, futur
     in the queryset, preventing MultipleObjectsReturned when the admin calls get()."""
     coach = Coach.objects.create(name="Anna Smith")
 
-    content1 = EventPageContent.objects.create(
-        event=future_event, name="coaches", content="a", position=1
-    )
-    content2 = EventPageContent.objects.create(
-        event=future_event, name="mentors", content="b", position=2
-    )
+    content1 = EventPageContent.objects.create(event=future_event, name="coaches", content="a", position=1)
+    content2 = EventPageContent.objects.create(event=future_event, name="mentors", content="b", position=2)
     content1.coaches.add(coach)
     content2.coaches.add(coach)
 
