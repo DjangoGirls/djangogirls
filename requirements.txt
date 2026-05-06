@@ -70,7 +70,7 @@ django-bleach==3.0.1
     # via -r requirements.in
 django-click==2.3.0
     # via -r requirements.in
-django-countries==7.5.1
+django-countries==8.2.0
     # via -r requirements.in
 django-date-extensions==3.1.2
     # via -r requirements.in
@@ -78,7 +78,7 @@ django-debug-toolbar==3.8.1
     # via -r requirements.in
 django-extensions==3.2.1
     # via -r requirements.in
-django-formtools==2.3
+django-formtools==2.5.1
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
