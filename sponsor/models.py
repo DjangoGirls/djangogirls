@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
-    logo = models.ImageField(
+    logo = models.FileField(
         upload_to="event/sponsors/",
         null=True,
         blank=True,
