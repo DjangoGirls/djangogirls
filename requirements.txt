@@ -102,7 +102,7 @@ easy-thumbnails==2.8.5
     # via -r requirements.in
 easydict==1.10
     # via -r requirements.in
-filelock==3.17.0
+filelock==3.20.3
     # via
     #   urlextract
     #   virtualenv
@@ -305,10 +305,11 @@ tomli==2.0.1
     #   black
     #   build
     #   pyproject-hooks
-typing-extensions==4.5.0
+typing-extensions==4.15.0
     # via
     #   black
     #   django-countries
+    #   virtualenv
 uritemplate==4.1.1
     # via google-api-python-client
 uritools==4.0.1
@@ -322,7 +323,7 @@ urllib3==1.26.19
     #   sentry-sdk
 vcrpy==4.2.1
     # via -r requirements.in
-virtualenv==20.26.6
+virtualenv==20.36.1
     # via pre-commit
 webencodings==0.5.1
     # via
