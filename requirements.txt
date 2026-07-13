@@ -286,7 +286,7 @@ six==1.16.0
     #   vcrpy
 slack-sdk==3.19.5
     # via -r requirements.in
-sqlparse==0.5.0
+sqlparse==0.5.4
     # via
     #   django
     #   django-debug-toolbar
