@@ -3,7 +3,9 @@ from unittest import mock
 
 from django.urls import reverse
 
-from core.models import Event, User
+from core.admin.event_page_content import EventPageContentAdmin
+from core.admin.event_page_menu import EventPageMenuAdmin
+from core.models import Event, EventPageContent, EventPageMenu, User
 
 
 def test_get_queryset_for_superuser(admin_client, events):
@@ -168,6 +170,55 @@ def test_unfreeze_events_action(admin_client, future_event):
 def test_event_str(admin_client, events):
     event = events[0]
     assert str(event) == f"{event.name}, {event.date}"
+
+
+def test_event_page_content_extra_model_filters_scoped_to_event(admin_client, future_event, past_event):
+    """get_extra_model_filters should return the event of the item at startorder,
+    preventing MultipleObjectsReturned when two events share the same position value."""
+    EventPageContent.objects.create(event=future_event, name="intro", content="a", position=1)
+    EventPageContent.objects.create(event=past_event, name="intro", content="b", position=1)
+
+    admin_instance = EventPageContentAdmin(EventPageContent, None)
+    request = mock.Mock()
+    request.POST = {"startorder": "1"}
+
+    filters = admin_instance.get_extra_model_filters(request)
+
+    assert "event" in filters
+    assert filters["event"] in (future_event, past_event)
+
+
+def test_event_page_content_extra_model_filters_no_startorder(admin_client):
+    """get_extra_model_filters returns empty dict when no startorder is present."""
+    admin_instance = EventPageContentAdmin(EventPageContent, None)
+    request = mock.Mock()
+    request.POST = {}
+
+    assert admin_instance.get_extra_model_filters(request) == {}
+
+
+def test_event_page_menu_extra_model_filters_scoped_to_event(admin_client, future_event, past_event):
+    """get_extra_model_filters on EventPageMenuAdmin scopes to the correct event."""
+    EventPageMenu.objects.create(event=future_event, title="Home", url="#home", position=1)
+    EventPageMenu.objects.create(event=past_event, title="Home", url="#home", position=1)
+
+    admin_instance = EventPageMenuAdmin(EventPageMenu, None)
+    request = mock.Mock()
+    request.POST = {"startorder": "1"}
+
+    filters = admin_instance.get_extra_model_filters(request)
+
+    assert "event" in filters
+    assert filters["event"] in (future_event, past_event)
+
+
+def test_event_page_menu_extra_model_filters_no_startorder(admin_client):
+    """get_extra_model_filters returns empty dict when no startorder is present."""
+    admin_instance = EventPageMenuAdmin(EventPageMenu, None)
+    request = mock.Mock()
+    request.POST = {}
+
+    assert admin_instance.get_extra_model_filters(request) == {}
 
 
 def test_blacklist_organizer(organizer_issue, admin_client):
