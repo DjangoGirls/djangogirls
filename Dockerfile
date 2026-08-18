@@ -1,5 +1,5 @@
 # Build stage for Node.js dependencies
-FROM node:18-slim AS node-builder
+FROM node:24-slim AS node-builder
 
 WORKDIR /app
 
@@ -29,7 +29,10 @@ RUN apt-get update && \
         libpq-dev \
         locales \
         poedit \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    curl -fsS \
+        --proto '=https' \
+        --proto-redir '=https' \
+        -L https://deb.nodesource.com/setup_24.x \
     && apt-get install -y --no-install-recommends nodejs \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && sed -i -e 's/# en_US ISO-8859-1/en_US ISO-8859-1/' /etc/locale.gen \
