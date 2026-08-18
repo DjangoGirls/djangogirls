@@ -5,8 +5,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install && \
-    npm install -g gulp 
+RUN npm install --ignore-scripts
 
 # Main Python stage
 FROM python:3.10.9-slim-bullseye
@@ -29,7 +28,7 @@ RUN apt-get update && \
         libpq-dev \
         locales \
         poedit \
-    curl -fsS \
+    && curl -fsS \
         --proto '=https' \
         --proto-redir '=https' \
         -L https://deb.nodesource.com/setup_24.x \
