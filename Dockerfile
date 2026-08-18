@@ -44,7 +44,7 @@ COPY requirements.txt ./
 COPY requirements.in ./
 
 RUN pip install --upgrade pip==23.3.2 && \
-    pip install pip-tools==7.3.0 typing-extensions && \
+    pip install pip-tools==7.3.0 typing-extensions==4.7.1 && \
     pip-compile requirements.in && \
     pip-sync
 
@@ -56,11 +56,6 @@ COPY rootfs /
 
 # Copy application code and build static files
 COPY . .
-
-RUN node --version && \
-    npm --version && \
-    npx gulp --version && \
-    npx gulp local
 
 # Set up entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
