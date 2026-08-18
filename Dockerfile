@@ -45,7 +45,7 @@ RUN apt-get update && \
 COPY requirements.txt ./
 COPY requirements.in ./
 
-RUN pip install --upgrade pip==23.3.2 && \
+RUN pip install --only-binary=:all: --upgrade pip==23.3.2 && \
     pip install \
         --only-binary=:all: \
         pip-tools==7.3.0 \
