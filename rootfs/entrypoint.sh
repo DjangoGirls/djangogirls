@@ -3,6 +3,11 @@
 #echo "Make messages"
 #./manage.py makemessages --all
 
+if [ "$NODE_ENV" = "development" ]; then
+    echo "Compiling static files"
+    npx gulp local
+fi
+
 echo "Compile messages"
 ./manage.py compilemessages
 

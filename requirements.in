@@ -28,7 +28,7 @@ urlextract
 
 # Local development
 python-dotenv==0.21.0
-pip-tools==6.12.1
+pip-tools==7.3.0
 pre-commit==2.21.0
 
 # Linting / Formatting
