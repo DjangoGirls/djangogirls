@@ -46,7 +46,7 @@ pytest-dotenv==0.5.2
 pytest-env==0.6.2
 pytest-mock==3.10.0
 pytest==6.2.5
-vcrpy
+vcrpy==8.3.0
 
 # Integrations
 django-gulp-rev==0.2
