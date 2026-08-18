@@ -22,13 +22,13 @@ WORKDIR /var/www/app
 # Install system dependencies in a single layer
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        gettext \
-        poedit \
-        locales \
+        build-essential \
         curl \
+        gettext \
         git \
         libpq-dev \
-        build-essential \
+        locales \
+        poedit \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \

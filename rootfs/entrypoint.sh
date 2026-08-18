@@ -5,7 +5,7 @@
 
 if [ "$NODE_ENV" = "development" ]; then
     echo "Compiling static files"
-    gulp watch
+    ./node_modules/.bin/gulp local
 fi
 
 echo "Compile messages"
