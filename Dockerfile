@@ -46,8 +46,10 @@ COPY requirements.txt ./
 COPY requirements.in ./
 
 RUN pip install --upgrade pip==23.3.2 && \
-    pip install pip-tools==7.3.0 typing-extensions==4.7.1 && \
-    pip-compile requirements.in && \
+    pip install \
+        --only-binary=:all: \
+        pip-tools==7.3.0 \
+        typing-extensions==4.7.1 && \
     pip-sync
 
 # Copy Node.js build artifacts from the node stage
@@ -61,6 +63,9 @@ COPY . .
 
 # Set up entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
+
+COPY .pre-commit-config.yaml .
+RUN git init . && pre-commit install-hooks
 
 # Configure health check
 HEALTHCHECK --start-period=15s --timeout=2s --retries=3 --interval=5s \
