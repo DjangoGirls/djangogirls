@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install --ignore-scripts
+RUN npm ci --ignore-scripts
 
 # Main Python stage
 FROM python:3.10.9-slim-bullseye
