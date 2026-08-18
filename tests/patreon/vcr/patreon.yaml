@@ -2,130 +2,135 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.12.4]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.34.2
     method: GET
     uri: https://api.patreon.com/user/483065
   response:
     body:
-      string: !!binary |
-        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
+      string: '{"data":{"id":"483065","type":"user","attributes":{"about":null,"created":"2015-01-12T19:48:20.000+00:00","current_user_block_status":"none","facebook":"https://www.facebook.com/djangogirls","first_name":"Django","full_name":"Django
+        Girls","gender":2,"image_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3IjoyMDB9/2.png?token-hash=UIFPaa9_HzO-Wyqbe0apjX0ef3sk8C5DzuEtoYLwB7U%3D","last_name":"Girls","social_connections":{"discord":null,"facebook":null,"google":null,"instagram":null,"reddit":null,"spotify":null,"spotify_open_access":null,"tiktok":null,"twitch":null,"twitter":null,"twitter2":null,"twitter_new_app":null,"vimeo":null,"youtube":null},"thumb_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3IjoyMDB9/2.png?token-hash=UIFPaa9_HzO-Wyqbe0apjX0ef3sk8C5DzuEtoYLwB7U%3D","twitch":null,"twitter":"djangogirls","url":"https://www.patreon.com/djangogirls","vanity":"djangogirls","youtube":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},"included":[{"id":"138614","type":"campaign","attributes":{"avatar_photo_image_urls":{"original":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJxIjoxMDAsIndlYnAiOjB9/2.png?token-hash=-oRWE2WXPBf1H1y8Uc1vwV9oO8MuRRa-W8wlaeQxg90%3D&token-time=1788393600","default":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3Ijo2MjB9/2.png?token-hash=27PxZV6lWOOTNuxuqd8cqCkhlE1wEuChyortKp171uo%3D&token-time=1788393600","default_small":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3IjozNjB9/2.png?token-hash=_aW7paQl1eP8YwDSPcdCTS0nM6bpv-AFQMu3sX2qbWs%3D&token-time=1788393600","default_large":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3IjoxMDgwfQ%3D%3D/2.png?token-hash=DYOGaFfM-c5WZfZffKPsTgIt515_xca7VR1ACOvTy9Y%3D&token-time=1788393600","default_blurred":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJiIjoyMCwidyI6NjIwfQ%3D%3D/2.png?token-hash=jpgAQOh9zEfRWdoBGbIbQcSEMgHTBW_X1h1PqKZTPPc%3D&token-time=1788393600","default_blurred_small":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJiIjoyMCwidyI6MzYwfQ%3D%3D/2.png?token-hash=_1YxoyST0l2L7nMdZIFtSk3Ko4aauDhP77SewTj1-f0%3D&token-time=1788393600","thumbnail":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJoIjozNjAsInciOjM2MH0%3D/2.png?token-hash=-addVNpIExAxJfBZyopfeMs9yytfKUquzwEAnneIle4%3D&token-time=1788393600","thumbnail_large":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/2.png?token-hash=kvFNvBu2JRqNgsF9uoQGwAzqFlccIcytS2KBAoi3hDI%3D&token-time=1788393600","thumbnail_small":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJoIjoxMDAsInciOjEwMH0%3D/2.png?token-hash=TET6HYAPRO1buefLjvrC2hrswdBzqzCNolgqBAxeRX0%3D&token-time=1788393600"},"avatar_photo_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/1f91cab98a204840a651e9c732eb013a/eyJ3Ijo2MjB9/2.png?token-hash=l5wadMiVG51be9ZpKSFvPip2lw2AklnAXYGlMNHWTs8%3D","campaign_pledge_sum":72966,"cover_photo_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/1.png?token-hash=mBtUfmvSyZrXsVgLIX00en3M8d2QRtCzxRRmtSXr64o%3D&token-time=1788480000","cover_photo_url_sizes":{"xsmall":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3Ijo2MjAsIndlIjoxfQ%3D%3D/1.png?token-hash=XjUUbJWJ4HHg8YJJ_iiGxSoM-iD6xOAv6gmrP4zv1dc%3D&token-time=1788480000","small":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3Ijo5NjAsIndlIjoxfQ%3D%3D/1.png?token-hash=5yDV9fotK2k6Z8DlVoYEB-bfCiIqyLnTHAXVUm0esW0%3D&token-time=1788480000","medium":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxMjAwLCJ3ZSI6MX0%3D/1.png?token-hash=sZzo-nTiBSRKkFSeSPz8cVoLI3av5vCkw4NFAdOzKA4%3D&token-time=1788480000","large":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxNjAwLCJ3ZSI6MX0%3D/1.png?token-hash=GN7TgrRTLV2gpksMUfrdSLQ4r85GC6KzBcckPUzwUgY%3D&token-time=1788480000","xlarge":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/1.png?token-hash=mBtUfmvSyZrXsVgLIX00en3M8d2QRtCzxRRmtSXr64o%3D&token-time=1788480000","low_quality":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJiIjo1MCwicSI6MSwidyI6NjIwLCJ3ZSI6MX0%3D/1.png?token-hash=7O_7HirfybY1LH_-IuNst9b7ChfdFs6Kdz8v75bAOQQ%3D&token-time=1788480000"},"created_at":"2015-01-12T19:52:15.000+00:00","creation_count":22,"creation_name":"creating
+        a community that inspires women to fall in love with pr","currency":"USD","display_patron_goals":false,"earnings_visibility":"public","image_small_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/1.png?token-hash=mBtUfmvSyZrXsVgLIX00en3M8d2QRtCzxRRmtSXr64o%3D&token-time=1788480000","image_url":"https://c10.patreonusercontent.com/4/patreon-media/p/campaign/138614/6cd11b392bd14dcfa9a3b288fe8e9a7c/eyJ3IjoxOTIwLCJ3ZSI6MX0%3D/1.png?token-hash=mBtUfmvSyZrXsVgLIX00en3M8d2QRtCzxRRmtSXr64o%3D&token-time=1788480000","is_charge_upfront":true,"is_charged_immediately":true,"is_monthly":true,"is_new_fandom":false,"is_nsfw":false,"is_plural":true,"main_video_embed":"<iframe
+        allowfullscreen=\"\" frameborder=\"0\" height=\"402\" scrolling=\"no\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F112325567%3Fautoplay%3D1&amp;url=http%3A%2F%2Fvimeo.com%2F112325567&amp;image=http%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F497265475_1280.jpg&amp;key=8ee8a2e6a8cc47aab1a5ee67f9a178e0&amp;autoplay=1&amp;type=text%2Fhtml&amp;schema=vimeo\"
+        width=\"714\"></iframe>","main_video_url":"https://vimeo.com/112325567","name":"Django
+        Girls","one_liner":"We inspire women to fall in love with programming.","outstanding_payment_amount_cents":null,"paid_member_count":11,"patron_count":90,"pay_per_name":"month","pledge_sum":72966,"pledge_sum_currency":"USD","pledge_url":"https://www.patreon.com/checkout/djangogirls","published_at":"2015-02-18T12:28:29.000+00:00","should_display_chat_tab":false,"summary":"<strong><a
+        href=\"http://djangogirls.org/\" rel=\"nofollow\">Django Girls</a> is a non-profit
+        organization that empowers and helps women to organize free, one-day programming
+        workshops by providing tools, resources and support.</strong> It was born
+        in July 2014 in Berlin and started by two Polish girls: Ola Sitarska and Ola
+        Sendecka.<br><br><strong>We make the world better by bringing more amazing
+        women into the world of technology and increasing the diversity in the Django
+        community.</strong> We believe that technology is for people and everyone
+        should be able to build it. We are making technology more approachable by
+        creating simple tools and <a href=\"http://djangogirls.org/resources/\" rel=\"nofollow\">resources</a>
+        designed with empathy.<br><br>Django Girls aims to introduce women and girls
+        who never coded before to the world of technology and increase the diversity
+        of the tech industry. This is achieved by organizing free one-day workshops
+        and inviting women to come and learn how to build the internet using <strong>HTML,
+        CSS, Python and Django</strong>. Django Girls is a volunteer-run organization
+        with volunteers all over the world. <br><br>We started in July 2014 and in
+        six years <strong>2,032</strong> volunteers in the Django Girls community
+        have organized<strong> 984 events </strong><strong>that allowed more than
+        21,277 women to learn about Python and Django for free</strong>. Django Girls
+        has been to <strong>526 cities in 98 countries\u00a0</strong>in Europe, Africa,
+        North America, South America, Asia and Australia.\u00a0<br><br>Our <a href=\"http://tutorial.djangogirls.org/\">free
+        Django tutorial</a> available in English and translated in 19 languages has
+        been used by more than 80,000 people and viewed almost 4,000,000 times. Many
+        of our alumni are already working as Django developers, attending conferences
+        and spreading their knowledge with others (make sure to read <a href=\"http://blog.djangogirls.org/post/105864489478/your-django-story-meet-dori-czapari\">Dori\u2019s</a>
+        Django Story, if you haven\u2019t done it yet). <a href=\"http://djangogirls.org/story/\">90
+        stories of successful female Django developers</a> have been told on our blog.<br><br>Since
+        the first Django Girls workshop in July 2014 we grew unexpectedly fast and
+        we couldn\u2019t sustain that growth without some help. In 2015, we introduced
+        the paid position of Awesomeness Ambassador to help provide support to other
+        volunteers. In 2017, we also introduced the temporary position of Fundraising
+        Coordinator to help us raise funds to run our activities. <br><br>All of the
+        money gathered here on Patreon will go towards running our Django Girls non-profit
+        organization as well as supporting the future growth of Django Girls, allowing
+        us to create more learning resources and enabling even more women to discover
+        the joy of programming.<br><br><strong>FAQ<br>What\u2019s the impact of your
+        work?</strong><br>The results of a survey we conducted in 2017 with almost
+        600 past Django Girls attendees to see if Django Girls Foundation actually
+        achieves the goal of our mission: to bring more women into tech industry,
+        shows that we have indeed made an impact in the tech industry! <strong>21%
+        of participants in our survey started working in tech after attending Django
+        Girls workshop! 73% of the participants  in our survey are still involved
+        in tech activities while 79% of Django Girls alumnis are still learning programming
+        after the workshop. </strong>To read more about the impact we are making in
+        bringing more women into the tech industry, <strong>please read our <a href=\"https://djangogirls.org/2016-2017/\">Impact
+        Report 2016 - 2017 here.</a></strong><br><br><strong>Are you a non-profit
+        organization?</strong><br>Yes, Django Girls Foundation is a charity registered
+        in the United Kingdom.<br><br><strong>How are we going to spend your money?</strong><br>The
+        money you donate will be spent on daily activities of the Django Girls Foundation.
+        The majority of our costs is paying our part-time staff: Awesomeness Ambassador
+        who provides administrative support to thousands of volunteers organizers,
+        Fundraising Coordinator who is leading this fundraising effort, accounting
+        services and software tools we use (like Mailchimp, etc). <br><br>","url":"https://www.patreon.com/djangogirls"},"relationships":{"creator":{"data":{"id":"483065","type":"user"},"links":{"related":"https://api.patreon.com/api/user/483065"}},"goals":{"data":null},"rewards":{"data":[{"id":"-1","type":"reward"},{"id":"10352179","type":"reward"},{"id":"158220","type":"reward"},{"id":"158221","type":"reward"},{"id":"158224","type":"reward"},{"id":"158226","type":"reward"},{"id":"254314","type":"reward"},{"id":"9440411","type":"reward"}]}}},{"id":"-1","type":"reward","attributes":{"amount":0,"amount_cents":0,"description":"Everyone","user_limit":null,"remaining":0,"requires_shipping":false,"created_at":null,"url":null,"patron_currency":"USD"}},{"id":"10352179","type":"reward","attributes":{"amount":0,"amount_cents":0,"created_at":"2023-10-12T18:04:03.157+00:00","currency":"USD","declined_patron_count":0,"description":"","discord_role_ids":null,"edited_at":"2023-10-12T18:04:03.157+00:00","image_url":null,"is_free_tier":true,"patron_amount_cents":0,"patron_count":79,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2023-10-12T18:04:03.157+00:00","remaining":null,"requires_shipping":false,"title":"Free","unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=10352179","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"158220","type":"reward","attributes":{"amount":500,"amount_cents":500,"created_at":"2016-03-22T12:46:08.000+00:00","currency":"USD","declined_patron_count":0,"description":"Receive
+        a virtual hug and a real smile from Django Girls all over the world. Exclusive
+        access to our super special thank you video!","discord_role_ids":null,"edited_at":null,"image_url":null,"is_free_tier":false,"patron_amount_cents":500,"patron_count":3,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2016-03-22T12:46:08.000+00:00","remaining":null,"requires_shipping":false,"title":null,"unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=158220","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"158221","type":"reward","attributes":{"amount":2500,"amount_cents":2500,"created_at":"2016-03-22T12:46:08.000+00:00","currency":"USD","declined_patron_count":0,"description":"All
+        of the above + every 3 months we will send you a small surprise (sticker pack,
+        thank you card, a keychain, bag of confetti!)","discord_role_ids":null,"edited_at":null,"image_url":null,"is_free_tier":false,"patron_amount_cents":2500,"patron_count":1,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2016-03-22T12:46:08.000+00:00","remaining":null,"requires_shipping":true,"title":null,"unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=158221","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"158224","type":"reward","attributes":{"amount":10000,"amount_cents":10000,"created_at":"2016-03-22T12:46:08.000+00:00","currency":"USD","declined_patron_count":0,"description":"<p
+        style=\"\">We will thank you from our Facebook and twitter page (with a chosen
+        link and an image, if you want) + logo on our website + logo in monthly newsletter
+        + sponsor badge + access to job board at a fee. This is a price for a month,
+        so if you want your logo to stay there for longer, just setup a recurring
+        donation :)</p>","discord_role_ids":null,"edited_at":"2023-01-18T18:35:25.279+00:00","image_url":null,"is_free_tier":false,"patron_amount_cents":10000,"patron_count":0,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2016-03-22T12:46:08.000+00:00","remaining":null,"requires_shipping":true,"title":"","unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=158224","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"158226","type":"reward","attributes":{"amount":25000,"amount_cents":25000,"created_at":"2016-03-22T12:46:08.000+00:00","currency":"USD","declined_patron_count":0,"description":"<p
+        style=\"\">All of the above + logo in all our events websites + when your
+        contribution equals our Silver Tier ($1000), we will do a blog post to announce
+        you! </p>","discord_role_ids":null,"edited_at":"2023-01-18T18:39:01.799+00:00","image_url":null,"is_free_tier":false,"patron_amount_cents":25000,"patron_count":0,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2016-03-22T12:46:08.000+00:00","remaining":null,"requires_shipping":true,"title":"","unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=158226","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"254314","type":"reward","attributes":{"amount":50000,"amount_cents":50000,"created_at":"2016-03-22T12:46:08.000+00:00","currency":"USD","declined_patron_count":0,"description":"<p
+        style=\"\">All of the above + small ad in our tutorial + opportunity to contribute
+        to our tutorial extensions in official materials!</p>","discord_role_ids":null,"edited_at":"2023-01-18T18:39:42.906+00:00","image_url":null,"is_free_tier":false,"patron_amount_cents":50000,"patron_count":1,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2016-03-22T12:46:08.000+00:00","remaining":null,"requires_shipping":true,"title":"","unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=254314","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}},{"id":"9440411","type":"reward","attributes":{"amount":100000,"amount_cents":100000,"created_at":"2023-01-18T18:42:23.360+00:00","currency":"USD","declined_patron_count":0,"description":"<p
+        style=\"\">All of the above + access to our job board for free!</p>","discord_role_ids":null,"edited_at":"2023-01-18T18:42:23.360+00:00","image_url":null,"is_free_tier":false,"patron_amount_cents":100000,"patron_count":0,"patron_currency":"USD","post_count":0,"published":true,"published_at":"2023-01-18T18:42:23.360+00:00","remaining":null,"requires_shipping":false,"title":"","unpublished_at":null,"url":"https://www.patreon.com/checkout/djangogirls?rid=9440411","user_limit":null},"relationships":{"campaign":{"data":{"id":"138614","type":"campaign"},"links":{"related":"https://api.patreon.com/api/campaigns/138614"}}}}],"links":{"self":"https://api.patreon.com/api/user/483065"}}'
     headers:
-      Access-Control-Allow-Credentials: ['true']
-      Access-Control-Allow-Headers: ['Content-Type, X-File-Name, X-Requested-With,
-          X-CSRF-URI, X-CSRF-Signature, X-CSRF-Time, Cache-Control']
-      Access-Control-Allow-Methods: [None]
-      Access-Control-Allow-Origin: [patreon.com]
-      CF-RAY: [31d8bb9027ff2af7-WAW]
-      Cache-control: [private]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Length: ['3130']
-      Content-Type: [application/vnd.api+json]
-      Date: ['Sat, 07 Jan 2017 16:19:40 GMT']
-      Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=d084cd8d36fdad3279190c89bebc266741483805980; expires=Sun,
-          07-Jan-18 16:19:40 GMT; path=/; domain=.patreon.com; HttpOnly', 'session_id=py733ea5d805c2ac74d892790fd8e38f664388a147eda51e5351bf5c72c3f831dc;
-          Domain=patreon.com; Expires=Mon, 06-Feb-2017 16:19:40 GMT; Max-Age=2592000;
-          Secure; HttpOnly; Path=/', 'amplitude_idpatreon.com=ewogICAgImRldmljZUlkIjogIjJkY2UzMzQ3LTMwOGItNGNmZi1hM2UzLTYzNTIyZDYzMDkzMCIsCiAgICAib3B0T3V0IjogZmFsc2UsCiAgICAidXNlcklkIjogMAp9;
-          Domain=patreon.com; Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000;
-          Path=/', 'patreon_device_id=2dce3347-308b-4cff-a3e3-63522d630930; Domain=patreon.com;
-          Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000; Path=/', 'group_id=4be0fbd86ef99b4fc539153d0fec8ecaf2774704084c1efaf65d808bafc22984;
-          Domain=patreon.com; Expires=Fri, 02-Jan-2037 16:19:40 GMT; Max-Age=630720000;
-          Secure; HttpOnly; Path=/']
-      Vary: [Accept-Encoding]
-      X-Content-Type-Options: [nosniff]
-      X-Patreon-UUID: [b09e7112-439c-43ca-a040-e50e52fa5167]
-    status: {code: 200, message: OK}
-- request:
-    body: channel=%23notifications&text=Daily+Patreon+update%3A+38+patrons+pledged+%24808+monthly%21&username=Django+Girls&icon_emoji=%3Adjango_heart%3A
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['142']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-requests/2.12.4]
-    method: POST
-    uri: https://slack.com/api/chat.postMessage
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWys9WskpLzClO1VFKLSrKL1KyUsrLL4lPLC3JSE1RqgUA9xsXwyEAAAA=
-    headers:
-      Access-Control-Allow-Origin: ['*']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Length: ['53']
-      Content-Security-Policy: [referrer no-referrer;]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 07 Jan 2017 16:19:40 GMT']
-      Server: [Apache]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
-      Vary: [Accept-Encoding]
-      Via: [1.1 4fafc89501d2c6922c11a87c6af1594c.cloudfront.net (CloudFront)]
-      X-Accepted-OAuth-Scopes: ['chat:write:user']
-      X-Amz-Cf-Id: [3Gskdo94butIbPEikQ26u0IOMgEpWDIKYWWkBduwAQbr2-CHSw6Ukg==]
-      X-Cache: [Miss from cloudfront]
-      X-Content-Type-Options: [nosniff]
-      X-Slack-Backend: [h]
-      X-Slack-Req-Id: [f009d0dd-1de3-46b9-be50-371b61ceef32]
-      X-XSS-Protection: ['0']
-    status: {code: 200, message: OK}
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a2d9a225cd10d0e9-JNB
+      Cache-Control:
+      - private
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Wed, 19 Aug 2026 13:51:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=2qEJP%2BmbGrtRxOUivFcvBMBn5xkq2d3G%2FaKdcG%2FlxR4kEPVUWFmUdynBUcJp2pbvdf5rRmV3gxjHV9lYQa3vECzpSB0AJayHx4ZEK9vsak4%2FxuSO3aCuK%2F1d4aEEMHkEaA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - patreon_device_id=8e46e3cf-dcd1-4d34-aff9-f4abf2619805; Domain=patreon.com;
+        Expires=Wed, 19 Aug 2026 13:51:30 GMT; Max-Age=0; Secure; Path=/
+      - patreon_device_id=8e46e3cf-dcd1-4d34-aff9-f4abf2619805; Expires=Tue, 14 Aug
+        2046 13:51:30 GMT; Max-Age=630720000; Secure; Path=/
+      - a_csrf=_Cz4KaLa1w6rJsZlTTLydP1zGkbwa3L7BIQtBtLeUgw; Domain=patreon.com; Expires=Wed,
+        19 Aug 2026 14:51:30 GMT; Max-Age=3600; Secure; HttpOnly; Path=/
+      - __cf_bm=YatqMIFEx1vOyvT6Mb6zb1zIZc4WNvZXduWdtM.jlTM-1787147490.202056-1.0.1.1-noWYHapfQBNJUvCJtbnvxcaHDWhmQQe5mxPhImB3plomTaHeFdvQXVmEVJgRPzCt.o3LitaQnwHFEUC8S9FSvP.UhTposfyxaW3ENxpHVIZksM9BUHknn6TWp5R.3LzJSTcOFbV3chpFAqMe3YeNvw;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=patreon.com; Expires=Wed,
+        19 Aug 2026 14:21:30 GMT
+      Strict-Transport-Security:
+      - max-age=2592000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      x-envoy-upstream-service-time:
+      - '261'
+      x-patreon-sha:
+      - 75e882c1c5132dea4013032a6221c3056eb2a292
+      x-patreon-uuid:
+      - 33419469-fe6b-4a96-800a-591877e54d63
+    status:
+      code: 200
+      message: OK
 version: 1

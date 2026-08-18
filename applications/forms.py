@@ -75,6 +75,27 @@ class ApplicationForm(forms.Form):
             self.form.event.email = f"{self.form.event.page_url}@djangogirls.org"
             self.form.event.save()
 
+        # Adding applicant email to Django Girls Dispatch
+        if application.newsletter_optin and application.email:
+            emailb = application.email.encode()
+            emailhash = hashlib.md5(emailb).hexdigest()
+            r = requests.get(
+                f"https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/{emailhash}",
+                auth=("user", settings.MAILCHIMP_API_KEY),
+            )
+            # Mailchimp will return a 404 if the email we want to add is not on
+            # the Dispatch subscriber list
+            if r.status_code == 404:
+                url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
+                payload = {"email_address": application.email, "status": "pending"}
+                requests.post(url, auth=("user", settings.MAILCHIMP_API_KEY), json=payload)
+
+        with transaction.atomic():
+            application.save()
+            for answer in answers:
+                answer.application = application
+            Answer.objects.bulk_create(answers)
+
         if application.email:
             # Send confirmation email
             subject = _("Confirmation of your application for %(page_title)s") % {
@@ -101,27 +122,6 @@ class ApplicationForm(forms.Form):
             except:  # noqa: E722
                 # TODO: what should we do when sending fails?
                 pass
-
-        # Adding applicant email to Django Girls Dispatch
-        if application.newsletter_optin and application.email:
-            emailb = application.email.encode()
-            emailhash = hashlib.md5(emailb).hexdigest()
-            r = requests.get(
-                f"https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/{emailhash}",
-                auth=("user", settings.MAILCHIMP_API_KEY),
-            )
-            # Mailchimp will return a 404 if the email we want to add is not on
-            # the Dispatch subscriber list
-            if r.status_code == 404:
-                url = "https://us8.api.mailchimp.com/3.0/lists/d278270e6f/members/"
-                payload = {"email_address": application.email, "status": "pending"}
-                requests.post(url, auth=("user", settings.MAILCHIMP_API_KEY), json=payload)
-
-        with transaction.atomic():
-            application.save()
-            for answer in answers:
-                answer.application = application
-            Answer.objects.bulk_create(answers)
 
 
 class ScoreForm(forms.ModelForm):

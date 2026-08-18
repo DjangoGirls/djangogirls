@@ -30,7 +30,7 @@ def get_applications_for_event(event, state=None, rsvp_status=None, order=None, 
 
     scores_subquery = Score.objects.filter(application=OuterRef("pk"), user=user)
     applications = applications.annotate(was_scored_by_user=Exists(scores_subquery))
-
+    
     if rsvp_status:
         applications = applications.filter(state="accepted", rsvp_status__in=rsvp_status)
     elif state:
