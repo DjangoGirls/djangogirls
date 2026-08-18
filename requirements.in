@@ -30,6 +30,7 @@ urlextract
 python-dotenv==0.21.0
 pip-tools==7.3.0
 pre-commit==2.21.0
+ruff==0.16.3
 
 # Linting / Formatting
 autoflake==1.4
