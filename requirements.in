@@ -21,31 +21,31 @@ django>=3.2,<4
 dnspython
 easy-thumbnails
 easydict==1.10
-pillow==10.3.0
+pillow==12.3.0
 psycopg2-binary==2.8.3
 pyquery==1.4.0
 urlextract
 
 # Local development
-python-dotenv==0.21.0
+python-dotenv==1.2.3
 pip-tools==7.3.0
 pre-commit==2.21.0
 ruff==0.16.3
 
 # Linting / Formatting
 autoflake==1.4
-black==24.3.0
+black==26.5.1
 flake8==4.0.1
 isort==5.8.0
 
 # Testing
 freezegun
-pytest-cov==2.12.1
-pytest-django==4.4.0
+pytest-cov==7.1.0
+pytest-django==4.14.0
 pytest-dotenv==0.5.2
-pytest-env==0.6.2
-pytest-mock==3.10.0
-pytest==6.2.5
+pytest-env==1.7.0
+pytest-mock==3.15.1
+pytest==9.1.1
 vcrpy==8.3.0
 
 # Integrations
