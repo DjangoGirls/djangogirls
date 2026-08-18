@@ -5,7 +5,7 @@
 
 if [ "$NODE_ENV" = "development" ]; then
     echo "Compiling static files"
-    npx gulp local
+    gulp watch
 fi
 
 echo "Compile messages"
