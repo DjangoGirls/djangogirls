@@ -23,10 +23,7 @@ class Command(BaseCommand):
         request = requests.get(url)
         data = request.json()
         campaign_id = data["data"]["relationships"]["campaign"]["data"]["id"]
-        campaign = next(
-            item for item in data["included"]
-            if item["type"] == "campaign" and item["id"] == campaign_id
-            )
+        campaign = next(item for item in data["included"] if item["type"] == "campaign" and item["id"] == campaign_id)
         attributes = campaign["attributes"]
         patron_count = attributes["paid_member_count"]
         pledge_sum = int(int(attributes["pledge_sum"]) / 100)
