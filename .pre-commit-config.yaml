@@ -8,7 +8,7 @@ ci:
     autoupdate_schedule: monthly
 
 default_language_version:
-  python: python3.10
+  python: python3.13
 
 fail_fast: true
 
@@ -22,7 +22,7 @@ repos:
      rev: v3.21.2
      hooks:
        -  id: pyupgrade
-          args: ["--py310-plus"]
+          args: ["--py313-plus"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.20
     hooks:

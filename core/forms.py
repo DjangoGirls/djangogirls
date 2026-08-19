@@ -1,4 +1,4 @@
-from captcha.fields import ReCaptchaField
+from django_recaptcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.core.validators import validate_email

@@ -8,7 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 
 # Main Python stage
-FROM python:3.10.9-slim-bullseye
+FROM python:3.13.15-slim-trixie
 
 # Set environment variables to reduce Python's output verbosity
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -45,11 +45,12 @@ RUN apt-get update && \
 COPY requirements.txt ./
 COPY requirements.in ./
 
-RUN pip install --only-binary=:all: --upgrade pip==23.3.2 && \
+RUN pip install --only-binary=:all: --upgrade pip==26.2.1 && \
     pip install \
         --only-binary=:all: \
-        pip-tools==7.3.0 \
-        typing-extensions==4.7.1 && \
+        pip-tools==7.6.1 \
+        setuptools==80.10.2 \
+        typing-extensions==4.16.0 && \
     pip-sync
 
 # Copy Node.js build artifacts from the node stage

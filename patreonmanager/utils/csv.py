@@ -1,3 +1,4 @@
+import datetime as dt
 import re
 from collections import defaultdict, namedtuple
 from datetime import datetime
@@ -38,7 +39,7 @@ class Patron(BasePatron):
     def start(self):
         if not self.start_raw:
             return None
-        return datetime.strptime(self.start_raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+        return datetime.strptime(self.start_raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=dt.timezone.utc)
 
     @property
     def pledge(self):
