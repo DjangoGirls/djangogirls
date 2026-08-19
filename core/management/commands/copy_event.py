@@ -63,7 +63,7 @@ def command():
     event.save()
 
     # Copy event with a name {name} #{number}, new date and empty stats
-    new_event = Event.objects.get(id=event.id)
+    new_event = Event.objects.get(pk=event.pk)
     new_event.pk = None
     new_event.name = f"{name} #{number}"
     new_event.page_title = f"{name} #{number}"

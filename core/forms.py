@@ -1,9 +1,9 @@
-from django_recaptcha.fields import ReCaptchaField
 from django import forms
 from django.conf import settings
 from django.core.validators import validate_email
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
+from django_recaptcha.fields import ReCaptchaField
 
 from .models import Event
 

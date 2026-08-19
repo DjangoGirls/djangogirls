@@ -5,8 +5,6 @@ from datetime import datetime
 from decimal import Decimal
 from os import path
 
-from django.utils import timezone
-
 CSV_FILENAME_FORMAT = "%Y-%m-Patreon.csv"
 
 
