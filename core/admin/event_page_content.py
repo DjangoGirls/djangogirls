@@ -24,14 +24,12 @@ class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        if not request.user.is_superuser:
-            if "event" in form.base_fields:
-                form.base_fields["event"].queryset = Event.objects.filter(team=request.user)
+        if not request.user.is_superuser and "event" in form.base_fields:
+            form.base_fields["event"].queryset = Event.objects.filter(team=request.user)
         return form
 
     def get_readonly_fields(self, request, obj=None):
-        if obj and not request.user.is_superuser:
+        if obj and not request.user.is_superuser and not obj.event.is_upcoming():
             # Don't let change objects for events that already happened
-            if not obj.event.is_upcoming():
-                return {x.name for x in self.model._meta.fields}
+            return {x.name for x in self.model._meta.fields}
         return self.readonly_fields
