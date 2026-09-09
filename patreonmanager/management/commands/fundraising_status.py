@@ -22,9 +22,11 @@ class Command(BaseCommand):
         url = f"{BASE_API_URL}user/{DJANGOGIRLS_USER_ID}"
         request = requests.get(url)
         data = request.json()
-
-        patron_count = data["linked"][0]["patron_count"]
-        pledge_sum = int(int(data["linked"][0]["pledge_sum"]) / 100)
+        campaign_id = data["data"]["relationships"]["campaign"]["data"]["id"]
+        campaign = next(item for item in data["included"] if item["type"] == "campaign" and item["id"] == campaign_id)
+        attributes = campaign["attributes"]
+        patron_count = attributes["paid_member_count"]
+        pledge_sum = int(int(attributes["pledge_sum"]) / 100)
         message = f"Daily Patreon update: {patron_count} patrons pledged ${pledge_sum} monthly!"
         logging.info(message)
 

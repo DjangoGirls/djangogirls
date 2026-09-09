@@ -6,6 +6,7 @@ services:
     stdin_open: true
     tty: true
     init: true
+    env_file: ./.env
     environment:
       - POSTGRES_USER=djangogirls
       - POSTGRES_PASSWORD=djangogirls
@@ -16,6 +17,7 @@ services:
       - db
     volumes:
       - .:/var/www/app
+      - node_modules:/var/www/app/node_modules
     ports:
       - "${APP_PORT:-8000}:8000"
 
@@ -33,3 +35,4 @@ services:
 
 volumes:
   pgdata:
+  node_modules:

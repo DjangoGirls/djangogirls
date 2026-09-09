@@ -101,3 +101,6 @@ quote-style = "double"
 indent-style = "space"
 docstring-code-format = true
 docstring-code-line-length = 80
+
+[tool.ruff.lint.pylint]
+max-args = 8

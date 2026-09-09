@@ -1,10 +1,9 @@
+import datetime as dt
 import re
 from collections import defaultdict, namedtuple
 from datetime import datetime
 from decimal import Decimal
 from os import path
-
-from django.utils import timezone
 
 CSV_FILENAME_FORMAT = "%Y-%m-Patreon.csv"
 
@@ -38,7 +37,7 @@ class Patron(BasePatron):
     def start(self):
         if not self.start_raw:
             return None
-        return datetime.strptime(self.start_raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+        return datetime.strptime(self.start_raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=dt.timezone.utc)
 
     @property
     def pledge(self):

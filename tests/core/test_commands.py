@@ -109,7 +109,7 @@ def test_copy_event(click_runner, random_day, events, past_event):
     assert Event.objects.count() == 4
 
     new_event_number = 2
-    command_input = f"{past_event.pk}\n{new_event_number}\n{random_day}\n"
+    command_input = f"{past_event.pk}\n{new_event_number}\n{random_day}\nN\n"
 
     click_runner.invoke(copy_event, input=command_input, catch_exceptions=False)
     old_event = past_event
