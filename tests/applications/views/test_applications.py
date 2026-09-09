@@ -44,7 +44,7 @@ def test_organiser_menu_in_applications_list(admin_client, future_event):
     assert f'<a href="{messaging_url}">Messaging</a>' in str(resp.content.decode("utf-8"))
 
 
-def test_get_sorted_applications_list(
+def test_get_sorted_applications_list(  # noqa: PLR0917
     application_submitted,
     application_accepted,
     application_rejected,
@@ -93,7 +93,7 @@ def test_get_sorted_applications_list(
     assert resp.context["order"] == "-average_score"
 
 
-def get_filtered_applications_list(
+def get_filtered_applications_list(  # noqa: PLR0917
     admin_client,
     future_event,
     application_submitted,
