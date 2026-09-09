@@ -91,7 +91,7 @@ def test_new_event_with_two_organizers(click_runner, random_day, events, slack_m
     slack_mock.chat_postMessage.assert_called_once()
 
 
-def test_new_event_short(click_runner, random_day, events, stock_pictures, slack_mock, settings):
+def test_new_event_short(click_runner, random_day, events, stock_pictures, slack_mock, settings):  # noqa: PLR0917
     settings.ENABLE_SLACK_NOTIFICATIONS = True
 
     assert Event.objects.count() == 4

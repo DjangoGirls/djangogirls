@@ -89,7 +89,7 @@ def test_remove_organizer_as_superuser(admin_client, organizer_julia, organizer_
     assert future_event.team.count() == 1
 
 
-def test_organizers_can_only_remove_from_their_events(
+def test_organizers_can_only_remove_from_their_events(  # noqa: PLR0917
     client, organizer_peter, superuser, organizer_julia, hidden_event, future_event
 ):
     future_event.team.add(organizer_julia)
