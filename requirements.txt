@@ -125,7 +125,7 @@ google-auth-httplib2==0.1.0
     # via google-api-python-client
 googleapis-common-protos==1.58.0
     # via google-api-core
-httplib2==0.21.0
+httplib2==0.32.0
     # via
     #   google-api-python-client
     #   google-auth-httplib2
@@ -210,7 +210,7 @@ pyflakes==2.4.0
     # via
     #   autoflake
     #   flake8
-pyparsing==3.0.9
+pyparsing==3.3.2
     # via httplib2
 pyproject-hooks==1.0.0
     # via build
