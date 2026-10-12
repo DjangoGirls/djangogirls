@@ -77,9 +77,9 @@ class ApplicationForm(forms.Form):
 
         if application.email:
             # Send confirmation email
-            subject = _("Confirmation of your application for %(page_title)s") % {
-                "page_title": self.form.event.page_title
-            }
+            page_title = self.form.event.page_title
+            subject = _("Confirmation of your application for %(page_title)s") % {"page_title": page_title}
+
             body = render_to_string(
                 "emails/application_confirmation.html",
                 {
