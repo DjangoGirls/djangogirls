@@ -4,7 +4,7 @@ from django.contrib import admin
 from coach.admin import CoachInline
 from core.admin.filters.event import EventFilter
 from core.admin.forms.event_page_content import EventPageContentForm
-from core.models import Event
+from core.models import Event, EventPageContent
 from sponsor.admin import SponsorInline
 
 
@@ -15,6 +15,17 @@ class EventPageContentAdmin(SortableAdminMixin, admin.ModelAdmin):
     form = EventPageContentForm
     sortable = "position"
     inlines = [SponsorInline, CoachInline]
+
+    def get_extra_model_filters(self, request):
+        startorder = request.POST.get("startorder")
+        if startorder is not None:
+            try:
+                obj = EventPageContent.objects.filter(position=int(startorder)).first()
+                if obj:
+                    return {"event": obj.event}
+            except (ValueError, EventPageContent.DoesNotExist):
+                pass
+        return {}
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
