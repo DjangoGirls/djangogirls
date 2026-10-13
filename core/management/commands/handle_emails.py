@@ -17,7 +17,7 @@ from django.utils import timezone
 from core.models import Event
 
 
-def send_event_emails(
+def send_event_emails(  # noqa: PLR0917
     events,
     subject_template,
     plain_template,
