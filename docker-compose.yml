@@ -7,12 +7,6 @@ services:
     tty: true
     init: true
     env_file: ./.env
-    environment:
-      - POSTGRES_USER=djangogirls
-      - POSTGRES_PASSWORD=djangogirls
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=djangogirls
     depends_on:
       - db
     volumes:
