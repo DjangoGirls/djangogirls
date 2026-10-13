@@ -91,7 +91,7 @@ def test_new_event_with_two_organizers(click_runner, random_day, events, slack_m
     slack_mock.chat_postMessage.assert_called_once()
 
 
-def test_new_event_short(click_runner, random_day, events, stock_pictures, slack_mock, settings):  # noqa: PLR0917
+def test_new_event_short(click_runner, random_day, events, stock_pictures, slack_mock, settings):
     settings.ENABLE_SLACK_NOTIFICATIONS = True
 
     assert Event.objects.count() == 4
@@ -109,7 +109,7 @@ def test_copy_event(click_runner, random_day, events, past_event):
     assert Event.objects.count() == 4
 
     new_event_number = 2
-    command_input = f"{past_event.pk}\n{new_event_number}\n{random_day}\n"
+    command_input = f"{past_event.pk}\n{new_event_number}\n{random_day}\nN\n"
 
     click_runner.invoke(copy_event, input=command_input, catch_exceptions=False)
     old_event = past_event

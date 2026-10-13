@@ -6,17 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OS: ubuntu-latest
-      PYTHON: '3.10'
+      PYTHON: '3.13'
 
     strategy:
       max-parallel: 4
       matrix:
         python-version:
-        - '3.10'
+        - '3.13'
 
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:12.22
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -27,7 +27,7 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: '2'
 

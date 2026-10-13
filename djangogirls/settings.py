@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "storages",
     "markdown_deux",
     "easy_thumbnails",
-    "captcha",
+    "django_recaptcha",
     "django_countries",
     "gulp_rev",
     "tinymce",
@@ -117,7 +117,6 @@ LANGUAGES = [
 
 TIME_ZONE = "UTC"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]

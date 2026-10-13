@@ -25,5 +25,6 @@ static/local/
 static/rev-manifest.json
 temp/
 .environment
+.env
 htmlcov
 *google3ef9938c*

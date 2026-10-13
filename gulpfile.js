@@ -1,3 +1,7 @@
+const dotenv = require("dotenv");
+
+dotenv.config({ path: ".env" });
+
 const build = require("./gulp/tasks/build");
 const watch = require("./gulp/tasks/watch");
 const local = require("./gulp/tasks/local");

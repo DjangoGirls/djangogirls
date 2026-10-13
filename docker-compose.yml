@@ -6,16 +6,12 @@ services:
     stdin_open: true
     tty: true
     init: true
-    environment:
-      - POSTGRES_USER=djangogirls
-      - POSTGRES_PASSWORD=djangogirls
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=djangogirls
+    env_file: ./.env
     depends_on:
       - db
     volumes:
       - .:/var/www/app
+      - node_modules:/var/www/app/node_modules
     ports:
       - "${APP_PORT:-8000}:8000"
 
@@ -33,3 +29,4 @@ services:
 
 volumes:
   pgdata:
+  node_modules:

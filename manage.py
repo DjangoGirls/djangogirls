@@ -4,7 +4,7 @@ import sys
 
 from dotenv import find_dotenv, load_dotenv
 
-load_dotenv(find_dotenv(filename=".environment"))
+load_dotenv(find_dotenv(filename=".env"))
 
 
 if __name__ == "__main__":

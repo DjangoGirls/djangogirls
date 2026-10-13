@@ -74,9 +74,17 @@ Step into newly created `djangogirls` directory:
 cd djangogirls
 ```
 
+Make a copy of the `.env-example` in the root folder file and name it `.env`.
+
 ### Docker
 
-If you have Docker and Docker compose installed, run `docker-compose up`
+If you have Docker and Docker compose installed, run `docker-compose up`.
+
+To load the sample data, run `docker exec djangogirls-app ./manage.py loaddata sample_db.json`.
+
+To create a superuser, run `docker exec -it djangogirls-app ./manage.py createsuperuser`.
+
+To run tests, run `docker exec -it djangogirls-app pytest`.
 
 ### Non Docker
 

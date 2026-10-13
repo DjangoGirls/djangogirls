@@ -1,15 +1,14 @@
 # Build stage for Node.js dependencies
-FROM node:18-slim AS node-builder
+FROM node:24-slim AS node-builder
 
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install && \
-    npm install -g gulp && \
-    mkdir -p /app/static
+COPY package.json package-lock.json ./
+
+RUN npm ci --ignore-scripts
 
 # Main Python stage
-FROM python:3.10.9-slim-bullseye
+FROM python:3.13.15-slim-trixie
 
 # Set environment variables to reduce Python's output verbosity
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -22,44 +21,52 @@ WORKDIR /var/www/app
 # Install system dependencies in a single layer
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        gettext \
-        poedit \
-        locales \
+        build-essential \
         curl \
+        gettext \
         git \
         libpq-dev \
-        build-essential \
-        # Install Node.js directly without using the NodeSource repository
-        nodejs npm \
+        locales \
+        poedit \
+    && curl -fsS \
+        --proto '=https' \
+        --proto-redir '=https' \
+        -L https://deb.nodesource.com/setup_24.x \
+    && apt-get install -y --no-install-recommends nodejs \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && sed -i -e 's/# en_US ISO-8859-1/en_US ISO-8859-1/' /etc/locale.gen \
     && sed -i -e 's/# en_US.ISO-8859-15 ISO-8859-15/en_US.ISO-8859-15 ISO-8859-15/' /etc/locale.gen \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && update-locale \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    # Install gulp globally
-    && npm install -g gulp
+    && rm -rf /var/lib/apt/lists/* 
 
 # Install Python dependencies
 COPY requirements.txt ./
-RUN pip install --upgrade pip pip-tools && \
+COPY requirements.in ./
+
+RUN pip install --only-binary=:all: --upgrade pip==26.2.1 && \
+    pip install \
+        --only-binary=:all: \
+        pip-tools==7.6.1 \
+        setuptools==80.10.2 \
+        typing-extensions==4.16.0 && \
     pip-sync
 
 # Copy Node.js build artifacts from the node stage
 COPY --from=node-builder /app/node_modules /var/www/app/node_modules
-COPY --from=node-builder /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node-builder /usr/local/bin/gulp /usr/local/bin/gulp
 
 # Copy entrypoint and health check scripts
 COPY rootfs /
 
 # Copy application code and build static files
 COPY . .
-RUN gulp local
 
 # Set up entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
+
+COPY .pre-commit-config.yaml .
+RUN git init . && pre-commit install-hooks
 
 # Configure health check
 HEALTHCHECK --start-period=15s --timeout=2s --retries=3 --interval=5s \
