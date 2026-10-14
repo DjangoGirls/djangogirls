@@ -1,4 +1,4 @@
-<div id="cookieModal" class="modal fade" role="dialog">
+<dialog id="cookieModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,10 +14,12 @@
             </div>
         </div>
     </div>
-</div>
+</dialog>
 
 <script>
     $(document).ready(function(){
+
+      const cookieModal = document.querySelector('#cookieModal');
       // Cookie consent functions
       function setCookie(name, value, days) {
           var expires = "";
@@ -42,17 +44,19 @@
   
       // Show cookie consent modal if not accepted yet
       if(getCookie('cookiesAccepted') === null){
-          $('#cookieModal').modal('show');
+          cookieModal.showModal();
       }
   
       // Handle cookie consent choices
       $('#acceptCookies').on('click', function(){
           setCookie('cookiesAccepted', 'true', 365);
+          cookieModal.close();
       });
   
       $('#rejectCookies').on('click', function(){
           setCookie('cookiesAccepted', 'false', 365);
           window['ga-disable-G-JGJW1VEY0D'] = true;
+          cookieModal.close();
       });
     });
   </script>
