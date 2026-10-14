@@ -32,7 +32,6 @@ class Command(BaseCommand):
             last_fetched = None
         # Fetch the Stripe charges.
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        # stripe.api_version = settings.STRIPE_API_VERSION
 
         # Fetch the Stripe charges.
         begin = datetime(2024, 8, 1)
