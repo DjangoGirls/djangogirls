@@ -6850,6 +6850,7 @@ msgstr "Ihre E-Mail-Adresse lautet %(email)s."
 #: templates/emails/organize/event_deployed.html:16
 #, python-format
 msgid ""
+"\n"
 "You can login here: <a href=\"http://mail.djangogirls.org/\">http://mail."
 "djangogirls.org/</a><br/> Username: %(email)s (@djangogirls.com works "
 "too!)<br/>"
