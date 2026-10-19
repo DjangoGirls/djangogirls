@@ -1,7 +1,9 @@
+from io import StringIO
 from unittest import mock
 
 from django.core.files import File
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
 
 from story.management.commands import fetch_tumblr_stories
 from story.models import Story
@@ -51,3 +53,85 @@ def test_fetch_tumblr_stories_command_new_stories(p_download_image, p_request_la
     command = fetch_tumblr_stories.Command()
     command.handle()
     assert Story.objects.count() == 2
+
+
+@mock.patch("requests.get")
+def test_fetch_stories_if_feed_not_found(mock_get):
+    mock_response = mock.MagicMock()
+    mock_response.status_code = 404
+    mock_response.content = "<xml></xml>"
+    mock_response.ok = False
+    mock_response.reason = "Not Found"
+    mock_get.return_value = mock_response
+
+    with StringIO() as out:
+        call_command("fetch_stories", stdout=out)
+        assert "Not Found" in out.getvalue()
+
+
+@mock.patch("requests.get")
+def test_fetch_stories_a_blog_post(mock_get):
+    mock_response = mock.MagicMock()
+    mock_response.status_code = 200
+    mock_response.ok = True
+    mock_response.content = """<rss version="2.0">
+<channel>
+<description/>
+<title>Django Girls Blog</title>
+<generator>Tumblr (3.0; @djangogirls)</generator>
+<link>https://blog.djangogirls.org/</link>
+<item>
+<title>Blog title</title>
+<description>Post description</description>
+<link>https://blog.djangogirls.org/post/791047576209227776</link>
+<guid>https://blog.djangogirls.org/post/791047576209227776</guid>
+<pubDate>Tue, 05 Aug 2025 14:49:16 +0100</pubDate>
+<category>codewithkindness</category>
+</item>
+</channel>
+</rss>"""
+    mock_get.return_value = mock_response
+
+    with StringIO() as out:
+        call_command("fetch_stories", stdout=out)
+
+    stories = Story.objects.all()
+    assert stories.count() == 1
+    story = stories.first()
+    assert story.name == "Blog title"
+    assert story.is_story is False
+
+
+@mock.patch("requests.get")
+def test_fetch_stories_a_story(mock_get):
+    """A blog post is considered a story (Story.is_story) if its
+    title starts with 'Your Django Story: Meet'."""
+    mock_response = mock.MagicMock()
+    mock_response.status_code = 200
+    mock_response.ok = True
+    mock_response.content = """<rss version="2.0">
+<channel>
+<description/>
+<title>Django Girls Blog</title>
+<generator>Tumblr (3.0; @djangogirls)</generator>
+<link>https://blog.djangogirls.org/</link>
+<item>
+<title>Your Django Story: Meet Pony</title>
+<description>Post description</description>
+<link>https://blog.djangogirls.org/post/791047576209227776</link>
+<guid>https://blog.djangogirls.org/post/791047576209227776</guid>
+<pubDate>Tue, 05 Aug 2025 14:49:16 +0100</pubDate>
+<category>codewithkindness</category>
+</item>
+</channel>
+</rss>"""
+    mock_get.return_value = mock_response
+
+    with StringIO() as out:
+        call_command("fetch_stories", stdout=out)
+
+    stories = Story.objects.all()
+    assert stories.count() == 1
+    story = stories.first()
+    assert story.name == "Pony"
+    assert story.is_story is True
