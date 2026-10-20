@@ -27,7 +27,7 @@ def command():
         click.style("What is the date of the previous Dispatch? (Format: YYYY-MM-DD)", bold=True, fg="yellow")
     )
 
-    dispatch_date = datetime.datetime.strptime(raw_dispatch_date, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+    dispatch_date = datetime.datetime.strptime(raw_dispatch_date, "%Y-%m-%d").replace(tzinfo=datetime.UTC)
 
     # Get the events that happened since the last Dispatch.
     click.echo(click.style("PREVIOUS EVENTS", bold=True))
