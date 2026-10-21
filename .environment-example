@@ -40,3 +40,4 @@ export TUMBLR_API_BASE_URL="https://api.tumblr.com/v2"
 export TUMBLR_BLOG_HOSTNAME="blog.djangogirls.org"
 
 export MAPBOX_ACCESS_TOKEN=""
+export NODE_ENV="development"
