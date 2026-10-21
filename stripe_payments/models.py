@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from django.db import models
 
@@ -10,8 +10,8 @@ class StripeChargeManager(models.Manager):
             charge_id=stripe_charge_data["id"],
             amount=stripe_charge_data["amount"],
             payment_data=stripe_charge_data,
-            charge_created=datetime.fromtimestamp(stripe_charge_data["created"], tz=timezone.utc),
-            fetched=datetime.now(tz=timezone.utc),
+            charge_created=datetime.fromtimestamp(stripe_charge_data["created"], tz=UTC),
+            fetched=datetime.now(tz=UTC),
         )
 
     def running_total(self, since=None):
