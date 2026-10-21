@@ -12,7 +12,6 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_DB=djangogirls
-      - NODE_ENV="development"
     env_file: ./.environment
     depends_on:
       - db

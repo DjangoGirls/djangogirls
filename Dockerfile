@@ -62,17 +62,6 @@ COPY . .
 # Set up entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Install git + pre-commit
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
-    pip install --no-cache-dir pre-commit && \
-    ln -s /usr/local/bin/pre-commit /usr/bin/pre-commit
-
-COPY .pre-commit-config.yaml .
-
-# Initialize repo and install hooks
-RUN git init . && pre-commit install-hooks
-
 # Configure health check
 HEALTHCHECK --start-period=15s --timeout=2s --retries=3 --interval=5s \
     CMD /healthcheck.sh
