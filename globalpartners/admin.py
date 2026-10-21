@@ -7,6 +7,7 @@ from .models import GlobalPartner
 
 GLOBALPARTNER_CHANGELIST = "admin:globalpartners_globalpartner_changelist"
 
+
 @admin.register(GlobalPartner)
 class GlobalPartnerAdmin(admin.ModelAdmin):
     list_display = (
