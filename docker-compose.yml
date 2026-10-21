@@ -12,10 +12,13 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_DB=djangogirls
+      - NODE_ENV="development"
+    env_file: ./.environment
     depends_on:
       - db
     volumes:
       - .:/var/www/app
+      - node_modules:/var/www/app/node_modules
     ports:
       - "${APP_PORT:-8000}:8000"
 
@@ -33,3 +36,4 @@ services:
 
 volumes:
   pgdata:
+  node_modules:
