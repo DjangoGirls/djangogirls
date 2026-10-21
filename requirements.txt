@@ -168,7 +168,7 @@ packaging==23.0
     #   pytest
 pathspec==1.1.1
     # via black
-pillow==12.3.0
+pillow==13.0.0
     # via
     #   -r requirements.in
     #   easy-thumbnails
