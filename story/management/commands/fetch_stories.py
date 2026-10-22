@@ -23,7 +23,9 @@ class Command(BaseCommand):
 
         response = requests.get(rss_url)
         if not response.ok:
-            raise Exception(f'Request to "{rss_url}" failed\nReponse: {response.status_code}: {response.reason}')
+            raise requests.exceptions.HTTPError(
+                f'Request to "{rss_url}" failed\nReponse: {response.status_code}: {response.reason}'
+            )
 
         try:
             rss = ElementTree.fromstring(response.content)
