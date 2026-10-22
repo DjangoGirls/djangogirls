@@ -9,7 +9,7 @@ if [ "$NODE_ENV" = "development" ]; then
 fi
 
 echo "Compile messages"
-./manage.py compilemessages
+./manage.py compilemessages --ignore=venv
 
 echo "Applying database migrations"
 ./manage.py migrate

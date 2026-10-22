@@ -18,6 +18,9 @@ services:
     volumes:
       - .:/var/www/app
       - node_modules:/var/www/app/node_modules
+      - static_local:/var/www/app/static/local
+      - static_build:/var/www/app/static/build
+      - temp_files:/var/www/app/temp
     ports:
       - "${APP_PORT:-8000}:8000"
 
@@ -36,3 +39,6 @@ services:
 volumes:
   pgdata:
   node_modules:
+  static_local:
+  static_build:
+  temp_files:

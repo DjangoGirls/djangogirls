@@ -1,22 +1,16 @@
 # Build stage for Node.js dependencies
 FROM node:24-slim AS node-builder
-
 WORKDIR /app
-
 COPY package.json package-lock.json ./
-
 RUN npm ci --ignore-scripts
 
 # Main Python stage
 FROM python:3.12.15-slim-trixie
-
-# Set environment variables to reduce Python's output verbosity
+WORKDIR /var/www/app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on 
-
-WORKDIR /var/www/app
 
 # Install system dependencies in a single layer
 RUN apt-get update && \
@@ -41,6 +35,8 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
+RUN addgroup --system django && adduser --system --ingroup django django
+
 # Install Python dependencies
 COPY requirements.txt ./
 COPY requirements.in ./
@@ -50,7 +46,7 @@ RUN pip install --only-binary=:all: --upgrade pip==24.2 && \
         pip-tools==7.6.0 python-dotenv==1.0.0 && \
     pip-sync
 
-# Copy Node.js build artifacts from the node stage
+
 COPY --from=node-builder /app/node_modules /var/www/app/node_modules
 
 # Copy entrypoint and health check scripts
@@ -58,6 +54,9 @@ COPY rootfs /
 
 # Copy application code and build static files
 COPY . .
+
+RUN chown -R django:django /var/www/app
+USER django
 
 # Set up entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
