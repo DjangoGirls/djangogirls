@@ -33,9 +33,8 @@ RUN apt-get update && \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && update-locale \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* 
-
-RUN addgroup --system django && adduser --system --ingroup django django
+    && rm -rf /var/lib/apt/lists/* \
+    && addgroup --system django && adduser --system --ingroup django django
 
 # Install Python dependencies
 COPY requirements.txt ./
