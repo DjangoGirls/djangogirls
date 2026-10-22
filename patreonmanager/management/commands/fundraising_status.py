@@ -15,6 +15,31 @@ BASE_API_URL = "https://api.patreon.com/"
 class Command(BaseCommand):
     help = "Fetch current amount of money raised on our Patreon"
 
+    def get_pledge_information(self, patreon_data) -> tuple[int, int]:
+        """Sums up the patron counts and their pledge sums from
+        all non-free membership tiers."""
+        membership_tiers = patreon_data["included"]
+
+        patron_count = 0
+        pledge_sum = 0
+
+        for tier in membership_tiers:
+            attributes = tier.get("attributes", {})
+
+            if attributes.get("is_free_tier", False):
+                continue
+
+            # Posts available for everyone are included as an "Everyone"
+            # tier that doesn't have any patron count or sum information
+            # so we need to use .get instead of bracket access here.
+            #
+            # It is not marked as a "free tier" either in the data so
+            # the previous check doesn't catch it.
+            patron_count += attributes.get("patron_count", 0)
+            pledge_sum += int(int(attributes.get("pledge_sum", 0)) / 100)
+
+        return patron_count, pledge_sum
+
     def handle(self, *args, **options):
         logging.basicConfig(level=logging.INFO)
 
@@ -23,8 +48,7 @@ class Command(BaseCommand):
         request = requests.get(url)
         data = request.json()
 
-        patron_count = data["linked"][0]["patron_count"]
-        pledge_sum = int(int(data["linked"][0]["pledge_sum"]) / 100)
+        patron_count, pledge_sum = self.get_pledge_information(data)
         message = f"Daily Patreon update: {patron_count} patrons pledged ${pledge_sum} monthly!"
         logging.info(message)
 
