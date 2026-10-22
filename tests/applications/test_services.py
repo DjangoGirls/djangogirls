@@ -26,9 +26,9 @@ def test_it_sorts_applications_by_score_excluding_hidden(
     4.25 just because of the sorting."""
 
     # Delete some of the scores given by the admin user so we can test the sorting
-    Score.objects.filter(
-        user=admin_user, application__in=scored_applications, pk__gt=scored_applications.count() / 2
-    ).delete()
+    scored_by_admin = Score.objects.filter(user=admin_user, application__in=scored_applications)
+    to_delete = scored_by_admin[2:].values_list("id", flat=True)
+    Score.objects.filter(pk__in=list(to_delete)).delete()
 
     apps = get_applications_for_event(event=future_event, user=admin_user, order="-average_score")
     result = [(app.was_scored_by_user, round(app.average_score, 3)) for app in apps]
