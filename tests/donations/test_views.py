@@ -7,8 +7,8 @@ from django.urls import reverse
 from pytest_django.asserts import assertContains
 from stripe.error import APIConnectionError, StripeError
 
-STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "test_public")
-STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "test_public")
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY") or "test_public"
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY") or "test_public"
 
 
 def test_index(client):
