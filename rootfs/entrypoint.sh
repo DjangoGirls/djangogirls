@@ -3,8 +3,13 @@
 #echo "Make messages"
 #./manage.py makemessages --all
 
+if [ "$NODE_ENV" = "development" ]; then
+    echo "Compiling static files"
+    ./node_modules/.bin/gulp local
+fi
+
 echo "Compile messages"
-./manage.py compilemessages
+./manage.py compilemessages --ignore=venv
 
 echo "Applying database migrations"
 ./manage.py migrate

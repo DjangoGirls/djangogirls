@@ -8,9 +8,20 @@ const config = require("../config");
  * removes the files created during local and production builds
  */
 const cleanTask = async () => {
-  await del(config.paths.copy.dest.development);
-  await del(config.paths.copy.dest.production);
-  await del(config.paths.temp);
+  await del([
+    `${config.paths.copy.dest.development}**`,
+    `!${config.paths.copy.dest.development}`,
+  ]);
+
+  await del([
+    `${config.paths.copy.dest.production}**`,
+    `!${config.paths.copy.dest.production}`,
+  ]);
+
+  await del([
+    `${config.paths.temp}**`,
+    `!${config.paths.temp}`,
+  ]);
 };
 
 module.exports = cleanTask;
