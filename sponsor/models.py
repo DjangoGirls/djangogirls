@@ -17,7 +17,7 @@ class Sponsor(models.Model):
         ordering = ("name",)
 
     def __str__(self):
-        return self.name
+        return self.name or "Sponsor without name"
 
     def logo_display_for_admin(self):
         if self.logo:
