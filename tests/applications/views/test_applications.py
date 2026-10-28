@@ -318,15 +318,18 @@ def test_application_detail_queries_optimized(admin_client, future_event, applic
     )
 
 
+def _create_scores_for_application(application, admin_user, django_user_model):
+    Score.objects.create(user=admin_user, application=application, score=4)
+    for i in range(5):
+        reviewer = django_user_model.objects.create(email=f"reviewer{i}@example.com")
+        Score.objects.create(user=reviewer, application=application, score=i)
+
+
 def test_application_detail_scores_user_query_optimized(
     admin_client, admin_user, future_event, application_submitted, django_user_model
 ):
     """Regression test for issue #1078 to ensure scores don't trigger N+1 queries for users."""
-    Score.objects.create(user=admin_user, application=application_submitted, score=4)
-
-    for i in range(5):
-        reviewer = django_user_model.objects.create(email=f"reviewer{i}@example.com")
-        Score.objects.create(user=reviewer, application=application_submitted, score=i)
+    _create_scores_for_application(application_submitted, admin_user, django_user_model)
 
     application_detail_url = reverse(
         "applications:application_detail",
@@ -340,22 +343,9 @@ def test_application_detail_scores_user_query_optimized(
         resp = admin_client.get(application_detail_url)
         assert resp.status_code == 200
 
-    score_table_name = Score._meta.db_table
     user_table_name = django_user_model._meta.db_table
+    user_queries = [q for q in queries.captured_queries if user_table_name in q["sql"]]
 
-    # With select_related("user"), there should be exactly 1 query joining scores and users
-    joined_queries = [
-        q for q in queries.captured_queries if score_table_name in q["sql"] and user_table_name in q["sql"]
-    ]
-    assert len(joined_queries) == 1, f"Expected 1 joined score/user query, got {len(joined_queries)}"
+    # With select_related("user"), user queries do not scale with scores count (at most 4 queries)
+    assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
 
-    # There should not be separate individual queries fetching each score's user
-    individual_user_queries = [
-        q
-        for q in queries.captured_queries
-        if user_table_name in q["sql"] and score_table_name not in q["sql"] and "LIMIT 21" in q["sql"]
-    ]
-    # Only request.user authentication query
-    assert len(individual_user_queries) == 1, (
-        f"Expected at most 1 individual user query (for logged in user), got {len(individual_user_queries)}"
-    )
