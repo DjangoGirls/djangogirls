@@ -9,7 +9,7 @@ RUN npm install && \
     mkdir -p /app/static
 
 # Main Python stage
-FROM python:3.10.9-slim-bullseye
+FROM python:3.12-slim-bookworm
 
 # Set environment variables to reduce Python's output verbosity
 ENV PYTHONDONTWRITEBYTECODE=1 \

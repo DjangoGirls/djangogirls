@@ -76,7 +76,7 @@ cd djangogirls
 
 ### Docker
 
-If you have Docker and Docker compose installed, run `docker-compose up`
+If you have Docker and Docker Compose installed, run `docker compose up --build`.
 
 ### Non Docker
 
