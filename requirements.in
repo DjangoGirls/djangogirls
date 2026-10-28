@@ -21,7 +21,7 @@ django>=3.2,<4
 dnspython
 easy-thumbnails
 easydict==1.10
-pillow==12.3.0
+pillow==13.0.0
 psycopg2-binary==2.9.13
 pyquery==2.1.0
 urlextract
