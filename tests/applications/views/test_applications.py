@@ -359,5 +359,3 @@ def test_application_detail_scores_user_query_optimized(
     assert len(individual_user_queries) == 1, (
         f"Expected at most 1 individual user query (for logged in user), got {len(individual_user_queries)}"
     )
-
-
