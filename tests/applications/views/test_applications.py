@@ -347,4 +347,3 @@ def test_application_detail_scores_user_query_optimized(
     user_queries = [q for q in queries.captured_queries if user_table_name in q["sql"]]
 
     assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
-
