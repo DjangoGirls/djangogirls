@@ -316,3 +316,48 @@ def test_application_detail_queries_optimized(admin_client, future_event, applic
     assert len(question_queries) <= 1, (
         f"Expected at most 1 question query (joined with answers), got {len(question_queries)}"
     )
+
+
+def test_application_detail_scores_user_query_optimized(
+    admin_client, admin_user, future_event, application_submitted, django_user_model
+):
+    """Regression test for issue #1078 to ensure scores don't trigger N+1 queries for users."""
+    Score.objects.create(user=admin_user, application=application_submitted, score=4)
+
+    for i in range(5):
+        reviewer = django_user_model.objects.create(email=f"reviewer{i}@example.com")
+        Score.objects.create(user=reviewer, application=application_submitted, score=i)
+
+    application_detail_url = reverse(
+        "applications:application_detail",
+        kwargs={
+            "page_url": future_event.page_url,
+            "app_number": application_submitted.number,
+        },
+    )
+
+    with CaptureQueriesContext(connection) as queries:
+        resp = admin_client.get(application_detail_url)
+        assert resp.status_code == 200
+
+    score_table_name = Score._meta.db_table
+    user_table_name = django_user_model._meta.db_table
+
+    # With select_related("user"), there should be exactly 1 query joining scores and users
+    joined_queries = [
+        q for q in queries.captured_queries if score_table_name in q["sql"] and user_table_name in q["sql"]
+    ]
+    assert len(joined_queries) == 1, f"Expected 1 joined score/user query, got {len(joined_queries)}"
+
+    # There should not be separate individual queries fetching each score's user
+    individual_user_queries = [
+        q
+        for q in queries.captured_queries
+        if user_table_name in q["sql"] and score_table_name not in q["sql"] and "LIMIT 21" in q["sql"]
+    ]
+    # Only request.user authentication query
+    assert len(individual_user_queries) == 1, (
+        f"Expected at most 1 individual user query (for logged in user), got {len(individual_user_queries)}"
+    )
+
+

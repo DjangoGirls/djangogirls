@@ -169,7 +169,7 @@ def application_detail(request, page_url, app_number):
         score = None
     score_form = ScoreForm(instance=score)
     event = get_event(page_url, request.user.is_authenticated, False)
-    all_scores = Score.objects.filter(application=application)
+    all_scores = Score.objects.filter(application=application).select_related("user")
 
     if request.POST:
         # Handle score submission.
