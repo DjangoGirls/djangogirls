@@ -2,13 +2,24 @@ from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 
 from core.admin.filters.event import EventFilter
-from core.models import Event
+from core.models import Event, EventPageMenu
 
 
 class EventPageMenuAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "event", "url", "position")
     list_filter = (EventFilter,)
     sortable = "position"
+
+    def get_extra_model_filters(self, request):
+        startorder = request.POST.get("startorder")
+        if startorder is not None:
+            try:
+                obj = EventPageMenu.objects.filter(position=int(startorder)).first()
+                if obj:
+                    return {"event": obj.event}
+            except (ValueError, EventPageMenu.DoesNotExist):
+                pass
+        return {}
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
