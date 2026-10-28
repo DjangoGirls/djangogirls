@@ -250,28 +250,30 @@ a, a:hover
         padding: 6px 12px
         margin-top: 0px
 
-    .dropdown
-        float: left
-        margin-right: 15px
+    select
+        border: 0px
+        padding: 0.2em 0.5em
+        color: black 
+        border-radius: 5px
 
-        button
-            border: 0px
-            color: white !important
+        &.accepted, &.yes
+            background: #3c763d
+            color: white
+        &.rejected, &.no
+            background: #a94442
+            color: white
+        &.submitted
+            background: #428bca
+            color: white
+        &.waitlisted
+            background: #fec500
+            color: white
+        &.default, &.waiting
+            background: rgba(0,0,0,0.3)
 
-            &.accepted, &.yes
-                background: #3c763d
-            &.rejected, &.no
-                background: #a94442
-            &.submitted
-                background: #428bca
-            &.waitlisted
-                background: #fec500
-            &.default, &.waiting
-                background: rgba(0,0,0,0.3)
-
-        ul
-            li
-                font-family: sans_font
+    ul
+        li
+            font-family: sans_font
 
     input[type="submit"]
         font-size: 14px
