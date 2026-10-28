@@ -348,4 +348,3 @@ def test_application_detail_scores_user_query_optimized(
 
     # With select_related("user"), user queries do not scale with scores count (at most 4 queries)
     assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
-
