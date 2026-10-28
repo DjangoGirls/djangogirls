@@ -346,5 +346,5 @@ def test_application_detail_scores_user_query_optimized(
     user_table_name = django_user_model._meta.db_table
     user_queries = [q for q in queries.captured_queries if user_table_name in q["sql"]]
 
-    # With select_related("user"), user queries do not scale with scores count (at most 4 queries)
     assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
+
