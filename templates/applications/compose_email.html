@@ -1,7 +1,7 @@
 {% extends 'core/event.html' %}
 {% load applications_tags i18n rev static %}
 
-{% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/applications.js' %}"></script>{% endblock %}
+{% block custom_js %}<script type="text/javascript" src="{% static_rev 'js/email.js' %}"></script>{% endblock %}
 
 {% block title %}{{ event.page_title }}{% endblock %}
 {% block description %}{{ event.page_description }}{% endblock %}
@@ -16,8 +16,8 @@
 
       <div class="col-md-7 stretch-form">
         <div class="rsvp-buttons">
-          <a class="btn small" data-option="yes">{% trans 'Add a "RSVP: yes" link to email' %}</a>
-          <a class="btn small" data-option="no">{% trans 'Add a "RSVP: no" link to email' %}</a>
+          <button data-value="yes">{% trans 'Add a "RSVP: yes" link to email' %}</button>
+          <button data-value="no">{% trans 'Add a "RSVP: no" link to email' %}</button>
           <a href="" target="_blank">{% trans "What's that?" %}</a>
         </div>
 

@@ -1,90 +1,171 @@
-$(document).ready(function() {
-    $("#select-all-box").click(function () {
-        $(".application-box").prop('checked', $(this).prop('checked'));
+document.addEventListener("DOMContentLoaded", () => {
+  const selectAllCheckbox = document.querySelector("#select-all-box");
+  const applicationCheckboxes = Object.values(
+    document.querySelectorAll(".application-box"),
+  );
+  const selectedCount = document.querySelector("#selected-count");
+  const applicationStatusSelects = document.querySelectorAll(
+    "select.state-change",
+  );
+  const applicationRsvpSelects =
+    document.querySelectorAll("select.rsvp-change");
+
+  const applicationChangeStateForm = document.querySelector(
+    "form#change-state-form",
+  );
+
+  function updateSelectedCount() {
+    selectedCount.textContent = document.querySelectorAll(
+      ".application-box:checked",
+    ).length;
+  }
+
+  function handleApplicationStatusChange(event) {
+    event.preventDefault();
+    const select = event.currentTarget;
+    const appId = select.dataset.appId;
+    const state = select.value;
+    const url = document.querySelector("#applications").dataset.changeStateUrl;
+
+    const formData = new FormData();
+    formData.append("state", state);
+    formData.append("application", appId);
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
     });
 
-    $('.application-box, #select-all-box').click(function() {
-        updateSelectedCount();
+    updateApplicationStateClasses(appId, state);
+
+    return false;
+  }
+
+  /**
+   *
+   * @param {Event} event
+   */
+  function handleApplicationRsvpChange(event) {
+    event.preventDefault();
+    const select = event.currentTarget;
+    const appId = select.dataset.appId;
+    const rsvpStatus = select.value;
+    const url = document.querySelector("#applications").dataset.changeRsvpUrl;
+
+    const formData = new FormData();
+    formData.append("rsvp_status", rsvpStatus);
+    formData.append("application", appId);
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
     });
 
-    $('.state-change').click(function(e){
-        var state = $(this).data('state'),
-            appId = $(this).data('app-id'),
-            url = $('#applications').data('change-state-url'),
-            name = $(this).text();
+    updateApplicationRSVPClasses(appId, rsvpStatus);
+    return false;
+  }
 
-        $.post(url, {'state': state, 'application': appId}, function(data){
-            updateApplicationState(appId, state, name);
-        });
-        e.preventDefault();
+  /**
+   * Update all selected applications to selected state
+   * at once.
+   *
+   * @param {Event} event Submit event
+   */
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+
+    const url = form.action;
+    const state = form.querySelector("select").value;
+
+    const selectedApplications = document.querySelectorAll(
+      ".application-box:checked",
+    );
+
+    const selectedIds = Object.values(selectedApplications).map(
+      (application) => application.value,
+    );
+
+    const formData = new FormData();
+    formData.append("state", state);
+    formData.append("application", selectedIds);
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
     });
 
-    $('#change-state-form').submit(function(){
-        var url = $(this).attr('action'),
-            state = $($(this).find('option:selected')).val(),
-            name = $($(this).find('option:selected')).text();
+    applicationCheckboxes.forEach((checkbox) => (checkbox.checked = false));
 
-        $.post(url, $(this).serialize(), function(data){
-            if (data['updated']){
-                data['updated'].forEach(function(id){
-                    updateApplicationState(id, state, name);
-                    $('#application-'+id+'-box').prop('checked', false);
-                });
-            }
-	    updateSelectedCount();
-        });
-
-        return false;
+    selectedIds.forEach((appId) => {
+      const application = document.querySelector(
+        `select#application-${appId}-state`,
+      );
+      application.value = state;
+      updateApplicationStateClasses(appId, state);
     });
 
-    $('.rsvp-change').click(function(){
-        var rsvp_status = $(this).data('rsvp'),
-            appId = $(this).data('app-id'),
-            url = $('#applications').data('change-rsvp-url'),
-            name = $(this).text();
+    return false;
+  }
+  /**
+   * Clears all previous state based classes and adds the new state class
+   * to the select of application's state
+   *
+   * @param {string} appId Application ID
+   * @param {string} newState state of application
+   */
+  function updateApplicationStateClasses(appId, newState) {
+    const application = document.querySelector(
+      `select#application-${appId}-state`,
+    );
+    application.classList.remove(
+      "submitted",
+      "accepted",
+      "rejected",
+      "default",
+      "waitlisted",
+    );
+    application.classList.add(newState);
+  }
 
-        $.post(url, {'rsvp_status': rsvp_status, 'application': appId}, function(data){
-            updateApplicationRsvp(appId, rsvp_status, name);
-        });
-    });
+  /**
+   * Clears all previous RSVP based classes and adds the new RSVP class
+   * to the select of application's RSVP
+   *
+   * @param {string} appId Application ID
+   * @param {string} newState state of application
+   */
+  function updateApplicationRSVPClasses(appId, newRSVP) {
+    const application = document.querySelector(
+      `select#application-${appId}-rsvp-status`,
+    );
+    application.classList.remove("yes", "no", "waiting");
+    application.classList.add(newRSVP);
+  }
 
-    $('#id_text').keyup(function(){
-        updatePreview($(this).val());
-    });
+  selectAllCheckbox.addEventListener("change", (event) => {
+    applicationCheckboxes.forEach(
+      (application) => (application.checked = event.target.checked),
+    );
 
-    $('.rsvp-buttons .btn').click(function(){
-        var option = $(this).data('option');
-        if (option == 'yes' || option == 'no'){
-            var rsvp_link = '\n[rsvp-url-'+option+']';
-            var message = $('#id_text').val()+rsvp_link;
-            $('#id_text').val(message);
-            updatePreview(message);
-        }
-    });
+    updateSelectedCount();
+  });
 
-    function updatePreview(value) {
-        var message = value;
-        message = message.replace(/\[rsvp-url-yes\]/g, '<a href="">http://djangogirls.org/rsvp-YES-generated-url</a>');
-        message = message.replace(/\[rsvp-url-no\]/g, '<a href="">http://djangogirls.org/rsvp-NO-generated-url</a>');
-        $('#preview').html(message);
-    }
+  /* Listen to checkbox changes for application rows */
+  applicationCheckboxes.forEach((application) => {
+    application.addEventListener("change", (event) => updateSelectedCount());
+  });
 
-    function updateApplicationState(id, state, stateName){
-        $('#application-'+id+'-state')
-            .removeClass('submitted accepted rejected default waitlisted')
-            .addClass(state)
-            .html(stateName+' <span class="caret"></span>');
-    }
+  /* Listen to select changes for application's status */
+  applicationStatusSelects.forEach((select) => {
+    select.addEventListener("change", handleApplicationStatusChange);
+  });
 
-    function updateApplicationRsvp(id, rsvp, rsvpName){
-        $('#application-'+id+'-rsvp-status')
-            .removeClass('waiting yes no')
-            .addClass(rsvp)
-            .html(rsvpName+' <span class="caret"></span>');
-    }
+  /* Listen to select changes for application's RSVP */
+  applicationRsvpSelects.forEach((select) => {
+    select.addEventListener("change", handleApplicationRsvpChange);
+  });
 
-    function updateSelectedCount(){
-        $('#selected-count').html($('.application-box:checked').length);
-    }
-
+  applicationChangeStateForm.addEventListener("submit", handleFormSubmit);
 });
