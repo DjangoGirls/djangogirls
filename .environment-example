@@ -6,6 +6,7 @@ export COVERAGE="TRUE"
 export DJANGO_DEBUG="FALSE"
 export DEBUG_TOOLBAR="no"
 
+export POSTGRES_USER=""
 export POSTGRES_PASSWORD=""
 
 export DISABLE_RECAPTCHA="yes"

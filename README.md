@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/DjangoGirls/djangogirls.svg?branch=master)](https://travis-ci.org/DjangoGirls/djangogirls) [![codecov](https://codecov.io/gh/DjangoGirls/djangogirls/branch/master/graph/badge.svg)](https://codecov.io/gh/DjangoGirls/djangogirls)
 
 
-This repository contains the Django application which powers [DjangoGirls.org](http://djangogirls.org/).
+This repository contains the Django application which powers [DjangoGirls.org](https://djangogirls.org/).
 
 ## What's in it?
 
@@ -26,18 +26,18 @@ And then follow the instructions.
 
 ### Event
 
-http://djangogirls.org/admin/core/event/
+https://djangogirls.org/admin/core/event/
 
 Here you can change:
 - Meta tags - title and description of the website
 - Main color - main color on the website in HEX (default is FF9400)
 - Custom CSS - customize CSS on the website
-- URL - url that goes after the domain (http://djangogirls.org/__url__)
-- Is live? - live website is available [on the homepage](http://djangogirls.org/) and can be accessed by anyone
+- URL - url that goes after the domain (https://djangogirls.org/__url__)
+- Is live? - live website is available [on the homepage](https://djangogirls.org/) and can be accessed by anyone
 
 ### EventPageContent
 
-http://djangogirls.org/admin/core/eventpagecontent/
+https://djangogirls.org/admin/core/eventpagecontent/
 
 Each website comes with some default content that you can adjust to your needs. Each object is a "block" on the website that you can modify in following ways:
 - Name - it's also a permalink that you can link to like this: __#name__
@@ -47,7 +47,7 @@ Each website comes with some default content that you can adjust to your needs. 
 
 ### EventPageMenu
 
-http://djangogirls.org/admin/core/eventpagemenu/add/
+https://djangogirls.org/admin/core/eventpagemenu/add/
 
 To manage menu available on the website, you can add objects to EventPageMenu. Available options:
 - Title
@@ -56,7 +56,7 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 
 # Contributing to Django Girls website
 
-The website is hosted on PythonAnywhere and is available here: http://djangogirls.org/
+The website is hosted on PythonAnywhere and is available here: https://djangogirls.org/
 
 Please note that we use Python 3 only, so make sure that you use correct version when running commands below.
 
@@ -80,9 +80,17 @@ If you have Docker and Docker Compose installed, run `docker compose up --build`
 
 ### Non Docker
 
-Create a new virtual environment (Python 3.12) if needed. Then, install all the required dependencies.
+Create a new [virtual environment](https://docs.python.org/3/library/venv.html) (with Python 3.12).
 
-The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
+Copy `.environment-example` to `.environment` and change the following:
+
+```
+DJANGO_DEBUG="TRUE"
+POSTGRES_USER="djangogirls"
+POSTGRES_PASSWORD="<create a password>"
+```
+
+Then, install all the required dependencies. The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
 compiles `requirements.txt` ensuring compatibility between packages.
 
 ```bash
@@ -98,21 +106,23 @@ Install the [pre-commit](https://github.com/pre-commit/pre-commit) hook. It's us
 pre-commit install
 ```
 
-Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed):
+Start the [PostgreSQL database server](https://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](https://www.postgresql.org/download/) installed).
 
 ```bash
-psql
+psql postgres
 ```
 
 In the `psql` shell, create a database and a role with the necessary permissions:
 
 ```sql
 CREATE DATABASE djangogirls;
-CREATE DATABASE postgres;
-CREATE ROLE postgres;
-GRANT ALL privileges ON DATABASE djangogirls TO postgres;
-ALTER ROLE postgres WITH LOGIN;
-ALTER ROLE postgres WITH CREATEDB;
+CREATE USER djangogirls WITH PASSWORD '<use the password you set up earlier in .environment>';
+ALTER USER djangogirls CREATEDB;
+
+\connect djangogirls
+
+GRANT ALL privileges ON DATABASE djangogirls TO djangogirls;
+ALTER SCHEMA public OWNER TO djangogirls;
 ```
 
 Exit the `psql` shell:
@@ -145,14 +155,13 @@ Install dependencies for static files:
 npm install
 ```
 
-Compile CSS and JS files:
+Compile CSS and JS files and watch for changes:
 
 ```bash
-npm install -g gulp
-gulp watch
+npm run gulp watch
 ```
 
-Run your local server:
+In a separate terminal window, run your local server:
 
 ```bash
 ./manage.py runserver
@@ -183,44 +192,42 @@ python -m pytest --cov-report term-missing --cov
 
 ### Static files
 
-We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
+We're using a [Stylus](https://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](https://learnboost.github.io/stylus/#get-styling-with-stylus).
 
 This means you shouldn't change any css files, but `.styl` files. They're in `/static/source/css/` directory.
 
 Autocompiling of `.styl` files to `.css`:
 
 ```bash
-npx gulp watch
+npm run gulp watch
 ```
 
 We're also using gulp for our static files builds (see [below](#gulp-tasks)). To build static files for production, run this:
 
 ```bash
-npx gulp build
+npm run gulp build
 ```
 
 For local development:
 
 ```bash
-npx gulp local
+npm run gulp local
 ```
 
 #### Gulp Tasks
 
-Static files are generated and maintained using [gulp.js](https://gulpjs.com/). To use, you'll need Node.js [installed](https://nodejs.org/en/download/). Then, run `npm install`. You can now use `npx gulp` (note that it's `np**x**`), followed by one of the following commands:
+Static files are generated and maintained using [gulp.js](https://gulpjs.com/). To use, you'll need Node.js [installed](https://nodejs.org/en/download/). Then, run `npm install`.
 
-* `gulp local` - run a one-off local build of css & js
-* `gulp watch` - compile and watch static assets for changes
-* `gulp build` - run a one-off production build, which involves minifying code and asset revision markers
-* `gulp clean` - remove the results of any of the above commands
-
-Running `gulp` on its own runs `watch` by default.
+* `npm run gulp local` - run a one-off local build of css & js
+* `npm run gulp watch` - compile and watch static assets for changes
+* `npm run gulp build` - run a one-off production build, which involves minifying code and asset revision markers
+* `npm run gulp clean` - remove the results of any of the above commands
 
 #### Developing Gulp Tasks
 
 Each gulp task is a single function, which are combined using the `series` operator so they run as a workflow. Each are commented with what they do and why they're important. 
 
-The biggest gotcha is [async completion](https://gulpjs.com/docs/en/getting-started/async-completion#signal-task-completion). Each task much signal to gulp when it has finished. The easiest way to do this is using an `aysnc` function, **but** if your functionality uses gulp streams (most native gulp functionality does), then you should **not** use an `async` function. Instead, return the gulp stream from the function and it will be handled correctly.
+The biggest gotcha is [async completion](https://gulpjs.com/docs/en/getting-started/async-completion#signal-task-completion). Each task must signal to gulp when it has finished. The easiest way to do this is using an `aysnc` function, **but** if your functionality uses gulp streams (most native gulp functionality does), then you should **not** use an `async` function. Instead, return the gulp stream from the function and it will be handled correctly.
 
 ```js
 // WRONG - uses gulp's streams in an async function; subsequent tasks won't wait for completion correctly:
@@ -236,6 +243,7 @@ const deleteFiles = async () => {
     await del(...)
 }
 ```
+
 
 ### Hosting on PythonAnywhere
 
@@ -295,8 +303,6 @@ you can create your own copy of this and load it with values relevant to your de
 To make use of this feature, create a copy of the example file and call it `.environment`. This file will be ignored by
 version control, but loaded by `manage.py`. So when you run django commands like `manage.py runserver` during development
 `python-dotenv` will load the environment variables from your `.environment` file so that they are available to the application.
-
-This is an optional feature. If you do not have a `.environment` file then it won't impact on the application at all.
 
 ### Before you Open a Pull Request
 
