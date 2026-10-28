@@ -60,3 +60,5 @@ jobs:
           py.test --cov
         env:
           POSTGRES_PASSWORD: postgres
+          DJANGO_DEBUG: 'True'
+          DJANGO_SECRET_KEY: 'hellodjangogirls'
