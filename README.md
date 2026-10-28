@@ -87,7 +87,7 @@ Copy `.environment-example` to `.environment` and change the following:
 ```
 DJANGO_DEBUG="TRUE"
 POSTGRES_USER="djangogirls"
-POSTGRES_PASSWORD="djangogirls"
+POSTGRES_PASSWORD="<create a password>"
 ```
 
 Then, install all the required dependencies. The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
@@ -116,7 +116,7 @@ In the `psql` shell, create a database and a role with the necessary permissions
 
 ```sql
 CREATE DATABASE djangogirls;
-CREATE USER djangogirls WITH PASSWORD 'djangogirls';
+CREATE USER djangogirls WITH PASSWORD '<use the password you set up earlier in .environment>';
 ALTER USER djangogirls CREATEDB;
 
 \connect djangogirls
