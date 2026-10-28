@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/DjangoGirls/djangogirls.svg?branch=master)](https://travis-ci.org/DjangoGirls/djangogirls) [![codecov](https://codecov.io/gh/DjangoGirls/djangogirls/branch/master/graph/badge.svg)](https://codecov.io/gh/DjangoGirls/djangogirls)
 
 
-This repository contains the Django application which powers [DjangoGirls.org](http://djangogirls.org/).
+This repository contains the Django application which powers [DjangoGirls.org](https://djangogirls.org/).
 
 ## What's in it?
 
@@ -26,18 +26,18 @@ And then follow the instructions.
 
 ### Event
 
-http://djangogirls.org/admin/core/event/
+https://djangogirls.org/admin/core/event/
 
 Here you can change:
 - Meta tags - title and description of the website
 - Main color - main color on the website in HEX (default is FF9400)
 - Custom CSS - customize CSS on the website
-- URL - url that goes after the domain (http://djangogirls.org/__url__)
-- Is live? - live website is available [on the homepage](http://djangogirls.org/) and can be accessed by anyone
+- URL - url that goes after the domain (https://djangogirls.org/__url__)
+- Is live? - live website is available [on the homepage](https://djangogirls.org/) and can be accessed by anyone
 
 ### EventPageContent
 
-http://djangogirls.org/admin/core/eventpagecontent/
+https://djangogirls.org/admin/core/eventpagecontent/
 
 Each website comes with some default content that you can adjust to your needs. Each object is a "block" on the website that you can modify in following ways:
 - Name - it's also a permalink that you can link to like this: __#name__
@@ -47,7 +47,7 @@ Each website comes with some default content that you can adjust to your needs. 
 
 ### EventPageMenu
 
-http://djangogirls.org/admin/core/eventpagemenu/add/
+https://djangogirls.org/admin/core/eventpagemenu/add/
 
 To manage menu available on the website, you can add objects to EventPageMenu. Available options:
 - Title
@@ -56,7 +56,7 @@ To manage menu available on the website, you can add objects to EventPageMenu. A
 
 # Contributing to Django Girls website
 
-The website is hosted on PythonAnywhere and is available here: http://djangogirls.org/
+The website is hosted on PythonAnywhere and is available here: https://djangogirls.org/
 
 Please note that we use Python 3 only, so make sure that you use correct version when running commands below.
 
@@ -106,7 +106,7 @@ Install the [pre-commit](https://github.com/pre-commit/pre-commit) hook. It's us
 pre-commit install
 ```
 
-Start the [PostgreSQL database server](http://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](http://www.postgresql.org/download/) installed).
+Start the [PostgreSQL database server](https://www.postgresql.org/docs/current/static/server-start.html) and enter the `psql` shell (you need to have [PostgreSQL](https://www.postgresql.org/download/) installed).
 
 ```bash
 psql postgres
@@ -192,7 +192,7 @@ python -m pytest --cov-report term-missing --cov
 
 ### Static files
 
-We're using a [Stylus](http://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](http://learnboost.github.io/stylus/#get-styling-with-stylus).
+We're using a [Stylus](https://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](https://learnboost.github.io/stylus/#get-styling-with-stylus).
 
 This means you shouldn't change any css files, but `.styl` files. They're in `/static/source/css/` directory.
 
