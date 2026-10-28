@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "description": "This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).",
+  "scripts": {
+    "gulp": "./node_modules/gulp/bin/gulp.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DjangoGirls/djangogirls.git"
