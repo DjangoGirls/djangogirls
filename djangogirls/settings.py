@@ -16,7 +16,7 @@ def gettext(s):
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_URL = "https://djangogirls.org"
 
-DEBUG = os.getenv("DJANGO_DEBUG") != "FALSE"
+DEBUG = sanitize(os.getenv("DJANGO_DEBUG", False), bool)
 
 SECRET_KEY = "hello!" if DEBUG else os.getenv("DJANGO_SECRET_KEY")
 
@@ -248,7 +248,7 @@ FLICKR_API_KEY = os.environ.get("FLICKR_API_KEY")
 
 # ***** DEBUG TOOLBAR *****
 
-DEBUG_TOOLBAR = DEBUG and os.environ.get("DEBUG_TOOLBAR", "no") == "yes"
+DEBUG_TOOLBAR = DEBUG and sanitize(os.environ.get("DEBUG_TOOLBAR", "no"), bool)
 
 if DEBUG_TOOLBAR:
     INTERNAL_IPS = [
@@ -265,7 +265,7 @@ if DEBUG_TOOLBAR:
         "SHOW_TOOLBAR_CALLBACK": lambda request: not request.is_ajax(),
     }
 
-RECAPTCHA_TESTING = os.environ.get("RECAPTCHA_TESTING") == "True"
+RECAPTCHA_TESTING = sanitize(os.environ.get("RECAPTCHA_TESTING", False), bool)
 if RECAPTCHA_TESTING:
     SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
