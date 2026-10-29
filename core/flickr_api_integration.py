@@ -15,8 +15,9 @@ def get_flickr_photo_list():
             f"&user_id={settings.FLICKR_DJANGO_GIRLS_USER_ID}"
             "&extras=o_dims&format=json&nojsoncallback=1"
         )
+        req.raise_for_status()
         return req.json()
-    except requests.exceptions.RequestException:
+    except (requests.exceptions.RequestException, ValueError):
         return None
 
 
