@@ -14,6 +14,8 @@ from .forms import StripeForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+DONATIONS_ERROR_URL = "donations:error"
+
 
 def index(request):
     context = {
@@ -47,18 +49,18 @@ def charge(request):
                 )
             except APIConnectionError as err:
                 request.session["stripe_message"] = err.user_message
-                return redirect(reverse("donations:error"))
+                return redirect(reverse(DONATIONS_ERROR_URL))
             except CardError as err:
                 request.session["stripe_message"] = err.user_message
-                return redirect(reverse("donations:error"))
+                return redirect(reverse(DONATIONS_ERROR_URL))
             try:
                 stripe.Charge.create(customer=customer, amount=amount * 100, currency=currency, description="Donation")
             except StripeError as err:
                 request.session["stripe_message"] = err.user_message
-                return redirect(reverse("donations:error"))
+                return redirect(reverse(DONATIONS_ERROR_URL))
             else:
                 return redirect(reverse("donations:success", kwargs={"amount": amount, "currency": currency}))
-        return redirect(reverse("donations:error"))
+        return redirect(reverse(DONATIONS_ERROR_URL))
 
     else:
         return HttpResponseForbidden()
