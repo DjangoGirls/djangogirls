@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Sponsor(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, blank=True, default="")
     logo = models.ImageField(
         upload_to="event/sponsors/",
         null=True,
@@ -29,7 +29,7 @@ class Sponsor(models.Model):
 
 
 class Donor(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, blank=True, default="")
     amount = models.FloatField()
     visible = models.BooleanField(default=False)
 
