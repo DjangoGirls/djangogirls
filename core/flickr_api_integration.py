@@ -16,6 +16,7 @@ def get_flickr_photo_list():
             "&extras=o_dims&format=json&nojsoncallback=1",
             timeout=10,
         )
+        req.raise_for_status()
         return req.json()
     except (requests.exceptions.RequestException, ValueError):
         return None

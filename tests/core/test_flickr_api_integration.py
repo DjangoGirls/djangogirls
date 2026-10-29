@@ -29,6 +29,15 @@ def test_get_flickr_photo_list_when_bad_request(mock_get):
 
 
 @mock.patch("requests.get")
+def test_get_flickr_photo_list_when_http_error(mock_get):
+    mock_get.return_value.raise_for_status.side_effect = requests.exceptions.HTTPError
+
+    result = get_flickr_photo_list()
+
+    assert result is None
+
+
+@mock.patch("requests.get")
 def test_get_flickr_photo_list_when_response_is_not_json(mock_get):
     mock_get.return_value.json.side_effect = requests.exceptions.JSONDecodeError("Expecting value", "", 0)
 
