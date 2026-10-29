@@ -6,6 +6,9 @@
 echo "Compile messages"
 ./manage.py compilemessages
 
+echo "Building static files"
+gulp local
+
 echo "Applying database migrations"
 ./manage.py migrate
 

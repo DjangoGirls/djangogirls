@@ -16,6 +16,7 @@ services:
       - db
     volumes:
       - .:/var/www/app
+      - node_modules:/var/www/app/node_modules
     ports:
       - "${APP_PORT:-8000}:8000"
 
@@ -32,4 +33,5 @@ services:
       - "${DB_PORT:-5432}:5432"
 
 volumes:
+  node_modules:
   pgdata:
