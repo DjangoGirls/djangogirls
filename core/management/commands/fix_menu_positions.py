@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
-from django.db.models import Count
 
-from core.models import Event, EventPageMenu
+from core.models import Event
 
 
 class Command(BaseCommand):
