@@ -19,10 +19,18 @@ class Command(BaseCommand):
     help = "Fetch Django Girls stories from our blog"
 
     def handle(self, *args, **options):
-        rss_url = "http://blog.djangogirls.org/rss"
+        rss_url = "https://blog.djangogirls.org/rss"
 
         response = requests.get(rss_url)
-        rss = ElementTree.fromstring(response.content)
+        if not response.ok:
+            raise requests.exceptions.HTTPError(
+                f'Request to "{rss_url}" failed\nReponse: {response.status_code}: {response.reason}'
+            )
+
+        try:
+            rss = ElementTree.fromstring(response.content)
+        except ElementTree.ParseError as e:
+            return f"Failed to parse XML: {e}"
 
         for post in rss.iter("item"):
             title = post.find("title").text
