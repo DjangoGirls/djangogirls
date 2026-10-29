@@ -308,6 +308,7 @@ class EventPageMenu(models.Model):
     class Meta:
         ordering = ("position",)
         verbose_name = "Website Menu"
+        unique_together = ("event", "position")
 
     def __str__(self):
         return self.title
