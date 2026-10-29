@@ -13,10 +13,11 @@ def get_flickr_photo_list():
             "?method=flickr.people.getPublicPhotos"
             f"&api_key={settings.FLICKR_API_KEY}"
             f"&user_id={settings.FLICKR_DJANGO_GIRLS_USER_ID}"
-            "&extras=o_dims&format=json&nojsoncallback=1"
+            "&extras=o_dims&format=json&nojsoncallback=1",
+            timeout=10,
         )
         return req.json()
-    except requests.exceptions.RequestException:
+    except (requests.exceptions.RequestException, ValueError):
         return None
 
 
@@ -40,7 +41,8 @@ def get_photo_files(photo_list):
     try:
         for photo in photo_list:
             request = requests.get(
-                f"https://live.staticflickr.com/{photo['server']}/{photo['id']}_{photo['secret']}_b.jpg"
+                f"https://live.staticflickr.com/{photo['server']}/{photo['id']}_{photo['secret']}_b.jpg",
+                timeout=10,
             )
             photo_file = ImageFile(io.BytesIO(request.content), name=f"{photo['id']}.jpg")
             photo_files_list.append(photo_file)
