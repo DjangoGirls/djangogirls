@@ -45,5 +45,7 @@ jobs:
         POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: postgres
         POSTGRES_USER: postgres
+        DJANGO_DEBUG: 'True'
+        DJANGO_SECRET_KEY: 'hellodjangogirls'
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v2
