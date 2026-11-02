@@ -101,10 +101,11 @@ def command():
         new_content.sponsors = obj.sponsors.all()
 
     # Copy all EventPageMenu objects
-    for obj in event.menu.all():
+    for position, obj in enumerate(event.menu.all(), start=1):
         new_obj = obj
         new_obj.pk = None
         new_obj.event = new_event
+        new_obj.position = position
         new_obj.save()
 
     # Brag on Slack
