@@ -54,6 +54,8 @@ jobs:
           python manage.py migrate
         env:
           POSTGRES_PASSWORD: postgres
+          DJANGO_DEBUG: 'True'
+          DJANGO_SECRET_KEY: 'hellodjangogirls'
 
       - name: Run Tests
         run: |
