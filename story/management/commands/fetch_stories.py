@@ -1,3 +1,4 @@
+from io import BytesIO
 from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
 
@@ -19,10 +20,23 @@ class Command(BaseCommand):
     help = "Fetch Django Girls stories from our blog"
 
     def handle(self, *args, **options):
-        rss_url = "http://blog.djangogirls.org/rss"
+        rss_url = "https://blog.djangogirls.org/rss"
 
         response = requests.get(rss_url)
-        rss = ElementTree.fromstring(response.content)
+        if not response.ok:
+            error_msg = f'Request to "{rss_url}" failed\nResponse: {response.status_code}: {response.reason}'
+            raise HTTPError(
+                rss_url,
+                response.status_code,
+                error_msg,
+                response.headers,
+                BytesIO(error_msg.encode("utf8")),
+            )
+
+        try:
+            rss = ElementTree.fromstring(response.content)
+        except ElementTree.ParseError as e:
+            return f"Failed to parse XML: {e}"
 
         for post in rss.iter("item"):
             title = post.find("title").text
