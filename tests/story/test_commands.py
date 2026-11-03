@@ -1,8 +1,8 @@
 from io import StringIO
 from unittest import mock
+from urllib.error import HTTPError
 
 import pytest
-import requests
 from django.core.files import File
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
@@ -66,7 +66,7 @@ def test_fetch_stories_if_feed_not_found(mock_get):
     mock_response.reason = "Not Found"
     mock_get.return_value = mock_response
 
-    with StringIO() as out, pytest.raises(requests.exceptions.HTTPError):
+    with StringIO() as out, pytest.raises(HTTPError):
         call_command("fetch_stories", stdout=out)
         assert "Not Found" in out.getvalue()
 

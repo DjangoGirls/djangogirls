@@ -1,3 +1,4 @@
+from io import BytesIO
 from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
 
@@ -23,8 +24,13 @@ class Command(BaseCommand):
 
         response = requests.get(rss_url)
         if not response.ok:
-            raise requests.exceptions.HTTPError(
-                f'Request to "{rss_url}" failed\nReponse: {response.status_code}: {response.reason}'
+            error_msg = f'Request to "{rss_url}" failed\nResponse: {response.status_code}: {response.reason}'
+            raise HTTPError(
+                rss_url,
+                response.status_code,
+                error_msg,
+                response.headers,
+                BytesIO(error_msg.encode("utf8")),
             )
 
         try:
