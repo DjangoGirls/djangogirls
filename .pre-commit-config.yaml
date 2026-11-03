@@ -19,12 +19,12 @@ repos:
       - id: django-upgrade
         args: [--target-version, "3.2"]
   -  repo: https://github.com/asottile/pyupgrade
-     rev: v3.21.2
+     rev: v3.22.0
      hooks:
        -  id: pyupgrade
           args: ["--py312-plus"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.10
+    rev: v0.17.3
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
