@@ -6,6 +6,9 @@
 //   build - production build into static/build/: minified CSS & JS with
 //           content-hashed filenames listed in static/rev-manifest.json
 //   clean - remove everything the tasks above create
+
+// Every path below is built from the constants in this file, never from user input
+/* eslint-disable security/detect-non-literal-fs-filename */
 import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import { watch as fsWatch } from "node:fs";
