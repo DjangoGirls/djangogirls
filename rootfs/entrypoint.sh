@@ -8,7 +8,7 @@ echo "Compile messages"
 
 echo "Building static files"
 # node_modules lives in a docker volume that may predate package.json changes
-npm install --no-audit --no-fund
+npm install --ignore-scripts --no-audit --no-fund
 npm run build:local
 
 echo "Applying database migrations"

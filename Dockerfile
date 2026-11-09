@@ -4,7 +4,7 @@ FROM node:22-slim AS node-builder
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 # Main Python stage
 FROM python:3.12-slim-bookworm

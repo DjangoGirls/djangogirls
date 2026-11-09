@@ -32,15 +32,15 @@ const log = (message) => console.log(`[${new Date().toLocaleTimeString()}] ${mes
  */
 async function styles(dest, production) {
   await mkdir(`${dest}/css`, { recursive: true });
-  for (const [name, vendorFiles] of Object.entries(CSS_BUNDLES)) {
+  const bundle = async ([name, vendorFiles]) => {
     const filename = `${SOURCE}/css/${name}.styl`;
-    const css = await stylus(await readFile(filename, "utf8"))
-      .set("filename", filename)
-      .set("compress", production)
-      .render();
-    const parts = await Promise.all(vendorFiles.map((file) => readFile(file, "utf8")));
+    const [source, ...parts] = await Promise.all(
+      [filename, ...vendorFiles].map((file) => readFile(file, "utf8")),
+    );
+    const css = stylus(source).set("filename", filename).set("compress", production).render();
     await writeFile(`${dest}/css/${name}.css`, [...parts, css].join("\n"));
-  }
+  };
+  await Promise.all(Object.entries(CSS_BUNDLES).map(bundle));
 }
 
 /**
@@ -48,14 +48,15 @@ async function styles(dest, production) {
  */
 async function scripts(dest, production) {
   await mkdir(`${dest}/js`, { recursive: true });
-  for (const file of await readdir(`${SOURCE}/js`)) {
-    if (!file.endsWith(".js")) continue;
+  const copyScript = async (file) => {
     let code = await readFile(`${SOURCE}/js/${file}`, "utf8");
     if (production) {
       code = (await minify(code)).code;
     }
     await writeFile(`${dest}/js/${file}`, code);
-  }
+  };
+  const files = await readdir(`${SOURCE}/js`);
+  await Promise.all(files.filter((file) => file.endsWith(".js")).map(copyScript));
 }
 
 /**
@@ -77,17 +78,17 @@ async function copyFiles(dest) {
  * django-gulp-rev's {% static_rev %} tag reads.
  */
 async function revision(dest) {
-  const manifest = {};
-  for (const dir of ["css", "js"]) {
-    for (const file of (await readdir(`${dest}/${dir}`)).sort()) {
-      const contents = await readFile(`${dest}/${dir}/${file}`);
-      const hash = createHash("md5").update(contents).digest("hex").slice(0, 10);
-      const { name, ext } = path.parse(file);
-      const revisioned = `${name}-${hash}${ext}`;
-      await rename(`${dest}/${dir}/${file}`, `${dest}/${dir}/${revisioned}`);
-      manifest[`${dir}/${file}`] = `${dir}/${revisioned}`;
-    }
-  }
+  const revisionFile = async (file) => {
+    const contents = await readFile(`${dest}/${file}`);
+    const hash = createHash("md5").update(contents).digest("hex").slice(0, 10);
+    const { dir, name, ext } = path.parse(file);
+    const revisioned = `${dir}/${name}-${hash}${ext}`;
+    await rename(`${dest}/${file}`, `${dest}/${revisioned}`);
+    return [file, revisioned];
+  };
+  const listDir = async (dir) => (await readdir(`${dest}/${dir}`)).map((file) => `${dir}/${file}`);
+  const files = (await Promise.all(["css", "js"].map(listDir))).flat().sort();
+  const manifest = Object.fromEntries(await Promise.all(files.map(revisionFile)));
   await writeFile(MANIFEST, JSON.stringify(manifest, null, 2));
 }
 
@@ -125,16 +126,21 @@ async function watch() {
   log(`Watching ${SOURCE}/ for changes...`);
 }
 
-const tasks = {
-  local: () => build(false),
-  build: () => build(true),
-  watch,
-  clean,
-};
-
 const task = process.argv[2] ?? "watch";
-if (!tasks[task]) {
-  console.error(`Unknown task "${task}". Available tasks: ${Object.keys(tasks).join(", ")}`);
-  process.exit(1);
+switch (task) {
+  case "local":
+    await build(false);
+    break;
+  case "build":
+    await build(true);
+    break;
+  case "watch":
+    await watch();
+    break;
+  case "clean":
+    await clean();
+    break;
+  default:
+    console.error(`Unknown task "${task}". Available tasks: local, build, watch, clean`);
+    process.exit(1);
 }
-await tasks[task]();
