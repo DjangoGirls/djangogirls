@@ -357,3 +357,27 @@ class Email(models.Model):
         self.successfuly_sent = ", ".join(successfuly_sent)
         self.failed_to_sent = ", ".join(failed_to_sent)
         self.save()
+
+
+class AuditLogCategory(models.TextChoices):
+    STATE = "STATE", _("Application State")
+    RSVP = "RSVP", _("RSVP Status")
+
+
+class ApplicationAuditLog(models.Model):
+    """An audit log to keep track of changes to application's
+    state and RSVP status."""
+
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    category = models.CharField(choices=AuditLogCategory.choices, default=AuditLogCategory.STATE, max_length=255)
+    old_value = models.CharField(null=True, blank=True, max_length=255)
+    new_value = models.CharField(null=True, blank=True, max_length=255)
+    user_source = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    other_source = models.CharField(null=True, blank=True, max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (
+            f"<ApplicationAuditLog: {self.application.pk}, {self.category}"
+            "from {self.old_value} to {self.new_value}>"
+        )
