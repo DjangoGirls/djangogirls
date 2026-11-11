@@ -362,7 +362,7 @@ def test_application_audit_log_on_organiser_state_change(admin_user, admin_clien
     assert audit_log.old_value == "submitted"
     assert audit_log.new_value == "accepted"
     assert audit_log.user_source == admin_user
-    assert audit_log.other_source is None
+    assert audit_log.other_source == ""
     assert audit_log.category == AuditLogCategory.STATE
 
 
@@ -379,7 +379,7 @@ def test_application_audit_log_on_organiser_rsvp_change(admin_user, admin_client
     assert audit_log.old_value == "waiting"
     assert audit_log.new_value == "yes"
     assert audit_log.user_source == admin_user
-    assert audit_log.other_source is None
+    assert audit_log.other_source == ""
     assert audit_log.category == AuditLogCategory.RSVP
 
 
