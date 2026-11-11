@@ -7,7 +7,9 @@ echo "Compile messages"
 ./manage.py compilemessages
 
 echo "Building static files"
-gulp local
+# node_modules lives in a docker volume that may predate package.json changes
+npm install --ignore-scripts --no-audit --no-fund
+npm run build:local
 
 echo "Applying database migrations"
 ./manage.py migrate

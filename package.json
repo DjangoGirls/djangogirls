@@ -4,7 +4,11 @@
   "version": "1.0.0",
   "description": "This repository contains sources of Django application that powers [DjangoGirls.org](http://djangogirls.org/).",
   "scripts": {
-    "gulp": "./node_modules/gulp/bin/gulp.js"
+    "build": "node scripts/build-static.mjs build",
+    "build:local": "node scripts/build-static.mjs local",
+    "watch": "node scripts/build-static.mjs watch",
+    "clean": "node scripts/build-static.mjs clean",
+    "gulp": "node scripts/build-static.mjs"
   },
   "repository": {
     "type": "git",
@@ -15,18 +19,16 @@
   },
   "homepage": "https://github.com/DjangoGirls/djangogirls#readme",
   "devDependencies": {
-    "bootstrap": "^5.3.3",
-    "del": "^6.0.0",
-    "fancy-log": "^1.3.3",
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-environments": "0.1.3",
-    "gulp-rev": "^7.0.0",
-    "gulp-rev-css-url": "0.1.0",
-    "gulp-rev-napkin": "0.1.0",
-    "gulp-stylus": "^2.3.1",
-    "gulp-uglify": "^1.5.3",
-    "gulp-watch": "^4.3.5",
-    "stylus": "^0.59.0"
+    "bootstrap": "^5.3.8",
+    "stylus": "^0.64.0",
+    "terser": "^5.51.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "stylus": {
+      "glob": "^14.0.4"
+    }
   }
 }
