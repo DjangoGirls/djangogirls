@@ -25,6 +25,7 @@
 
 
         <div class="col-md-5 scoring">
+            <section>
             {% if user_score.score > 0 %}
             <h4>{% trans "Scores" %}</h4>
             <ul>
@@ -54,7 +55,8 @@
                 {% endfor %}
             </table>
             {% endif %}
-
+            </section>
+            <section>
             <h4>Your score</h4>
             <form action="" method="post" class="scoring-form">
                 {% csrf_token %}
@@ -64,6 +66,42 @@
                 <input class="btn" type="submit" value="{% trans "Save" %}" />
                 <input class="btn" type="submit" name="random" value="{% trans "Save & draw next" %}" />
             </form>
+            </section>
+            <section>
+             <h4>Audit log</h4>
+            {% if not application_audit_logs %}
+            <p>No audit log entries.</p>
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>By</th>
+                        <th>At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for audit_log in application_audit_logs %}
+                    <tr>
+                        <td>{{ audit_log.category }}</td>
+                        <td>{{ audit_log.old_value}}</td>
+                        <td>{{ audit_log.new_value}}</td>
+                        <td>
+                            {% if audit_log.other_source %}
+                                {{audit_log.other_source}}
+                            {% else %}
+                                {{audit_log.user_source.email}}
+                            {% endif %}
+                        </td>
+                        <td>{{audit_log.created }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            </section>
         </div>
     </div>
 </div>

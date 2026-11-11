@@ -6,7 +6,7 @@ from django.utils.html import format_html
 
 from core.models import Event
 
-from .models import Answer, Application, Email, Form, Question
+from .models import Answer, Application, ApplicationAuditLog, Email, Form, Question
 
 
 @admin.register(Form)
@@ -108,3 +108,16 @@ class AnswerAdmin(admin.ModelAdmin):
 @admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
     list_display = ("form", "author", "subject", "recipients_group", "created", "sent")
+
+
+@admin.register(ApplicationAuditLog)
+class ApplicationAdmitLogAdmin(admin.ModelAdmin):
+    list_display = (
+        "application",
+        "category",
+        "old_value",
+        "new_value",
+        "user_source",
+        "other_source",
+        "created",
+    )
