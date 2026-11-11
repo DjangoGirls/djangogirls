@@ -370,10 +370,10 @@ class ApplicationAuditLog(models.Model):
 
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
     category = models.CharField(choices=AuditLogCategory.choices, default=AuditLogCategory.STATE, max_length=255)
-    old_value = models.CharField(null=True, blank=True, max_length=255)
-    new_value = models.CharField(null=True, blank=True, max_length=255)
+    old_value = models.CharField(blank=True, max_length=255)
+    new_value = models.CharField(blank=True, max_length=255)
     user_source = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    other_source = models.CharField(null=True, blank=True, max_length=255)
+    other_source = models.CharField(blank=True, max_length=255)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

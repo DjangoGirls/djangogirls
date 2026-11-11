@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ).length;
   }
 
-  function handleApplicationStatusChange(event) {
+  async function handleApplicationStatusChange(event) {
     event.preventDefault();
     const select = event.currentTarget;
     const appId = select.dataset.appId;
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("state", state);
     formData.append("application", appId);
 
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       body: formData,
     });
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
    *
    * @param {Event} event
    */
-  function handleApplicationRsvpChange(event) {
+  async function handleApplicationRsvpChange(event) {
     event.preventDefault();
     const select = event.currentTarget;
     const appId = select.dataset.appId;
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("rsvp_status", rsvpStatus);
     formData.append("application", appId);
 
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       body: formData,
     });
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
    *
    * @param {Event} event Submit event
    */
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("state", state);
     formData.append("application", selectedIds);
 
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       body: formData,
     });
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Listen to checkbox changes for application rows */
   applicationCheckboxes.forEach((application) => {
-    application.addEventListener("change", (event) => updateSelectedCount());
+    application.addEventListener("change", updateSelectedCount);
   });
 
   /* Listen to select changes for application's status */

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", handleRsvpButtonClick),
   );
 
-  emailContent.addEventListener("keyup", (event) => {
+  emailContent.addEventListener("keyup", () => {
     updateEmailPreview(emailContent.value);
   });
 
@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateEmailPreview(content) {
     console.log(content);
-    content = content.replace(
-      /\[rsvp-url-yes\]/g,
+    content = content.replaceAll(
+      "[rsvp-url-yes]",
       '<a href="">https://djangogirls.org/rsvp-YES-generated-url</a>',
     );
-    content = content.replace(
-      /\[rsvp-url-no\]/g,
+    content = content.replaceAll(
+      "[rsvp-url-no]",
       '<a href="">https://djangogirls.org/rsvp-NO-generated-url</a>',
     );
 
