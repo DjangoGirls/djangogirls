@@ -348,6 +348,7 @@ def test_application_detail_scores_user_query_optimized(
 
     assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
 
+
 def test_application_audit_log_on_organiser_state_change(admin_user, admin_client, future_event, application_submitted):
     assert application_submitted.state == "submitted"
 
