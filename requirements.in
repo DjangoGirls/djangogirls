@@ -22,18 +22,17 @@ psycopg2-binary==2.9.13
 pyquery==2.1.0
 
 # Local development
-python-dotenv==0.21.0
+python-dotenv==1.2.4
 pip-tools==7.6.0
 pre-commit==4.6.2
 
 # Testing
 freezegun
-pytest-cov==2.12.1
-pytest-django==4.4.0
-pytest-dotenv==0.5.2
-pytest-env==0.6.2
-pytest-mock==3.10.0
-pytest==6.2.5
+pytest-cov==7.1.0
+pytest-django==4.8.0
+pytest-env==1.8.5
+pytest-mock==3.17.0
+pytest==9.2.0
 vcrpy==8.3.0
 
 # Integrations
