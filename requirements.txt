@@ -10,8 +10,6 @@ asgiref==3.6.0
     #   django-countries
 attrs==22.2.0
     # via pytest
-autoflake==1.4
-    # via -r requirements.in
 bleach[css]==5.0.1
     # via django-bleach
 boto3==1.26.85
@@ -52,7 +50,6 @@ django==3.2.25
     #   django-debug-toolbar
     #   django-extensions
     #   django-formtools
-    #   django-leaflet
     #   django-recaptcha
     #   django-sendgrid-v5
     #   django-storages
@@ -60,8 +57,6 @@ django==3.2.25
     #   django-unused-media
     #   easy-thumbnails
 django-admin-sortable2==1.0.4
-    # via -r requirements.in
-django-autoslug==1.9.4
     # via -r requirements.in
 django-bleach==3.0.1
     # via -r requirements.in
@@ -79,8 +74,6 @@ django-formtools==2.5.1
     # via -r requirements.in
 django-gulp-rev==0.2
     # via -r requirements.in
-django-leaflet==0.24.0
-    # via -r requirements.in
 django-markdown-deux==1.0.5
     # via -r requirements.in
 django-recaptcha==3.0.0
@@ -93,8 +86,6 @@ django-tinymce==4.1.0
     # via -r requirements.in
 django-unused-media==0.1.13
     # via -r requirements.in
-dnspython==2.9.0
-    # via -r requirements.in
 easy-thumbnails==2.8.5
     # via -r requirements.in
 easydict==1.10
@@ -102,7 +93,6 @@ easydict==1.10
 filelock==3.32.7
     # via
     #   python-discovery
-    #   urlextract
     #   virtualenv
 freezegun==1.2.2
     # via -r requirements.in
@@ -131,13 +121,9 @@ icalendar==4.0.3
 identify==2.5.18
     # via pre-commit
 idna==3.7
-    # via
-    #   requests
-    #   urlextract
+    # via requests
 iniconfig==2.0.0
     # via pytest
-isort==5.8.0
-    # via -r requirements.in
 jmespath==1.0.1
     # via
     #   boto3
@@ -163,9 +149,7 @@ pillow==13.0.0
 pip-tools==7.6.0
     # via -r requirements.in
 platformdirs==4.3.6
-    # via
-    #   urlextract
-    #   virtualenv
+    # via virtualenv
 pluggy==1.0.0
     # via pytest
 pre-commit==4.6.2
@@ -189,8 +173,6 @@ pyasn1-modules==0.2.8
     # via
     #   google-auth
     #   oauth2client
-pyflakes==2.4.0
-    # via autoflake
 pyparsing==3.3.2
     # via httplib2
 pyproject-hooks==1.0.0
@@ -288,10 +270,6 @@ typing-extensions==4.16.0
     # via django-countries
 uritemplate==4.1.1
     # via google-api-python-client
-uritools==4.0.1
-    # via urlextract
-urlextract==1.8.0
-    # via -r requirements.in
 urllib3==1.26.19
     # via
     #   botocore

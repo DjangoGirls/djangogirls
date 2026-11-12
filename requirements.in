@@ -1,7 +1,6 @@
 # Core dependencies
 dj-database-url==0.5.0
 django-admin-sortable2==1.0.4
-django-autoslug==1.9.4
 django-bleach<4
 django-click==2.3.0
 django-countries
@@ -10,30 +9,22 @@ django-debug-toolbar
 django-extensions
 django-formtools>=2.5
 django-gulp-rev==0.2
-django-leaflet==0.24.0
 django-markdown-deux==1.0.5
 django-recaptcha
-django-sendgrid-v5==0.8.1
 django-storages[boto3]==1.7.1
 django-tinymce
 django-unused-media==0.1.13
 django>=3.2,<4
-dnspython
 easy-thumbnails
 easydict==1.10
 pillow==13.0.0
 psycopg2-binary==2.9.13
 pyquery==2.1.0
-urlextract
 
 # Local development
 python-dotenv==0.21.0
 pip-tools==7.6.0
 pre-commit==4.6.2
-
-# Linting / Formatting
-autoflake==1.4
-isort==5.8.0
 
 # Testing
 freezegun
@@ -46,8 +37,6 @@ pytest==6.2.5
 vcrpy==8.3.0
 
 # Integrations
-django-gulp-rev==0.2
-django-leaflet==0.24.0
 django-sendgrid-v5==0.8.1
 google-api-python-client==2.37.0
 icalendar==4.0.3
