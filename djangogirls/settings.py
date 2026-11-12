@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "adminsortable2",
     "django_bleach",
     "django_date_extensions",
-    "django_unused_media",
     "django_extensions",
     "storages",
     "markdown_deux",
@@ -204,8 +203,6 @@ RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "")
 RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
 # Using new No Captcha reCaptcha with SSL
 NOCAPTCHA = True
-
-TRELLO_API_KEY = os.environ.get("TRELLO_API_KEY")
 
 NOSE_ARGS = []
 
