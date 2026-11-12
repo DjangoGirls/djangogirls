@@ -74,20 +74,50 @@ Step into newly created `djangogirls` directory:
 cd djangogirls
 ```
 
+Both setups below, Docker and non Docker, read environment variables from a `.environment` file.
+Copy `.environment-example` to `.environment`:
+
+```bash
+cp .environment-example .environment
+```
+
+Then turn on debug mode in `.environment`. Change this line:
+
+```
+export DJANGO_DEBUG="FALSE"
+```
+
+to:
+
+```
+export DJANGO_DEBUG="TRUE"
+```
+
+See [Handling environment variables](#handling-environment-variables) for more details.
+
 ### Docker
 
 If you have Docker and Docker Compose installed, run `docker compose up --build`.
+
+Docker sets the database variables (`POSTGRES_*`) for you, so you don't need to change them in `.environment`.
+
+If you see this error, you don't have a `.environment` file yet. Create it as explained above:
+
+```
+Failed to load .../djangogirls/.environment: open .../djangogirls/.environment: no such file or directory
+```
+
+If you see `The SECRET_KEY setting must not be empty.`, check that `DJANGO_DEBUG` is `"TRUE"` in `.environment`.
 
 ### Non Docker
 
 Create a new [virtual environment](https://docs.python.org/3/library/venv.html) (with Python 3.12).
 
-Copy `.environment-example` to `.environment` and change the following:
+In `.environment`, also set the database user and password:
 
 ```
-DJANGO_DEBUG="TRUE"
-POSTGRES_USER="djangogirls"
-POSTGRES_PASSWORD="<create a password>"
+export POSTGRES_USER="djangogirls"
+export POSTGRES_PASSWORD="<create a password>"
 ```
 
 Then, install all the required dependencies. The dependencies are compiled by [pip-tools](https://github.com/jazzband/pip-tools), which
@@ -262,6 +292,8 @@ you can create your own copy of this and load it with values relevant to your de
 To make use of this feature, create a copy of the example file and call it `.environment`. This file will be ignored by
 version control, but loaded by `manage.py`. So when you run django commands like `manage.py runserver` during development
 `python-dotenv` will load the environment variables from your `.environment` file so that they are available to the application.
+
+With Docker, `docker-compose.yml` also loads `.environment` into the container (`env_file`), so the same file works for both setups.
 
 ### Before you Open a Pull Request
 
