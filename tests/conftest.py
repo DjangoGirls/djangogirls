@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group, Permission
 from core.models import Event, User
 from core.tumblr_client import RemoteStory
 from globalpartners.models import GlobalPartner
+from patreonmanager.models import FundraisingStatus
 from pictures.models import StockPicture
 from sponsor.models import Donor
 from tests.mocks import *
@@ -278,7 +279,7 @@ def remote_story():
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def globalpartner(db):
     return GlobalPartner.objects.create(
         company_name="Django Software Foundation",
@@ -290,7 +291,7 @@ def globalpartner(db):
     )
 
 
-@pytest.fixture
+@pytest.fixture()
 def globalpartner2(db):
     return GlobalPartner.objects.create(
         company_name="Caktus Group",
@@ -299,4 +300,12 @@ def globalpartner2(db):
         logo="caktus.png",
         is_displayed=True,
         sponsor_level_annual=2500,
+    )
+
+
+@pytest.fixture(autouse=True)
+def latest_stats(db):
+    return FundraisingStatus.objects.create(
+        number_of_patrons=10,
+        amount_raised=500
     )
