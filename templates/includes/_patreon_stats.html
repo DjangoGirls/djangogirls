@@ -1,0 +1,8 @@
+{% load i18n static %}
+
+<p class="support-stats"><span class="highlighted-number">${{ amount_raised }}</span> of <span class="highlighted-number">${{ goal }}</span> monthly goal pledged</p>
+<div class="support-bar">
+    <div class="pledge" style="width: 42%">{{ percentage }}%
+    </div>
+</div>
+<a class="btn" href="http://patreon.com/djangogirls">{% trans "Make a recurring donation on Patreon" %}</a>

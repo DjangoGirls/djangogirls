@@ -74,7 +74,7 @@ class Payment(models.Model):
 
 
 class FundraisingStatus(models.Model):
-    GOAL = 1500
+    GOAL = 2500
 
     date_updated = models.DateTimeField(auto_now_add=True)
     number_of_patrons = models.IntegerField()
