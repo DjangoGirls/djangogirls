@@ -81,7 +81,13 @@ Copy `.environment-example` to `.environment`:
 cp .environment-example .environment
 ```
 
-Then turn on debug mode in `.environment`:
+Then turn on debug mode in `.environment`. Change this line:
+
+```
+export DJANGO_DEBUG="FALSE"
+```
+
+to:
 
 ```
 export DJANGO_DEBUG="TRUE"
@@ -94,6 +100,14 @@ See [Handling environment variables](#handling-environment-variables) for more d
 If you have Docker and Docker Compose installed, run `docker compose up --build`.
 
 Docker sets the database variables (`POSTGRES_*`) for you, so you don't need to change them in `.environment`.
+
+If you see this error, you don't have a `.environment` file yet. Create it as explained above:
+
+```
+Failed to load .../djangogirls/.environment: open .../djangogirls/.environment: no such file or directory
+```
+
+If you see `The SECRET_KEY setting must not be empty.`, check that `DJANGO_DEBUG` is `"TRUE"` in `.environment`.
 
 ### Non Docker
 
