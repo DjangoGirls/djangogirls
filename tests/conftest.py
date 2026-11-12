@@ -305,7 +305,4 @@ def globalpartner2(db):
 
 @pytest.fixture(autouse=True)
 def latest_stats(db):
-    return FundraisingStatus.objects.create(
-        number_of_patrons=10,
-        amount_raised=500
-    )
+    return FundraisingStatus.objects.create(number_of_patrons=10, amount_raised=500)
