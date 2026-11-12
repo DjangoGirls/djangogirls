@@ -188,7 +188,7 @@ npm install
 Compile CSS and JS files and watch for changes:
 
 ```bash
-npm run gulp watch
+npm run watch
 ```
 
 In a separate terminal window, run your local server:
@@ -222,57 +222,16 @@ python -m pytest --cov-report term-missing --cov
 
 ### Static files
 
-We're using a [Stylus](https://learnboost.github.io/stylus/) as our CSS pre-processor. [Get styling with Stylus](https://learnboost.github.io/stylus/#get-styling-with-stylus).
+We're using [Stylus](https://stylus-lang.com/) as our CSS pre-processor.
 
 This means you shouldn't change any css files, but `.styl` files. They're in `/static/source/css/` directory.
 
-Autocompiling of `.styl` files to `.css`:
+Static files are built by a small Node.js script, [`scripts/build-static.mjs`](scripts/build-static.mjs). You'll need Node.js 20 or newer [installed](https://nodejs.org/en/download/). Then, run `npm install`.
 
-```bash
-npm run gulp watch
-```
-
-We're also using gulp for our static files builds (see [below](#gulp-tasks)). To build static files for production, run this:
-
-```bash
-npm run gulp build
-```
-
-For local development:
-
-```bash
-npm run gulp local
-```
-
-#### Gulp Tasks
-
-Static files are generated and maintained using [gulp.js](https://gulpjs.com/). To use, you'll need Node.js [installed](https://nodejs.org/en/download/). Then, run `npm install`.
-
-* `npm run gulp local` - run a one-off local build of css & js
-* `npm run gulp watch` - compile and watch static assets for changes
-* `npm run gulp build` - run a one-off production build, which involves minifying code and asset revision markers
-* `npm run gulp clean` - remove the results of any of the above commands
-
-#### Developing Gulp Tasks
-
-Each gulp task is a single function, which are combined using the `series` operator so they run as a workflow. Each are commented with what they do and why they're important. 
-
-The biggest gotcha is [async completion](https://gulpjs.com/docs/en/getting-started/async-completion#signal-task-completion). Each task must signal to gulp when it has finished. The easiest way to do this is using an `aysnc` function, **but** if your functionality uses gulp streams (most native gulp functionality does), then you should **not** use an `async` function. Instead, return the gulp stream from the function and it will be handled correctly.
-
-```js
-// WRONG - uses gulp's streams in an async function; subsequent tasks won't wait for completion correctly:
-const copyFiles = async () => {
-    return gulp.src(...).pipe(gulp.dest(...))
-}
-
-// RIGHT - either returns a gulp stream _or_ uses an `async` function:
-const copyFiles = () => {
-    return gulp.src(...).pipe(gulp.dest(...))
-}
-const deleteFiles = async () => {
-    await del(...)
-}
-```
+* `npm run watch` - build CSS & JS and rebuild when files in `static/source/` change
+* `npm run build:local` - run a one-off local build of CSS & JS into `static/local/`
+* `npm run build` - run a one-off production build into `static/build/`: minifies code and adds a content hash to CSS & JS filenames (listed in `static/rev-manifest.json`)
+* `npm run clean` - remove the results of any of the above commands
 
 
 ### Hosting on PythonAnywhere
