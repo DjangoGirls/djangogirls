@@ -23,8 +23,6 @@ export SLACK_API_KEY=""
 
 export STORE_DISCOUNT_CODE=""
 
-export TRELLO_API_KEY=""
-
 export SENTRY_DSN=""
 
 export GAPPS_PRIVATE_KEY_ID=""
