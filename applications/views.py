@@ -12,7 +12,15 @@ from core.utils import get_event
 
 from .decorators import organiser_only
 from .forms import ApplicationForm, EmailForm, ScoreForm
-from .models import Application, Email, Form, Question, Score
+from .models import (
+    Application,
+    ApplicationAuditLog,
+    AuditLogCategory,
+    Email,
+    Form,
+    Question,
+    Score,
+)
 from .questions import get_organiser_menu
 from .services import get_applications_for_event, get_random_application
 
@@ -187,6 +195,8 @@ def application_detail(request, page_url, app_number):
                 return redirect("applications:application_detail", page_url, new_app.number)
             return redirect("applications:applications", page_url)
 
+    application_audit_logs = ApplicationAuditLog.objects.filter(application=application)
+
     return render(
         request,
         "applications/application_detail.html",
@@ -199,6 +209,7 @@ def application_detail(request, page_url, app_number):
             "score_form": score_form,
             "scores": all_scores,
             "user_score": score,
+            "application_audit_logs": application_audit_logs,
         },
     )
 
@@ -276,6 +287,16 @@ def change_state(request, page_url):
     applications = [value for value in applications if value.isdigit()]
 
     applications = Application.objects.filter(id__in=applications, form__event=event)
+
+    for application in applications:
+        ApplicationAuditLog.objects.create(
+            application=application,
+            category=AuditLogCategory.STATE,
+            old_value=application.state,
+            new_value=state,
+            user_source=request.user,
+        )
+
     applications.update(state=state)
 
     ids = applications.values_list("id", flat=True)
@@ -299,6 +320,14 @@ def change_rsvp(request, page_url):
         return JsonResponse({"error": _("Missing parameters")})
 
     applications = Application.objects.filter(id__in=applications, form__event=event)
+    for application in applications:
+        ApplicationAuditLog.objects.create(
+            application=application,
+            category=AuditLogCategory.RSVP,
+            old_value=application.rsvp_status,
+            new_value=rsvp_status,
+            user_source=request.user,
+        )
     applications.update(rsvp_status=rsvp_status)
 
     ids = applications.values_list("id", flat=True)
@@ -342,6 +371,14 @@ def rsvp(request, page_url, code):
         )
 
         return redirect(f"/{event.page_url}/")
+
+    ApplicationAuditLog.objects.create(
+        application=application,
+        category=AuditLogCategory.RSVP,
+        old_value=application.rsvp_status,
+        new_value=rsvp,
+        other_source="RSVP code",
+    )
 
     application.rsvp_status = rsvp
     application.save()
