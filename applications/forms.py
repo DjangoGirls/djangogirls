@@ -75,33 +75,6 @@ class ApplicationForm(forms.Form):
             self.form.event.email = f"{self.form.event.page_url}@djangogirls.org"
             self.form.event.save()
 
-        if application.email:
-            # Send confirmation email
-            subject = _("Confirmation of your application for %(page_title)s") % {
-                "page_title": self.form.event.page_title
-            }
-            body = render_to_string(
-                "emails/application_confirmation.html",
-                {
-                    "application": application,
-                    "intro": self.form.confirmation_mail,
-                },
-            )
-            msg = EmailMessage(
-                subject,
-                body,
-                self.form.event.email,
-                [
-                    application.email,
-                ],
-            )
-            msg.content_subtype = "html"
-            try:  # noqa: SIM105
-                msg.send()
-            except:  # noqa: E722
-                # TODO: what should we do when sending fails?
-                pass
-
         # Adding applicant email to Django Girls Dispatch
         if application.newsletter_optin and application.email:
             emailb = application.email.encode()
@@ -119,9 +92,38 @@ class ApplicationForm(forms.Form):
 
         with transaction.atomic():
             application.save()
+
             for answer in answers:
                 answer.application = application
             Answer.objects.bulk_create(answers)
+
+            if application.email:
+                # Send confirmation email
+                subject = _("Confirmation of your application for %(page_title)s") % {
+                    "page_title": self.form.event.page_title
+                }
+
+                body = render_to_string(
+                    "emails/application_confirmation.html",
+                    {
+                        "application": application,
+                        "intro": self.form.confirmation_mail,
+                    },
+                )
+                msg = EmailMessage(
+                    subject,
+                    body,
+                    self.form.event.email,
+                    [
+                        application.email,
+                    ],
+                )
+                msg.content_subtype = "html"
+                try:  # noqa: SIM105
+                    msg.send()
+                except:  # noqa: E722
+                    # TODO: what should we do when sending fails?
+                    pass
 
 
 class ScoreForm(forms.ModelForm):
