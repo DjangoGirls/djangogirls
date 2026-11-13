@@ -3,10 +3,9 @@ import re
 from django.conf import settings
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from httplib2 import Http
-from oauth2client.service_account import ServiceAccountCredentials
 
 from core.models import Event
 
@@ -29,14 +28,11 @@ def get_gapps_client():
     if not settings.GAPPS_PRIVATE_KEY or not settings.GAPPS_PRIVATE_KEY_ID:
         return None
 
-    credentials = ServiceAccountCredentials.from_json_keyfile_dict(
-        GAPPS_JSON_CREDENTIALS, scopes=settings.GAPPS_ADMIN_SDK_SCOPES
-    )
+    credentials = Credentials.from_service_account_info(
+        GAPPS_JSON_CREDENTIALS, scopes=[settings.GAPPS_ADMIN_SDK_SCOPES]
+    ).with_subject("hello@djangogirls.org")
 
-    delegated_credentials = credentials.create_delegated("hello@djangogirls.org")
-    http_auth = delegated_credentials.authorize(Http())
-
-    return build("admin", "directory_v1", http=http_auth)
+    return build("admin", "directory_v1", credentials=credentials)
 
 
 def make_email(slug):
