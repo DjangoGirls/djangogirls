@@ -50,7 +50,7 @@ def parse_posts(posts_data: list[dict[str, Any]]) -> Iterator[RemoteStory]:
         yield RemoteStory(
             url=post_data["post_url"],
             content_parts=post_data["content"],
-            created=datetime.datetime.utcfromtimestamp(post_data["timestamp"]),
+            created=datetime.datetime.fromtimestamp(post_data["timestamp"], tz=datetime.UTC),
         )
 
 

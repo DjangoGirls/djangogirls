@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 
@@ -19,6 +19,6 @@ def donation():
             "review": "",
             "source": {},
         },
-        charge_created=datetime.now(),
-        fetched=datetime.now(),
+        charge_created=datetime.now(UTC),
+        fetched=datetime.now(UTC),
     )

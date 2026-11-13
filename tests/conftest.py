@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 from django.contrib.auth.models import Group, Permission
@@ -274,7 +274,7 @@ def remote_story():
                 "type": "image",
             },
         ],
-        created=datetime.utcnow(),
+        created=datetime.now(UTC),
     )
 
 
