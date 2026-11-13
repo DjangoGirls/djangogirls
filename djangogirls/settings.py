@@ -259,7 +259,7 @@ if DEBUG_TOOLBAR:
     ]
     DEBUG_TOOLBAR_PATCH_SETTINGS = False
     DEBUG_TOOLBAR_CONFIG = {
-        "SHOW_TOOLBAR_CALLBACK": lambda request: not request.is_ajax(),
+        "SHOW_TOOLBAR_CALLBACK": lambda request: request.headers.get("x-requested-with") != "XMLHttpRequest",
     }
 
 RECAPTCHA_TESTING = sanitize(os.environ.get("RECAPTCHA_TESTING", False), bool)
