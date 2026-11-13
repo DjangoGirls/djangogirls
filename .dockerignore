@@ -1,0 +1,13 @@
+# Installed and built inside the image, so local copies must not overwrite them
+node_modules
+static/local
+static/build
+static/rev-manifest.json
+staticfiles
+
+# Local secrets: docker-compose.yml loads .environment at runtime instead
+.environment
+
+.git
+**/__pycache__
+**/*.pyc

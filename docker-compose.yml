@@ -6,6 +6,7 @@ services:
     stdin_open: true
     tty: true
     init: true
+    env_file: .environment
     environment:
       - POSTGRES_USER=djangogirls
       - POSTGRES_PASSWORD=djangogirls
