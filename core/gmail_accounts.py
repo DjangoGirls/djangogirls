@@ -30,7 +30,7 @@ def get_gapps_client():
 
     credentials = Credentials.from_service_account_info(
         GAPPS_JSON_CREDENTIALS, scopes=[settings.GAPPS_ADMIN_SDK_SCOPES]
-    ).with_subject("hello@djangogirls.org")
+    ).with_subject(settings.DEFAULT_FROM_EMAIL)
 
     return build("admin", "directory_v1", credentials=credentials)
 
