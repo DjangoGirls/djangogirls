@@ -183,7 +183,7 @@ pytest==9.2.0
     #   pytest-mock
 pytest-cov==7.1.0
     # via -r requirements.in
-pytest-django==4.8.0
+pytest-django==4.11.1
     # via -r requirements.in
 pytest-env==1.8.5
     # via -r requirements.in
