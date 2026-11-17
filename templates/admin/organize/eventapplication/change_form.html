@@ -1,12 +1,35 @@
 {% extends "admin/change_form.html" %}
-{% load i18n %}
+{% load i18n admin_urls %}
 
 {% block extrastyle %}
 {{ block.super }}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 {% endblock %}
 
+{% block breadcrumbs %}
+{% if anonymous_label %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {{ anonymous_label }}
+</div>
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endblock %}
+
 {% block object-tools %}
+  {% if anonymous_label %}
+    <div class="row mb-3">
+        <div class="alert alert-info">
+          {% trans "This application is anonymous: the city, country and organizers are hidden, so you can review the answers without bias." %}
+          <a class="btn btn-sm btn-outline-secondary ms-2" href="{% url 'admin:organize_eventapplication_reveal' original.pk %}">
+            {% trans "Reveal details" %}
+          </a>
+        </div>
+    </div>
+  {% endif %}
   {% if original %}
     <div class="row mb-3">
         <h4 class="italic-title">{% trans "Triaging" %}</h4>

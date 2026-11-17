@@ -1,10 +1,17 @@
 from django.contrib import admin, messages
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
-from .constants import ACCEPTED, DEPLOYED, IN_REVIEW, ON_HOLD, REJECTED
+from .constants import ACCEPTED, DEPLOYED, IN_REVIEW, NEW, ON_HOLD, REJECTED
 from .models import Coorganizer, EventApplication
+
+# Applications are reviewed without knowing who or where they come from,
+# until a reviewer reveals the details or the application moves on.
+ANONYMOUS_STATUSES = (NEW, IN_REVIEW)
+IDENTITY_FIELDS = ("previous_event", "city", "country", "website_slug")
+REVEALED_SESSION_KEY = "revealed_event_applications"
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -31,8 +38,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
     actions_on_bottom = False
 
     list_display = (
-        "city",
-        "country",
+        "display_city",
+        "display_country",
         "date",
         "created_at",
         "main_organizer",
@@ -142,12 +149,76 @@ class EventApplicationAdmin(admin.ModelAdmin):
         ),
     )
 
+    def is_anonymous(self, request, obj):
+        return obj.status in ANONYMOUS_STATUSES and obj.pk not in request.session.get(REVEALED_SESSION_KEY, [])
+
+    def anonymous_label(self, obj):
+        return _("Application #%(id)s") % {"id": obj.pk}
+
+    @admin.display(description=_("City"))
+    def display_city(self, obj):
+        return self.anonymous_label(obj) if obj.status in ANONYMOUS_STATUSES else obj.city
+
+    @admin.display(description=_("Country"))
+    def display_country(self, obj):
+        return _("Hidden") if obj.status in ANONYMOUS_STATUSES else obj.get_country_display()
+
+    @admin.display(description=_("Main organizer"))
     def main_organizer(self, obj):
+        if obj.status in ANONYMOUS_STATUSES:
+            return _("Hidden")
         return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
+
+    def get_search_results(self, request, queryset, search_term):
+        # All search fields identify the application, so searching must not reveal anonymous ones
+        if search_term:
+            queryset = queryset.exclude(status__in=ANONYMOUS_STATUSES)
+        return super().get_search_results(request, queryset, search_term)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if not obj or not self.is_anonymous(request, obj):
+            return fieldsets
+        anonymous_fieldsets = []
+        for name, options in fieldsets:
+            fields = [
+                field
+                for field in options["fields"]
+                if field not in IDENTITY_FIELDS and not field.startswith("main_organizer_")
+            ]
+            anonymous_fieldsets.append((name, {**options, "fields": fields}))
+        return anonymous_fieldsets
+
+    def get_inlines(self, request, obj):
+        if obj and self.is_anonymous(request, obj):
+            return ()
+        return super().get_inlines(request, obj)
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        obj = self.get_object(request, object_id)
+        if obj and self.is_anonymous(request, obj):
+            label = self.anonymous_label(obj)
+            extra_context = {**(extra_context or {}), "anonymous_label": label, "subtitle": label}
+        return super().change_view(request, object_id, form_url, extra_context)
+
+    def view_reveal_application(self, request, application_id):
+        """Show the city, country and organizers of an anonymous application to this reviewer."""
+        application = get_object_or_404(EventApplication, id=application_id)
+        if not self.has_view_permission(request, application):
+            raise PermissionDenied
+        revealed = request.session.get(REVEALED_SESSION_KEY, [])
+        if application.pk not in revealed:
+            request.session[REVEALED_SESSION_KEY] = [*revealed, application.pk]
+        return redirect("admin:organize_eventapplication_change", application.id)
 
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
+            path(
+                "<int:application_id>/reveal/",
+                self.admin_site.admin_view(self.view_reveal_application),
+                name="organize_eventapplication_reveal",
+            ),
             path(
                 "<int:application_id>/triage/<str:new_status>/",
                 self.admin_site.admin_view(self.view_change_application_status),
@@ -186,10 +257,18 @@ class EventApplicationAdmin(admin.ModelAdmin):
             messages.error(request, _("Invalid status provided for application"))
             return redirect("admin:organize_eventapplication_change", application.id)
 
-        messages.success(
-            request,
-            _("Application for %(city)s, %(country)s has been moved to %(status)s")
-            % {"city": application.city, "country": application.country, "status": application.get_status_display()},
-        )
+        status = application.get_status_display()
+        if self.is_anonymous(request, application):
+            message = _("%(application)s has been moved to %(status)s") % {
+                "application": self.anonymous_label(application),
+                "status": status,
+            }
+        else:
+            message = _("Application for %(city)s, %(country)s has been moved to %(status)s") % {
+                "city": application.city,
+                "country": application.country,
+                "status": status,
+            }
+        messages.success(request, message)
 
         return redirect("admin:organize_eventapplication_changelist")
