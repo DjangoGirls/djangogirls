@@ -11,9 +11,6 @@ from core.models import Event, User
 
 from .questions import DEFAULT_QUESTIONS
 
-RSVP_LINKS = ["[rsvp-url-yes]", "[rsvp-url-no]"]
-
-
 class Form(models.Model):
     event = models.OneToOneField(Event, on_delete=models.deletion.CASCADE)
     text_header = models.CharField(max_length=255, default=_("Apply for a spot at Django Girls [City]!"))
@@ -54,9 +51,6 @@ class Form(models.Model):
     )
     open_from = models.DateTimeField(null=True, verbose_name=_("Application process is open from"))
     open_until = models.DateTimeField(null=True, verbose_name=_("Application process is open until"))
-
-    def __str__(self):
-        return f"Application form for {self.event.name}"
 
     def save(self, *args, **kwargs):
         is_form_new = not self.pk
@@ -114,9 +108,6 @@ class Question(models.Model):
     class Meta:
         ordering = ["order"]
 
-    def __str__(self):
-        return self.title
-
     def get_choices_as_list(self):
         if self.question_type != "choices":
             raise TypeError(_("You can only get choices for fields that have question_type == choices."))
@@ -173,9 +164,6 @@ class Application(models.Model):
             )
         ]
 
-    def __str__(self):
-        return str(self.pk)
-
     def save(self, *args, **kwargs):
         if self.pk is None:
             current_max = Application.objects.filter(form=self.form).aggregate(models.Max("number"))["number__max"]
@@ -201,8 +189,8 @@ class Application(models.Model):
         c = sum(data) / float(len(data))
         if n < 2:
             return 0
-        ss = sum((x - c) ** 2 for x in data)
-        ss -= sum((x - c) for x in data) ** 2 / len(data)
+        ss = sum((x - c) (x - c) for x in data)
+        ss -= sum((x - c) for x in data) * sum((x - c) for x in data)/ len(data)
         assert not ss < 0, f"negative sum of square deviations: {ss}"
         return ss / (n - 1)
 
@@ -257,10 +245,6 @@ class Answer(models.Model):
     class Meta:
         ordering = ("question__order",)
 
-    def __str__(self):
-        return f"{self.application} - {self.question}"
-
-
 class Score(models.Model):
     """
     A score represents the score given by a coach for an application.
@@ -280,10 +264,6 @@ class Score(models.Model):
             "user",
             "application",
         )
-
-    def __str__(self):
-        return f"{self.user} - {self.application}. Score {self.score}"
-
 
 class Email(models.Model):
     form = models.ForeignKey(Form, on_delete=models.deletion.PROTECT)
@@ -305,9 +285,6 @@ class Email(models.Model):
     sent_from = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     sent = models.DateTimeField(null=True, blank=True)
-
-    def __str__(self):
-        return self.subject
 
     def get_rsvp_link(self, code):
         return f"http://djangogirls.org/{self.form.event.page_url}/rsvp/{code}"
@@ -339,7 +316,7 @@ class Email(models.Model):
             if recipient.email:
                 body = self.text.replace("\n", "<br />")
 
-                for rsvp_link in RSVP_LINKS:
+                for rsvp_link in ["[rsvp-url-yes]", "[rsvp-url-no]"]:
                     if rsvp_link in body:
                         body = self.add_rsvp_links(body, recipient)
                         break

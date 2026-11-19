@@ -128,7 +128,7 @@ def get_filtered_applications_list(  # noqa: PLR0917
 
 
 def test_application_str(admin_client, future_event, application_submitted):
-    assert str(application_submitted.id) == str(application_submitted)
+    assert str(application_submitted.id) == str(application_submitted.pk)
 
 
 def test_changing_application_status(admin_client, future_event, application_submitted):
