@@ -1,6 +1,6 @@
 # Core dependencies
 dj-database-url==0.5.0
-django-admin-sortable2==1.0.4
+django-admin-sortable2==2.2
 django-bleach<4
 django-click==2.3.0
 django-countries
@@ -9,11 +9,11 @@ django-debug-toolbar
 django-extensions
 django-formtools>=2.5
 django-gulp-rev==0.2
-django-markdown-deux==1.0.5
+django-markdown-deux==1.0.6
 django-recaptcha
 django-storages[boto3]==1.7.1
 django-tinymce
-django>=3.2,<4
+django>=4.2,<5
 easy-thumbnails
 easydict==1.10
 pillow==13.0.0
