@@ -6,6 +6,8 @@ from django.utils.crypto import get_random_string
 from core.models.managers.user import UserManager
 from core.slack_client import invite_user_to_slack
 
+UNAMBIGUOUS_CHARACTERS = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+
 
 class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(unique=True)
@@ -29,8 +31,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         invite_user_to_slack(self.email, self.first_name)
 
     def generate_password(self):
-        # Same as the removed make_random_password(): no look-alike characters like l, I, 1, O, 0
-        password = get_random_string(10, "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789")
+        password = get_random_string(10, UNAMBIGUOUS_CHARACTERS)
         self.set_password(password)
         self.save()
         return password
