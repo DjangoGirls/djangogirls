@@ -18,7 +18,7 @@ def send_application_confirmation(event_application):
 def send_application_notification(event_application):
     """
     Triggered when user submits application to organize new Django Girls event
-    Sent to hello@djangogirls.org as a notification with reply-to to organizers
+    Sent to DEFAULT_FROM_EMAIL as a notification with reply-to to organizers
     who applied
     """
     subject = (
