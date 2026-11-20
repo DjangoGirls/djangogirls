@@ -19,10 +19,10 @@ def statistics(request):
     platinum = global_partners.filter(sponsor_level_annual=5000)
     silver = global_partners.filter(sponsor_level_annual=1000)
     bronze = global_partners.filter(sponsor_level_annual=500)
-    latest_stats = FundraisingStatus.objects.order_by("-date_updated").first()
-    amount_raised = latest_stats.amount_raised if latest_stats else 0
-    goal = FundraisingStatus.GOAL
-    percentage = latest_stats.percentage_of_goal if latest_stats else 0
+    latest_stats = FundraisingStatus.objects.first() or FundraisingStatus(number_of_patrons=0, amount_raised=0)
+    amount_raised = latest_stats.amount_raised
+    goal = latest_stats.GOAL
+    percentage = latest_stats.percentage_of_goal
 
     return {
         "past_events_count": past_events.count(),
