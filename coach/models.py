@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 
-DEFAULT_COACH_PHOTO = static("img/global/coach-empty.jpg")
+DEFAULT_COACH_PHOTO = static("img/global/coach-empty.png")
 
 
 class Coach(models.Model):
