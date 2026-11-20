@@ -1,6 +1,6 @@
 # Django Girls website
 
-[![Build Status](https://travis-ci.org/DjangoGirls/djangogirls.svg?branch=master)](https://travis-ci.org/DjangoGirls/djangogirls) [![codecov](https://codecov.io/gh/DjangoGirls/djangogirls/branch/master/graph/badge.svg)](https://codecov.io/gh/DjangoGirls/djangogirls)
+[![Tests](https://github.com/DjangoGirls/djangogirls/actions/workflows/django.yml/badge.svg?branch=main)](https://github.com/DjangoGirls/djangogirls/actions/workflows/django.yml) [![codecov](https://codecov.io/gh/DjangoGirls/djangogirls/branch/main/graph/badge.svg)](https://codecov.io/gh/DjangoGirls/djangogirls)
 
 
 This repository contains the Django application which powers [DjangoGirls.org](https://djangogirls.org/).
