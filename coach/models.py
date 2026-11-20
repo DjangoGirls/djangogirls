@@ -6,8 +6,6 @@ from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 
-DEFAULT_COACH_PHOTO = static("img/global/coach-empty.png")
-
 
 class Coach(models.Model):
     name = models.CharField(max_length=200)
@@ -50,10 +48,12 @@ class Coach(models.Model):
 
     @property
     def photo_url(self):
+        # note: always ensure that the path is reflected in tests/coach/test_models.py test_default_photo()
+        default_coach_photo = static("img/global/coach-empty.png")
         if self.photo:
             try:
                 return get_thumbnailer(self.photo)["coach"].url
             except InvalidImageFormatError:
-                return DEFAULT_COACH_PHOTO
+                return default_coach_photo
 
-        return DEFAULT_COACH_PHOTO
+        return default_coach_photo
