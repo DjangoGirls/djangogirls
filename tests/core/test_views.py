@@ -341,7 +341,6 @@ def test_robots_txt_view(client):
 
 
 def test_index_without_fundraising_status(client):
-    # A fresh database (local setup) has no fundraising status yet: every page used to crash
     FundraisingStatus.objects.all().delete()
 
     resp = client.get(reverse("core:index"))

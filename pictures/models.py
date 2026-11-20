@@ -5,13 +5,7 @@ from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-
-def _mark_safe(text):
-    # str() first: on Django 4.2, mark_safe() returns a lazy translation unchanged, which breaks str()
-    return mark_safe(str(text))
-
-
-mark_safe_lazy = lazy(_mark_safe, str)
+mark_safe_lazy = lazy(lambda text: mark_safe(str(text)), str)
 
 
 class EventPictureManager(models.Manager):

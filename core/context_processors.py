@@ -19,7 +19,6 @@ def statistics(request):
     platinum = global_partners.filter(sponsor_level_annual=5000)
     silver = global_partners.filter(sponsor_level_annual=1000)
     bronze = global_partners.filter(sponsor_level_annual=500)
-    # Empty on a fresh database (local setup, tests): show 0 instead of crashing every page
     latest_stats = FundraisingStatus.objects.order_by("-date_updated").first()
     amount_raised = latest_stats.amount_raised if latest_stats else 0
     goal = FundraisingStatus.GOAL
