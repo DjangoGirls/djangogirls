@@ -23,7 +23,7 @@
   {% if anonymous_label %}
     <div class="row mb-3">
         <div class="alert alert-info">
-          {% trans "This application is anonymous: the city, country and organizers are hidden, so you can review the answers without bias." %}
+          {% trans "City, country and organizers are hidden during the review." %}
           <a class="btn btn-sm btn-outline-secondary ms-2" href="{% url 'admin:organize_eventapplication_reveal' original.pk %}">
             {% trans "Reveal details" %}
           </a>

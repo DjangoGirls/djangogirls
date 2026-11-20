@@ -7,10 +7,16 @@ from django.utils.translation import gettext_lazy as _
 from .constants import ACCEPTED, DEPLOYED, IN_REVIEW, NEW, ON_HOLD, REJECTED
 from .models import Coorganizer, EventApplication
 
-# Applications are reviewed without knowing who or where they come from,
-# until a reviewer reveals the details or the application moves on.
 ANONYMOUS_STATUSES = (NEW, IN_REVIEW)
-IDENTITY_FIELDS = ("previous_event", "city", "country", "website_slug")
+IDENTITY_FIELDS = (
+    "previous_event",
+    "city",
+    "country",
+    "website_slug",
+    "main_organizer_email",
+    "main_organizer_first_name",
+    "main_organizer_last_name",
+)
 REVEALED_SESSION_KEY = "revealed_event_applications"
 
 
@@ -170,7 +176,6 @@ class EventApplicationAdmin(admin.ModelAdmin):
         return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
 
     def get_search_results(self, request, queryset, search_term):
-        # All search fields identify the application, so searching must not reveal anonymous ones
         if search_term:
             queryset = queryset.exclude(status__in=ANONYMOUS_STATUSES)
         return super().get_search_results(request, queryset, search_term)
@@ -179,15 +184,10 @@ class EventApplicationAdmin(admin.ModelAdmin):
         fieldsets = super().get_fieldsets(request, obj)
         if not obj or not self.is_anonymous(request, obj):
             return fieldsets
-        anonymous_fieldsets = []
-        for name, options in fieldsets:
-            fields = [
-                field
-                for field in options["fields"]
-                if field not in IDENTITY_FIELDS and not field.startswith("main_organizer_")
-            ]
-            anonymous_fieldsets.append((name, {**options, "fields": fields}))
-        return anonymous_fieldsets
+        return [
+            (name, {**options, "fields": [field for field in options["fields"] if field not in IDENTITY_FIELDS]})
+            for name, options in fieldsets
+        ]
 
     def get_inlines(self, request, obj):
         if obj and self.is_anonymous(request, obj):
@@ -202,7 +202,6 @@ class EventApplicationAdmin(admin.ModelAdmin):
         return super().change_view(request, object_id, form_url, extra_context)
 
     def view_reveal_application(self, request, application_id):
-        """Show the city, country and organizers of an anonymous application to this reviewer."""
         application = get_object_or_404(EventApplication, id=application_id)
         if not self.has_view_permission(request, application):
             raise PermissionDenied
@@ -259,10 +258,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
 
         status = application.get_status_display()
         if self.is_anonymous(request, application):
-            message = _("%(application)s has been moved to %(status)s") % {
-                "application": self.anonymous_label(application),
-                "status": status,
-            }
+            label = self.anonymous_label(application)
+            message = _("%(application)s has been moved to %(status)s") % {"application": label, "status": status}
         else:
             message = _("Application for %(city)s, %(country)s has been moved to %(status)s") % {
                 "city": application.city,
