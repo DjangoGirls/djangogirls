@@ -1,9 +1,10 @@
 from datetime import datetime
 from unittest import mock
 
+import pytest
 from django.urls import reverse
 
-from core.models import Event, User
+from core.models import Event, EventPageContent, EventPageMenu, User
 
 
 def test_get_queryset_for_superuser(admin_client, events):
@@ -180,3 +181,27 @@ def test_reverse_blacklist(reverse_blacklisting, admin_client):
     response = admin_client.get(reverse("admin:core_organizerissue_reverse_blacklist", args=(reverse_blacklisting.pk,)))
     assert response.status_code == 302
     assert User.objects.filter(is_blacklisted=True).count() == 0
+
+
+@pytest.mark.parametrize(
+    ("model", "fields"),
+    [
+        (EventPageContent, {"name": "About", "content": "Content"}),
+        (EventPageMenu, {"title": "About", "url": "about"}),
+    ],
+)
+def test_reorder_event_page_items_only_changes_one_event(admin_client, future_event, past_event, model, fields):
+    for event in (future_event, past_event):
+        model.objects.filter(event=event).delete()
+        for position in (1, 2, 3):
+            model.objects.create(event=event, position=position, **fields)
+    first, second, third = model.objects.filter(event=future_event)
+    other_event_items = list(model.objects.filter(event=past_event).values_list("pk", "position"))
+
+    url = reverse(f"admin:core_{model._meta.model_name}_changelist") + "adminsortable2_update/"
+    move_first_to_end = {"updatedItems": [[str(second.pk), 1], [str(third.pk), 2], [str(first.pk), 3]]}
+    response = admin_client.post(url, move_first_to_end, content_type="application/json")
+
+    assert response.status_code == 200
+    assert list(model.objects.filter(event=future_event)) == [second, third, first]
+    assert list(model.objects.filter(event=past_event).values_list("pk", "position")) == other_event_items

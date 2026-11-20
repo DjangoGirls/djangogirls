@@ -191,6 +191,7 @@ MAILCHIMP_API_KEY = os.environ.get("MAILCHIMP_APIKEY")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "hello@djangogirls.org")
+PASSWORD_CHARACTERS = os.environ.get("PASSWORD_CHARACTERS", "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789")
 
 ENABLE_SLACK_NOTIFICATIONS = sanitize(os.environ.get("ENABLE_SLACK_NOTIFICATIONS", False), bool)
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")

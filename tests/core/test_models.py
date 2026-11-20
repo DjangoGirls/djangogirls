@@ -108,3 +108,12 @@ def test_event_lnglat(future_event):
 
 def test_organizerissue_string_representation(organizer_issue):
     assert str(organizer_issue) == f"{organizer_issue.organizer.get_full_name()} - {organizer_issue.event}"
+
+
+def test_generate_password(organizer_peter):
+    password = organizer_peter.generate_password()
+
+    assert len(password) == 10
+    assert not set(password) & set("lIO01")
+    organizer_peter.refresh_from_db()
+    assert organizer_peter.check_password(password)
