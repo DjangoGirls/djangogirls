@@ -7,26 +7,25 @@ from django.utils.translation import gettext_lazy as _
 
 from core.flickr_api_integration import select_random_flickr_photos
 
-DEFAULT_BACKGROUND_PHOTOS = {
-    "about": [
-        settings.STATICFILES_DIRS[0] + "/img/photos/about1.jpg",
-        settings.STATICFILES_DIRS[0] + "/img/photos/about2.jpg",
-    ],
-    "apply": [settings.STATICFILES_DIRS[0] + "/img/photos/apply.jpg"],
-    "coach": [
-        settings.STATICFILES_DIRS[0] + "/img/photos/coach1.jpg",
-        settings.STATICFILES_DIRS[0] + "/img/photos/coach2.jpg",
-    ],
-    "footer": [
-        settings.STATICFILES_DIRS[0] + "/img/photos/footer1.jpg",
-        settings.STATICFILES_DIRS[0] + "/img/photos/footer2.jpg",
-    ],
-}
-
 
 def get_random_photo(section):
-    if section in DEFAULT_BACKGROUND_PHOTOS:
-        photos = DEFAULT_BACKGROUND_PHOTOS[section]
+    default_background_photos = {
+        "about": [
+            settings.STATICFILES_DIRS[0] + "/img/photos/about1.jpg",
+            settings.STATICFILES_DIRS[0] + "/img/photos/about2.jpg",
+        ],
+        "apply": [settings.STATICFILES_DIRS[0] + "/img/photos/apply.jpg"],
+        "coach": [
+            settings.STATICFILES_DIRS[0] + "/img/photos/coach1.jpg",
+            settings.STATICFILES_DIRS[0] + "/img/photos/coach2.jpg",
+        ],
+        "footer": [
+            settings.STATICFILES_DIRS[0] + "/img/photos/footer1.jpg",
+            settings.STATICFILES_DIRS[0] + "/img/photos/footer2.jpg",
+        ],
+    }
+    if section in default_background_photos:
+        photos = default_background_photos[section]
         return UploadedFile(open(photos[random.randint(0, len(photos) - 1)], "rb"))
     return None
 
