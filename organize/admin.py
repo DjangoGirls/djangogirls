@@ -1,10 +1,24 @@
 from django.contrib import admin, messages
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
-from .constants import ACCEPTED, DEPLOYED, IN_REVIEW, ON_HOLD, REJECTED
+from .constants import ACCEPTED, DEPLOYED, IN_REVIEW, NEW, ON_HOLD, REJECTED
 from .models import Coorganizer, EventApplication
+
+ANONYMOUS_STATUSES = (NEW, IN_REVIEW)
+IDENTITY_FIELDS = (
+    "previous_event",
+    "city",
+    "country",
+    "website_slug",
+    "main_organizer_email",
+    "main_organizer_first_name",
+    "main_organizer_last_name",
+)
+REVEALED_SESSION_KEY = "revealed_event_applications"
+CHANGE_URL_NAME = "admin:organize_eventapplication_change"
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -31,8 +45,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
     actions_on_bottom = False
 
     list_display = (
-        "city",
-        "country",
+        "display_city",
+        "display_country",
         "date",
         "created_at",
         "main_organizer",
@@ -142,12 +156,80 @@ class EventApplicationAdmin(admin.ModelAdmin):
         ),
     )
 
+    def is_anonymous(self, request, obj):
+        return obj.status in ANONYMOUS_STATUSES and obj.pk not in request.session.get(REVEALED_SESSION_KEY, [])
+
+    def anonymous_label(self, obj):
+        return _("Application #%(id)s") % {"id": obj.pk}
+
+    @admin.display(description=_("City"))
+    def display_city(self, obj):
+        return self.anonymous_label(obj) if obj.status in ANONYMOUS_STATUSES else obj.city
+
+    @admin.display(description=_("Country"))
+    def display_country(self, obj):
+        return _("Hidden") if obj.status in ANONYMOUS_STATUSES else obj.get_country_display()
+
+    @admin.display(description=_("Main organizer"))
     def main_organizer(self, obj):
+        if obj.status in ANONYMOUS_STATUSES:
+            return _("Hidden")
         return f"{obj.main_organizer_first_name} {obj.main_organizer_last_name} ({obj.main_organizer_email})"
+
+    def get_search_results(self, request, queryset, search_term):
+        if search_term:
+            queryset = queryset.exclude(status__in=ANONYMOUS_STATUSES)
+        return super().get_search_results(request, queryset, search_term)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if not obj or not self.is_anonymous(request, obj):
+            return fieldsets
+        return [
+            (name, {**options, "fields": [field for field in options["fields"] if field not in IDENTITY_FIELDS]})
+            for name, options in fieldsets
+        ]
+
+    def get_inlines(self, request, obj):
+        if obj and self.is_anonymous(request, obj):
+            return ()
+        return super().get_inlines(request, obj)
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        obj = self.get_object(request, object_id)
+        if obj and self.is_anonymous(request, obj):
+            label = self.anonymous_label(obj)
+            extra_context = {**(extra_context or {}), "anonymous_label": label, "subtitle": label}
+        return super().change_view(request, object_id, form_url, extra_context)
+
+    def view_reveal_application(self, request, application_id):
+        application = get_object_or_404(EventApplication, id=application_id)
+        if not self.has_view_permission(request, application):
+            raise PermissionDenied
+        revealed = request.session.get(REVEALED_SESSION_KEY, [])
+        if application.pk not in revealed:
+            request.session[REVEALED_SESSION_KEY] = [*revealed, application.pk]
+        return redirect(CHANGE_URL_NAME, application.id)
+
+    def status_changed_message(self, request, application):
+        status = application.get_status_display()
+        if self.is_anonymous(request, application):
+            label = self.anonymous_label(application)
+            return _("%(application)s has been moved to %(status)s") % {"application": label, "status": status}
+        return _("Application for %(city)s, %(country)s has been moved to %(status)s") % {
+            "city": application.city,
+            "country": application.country,
+            "status": status,
+        }
 
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
+            path(
+                "<int:application_id>/reveal/",
+                self.admin_site.admin_view(self.view_reveal_application),
+                name="organize_eventapplication_reveal",
+            ),
             path(
                 "<int:application_id>/triage/<str:new_status>/",
                 self.admin_site.admin_view(self.view_change_application_status),
@@ -164,7 +246,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
 
         if application.status is DEPLOYED:
             messages.error(request, _("The application is already deployed"))
-            return redirect("admin:organize_eventapplication_change", application.id)
+            return redirect(CHANGE_URL_NAME, application.id)
         elif new_status in [IN_REVIEW, ON_HOLD]:
             application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
@@ -184,12 +266,8 @@ class EventApplicationAdmin(admin.ModelAdmin):
                         application.send_deployed_email(event)
         else:
             messages.error(request, _("Invalid status provided for application"))
-            return redirect("admin:organize_eventapplication_change", application.id)
+            return redirect(CHANGE_URL_NAME, application.id)
 
-        messages.success(
-            request,
-            _("Application for %(city)s, %(country)s has been moved to %(status)s")
-            % {"city": application.city, "country": application.country, "status": application.get_status_display()},
-        )
+        messages.success(request, self.status_changed_message(request, application))
 
         return redirect("admin:organize_eventapplication_changelist")
