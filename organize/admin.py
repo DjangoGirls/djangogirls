@@ -211,6 +211,17 @@ class EventApplicationAdmin(admin.ModelAdmin):
             request.session[REVEALED_SESSION_KEY] = [*revealed, application.pk]
         return redirect(CHANGE_URL_NAME, application.id)
 
+    def status_changed_message(self, request, application):
+        status = application.get_status_display()
+        if self.is_anonymous(request, application):
+            label = self.anonymous_label(application)
+            return _("%(application)s has been moved to %(status)s") % {"application": label, "status": status}
+        return _("Application for %(city)s, %(country)s has been moved to %(status)s") % {
+            "city": application.city,
+            "country": application.country,
+            "status": status,
+        }
+
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
@@ -257,16 +268,6 @@ class EventApplicationAdmin(admin.ModelAdmin):
             messages.error(request, _("Invalid status provided for application"))
             return redirect(CHANGE_URL_NAME, application.id)
 
-        status = application.get_status_display()
-        if self.is_anonymous(request, application):
-            label = self.anonymous_label(application)
-            message = _("%(application)s has been moved to %(status)s") % {"application": label, "status": status}
-        else:
-            message = _("Application for %(city)s, %(country)s has been moved to %(status)s") % {
-                "city": application.city,
-                "country": application.country,
-                "status": status,
-            }
-        messages.success(request, message)
+        messages.success(request, self.status_changed_message(request, application))
 
         return redirect("admin:organize_eventapplication_changelist")
