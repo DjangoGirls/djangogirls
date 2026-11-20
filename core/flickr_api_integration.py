@@ -23,10 +23,13 @@ def get_flickr_photo_list():
 
 
 def filter_landscape_photos(json_response):
+    if not isinstance(json_response, dict):
+        return None
     try:
-        photo_list = json_response["photos"]["photo"]
+        photos = json_response.get("photos") or {}
+        photo_list = photos.get("photo")
         return [photo for photo in photo_list if (photo["o_width"] > photo["o_height"])]
-    except (TypeError, KeyError):
+    except TypeError:
         return None
 
 
@@ -41,6 +44,8 @@ def get_photo_files(photo_list):
     photo_files_list = []
     try:
         for photo in photo_list:
+            if not isinstance(photo, dict) or not all(k in photo for k in ("server", "id", "secret")):
+                return None
             request = requests.get(
                 f"https://live.staticflickr.com/{photo['server']}/{photo['id']}_{photo['secret']}_b.jpg",
                 timeout=10,
@@ -48,7 +53,7 @@ def get_photo_files(photo_list):
             photo_file = ImageFile(io.BytesIO(request.content), name=f"{photo['id']}.jpg")
             photo_files_list.append(photo_file)
         return photo_files_list if len(photo_files_list) else None
-    except (requests.exceptions.RequestException, TypeError, KeyError):
+    except (requests.exceptions.RequestException, TypeError):
         return None
 
 
