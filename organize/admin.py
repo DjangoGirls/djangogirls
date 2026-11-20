@@ -18,6 +18,7 @@ IDENTITY_FIELDS = (
     "main_organizer_last_name",
 )
 REVEALED_SESSION_KEY = "revealed_event_applications"
+CHANGE_URL_NAME = "admin:organize_eventapplication_change"
 
 
 class InlineCoorganizerAdmin(admin.TabularInline):
@@ -208,7 +209,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
         revealed = request.session.get(REVEALED_SESSION_KEY, [])
         if application.pk not in revealed:
             request.session[REVEALED_SESSION_KEY] = [*revealed, application.pk]
-        return redirect("admin:organize_eventapplication_change", application.id)
+        return redirect(CHANGE_URL_NAME, application.id)
 
     def get_urls(self):
         urls = super().get_urls()
@@ -234,7 +235,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
 
         if application.status is DEPLOYED:
             messages.error(request, _("The application is already deployed"))
-            return redirect("admin:organize_eventapplication_change", application.id)
+            return redirect(CHANGE_URL_NAME, application.id)
         elif new_status in [IN_REVIEW, ON_HOLD]:
             application.change_status_to(new_status)
         elif new_status in [REJECTED, ACCEPTED]:
@@ -254,7 +255,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
                         application.send_deployed_email(event)
         else:
             messages.error(request, _("Invalid status provided for application"))
-            return redirect("admin:organize_eventapplication_change", application.id)
+            return redirect(CHANGE_URL_NAME, application.id)
 
         status = application.get_status_display()
         if self.is_anonymous(request, application):
