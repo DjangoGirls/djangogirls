@@ -4,7 +4,7 @@ from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from django.utils import translation
 
-from applications.models import Answer, Application, Question, Score
+from applications.models import Answer, Application, ApplicationAuditLog, AuditLogCategory, Question, Score
 from applications.views import application_list
 
 
@@ -347,3 +347,55 @@ def test_application_detail_scores_user_query_optimized(
     user_queries = [q for q in queries.captured_queries if user_table_name in q["sql"]]
 
     assert len(user_queries) <= 4, f"Expected at most 4 user queries, got {len(user_queries)}"
+
+
+def test_application_audit_log_on_organiser_state_change(admin_user, admin_client, future_event, application_submitted):
+    assert application_submitted.state == "submitted"
+
+    admin_client.post(
+        reverse("applications:change_state", args=[future_event.page_url]),
+        {"state": "accepted", "application": application_submitted.id},
+    )
+
+    audit_log = ApplicationAuditLog.objects.filter(application=application_submitted).first()
+    assert audit_log
+    assert audit_log.old_value == "submitted"
+    assert audit_log.new_value == "accepted"
+    assert audit_log.user_source == admin_user
+    assert audit_log.other_source == ""
+    assert audit_log.category == AuditLogCategory.STATE
+
+
+def test_application_audit_log_on_organiser_rsvp_change(admin_user, admin_client, future_event, application_submitted):
+    assert application_submitted.rsvp_status == "waiting"
+
+    admin_client.post(
+        reverse("applications:change_rsvp", args=[future_event.page_url]),
+        {"rsvp_status": "yes", "application": application_submitted.id},
+    )
+
+    audit_log = ApplicationAuditLog.objects.filter(application=application_submitted).first()
+    assert audit_log
+    assert audit_log.old_value == "waiting"
+    assert audit_log.new_value == "yes"
+    assert audit_log.user_source == admin_user
+    assert audit_log.other_source == ""
+    assert audit_log.category == AuditLogCategory.RSVP
+
+
+def test_application_audit_log_on_applicant_rsvp_code(client, future_event, application_accepted):
+    assert application_accepted.rsvp_status == "waiting"
+    rsvp_code = application_accepted.get_rsvp_yes_code()
+
+    client.post(
+        reverse("applications:rsvp", args=[future_event.page_url, rsvp_code]),
+        {"rsvp_status": "yes", "application": application_accepted.id},
+    )
+
+    audit_log = ApplicationAuditLog.objects.filter(application=application_accepted).first()
+    assert audit_log
+    assert audit_log.old_value == "waiting"
+    assert audit_log.new_value == "yes"
+    assert audit_log.user_source is None
+    assert audit_log.other_source == "RSVP code"
+    assert audit_log.category == AuditLogCategory.RSVP
