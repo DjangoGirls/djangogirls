@@ -96,7 +96,7 @@ def command(short):
     click.secho("This is a ready, filled out mail to sent to organizers:", fg="green")
 
     click.echo(f"SUBJECT: Django Girls {event.city} setup")
-    click.echo("TO: {}, {}, hello@djangogirls.org".format(", ".join([x.email for x in members]), event.email))
+    click.echo("TO: {}, {}, {}".format(", ".join([x.email for x in members]), event.email, settings.DEFAULT_FROM_EMAIL))
     click.echo("BODY:")
 
     if short:

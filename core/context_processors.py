@@ -1,6 +1,7 @@
 from django.db.models import Sum
 
 from globalpartners.models import GlobalPartner
+from patreonmanager.models import FundraisingStatus
 
 from .models import Event, User
 
@@ -18,6 +19,10 @@ def statistics(request):
     platinum = global_partners.filter(sponsor_level_annual=5000)
     silver = global_partners.filter(sponsor_level_annual=1000)
     bronze = global_partners.filter(sponsor_level_annual=500)
+    latest_stats = FundraisingStatus.objects.latest("date_updated")
+    amount_raised = latest_stats.amount_raised
+    goal = latest_stats.GOAL
+    percentage = latest_stats.percentage_of_goal
 
     return {
         "past_events_count": past_events.count(),
@@ -32,4 +37,7 @@ def statistics(request):
         "platinum": platinum,
         "silver": silver,
         "bronze": bronze,
+        "amount_raised": amount_raised,
+        "goal": goal,
+        "percentage": percentage,
     }
