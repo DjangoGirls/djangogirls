@@ -5,6 +5,7 @@ from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
 from core.models import Event, User
+from pictures.models import StockPicture
 
 
 def test_delete(events):
@@ -42,6 +43,29 @@ def test_add_default_menu(future_event):
     assert future_event.menu.count() == 0
     future_event.add_default_menu()
     assert future_event.menu.count() == 5
+
+
+def test_set_random_cover_without_stock_pictures(future_event):
+    future_event.set_random_cover()
+
+    assert not future_event.photo
+    assert future_event.photo_credit is None
+    assert future_event.photo_link is None
+
+
+def test_set_random_cover_with_stock_picture(future_event):
+    stock_picture = StockPicture.objects.create(
+        photo="stock_pictures/example.jpg",
+        photo_credit="Photo credit",
+        photo_link="https://example.com/photo",
+        kind=StockPicture.COVER,
+    )
+
+    future_event.set_random_cover()
+
+    assert future_event.photo.name == stock_picture.photo.name
+    assert future_event.photo_credit == stock_picture.photo_credit
+    assert future_event.photo_link == stock_picture.photo_link
 
 
 def test_invite_organizer_to_team(future_event):

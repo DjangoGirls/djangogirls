@@ -7,20 +7,27 @@ from django_date_extensions.fields import ApproximateDate
 
 from .models import Event
 
-NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
-
 
 def get_coordinates_for_city(city, country):
+    nominatim_url = "https://nominatim.openstreetmap.org/search"
     q = f"{city}, {country}"
-    req = requests.get(NOMINATIM_URL, params={"format": "json", "q": q})
+    req = requests.get(nominatim_url, params={"format": "json", "q": q})
 
     try:
-        data = req.json()[0]
-        formatted_lat = "{:.7f}".format(float(data["lat"]))
-        formatted_lon = "{:.7f}".format(float(data["lon"]))
-        return f"{formatted_lat}, {formatted_lon}"
-    except (IndexError, KeyError, JSONDecodeError):
+        results = req.json()
+    except JSONDecodeError:
         return None
+
+    if not isinstance(results, list) or not results:
+        return None
+
+    data = results[0]
+    if not isinstance(data, dict) or "lat" not in data or "lon" not in data:
+        return None
+
+    formatted_lat = "{:.7f}".format(float(data["lat"]))
+    formatted_lon = "{:.7f}".format(float(data["lon"]))
+    return f"{formatted_lat}, {formatted_lon}"
 
 
 def get_event(page_url, is_user_authenticated, is_preview):
@@ -34,10 +41,7 @@ def get_event(page_url, is_user_authenticated, is_preview):
         event = Event.objects.filter(page_url=page_url).order_by("-date").first()
 
     if not (is_user_authenticated or is_preview) and not event.is_page_live:
-        try:
-            past = event.date <= now_approx
-        except AttributeError:
-            past = True
+        past = not event.date or event.date <= now_approx
         return page_url, past
 
     return event

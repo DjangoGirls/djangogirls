@@ -10,8 +10,10 @@ mark_safe_lazy = lazy(mark_safe, str)
 
 class EventPictureManager(models.Manager):
     def random_cover(self):
-        queryset = self.get_queryset()
-        return random.choice(queryset.filter(kind=StockPicture.COVER))
+        pictures = list(self.get_queryset().filter(kind=StockPicture.COVER))
+        if not pictures:
+            return None
+        return random.choice(pictures)
 
     def random_background(self):
         queryset = self.get_queryset()

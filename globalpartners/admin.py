@@ -5,11 +5,11 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import GlobalPartner
 
-GLOBALPARTNER_CHANGELIST = "admin:globalpartners_globalpartner_changelist"
-
 
 @admin.register(GlobalPartner)
 class GlobalPartnerAdmin(admin.ModelAdmin):
+    changelist_url = "admin:globalpartners_globalpartner_changelist"
+
     list_display = (
         "company_name",
         "patreon_sponsor",
@@ -56,7 +56,7 @@ class GlobalPartnerAdmin(admin.ModelAdmin):
             % {"contact_person": globalpartner.contact_person, "company_name": globalpartner.company_name},
         )
 
-        return redirect(GLOBALPARTNER_CHANGELIST)
+        return redirect(self.changelist_url)
 
     def send_renewal_email(self, request, globalpartner_id):
         globalpartner = get_object_or_404(GlobalPartner, id=globalpartner_id)
@@ -67,7 +67,7 @@ class GlobalPartnerAdmin(admin.ModelAdmin):
             % {"contact_person": globalpartner.contact_person, "company_name": globalpartner.company_name},
         )
 
-        return redirect(GLOBALPARTNER_CHANGELIST)
+        return redirect(self.changelist_url)
 
     def send_promotional_material_email(self, request, globalpartner_id):
         globalpartner = get_object_or_404(GlobalPartner, id=globalpartner_id)
@@ -78,7 +78,7 @@ class GlobalPartnerAdmin(admin.ModelAdmin):
             % {"contact_person": globalpartner.contact_person, "company_name": globalpartner.company_name},
         )
 
-        return redirect(GLOBALPARTNER_CHANGELIST)
+        return redirect(self.changelist_url)
 
     def send_thank_you_email(self, request, globalpartner_id):
         globalpartner = get_object_or_404(GlobalPartner, id=globalpartner_id)
@@ -89,4 +89,4 @@ class GlobalPartnerAdmin(admin.ModelAdmin):
             % {"contact_person": globalpartner.contact_person, "company_name": globalpartner.company_name},
         )
 
-        return redirect(GLOBALPARTNER_CHANGELIST)
+        return redirect(self.changelist_url)
