@@ -126,7 +126,7 @@ def send_offer_help_emails():
             "or application form open. If the organizers don't contact you back soon, you should "
             "remove those events from the events page:\n" + "\n".join(e.city for e in events),
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=["hello@djangogirls.org"],
+            recipient_list=[settings.DEFAULT_FROM_EMAIL],
         )
 
 

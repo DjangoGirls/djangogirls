@@ -88,3 +88,12 @@ def test_send_summary_checkin_to_hello(event, mailoutbox):
     assert mailoutbox[1].to == ["hello@djangogirls.org"]
     assert event.city in mailoutbox[0].body
     assert mailoutbox[1].subject == "Check-in email summary"
+
+
+def test_send_summary_checkin_to_default_from_email(event, mailoutbox, settings):
+    settings.DEFAULT_FROM_EMAIL = "team@example.com"
+    event.created_at = timezone.now() - timezone.timedelta(weeks=3)
+    event.save()
+    handle_emails.send_offer_help_emails()
+
+    assert mailoutbox[1].to == ["team@example.com"]
