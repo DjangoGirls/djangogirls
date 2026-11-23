@@ -11,6 +11,7 @@ from core.models import Event, User
 
 from .questions import DEFAULT_QUESTIONS
 
+
 class Form(models.Model):
     event = models.OneToOneField(Event, on_delete=models.deletion.CASCADE)
     text_header = models.CharField(max_length=255, default=_("Apply for a spot at Django Girls [City]!"))
@@ -189,8 +190,8 @@ class Application(models.Model):
         c = sum(data) / float(len(data))
         if n < 2:
             return 0
-        ss = sum((x - c) (x - c) for x in data)
-        ss -= sum((x - c) for x in data) * sum((x - c) for x in data)/ len(data)
+        ss = sum((x - c) * (x - c) for x in data)
+        ss -= sum((x - c) for x in data) * sum((x - c) for x in data) / len(data)
         assert not ss < 0, f"negative sum of square deviations: {ss}"
         return ss / (n - 1)
 
@@ -245,6 +246,7 @@ class Answer(models.Model):
     class Meta:
         ordering = ("question__order",)
 
+
 class Score(models.Model):
     """
     A score represents the score given by a coach for an application.
@@ -264,6 +266,7 @@ class Score(models.Model):
             "user",
             "application",
         )
+
 
 class Email(models.Model):
     form = models.ForeignKey(Form, on_delete=models.deletion.PROTECT)

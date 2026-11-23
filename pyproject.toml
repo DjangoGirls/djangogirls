@@ -45,6 +45,7 @@ lint.extend-ignore = [
   "B905",  # `zip()` without an explicit `strict=` parameter
   "C901",  # too complex functions
   "DJ001", # Avoid using `null=True` on string-based fields such as CharField
+    "DJ008",  # Models intentionally omit __str__ (Creedengo getter/setter rule)
   "E402",  # module level import not at top of file
   "E731",  # do not assign a lambda expression, use a def
   "FBT002",   # Boolean default value in function definition
@@ -75,7 +76,7 @@ lint.extend-ignore = [
 ]
 "djangogirls/settings.py" = [
   "PLW1508", # Use boolean instead string for environment variable
-]  
+]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
