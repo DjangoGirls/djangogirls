@@ -1,3 +1,4 @@
+from html import unescape
 from io import BytesIO
 from urllib.error import HTTPError, URLError
 from xml.etree import ElementTree
@@ -39,7 +40,7 @@ class Command(BaseCommand):
             return f"Failed to parse XML: {e}"
 
         for post in rss.iter("item"):
-            title = post.find("title").text
+            title = unescape(post.find("title").text)
             if "Your Django Story: Meet" in title:
                 name = title.replace("Your Django Story: Meet ", "")
                 is_story = True
