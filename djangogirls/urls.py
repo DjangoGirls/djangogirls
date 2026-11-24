@@ -20,40 +20,42 @@ urlpatterns = [
     path("pages/coc/rec/", RedirectView.as_view(url="/coc/pt-br/", permanent=True)),
 ]
 
-urlpatterns += i18n_patterns(
-    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
-    # Redirect old links:
-    path("pages/in-your-city/", RedirectView.as_view(url="/organize/", permanent=True)),
-    path("admin", RedirectView.as_view(url="/admin/", permanent=True)),
-    path("admin/core/eventpage/<int>/", RedirectView.as_view(pattern_name="admin:core_event_change")),
-    # Admin link for password reset
-    # See:
-    # https://github.com/darklow/django-suit/blob/92a745d72935622220eca80edfce779419c30094/suit/templates/admin/
-    # login.html#L61
-    path(
-        "admin/password_reset/",
-        RedirectView.as_view(url="/account/password_reset", permanent=True),
-        name="admin_password_reset",
-    ),
-    path("tinymce/", include("tinymce.urls")),
-    # Regular links:
-    path("admin/", admin.site.urls),
-    path("pages/", include("django.contrib.flatpages.urls")),
-    path("account/", include("django.contrib.auth.urls")),
-    path("coach/", include("coach.urls")),
-    path("contact/", include("contact.urls")),
-    path("donate/", include("donations.urls")),
-    path("organize/", include("organize.urls")),
-    path("story/", include("story.urls")),
-    path("jobs/", include("jobboard.urls")),
-    # path('', include('sponsor.urls')),
-    path("", include("applications.urls")),
-    path("", include("core.urls")),
+urlpatterns.extend(
+    i18n_patterns(
+        path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+        # Redirect old links:
+        path("pages/in-your-city/", RedirectView.as_view(url="/organize/", permanent=True)),
+        path("admin", RedirectView.as_view(url="/admin/", permanent=True)),
+        path("admin/core/eventpage/<int>/", RedirectView.as_view(pattern_name="admin:core_event_change")),
+        # Admin link for password reset
+        # See:
+        # https://github.com/darklow/django-suit/blob/92a745d72935622220eca80edfce779419c30094/suit/templates/admin/
+        # login.html#L61
+        path(
+            "admin/password_reset/",
+            RedirectView.as_view(url="/account/password_reset", permanent=True),
+            name="admin_password_reset",
+        ),
+        path("tinymce/", include("tinymce.urls")),
+        # Regular links:
+        path("admin/", admin.site.urls),
+        path("pages/", include("django.contrib.flatpages.urls")),
+        path("account/", include("django.contrib.auth.urls")),
+        path("coach/", include("coach.urls")),
+        path("contact/", include("contact.urls")),
+        path("donate/", include("donations.urls")),
+        path("organize/", include("organize.urls")),
+        path("story/", include("story.urls")),
+        path("jobs/", include("jobboard.urls")),
+        # path('', include('sponsor.urls')),
+        path("", include("applications.urls")),
+        path("", include("core.urls")),
+    )
 )
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns.extend(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
+    urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
 
     try:
         import debug_toolbar

@@ -11,7 +11,7 @@ from requests.exceptions import RequestException
 logger = logging.getLogger(__name__)
 
 
-@dataclass
+@dataclass(slots=True)
 class RemoteStory:
     url: str
     content_parts: list[dict[str, Any]]

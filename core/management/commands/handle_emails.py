@@ -51,7 +51,7 @@ def send_event_emails(  # noqa: PLR0917
                 html_message=html_content,
             )
         except SMTPException:
-            logging.exception("Couldn't send {} email to {}".format(email_type, "".join(recipients)))
+            logging.exception("Couldn't send %s email to %s", email_type, "".join(recipients))
         else:
             setattr(event, timestamp_field, timezone.now())
             event.save(update_fields=[timestamp_field])

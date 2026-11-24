@@ -8,8 +8,6 @@ from ...command_helpers import gather_event_date_from_prompt
 from ...forms import EventForm
 from ...utils import get_coordinates_for_city
 
-DELIMITER = "\n-------------------------------------------------------------\n"
-
 
 def get_basic_info():
     """
@@ -42,6 +40,8 @@ def get_basic_info():
 @click.option("--short", "-s", is_flag=True, help="Shorter version of the setup email to use with a canned email.")
 def command(short):
     """Creates new Django Girls event"""
+    delimiter = "\n-------------------------------------------------------------\n"
+
     # Basics
     (city, country, date, url, event_email) = get_basic_info()
 
@@ -87,12 +87,12 @@ def command(short):
     event.save()
 
     click.secho(f"Website is ready here: http://djangogirls.org/{url}", fg="green")
-    click.echo(DELIMITER)
+    click.echo(delimiter)
 
     click.secho("Ok, now follow this:", fg="black", bg="green")
     click.echo("1. Create an email account for the event.")
     click.echo("2. Send e-mail with instructions to a team!")
-    click.echo(DELIMITER)
+    click.echo(delimiter)
     click.secho("This is a ready, filled out mail to sent to organizers:", fg="green")
 
     click.echo(f"SUBJECT: Django Girls {event.city} setup")

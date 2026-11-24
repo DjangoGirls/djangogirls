@@ -221,14 +221,12 @@ class Event(models.Model):
         return user
 
     def set_random_cover(self):
-        try:
-            event_picture = StockPicture.objects.random_cover()
-            self.photo = event_picture.photo
-            self.photo_credit = event_picture.photo_credit
-            self.photo_link = event_picture.photo_link
-        except IndexError:
-            # No StockPicture available
-            pass
+        event_picture = StockPicture.objects.random_cover()
+        if event_picture is None:
+            return
+        self.photo = event_picture.photo
+        self.photo_credit = event_picture.photo_credit
+        self.photo_link = event_picture.photo_link
 
     def clone(self):
         """

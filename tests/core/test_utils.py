@@ -4,7 +4,7 @@ from unittest import mock
 
 from freezegun import freeze_time
 
-from core.utils import NOMINATIM_URL, get_coordinates_for_city, get_event, next_deadline
+from core.utils import get_coordinates_for_city, get_event, next_deadline
 
 
 @mock.patch("requests.get")
@@ -19,7 +19,7 @@ def test_get_coordinates_for_city(mock_get):
     result = get_coordinates_for_city("London", "UK")
 
     mock_get.assert_called_once_with(
-        NOMINATIM_URL,
+        "https://nominatim.openstreetmap.org/search",
         params={
             "format": "json",
             "q": "London, UK",
@@ -38,7 +38,7 @@ def test_returns_none_when_no_results(mock_get):
     result = get_coordinates_for_city("PretendTown", "UK")
 
     mock_get.assert_called_once_with(
-        NOMINATIM_URL,
+        "https://nominatim.openstreetmap.org/search",
         params={
             "format": "json",
             "q": "PretendTown, UK",
@@ -55,7 +55,7 @@ def test_returns_none_when_invalid_results(mock_get):
     result = get_coordinates_for_city("PretendTown", "UK")
 
     mock_get.assert_called_once_with(
-        NOMINATIM_URL,
+        "https://nominatim.openstreetmap.org/search",
         params={
             "format": "json",
             "q": "PretendTown, UK",

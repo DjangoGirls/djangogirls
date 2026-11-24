@@ -3,8 +3,6 @@ import djclick as click
 from core.forms import AddOrganizerForm
 from core.models import Event
 
-DELIMITER = "\n-------------------------------------------------------------\n"
-
 
 def get_organizer_data():
     """
@@ -53,6 +51,7 @@ def command():
     for member in members:
         click.echo(f"User {member.email} has been added and notified")
 
-    click.echo(DELIMITER)
+    delimiter = "\n-------------------------------------------------------------\n"
+    click.echo(delimiter)
 
     click.echo("You still need to invite people to Google Group!")
