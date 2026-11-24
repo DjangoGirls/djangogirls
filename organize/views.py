@@ -29,7 +29,7 @@ FORMS = (
 
 
 class OrganizeFormWizard(NamedUrlSessionWizardView):
-    
+
     TEMPLATES = {
         "previous_event": "organize/form/step1_previous_event.html",
         "application": "organize/form/step2_application.html",
