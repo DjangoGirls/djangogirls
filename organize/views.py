@@ -27,7 +27,6 @@ FORMS = (
     ("workshop_remote", RemoteWorkshopForm),
 )
 
-
 class OrganizeFormWizard(NamedUrlSessionWizardView):
 
     TEMPLATES = {
@@ -40,7 +39,7 @@ class OrganizeFormWizard(NamedUrlSessionWizardView):
     }
 
     def get_template_names(self):
-        return [TEMPLATES[self.steps.current]]
+        return [self.TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
         # Process the data from the forms
