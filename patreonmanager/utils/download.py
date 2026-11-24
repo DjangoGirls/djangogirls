@@ -12,19 +12,11 @@ from urllib.parse import parse_qs, urlparse
 import requests
 from lxml import html
 
-LOGIN_URL = "https://api.patreon.com/login"
-
-BASE_URL = "https://www.patreon.com"
-MANAGER_URL = BASE_URL + "/manageRewards"
-MONTH_CSV_DOWNLOAD_URL = BASE_URL + "/downloadCsv"
-
-MONTH_CONTAINER_XPATH = '//div[@id="boxGrid"]/div[@class="box mylink"]'
-MONTH_LINK_XPATH = './/div[@class="pledge"]/a'
 MONTH_TITLE_RE = re.compile("^(?P<month_year>.+) Patreon supported$")
 # In November 2015 the title changed:
 NEW_MONTH_TITLE_RE = re.compile("^(?P<month_year>.+) patron supported$")
 
-FILENAME_FORMAT = "{:%Y-%m}-Patreon.csv"
+FILENAME_FORMAT = "{:%Y-%m}-Patreon.parquet"
 
 
 def login(email, password):
@@ -34,7 +26,7 @@ def login(email, password):
     """
     logging.info("Attempting login with email %r...", email)
     session = requests.session()
-    response = session.post(LOGIN_URL, json={"data": {"email": email, "password": password}})
+    response = session.post("https://api.patreon.com/login", json={"data": {"email": email, "password": password}})
     assert response.status_code == 200
     logging.info("Login successful!")
     # TODO: handle bad username/password
@@ -46,24 +38,24 @@ def gen_monthly_report_links(session):
     Generate download links to the current sessions's monthly CSV reports.
     """
     logging.info("Opening patron manager page...")
-    response = session.get(MANAGER_URL)
+    response = session.get(BASE_URL + "/manageRewards")
     assert response.status_code == 200
     logging.info("Done.")
 
     tree = html.fromstring(response.text)
-    containers = tree.xpath(MONTH_CONTAINER_XPATH)
+    containers = tree.xpath('//div[@id="boxGrid"]/div[@class="box mylink"]')
     logging.info("Found %d result(s)", len(containers))
 
     for container in containers:
-        container.make_links_absolute(BASE_URL)
-        anchor_node = container.xpath(MONTH_LINK_XPATH)[0]
+        container.make_links_absolute("https://www.patreon.com")
+        anchor_node = container.xpath('.//div[@class="pledge"]/a')[0]
 
         hid = _get_hid_from_url(anchor_node.attrib["href"])
         month_datetime = _get_datetime_from_title(anchor_node.text_content())
 
         filename = FILENAME_FORMAT.format(month_datetime)
 
-        url = _get_full_url(MONTH_CSV_DOWNLOAD_URL, params={"hid": hid})
+        url = _get_full_url("https://www.patreon.com/downloadCsv", params={"hid": hid})
 
         yield filename, url
 

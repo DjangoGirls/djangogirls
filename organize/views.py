@@ -27,17 +27,18 @@ FORMS = (
     ("workshop_remote", RemoteWorkshopForm),
 )
 
-TEMPLATES = {
-    "previous_event": "organize/form/step1_previous_event.html",
-    "application": "organize/form/step2_application.html",
-    "organizers": "organize/form/step3_organizers.html",
-    "workshop_type": "organize/form/step4_workshop_type.html",
-    "workshop": "organize/form/step5_workshop.html",
-    "workshop_remote": "organize/form/step5_workshop_remote.html",
-}
-
 
 class OrganizeFormWizard(NamedUrlSessionWizardView):
+    
+    TEMPLATES = {
+        "previous_event": "organize/form/step1_previous_event.html",
+        "application": "organize/form/step2_application.html",
+        "organizers": "organize/form/step3_organizers.html",
+        "workshop_type": "organize/form/step4_workshop_type.html",
+        "workshop": "organize/form/step5_workshop.html",
+        "workshop_remote": "organize/form/step5_workshop_remote.html",
+    }
+
     def get_template_names(self):
         return [TEMPLATES[self.steps.current]]
 

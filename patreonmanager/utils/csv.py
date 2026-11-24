@@ -5,9 +5,6 @@ from datetime import datetime
 from decimal import Decimal
 from os import path
 
-CSV_FILENAME_FORMAT = "%Y-%m-Patreon.csv"
-
-
 BasePatron = namedtuple(
     "BasePatron",
     [
@@ -83,7 +80,7 @@ class Reward(BaseReward):
         return match.group("description")
 
 
-def guess_month_from_filename(csv_filename, datefmt=CSV_FILENAME_FORMAT):
+def guess_month_from_filename(csv_filename, datefmt="%Y-%m-Patreon.parquet"):
     csv_filename = path.basename(csv_filename)
     return datetime.strptime(csv_filename, datefmt).date()
 

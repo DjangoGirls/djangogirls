@@ -25,11 +25,8 @@ class Command(BaseCommand):
             "them in the database as StripeCharge objects."
         )
         # Get the last StripeCharge fetched.
-        try:
-            last_fetched = StripeCharge.objects.order_by("-fetched").first().fetched
-        except AttributeError:
-            # No StripeCharge objects exist.
-            last_fetched = None
+        last_charge = StripeCharge.objects.order_by("-fetched").first()
+        last_fetched = last_charge.fetched if last_charge else None
         # Fetch the Stripe charges.
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
