@@ -85,6 +85,6 @@ def test_answer_str(admin_client, application_submitted, future_event, future_ev
     answer = Answer.objects.create(
         application=new_application, question=last_question, answer="answer to last for app 5"
     )
-    assert f"{str(answer.application.pk)} - {answer.question.title}" == (
-        f"{str(answer.application.pk)} - {answer.question.title}"
+    assert f"{answer.application.pk!s} - {answer.question.title}" == (
+        f"{answer.application.pk!s} - {answer.question.title}"
     )
