@@ -30,18 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateEmailPreview(content) {
-    content = content.replaceAll(
-      "[rsvp-url-yes]",
-      '<a href="">https://djangogirls.org/rsvp-YES-generated-url</a>',
-    );
-    content = content.replaceAll(
-      "[rsvp-url-no]",
-      '<a href="">https://djangogirls.org/rsvp-NO-generated-url</a>',
+    content = DOMPurify.sanitize(
+      content.replaceAll(
+        "[rsvp-url-yes]",
+        '<a href="">https://djangogirls.org/rsvp-YES-generated-url</a>',
+      ),
     );
 
-    /* This preview is only used to show what the user themselves have currently
-       written into the text box. It is thus safe to use innerHTML to
-       insert user-created content. */
-    document.querySelector("#preview").innerHTML = content;
+    content = DOMPurify.sanitize(
+      content.replaceAll(
+        "[rsvp-url-no]",
+        '<a href="">https://djangogirls.org/rsvp-NO-generated-url</a>',
+      ),
+    );
+
+    document.querySelector("#preview").innerHTML = DOMPurify.sanitize(content);
   }
 });
