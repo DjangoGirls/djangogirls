@@ -40,7 +40,7 @@
                   <option value="waitlisted">{% trans "Application on waiting list" %}</option>
                   <option value="declined">{% trans "Applicant declined" %}</option>
               </select>
-              <input type="submit" value="{% trans "Apply" %}" />
+              <input type="submit" value="{% trans 'Apply' %}" />
           </p>
           <a href="{% url 'applications:applications_csv' event.page_url %}{{ active_query_string }}" class="btn download">{% trans "Download to csv" %}</a>
           <p>
@@ -72,43 +72,21 @@
                       <td><a href="{% url 'applications:application_detail' page_url=app.form.event.page_url app_number=app.number %}">{{ app.number }}</a></td>
                       <td>{{ app.email|default:"No email" }}</td>
                       <td>
-                          <div class="dropdown">
-                            <button
-                                class="btn btn-default dropdown-toggle {{ app.state|default:'default' }}"
-                                type="button"
-                                id="application-{{ app.id }}-state"
-                                data-toggle="dropdown"
-                              >
-                              {{ app.get_state_display }}
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a href="#" class="state-change" data-state="submitted" data-app-id="{{ app.id }}">{% trans "Application submitted" %}</a></li>
-                              <li><a href="#" class="state-change" data-state="accepted" data-app-id="{{ app.id }}">{% trans "Application accepted" %}</a></li>
-                              <li><a href="#" class="state-change" data-state="rejected" data-app-id="{{ app.id }}">{% trans "Application rejected" %}</a></li>
-                              <li><a href="#" class="state-change" data-state="waitlisted" data-app-id="{{ app.id }}">{% trans "Application on waiting list" %}</a></li>
-                              <li><a href="#" class="state-change" data-state="declined" data-app-id="{{ app.id }}">{% trans "Applicant declined" %}</a></li>
-                            </ul>
-                          </div>
+                        <select id="application-{{ app.id }}-state" data-app-id="{{ app.id }}" class="state-change {{ app.state|default:'default' }}">
+                          <option value="submitted" {% if app.state == "submitted" %}selected{% endif %}>{% trans "Application submitted" %}</option>
+                          <option value="accepted" {% if app.state == "accepted" %}selected{% endif %}>{% trans "Application accepted" %}</option>
+                          <option value="rejected" {% if app.state == "rejected" %}selected{% endif %}>{% trans "Application rejected" %}</option>
+                          <option value="waitlisted" {% if app.state == "waitlisted" %}selected{% endif %}>{% trans "Application on waiting list" %}</option>
+                          <option value="declined" {% if app.state == "declined" %}selected{% endif %}>{% trans "Applicant declined" %}</option>
+                        </select>
                       </td>
                       <td>
                         {% if app.is_accepted %}
-                          <div class="dropdown">
-                            <button
-                                class="btn btn-default dropdown-toggle {{ app.rsvp_status|default:'default' }}"
-                                type="button"
-                                id="application-{{ app.id }}-rsvp-status"
-                                data-toggle="dropdown"
-                              >
-                              {{ app.get_rsvp_status_display }}
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a href="#" class="rsvp-change" data-rsvp="waiting" data-app-id="{{ app.id }}">{% trans "Waiting for response" %}</a></li>
-                              <li><a href="#" class="rsvp-change" data-rsvp="yes" data-app-id="{{ app.id }}">{% trans "Confirmed attendance" %}</a></li>
-                              <li><a href="#" class="rsvp-change" data-rsvp="no" data-app-id="{{ app.id }}">{% trans "Rejected invitation" %}</a></li>
-                            </ul>
-                          </div>
+                        <select id="application-{{ app.id }}-rsvp-status" data-app-id="{{ app.id }}" class="rsvp-change {{ app.rsvp_status|default:'default' }}">
+                          <option value="waiting" {% if app.rsvp_status == "waiting" %}selected{% endif %}>{% trans "Waiting for response" %}</option>
+                          <option value="yes" {% if app.rsvp_status == "yes" %}selected{% endif %}>{% trans "Confirmed attendance" %}</option>
+                          <option value="no" {% if app.rsvp_status == "no" %}selected{% endif %}>{% trans "Rejected invitation" %}</option>
+                        </select>
                         {% else %}
                           —
                         {% endif %}
@@ -117,7 +95,7 @@
                           {% if app.was_scored_by_user %}
                               {{ app.average_score }}
                               <span class="num_votes">
-{#                              TODO: Another complex tranlsation #}
+                                  {# TODO: Another complex translation #}
                                   ({{ app.scores.count }} vote{{ app.scores.count|pluralize }}, &sigma;={{ app.stdev|floatformat:"1" }})
                               </span>
                           {% else %}
