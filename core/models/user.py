@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import Group
 from django.db import models
+from django.utils.crypto import get_random_string
 
 from core.models.managers.user import UserManager
 from core.slack_client import invite_user_to_slack
@@ -28,7 +30,7 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         invite_user_to_slack(self.email, self.first_name)
 
     def generate_password(self):
-        password = User.objects.make_random_password()
+        password = get_random_string(10, settings.PASSWORD_CHARACTERS)
         self.set_password(password)
         self.save()
         return password

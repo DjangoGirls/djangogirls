@@ -16,6 +16,7 @@ export MAILCHIMP_APIKEY=""
 
 export SENDGRID_API_KEY=""
 export DEFAULT_FROM_EMAIL="hello@djangogirls.org"
+export PASSWORD_CHARACTERS="abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
 export RECAPTCHA_PUBLIC_KEY=""
 export RECAPTCHA_PRIVATE_KEY=""

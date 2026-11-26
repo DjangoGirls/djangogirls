@@ -11,7 +11,7 @@ django-formtools>=2.5
 django-gulp-rev==0.2
 django-markdown-deux==1.0.6
 django-recaptcha
-django-storages[boto3]==1.7.1
+django-storages[boto3]==1.14.6
 django-tinymce
 django>=4.2,<5
 easy-thumbnails
@@ -28,7 +28,7 @@ pre-commit==4.6.2
 # Testing
 freezegun
 pytest-cov==7.1.0
-pytest-django==4.8.0
+pytest-django==4.11.1
 pytest-env==1.8.5
 pytest-mock==3.17.0
 pytest==9.2.0
