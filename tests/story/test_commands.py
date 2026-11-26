@@ -137,3 +137,36 @@ def test_fetch_stories_a_story(mock_get):
     story = stories.first()
     assert story.name == "Pony"
     assert story.is_story is True
+
+
+@mock.patch("requests.get")
+def test_unescape_html_entities_in_the_name(mock_get):
+    mock_response = mock.MagicMock()
+    mock_response.status_code = 200
+    mock_response.ok = True
+    mock_response.content = """<rss version="2.0">
+<channel>
+<description/>
+<title>Django Girls Blog</title>
+<generator>Tumblr (3.0; @djangogirls)</generator>
+<link>https://blog.djangogirls.org/</link>
+<item>
+<title><![CDATA[It&apos;s our 10th birthday]]></title>
+<description>Post description</description>
+<link>https://blog.djangogirls.org/post/791047576209227776</link>
+<guid>https://blog.djangogirls.org/post/791047576209227776</guid>
+<pubDate>Tue, 05 Aug 2025 14:49:16 +0100</pubDate>
+<category>codewithkindness</category>
+</item>
+</channel>
+</rss>"""
+    mock_get.return_value = mock_response
+
+    with StringIO() as out:
+        call_command("fetch_stories", stdout=out)
+
+    stories = Story.objects.all()
+    assert stories.count() == 1
+    story = stories.first()
+    assert story
+    assert story.name == "It's our 10th birthday"
