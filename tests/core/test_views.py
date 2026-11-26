@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django_date_extensions.fields import ApproximateDate
 
+from patreonmanager.models import FundraisingStatus
+
 
 def test_index(client, future_event, past_event, global_partners):
     # Access homepage
@@ -336,3 +338,20 @@ def test_crowdfunding_donors(client, visible_donors, hidden_donors):
 def test_robots_txt_view(client):
     response = client.get(reverse("core:robots"))
     assert response.status_code == 200
+
+
+def test_index_without_fundraising_status(client):
+    FundraisingStatus.objects.all().delete()
+
+    resp = client.get(reverse("core:index"))
+
+    assert resp.status_code == 200
+    assert resp.context["amount_raised"] == 0
+    assert resp.context["percentage"] == 0
+
+
+def test_index_fundraising_bar_shows_percentage(client, latest_stats):
+    resp = client.get(reverse("core:index"))
+
+    assert latest_stats.percentage_of_goal == 20
+    assert 'class="pledge" style="width: 20%"' in resp.content.decode()
